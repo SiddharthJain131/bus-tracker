@@ -13,10 +13,12 @@ export default function StudentDetailModal({ student, open, onClose }) {
   const [studentDetails, setStudentDetails] = useState(null);
   const [showRouteModal, setShowRouteModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [tempClosed, setTempClosed] = useState(false);
 
   useEffect(() => {
     if (open && student) {
       fetchStudentDetails();
+      setTempClosed(false);
     }
   }, [open, student]);
 
