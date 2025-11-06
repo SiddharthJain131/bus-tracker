@@ -345,9 +345,9 @@ frontend:
 
   - task: "Teacher Dashboard"
     implemented: true
-    working: true
+    working: false
     file: "/app/frontend/src/components/TeacherDashboardNew.jsx"
-    stuck_count: 1
+    stuck_count: 2
     priority: "high"
     needs_retesting: false
     status_history:
@@ -366,6 +366,12 @@ frontend:
       - working: true
         agent: "testing"
         comment: "✅ COMPREHENSIVE STUDENT INFORMATION VIEWING TEST COMPLETED - 100% SUCCESS RATE. Investigated user-reported issue with student information viewing in teacher account. TESTED COMPONENTS: ✅ Login as teacher@school.com working perfectly, ✅ Student list displays correctly (3 students: Emma Johnson, Liam Smith, Olivia Brown with proper Name|Parent|Bus|AM Status|PM Status columns), ✅ Search functionality working (filtered Emma correctly), ✅ View button functionality working - StudentDetailModal opens properly, ✅ Student details display correctly in modal (Name: Emma Johnson, ID: 22a473e7-4f4f-4960-ba55-6d7196168dbd, Class & Section: Grade 5 - A, Phone: +1-555-3001, Teacher: Mary Teacher, Bus Number: BUS-001, Parent: John Parent with email parent@school.com, Emergency: +1-555-9001, Remarks: Allergic to peanuts), ✅ Route visualization working - RouteVisualizationModal opens and closes properly with z-index fix confirmed, ✅ Attendance stats working (Total: 3 students, Avg: 1% monthly attendance, Today's Absences: 0), ✅ Multiple student testing successful. PREVIOUS ISSUES RESOLVED: ✅ Z-index issue fixed - route modal close button now clickable, ✅ Attendance API working with correct YYYY-MM format, ✅ All data binding working correctly in StudentDetailModal. Minor: Console warnings about missing DialogContent Description (accessibility, non-critical). User's reported issue with student information viewing is RESOLVED - all functionality working correctly."
+      - working: false
+        agent: "user"
+        comment: "The X button (close button) of View Route UI is still bugged. Need to retest specifically the RouteVisualizationModal close button functionality when opened from teacher dashboard student details."
+      - working: false
+        agent: "testing"
+        comment: "❌ CRITICAL ISSUE CONFIRMED - USER REPORT VALIDATED. Comprehensive testing of RouteVisualizationModal close button reveals the exact issue: PROBLEM IDENTIFIED: StudentDetailModal backdrop (z-index 50) with class 'fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in' is intercepting ALL pointer events, preventing clicks on RouteVisualizationModal close button despite RouteVisualizationModal having higher z-index (60). PLAYWRIGHT ERROR: 'div data-state=open aria-hidden=true class=fixed inset-0 z-50 bg-black/80' intercepts pointer events. ROOT CAUSE: The StudentDetailModal backdrop remains active and covers entire screen even when RouteVisualizationModal opens on top. The backdrop should have pointer-events:none or be properly managed when higher-level modal opens. TECHNICAL DETAILS: Close button has pointer-events:none in computed styles, making it unclickable. Both backdrop click and direct button click fail with same interception error. Z-index fix (z-50 to z-[60]) was insufficient - the issue is backdrop pointer event management, not layering. IMPACT: Users cannot close route modal using X button, making the feature unusable. This is a critical UX blocker requiring immediate fix to StudentDetailModal backdrop behavior when nested modals are open."
 
   - task: "Admin Dashboard"
     implemented: true
