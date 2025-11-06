@@ -38,7 +38,7 @@ export default function StudentDetailModal({ student, open, onClose }) {
 
   return (
     <>
-      <Dialog open={open} onOpenChange={onClose}>
+      <Dialog open={open && !tempClosed} onOpenChange={onClose}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold" style={{ fontFamily: 'Space Grotesk' }}>
