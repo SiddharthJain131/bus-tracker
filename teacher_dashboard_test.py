@@ -327,7 +327,7 @@ class TeacherDashboardTester:
                 "GET",
                 "get_attendance",
                 200,
-                params={"student_id": student_id, "year": "2025", "month": "01"},
+                params={"student_id": student_id, "month": "2025-01"},
                 critical=True
             )
             
