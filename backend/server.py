@@ -771,6 +771,13 @@ async def get_teacher_students(current_user: dict = Depends(get_current_user)):
             student['bus_number'] = bus['bus_number'] if bus else 'N/A'
         else:
             student['bus_number'] = 'N/A'
+        
+        # Add parent info
+        if student.get('parent_id'):
+            parent = await db.users.find_one({"user_id": student['parent_id']}, {"_id": 0})
+            student['parent_name'] = parent['name'] if parent else 'N/A'
+        else:
+            student['parent_name'] = 'N/A'
     
     return students
 
