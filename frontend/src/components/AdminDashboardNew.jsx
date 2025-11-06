@@ -25,6 +25,8 @@ import UserDetailModal from './UserDetailModal';
 import BusDetailModal from './BusDetailModal';
 import EditStudentModalEnhanced from './EditStudentModalEnhanced';
 import EditUserModalEnhanced from './EditUserModalEnhanced';
+import AddStudentModal from './AddStudentModal';
+import AddUserModal from './AddUserModal';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
