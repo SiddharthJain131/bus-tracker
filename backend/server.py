@@ -229,6 +229,8 @@ async def login(user_login: UserLogin, response: Response):
         "name": user['name'],
         "phone": user.get('phone'),
         "photo": user.get('photo'),
+        "assigned_class": user.get('assigned_class'),
+        "assigned_section": user.get('assigned_section'),
         "student_ids": user.get('student_ids', [])
     }
 
