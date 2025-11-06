@@ -158,7 +158,10 @@ export default function StudentDetailModal({ student, open, onClose }) {
         <RouteVisualizationModal
           routeId={studentDetails.route_id}
           open={showRouteModal}
-          onClose={() => setShowRouteModal(false)}
+          onClose={() => {
+            setShowRouteModal(false);
+            setTempClosed(false);
+          }}
         />
       )}
     </>
