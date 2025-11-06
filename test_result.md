@@ -215,6 +215,9 @@ backend:
       - working: true
         agent: "testing"
         comment: "✅ PASSED - User management APIs working correctly. Admin-only access enforced (403 for non-admin). User updates working. Password hashes properly excluded from responses."
+      - working: true
+        agent: "testing"
+        comment: "✅ ENHANCED ADMIN DASHBOARD VERIFICATION - GET /api/users returns all users without password_hash (security verified). PUT /api/users/{id} working with restriction: admin cannot edit another admin (403 properly returned). User data clean and secure for Enhanced Admin Dashboard Users tab."
 
   - task: "Bus and Route APIs"
     implemented: true
