@@ -382,7 +382,7 @@ frontend:
   - task: "Admin Dashboard"
     implemented: true
     working: "NA"
-    file: "/app/frontend/src/components/AdminDashboard.jsx"
+    file: "/app/frontend/src/components/AdminDashboardNew.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
@@ -390,6 +390,18 @@ frontend:
       - working: "NA"
         agent: "main"
         comment: "Admin dashboard at lines 1-442. Includes Students, Users, Holidays, Demo tabs with CRUD operations."
+
+  - task: "Add Student Flow & Cross-Dashboard Linking"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/AddStudentModal.jsx, /app/frontend/src/components/AddUserModal.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Comprehensive frontend QA test for Admin Add Student flow. Testing multi-step modal (Student Info → Parent Info → Teacher Assignment), automatic parent account creation, teacher auto-assignment based on class/section, and cross-dashboard visibility. Test scenarios: A) Student with assigned teacher (verify in Admin, Parent, Teacher dashboards), B) Student without assigned teacher (verify in Admin, Parent dashboards only), C) Manual user creation via Add User modal (Parent, Teacher, Admin roles). Components involved: AddStudentModal.jsx (3-step wizard), AddUserModal.jsx (role-based form), AdminDashboardNew.jsx (Students & Users tabs), ParentDashboard.jsx, TeacherDashboardNew.jsx. Focus: data linking correctness, dashboard refresh triggers, simulated multi-role login verification."
 
   - task: "Role-based routing"
     implemented: true
