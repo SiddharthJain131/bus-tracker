@@ -289,6 +289,13 @@ export default function AdminDashboardNew({ user, onLogout }) {
                       className="pl-10 w-64"
                     />
                   </div>
+                  <Button
+                    onClick={() => setShowAddStudent(true)}
+                    className="bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 text-white"
+                  >
+                    <UserPlus className="w-4 h-4 mr-2" />
+                    Add Student
+                  </Button>
                 </div>
               </div>
 
