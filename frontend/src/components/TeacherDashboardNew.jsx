@@ -52,10 +52,9 @@ export default function TeacherDashboardNew({ user, onLogout }) {
 
   const fetchAllData = async () => {
     try {
-      await Promise.all([
-        fetchStudents(),
-        fetchNotifications()
-      ]);
+      // Fetch students first, then notifications
+      await fetchStudents();
+      await fetchNotifications();
     } catch (error) {
       toast.error('Failed to load dashboard data');
       console.error(error);
