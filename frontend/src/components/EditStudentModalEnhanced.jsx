@@ -14,6 +14,7 @@ const API = `${BACKEND_URL}/api`;
 export default function EditStudentModalEnhanced({ student, open, onClose, onSuccess, adminName }) {
   const [formData, setFormData] = useState({
     name: '',
+    roll_number: '',
     phone: '',
     class_name: '',
     section: '',
