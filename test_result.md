@@ -197,6 +197,9 @@ backend:
       - working: true
         agent: "testing"
         comment: "✅ PASSED - Student CRUD APIs working correctly. Role-based filtering: parents see only their children, teachers see assigned students, admin sees all. Student details enriched with parent/teacher/bus names. Admin updates trigger email notifications to parents."
+      - working: true
+        agent: "testing"
+        comment: "✅ ENHANCED ADMIN DASHBOARD VERIFICATION - GET /api/students returns enriched data with parent_name, teacher_name, bus_number for dashboard table. GET /api/students/{id} provides complete student details for View modal including parent_email and route_id. PUT /api/students/{id} triggers email notifications to parents (confirmed in logs). All data properly enriched for Enhanced Admin Dashboard UI."
 
   - task: "User management APIs"
     implemented: true
