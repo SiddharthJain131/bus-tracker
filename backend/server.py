@@ -571,6 +571,41 @@ async def get_users(current_user: dict = Depends(get_current_user)):
     users = await db.users.find({}, {"_id": 0, "password_hash": 0}).to_list(1000)
     return users
 
+@api_router.post("/users")
+async def create_user(user_data: UserCreate, current_user: dict = Depends(get_current_user)):
+    if current_user['role'] != 'admin':
+        raise HTTPException(status_code=403, detail="Access denied")
+    
+    # Check if email already exists
+    existing_user = await db.users.find_one({"email": user_data.email})
+    if existing_user:
+        raise HTTPException(status_code=400, detail="Email already exists")
+    
+    # Hash the password
+    password_hash = hashlib.sha256(user_data.password.encode()).hexdigest()
+    
+    # Create user object
+    user = User(
+        user_id=str(uuid.uuid4()),
+        email=user_data.email,
+        password_hash=password_hash,
+        role=user_data.role,
+        name=user_data.name,
+        phone=user_data.phone,
+        photo=user_data.photo,
+        assigned_class=user_data.assigned_class,
+        assigned_section=user_data.assigned_section,
+        address=user_data.address,
+        student_ids=[]
+    )
+    
+    await db.users.insert_one(user.model_dump())
+    
+    # Return user without password_hash
+    user_dict = user.model_dump()
+    user_dict.pop('password_hash')
+    return user_dict
+
 @api_router.put("/users/{user_id}")
 async def update_user(user_id: str, updates: UserUpdate, current_user: dict = Depends(get_current_user)):
     if current_user['role'] != 'admin':
