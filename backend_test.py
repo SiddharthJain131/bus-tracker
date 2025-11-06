@@ -150,57 +150,81 @@ class SchoolBusTrackerAPITester:
         )
         return success
 
-    def test_scan_event(self):
+    def test_scan_event(self, student_id=None, verified=True):
         """Test scan event endpoint"""
+        if not student_id and self.student_ids:
+            student_id = self.student_ids[0]
+        elif not student_id:
+            student_id = "test-student-id"
+            
         scan_data = {
-            "student_id": "test-student-id",
-            "tag_id": "RFID-1234",
-            "verified": True,
-            "confidence": 0.95,
-            "lat": 37.7749,
-            "lon": -122.4194
+            "student_id": student_id,
+            "tag_id": f"RFID-{random.randint(1000, 9999)}",
+            "verified": verified,
+            "confidence": 0.95 if verified else 0.65,
+            "lat": 37.7749 + random.uniform(-0.01, 0.01),
+            "lon": -122.4194 + random.uniform(-0.01, 0.01)
         }
         return self.run_test(
-            "Create scan event",
+            f"Create scan event (verified={verified})",
             "POST",
             "scan_event",
             200,
-            data=scan_data
+            data=scan_data,
+            critical=True
         )
 
-    def test_update_location(self):
+    def test_update_location(self, bus_id=None):
         """Test bus location update"""
+        if not bus_id and self.bus_ids:
+            bus_id = self.bus_ids[0]
+        elif not bus_id:
+            bus_id = "BUS-001"
+            
         location_data = {
-            "bus_id": "BUS-001",
-            "lat": 37.7749,
-            "lon": -122.4194
+            "bus_id": bus_id,
+            "lat": 37.7749 + random.uniform(-0.01, 0.01),
+            "lon": -122.4194 + random.uniform(-0.01, 0.01)
         }
         return self.run_test(
             "Update bus location",
             "POST",
             "update_location",
             200,
-            data=location_data
+            data=location_data,
+            critical=True
         )
 
-    def test_get_bus_location(self):
+    def test_get_bus_location(self, bus_id=None):
         """Test get bus location"""
+        if not bus_id and self.bus_ids:
+            bus_id = self.bus_ids[0]
+        elif not bus_id:
+            bus_id = "BUS-001"
+            
         return self.run_test(
             "Get bus location",
             "GET",
             "get_bus_location",
             200,
-            params={"bus_id": "BUS-001"}
+            params={"bus_id": bus_id},
+            critical=True
         )
 
-    def test_get_attendance(self):
+    def test_get_attendance(self, student_id=None):
         """Test get attendance"""
+        if not student_id and self.student_ids:
+            student_id = self.student_ids[0]
+        elif not student_id:
+            student_id = "test-student-id"
+            
         return self.run_test(
             "Get attendance",
             "GET",
             "get_attendance",
             200,
-            params={"student_id": "test-student-id", "month": "2025-01"}
+            params={"student_id": student_id, "month": "2025-01"},
+            critical=True
         )
 
     def test_get_notifications(self):
@@ -209,7 +233,8 @@ class SchoolBusTrackerAPITester:
             "Get notifications",
             "GET",
             "get_notifications",
-            200
+            200,
+            critical=True
         )
 
     def test_admin_endpoints(self):
