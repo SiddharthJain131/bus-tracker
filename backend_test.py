@@ -1054,7 +1054,7 @@ def main():
         tester.test_student_crud()
         tester.test_logout()
         
-        if not (admin_success and enhanced_admin_success and edit_operations_success and stats_success):
+        if not (admin_success and enhanced_admin_success and edit_operations_success and stats_success and enhancements_success):
             print("   ❌ Admin endpoints or Enhanced Dashboard features failed")
     
     # Test Teacher role
