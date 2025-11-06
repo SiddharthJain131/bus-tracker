@@ -64,6 +64,7 @@ class Student(BaseModel):
     model_config = ConfigDict(extra="ignore")
     student_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     name: str
+    roll_number: Optional[str] = None
     phone: Optional[str] = None
     photo: Optional[str] = None
     class_name: Optional[str] = None
