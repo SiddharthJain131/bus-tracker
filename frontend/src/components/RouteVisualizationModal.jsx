@@ -28,6 +28,10 @@ export default function RouteVisualizationModal({ routeId, open, onClose }) {
     }
   };
 
+  if (!open) {
+    return null;
+  }
+
   if (loading) {
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" data-testid="route-modal">
