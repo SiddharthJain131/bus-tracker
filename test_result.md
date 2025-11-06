@@ -429,12 +429,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Authentication APIs (login, logout, me)"
-    - "Scan event API (/api/scan_event)"
-    - "Update location API (/api/update_location)"
-    - "Get attendance API (/api/get_attendance)"
-    - "Get bus location API (/api/get_bus_location)"
-    - "Student CRUD APIs"
+    - "Enhanced Admin Dashboard Backend APIs"
     - "Login page"
     - "Parent Dashboard"
     - "Teacher Dashboard"
