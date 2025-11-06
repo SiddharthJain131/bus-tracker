@@ -7,13 +7,15 @@ import RouteMap from './RouteMap';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
-export default function RouteVisualizationModal({ routeId, onClose }) {
+export default function RouteVisualizationModal({ routeId, open, onClose }) {
   const [route, setRoute] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchRoute();
-  }, [routeId]);
+    if (open && routeId) {
+      fetchRoute();
+    }
+  }, [routeId, open]);
 
   const fetchRoute = async () => {
     try {
