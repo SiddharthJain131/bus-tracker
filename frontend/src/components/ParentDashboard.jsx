@@ -6,6 +6,8 @@ import { toast } from 'sonner';
 import { LogOut, Bus, Bell, Calendar, MapPin } from 'lucide-react';
 import BusMap from './BusMap';
 import AttendanceGrid from './AttendanceGrid';
+import UserProfileHeader from './UserProfileHeader';
+import StudentCard from './StudentCard';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -13,6 +15,7 @@ const API = `${BACKEND_URL}/api`;
 export default function ParentDashboard({ user, onLogout }) {
   const [students, setStudents] = useState([]);
   const [selectedStudent, setSelectedStudent] = useState(null);
+  const [selectedStudentDetails, setSelectedStudentDetails] = useState(null);
   const [notifications, setNotifications] = useState([]);
   const [busLocation, setBusLocation] = useState(null);
 
@@ -23,6 +26,7 @@ export default function ParentDashboard({ user, onLogout }) {
 
   useEffect(() => {
     if (selectedStudent) {
+      fetchStudentDetails(selectedStudent.student_id);
       const interval = setInterval(() => {
         fetchBusLocation(selectedStudent.bus_id);
       }, 10000);
@@ -34,13 +38,22 @@ export default function ParentDashboard({ user, onLogout }) {
 
   const fetchStudents = async () => {
     try {
-      const response = await axios.get(`${API}/parent/students`);
+      const response = await axios.get(`${API}/students`);
       setStudents(response.data);
       if (response.data.length > 0) {
         setSelectedStudent(response.data[0]);
       }
     } catch (error) {
       toast.error('Failed to load students');
+    }
+  };
+
+  const fetchStudentDetails = async (studentId) => {
+    try {
+      const response = await axios.get(`${API}/students/${studentId}`);
+      setSelectedStudentDetails(response.data);
+    } catch (error) {
+      console.error('Failed to load student details:', error);
     }
   };
 
