@@ -755,11 +755,17 @@ def main():
     print(f"\n   Testing ADMIN role capabilities...")
     if tester.test_login("admin@school.com", "password"):
         admin_success = tester.test_admin_endpoints()
+        
+        # Test Enhanced Admin Dashboard specific features
+        enhanced_admin_success = tester.test_enhanced_admin_dashboard()
+        edit_operations_success = tester.test_admin_edit_operations()
+        stats_success = tester.test_admin_dashboard_stats()
+        
         tester.test_student_crud()
         tester.test_logout()
         
-        if not admin_success:
-            print("   ❌ Admin endpoints failed")
+        if not (admin_success and enhanced_admin_success and edit_operations_success and stats_success):
+            print("   ❌ Admin endpoints or Enhanced Dashboard features failed")
     
     # Test Teacher role
     print(f"\n   Testing TEACHER role capabilities...")
