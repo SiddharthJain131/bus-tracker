@@ -251,6 +251,9 @@ backend:
       - working: true
         agent: "testing"
         comment: "✅ PASSED - Holiday management APIs working correctly. Admin-only access enforced. Holiday dates properly affect attendance grid (blue status on holidays)."
+      - working: true
+        agent: "testing"
+        comment: "✅ ENHANCED ADMIN DASHBOARD VERIFICATION - GET /api/admin/holidays returns holidays list for dashboard overview. Admin-only access properly enforced (403 for non-admin). Holiday data ready for Enhanced Admin Dashboard display."
 
   - task: "Teacher and Parent specific endpoints"
     implemented: true
