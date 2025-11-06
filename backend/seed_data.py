@@ -217,6 +217,7 @@ async def seed_data():
         {
             "student_id": student1_id,
             "name": "Emma Johnson",
+            "roll_number": None,  # Added roll_number field
             "phone": "+1-555-3001",
             "photo": None,
             "class_name": "Grade 5",
@@ -231,6 +232,7 @@ async def seed_data():
         {
             "student_id": student2_id,
             "name": "Liam Smith",
+            "roll_number": None,  # Added roll_number field
             "phone": "+1-555-3002",
             "photo": None,
             "class_name": "Grade 5",
@@ -245,6 +247,7 @@ async def seed_data():
         {
             "student_id": student3_id,
             "name": "Olivia Brown",
+            "roll_number": None,  # Added roll_number field
             "phone": "+1-555-3003",
             "photo": None,
             "class_name": "Grade 4",
