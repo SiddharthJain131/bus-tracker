@@ -93,13 +93,14 @@ export default function TeacherDashboardNew({ user, onLogout }) {
       const now = new Date();
       const year = now.getFullYear();
       const month = String(now.getMonth() + 1).padStart(2, '0');
+      const monthParam = `${year}-${month}`;
       
       let totalAttended = 0;
       let totalPossible = 0;
       
       for (const student of studentsList) {
         const response = await axios.get(
-          `${API}/get_attendance?student_id=${student.student_id}&year=${year}&month=${month}`
+          `${API}/get_attendance?student_id=${student.student_id}&month=${monthParam}`
         );
         
         const attendanceData = response.data.attendance || {};
