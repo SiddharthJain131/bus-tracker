@@ -218,11 +218,22 @@ async def get_current_user(session_token: Optional[str] = Cookie(None)):
 # Auth endpoints
 @api_router.post("/auth/login")
 async def login(user_login: UserLogin, response: Response):
+    logging.info(f"Login attempt for email: {user_login.email}")
     user = await db.users.find_one({"email": user_login.email}, {"_id": 0})
     if not user:
+        logging.warning(f"User not found: {user_login.email}")
         raise HTTPException(status_code=401, detail="Invalid credentials")
     
-    if not bcrypt.checkpw(user_login.password.encode('utf-8'), user['password_hash'].encode('utf-8')):
+    logging.info(f"User found: {user['name']} ({user['role']})")
+    
+    try:
+        password_valid = bcrypt.checkpw(user_login.password.encode('utf-8'), user['password_hash'].encode('utf-8'))
+        logging.info(f"Password verification result: {password_valid}")
+        if not password_valid:
+            logging.warning(f"Invalid password for user: {user_login.email}")
+            raise HTTPException(status_code=401, detail="Invalid credentials")
+    except Exception as e:
+        logging.error(f"Password verification error: {e}")
         raise HTTPException(status_code=401, detail="Invalid credentials")
     
     session_token = secrets.token_urlsafe(32)
