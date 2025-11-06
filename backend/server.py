@@ -491,6 +491,16 @@ async def create_student(student: Student, current_user: dict = Depends(get_curr
     if current_user['role'] != 'admin':
         raise HTTPException(status_code=403, detail="Access denied")
     
+    # Validate roll_number uniqueness per class+section
+    if student.roll_number and student.class_name and student.section:
+        existing = await db.students.find_one({
+            "roll_number": student.roll_number,
+            "class_name": student.class_name,
+            "section": student.section
+        })
+        if existing:
+            raise HTTPException(status_code=400, detail=f"Roll number {student.roll_number} already exists in {student.class_name} - {student.section}")
+    
     await db.students.insert_one(student.model_dump())
     return student
 
