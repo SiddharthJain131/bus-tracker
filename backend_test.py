@@ -905,7 +905,7 @@ class SchoolBusTrackerAPITester:
         self.test_logout()
         
         # Try to login with newly created parent
-        login_success = self.test_login("testparent@test.com", "test123")
+        login_success = self.test_login(f"testparent{timestamp}@test.com", "test123")
         if login_success:
             print(f"   ✅ Password hashing working - can login with created parent user")
             self.test_logout()
