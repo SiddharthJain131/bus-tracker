@@ -54,6 +54,8 @@ export default function AdminDashboardNew({ user, onLogout }) {
   const [showBusDetail, setShowBusDetail] = useState(false);
   const [showEditStudent, setShowEditStudent] = useState(false);
   const [showEditUser, setShowEditUser] = useState(false);
+  const [showAddStudent, setShowAddStudent] = useState(false);
+  const [showAddUser, setShowAddUser] = useState(false);
 
   useEffect(() => {
     fetchAllData();
