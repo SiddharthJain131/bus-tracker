@@ -592,6 +592,18 @@ export default function AdminDashboardNew({ user, onLogout }) {
         }}
         onSuccess={fetchAllData}
       />
+
+      <AddStudentModal
+        open={showAddStudent}
+        onClose={() => setShowAddStudent(false)}
+        onSuccess={fetchAllData}
+      />
+
+      <AddUserModal
+        open={showAddUser}
+        onClose={() => setShowAddUser(false)}
+        onSuccess={fetchAllData}
+      />
     </div>
   );
 }
