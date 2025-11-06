@@ -103,21 +103,21 @@ export default function TeacherDashboardNew({ user, onLogout }) {
           `${API}/get_attendance?student_id=${student.student_id}&month=${monthParam}`
         );
         
-        const attendanceData = response.data.attendance || {};
+        const gridData = response.data.grid || [];
         
         // Count attended vs possible for this student
-        Object.values(attendanceData).forEach(dayData => {
+        gridData.forEach(dayData => {
           // AM trip
-          if (dayData.AM) {
+          if (dayData.am_status && dayData.am_status !== 'blue') {
             totalPossible++;
-            if (dayData.AM === 'green' || dayData.AM === 'yellow') {
+            if (dayData.am_status === 'green' || dayData.am_status === 'yellow') {
               totalAttended++;
             }
           }
           // PM trip
-          if (dayData.PM) {
+          if (dayData.pm_status && dayData.pm_status !== 'blue') {
             totalPossible++;
-            if (dayData.PM === 'green' || dayData.PM === 'yellow') {
+            if (dayData.pm_status === 'green' || dayData.pm_status === 'yellow') {
               totalAttended++;
             }
           }
