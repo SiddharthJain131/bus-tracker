@@ -19,7 +19,7 @@ class SchoolBusTrackerAPITester:
         self.student_ids = []
         self.bus_ids = []
 
-    def run_test(self, name, method, endpoint, expected_status, data=None, params=None):
+    def run_test(self, name, method, endpoint, expected_status, data=None, params=None, critical=False):
         """Run a single API test"""
         url = f"{self.api_url}/{endpoint}"
         
@@ -37,23 +37,67 @@ class SchoolBusTrackerAPITester:
                 response = self.session.delete(url)
 
             success = response.status_code == expected_status
+            
+            result = {
+                'name': name,
+                'method': method,
+                'endpoint': endpoint,
+                'expected_status': expected_status,
+                'actual_status': response.status_code,
+                'success': success,
+                'critical': critical
+            }
+            
             if success:
                 self.tests_passed += 1
                 print(f"✅ Passed - Status: {response.status_code}")
                 try:
-                    return True, response.json()
+                    response_data = response.json()
+                    result['response'] = response_data
+                    self.test_results.append(result)
+                    return True, response_data
                 except:
+                    result['response'] = {}
+                    self.test_results.append(result)
                     return True, {}
             else:
+                self.tests_failed += 1
                 print(f"❌ Failed - Expected {expected_status}, got {response.status_code}")
                 try:
-                    print(f"   Response: {response.json()}")
+                    error_data = response.json()
+                    print(f"   Response: {error_data}")
+                    result['error'] = error_data
                 except:
-                    print(f"   Response: {response.text}")
+                    error_text = response.text
+                    print(f"   Response: {error_text}")
+                    result['error'] = error_text
+                
+                if critical:
+                    self.critical_failures.append(result)
+                
+                self.test_results.append(result)
                 return False, {}
 
         except Exception as e:
-            print(f"❌ Failed - Error: {str(e)}")
+            self.tests_failed += 1
+            error_msg = str(e)
+            print(f"❌ Failed - Error: {error_msg}")
+            
+            result = {
+                'name': name,
+                'method': method,
+                'endpoint': endpoint,
+                'expected_status': expected_status,
+                'actual_status': 'ERROR',
+                'success': False,
+                'critical': critical,
+                'error': error_msg
+            }
+            
+            if critical:
+                self.critical_failures.append(result)
+            
+            self.test_results.append(result)
             return False, {}
 
     def test_login(self, email, password):
