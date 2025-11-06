@@ -1,0 +1,148 @@
+import React, { useState } from 'react';
+import { Card } from './ui/card';
+import { Button } from './ui/button';
+import { User, GraduationCap, Bus, MapPin, Phone, AlertCircle } from 'lucide-react';
+import RouteVisualizationModal from './RouteVisualizationModal';
+
+const getInitials = (name) => {
+  return name
+    .split(' ')
+    .map((n) => n[0])
+    .join('')
+    .toUpperCase()
+    .substring(0, 2);
+};
+
+export default function StudentCard({ student, compact = false }) {
+  const [showRouteModal, setShowRouteModal] = useState(false);
+
+  if (compact) {
+    return (
+      <Card className="p-4 hover:shadow-md transition-shadow" data-testid={`student-card-${student.student_id}`}>
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white font-bold">
+            {student.photo ? (
+              <img src={student.photo} alt={student.name} className="w-full h-full rounded-full object-cover" />
+            ) : (
+              getInitials(student.name)
+            )}
+          </div>
+          <div className="flex-1">
+            <h3 className="font-semibold text-gray-900">{student.name}</h3>
+            <p className="text-sm text-gray-600">
+              {student.class_name} {student.section && `- ${student.section}`}
+            </p>
+          </div>
+        </div>
+        <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
+          <div className="flex items-center gap-1 text-gray-600">
+            <GraduationCap className="w-3 h-3" />
+            <span>{student.teacher_name || 'N/A'}</span>
+          </div>
+          <div className="flex items-center gap-1 text-gray-600">
+            <Bus className="w-3 h-3" />
+            <span>{student.bus_number || 'N/A'}</span>
+          </div>
+        </div>
+      </Card>
+    );
+  }
+
+  return (
+    <>
+      <Card className="p-6 card-hover" data-testid={`student-detail-card-${student.student_id}`}>
+        <div className="flex items-start gap-4">
+          {/* Avatar */}
+          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">
+            {student.photo ? (
+              <img src={student.photo} alt={student.name} className="w-full h-full rounded-full object-cover" />
+            ) : (
+              getInitials(student.name)
+            )}
+          </div>
+
+          {/* Info */}
+          <div className="flex-1">
+            <h3 className="text-2xl font-bold text-gray-900 mb-1" style={{ fontFamily: 'Space Grotesk' }}>
+              {student.name}
+            </h3>
+            
+            <div className="grid md:grid-cols-2 gap-3 mt-4">
+              <div className="flex items-center gap-2 text-gray-700">
+                <GraduationCap className="w-5 h-5 text-blue-600" />
+                <div>
+                  <div className="text-xs text-gray-500">Class & Section</div>
+                  <div className="font-medium">{student.class_name || 'N/A'} - {student.section || 'N/A'}</div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 text-gray-700">
+                <User className="w-5 h-5 text-blue-600" />
+                <div>
+                  <div className="text-xs text-gray-500">Teacher</div>
+                  <div className="font-medium">{student.teacher_name || 'N/A'}</div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 text-gray-700">
+                <Bus className="w-5 h-5 text-blue-600" />
+                <div>
+                  <div className="text-xs text-gray-500">Bus Number</div>
+                  <div className="font-medium">{student.bus_number || 'N/A'}</div>
+                </div>
+              </div>
+
+              {student.phone && (
+                <div className="flex items-center gap-2 text-gray-700">
+                  <Phone className="w-5 h-5 text-blue-600" />
+                  <div>
+                    <div className="text-xs text-gray-500">Phone</div>
+                    <div className="font-medium">{student.phone}</div>
+                  </div>
+                </div>
+              )}
+
+              {student.emergency_contact && (
+                <div className="flex items-center gap-2 text-gray-700">
+                  <AlertCircle className="w-5 h-5 text-red-600" />
+                  <div>
+                    <div className="text-xs text-gray-500">Emergency Contact</div>
+                    <div className="font-medium">{student.emergency_contact}</div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {student.remarks && (
+              <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                <p className="text-sm text-yellow-900">
+                  <strong>Note:</strong> {student.remarks}
+                </p>
+              </div>
+            )}
+
+            {student.route_id && (
+              <div className="mt-4">
+                <Button
+                  data-testid="view-route-button"
+                  onClick={() => setShowRouteModal(true)}
+                  className="flex items-center gap-2"
+                >
+                  <MapPin className="w-4 h-4" />
+                  View Bus Route
+                </Button>
+              </div>
+            )}
+          </div>
+        </div>
+      </Card>
+
+      {showRouteModal && (
+        <RouteVisualizationModal
+          routeId={student.route_id}
+          onClose={() => setShowRouteModal(false)}
+        />
+      )}
+    </>
+  );
+}
