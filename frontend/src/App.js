@@ -86,7 +86,7 @@ function App() {
             path="/teacher"
             element={
               user && user.role === 'teacher' ? (
-                <TeacherDashboard user={user} onLogout={handleLogout} />
+                <TeacherDashboardNew user={user} onLogout={handleLogout} />
               ) : (
                 <Navigate to="/" replace />
               )
