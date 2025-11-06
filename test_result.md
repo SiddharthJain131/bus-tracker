@@ -345,11 +345,11 @@ frontend:
 
   - task: "Teacher Dashboard"
     implemented: true
-    working: "NA"
+    working: false
     file: "/app/frontend/src/components/TeacherDashboardNew.jsx"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
@@ -357,6 +357,9 @@ frontend:
       - working: "NA"
         agent: "main"
         comment: "Enhanced Teacher Dashboard implemented with: 1) Profile card with photo, name, phone, email, class & section 2) Summary cards: total students, avg monthly attendance %, today's absences (red status only) 3) Student list table with Name|Parent|Bus|AM Status|PM Status|View columns 4) Search bar and filters for student/parent name, bus number, AM/PM status 5) View modal with StudentDetailModal showing full details + monthly attendance grid + View Route button 6) RouteVisualizationModal for bus route with Leaflet map and stops flow 7) Notifications panel showing all system events for teacher's students 8) Read-only access (no edit buttons) 9) White/emerald/teal theme matching Admin/Parent dashboards. Backend updated to include parent_name in /api/teacher/students endpoint."
+      - working: false
+        agent: "testing"
+        comment: "❌ CRITICAL Z-INDEX ISSUE FOUND - Enhanced Teacher Dashboard UI comprehensive testing completed. WORKING COMPONENTS: ✅ Login/redirect to /teacher (working), ✅ Profile section (Mary Teacher, teacher@school.com, +1-555-2001, Class: Grade 5 - Section A), ✅ Summary stats cards (3 students, 0% attendance due to backend error, 0 absences), ✅ Student list table with all columns and data (Emma Johnson, Liam Smith, Olivia Brown with status badges), ✅ Search and filters (student/parent name search, bus filter working), ✅ Student detail modal (opens correctly, shows complete student profile), ✅ Notifications panel (showing 'No notifications'), ✅ Responsive layout (tablet/mobile views working). CRITICAL ISSUES: ❌ Route modal z-index problem - backdrop element intercepts pointer events making close button unclickable (Playwright error: 'div data-state=open aria-hidden=true class=fixed inset-0 z-50 bg-black/80' intercepts clicks), ❌ Backend attendance API returns 500 error (ValueError: not enough values to unpack - month parameter '11' instead of '2025-11'). Route modal layering hierarchy broken: Base UI < Student Modal < Route Modal backdrop blocks interactions."
 
   - task: "Admin Dashboard"
     implemented: true
