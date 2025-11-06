@@ -4,7 +4,7 @@ import axios from 'axios';
 import Login from './components/Login';
 import ParentDashboard from './components/ParentDashboard';
 import TeacherDashboard from './components/TeacherDashboard';
-import AdminDashboard from './components/AdminDashboard';
+import AdminDashboardNew from './components/AdminDashboardNew';
 import { Toaster } from './components/ui/sonner';
 import './App.css';
 
