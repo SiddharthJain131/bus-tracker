@@ -819,7 +819,7 @@ class SchoolBusTrackerAPITester:
         # Test 6: Create teacher user with assigned_class and assigned_section
         teacher_data = {
             "name": "Test Teacher",
-            "email": "testteacher@test.com", 
+            "email": f"testteacher{timestamp}@test.com", 
             "password": "test123",
             "role": "teacher",
             "phone": "+1-555-TEACHER",
