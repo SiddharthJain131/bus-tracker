@@ -140,12 +140,15 @@ export default function TeacherDashboardNew({ user, onLogout }) {
   const fetchNotifications = async () => {
     try {
       const response = await axios.get(`${API}/get_notifications`);
-      // Filter notifications related to teacher's students
-      const studentIds = students.map(s => s.student_id);
-      const filteredNotifications = response.data.filter(n => 
-        n.student_id && studentIds.includes(n.student_id)
-      );
-      setNotifications(filteredNotifications);
+      // Enrich notifications with student names
+      const enrichedNotifications = response.data.map(notification => {
+        const student = students.find(s => s.student_id === notification.student_id);
+        return {
+          ...notification,
+          student_name: student ? student.name : 'Unknown Student'
+        };
+      });
+      setNotifications(enrichedNotifications);
     } catch (error) {
       console.error('Failed to load notifications:', error);
     }
