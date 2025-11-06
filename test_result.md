@@ -340,7 +340,7 @@ frontend:
   - task: "Teacher Dashboard"
     implemented: true
     working: "NA"
-    file: "/app/frontend/src/components/TeacherDashboard.jsx"
+    file: "/app/frontend/src/components/TeacherDashboardNew.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
@@ -348,6 +348,9 @@ frontend:
       - working: "NA"
         agent: "main"
         comment: "Teacher dashboard at lines 1-158. Shows today's attendance with AM/PM status for assigned students."
+      - working: "NA"
+        agent: "main"
+        comment: "Enhanced Teacher Dashboard implemented with: 1) Profile card with photo, name, phone, email, class & section 2) Summary cards: total students, avg monthly attendance %, today's absences (red status only) 3) Student list table with Name|Parent|Bus|AM Status|PM Status|View columns 4) Search bar and filters for student/parent name, bus number, AM/PM status 5) View modal with StudentDetailModal showing full details + monthly attendance grid + View Route button 6) RouteVisualizationModal for bus route with Leaflet map and stops flow 7) Notifications panel showing all system events for teacher's students 8) Read-only access (no edit buttons) 9) White/emerald/teal theme matching Admin/Parent dashboards. Backend updated to include parent_name in /api/teacher/students endpoint."
 
   - task: "Admin Dashboard"
     implemented: true
