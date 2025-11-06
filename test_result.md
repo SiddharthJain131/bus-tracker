@@ -233,6 +233,9 @@ backend:
       - working: true
         agent: "testing"
         comment: "✅ PASSED - Bus, Route, and Stop APIs working correctly. Data enrichment working (buses show route names, routes show stop details). All CRUD operations functional."
+      - working: true
+        agent: "testing"
+        comment: "✅ ENHANCED ADMIN DASHBOARD VERIFICATION - GET /api/buses returns buses with route_name enrichment for dashboard table. GET /api/buses/{id} provides bus details with route_data for View modal. GET /api/routes/{id} returns route with stops array and map_path for map visualization. All data properly structured for Enhanced Admin Dashboard Buses & Routes tab."
 
   - task: "Holiday management APIs"
     implemented: true
