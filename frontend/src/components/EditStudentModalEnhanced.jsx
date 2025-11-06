@@ -119,6 +119,15 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
             </div>
 
             <div>
+              <Label>Roll Number</Label>
+              <Input
+                value={formData.roll_number}
+                onChange={(e) => handleChange('roll_number', e.target.value)}
+                placeholder="Roll number"
+              />
+            </div>
+
+            <div>
               <Label>Phone</Label>
               <Input
                 value={formData.phone}
@@ -129,20 +138,40 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
 
             <div>
               <Label>Class</Label>
-              <Input
+              <Select
                 value={formData.class_name}
-                onChange={(e) => handleChange('class_name', e.target.value)}
-                placeholder="e.g., 5th Grade"
-              />
+                onValueChange={(value) => handleChange('class_name', value)}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select class" />
+                </SelectTrigger>
+                <SelectContent>
+                  {CLASS_OPTIONS.map(option => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             <div>
               <Label>Section</Label>
-              <Input
+              <Select
                 value={formData.section}
-                onChange={(e) => handleChange('section', e.target.value)}
-                placeholder="e.g., A, B, C"
-              />
+                onValueChange={(value) => handleChange('section', value)}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select section" />
+                </SelectTrigger>
+                <SelectContent>
+                  {SECTION_OPTIONS.map(option => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             <div>
