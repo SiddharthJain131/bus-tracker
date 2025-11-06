@@ -124,7 +124,7 @@ export default function BusDetailModal({ bus, open, onClose }) {
 
                 {/* Route Map */}
                 <div className="h-96 rounded-lg overflow-hidden border-2 border-gray-200">
-                  <RouteMap routeData={routeData} />
+                  <RouteMap route={routeData} />
                 </div>
               </Card>
             )}
