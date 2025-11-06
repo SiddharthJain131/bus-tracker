@@ -582,8 +582,8 @@ async def create_user(user_data: UserCreate, current_user: dict = Depends(get_cu
     if existing_user:
         raise HTTPException(status_code=400, detail="Email already exists")
     
-    # Hash the password
-    password_hash = hashlib.sha256(user_data.password.encode()).hexdigest()
+    # Hash the password using bcrypt (consistent with login)
+    password_hash = bcrypt.hashpw(user_data.password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
     
     # Create user object
     user = User(
