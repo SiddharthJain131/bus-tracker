@@ -261,7 +261,7 @@ backend:
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: "NA"
         agent: "main"
@@ -269,6 +269,9 @@ backend:
       - working: true
         agent: "testing"
         comment: "✅ PASSED - Role-specific endpoints working correctly. Teacher sees assigned students with today's AM/PM status. Parent sees only their children. Role-based access control enforced (403 for cross-role access)."
+      - working: true
+        agent: "main"
+        comment: "Enhanced /api/teacher/students endpoint to include parent_name field for each student. Backend enrichment working properly to support enhanced Teacher Dashboard."
 
   - task: "Demo simulation APIs"
     implemented: true
