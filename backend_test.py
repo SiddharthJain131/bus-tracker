@@ -4,7 +4,7 @@ from datetime import datetime
 import json
 
 class SchoolBusTrackerAPITester:
-    def __init__(self, base_url="https://schoolbusgps.preview.emergentagent.com"):
+    def __init__(self, base_url="https://dashtest-auto.preview.emergentagent.com"):
         self.base_url = base_url
         self.api_url = f"{base_url}/api"
         self.session = requests.Session()
