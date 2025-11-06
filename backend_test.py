@@ -1048,6 +1048,9 @@ def main():
         edit_operations_success = tester.test_admin_edit_operations()
         stats_success = tester.test_admin_dashboard_stats()
         
+        # Test Admin Dashboard Enhancements (roll_number and user creation)
+        enhancements_success = tester.test_admin_dashboard_enhancements()
+        
         tester.test_student_crud()
         tester.test_logout()
         
