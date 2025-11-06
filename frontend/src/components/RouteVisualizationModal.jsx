@@ -34,7 +34,7 @@ export default function RouteVisualizationModal({ routeId, open, onClose }) {
 
   if (loading) {
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" data-testid="route-modal">
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[60]" data-testid="route-modal">
         <div className="bg-white rounded-lg p-6">
           <div className="spinner mx-auto"></div>
           <p className="mt-4 text-gray-600">Loading route...</p>
@@ -48,7 +48,7 @@ export default function RouteVisualizationModal({ routeId, open, onClose }) {
   }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" data-testid="route-modal" onClick={onClose}>
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[60] p-4" data-testid="route-modal" onClick={onClose}>
       <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-auto" onClick={(e) => e.stopPropagation()}>
         {/* Header */}
         <div className="flex justify-between items-center p-6 border-b border-gray-200">
