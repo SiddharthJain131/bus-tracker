@@ -34,6 +34,7 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
     if (open && student) {
       setFormData({
         name: student.name || '',
+        roll_number: student.roll_number || '',
         phone: student.phone || '',
         class_name: student.class_name || '',
         section: student.section || '',
