@@ -640,6 +640,293 @@ class SchoolBusTrackerAPITester:
         
         return all(results)
 
+    def test_admin_dashboard_enhancements(self):
+        """Test new Admin Dashboard enhancements - roll_number field and user creation"""
+        results = []
+        
+        print(f"\n🎯 Testing Admin Dashboard Enhancements...")
+        
+        # 1. Test Student Creation with Roll Number
+        print(f"   Testing Student Creation with Roll Number...")
+        
+        # First, get existing bus and parent IDs for test data
+        success, buses_data = self.run_test("Get buses for student creation", "GET", "buses", 200)
+        if not success or not buses_data:
+            print("   ❌ Cannot get buses for student creation test")
+            return False
+        
+        success, users_data = self.run_test("Get users for parent ID", "GET", "users", 200)
+        if not success or not users_data:
+            print("   ❌ Cannot get users for student creation test")
+            return False
+        
+        # Find a parent user
+        parent_user = next((u for u in users_data if u['role'] == 'parent'), None)
+        if not parent_user:
+            print("   ❌ No parent user found for student creation test")
+            return False
+        
+        bus_id = buses_data[0]['bus_id']
+        parent_id = parent_user['user_id']
+        
+        # Test 1: Create student with roll_number in Grade 5 - A
+        student_data_1 = {
+            "name": "Test Student Alpha",
+            "roll_number": "001",
+            "class_name": "Grade 5",
+            "section": "A",
+            "parent_id": parent_id,
+            "bus_id": bus_id,
+            "phone": "+1-555-TEST1",
+            "emergency_contact": "+1-555-EMRG1",
+            "remarks": "Test student for roll number validation"
+        }
+        
+        success, created_student_1 = self.run_test(
+            "Create student with roll_number 001 in Grade 5-A",
+            "POST",
+            "students",
+            200,
+            data=student_data_1,
+            critical=True
+        )
+        results.append(success)
+        
+        if success and created_student_1:
+            print(f"   ✅ Student created: {created_student_1['name']} - Roll: {created_student_1['roll_number']}")
+            test_student_id_1 = created_student_1['student_id']
+        else:
+            print("   ❌ Failed to create first test student")
+            return False
+        
+        # Test 2: Create another student with same roll_number in different class (should succeed)
+        student_data_2 = {
+            "name": "Test Student Beta",
+            "roll_number": "001",  # Same roll number
+            "class_name": "Grade 6",  # Different class
+            "section": "B",  # Different section
+            "parent_id": parent_id,
+            "bus_id": bus_id,
+            "phone": "+1-555-TEST2",
+            "emergency_contact": "+1-555-EMRG2",
+            "remarks": "Test student for roll number uniqueness across classes"
+        }
+        
+        success, created_student_2 = self.run_test(
+            "Create student with same roll_number 001 in Grade 6-B (should succeed)",
+            "POST",
+            "students",
+            200,
+            data=student_data_2,
+            critical=True
+        )
+        results.append(success)
+        
+        if success and created_student_2:
+            print(f"   ✅ Student created in different class: {created_student_2['name']} - Roll: {created_student_2['roll_number']}")
+            test_student_id_2 = created_student_2['student_id']
+        else:
+            print("   ❌ Failed to create student with same roll number in different class")
+        
+        # Test 3: Try to create student with same roll_number in same class+section (should fail)
+        student_data_3 = {
+            "name": "Test Student Gamma",
+            "roll_number": "001",  # Same roll number
+            "class_name": "Grade 5",  # Same class
+            "section": "A",  # Same section
+            "parent_id": parent_id,
+            "bus_id": bus_id,
+            "phone": "+1-555-TEST3"
+        }
+        
+        success, _ = self.run_test(
+            "Try to create student with duplicate roll_number in same class+section (should fail)",
+            "POST",
+            "students",
+            400,  # Should fail with 400
+            data=student_data_3,
+            critical=True
+        )
+        results.append(success)
+        
+        if success:
+            print(f"   ✅ Roll number uniqueness validation working - duplicate in same class rejected")
+        else:
+            print("   ❌ Roll number uniqueness validation failed - duplicate was allowed")
+        
+        # Test 4: Verify GET /api/students includes roll_number field
+        success, all_students = self.run_test(
+            "Verify GET /api/students includes roll_number field",
+            "GET",
+            "students",
+            200,
+            critical=True
+        )
+        results.append(success)
+        
+        if success and all_students:
+            # Check if roll_number field is present in response
+            students_with_roll = [s for s in all_students if 'roll_number' in s]
+            if len(students_with_roll) == len(all_students):
+                print(f"   ✅ All {len(all_students)} students have roll_number field (including null values)")
+            else:
+                print(f"   ❌ Some students missing roll_number field: {len(students_with_roll)}/{len(all_students)}")
+                results.append(False)
+            
+            # Verify our test students are in the list with correct roll numbers
+            test_students = [s for s in all_students if s['name'].startswith('Test Student')]
+            for student in test_students:
+                if student.get('roll_number'):
+                    print(f"   ✅ Found test student: {student['name']} - Roll: {student['roll_number']} - Class: {student['class_name']}-{student['section']}")
+        
+        # 2. Test User Creation Endpoint
+        print(f"\n   Testing User Creation Endpoint...")
+        
+        # Test 5: Create parent user
+        parent_data = {
+            "name": "Test Parent",
+            "email": "testparent@test.com",
+            "password": "test123",
+            "role": "parent",
+            "phone": "+1-555-PARENT",
+            "address": "123 Test Street, Test City"
+        }
+        
+        success, created_parent = self.run_test(
+            "Create parent user",
+            "POST",
+            "users",
+            200,
+            data=parent_data,
+            critical=True
+        )
+        results.append(success)
+        
+        if success and created_parent:
+            print(f"   ✅ Parent user created: {created_parent['name']} - {created_parent['email']}")
+            # Verify password_hash is not in response
+            if 'password_hash' not in created_parent:
+                print(f"   ✅ Password hash properly excluded from response")
+            else:
+                print(f"   ❌ Security issue: password_hash exposed in response")
+                results.append(False)
+            test_parent_id = created_parent['user_id']
+        else:
+            print("   ❌ Failed to create parent user")
+        
+        # Test 6: Create teacher user with assigned_class and assigned_section
+        teacher_data = {
+            "name": "Test Teacher",
+            "email": "testteacher@test.com", 
+            "password": "test123",
+            "role": "teacher",
+            "phone": "+1-555-TEACHER",
+            "assigned_class": "Grade 1",
+            "assigned_section": "A",
+            "address": "456 Teacher Lane, Education City"
+        }
+        
+        success, created_teacher = self.run_test(
+            "Create teacher user with assigned class/section",
+            "POST",
+            "users",
+            200,
+            data=teacher_data,
+            critical=True
+        )
+        results.append(success)
+        
+        if success and created_teacher:
+            print(f"   ✅ Teacher user created: {created_teacher['name']} - Class: {created_teacher.get('assigned_class')}-{created_teacher.get('assigned_section')}")
+            if created_teacher.get('assigned_class') == "Grade 1" and created_teacher.get('assigned_section') == "A":
+                print(f"   ✅ Teacher assignment fields properly saved")
+            else:
+                print(f"   ❌ Teacher assignment fields not saved correctly")
+                results.append(False)
+            test_teacher_id = created_teacher['user_id']
+        else:
+            print("   ❌ Failed to create teacher user")
+        
+        # Test 7: Create admin user
+        admin_data = {
+            "name": "Test Admin",
+            "email": "testadmin@test.com",
+            "password": "test123", 
+            "role": "admin",
+            "phone": "+1-555-ADMIN",
+            "address": "789 Admin Boulevard, Management City"
+        }
+        
+        success, created_admin = self.run_test(
+            "Create admin user",
+            "POST",
+            "users",
+            200,
+            data=admin_data,
+            critical=True
+        )
+        results.append(success)
+        
+        if success and created_admin:
+            print(f"   ✅ Admin user created: {created_admin['name']} - {created_admin['email']}")
+            test_admin_id = created_admin['user_id']
+        else:
+            print("   ❌ Failed to create admin user")
+        
+        # Test 8: Test email uniqueness validation
+        duplicate_email_data = {
+            "name": "Duplicate Email User",
+            "email": "testparent@test.com",  # Same email as parent created above
+            "password": "test123",
+            "role": "parent"
+        }
+        
+        success, _ = self.run_test(
+            "Try to create user with duplicate email (should fail)",
+            "POST",
+            "users",
+            400,  # Should fail with 400
+            data=duplicate_email_data,
+            critical=True
+        )
+        results.append(success)
+        
+        if success:
+            print(f"   ✅ Email uniqueness validation working - duplicate email rejected")
+        else:
+            print("   ❌ Email uniqueness validation failed - duplicate email was allowed")
+        
+        # Test 9: Verify password hashing is working by trying to login with created user
+        print(f"\n   Testing password hashing by attempting login...")
+        
+        # Logout current admin session
+        self.test_logout()
+        
+        # Try to login with newly created parent
+        login_success = self.test_login("testparent@test.com", "test123")
+        if login_success:
+            print(f"   ✅ Password hashing working - can login with created parent user")
+            self.test_logout()
+        else:
+            print(f"   ❌ Password hashing issue - cannot login with created parent user")
+            results.append(False)
+        
+        # Login back as admin for cleanup
+        self.test_login("admin@school.com", "password")
+        
+        # Cleanup: Delete test users and students
+        print(f"\n   Cleaning up test data...")
+        
+        # Delete test students
+        if 'test_student_id_1' in locals():
+            self.run_test("Cleanup - Delete test student 1", "DELETE", f"students/{test_student_id_1}", 200)
+        if 'test_student_id_2' in locals():
+            self.run_test("Cleanup - Delete test student 2", "DELETE", f"students/{test_student_id_2}", 200)
+        
+        print(f"   ✅ Test cleanup completed")
+        
+        return all(results)
+
     def test_missing_endpoints(self):
         """Test for missing endpoints mentioned in review"""
         # Test for /api/get_embeddings (mentioned as missing in review)
