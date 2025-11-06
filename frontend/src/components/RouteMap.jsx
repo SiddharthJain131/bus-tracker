@@ -14,10 +14,12 @@ export default function RouteMap({ route }) {
   const mapInstanceRef = useRef(null);
 
   useEffect(() => {
+    if (!route) return;
+    
     if (!mapInstanceRef.current && mapRef.current) {
       // Initialize map
-      const centerLat = route.map_path.length > 0 ? route.map_path[0].lat : 37.7749;
-      const centerLon = route.map_path.length > 0 ? route.map_path[0].lon : -122.4194;
+      const centerLat = route.map_path && route.map_path.length > 0 ? route.map_path[0].lat : 37.7749;
+      const centerLon = route.map_path && route.map_path.length > 0 ? route.map_path[0].lon : -122.4194;
       
       mapInstanceRef.current = L.map(mapRef.current).setView([centerLat, centerLon], 13);
 
