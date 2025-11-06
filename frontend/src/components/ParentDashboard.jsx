@@ -103,27 +103,29 @@ export default function ParentDashboard({ user, onLogout }) {
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Student selector */}
-        {students.length > 1 && (
-          <Card className="p-4 mb-6">
-            <div className="flex gap-2 flex-wrap">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+        {/* User Profile */}
+        <UserProfileHeader user={user} />
+
+        {/* Student Cards - Multiple Children */}
+        {students.length > 1 ? (
+          <div>
+            <h2 className="text-xl font-semibold mb-4" style={{ fontFamily: 'Space Grotesk' }}>My Children</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
               {students.map((student) => (
-                <Button
+                <div
                   key={student.student_id}
-                  data-testid={`select-student-${student.name.toLowerCase().replace(' ', '-')}`}
                   onClick={() => setSelectedStudent(student)}
-                  variant={selectedStudent?.student_id === student.student_id ? 'default' : 'outline'}
-                  className="rounded-full"
+                  className={`cursor-pointer ${selectedStudent?.student_id === student.student_id ? 'ring-2 ring-blue-500 rounded-lg' : ''}`}
                 >
-                  {student.name}
-                </Button>
+                  <StudentCard student={student} compact={true} />
+                </div>
               ))}
             </div>
-          </Card>
-        )}
+          </div>
+        ) : null}
 
-        {selectedStudent && (
+        {selectedStudent && selectedStudentDetails && (
           <div className="grid lg:grid-cols-3 gap-6">
             {/* Left column - Map and Attendance */}
             <div className="lg:col-span-2 space-y-6">
