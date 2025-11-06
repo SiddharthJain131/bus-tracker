@@ -126,92 +126,99 @@ export default function ParentDashboard({ user, onLogout }) {
         ) : null}
 
         {selectedStudent && selectedStudentDetails && (
-          <div className="grid lg:grid-cols-3 gap-6">
-            {/* Left column - Map and Attendance */}
-            <div className="lg:col-span-2 space-y-6">
-              {/* Live Bus Map */}
-              <Card className="p-6 card-hover">
-                <div className="flex items-center gap-2 mb-4">
-                  <MapPin className="w-5 h-5 text-blue-600" />
-                  <h2 className="text-xl font-semibold" style={{ fontFamily: 'Space Grotesk' }}>Live Bus Location</h2>
-                  {busLocation && (
-                    <span className="ml-auto text-xs text-gray-500">
-                      Updated: {new Date(busLocation.timestamp).toLocaleTimeString()}
-                    </span>
-                  )}
-                </div>
-                <div className="h-96 rounded-lg overflow-hidden" data-testid="bus-map-container">
-                  <BusMap location={busLocation} />
-                </div>
-              </Card>
+          <div className="space-y-6">
+            {/* Student Details */}
+            <StudentCard student={selectedStudentDetails} />
 
-              {/* Attendance Grid */}
-              <Card className="p-6 card-hover">
-                <div className="flex items-center gap-2 mb-4">
-                  <Calendar className="w-5 h-5 text-blue-600" />
-                  <h2 className="text-xl font-semibold" style={{ fontFamily: 'Space Grotesk' }}>Attendance</h2>
-                </div>
-                <AttendanceGrid studentId={selectedStudent.student_id} />
-              </Card>
-            </div>
+            <div className="grid lg:grid-cols-3 gap-6">
+              {/* Left column - Map and Attendance */}
+              <div className="lg:col-span-2 space-y-6">
+                {/* Live Bus Map */}
+                <Card className="p-6 card-hover">
+                  <div className="flex items-center gap-2 mb-4">
+                    <MapPin className="w-5 h-5 text-blue-600" />
+                    <h2 className="text-xl font-semibold" style={{ fontFamily: 'Space Grotesk' }}>Live Bus Location</h2>
+                    {busLocation && (
+                      <span className="ml-auto text-xs text-gray-500">
+                        Updated: {new Date(busLocation.timestamp).toLocaleTimeString()}
+                      </span>
+                    )}
+                  </div>
+                  <div className="h-96 rounded-lg overflow-hidden" data-testid="bus-map-container">
+                    <BusMap location={busLocation} />
+                  </div>
+                </Card>
 
-            {/* Right column - Notifications */}
-            <div>
-              <Card className="p-6 card-hover">
-                <div className="flex items-center gap-2 mb-4">
-                  <Bell className="w-5 h-5 text-blue-600" />
-                  <h2 className="text-xl font-semibold" style={{ fontFamily: 'Space Grotesk' }}>Notifications</h2>
-                </div>
-                <div className="space-y-3 max-h-96 overflow-y-auto" data-testid="notifications-container">
-                  {notifications.length === 0 ? (
-                    <p className="text-sm text-gray-500 text-center py-8">No notifications</p>
-                  ) : (
-                    notifications.map((notification) => (
-                      <div
-                        key={notification.notification_id}
-                        data-testid={`notification-${notification.type}`}
-                        className={`p-3 rounded-lg border ${
-                          notification.type === 'mismatch'
-                            ? 'bg-red-50 border-red-200'
-                            : 'bg-yellow-50 border-yellow-200'
-                        }`}
-                      >
-                        <p className="text-sm font-medium text-gray-900">{notification.message}</p>
-                        <p className="text-xs text-gray-500 mt-1">
-                          {new Date(notification.timestamp).toLocaleString()}
-                        </p>
-                      </div>
-                    ))
-                  )}
-                </div>
-              </Card>
+                {/* Attendance Grid */}
+                <Card className="p-6 card-hover">
+                  <div className="flex items-center gap-2 mb-4">
+                    <Calendar className="w-5 h-5 text-blue-600" />
+                    <h2 className="text-xl font-semibold" style={{ fontFamily: 'Space Grotesk' }}>Attendance</h2>
+                  </div>
+                  <AttendanceGrid studentId={selectedStudent.student_id} />
+                </Card>
+              </div>
 
-              {/* Status Legend */}
-              <Card className="p-6 mt-6">
-                <h3 className="text-sm font-semibold text-gray-900 mb-3">Status Legend</h3>
-                <div className="space-y-2 text-xs">
-                  <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 rounded status-gray"></div>
-                    <span>Not Scanned</span>
+              {/* Right column - Notifications */}
+              <div>
+                <Card className="p-6 card-hover">
+                  <div className="flex items-center gap-2 mb-4">
+                    <Bell className="w-5 h-5 text-blue-600" />
+                    <h2 className="text-xl font-semibold" style={{ fontFamily: 'Space Grotesk' }}>Notifications</h2>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 rounded status-yellow"></div>
-                    <span>On Board</span>
+                  <div className="space-y-3 max-h-96 overflow-y-auto" data-testid="notifications-container">
+                    {notifications.length === 0 ? (
+                      <p className="text-sm text-gray-500 text-center py-8">No notifications</p>
+                    ) : (
+                      notifications.map((notification) => (
+                        <div
+                          key={notification.notification_id}
+                          data-testid={`notification-${notification.type}`}
+                          className={`p-3 rounded-lg border ${
+                            notification.type === 'mismatch'
+                              ? 'bg-red-50 border-red-200'
+                              : notification.type === 'update'
+                              ? 'bg-blue-50 border-blue-200'
+                              : 'bg-yellow-50 border-yellow-200'
+                          }`}
+                        >
+                          <p className="text-sm font-medium text-gray-900">{notification.message}</p>
+                          <p className="text-xs text-gray-500 mt-1">
+                            {new Date(notification.timestamp).toLocaleString()}
+                          </p>
+                        </div>
+                      ))
+                    )}
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 rounded status-green"></div>
-                    <span>Reached School</span>
+                </Card>
+
+                {/* Status Legend */}
+                <Card className="p-6 mt-6">
+                  <h3 className="text-sm font-semibold text-gray-900 mb-3">Status Legend</h3>
+                  <div className="space-y-2 text-xs">
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 rounded status-gray"></div>
+                      <span>Not Scanned</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 rounded status-yellow"></div>
+                      <span>On Board</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 rounded status-green"></div>
+                      <span>Reached School</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 rounded status-red"></div>
+                      <span>Missed Boarding</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 rounded status-blue"></div>
+                      <span>Holiday</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 rounded status-red"></div>
-                    <span>Missed Boarding</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 rounded status-blue"></div>
-                    <span>Holiday</span>
-                  </div>
-                </div>
-              </Card>
+                </Card>
+              </div>
             </div>
           </div>
         )}
