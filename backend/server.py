@@ -56,6 +56,17 @@ class UserUpdate(BaseModel):
     assigned_section: Optional[str] = None
     address: Optional[str] = None
 
+class UserCreate(BaseModel):
+    email: str
+    password: str
+    role: str  # parent, teacher, admin
+    name: str
+    phone: Optional[str] = None
+    photo: Optional[str] = None
+    assigned_class: Optional[str] = None
+    assigned_section: Optional[str] = None
+    address: Optional[str] = None
+
 class UserLogin(BaseModel):
     email: str
     password: str
