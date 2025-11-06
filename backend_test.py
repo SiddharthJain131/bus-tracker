@@ -783,9 +783,11 @@ class SchoolBusTrackerAPITester:
         print(f"\n   Testing User Creation Endpoint...")
         
         # Test 5: Create parent user
+        import time
+        timestamp = int(time.time())
         parent_data = {
             "name": "Test Parent",
-            "email": "testparent@test.com",
+            "email": f"testparent{timestamp}@test.com",
             "password": "test123",
             "role": "parent",
             "phone": "+1-555-PARENT",
