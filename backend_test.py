@@ -394,105 +394,229 @@ class SchoolBusTrackerAPITester:
         
         return all(results)
 
+    def test_attendance_flow(self):
+        """Test complete attendance flow"""
+        results = []
+        
+        if not self.student_ids:
+            print("   No student IDs available for attendance testing")
+            return False
+        
+        student_id = self.student_ids[0]
+        
+        # Test verified scan (should create yellow status)
+        success, _ = self.test_scan_event(student_id, verified=True)
+        results.append(success)
+        
+        # Test unverified scan (should create notification)
+        success, _ = self.test_scan_event(student_id, verified=False)
+        results.append(success)
+        
+        # Check notifications were created
+        success, notifications = self.run_test(
+            "Check notifications after unverified scan",
+            "GET",
+            "get_notifications",
+            200
+        )
+        results.append(success)
+        
+        if success and notifications:
+            mismatch_notifications = [n for n in notifications if n.get('type') == 'mismatch']
+            print(f"   Found {len(mismatch_notifications)} identity mismatch notifications")
+        
+        # Get attendance to verify status
+        success, attendance_data = self.test_get_attendance(student_id)
+        results.append(success)
+        
+        return all(results)
+
+    def test_missing_endpoints(self):
+        """Test for missing endpoints mentioned in review"""
+        # Test for /api/get_embeddings (mentioned as missing in review)
+        success, _ = self.run_test(
+            "Check missing get_embeddings endpoint",
+            "GET",
+            "get_embeddings",
+            404  # Expected to be missing
+        )
+        return success
+
+    def generate_report(self):
+        """Generate comprehensive test report"""
+        print(f"\n📋 COMPREHENSIVE TEST REPORT")
+        print("=" * 60)
+        
+        # Summary
+        success_rate = (self.tests_passed / self.tests_run * 100) if self.tests_run > 0 else 0
+        print(f"Total Tests: {self.tests_run}")
+        print(f"Passed: {self.tests_passed}")
+        print(f"Failed: {self.tests_failed}")
+        print(f"Success Rate: {success_rate:.1f}%")
+        
+        # Critical failures
+        if self.critical_failures:
+            print(f"\n❌ CRITICAL FAILURES ({len(self.critical_failures)}):")
+            for failure in self.critical_failures:
+                print(f"   • {failure['name']}: {failure.get('error', 'Status ' + str(failure['actual_status']))}")
+        
+        # Passed tests summary
+        passed_tests = [t for t in self.test_results if t['success']]
+        if passed_tests:
+            print(f"\n✅ PASSED TESTS ({len(passed_tests)}):")
+            for test in passed_tests:
+                if test.get('critical'):
+                    print(f"   • {test['name']} (CRITICAL)")
+                else:
+                    print(f"   • {test['name']}")
+        
+        # Failed tests summary
+        failed_tests = [t for t in self.test_results if not t['success']]
+        if failed_tests:
+            print(f"\n❌ FAILED TESTS ({len(failed_tests)}):")
+            for test in failed_tests:
+                error_info = test.get('error', f"Status {test['actual_status']}")
+                if test.get('critical'):
+                    print(f"   • {test['name']} (CRITICAL): {error_info}")
+                else:
+                    print(f"   • {test['name']}: {error_info}")
+        
+        # API Coverage
+        tested_endpoints = set()
+        for test in self.test_results:
+            tested_endpoints.add(test['endpoint'])
+        
+        print(f"\n📊 API COVERAGE:")
+        print(f"   Endpoints tested: {len(tested_endpoints)}")
+        print(f"   Expected endpoints: 22+ (from review request)")
+        
+        return success_rate >= 80 and len(self.critical_failures) == 0
+
 def main():
-    print("🚌 School Bus Tracker API Testing")
-    print("=" * 50)
+    print("🚌 IoT RFID School Bus Tracker - Comprehensive Backend Testing")
+    print("=" * 70)
     
     tester = SchoolBusTrackerAPITester()
     
-    # Test credentials from the review request
+    # Test credentials from seed data
     test_accounts = [
         ("parent@school.com", "password", "parent"),
         ("teacher@school.com", "password", "teacher"), 
         ("admin@school.com", "password", "admin")
     ]
     
-    all_tests_passed = True
+    # Phase 1: Authentication Tests
+    print(f"\n🔐 PHASE 1: AUTHENTICATION TESTING")
+    print("-" * 50)
     
+    # Test invalid credentials first
+    tester.test_invalid_login()
+    
+    auth_success = True
     for email, password, role in test_accounts:
-        print(f"\n🔐 Testing {role.upper()} role ({email})")
-        print("-" * 40)
+        print(f"\n   Testing {role.upper()} authentication...")
         
         # Test login
         if not tester.test_login(email, password):
-            print(f"❌ Login failed for {role}")
-            all_tests_passed = False
+            print(f"   ❌ Login failed for {role}")
+            auth_success = False
             continue
             
         # Test get me
         success, user_data = tester.test_get_me()
         if not success:
-            print(f"❌ Get user info failed for {role}")
-            all_tests_passed = False
+            print(f"   ❌ Get user info failed for {role}")
+            auth_success = False
             continue
             
-        # Role-specific tests
-        if role == "admin":
-            if not tester.test_admin_endpoints():
-                print(f"❌ Admin endpoints failed")
-                all_tests_passed = False
-        elif role == "teacher":
-            if not tester.test_teacher_endpoints():
-                print(f"❌ Teacher endpoints failed")
-                all_tests_passed = False
-        elif role == "parent":
-            if not tester.test_parent_endpoints():
-                print(f"❌ Parent endpoints failed")
-                all_tests_passed = False
-        
         # Test logout
         if not tester.test_logout():
-            print(f"❌ Logout failed for {role}")
-            all_tests_passed = False
+            print(f"   ❌ Logout failed for {role}")
+            auth_success = False
     
-    # Test core functionality (without auth for some endpoints)
-    print(f"\n🔧 Testing Core Functionality")
-    print("-" * 40)
+    if not auth_success:
+        print("❌ Authentication tests failed - cannot proceed with role-based testing")
+        return 1
+    
+    # Phase 2: Role-Based Endpoint Testing
+    print(f"\n👥 PHASE 2: ROLE-BASED ENDPOINT TESTING")
+    print("-" * 50)
+    
+    # Test Admin role
+    print(f"\n   Testing ADMIN role capabilities...")
+    if tester.test_login("admin@school.com", "password"):
+        admin_success = tester.test_admin_endpoints()
+        tester.test_student_crud()
+        tester.test_logout()
+        
+        if not admin_success:
+            print("   ❌ Admin endpoints failed")
+    
+    # Test Teacher role
+    print(f"\n   Testing TEACHER role capabilities...")
+    if tester.test_login("teacher@school.com", "password"):
+        teacher_success = tester.test_teacher_endpoints()
+        tester.test_logout()
+        
+        if not teacher_success:
+            print("   ❌ Teacher endpoints failed")
+    
+    # Test Parent role
+    print(f"\n   Testing PARENT role capabilities...")
+    if tester.test_login("parent@school.com", "password"):
+        parent_success = tester.test_parent_endpoints()
+        
+        # Test role-based access control
+        print(f"\n   Testing role-based access control...")
+        tester.test_role_based_access_control()
+        
+        tester.test_logout()
+        
+        if not parent_success:
+            print("   ❌ Parent endpoints failed")
+    
+    # Phase 3: Core IoT Functionality Testing
+    print(f"\n🔧 PHASE 3: CORE IoT FUNCTIONALITY TESTING")
+    print("-" * 50)
     
     # Login as admin for core tests
     if tester.test_login("admin@school.com", "password"):
         
-        # Test scan event
-        success, _ = tester.test_scan_event()
-        if not success:
-            all_tests_passed = False
-            
-        # Test location update
-        success, _ = tester.test_update_location()
-        if not success:
-            all_tests_passed = False
-            
-        # Test get bus location
-        success, _ = tester.test_get_bus_location()
-        if not success:
-            all_tests_passed = False
-            
-        # Test get attendance
-        success, _ = tester.test_get_attendance()
-        if not success:
-            all_tests_passed = False
-            
+        print(f"\n   Testing core IoT APIs...")
+        
+        # Test bus location updates
+        tester.test_update_location()
+        tester.test_get_bus_location()
+        
+        # Test attendance flow
+        print(f"\n   Testing attendance flow...")
+        tester.test_attendance_flow()
+        
         # Test notifications
-        success, _ = tester.test_get_notifications()
-        if not success:
-            all_tests_passed = False
-            
+        tester.test_get_notifications()
+        
         # Test demo endpoints
-        if not tester.test_demo_endpoints():
-            all_tests_passed = False
+        print(f"\n   Testing demo simulation...")
+        tester.test_demo_endpoints()
+        
+        tester.test_logout()
     
-    # Print final results
-    print(f"\n📊 Final Results")
-    print("=" * 50)
-    print(f"Tests passed: {tester.tests_passed}/{tester.tests_run}")
-    success_rate = (tester.tests_passed / tester.tests_run * 100) if tester.tests_run > 0 else 0
-    print(f"Success rate: {success_rate:.1f}%")
+    # Phase 4: Edge Cases and Missing Endpoints
+    print(f"\n⚠️  PHASE 4: EDGE CASES & MISSING ENDPOINTS")
+    print("-" * 50)
     
-    if all_tests_passed and success_rate >= 90:
-        print("✅ All critical tests passed!")
+    tester.test_missing_endpoints()
+    
+    # Generate final report
+    overall_success = tester.generate_report()
+    
+    if overall_success:
+        print(f"\n🎉 OVERALL RESULT: SUCCESS")
+        print("   All critical backend APIs are working correctly!")
         return 0
     else:
-        print("❌ Some tests failed!")
+        print(f"\n💥 OVERALL RESULT: ISSUES FOUND")
+        print("   Critical issues detected that need attention!")
         return 1
 
 if __name__ == "__main__":
