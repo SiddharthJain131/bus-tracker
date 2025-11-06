@@ -923,6 +923,9 @@ class SchoolBusTrackerAPITester:
         if 'test_student_id_2' in locals():
             self.run_test("Cleanup - Delete test student 2", "DELETE", f"students/{test_student_id_2}", 200)
         
+        # Note: We don't delete test users as there's no DELETE /api/users endpoint
+        # This is expected behavior - users would be managed through admin interface
+        
         print(f"   ✅ Test cleanup completed")
         
         return all(results)
