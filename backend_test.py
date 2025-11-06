@@ -107,10 +107,12 @@ class SchoolBusTrackerAPITester:
             "POST",
             "auth/login",
             200,
-            data={"email": email, "password": password}
+            data={"email": email, "password": password},
+            critical=True
         )
         if success:
             self.current_user = response
+            print(f"   Logged in as: {response.get('name')} ({response.get('role')})")
             return True
         return False
 
@@ -120,7 +122,8 @@ class SchoolBusTrackerAPITester:
             "Logout",
             "POST", 
             "auth/logout",
-            200
+            200,
+            critical=True
         )
         if success:
             self.current_user = None
@@ -132,8 +135,20 @@ class SchoolBusTrackerAPITester:
             "Get current user",
             "GET",
             "auth/me", 
-            200
+            200,
+            critical=True
         )
+
+    def test_invalid_login(self):
+        """Test invalid credentials"""
+        success, _ = self.run_test(
+            "Invalid login credentials",
+            "POST",
+            "auth/login",
+            401,
+            data={"email": "invalid@test.com", "password": "wrongpassword"}
+        )
+        return success
 
     def test_scan_event(self):
         """Test scan event endpoint"""
