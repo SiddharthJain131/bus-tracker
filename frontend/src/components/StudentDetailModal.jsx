@@ -138,7 +138,10 @@ export default function StudentDetailModal({ student, open, onClose }) {
               {/* View Route Button */}
               {studentDetails.route_id && (
                 <Button
-                  onClick={() => setShowRouteModal(true)}
+                  onClick={() => {
+                    setShowRouteModal(true);
+                    setTempClosed(true);
+                  }}
                   className="w-full flex items-center justify-center gap-2"
                 >
                   <MapPin className="w-4 h-4" />
