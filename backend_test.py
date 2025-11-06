@@ -275,6 +275,215 @@ class SchoolBusTrackerAPITester:
         
         return all(results)
 
+    def test_enhanced_admin_dashboard(self):
+        """Test Enhanced Admin Dashboard specific requirements"""
+        results = []
+        
+        print(f"\n🎯 Testing Enhanced Admin Dashboard APIs...")
+        
+        # 1. Data Retrieval for Admin Dashboard
+        print(f"   Testing data retrieval with enriched data...")
+        
+        # Get students with enriched data (parent_name, teacher_name, bus_number)
+        success, students_data = self.run_test(
+            "Admin Dashboard - Get students with enriched data", 
+            "GET", "students", 200, critical=True
+        )
+        results.append(success)
+        if success and students_data:
+            # Verify enrichment fields are present
+            for student in students_data[:2]:
+                if 'parent_name' in student and 'teacher_name' in student and 'bus_number' in student:
+                    print(f"   ✅ Student enrichment: {student['name']} - Parent: {student['parent_name']}, Teacher: {student['teacher_name']}, Bus: {student['bus_number']}")
+                else:
+                    print(f"   ❌ Missing enrichment fields for student: {student.get('name', 'Unknown')}")
+                    results.append(False)
+        
+        # Get users without password_hash
+        success, users_data = self.run_test(
+            "Admin Dashboard - Get users (no password_hash)", 
+            "GET", "users", 200, critical=True
+        )
+        results.append(success)
+        if success and users_data:
+            # Verify password_hash is excluded
+            for user in users_data[:2]:
+                if 'password_hash' not in user:
+                    print(f"   ✅ User data secure: {user['name']} - no password_hash exposed")
+                else:
+                    print(f"   ❌ Security issue: password_hash exposed for {user.get('name', 'Unknown')}")
+                    results.append(False)
+        
+        # Get buses with route_name enrichment
+        success, buses_data = self.run_test(
+            "Admin Dashboard - Get buses with route enrichment", 
+            "GET", "buses", 200, critical=True
+        )
+        results.append(success)
+        if success and buses_data:
+            for bus in buses_data[:2]:
+                if 'route_name' in bus:
+                    print(f"   ✅ Bus enrichment: {bus['bus_number']} - Route: {bus['route_name']}")
+                else:
+                    print(f"   ❌ Missing route_name for bus: {bus.get('bus_number', 'Unknown')}")
+                    results.append(False)
+        
+        # 2. Test detailed views for modals
+        if self.student_ids:
+            student_id = self.student_ids[0]
+            success, student_detail = self.run_test(
+                "Admin Dashboard - Get student detail for View modal", 
+                "GET", f"students/{student_id}", 200, critical=True
+            )
+            results.append(success)
+            if success and student_detail:
+                required_fields = ['name', 'parent_name', 'parent_email', 'teacher_name', 'bus_number']
+                missing_fields = [field for field in required_fields if field not in student_detail]
+                if not missing_fields:
+                    print(f"   ✅ Student detail complete for modal: {student_detail['name']}")
+                else:
+                    print(f"   ❌ Student detail missing fields: {missing_fields}")
+                    results.append(False)
+        
+        if self.bus_ids:
+            bus_id = self.bus_ids[0]
+            success, bus_detail = self.run_test(
+                "Admin Dashboard - Get bus detail for View modal", 
+                "GET", f"buses/{bus_id}", 200, critical=True
+            )
+            results.append(success)
+            if success and bus_detail:
+                if 'route_data' in bus_detail:
+                    print(f"   ✅ Bus detail with route data: {bus_detail['bus_number']}")
+                else:
+                    print(f"   ❌ Bus detail missing route_data for modal")
+                    results.append(False)
+        
+        # 3. Test route details for map visualization
+        success, routes_data = self.run_test("Admin Dashboard - Get routes", "GET", "routes", 200)
+        results.append(success)
+        if success and routes_data and routes_data:
+            route_id = routes_data[0]['route_id']
+            success, route_detail = self.run_test(
+                "Admin Dashboard - Get route with stops for map", 
+                "GET", f"routes/{route_id}", 200, critical=True
+            )
+            results.append(success)
+            if success and route_detail:
+                if 'stops' in route_detail and 'map_path' in route_detail:
+                    print(f"   ✅ Route detail with stops and map_path: {route_detail['route_name']}")
+                else:
+                    print(f"   ❌ Route detail missing stops or map_path for visualization")
+                    results.append(False)
+        
+        return all(results)
+
+    def test_admin_edit_operations(self):
+        """Test admin edit operations with email notifications"""
+        results = []
+        
+        print(f"\n✏️  Testing Admin Edit Operations...")
+        
+        if not self.student_ids:
+            print("   ❌ No student IDs available for edit testing")
+            return False
+        
+        student_id = self.student_ids[0]
+        
+        # Get original student data
+        success, original_student = self.run_test(
+            "Get original student data", 
+            "GET", f"students/{student_id}", 200
+        )
+        if not success:
+            return False
+        
+        # Update student info (should trigger email notification)
+        update_data = {
+            "remarks": f"Updated by Enhanced Admin Dashboard test at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+        }
+        success, _ = self.run_test(
+            "Admin - Update student (should trigger email)", 
+            "PUT", f"students/{student_id}", 200, 
+            data=update_data, critical=True
+        )
+        results.append(success)
+        
+        if success:
+            print(f"   ✅ Student update successful - email notification should be sent to parent")
+            
+            # Check email logs to verify notification was sent
+            success, email_logs = self.run_test(
+                "Check email logs for student update notification", 
+                "GET", "email_logs", 200
+            )
+            if success and email_logs:
+                recent_emails = [log for log in email_logs if log.get('student_id') == student_id]
+                if recent_emails:
+                    print(f"   ✅ Email notification logged: {recent_emails[0]['subject']}")
+                else:
+                    print(f"   ⚠️  No email log found for student update (may be expected)")
+        
+        # Test user update
+        success, users_data = self.run_test("Get users for edit test", "GET", "users", 200)
+        if success and users_data:
+            # Find a non-admin user to update
+            non_admin_user = next((u for u in users_data if u['role'] != 'admin'), None)
+            if non_admin_user:
+                user_id = non_admin_user['user_id']
+                update_data = {
+                    "phone": f"555-TEST-{random.randint(1000, 9999)}"
+                }
+                success, _ = self.run_test(
+                    "Admin - Update user info", 
+                    "PUT", f"users/{user_id}", 200, 
+                    data=update_data, critical=True
+                )
+                results.append(success)
+                
+                # Test restriction: admin cannot edit another admin
+                admin_user = next((u for u in users_data if u['role'] == 'admin' and u['user_id'] != self.current_user['user_id']), None)
+                if admin_user:
+                    success, _ = self.run_test(
+                        "Admin - Try to edit another admin (should fail)", 
+                        "PUT", f"users/{admin_user['user_id']}", 403, 
+                        data={"phone": "should-fail"}
+                    )
+                    results.append(success)
+                    if success:
+                        print(f"   ✅ Admin edit restriction working - cannot edit other admins")
+        
+        return all(results)
+
+    def test_admin_dashboard_stats(self):
+        """Test stats verification for admin dashboard"""
+        results = []
+        
+        print(f"\n📊 Testing Admin Dashboard Stats...")
+        
+        # Count total students
+        success, students_data = self.run_test("Get all students for count", "GET", "students", 200, critical=True)
+        results.append(success)
+        if success and students_data:
+            student_count = len(students_data)
+            print(f"   ✅ Total students: {student_count}")
+        
+        # Count teachers from users
+        success, users_data = self.run_test("Get all users for teacher count", "GET", "users", 200, critical=True)
+        results.append(success)
+        if success and users_data:
+            teacher_count = len([u for u in users_data if u['role'] == 'teacher'])
+            print(f"   ✅ Total teachers: {teacher_count}")
+        
+        # Count total buses
+        success, buses_data = self.run_test("Get all buses for count", "GET", "buses", 200, critical=True)
+        results.append(success)
+        if success and buses_data:
+            bus_count = len(buses_data)
+            print(f"   ✅ Total buses: {bus_count}")
+        
+        return all(results)
+
     def test_teacher_endpoints(self):
         """Test teacher-specific endpoints"""
         success, students_data = self.run_test(
