@@ -852,7 +852,7 @@ class SchoolBusTrackerAPITester:
         # Test 7: Create admin user
         admin_data = {
             "name": "Test Admin",
-            "email": "testadmin@test.com",
+            "email": f"testadmin{timestamp}@test.com",
             "password": "test123", 
             "role": "admin",
             "phone": "+1-555-ADMIN",
