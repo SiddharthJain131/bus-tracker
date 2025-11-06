@@ -878,7 +878,7 @@ class SchoolBusTrackerAPITester:
         # Test 8: Test email uniqueness validation
         duplicate_email_data = {
             "name": "Duplicate Email User",
-            "email": "testparent@test.com",  # Same email as parent created above
+            "email": f"testparent{timestamp}@test.com",  # Same email as parent created above
             "password": "test123",
             "role": "parent"
         }
