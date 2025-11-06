@@ -525,6 +525,21 @@ async def create_student(student: Student, current_user: dict = Depends(get_curr
             raise HTTPException(status_code=400, detail=f"Roll number {student.roll_number} already exists in {student.class_name} - {student.section}")
     
     await db.students.insert_one(student.model_dump())
+    
+    # Update parent's student_ids array
+    if student.parent_id:
+        await db.users.update_one(
+            {"user_id": student.parent_id},
+            {"$addToSet": {"student_ids": student.student_id}}
+        )
+    
+    # Update teacher's student_ids array if teacher is assigned
+    if student.teacher_id:
+        await db.users.update_one(
+            {"user_id": student.teacher_id},
+            {"$addToSet": {"student_ids": student.student_id}}
+        )
+    
     return student
 
 @api_router.put("/students/{student_id}")
