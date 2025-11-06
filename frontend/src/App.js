@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import Login from './components/Login';
 import ParentDashboard from './components/ParentDashboard';
-import TeacherDashboard from './components/TeacherDashboard';
+import TeacherDashboardNew from './components/TeacherDashboardNew';
 import AdminDashboardNew from './components/AdminDashboardNew';
 import { Toaster } from './components/ui/sonner';
 import './App.css';
