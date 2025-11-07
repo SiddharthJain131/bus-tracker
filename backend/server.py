@@ -833,8 +833,40 @@ async def delete_route(route_id: str, current_user: dict = Depends(get_current_u
     if current_user['role'] != 'admin':
         raise HTTPException(status_code=403, detail="Access denied")
     
+    # Check if route exists
+    route = await db.routes.find_one({"route_id": route_id}, {"_id": 0})
+    if not route:
+        raise HTTPException(status_code=404, detail="Route not found")
+    
+    # Check for buses using this route
+    bus_count = await db.buses.count_documents({"route_id": route_id})
+    if bus_count > 0:
+        raise HTTPException(
+            status_code=409,
+            detail=f"Cannot delete route. {bus_count} bus(es) are using this route. Please reassign buses first."
+        )
+    
+    # Cascade delete: Remove stops that are only used by this route
+    stop_ids = route.get('stop_ids', [])
+    for stop_id in stop_ids:
+        # Check if stop is used by other routes
+        other_routes = await db.routes.count_documents({
+            "route_id": {"$ne": route_id},
+            "stop_ids": stop_id
+        })
+        # Check if stop is used by students
+        students_using_stop = await db.students.count_documents({"stop_id": stop_id})
+        
+        # Only delete stop if not used elsewhere
+        if other_routes == 0 and students_using_stop == 0:
+            await db.stops.delete_one({"stop_id": stop_id})
+    
     await db.routes.delete_one({"route_id": route_id})
-    return {"status": "deleted"}
+    return {
+        "status": "deleted", 
+        "route_id": route_id,
+        "cascaded_stops": len([s for s in stop_ids])
+    }
 
 # Stop APIs
 @api_router.get("/stops")
