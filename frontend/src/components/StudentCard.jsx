@@ -117,29 +117,9 @@ export default function StudentCard({ student, compact = false }) {
                 </p>
               </div>
             )}
-
-            {student.route_id && (
-              <div className="mt-4">
-                <Button
-                  data-testid="view-route-button"
-                  onClick={() => setShowRouteModal(true)}
-                  className="flex items-center gap-2"
-                >
-                  <MapPin className="w-4 h-4" />
-                  View Bus Route
-                </Button>
-              </div>
-            )}
           </div>
         </div>
       </Card>
-
-      {showRouteModal && (
-        <RouteVisualizationModal
-          routeId={student.route_id}
-          onClose={() => setShowRouteModal(false)}
-        />
-      )}
     </>
   );
 }
