@@ -342,7 +342,8 @@ async def seed_data():
             "address": "321 Teacher Lane, San Francisco, CA",
             "assigned_class": "Grade 5",
             "assigned_section": "A",
-            "student_ids": [student_ids[0], student_ids[1], student_ids[2], student_ids[3], student_ids[4]]
+            "student_ids": [student_ids[0], student_ids[1], student_ids[2], student_ids[3], student_ids[4]],
+            "is_elevated_admin": False
         },
         {
             "user_id": teacher2_id,
@@ -355,7 +356,8 @@ async def seed_data():
             "address": "456 Educator Drive, San Francisco, CA",
             "assigned_class": "Grade 6",
             "assigned_section": "B",
-            "student_ids": [student_ids[5], student_ids[6], student_ids[7], student_ids[8], student_ids[9]]
+            "student_ids": [student_ids[5], student_ids[6], student_ids[7], student_ids[8], student_ids[9]],
+            "is_elevated_admin": False
         },
         {
             "user_id": teacher3_id,
@@ -368,7 +370,8 @@ async def seed_data():
             "address": "789 School Street, San Francisco, CA",
             "assigned_class": "Grade 4",
             "assigned_section": "A",
-            "student_ids": [student_ids[10], student_ids[11], student_ids[12], student_ids[13], student_ids[14]]
+            "student_ids": [student_ids[10], student_ids[11], student_ids[12], student_ids[13], student_ids[14]],
+            "is_elevated_admin": False
         },
         
         # PARENTS (15 parents for 15 students)
