@@ -169,8 +169,33 @@ export default function ParentDashboard({ user, onLogout }) {
                       </span>
                     )}
                   </div>
-                  <div className="h-96 rounded-lg overflow-hidden" data-testid="bus-map-container">
-                    <BusMap location={busLocation} />
+                  <div className="h-96 rounded-lg overflow-hidden relative" data-testid="bus-map-container">
+                    <BusMap location={busLocation} route={route} showRoute={showRoute} />
+                    
+                    {/* Toggle Route Button */}
+                    {route && (
+                      <button
+                        onClick={toggleRoute}
+                        data-testid="toggle-route-button"
+                        className={`absolute top-4 right-4 z-[1000] flex items-center gap-2 px-4 py-2 rounded-lg shadow-lg transition-all ${
+                          showRoute
+                            ? 'bg-blue-600 text-white hover:bg-blue-700'
+                            : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300'
+                        }`}
+                      >
+                        {showRoute ? (
+                          <>
+                            <EyeOff className="w-4 h-4" />
+                            <span className="text-sm font-medium">Hide Route</span>
+                          </>
+                        ) : (
+                          <>
+                            <Eye className="w-4 h-4" />
+                            <span className="text-sm font-medium">Show Route</span>
+                          </>
+                        )}
+                      </button>
+                    )}
                   </div>
                 </Card>
 
