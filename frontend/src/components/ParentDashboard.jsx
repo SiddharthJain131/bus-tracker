@@ -86,6 +86,20 @@ export default function ParentDashboard({ user, onLogout }) {
     }
   };
 
+  const fetchRoute = async (routeId) => {
+    try {
+      const response = await axios.get(`${API}/routes/${routeId}`);
+      setRoute(response.data);
+    } catch (error) {
+      console.error('Failed to load route:', error);
+      setRoute(null);
+    }
+  };
+
+  const toggleRoute = () => {
+    setShowRoute(!showRoute);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50" data-testid="parent-dashboard">
       {/* Header */}
