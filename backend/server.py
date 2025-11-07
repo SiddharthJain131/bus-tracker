@@ -899,6 +899,17 @@ async def create_stop(stop: Stop, current_user: dict = Depends(get_current_user)
     await db.stops.insert_one(stop.model_dump())
     return stop
 
+@api_router.put("/stops/{stop_id}")
+async def update_stop(stop_id: str, stop: Stop, current_user: dict = Depends(get_current_user)):
+    if current_user['role'] != 'admin':
+        raise HTTPException(status_code=403, detail="Access denied")
+    
+    await db.stops.update_one(
+        {"stop_id": stop_id},
+        {"$set": stop.model_dump()}
+    )
+    return stop
+
 @api_router.delete("/stops/{stop_id}")
 async def delete_stop(stop_id: str, current_user: dict = Depends(get_current_user)):
     if current_user['role'] != 'admin':
