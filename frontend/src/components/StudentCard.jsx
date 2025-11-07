@@ -12,7 +12,6 @@ const getInitials = (name) => {
 };
 
 export default function StudentCard({ student, compact = false }) {
-  const [showRouteModal, setShowRouteModal] = useState(false);
 
   if (compact) {
     return (
