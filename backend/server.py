@@ -660,6 +660,43 @@ async def update_user(user_id: str, updates: UserUpdate, current_user: dict = De
     
     return {"status": "updated"}
 
+@api_router.delete("/users/{user_id}")
+async def delete_user(user_id: str, current_user: dict = Depends(get_current_user)):
+    if current_user['role'] != 'admin':
+        raise HTTPException(status_code=403, detail="Access denied")
+    
+    # Cannot delete yourself
+    if user_id == current_user['user_id']:
+        raise HTTPException(status_code=403, detail="Cannot delete your own account")
+    
+    # Cannot delete another admin
+    target_user = await db.users.find_one({"user_id": user_id}, {"_id": 0})
+    if not target_user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    if target_user['role'] == 'admin':
+        raise HTTPException(status_code=403, detail="Cannot delete another admin")
+    
+    # Delete the user
+    await db.users.delete_one({"user_id": user_id})
+    
+    # If user is a parent or teacher, update student references
+    if target_user['role'] == 'parent':
+        # Set parent_id to null for students linked to this parent
+        await db.students.update_many(
+            {"parent_id": user_id},
+            {"$set": {"parent_id": None}}
+        )
+    elif target_user['role'] == 'teacher':
+        # Set teacher_id to null for students linked to this teacher
+        await db.students.update_many(
+            {"teacher_id": user_id},
+            {"$set": {"teacher_id": None}}
+        )
+    
+    return {"status": "deleted"}
+
+
 # Bus APIs
 @api_router.get("/buses")
 async def get_buses(current_user: dict = Depends(get_current_user)):
