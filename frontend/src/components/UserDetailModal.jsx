@@ -117,7 +117,7 @@ export default function UserDetailModal({ user, open, onClose }) {
                     <span className="text-sm font-medium text-gray-600">Assigned Class</span>
                   </div>
                   <p className="text-lg font-semibold text-gray-900">
-                    {user.assigned_class || 'N/A'} - {user.assigned_section || 'N/A'}
+                    {formatClassName(user.assigned_class)} - {user.assigned_section || 'N/A'}
                   </p>
                 </Card>
               </>
