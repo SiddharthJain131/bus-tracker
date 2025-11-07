@@ -887,8 +887,29 @@ async def delete_stop(stop_id: str, current_user: dict = Depends(get_current_use
     if current_user['role'] != 'admin':
         raise HTTPException(status_code=403, detail="Access denied")
     
+    # Check if stop exists
+    stop = await db.stops.find_one({"stop_id": stop_id}, {"_id": 0})
+    if not stop:
+        raise HTTPException(status_code=404, detail="Stop not found")
+    
+    # Check for students assigned to this stop
+    student_count = await db.students.count_documents({"stop_id": stop_id})
+    if student_count > 0:
+        raise HTTPException(
+            status_code=409,
+            detail=f"Cannot delete stop. {student_count} student(s) are assigned to this stop. Please reassign students first."
+        )
+    
+    # Check for routes using this stop
+    route_count = await db.routes.count_documents({"stop_ids": stop_id})
+    if route_count > 0:
+        raise HTTPException(
+            status_code=409,
+            detail=f"Cannot delete stop. {route_count} route(s) include this stop. Please remove stop from routes first."
+        )
+    
     await db.stops.delete_one({"stop_id": stop_id})
-    return {"status": "deleted"}
+    return {"status": "deleted", "stop_id": stop_id}
 
 # Email logs
 @api_router.get("/email_logs")
