@@ -705,9 +705,12 @@ async def delete_user(user_id: str, current_user: dict = Depends(get_current_use
     if not target_user:
         raise HTTPException(status_code=404, detail="User not found")
     
-    # Cannot delete another admin
-    if target_user['role'] == 'admin':
-        raise HTTPException(status_code=403, detail="Cannot delete another admin")
+    # Check elevated admin permissions
+    is_elevated = current_user.get('is_elevated_admin', False)
+    
+    # Cannot delete another admin unless you are elevated admin
+    if target_user['role'] == 'admin' and not is_elevated:
+        raise HTTPException(status_code=403, detail="Only elevated admins can delete other admins")
     
     # Count dependent records before deletion
     affected_students = 0
