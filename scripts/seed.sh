@@ -37,7 +37,7 @@ if [ $? -eq 0 ]; then
     echo "=================================================="
     echo ""
     echo "📌 Next Steps:"
-    echo "   1. Start the application: sudo supervisorctl restart all"
+    echo "   1. Start the application: sudo supervisorctl restart frontend backend && sleep 10 && sudo supervisorctl status"
     echo "   2. Access frontend: http://localhost:3000"
     echo "   3. Use demo credentials from the output above"
     echo ""
