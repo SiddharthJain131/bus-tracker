@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Run automated QA and testing agent on imported GitHub project. Goals: Crawl app structure, identify missing/broken components (Parent/Teacher/Admin dashboards), verify API endpoints (/api/scan_event, /api/update_location, /api/get_attendance, /api/get_bus_location, /api/get_embeddings), inspect pages for UI bindings/errors, validate role-based routing, generate summary report with missing routes, incomplete bindings, UI errors, and suggested fixes."
+user_problem_statement: "Dependency-Aware Update/Delete Safety Test — Bus Tracker Project. Analyze database schema and data relationships, run dependency-aware Update/Delete Caution Test to ensure all linked entities behave correctly. Define and document entity dependencies. Tasks: Parse data model, run update/delete caution tests, implement dependency safeguards, and document dependencies and safe deletion rules."
 
 backend:
   - task: "Authentication APIs (login, logout, me)"
