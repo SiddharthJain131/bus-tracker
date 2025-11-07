@@ -259,7 +259,8 @@ async def login(user_login: UserLogin, response: Response):
         "photo": user.get('photo'),
         "assigned_class": user.get('assigned_class'),
         "assigned_section": user.get('assigned_section'),
-        "student_ids": user.get('student_ids', [])
+        "student_ids": user.get('student_ids', []),
+        "is_elevated_admin": user.get('is_elevated_admin', False)
     }
 
 @api_router.post("/auth/logout")
