@@ -687,7 +687,6 @@ export default function AdminDashboardNew({ user, onLogout }) {
                                 </tr>
                               );
                             })
-                          )
                           )}
                         </tbody>
                       </table>
