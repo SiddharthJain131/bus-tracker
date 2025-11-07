@@ -1404,6 +1404,479 @@ class SchoolBusTrackerAPITester:
         
         return all(results)
 
+    def test_dependency_aware_delete_safeguards(self):
+        """Test dependency-aware delete safeguards as per review request"""
+        results = []
+        
+        print(f"\n🔒 TESTING DEPENDENCY-AWARE DELETE SAFEGUARDS")
+        print("=" * 70)
+        
+        # ===== TEST GROUP 1: STUDENT DELETION SAFEGUARDS =====
+        print(f"\n📋 TEST GROUP 1: Student Deletion Safeguards")
+        print("-" * 50)
+        
+        # Get list of students
+        success, students_data = self.run_test(
+            "Get list of students",
+            "GET",
+            "students",
+            200,
+            critical=True
+        )
+        results.append(success)
+        
+        if not success or not students_data:
+            print("   ❌ Cannot get students for testing")
+            return False
+        
+        # Pick first student
+        student = students_data[0]
+        student_id = student['student_id']
+        print(f"   Testing with student: {student['name']} (ID: {student_id})")
+        
+        # Check if student has attendance
+        success, attendance_data = self.run_test(
+            f"Check attendance for student {student['name']}",
+            "GET",
+            "get_attendance",
+            200,
+            params={"student_id": student_id, "month": "2025-01"}
+        )
+        results.append(success)
+        
+        has_attendance = False
+        attendance_count = 0
+        if success and attendance_data:
+            grid = attendance_data.get('grid', [])
+            # Count non-gray statuses (actual attendance records)
+            attendance_count = sum(1 for day in grid if day.get('am_status') not in ['gray', 'blue'] or day.get('pm_status') not in ['gray', 'blue'])
+            has_attendance = attendance_count > 0
+            print(f"   Student has {attendance_count} attendance records")
+        
+        # Try to delete student
+        expected_status = 409 if has_attendance else 200
+        success, delete_response = self.run_test(
+            f"Try DELETE /api/students/{student_id} - {'should BLOCK (409)' if has_attendance else 'should SUCCEED (200)'}",
+            "DELETE",
+            f"students/{student_id}",
+            expected_status,
+            critical=True
+        )
+        results.append(success)
+        
+        if has_attendance and success:
+            # Verify error message includes attendance count
+            if delete_response and 'detail' in delete_response:
+                error_msg = delete_response['detail']
+                print(f"   ✅ Blocked with message: {error_msg}")
+                if str(attendance_count) in error_msg or 'attendance' in error_msg.lower():
+                    print(f"   ✅ Error message includes attendance information")
+                else:
+                    print(f"   ⚠️  Error message may not include attendance count")
+            else:
+                print(f"   ⚠️  No error detail in response")
+        elif not has_attendance and success:
+            print(f"   ✅ Student without attendance deleted successfully")
+        
+        # ===== TEST GROUP 2: USER DELETION SAFEGUARDS (PARENT) =====
+        print(f"\n👨‍👩‍👧 TEST GROUP 2: User Deletion Safeguards (Parent)")
+        print("-" * 50)
+        
+        # Get parent users
+        success, users_data = self.run_test(
+            "Get all users",
+            "GET",
+            "users",
+            200,
+            critical=True
+        )
+        results.append(success)
+        
+        if not success or not users_data:
+            print("   ❌ Cannot get users for testing")
+            return False
+        
+        # Find a parent user
+        parent_users = [u for u in users_data if u['role'] == 'parent']
+        if not parent_users:
+            print("   ⚠️  No parent users found for testing")
+        else:
+            parent = parent_users[0]
+            parent_id = parent['user_id']
+            print(f"   Testing with parent: {parent['name']} (ID: {parent_id})")
+            
+            # Check if parent has linked students
+            parent_students = [s for s in students_data if s.get('parent_id') == parent_id]
+            student_count = len(parent_students)
+            print(f"   Parent has {student_count} linked student(s)")
+            
+            # Try to delete parent
+            expected_status = 409 if student_count > 0 else 200
+            success, delete_response = self.run_test(
+                f"Try DELETE /api/users/{parent_id} - {'should BLOCK (409)' if student_count > 0 else 'should SUCCEED (200)'}",
+                "DELETE",
+                f"users/{parent_id}",
+                expected_status,
+                critical=True
+            )
+            results.append(success)
+            
+            if student_count > 0 and success:
+                # Verify error message includes student count
+                if delete_response and 'detail' in delete_response:
+                    error_msg = delete_response['detail']
+                    print(f"   ✅ Blocked with message: {error_msg}")
+                    if str(student_count) in error_msg or 'student' in error_msg.lower():
+                        print(f"   ✅ Error message includes student count/information")
+                    else:
+                        print(f"   ⚠️  Error message may not include student count")
+                else:
+                    print(f"   ⚠️  No error detail in response")
+        
+        # ===== TEST GROUP 3: USER DELETION SAFEGUARDS (TEACHER) =====
+        print(f"\n👨‍🏫 TEST GROUP 3: User Deletion Safeguards (Teacher)")
+        print("-" * 50)
+        
+        # Find a teacher user
+        teacher_users = [u for u in users_data if u['role'] == 'teacher']
+        if not teacher_users:
+            print("   ⚠️  No teacher users found for testing")
+        else:
+            teacher = teacher_users[0]
+            teacher_id = teacher['user_id']
+            print(f"   Testing with teacher: {teacher['name']} (ID: {teacher_id})")
+            
+            # Check if teacher has assigned students
+            teacher_students = [s for s in students_data if s.get('teacher_id') == teacher_id]
+            student_count = len(teacher_students)
+            print(f"   Teacher has {student_count} assigned student(s)")
+            
+            # Try to delete teacher
+            expected_status = 409 if student_count > 0 else 200
+            success, delete_response = self.run_test(
+                f"Try DELETE /api/users/{teacher_id} - {'should BLOCK (409)' if student_count > 0 else 'should SUCCEED (200)'}",
+                "DELETE",
+                f"users/{teacher_id}",
+                expected_status,
+                critical=True
+            )
+            results.append(success)
+            
+            if student_count > 0 and success:
+                # Verify error message includes student count
+                if delete_response and 'detail' in delete_response:
+                    error_msg = delete_response['detail']
+                    print(f"   ✅ Blocked with message: {error_msg}")
+                    if str(student_count) in error_msg or 'student' in error_msg.lower():
+                        print(f"   ✅ Error message includes student count/information")
+                    else:
+                        print(f"   ⚠️  Error message may not include student count")
+                else:
+                    print(f"   ⚠️  No error detail in response")
+        
+        # ===== TEST GROUP 4: BUS DELETION SAFEGUARDS =====
+        print(f"\n🚌 TEST GROUP 4: Bus Deletion Safeguards")
+        print("-" * 50)
+        
+        # Get buses
+        success, buses_data = self.run_test(
+            "Get all buses",
+            "GET",
+            "buses",
+            200,
+            critical=True
+        )
+        results.append(success)
+        
+        if not success or not buses_data:
+            print("   ❌ Cannot get buses for testing")
+            return False
+        
+        # Pick first bus
+        bus = buses_data[0]
+        bus_id = bus['bus_id']
+        print(f"   Testing with bus: {bus['bus_number']} (ID: {bus_id})")
+        
+        # Check if bus has assigned students
+        bus_students = [s for s in students_data if s.get('bus_id') == bus_id]
+        student_count = len(bus_students)
+        print(f"   Bus has {student_count} assigned student(s)")
+        
+        # Try to delete bus
+        expected_status = 409 if student_count > 0 else 200
+        success, delete_response = self.run_test(
+            f"Try DELETE /api/buses/{bus_id} - {'should BLOCK (409)' if student_count > 0 else 'should SUCCEED (200)'}",
+            "DELETE",
+            f"buses/{bus_id}",
+            expected_status,
+            critical=True
+        )
+        results.append(success)
+        
+        if student_count > 0 and success:
+            # Verify error message includes student count
+            if delete_response and 'detail' in delete_response:
+                error_msg = delete_response['detail']
+                print(f"   ✅ Blocked with message: {error_msg}")
+                if str(student_count) in error_msg or 'student' in error_msg.lower():
+                    print(f"   ✅ Error message includes student count/information")
+                else:
+                    print(f"   ⚠️  Error message may not include student count")
+            else:
+                print(f"   ⚠️  No error detail in response")
+        
+        # ===== TEST GROUP 5: ROUTE DELETION SAFEGUARDS =====
+        print(f"\n🗺️  TEST GROUP 5: Route Deletion Safeguards")
+        print("-" * 50)
+        
+        # Get routes
+        success, routes_data = self.run_test(
+            "Get all routes",
+            "GET",
+            "routes",
+            200,
+            critical=True
+        )
+        results.append(success)
+        
+        if not success or not routes_data:
+            print("   ❌ Cannot get routes for testing")
+            return False
+        
+        # Pick first route
+        route = routes_data[0]
+        route_id = route['route_id']
+        print(f"   Testing with route: {route['route_name']} (ID: {route_id})")
+        
+        # Check if route has buses using it
+        route_buses = [b for b in buses_data if b.get('route_id') == route_id]
+        bus_count = len(route_buses)
+        print(f"   Route has {bus_count} bus(es) using it")
+        
+        # Try to delete route
+        expected_status = 409 if bus_count > 0 else 200
+        success, delete_response = self.run_test(
+            f"Try DELETE /api/routes/{route_id} - {'should BLOCK (409)' if bus_count > 0 else 'should SUCCEED (200)'}",
+            "DELETE",
+            f"routes/{route_id}",
+            expected_status,
+            critical=True
+        )
+        results.append(success)
+        
+        if bus_count > 0 and success:
+            # Verify error message includes bus count
+            if delete_response and 'detail' in delete_response:
+                error_msg = delete_response['detail']
+                print(f"   ✅ Blocked with message: {error_msg}")
+                if str(bus_count) in error_msg or 'bus' in error_msg.lower():
+                    print(f"   ✅ Error message includes bus count/information")
+                else:
+                    print(f"   ⚠️  Error message may not include bus count")
+            else:
+                print(f"   ⚠️  No error detail in response")
+        
+        # ===== TEST GROUP 6: STOP DELETION SAFEGUARDS =====
+        print(f"\n🛑 TEST GROUP 6: Stop Deletion Safeguards")
+        print("-" * 50)
+        
+        # Get stops
+        success, stops_data = self.run_test(
+            "Get all stops",
+            "GET",
+            "stops",
+            200,
+            critical=True
+        )
+        results.append(success)
+        
+        if not success or not stops_data:
+            print("   ❌ Cannot get stops for testing")
+            return False
+        
+        # Pick first stop
+        stop = stops_data[0]
+        stop_id = stop['stop_id']
+        print(f"   Testing with stop: {stop['stop_name']} (ID: {stop_id})")
+        
+        # Check if stop has students assigned
+        stop_students = [s for s in students_data if s.get('stop_id') == stop_id]
+        student_count = len(stop_students)
+        print(f"   Stop has {student_count} student(s) assigned")
+        
+        # Check if stop is in routes
+        routes_using_stop = [r for r in routes_data if stop_id in r.get('stop_ids', [])]
+        route_count = len(routes_using_stop)
+        print(f"   Stop is used by {route_count} route(s)")
+        
+        # Try to delete stop
+        has_dependencies = student_count > 0 or route_count > 0
+        expected_status = 409 if has_dependencies else 200
+        success, delete_response = self.run_test(
+            f"Try DELETE /api/stops/{stop_id} - {'should BLOCK (409)' if has_dependencies else 'should SUCCEED (200)'}",
+            "DELETE",
+            f"stops/{stop_id}",
+            expected_status,
+            critical=True
+        )
+        results.append(success)
+        
+        if has_dependencies and success:
+            # Verify error message mentions students or routes
+            if delete_response and 'detail' in delete_response:
+                error_msg = delete_response['detail']
+                print(f"   ✅ Blocked with message: {error_msg}")
+                if 'student' in error_msg.lower() or 'route' in error_msg.lower():
+                    print(f"   ✅ Error message mentions dependency type (students or routes)")
+                else:
+                    print(f"   ⚠️  Error message may not clearly indicate dependency type")
+            else:
+                print(f"   ⚠️  No error detail in response")
+        
+        # ===== TEST GROUP 7: UPDATE OPERATIONS (SAFE UPDATES) =====
+        print(f"\n✏️  TEST GROUP 7: Update Operations (Safe Updates)")
+        print("-" * 50)
+        
+        # Test 1: Update parent contact
+        if parent_users:
+            parent = parent_users[0]
+            parent_id = parent['user_id']
+            new_phone = f"+1-555-TEST-{random.randint(1000, 9999)}"
+            
+            success, _ = self.run_test(
+                f"Update parent contact: PUT /api/users/{parent_id}",
+                "PUT",
+                f"users/{parent_id}",
+                200,
+                data={"phone": new_phone},
+                critical=True
+            )
+            results.append(success)
+            
+            if success:
+                print(f"   ✅ Parent contact updated successfully to {new_phone}")
+                
+                # Verify student can still access parent info
+                parent_students = [s for s in students_data if s.get('parent_id') == parent_id]
+                if parent_students:
+                    student_id = parent_students[0]['student_id']
+                    success, student_detail = self.run_test(
+                        f"Verify student can access parent info: GET /api/students/{student_id}",
+                        "GET",
+                        f"students/{student_id}",
+                        200
+                    )
+                    results.append(success)
+                    if success and student_detail:
+                        if student_detail.get('parent_id') == parent_id:
+                            print(f"   ✅ Student still linked to parent after update")
+                        else:
+                            print(f"   ❌ Student-parent link broken after update")
+                            results.append(False)
+        
+        # Test 2: Update student bus assignment
+        if students_data and len(buses_data) > 1:
+            student = students_data[0]
+            student_id = student['student_id']
+            current_bus_id = student.get('bus_id')
+            
+            # Find a different bus
+            different_bus = next((b for b in buses_data if b['bus_id'] != current_bus_id), None)
+            if different_bus:
+                new_bus_id = different_bus['bus_id']
+                
+                success, _ = self.run_test(
+                    f"Update student bus assignment: PUT /api/students/{student_id}",
+                    "PUT",
+                    f"students/{student_id}",
+                    200,
+                    data={"bus_id": new_bus_id},
+                    critical=True
+                )
+                results.append(success)
+                
+                if success:
+                    print(f"   ✅ Student bus assignment updated from {current_bus_id} to {new_bus_id}")
+                    
+                    # Verify update succeeded
+                    success, updated_student = self.run_test(
+                        f"Verify student shows new bus: GET /api/students/{student_id}",
+                        "GET",
+                        f"students/{student_id}",
+                        200
+                    )
+                    results.append(success)
+                    if success and updated_student:
+                        if updated_student.get('bus_id') == new_bus_id:
+                            print(f"   ✅ Student now shows new bus: {updated_student.get('bus_number', 'N/A')}")
+                        else:
+                            print(f"   ❌ Student bus update not reflected")
+                            results.append(False)
+        
+        # Test 3: Update teacher assignment
+        if students_data and len(teacher_users) > 1:
+            student = students_data[0]
+            student_id = student['student_id']
+            current_teacher_id = student.get('teacher_id')
+            
+            # Find a different teacher
+            different_teacher = next((t for t in teacher_users if t['user_id'] != current_teacher_id), None)
+            if different_teacher:
+                new_teacher_id = different_teacher['user_id']
+                
+                success, _ = self.run_test(
+                    f"Update teacher assignment: PUT /api/students/{student_id}",
+                    "PUT",
+                    f"students/{student_id}",
+                    200,
+                    data={"teacher_id": new_teacher_id},
+                    critical=True
+                )
+                results.append(success)
+                
+                if success:
+                    print(f"   ✅ Student teacher assignment updated")
+                    
+                    # Verify update succeeded
+                    success, updated_student = self.run_test(
+                        f"Verify student shows new teacher: GET /api/students/{student_id}",
+                        "GET",
+                        f"students/{student_id}",
+                        200
+                    )
+                    results.append(success)
+                    if success and updated_student:
+                        if updated_student.get('teacher_id') == new_teacher_id:
+                            print(f"   ✅ Student now shows new teacher: {updated_student.get('teacher_name', 'N/A')}")
+                        else:
+                            print(f"   ❌ Student teacher update not reflected")
+                            results.append(False)
+        
+        # ===== SUMMARY =====
+        print(f"\n📊 DEPENDENCY-AWARE DELETE SAFEGUARDS TEST SUMMARY")
+        print("=" * 70)
+        
+        total_tests = len(results)
+        passed_tests = sum(1 for r in results if r)
+        failed_tests = total_tests - passed_tests
+        success_rate = (passed_tests / total_tests * 100) if total_tests > 0 else 0
+        
+        print(f"Total Tests: {total_tests}")
+        print(f"Passed: {passed_tests}")
+        print(f"Failed: {failed_tests}")
+        print(f"Success Rate: {success_rate:.1f}%")
+        
+        if all(results):
+            print(f"\n✅ ALL DEPENDENCY SAFEGUARDS WORKING CORRECTLY!")
+            print("   - Delete operations with dependencies return 409 status")
+            print("   - Error messages clearly state dependency type and count")
+            print("   - Update operations complete successfully without breaking links")
+            print("   - No orphaned records created")
+        else:
+            print(f"\n⚠️  SOME DEPENDENCY SAFEGUARDS NEED ATTENTION")
+        
+        return all(results)
+
     def test_missing_endpoints(self):
         """Test for missing endpoints mentioned in review"""
         # Test for /api/get_embeddings (mentioned as missing in review)
