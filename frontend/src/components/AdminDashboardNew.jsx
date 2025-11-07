@@ -576,65 +576,117 @@ export default function AdminDashboardNew({ user, onLogout }) {
                 <h2 className="text-xl font-semibold" style={{ fontFamily: 'Space Grotesk' }}>
                   Buses & Routes Management
                 </h2>
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                  <Input
-                    type="text"
-                    placeholder="Search buses..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10 w-64"
-                  />
+                <div className="flex gap-3">
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                    <Input
+                      type="text"
+                      placeholder="Search..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="pl-10 w-64"
+                    />
+                  </div>
                 </div>
               </div>
 
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-gray-50 border-b-2 border-gray-200">
-                    <tr>
-                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Bus No</th>
-                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Driver</th>
-                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Phone</th>
-                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Route</th>
-                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Capacity</th>
-                      <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-200">
-                    {filteredBuses.length === 0 ? (
-                      <tr>
-                        <td colSpan="6" className="px-4 py-8 text-center text-gray-500">
-                          No buses found
-                        </td>
-                      </tr>
-                    ) : (
-                      filteredBuses.map(bus => (
-                        <tr key={bus.bus_id} className="hover:bg-gray-50">
-                          <td className="px-4 py-4">
-                            <div className="font-medium text-gray-900">Bus {bus.bus_number}</div>
-                          </td>
-                          <td className="px-4 py-4 text-sm text-gray-600">{bus.driver_name}</td>
-                          <td className="px-4 py-4 text-sm text-gray-600">{bus.driver_phone}</td>
-                          <td className="px-4 py-4 text-sm text-gray-600">{bus.route_name || 'N/A'}</td>
-                          <td className="px-4 py-4 text-sm text-gray-600">{bus.capacity} students</td>
-                          <td className="px-4 py-4">
-                            <div className="flex items-center justify-center gap-2">
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => handleViewBus(bus)}
-                                className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
-                              >
-                                <Eye className="w-4 h-4" />
-                              </Button>
-                            </div>
-                          </td>
+              <Tabs defaultValue="buses">
+                <TabsList className="grid w-full grid-cols-2 mb-6">
+                  <TabsTrigger value="buses">Buses ({buses.length})</TabsTrigger>
+                  <TabsTrigger value="routes">Routes</TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="buses">
+                  <div className="flex justify-end mb-4">
+                    <Button
+                      onClick={() => setShowAddBus(true)}
+                      className="bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white"
+                    >
+                      <Plus className="w-4 h-4 mr-2" />
+                      Add Bus
+                    </Button>
+                  </div>
+                  <div className="overflow-x-auto">
+                    <table className="w-full">
+                      <thead className="bg-gray-50 border-b-2 border-gray-200">
+                        <tr>
+                          <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Bus No</th>
+                          <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Driver</th>
+                          <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Phone</th>
+                          <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Route</th>
+                          <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Capacity</th>
+                          <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">Actions</th>
                         </tr>
-                      ))
-                    )}
-                  </tbody>
-                </table>
-              </div>
+                      </thead>
+                      <tbody className="divide-y divide-gray-200">
+                        {filteredBuses.length === 0 ? (
+                          <tr>
+                            <td colSpan="6" className="px-4 py-8 text-center text-gray-500">
+                              No buses found
+                            </td>
+                          </tr>
+                        ) : (
+                          filteredBuses.map(bus => (
+                            <tr key={bus.bus_id} className="hover:bg-gray-50">
+                              <td className="px-4 py-4">
+                                <div className="font-medium text-gray-900">{bus.bus_number}</div>
+                              </td>
+                              <td className="px-4 py-4 text-sm text-gray-600">{bus.driver_name}</td>
+                              <td className="px-4 py-4 text-sm text-gray-600">{bus.driver_phone}</td>
+                              <td className="px-4 py-4 text-sm text-gray-600">{bus.route_name || 'N/A'}</td>
+                              <td className="px-4 py-4 text-sm text-gray-600">{bus.capacity} students</td>
+                              <td className="px-4 py-4">
+                                <div className="flex items-center justify-center gap-2">
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() => handleViewBus(bus)}
+                                    className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+                                    title="View Details"
+                                  >
+                                    <Eye className="w-4 h-4" />
+                                  </Button>
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() => handleEditBus(bus)}
+                                    className="text-yellow-600 hover:text-yellow-700 hover:bg-yellow-50"
+                                    title="Edit Bus"
+                                  >
+                                    <Edit className="w-4 h-4" />
+                                  </Button>
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() => handleDelete(bus, 'bus')}
+                                    className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                                    title="Delete Bus"
+                                  >
+                                    <Trash2 className="w-4 h-4" />
+                                  </Button>
+                                </div>
+                              </td>
+                            </tr>
+                          ))
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="routes">
+                  <RoutesTable 
+                    searchTerm={searchTerm}
+                    onViewRoute={(route) => {
+                      setSelectedRoute(route);
+                      setShowBusDetail(true);
+                    }}
+                    onEditRoute={handleEditRoute}
+                    onDeleteRoute={(route) => handleDelete(route, 'route')}
+                    onAddRoute={() => setShowAddRoute(true)}
+                  />
+                </TabsContent>
+              </Tabs>
             </Card>
           </TabsContent>
         </Tabs>
