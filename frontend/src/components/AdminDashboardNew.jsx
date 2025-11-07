@@ -18,7 +18,9 @@ import {
   Bell,
   Mail,
   Phone,
-  MapPin
+  MapPin,
+  Trash2,
+  Plus
 } from 'lucide-react';
 import StudentDetailModal from './StudentDetailModal';
 import UserDetailModal from './UserDetailModal';
