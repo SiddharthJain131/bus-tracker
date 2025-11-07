@@ -867,6 +867,51 @@ export default function AdminDashboardNew({ user, onLogout }) {
         onClose={() => setShowAddUser(false)}
         onSuccess={fetchAllData}
       />
+
+      <AddBusModal
+        open={showAddBus}
+        onClose={() => setShowAddBus(false)}
+        onSuccess={fetchAllData}
+      />
+
+      <AddRouteModal
+        open={showAddRoute}
+        onClose={() => setShowAddRoute(false)}
+        onSuccess={fetchAllData}
+      />
+
+      <EditBusModal
+        bus={editBus}
+        open={showEditBus}
+        onClose={() => {
+          setShowEditBus(false);
+          setEditBus(null);
+        }}
+        onSuccess={fetchAllData}
+      />
+
+      <EditRouteModal
+        route={editRoute}
+        open={showEditRoute}
+        onClose={() => {
+          setShowEditRoute(false);
+          setEditRoute(null);
+        }}
+        onSuccess={fetchAllData}
+      />
+
+      <DeleteConfirmationDialog
+        open={showDeleteConfirm}
+        onClose={() => {
+          setShowDeleteConfirm(false);
+          setDeleteItem(null);
+        }}
+        onConfirm={confirmDelete}
+        title="Delete Confirmation"
+        itemName={deleteItem?.name || deleteItem?.bus_number || deleteItem?.route_name}
+        itemType={deleteItem?.type}
+        isDeleting={isDeleting}
+      />
     </div>
   );
 }
