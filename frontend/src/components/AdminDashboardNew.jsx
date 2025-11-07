@@ -728,15 +728,6 @@ export default function AdminDashboardNew({ user, onLogout }) {
                 </TabsList>
 
                 <TabsContent value="buses">
-                  <div className="flex justify-end mb-4">
-                    <Button
-                      onClick={() => setShowAddBus(true)}
-                      className="bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white"
-                    >
-                      <Plus className="w-4 h-4 mr-2" />
-                      Add Bus
-                    </Button>
-                  </div>
                   <div className="overflow-x-auto">
                     <table className="w-full">
                       <thead className="bg-gray-50 border-b-2 border-gray-200">
