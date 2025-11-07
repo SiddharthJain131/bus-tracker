@@ -228,8 +228,8 @@ export default function EditRouteModal({ route, open, onClose, onSuccess }) {
   if (!route) return null;
 
   return (
-    <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[500px]">
+    <Dialog open={open} onOpenChange={handleClose}>
+      <DialogContent className="sm:max-w-[700px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-amber-600 rounded-full flex items-center justify-center">
@@ -240,12 +240,6 @@ export default function EditRouteModal({ route, open, onClose, onSuccess }) {
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
-            <p className="text-sm text-blue-800">
-              <strong>Note:</strong> To modify stops, please use the Route Details view. This form only updates route name and remarks.
-            </p>
-          </div>
-
           <div className="space-y-2">
             <Label htmlFor="route_name">Route Name *</Label>
             <Input
@@ -261,7 +255,7 @@ export default function EditRouteModal({ route, open, onClose, onSuccess }) {
             <Label htmlFor="remarks">Remarks</Label>
             <textarea
               id="remarks"
-              rows="3"
+              rows="2"
               placeholder="Any additional notes..."
               value={formData.remarks}
               onChange={(e) => setFormData({ ...formData, remarks: e.target.value })}
@@ -269,8 +263,101 @@ export default function EditRouteModal({ route, open, onClose, onSuccess }) {
             />
           </div>
 
-          <div className="flex justify-end gap-3 pt-4">
-            <Button type="button" variant="outline" onClick={onClose} disabled={loading}>
+          <div className="border-t pt-4">
+            <div className="flex justify-between items-center mb-3">
+              <Label className="text-lg font-semibold">Stops ({stops.length})</Label>
+              <Button
+                type="button"
+                onClick={handleAddStop}
+                size="sm"
+                className="bg-yellow-500 hover:bg-yellow-600 text-white"
+              >
+                <Plus className="w-4 h-4 mr-1" />
+                Add Stop
+              </Button>
+            </div>
+
+            {stops.length === 0 ? (
+              <div className="text-center py-8 text-gray-500 border rounded-lg bg-gray-50">
+                No stops yet. Click "Add Stop" to begin.
+              </div>
+            ) : (
+              <div className="space-y-3 max-h-[350px] overflow-y-auto pr-2">
+                {stops.map((stop, index) => (
+                  <div key={index} className="border rounded-lg p-3 bg-gray-50">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="font-semibold text-sm text-gray-700">Stop {index + 1}</span>
+                      <div className="flex items-center gap-1">
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleMoveStop(index, 'up')}
+                          disabled={index === 0}
+                          className="text-gray-600 hover:text-gray-700 hover:bg-gray-100 p-1 h-7 w-7"
+                          title="Move up"
+                        >
+                          <MoveUp className="w-4 h-4" />
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleMoveStop(index, 'down')}
+                          disabled={index === stops.length - 1}
+                          className="text-gray-600 hover:text-gray-700 hover:bg-gray-100 p-1 h-7 w-7"
+                          title="Move down"
+                        >
+                          <MoveDown className="w-4 h-4" />
+                        </Button>
+                        {stops.length > 1 && (
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleRemoveStop(index)}
+                            className="text-red-600 hover:text-red-700 hover:bg-red-50 p-1 h-7 w-7"
+                            title="Remove stop"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        )}
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <Input
+                        placeholder="Stop name"
+                        value={stop.stop_name}
+                        onChange={(e) => handleStopChange(index, 'stop_name', e.target.value)}
+                        required
+                      />
+                      <div className="grid grid-cols-2 gap-2">
+                        <Input
+                          type="number"
+                          step="any"
+                          placeholder="Latitude"
+                          value={stop.lat}
+                          onChange={(e) => handleStopChange(index, 'lat', e.target.value)}
+                          required
+                        />
+                        <Input
+                          type="number"
+                          step="any"
+                          placeholder="Longitude"
+                          value={stop.lon}
+                          onChange={(e) => handleStopChange(index, 'lon', e.target.value)}
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="flex justify-end gap-3 pt-4 border-t">
+            <Button type="button" variant="outline" onClick={handleClose} disabled={loading}>
               Cancel
             </Button>
             <Button 
