@@ -586,8 +586,31 @@ async def delete_student(student_id: str, current_user: dict = Depends(get_curre
     if current_user['role'] != 'admin':
         raise HTTPException(status_code=403, detail="Access denied")
     
+    # Check if student exists
+    student = await db.students.find_one({"student_id": student_id}, {"_id": 0})
+    if not student:
+        raise HTTPException(status_code=404, detail="Student not found")
+    
+    # Check for dependent attendance records
+    attendance_count = await db.attendance.count_documents({"student_id": student_id})
+    if attendance_count > 0:
+        raise HTTPException(
+            status_code=409, 
+            detail=f"Cannot delete student. {attendance_count} attendance record(s) exist. Please delete attendance records first or archive the student."
+        )
+    
+    # Check for dependent notifications
+    notification_count = await db.notifications.count_documents({"student_id": student_id})
+    if notification_count > 0:
+        # Soft warning - we can cascade delete notifications
+        await db.notifications.delete_many({"student_id": student_id})
+    
     await db.students.delete_one({"student_id": student_id})
-    return {"status": "deleted"}
+    return {
+        "status": "deleted",
+        "student_id": student_id,
+        "cascaded_notifications": notification_count
+    }
 
 # User APIs
 @api_router.get("/users")
