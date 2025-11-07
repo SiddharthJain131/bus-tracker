@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { toast } from 'sonner';
-import { LogOut, Bus, Bell, Calendar, MapPin } from 'lucide-react';
+import { LogOut, Bus, Bell, Calendar, MapPin, Eye, EyeOff } from 'lucide-react';
 import BusMap from './BusMap';
 import AttendanceGrid from './AttendanceGrid';
 import UserProfileHeader from './UserProfileHeader';
@@ -18,6 +18,8 @@ export default function ParentDashboard({ user, onLogout }) {
   const [selectedStudentDetails, setSelectedStudentDetails] = useState(null);
   const [notifications, setNotifications] = useState([]);
   const [busLocation, setBusLocation] = useState(null);
+  const [showRoute, setShowRoute] = useState(false);
+  const [route, setRoute] = useState(null);
 
   useEffect(() => {
     fetchStudents();
