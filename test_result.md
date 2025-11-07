@@ -393,6 +393,18 @@ backend:
         agent: "testing"
         comment: "✅ PASSED - Stop deletion safeguards working correctly. Tested with stop 'Main Gate North' which has 1 student assigned and is used by 1 route. DELETE /api/stops/{id} properly returned 409 status with clear error message: 'Cannot delete stop. 1 student(s) are assigned to this stop. Please reassign students first.' Error message mentions dependency type (students). Dual-check logic (students OR routes) confirmed working."
 
+  - task: "Elevated Admin Permissions & Roll Number Display"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/AdminDashboardNew.jsx, /app/frontend/src/components/TeacherDashboardNew.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ COMPREHENSIVE TEST COMPLETED - All 3 scenarios passed successfully. SCENARIO 1 (Elevated Admin Edit): admin@school.com can edit other admins including admin2@school.com. Edit modal opens correctly with user form. SCENARIO 2 (Regular Admin Restrictions): admin2@school.com login working, elevated admin badge (⭐ Elevated) visible on James Anderson, UI properly shows permission indicators. SCENARIO 3 (Roll Numbers): teacher@school.com dashboard displays Roll No column with 5 students having G5A-XXX format roll numbers (G5A-001 through G5A-005). All functionality working as expected per review requirements."
+
 frontend:
   - task: "Login page"
     implemented: true
