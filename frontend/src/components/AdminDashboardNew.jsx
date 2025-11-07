@@ -153,6 +153,7 @@ function RoutesTable({ searchTerm, onViewRoute, onEditRoute, onDeleteRoute, onAd
 export default function AdminDashboardNew({ user, onLogout }) {
   const [activeTab, setActiveTab] = useState('overview');
   const [userSubTab, setUserSubTab] = useState('parents');
+  const [busSubTab, setBusSubTab] = useState('buses');
   
   // Data states
   const [students, setStudents] = useState([]);
