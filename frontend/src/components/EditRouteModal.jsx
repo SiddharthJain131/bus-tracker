@@ -10,7 +10,7 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { toast } from 'sonner';
-import { MapPin } from 'lucide-react';
+import { MapPin, Plus, Trash2, MoveUp, MoveDown } from 'lucide-react';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -21,6 +21,8 @@ export default function EditRouteModal({ route, open, onClose, onSuccess }) {
     route_name: '',
     remarks: ''
   });
+  const [stops, setStops] = useState([]);
+  const [originalStops, setOriginalStops] = useState([]);
 
   useEffect(() => {
     if (open && route) {
@@ -28,8 +30,39 @@ export default function EditRouteModal({ route, open, onClose, onSuccess }) {
         route_name: route.route_name || '',
         remarks: route.remarks || ''
       });
+      
+      // Fetch stops for this route
+      fetchRouteStops();
     }
   }, [open, route]);
+
+  const fetchRouteStops = async () => {
+    if (!route?.route_id) return;
+    
+    try {
+      const response = await axios.get(`${API}/routes/${route.route_id}`);
+      const routeData = response.data;
+      
+      if (routeData.stops && routeData.stops.length > 0) {
+        const sortedStops = routeData.stops.sort((a, b) => a.order_index - b.order_index);
+        setStops(sortedStops.map(s => ({
+          stop_id: s.stop_id || null,
+          stop_name: s.stop_name,
+          lat: s.lat.toString(),
+          lon: s.lon.toString(),
+          order_index: s.order_index,
+          isNew: false
+        })));
+        setOriginalStops(JSON.parse(JSON.stringify(sortedStops.map(s => s.stop_id))));
+      } else {
+        setStops([]);
+        setOriginalStops([]);
+      }
+    } catch (error) {
+      console.error('Failed to fetch route stops:', error);
+      toast.error('Failed to load route stops');
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
