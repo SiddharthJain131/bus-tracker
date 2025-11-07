@@ -523,7 +523,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
                           </td>
                           <td className="px-4 py-4 text-sm text-gray-600">{student.phone || 'N/A'}</td>
                           <td className="px-4 py-4 text-sm text-gray-600">{student.parent_name || 'N/A'}</td>
-                          <td className="px-4 py-4 text-sm text-gray-600">{student.class_name || 'N/A'}</td>
+                          <td className="px-4 py-4 text-sm text-gray-600">{formatClassName(student.class_name)}</td>
                           <td className="px-4 py-4 text-sm text-gray-600">{student.section || 'N/A'}</td>
                           <td className="px-4 py-4 text-sm text-gray-600">{student.bus_number || 'N/A'}</td>
                           <td className="px-4 py-4">
