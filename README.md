@@ -46,7 +46,7 @@ The Bus Tracker System is a full-stack application designed to help schools mana
 ### Step 1: Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/SiddharthJain131/bus-tracker.git
 cd bus-tracker
 ```
 
@@ -141,7 +141,7 @@ The application will be available at:
 
 | Email | Password | Name | Class/Section | Students |
 |-------|----------|------|---------------|----------|
-| teacher1@school.com | password | Mary Johnson | Grade 5 - A | 5 students |
+| teacher@school.com | password | Mary Johnson | Grade 5 - A | 5 students |
 | teacher2@school.com | password | Robert Smith | Grade 6 - B | 5 students |
 | teacher3@school.com | password | Sarah Wilson | Grade 4 - A | 5 students |
 
@@ -149,7 +149,7 @@ The application will be available at:
 
 | Email | Password | Name | Child |
 |-------|----------|------|-------|
-| parent1@school.com | password | John Parent | Emma Johnson (Grade 5-A) |
+| parent@school.com | password | John Parent | Emma Johnson (Grade 5-A) |
 | parent2@school.com | password | Sarah Smith | Liam Smith (Grade 5-A) |
 | parent3@school.com | password | Michael Brown | Sophia Brown (Grade 5-A) |
 | parent4@school.com | password | Emily Davis | Noah Davis (Grade 5-A) |

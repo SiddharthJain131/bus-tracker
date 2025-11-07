@@ -36,7 +36,7 @@ TEST_CREDENTIALS = """
   Role: Secondary Administrator
 
 👨‍🏫 TEACHER ACCOUNTS:
-  Email: teacher1@school.com
+  Email: teacher@school.com
   Password: password
   Name: Mary Johnson
   Class: Grade 5 - Section A
@@ -52,7 +52,7 @@ TEST_CREDENTIALS = """
   Class: Grade 4 - Section A
 
 👪 PARENT ACCOUNTS:
-  Email: parent1@school.com
+  Email: parent@school.com
   Password: password
   Children: Emma Johnson (Grade 5-A)
   ---
@@ -331,7 +331,7 @@ async def seed_data():
         # TEACHERS
         {
             "user_id": teacher1_id,
-            "email": "teacher1@school.com",
+            "email": "teacher@school.com",
             "password_hash": password_hash,
             "role": "teacher",
             "name": "Mary Johnson",
@@ -372,7 +372,7 @@ async def seed_data():
         # PARENTS (15 parents for 15 students)
         {
             "user_id": parent_ids[0],
-            "email": "parent1@school.com",
+            "email": "parent@school.com",
             "password_hash": password_hash,
             "role": "parent",
             "name": "John Parent",
@@ -969,7 +969,7 @@ async def seed_data():
     print("\n" + TEST_CREDENTIALS)
     
     print("\n🔗 DATA LINKING:")
-    print("   • Grade 5-A: 5 students → Teacher: Mary Johnson (teacher1@school.com)")
+    print("   • Grade 5-A: 5 students → Teacher: Mary Johnson (teacher@school.com)")
     print("   • Grade 6-B: 5 students → Teacher: Robert Smith (teacher2@school.com)")
     print("   • Grade 4-A: 5 students → Teacher: Sarah Wilson (teacher3@school.com)")
     print("   • Each student linked to: Parent, Teacher, Bus, and Bus Stop")
