@@ -35,17 +35,19 @@ export default function ParentDashboard({ user, onLogout }) {
 
       fetchBusLocation(selectedStudent.bus_id);
       
-      // Fetch route data if route_id exists
-      if (selectedStudent.route_id) {
-        fetchRoute(selectedStudent.route_id);
-      } else {
-        setRoute(null);
-        setShowRoute(false);
-      }
-      
       return () => clearInterval(interval);
     }
   }, [selectedStudent]);
+
+  useEffect(() => {
+    // Fetch route data when student details are loaded and route_id exists
+    if (selectedStudentDetails && selectedStudentDetails.route_id) {
+      fetchRoute(selectedStudentDetails.route_id);
+    } else {
+      setRoute(null);
+      setShowRoute(false);
+    }
+  }, [selectedStudentDetails]);
 
   const fetchStudents = async () => {
     try {
