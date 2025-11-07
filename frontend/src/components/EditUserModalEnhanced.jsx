@@ -119,7 +119,7 @@ export default function EditUserModalEnhanced({ user, currentUser, open, onClose
                   <Input
                     value={formData.assigned_class}
                     onChange={(e) => handleChange('assigned_class', e.target.value)}
-                    placeholder="e.g., 5th Grade"
+                    placeholder="e.g., 5"
                     disabled={isEditingOtherAdmin}
                   />
                 </div>
