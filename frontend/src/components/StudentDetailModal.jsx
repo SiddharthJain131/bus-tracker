@@ -15,6 +15,12 @@ export default function StudentDetailModal({ student, open, onClose }) {
   const [loading, setLoading] = useState(false);
   const [tempClosed, setTempClosed] = useState(false);
 
+  // Helper function to remove "Grade " prefix from class names
+  const formatClassName = (className) => {
+    if (!className) return 'N/A';
+    return className.replace(/^Grade\s+/i, '');
+  };
+
   useEffect(() => {
     if (open && student) {
       fetchStudentDetails();
