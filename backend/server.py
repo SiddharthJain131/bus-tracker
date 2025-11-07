@@ -57,6 +57,7 @@ class UserUpdate(BaseModel):
     assigned_class: Optional[str] = None
     assigned_section: Optional[str] = None
     address: Optional[str] = None
+    is_elevated_admin: Optional[bool] = None
 
 class UserCreate(BaseModel):
     email: str
