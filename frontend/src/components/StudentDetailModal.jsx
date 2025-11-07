@@ -63,7 +63,9 @@ export default function StudentDetailModal({ student, open, onClose }) {
                   <h3 className="text-2xl font-bold text-gray-900" style={{ fontFamily: 'Space Grotesk' }}>
                     {studentDetails.name}
                   </h3>
-                  <p className="text-gray-600">Student ID: {studentDetails.student_id}</p>
+                  <p className="text-gray-600">
+                    Roll No: <span className="font-semibold text-emerald-700">{studentDetails.roll_number || studentDetails.student_id}</span>
+                  </p>
                 </div>
               </div>
 
