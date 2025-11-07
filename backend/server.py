@@ -282,7 +282,8 @@ async def get_me(current_user: dict = Depends(get_current_user)):
         "address": current_user.get('address'),
         "assigned_class": current_user.get('assigned_class'),
         "assigned_section": current_user.get('assigned_section'),
-        "student_ids": current_user.get('student_ids', [])
+        "student_ids": current_user.get('student_ids', []),
+        "is_elevated_admin": current_user.get('is_elevated_admin', False)
     }
 
 # Photo upload
