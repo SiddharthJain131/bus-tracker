@@ -93,7 +93,7 @@ export default function StudentDetailModal({ student, open, onClose }) {
                     <span className="text-sm font-medium text-gray-600">Class & Section</span>
                   </div>
                   <p className="text-lg font-semibold text-gray-900">
-                    {studentDetails.class_name || 'N/A'} - {studentDetails.section || 'N/A'}
+                    {formatClassName(studentDetails.class_name)} - {studentDetails.section || 'N/A'}
                   </p>
                 </Card>
 
