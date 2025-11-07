@@ -537,17 +537,13 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Enhanced Admin Dashboard Backend APIs"
-    - "Login page"
-    - "Parent Dashboard"
-    - "Teacher Dashboard"
-    - "Admin Dashboard"
-    - "Role-based routing"
-    - "Bus Map component (Leaflet)"
-    - "Attendance Grid component"
-    - "Demo simulation UI"
+    - "Dependency-Aware Delete Safeguards - Student Deletion"
+    - "Dependency-Aware Delete Safeguards - User Deletion"
+    - "Dependency-Aware Delete Safeguards - Bus Deletion"
+    - "Dependency-Aware Delete Safeguards - Route Deletion"
+    - "Dependency-Aware Delete Safeguards - Stop Deletion"
   stuck_tasks: []
-  test_all: true
+  test_all: false
   test_priority: "high_first"
 
 agent_communication:
