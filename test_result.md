@@ -564,11 +564,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Dependency-Aware Delete Safeguards - Student Deletion"
-    - "Dependency-Aware Delete Safeguards - User Deletion"
-    - "Dependency-Aware Delete Safeguards - Bus Deletion"
-    - "Dependency-Aware Delete Safeguards - Route Deletion"
-    - "Dependency-Aware Delete Safeguards - Stop Deletion"
+    - "Elevated Admin Permissions & Roll Number Display"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
