@@ -419,6 +419,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
                                 size="sm"
                                 onClick={() => handleViewStudent(student)}
                                 className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+                                title="View Details"
                               >
                                 <Eye className="w-4 h-4" />
                               </Button>
@@ -426,9 +427,19 @@ export default function AdminDashboardNew({ user, onLogout }) {
                                 variant="ghost"
                                 size="sm"
                                 onClick={() => handleEditStudent(student)}
-                                className="text-violet-600 hover:text-violet-700 hover:bg-violet-50"
+                                className="text-yellow-600 hover:text-yellow-700 hover:bg-yellow-50"
+                                title="Edit Student"
                               >
                                 <Edit className="w-4 h-4" />
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => handleDelete(student, 'student')}
+                                className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                                title="Delete Student"
+                              >
+                                <Trash2 className="w-4 h-4" />
                               </Button>
                             </div>
                           </td>
