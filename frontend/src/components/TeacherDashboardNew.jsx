@@ -263,7 +263,7 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                   {(user.assigned_class || user.assigned_section) && (
                     <div className="flex items-center gap-1 text-sm font-medium text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full inline-flex">
                       <GraduationCap className="w-4 h-4" />
-                      Class: {user.assigned_class || 'N/A'} {user.assigned_section ? `- Section ${user.assigned_section}` : ''}
+                      Class: {formatClassName(user.assigned_class)} {user.assigned_section ? `- Section ${user.assigned_section}` : ''}
                     </div>
                   )}
                 </div>
