@@ -25,6 +25,7 @@ import {
 import StudentDetailModal from './StudentDetailModal';
 import UserDetailModal from './UserDetailModal';
 import BusDetailModal from './BusDetailModal';
+import RouteDetailModal from './RouteDetailModal';
 import EditStudentModalEnhanced from './EditStudentModalEnhanced';
 import EditUserModalEnhanced from './EditUserModalEnhanced';
 import AddStudentModal from './AddStudentModal';
