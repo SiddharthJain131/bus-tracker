@@ -54,8 +54,12 @@ export default function AdminDashboardNew({ user, onLogout }) {
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
   const [selectedBus, setSelectedBus] = useState(null);
+  const [selectedRoute, setSelectedRoute] = useState(null);
   const [editStudent, setEditStudent] = useState(null);
   const [editUser, setEditUser] = useState(null);
+  const [editBus, setEditBus] = useState(null);
+  const [editRoute, setEditRoute] = useState(null);
+  const [deleteItem, setDeleteItem] = useState(null);
   
   // Modal visibility
   const [showStudentDetail, setShowStudentDetail] = useState(false);
@@ -63,8 +67,14 @@ export default function AdminDashboardNew({ user, onLogout }) {
   const [showBusDetail, setShowBusDetail] = useState(false);
   const [showEditStudent, setShowEditStudent] = useState(false);
   const [showEditUser, setShowEditUser] = useState(false);
+  const [showEditBus, setShowEditBus] = useState(false);
+  const [showEditRoute, setShowEditRoute] = useState(false);
   const [showAddStudent, setShowAddStudent] = useState(false);
   const [showAddUser, setShowAddUser] = useState(false);
+  const [showAddBus, setShowAddBus] = useState(false);
+  const [showAddRoute, setShowAddRoute] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     fetchAllData();
