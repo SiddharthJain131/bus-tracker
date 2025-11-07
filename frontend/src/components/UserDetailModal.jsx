@@ -11,6 +11,12 @@ export default function UserDetailModal({ user, open, onClose }) {
   const [linkedStudents, setLinkedStudents] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  // Helper function to remove "Grade " prefix from class names
+  const formatClassName = (className) => {
+    if (!className) return 'N/A';
+    return className.replace(/^Grade\s+/i, '');
+  };
+
   useEffect(() => {
     if (open && user) {
       if (user.role === 'parent' || user.role === 'teacher') {
