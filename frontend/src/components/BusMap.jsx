@@ -10,10 +10,11 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
-export default function BusMap({ location }) {
+export default function BusMap({ location, route, showRoute }) {
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
   const markerRef = useRef(null);
+  const routeLayersRef = useRef([]);
 
   useEffect(() => {
     if (!mapInstanceRef.current && mapRef.current) {
@@ -64,9 +65,79 @@ export default function BusMap({ location }) {
     if (location && markerRef.current && mapInstanceRef.current) {
       const newLatLng = [location.lat, location.lon];
       markerRef.current.setLatLng(newLatLng);
-      mapInstanceRef.current.setView(newLatLng, 15, { animate: true });
+      
+      // If route is not shown, center on bus location
+      if (!showRoute) {
+        mapInstanceRef.current.setView(newLatLng, 15, { animate: true });
+      }
     }
-  }, [location]);
+  }, [location, showRoute]);
+
+  // Handle route display
+  useEffect(() => {
+    if (!mapInstanceRef.current) return;
+
+    // Clear existing route layers
+    routeLayersRef.current.forEach(layer => {
+      mapInstanceRef.current.removeLayer(layer);
+    });
+    routeLayersRef.current = [];
+
+    if (showRoute && route) {
+      // Draw polyline
+      if (route.map_path && route.map_path.length > 0) {
+        const latLngs = route.map_path.map((point) => [point.lat, point.lon]);
+        const polyline = L.polyline(latLngs, {
+          color: '#3b82f6',
+          weight: 4,
+          opacity: 0.7,
+        }).addTo(mapInstanceRef.current);
+        routeLayersRef.current.push(polyline);
+
+        // Add stop markers
+        if (route.stops && route.stops.length > 0) {
+          route.stops.forEach((stop, index) => {
+            const markerIcon = L.divIcon({
+              className: 'custom-stop-marker',
+              html: `
+                <div style="
+                  width: 32px;
+                  height: 32px;
+                  background: white;
+                  border: 3px solid #3b82f6;
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  font-weight: bold;
+                  color: #3b82f6;
+                  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+                ">
+                  ${index + 1}
+                </div>
+              `,
+              iconSize: [32, 32],
+              iconAnchor: [16, 16],
+            });
+
+            const marker = L.marker([stop.lat, stop.lon], { icon: markerIcon }).addTo(mapInstanceRef.current);
+            marker.bindPopup(`<b>${stop.stop_name}</b><br>Stop ${index + 1}`);
+            routeLayersRef.current.push(marker);
+          });
+        }
+
+        // Fit bounds to include both route and bus location
+        const bounds = polyline.getBounds();
+        if (location) {
+          bounds.extend([location.lat, location.lon]);
+        }
+        mapInstanceRef.current.fitBounds(bounds, { padding: [50, 50] });
+      }
+    } else if (location && mapInstanceRef.current) {
+      // When route is hidden, center on bus location
+      mapInstanceRef.current.setView([location.lat, location.lon], 15, { animate: true });
+    }
+  }, [showRoute, route, location]);
 
   return <div ref={mapRef} style={{ width: '100%', height: '100%' }} data-testid="leaflet-map" />;
 }
