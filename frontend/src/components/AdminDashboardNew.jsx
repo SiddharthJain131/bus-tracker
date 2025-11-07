@@ -531,6 +531,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
                                       size="sm"
                                       onClick={() => handleViewUser(u)}
                                       className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+                                      title="View Details"
                                     >
                                       <Eye className="w-4 h-4" />
                                     </Button>
@@ -538,10 +539,21 @@ export default function AdminDashboardNew({ user, onLogout }) {
                                       variant="ghost"
                                       size="sm"
                                       onClick={() => handleEditUser(u)}
-                                      className="text-violet-600 hover:text-violet-700 hover:bg-violet-50"
+                                      className="text-yellow-600 hover:text-yellow-700 hover:bg-yellow-50"
                                       disabled={u.role === 'admin' && u.user_id !== user.user_id}
+                                      title="Edit User"
                                     >
                                       <Edit className="w-4 h-4" />
+                                    </Button>
+                                    <Button
+                                      variant="ghost"
+                                      size="sm"
+                                      onClick={() => handleDelete(u, 'user')}
+                                      className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                                      disabled={u.role === 'admin' || u.user_id === user.user_id}
+                                      title={u.role === 'admin' ? 'Cannot delete admins' : u.user_id === user.user_id ? 'Cannot delete yourself' : 'Delete User'}
+                                    >
+                                      <Trash2 className="w-4 h-4" />
                                     </Button>
                                   </div>
                                 </td>
