@@ -170,26 +170,31 @@ def test_buses_api(session_token):
         return False
 
 def check_backend_logs():
-    """Check backend logs for errors"""
-    print_test("Checking backend logs for errors")
+    """Check backend logs for actual errors (not INFO/WARNING)"""
+    print_test("Checking backend logs for actual errors")
     
     try:
         import subprocess
+        # Check for actual Python errors/exceptions
         result = subprocess.run(
-            ['tail', '-n', '50', '/var/log/supervisor/backend.err.log'],
+            ['grep', '-i', '-E', 'error|exception|traceback', '/var/log/supervisor/backend.err.log'],
             capture_output=True,
             text=True,
             timeout=5
         )
         
-        if result.returncode == 0:
-            error_log = result.stdout
-            if error_log.strip():
-                print_error(f"Backend error log has content:\n{error_log[-500:]}")
-                return False
-            else:
-                print_success("Backend error log is clean (no errors)")
-                return True
+        # grep returns 0 if matches found, 1 if no matches
+        if result.returncode == 1:
+            # No errors found - this is good!
+            print_success("Backend logs are clean (no errors or exceptions)")
+            return True
+        elif result.returncode == 0:
+            # Errors found
+            error_lines = result.stdout.strip().split('\n')
+            print_error(f"Found {len(error_lines)} error/exception lines in backend logs:")
+            for line in error_lines[-5:]:  # Show last 5 errors
+                print(f"  {line[:100]}")
+            return False
         else:
             print_info("Could not read backend error log")
             return True  # Don't fail test if we can't read logs
