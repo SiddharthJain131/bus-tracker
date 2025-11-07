@@ -384,7 +384,6 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                         <tr key={student.student_id} className="hover:bg-gray-50">
                           <td className="px-4 py-4">
                             <div className="font-medium text-gray-900">{student.name}</div>
-                            <div className="text-sm text-gray-500">{student.class_name} - {student.section}</div>
                           </td>
                           <td className="px-4 py-4">
                             <span className="font-medium text-emerald-700">{student.roll_number || 'N/A'}</span>
