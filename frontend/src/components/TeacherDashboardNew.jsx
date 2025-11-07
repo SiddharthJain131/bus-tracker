@@ -364,6 +364,7 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                   <thead className="bg-gray-50 border-b-2 border-gray-200">
                     <tr>
                       <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Name</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Roll No</th>
                       <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Parent Name</th>
                       <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Bus No</th>
                       <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">AM Status</th>
@@ -374,7 +375,7 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                   <tbody className="divide-y divide-gray-200">
                     {filteredStudents.length === 0 ? (
                       <tr>
-                        <td colSpan="6" className="px-4 py-8 text-center text-gray-500">
+                        <td colSpan="7" className="px-4 py-8 text-center text-gray-500">
                           No students found
                         </td>
                       </tr>
@@ -384,6 +385,9 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                           <td className="px-4 py-4">
                             <div className="font-medium text-gray-900">{student.name}</div>
                             <div className="text-sm text-gray-500">{student.class_name} - {student.section}</div>
+                          </td>
+                          <td className="px-4 py-4">
+                            <span className="font-medium text-emerald-700">{student.roll_number || 'N/A'}</span>
                           </td>
                           <td className="px-4 py-4 text-sm text-gray-600">
                             {student.parent_name || 'N/A'}
