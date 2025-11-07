@@ -932,6 +932,478 @@ class SchoolBusTrackerAPITester:
         
         return all(results)
 
+    def test_admin_crud_operations(self):
+        """Test all CRUD operations for Admin Dashboard as per review request"""
+        results = []
+        
+        print(f"\n🎯 Testing Admin Dashboard CRUD Operations (Review Request)...")
+        
+        # ===== 1. STUDENTS CRUD =====
+        print(f"\n   === STUDENTS CRUD ===")
+        
+        # Create a test student first
+        success, users_data = self.run_test("Get users for test student", "GET", "users", 200)
+        if not success or not users_data:
+            print("   ❌ Cannot get users for student CRUD test")
+            return False
+        
+        parent_user = next((u for u in users_data if u['role'] == 'parent'), None)
+        if not parent_user:
+            print("   ❌ No parent user found for student CRUD test")
+            return False
+        
+        success, buses_data = self.run_test("Get buses for test student", "GET", "buses", 200)
+        if not success or not buses_data:
+            print("   ❌ Cannot get buses for student CRUD test")
+            return False
+        
+        import time
+        timestamp = int(time.time())
+        test_student_data = {
+            "name": f"CRUD Test Student {timestamp}",
+            "roll_number": f"CRUD{timestamp}",
+            "class_name": "Grade 10",
+            "section": "Z",
+            "parent_id": parent_user['user_id'],
+            "bus_id": buses_data[0]['bus_id'],
+            "phone": "+1-555-CRUD-TEST",
+            "emergency_contact": "+1-555-CRUD-EMRG",
+            "remarks": "Test student for CRUD operations"
+        }
+        
+        success, created_student = self.run_test(
+            "Create test student for deletion",
+            "POST",
+            "students",
+            200,
+            data=test_student_data,
+            critical=True
+        )
+        results.append(success)
+        
+        if not success or not created_student:
+            print("   ❌ Failed to create test student")
+            return False
+        
+        test_student_id = created_student['student_id']
+        print(f"   ✅ Test student created: {created_student['name']} (ID: {test_student_id})")
+        
+        # Test: DELETE student as admin (should succeed)
+        success, _ = self.run_test(
+            "DELETE /api/students/{student_id} - Admin deletes student",
+            "DELETE",
+            f"students/{test_student_id}",
+            200,
+            critical=True
+        )
+        results.append(success)
+        if success:
+            print(f"   ✅ Admin successfully deleted student")
+        
+        # Verify student is deleted
+        success, _ = self.run_test(
+            "Verify student is deleted (should return 404)",
+            "GET",
+            f"students/{test_student_id}",
+            404
+        )
+        results.append(success)
+        if success:
+            print(f"   ✅ Student deletion verified")
+        
+        # Logout admin and login as teacher to test 403
+        self.test_logout()
+        
+        # Create another test student for teacher 403 test
+        self.test_login("admin@school.com", "password")
+        success, created_student2 = self.run_test(
+            "Create another test student for 403 test",
+            "POST",
+            "students",
+            200,
+            data={**test_student_data, "name": f"CRUD Test Student 2 {timestamp}", "roll_number": f"CRUD2{timestamp}"}
+        )
+        if success and created_student2:
+            test_student_id_2 = created_student2['student_id']
+            self.test_logout()
+            
+            # Login as teacher and try to delete (should fail with 403)
+            if self.test_login("teacher@school.com", "password"):
+                success, _ = self.run_test(
+                    "DELETE /api/students/{student_id} - Teacher tries to delete (should fail 403)",
+                    "DELETE",
+                    f"students/{test_student_id_2}",
+                    403,
+                    critical=True
+                )
+                results.append(success)
+                if success:
+                    print(f"   ✅ Admin-only access verified - teacher got 403")
+                self.test_logout()
+            
+            # Cleanup: Delete the second test student as admin
+            self.test_login("admin@school.com", "password")
+            self.run_test("Cleanup test student 2", "DELETE", f"students/{test_student_id_2}", 200)
+        
+        # ===== 2. USERS CRUD =====
+        print(f"\n   === USERS CRUD ===")
+        
+        # Create a test parent user for deletion
+        test_parent_data = {
+            "name": f"CRUD Test Parent {timestamp}",
+            "email": f"crudparent{timestamp}@test.com",
+            "password": "test123",
+            "role": "parent",
+            "phone": "+1-555-CRUD-PARENT",
+            "address": "123 CRUD Test Street"
+        }
+        
+        success, created_parent = self.run_test(
+            "Create test parent user for deletion",
+            "POST",
+            "users",
+            200,
+            data=test_parent_data,
+            critical=True
+        )
+        results.append(success)
+        
+        if not success or not created_parent:
+            print("   ❌ Failed to create test parent")
+            return False
+        
+        test_parent_id = created_parent['user_id']
+        print(f"   ✅ Test parent created: {created_parent['name']} (ID: {test_parent_id})")
+        
+        # Create a student linked to this parent to test cascading
+        test_student_for_cascade = {
+            "name": f"Cascade Test Student {timestamp}",
+            "roll_number": f"CASCADE{timestamp}",
+            "class_name": "Grade 11",
+            "section": "Y",
+            "parent_id": test_parent_id,
+            "bus_id": buses_data[0]['bus_id'],
+            "phone": "+1-555-CASCADE",
+            "emergency_contact": "+1-555-CASCADE-EMRG"
+        }
+        
+        success, created_cascade_student = self.run_test(
+            "Create student linked to test parent",
+            "POST",
+            "students",
+            200,
+            data=test_student_for_cascade,
+            critical=True
+        )
+        results.append(success)
+        
+        if not success or not created_cascade_student:
+            print("   ❌ Failed to create cascade test student")
+            return False
+        
+        cascade_student_id = created_cascade_student['student_id']
+        print(f"   ✅ Cascade test student created: {created_cascade_student['name']} (ID: {cascade_student_id})")
+        
+        # Test: DELETE parent user (should succeed and cascade)
+        success, _ = self.run_test(
+            "DELETE /api/users/{user_id} - Delete parent user",
+            "DELETE",
+            f"users/{test_parent_id}",
+            200,
+            critical=True
+        )
+        results.append(success)
+        if success:
+            print(f"   ✅ Parent user successfully deleted")
+        
+        # Verify cascading: student.parent_id should be null
+        success, cascade_student_data = self.run_test(
+            "Verify cascading - student.parent_id should be null",
+            "GET",
+            f"students/{cascade_student_id}",
+            200,
+            critical=True
+        )
+        results.append(success)
+        if success and cascade_student_data:
+            if cascade_student_data.get('parent_id') is None:
+                print(f"   ✅ Cascading verified - student.parent_id is null after parent deletion")
+            else:
+                print(f"   ❌ Cascading failed - student.parent_id is still: {cascade_student_data.get('parent_id')}")
+                results.append(False)
+        
+        # Cleanup cascade test student
+        self.run_test("Cleanup cascade test student", "DELETE", f"students/{cascade_student_id}", 200)
+        
+        # Test: Try to delete admin (should fail with 403)
+        success, all_users = self.run_test("Get all users to find another admin", "GET", "users", 200)
+        if success and all_users:
+            # Find another admin (not current user)
+            other_admin = next((u for u in all_users if u['role'] == 'admin' and u['user_id'] != self.current_user['user_id']), None)
+            
+            if other_admin:
+                success, _ = self.run_test(
+                    "DELETE /api/users/{user_id} - Try to delete another admin (should fail 403)",
+                    "DELETE",
+                    f"users/{other_admin['user_id']}",
+                    403,
+                    critical=True
+                )
+                results.append(success)
+                if success:
+                    print(f"   ✅ Admin deletion protection verified - cannot delete another admin")
+            else:
+                print(f"   ⚠️  No other admin found to test deletion protection")
+        
+        # Test: Try to delete self (should fail with 403)
+        success, _ = self.run_test(
+            "DELETE /api/users/{user_id} - Try to delete self (should fail 403)",
+            "DELETE",
+            f"users/{self.current_user['user_id']}",
+            403,
+            critical=True
+        )
+        results.append(success)
+        if success:
+            print(f"   ✅ Self-deletion protection verified - cannot delete own account")
+        
+        # ===== 3. BUSES CRUD =====
+        print(f"\n   === BUSES CRUD ===")
+        
+        # Get routes for bus creation
+        success, routes_data = self.run_test("Get routes for bus creation", "GET", "routes", 200)
+        route_id = routes_data[0]['route_id'] if success and routes_data else None
+        
+        # Test: POST /api/buses - Create a new bus
+        test_bus_data = {
+            "bus_number": f"TEST-BUS-{timestamp}",
+            "driver_name": "Test Driver",
+            "driver_phone": "+1-555-TEST-DRIVER",
+            "route_id": route_id,
+            "capacity": 40,
+            "remarks": "Test bus for CRUD operations"
+        }
+        
+        success, created_bus = self.run_test(
+            "POST /api/buses - Create a new bus",
+            "POST",
+            "buses",
+            200,
+            data=test_bus_data,
+            critical=True
+        )
+        results.append(success)
+        
+        if not success or not created_bus:
+            print("   ❌ Failed to create test bus")
+            return False
+        
+        test_bus_id = created_bus['bus_id']
+        print(f"   ✅ Test bus created: {created_bus['bus_number']} (ID: {test_bus_id})")
+        
+        # Test: PUT /api/buses/{bus_id} - Update bus details
+        updated_bus_data = {
+            **test_bus_data,
+            "bus_id": test_bus_id,
+            "driver_name": "Updated Test Driver",
+            "capacity": 45,
+            "remarks": "Updated test bus"
+        }
+        
+        success, _ = self.run_test(
+            "PUT /api/buses/{bus_id} - Update bus details",
+            "PUT",
+            f"buses/{test_bus_id}",
+            200,
+            data=updated_bus_data,
+            critical=True
+        )
+        results.append(success)
+        if success:
+            print(f"   ✅ Bus successfully updated")
+        
+        # Verify update
+        success, updated_bus = self.run_test(
+            "Verify bus update",
+            "GET",
+            f"buses/{test_bus_id}",
+            200
+        )
+        if success and updated_bus:
+            if updated_bus.get('driver_name') == "Updated Test Driver" and updated_bus.get('capacity') == 45:
+                print(f"   ✅ Bus update verified - driver: {updated_bus['driver_name']}, capacity: {updated_bus['capacity']}")
+            else:
+                print(f"   ❌ Bus update verification failed")
+                results.append(False)
+        
+        # Test: DELETE /api/buses/{bus_id} - Delete a bus
+        success, _ = self.run_test(
+            "DELETE /api/buses/{bus_id} - Delete a bus",
+            "DELETE",
+            f"buses/{test_bus_id}",
+            200,
+            critical=True
+        )
+        results.append(success)
+        if success:
+            print(f"   ✅ Bus successfully deleted")
+        
+        # Verify deletion
+        success, _ = self.run_test(
+            "Verify bus deletion (should return 404)",
+            "GET",
+            f"buses/{test_bus_id}",
+            404
+        )
+        results.append(success)
+        if success:
+            print(f"   ✅ Bus deletion verified")
+        
+        # ===== 4. ROUTES CRUD =====
+        print(f"\n   === ROUTES CRUD ===")
+        
+        # Test: POST /api/stops - Create stops
+        test_stop_1_data = {
+            "stop_name": f"CRUD Test Stop 1 {timestamp}",
+            "lat": 37.7749,
+            "lon": -122.4194,
+            "order_index": 1
+        }
+        
+        success, created_stop_1 = self.run_test(
+            "POST /api/stops - Create stop 1",
+            "POST",
+            "stops",
+            200,
+            data=test_stop_1_data,
+            critical=True
+        )
+        results.append(success)
+        
+        if not success or not created_stop_1:
+            print("   ❌ Failed to create test stop 1")
+            return False
+        
+        test_stop_1_id = created_stop_1['stop_id']
+        print(f"   ✅ Test stop 1 created: {created_stop_1['stop_name']} (ID: {test_stop_1_id})")
+        
+        test_stop_2_data = {
+            "stop_name": f"CRUD Test Stop 2 {timestamp}",
+            "lat": 37.7849,
+            "lon": -122.4294,
+            "order_index": 2
+        }
+        
+        success, created_stop_2 = self.run_test(
+            "POST /api/stops - Create stop 2",
+            "POST",
+            "stops",
+            200,
+            data=test_stop_2_data,
+            critical=True
+        )
+        results.append(success)
+        
+        if not success or not created_stop_2:
+            print("   ❌ Failed to create test stop 2")
+            return False
+        
+        test_stop_2_id = created_stop_2['stop_id']
+        print(f"   ✅ Test stop 2 created: {created_stop_2['stop_name']} (ID: {test_stop_2_id})")
+        
+        # Test: POST /api/routes - Create a new route
+        test_route_data = {
+            "route_name": f"CRUD Test Route {timestamp}",
+            "stop_ids": [test_stop_1_id, test_stop_2_id],
+            "map_path": [
+                {"lat": 37.7749, "lon": -122.4194},
+                {"lat": 37.7849, "lon": -122.4294}
+            ],
+            "remarks": "Test route for CRUD operations"
+        }
+        
+        success, created_route = self.run_test(
+            "POST /api/routes - Create a new route",
+            "POST",
+            "routes",
+            200,
+            data=test_route_data,
+            critical=True
+        )
+        results.append(success)
+        
+        if not success or not created_route:
+            print("   ❌ Failed to create test route")
+            return False
+        
+        test_route_id = created_route['route_id']
+        print(f"   ✅ Test route created: {created_route['route_name']} (ID: {test_route_id})")
+        
+        # Test: PUT /api/routes/{route_id} - Update route
+        updated_route_data = {
+            **test_route_data,
+            "route_id": test_route_id,
+            "route_name": f"Updated CRUD Test Route {timestamp}",
+            "remarks": "Updated test route"
+        }
+        
+        success, _ = self.run_test(
+            "PUT /api/routes/{route_id} - Update route",
+            "PUT",
+            f"routes/{test_route_id}",
+            200,
+            data=updated_route_data,
+            critical=True
+        )
+        results.append(success)
+        if success:
+            print(f"   ✅ Route successfully updated")
+        
+        # Verify update
+        success, updated_route = self.run_test(
+            "Verify route update",
+            "GET",
+            f"routes/{test_route_id}",
+            200
+        )
+        if success and updated_route:
+            if updated_route.get('route_name') == f"Updated CRUD Test Route {timestamp}":
+                print(f"   ✅ Route update verified - name: {updated_route['route_name']}")
+            else:
+                print(f"   ❌ Route update verification failed")
+                results.append(False)
+        
+        # Test: DELETE /api/routes/{route_id} - Delete a route
+        success, _ = self.run_test(
+            "DELETE /api/routes/{route_id} - Delete a route",
+            "DELETE",
+            f"routes/{test_route_id}",
+            200,
+            critical=True
+        )
+        results.append(success)
+        if success:
+            print(f"   ✅ Route successfully deleted")
+        
+        # Verify deletion
+        success, _ = self.run_test(
+            "Verify route deletion (should return 404)",
+            "GET",
+            f"routes/{test_route_id}",
+            404
+        )
+        results.append(success)
+        if success:
+            print(f"   ✅ Route deletion verified")
+        
+        # Cleanup stops
+        self.run_test("Cleanup test stop 1", "DELETE", f"stops/{test_stop_1_id}", 200)
+        self.run_test("Cleanup test stop 2", "DELETE", f"stops/{test_stop_2_id}", 200)
+        
+        print(f"\n   ✅ All CRUD operations test completed")
+        
+        return all(results)
+
     def test_missing_endpoints(self):
         """Test for missing endpoints mentioned in review"""
         # Test for /api/get_embeddings (mentioned as missing in review)
