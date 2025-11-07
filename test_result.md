@@ -342,6 +342,9 @@ frontend:
       - working: "NA"
         agent: "main"
         comment: "Parent dashboard at lines 1-228. Includes live bus map, attendance grid, notifications panel."
+      - working: "NA"
+        agent: "main"
+        comment: "✅ ROUTE MAP TOGGLE INTEGRATION COMPLETED - Replaced standalone 'View Route' button with integrated toggle control in map section. CHANGES: 1) BusMap.jsx: Enhanced to accept route, showRoute props. Added route polyline rendering with numbered stop markers using Leaflet. Route layers cleared when toggle OFF. Map auto-fits bounds to show both bus and route when toggle ON. 2) ParentDashboard.jsx: Added showRoute state and route state. Added fetchRoute function using GET /api/routes/{route_id}. Added toggleRoute function to manage toggle state. Placed floating toggle button in top-right corner of map div with Eye/EyeOff icons. Toggle shows 'Show Route' (white bg) or 'Hide Route' (blue bg) based on state. 3) StudentCard.jsx: Removed 'View Route' button section (lines 124-135). Removed RouteVisualizationModal import and showRouteModal state. Toggle button positioned absolutely with z-index 1000, styled with blue/white theme matching app design. Route only displays when toggle is ON, keeping live bus marker always visible."
 
   - task: "Teacher Dashboard"
     implemented: true
