@@ -69,6 +69,7 @@ class UserCreate(BaseModel):
     assigned_class: Optional[str] = None
     assigned_section: Optional[str] = None
     address: Optional[str] = None
+    is_elevated_admin: bool = False
 
 class UserLogin(BaseModel):
     email: str
