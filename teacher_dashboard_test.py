@@ -4,7 +4,7 @@ from datetime import datetime
 import json
 
 class TeacherDashboardTester:
-    def __init__(self, base_url="https://bustracker-setup.preview.emergentagent.com"):
+    def __init__(self, base_url="https://entity-guardian.preview.emergentagent.com"):
         self.base_url = base_url
         self.api_url = f"{base_url}/api"
         self.session = requests.Session()
