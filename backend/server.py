@@ -664,13 +664,18 @@ async def update_user(user_id: str, updates: UserUpdate, current_user: dict = De
     if current_user['role'] != 'admin':
         raise HTTPException(status_code=403, detail="Access denied")
     
-    # Cannot edit another admin
+    # Get target user
     target_user = await db.users.find_one({"user_id": user_id}, {"_id": 0})
     if not target_user:
         raise HTTPException(status_code=404, detail="User not found")
     
-    if target_user['role'] == 'admin' and user_id != current_user['user_id']:
-        raise HTTPException(status_code=403, detail="Cannot edit another admin")
+    # Check elevated admin permissions
+    is_elevated = current_user.get('is_elevated_admin', False)
+    is_editing_self = user_id == current_user['user_id']
+    
+    # Cannot edit another admin unless you are elevated admin
+    if target_user['role'] == 'admin' and not is_editing_self and not is_elevated:
+        raise HTTPException(status_code=403, detail="Only elevated admins can edit other admins")
     
     update_data = {k: v for k, v in updates.model_dump().items() if v is not None}
     await db.users.update_one(
