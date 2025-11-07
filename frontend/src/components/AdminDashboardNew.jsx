@@ -83,16 +83,18 @@ export default function AdminDashboardNew({ user, onLogout }) {
 
   const fetchAllData = async () => {
     try {
-      const [studentsRes, usersRes, busesRes, holidaysRes] = await Promise.all([
+      const [studentsRes, usersRes, busesRes, routesRes, holidaysRes] = await Promise.all([
         axios.get(`${API}/students`),
         axios.get(`${API}/users`),
         axios.get(`${API}/buses`),
+        axios.get(`${API}/routes`),
         axios.get(`${API}/admin/holidays`)
       ]);
 
       setStudents(studentsRes.data);
       setUsers(usersRes.data);
       setBuses(busesRes.data);
+      setRoutes(routesRes.data);
       setHolidays(holidaysRes.data);
 
       // Calculate stats
