@@ -38,6 +38,117 @@ import DeleteConfirmationDialog from './DeleteConfirmationDialog';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
+// Routes Table Component
+function RoutesTable({ searchTerm, onViewRoute, onEditRoute, onDeleteRoute, onAddRoute }) {
+  const [routes, setRoutes] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchRoutes();
+  }, []);
+
+  const fetchRoutes = async () => {
+    try {
+      const response = await axios.get(`${API}/routes`);
+      setRoutes(response.data);
+    } catch (error) {
+      console.error('Failed to fetch routes:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const filteredRoutes = routes.filter(r =>
+    r.route_name?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return (
+    <>
+      <div className="flex justify-end mb-4">
+        <Button
+          onClick={onAddRoute}
+          className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white"
+        >
+          <Plus className="w-4 h-4 mr-2" />
+          Add Route
+        </Button>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="w-full">
+          <thead className="bg-gray-50 border-b-2 border-gray-200">
+            <tr>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Route Name</th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Stops</th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Remarks</th>
+              <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">Actions</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200">
+            {loading ? (
+              <tr>
+                <td colSpan="4" className="px-4 py-8 text-center text-gray-500">
+                  Loading routes...
+                </td>
+              </tr>
+            ) : filteredRoutes.length === 0 ? (
+              <tr>
+                <td colSpan="4" className="px-4 py-8 text-center text-gray-500">
+                  No routes found
+                </td>
+              </tr>
+            ) : (
+              filteredRoutes.map(route => (
+                <tr key={route.route_id} className="hover:bg-gray-50">
+                  <td className="px-4 py-4">
+                    <div className="font-medium text-gray-900">{route.route_name}</div>
+                  </td>
+                  <td className="px-4 py-4 text-sm text-gray-600">
+                    {route.stop_ids?.length || 0} stops
+                  </td>
+                  <td className="px-4 py-4 text-sm text-gray-600">
+                    {route.remarks || 'N/A'}
+                  </td>
+                  <td className="px-4 py-4">
+                    <div className="flex items-center justify-center gap-2">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => onViewRoute(route)}
+                        className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+                        title="View Details"
+                      >
+                        <Eye className="w-4 h-4" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => onEditRoute(route)}
+                        className="text-yellow-600 hover:text-yellow-700 hover:bg-yellow-50"
+                        title="Edit Route"
+                      >
+                        <Edit className="w-4 h-4" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => onDeleteRoute(route)}
+                        className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                        title="Delete Route"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+    </>
+  );
+}
+
 export default function AdminDashboardNew({ user, onLogout }) {
   const [activeTab, setActiveTab] = useState('overview');
   const [userSubTab, setUserSubTab] = useState('parents');
