@@ -64,6 +64,50 @@ export default function EditRouteModal({ route, open, onClose, onSuccess }) {
     }
   };
 
+  const handleAddStop = () => {
+    setStops([...stops, {
+      stop_id: null,
+      stop_name: '',
+      lat: '',
+      lon: '',
+      order_index: stops.length,
+      isNew: true
+    }]);
+  };
+
+  const handleRemoveStop = (index) => {
+    if (stops.length === 1) {
+      toast.error('Route must have at least one stop');
+      return;
+    }
+    
+    const newStops = stops.filter((_, i) => i !== index);
+    // Re-index
+    newStops.forEach((stop, i) => stop.order_index = i);
+    setStops(newStops);
+  };
+
+  const handleStopChange = (index, field, value) => {
+    const newStops = [...stops];
+    newStops[index][field] = value;
+    setStops(newStops);
+  };
+
+  const handleMoveStop = (index, direction) => {
+    if (direction === 'up' && index === 0) return;
+    if (direction === 'down' && index === stops.length - 1) return;
+    
+    const newStops = [...stops];
+    const targetIndex = direction === 'up' ? index - 1 : index + 1;
+    
+    // Swap stops
+    [newStops[index], newStops[targetIndex]] = [newStops[targetIndex], newStops[index]];
+    
+    // Re-index
+    newStops.forEach((stop, i) => stop.order_index = i);
+    setStops(newStops);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -72,26 +116,113 @@ export default function EditRouteModal({ route, open, onClose, onSuccess }) {
       return;
     }
 
+    if (stops.length === 0) {
+      toast.error('Route must have at least one stop');
+      return;
+    }
+
+    // Validate stops
+    for (let i = 0; i < stops.length; i++) {
+      if (!stops[i].stop_name || !stops[i].lat || !stops[i].lon) {
+        toast.error(`Please fill in all fields for stop ${i + 1}`);
+        return;
+      }
+      
+      // Validate coordinates
+      const lat = parseFloat(stops[i].lat);
+      const lon = parseFloat(stops[i].lon);
+      if (isNaN(lat) || isNaN(lon)) {
+        toast.error(`Invalid coordinates for stop ${i + 1}`);
+        return;
+      }
+    }
+
     setLoading(true);
     try {
-      const payload = {
+      // Determine which stops are new, modified, or deleted
+      const stopsToDelete = originalStops.filter(id => 
+        !stops.find(s => s.stop_id === id)
+      );
+      
+      // Create or update stops
+      const processedStops = [];
+      for (const stop of stops) {
+        if (stop.isNew || !stop.stop_id) {
+          // Create new stop
+          const stopResponse = await axios.post(`${API}/stops`, {
+            stop_name: stop.stop_name,
+            lat: parseFloat(stop.lat),
+            lon: parseFloat(stop.lon),
+            order_index: stop.order_index
+          });
+          processedStops.push(stopResponse.data);
+        } else {
+          // Update existing stop
+          const stopResponse = await axios.put(`${API}/stops/${stop.stop_id}`, {
+            stop_id: stop.stop_id,
+            stop_name: stop.stop_name,
+            lat: parseFloat(stop.lat),
+            lon: parseFloat(stop.lon),
+            order_index: stop.order_index
+          });
+          processedStops.push(stopResponse.data);
+        }
+      }
+
+      // Delete removed stops (if they're not used elsewhere)
+      for (const stopId of stopsToDelete) {
+        try {
+          // Check if stop is used by students
+          const studentsResponse = await axios.get(`${API}/students?stop_id=${stopId}`);
+          const students = studentsResponse.data;
+          
+          if (students.length > 0) {
+            // Move students to the first stop of the route
+            const firstStopId = processedStops[0].stop_id;
+            for (const student of students) {
+              await axios.put(`${API}/students/${student.student_id}`, {
+                ...student,
+                stop_id: firstStopId
+              });
+            }
+            toast.info(`Moved ${students.length} student(s) from deleted stop to first stop`);
+          }
+          
+          // Now delete the stop
+          await axios.delete(`${API}/stops/${stopId}`);
+        } catch (error) {
+          console.error(`Failed to handle stop deletion: ${stopId}`, error);
+          // Continue with route update even if stop deletion fails
+        }
+      }
+
+      // Update route with new stop IDs
+      const map_path = processedStops.map(s => ({ lat: s.lat, lon: s.lon }));
+      const stop_ids = processedStops.map(s => s.stop_id);
+
+      await axios.put(`${API}/routes/${route.route_id}`, {
         route_id: route.route_id,
         route_name: formData.route_name,
-        stop_ids: route.stop_ids || [],
-        map_path: route.map_path || [],
+        stop_ids,
+        map_path,
         remarks: formData.remarks || null
-      };
+      });
 
-      await axios.put(`${API}/routes/${route.route_id}`, payload);
       toast.success(`Route "${formData.route_name}" updated successfully!`);
       onSuccess();
-      onClose();
+      handleClose();
     } catch (error) {
       console.error('Update route error:', error);
       toast.error(error.response?.data?.detail || 'Failed to update route');
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleClose = () => {
+    setStops([]);
+    setOriginalStops([]);
+    onClose();
   };
 
   if (!route) return null;
