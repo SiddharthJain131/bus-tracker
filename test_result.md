@@ -318,6 +318,66 @@ backend:
         agent: "testing"
         comment: "✅ COMPREHENSIVE VERIFICATION COMPLETED - All Enhanced Admin Dashboard backend requirements verified: 1) Authentication: admin@school.com/password login working, session management functional. 2) Data Retrieval: Students API returns enriched data (parent_name, teacher_name, bus_number), Users API excludes password_hash, Buses API includes route_name enrichment, Holidays API working. 3) Detailed Views: Student/Bus/Route detail APIs provide complete data for View modals. 4) Edit Operations: Student updates trigger email notifications (confirmed in logs), User updates working with admin restrictions. 5) Stats: Dashboard counts verified (3 students, 1 teacher, 2 buses). All 56 tests passed with 100% success rate. Backend fully ready for Enhanced Admin Dashboard production use."
 
+  - task: "Dependency-Aware Delete Safeguards - Student Deletion"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Implemented dependency checks for student deletion. Now checks for: 1) Attendance records (blocks deletion if exists), 2) Notifications (cascades delete). Returns 409 conflict if attendance exists with clear error message."
+
+  - task: "Dependency-Aware Delete Safeguards - User Deletion"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Enhanced user deletion with strict dependency checks. Now blocks deletion if: 1) Parent has linked students, 2) Teacher has assigned students. Cascades delete notifications. Returns 409 conflict with student count."
+
+  - task: "Dependency-Aware Delete Safeguards - Bus Deletion"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Implemented dependency checks for bus deletion. Now checks for students assigned to bus. Blocks deletion if students exist with 409 conflict and clear error message."
+
+  - task: "Dependency-Aware Delete Safeguards - Route Deletion"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Implemented dependency checks for route deletion. Blocks if buses use route. Implements safe cascade for stops - only deletes stops if not used by other routes or students."
+
+  - task: "Dependency-Aware Delete Safeguards - Stop Deletion"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Implemented dependency checks for stop deletion. Now checks for: 1) Students assigned to stop, 2) Routes using stop. Blocks deletion if either exists with 409 conflict and clear error message."
+
 frontend:
   - task: "Login page"
     implemented: true
