@@ -704,10 +704,24 @@ export default function AdminDashboardNew({ user, onLogout }) {
                       className="pl-10 w-64"
                     />
                   </div>
+                  <Button
+                    onClick={() => setShowAddBus(true)}
+                    className="bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white"
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add Bus
+                  </Button>
+                  <Button
+                    onClick={() => setShowAddRoute(true)}
+                    className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white"
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add Route
+                  </Button>
                 </div>
               </div>
 
-              <Tabs defaultValue="buses">
+              <Tabs value={busSubTab} onValueChange={setBusSubTab}>
                 <TabsList className="grid w-full grid-cols-2 mb-6">
                   <TabsTrigger value="buses">Buses ({buses.length})</TabsTrigger>
                   <TabsTrigger value="routes">Routes</TabsTrigger>
