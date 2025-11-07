@@ -1,0 +1,27 @@
+{
+  "name": "bus-tracker",
+  "version": "1.0.0",
+  "description": "School Bus Tracking and Student Attendance Management System",
+  "scripts": {
+    "seed": "cd backend && python seed_data.py",
+    "seed:verbose": "cd backend && python seed_data.py",
+    "dev:backend": "cd backend && uvicorn server:app --host 0.0.0.0 --port 8001 --reload",
+    "dev:frontend": "cd frontend && yarn start",
+    "install:all": "cd backend && pip install -r requirements.txt && cd ../frontend && yarn install",
+    "start": "sudo supervisorctl restart all",
+    "status": "sudo supervisorctl status"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-repo/bus-tracker"
+  },
+  "keywords": [
+    "bus-tracking",
+    "school-management",
+    "attendance",
+    "rfid",
+    "gps-tracking"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
