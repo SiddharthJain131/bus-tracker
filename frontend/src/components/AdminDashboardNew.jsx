@@ -616,57 +616,78 @@ export default function AdminDashboardNew({ user, onLogout }) {
                               </td>
                             </tr>
                           ) : (
-                            (role === 'parents' ? parentUsers : role === 'teachers' ? teacherUsers : adminUsers).map(u => (
-                              <tr key={u.user_id} className="hover:bg-gray-50">
-                                <td className="px-4 py-4">
-                                  <div className="font-medium text-gray-900">{u.name}</div>
-                                </td>
-                                <td className="px-4 py-4">
-                                  <span className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${
-                                    u.role === 'admin' ? 'bg-purple-100 text-purple-800' :
-                                    u.role === 'teacher' ? 'bg-emerald-100 text-emerald-800' :
-                                    'bg-blue-100 text-blue-800'
-                                  }`}>
-                                    {u.role}
-                                  </span>
-                                </td>
-                                <td className="px-4 py-4 text-sm text-gray-600">{u.email}</td>
-                                <td className="px-4 py-4 text-sm text-gray-600">{u.phone || 'N/A'}</td>
-                                <td className="px-4 py-4">
-                                  <div className="flex items-center justify-center gap-2">
-                                    <Button
-                                      variant="ghost"
-                                      size="sm"
-                                      onClick={() => handleViewUser(u)}
-                                      className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
-                                      title="View Details"
-                                    >
-                                      <Eye className="w-4 h-4" />
-                                    </Button>
-                                    <Button
-                                      variant="ghost"
-                                      size="sm"
-                                      onClick={() => handleEditUser(u)}
-                                      className="text-yellow-600 hover:text-yellow-700 hover:bg-yellow-50"
-                                      disabled={u.role === 'admin' && u.user_id !== user.user_id}
-                                      title="Edit User"
-                                    >
-                                      <Edit className="w-4 h-4" />
-                                    </Button>
-                                    <Button
-                                      variant="ghost"
-                                      size="sm"
-                                      onClick={() => handleDelete(u, 'user')}
-                                      className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                                      disabled={u.role === 'admin' || u.user_id === user.user_id}
-                                      title={u.role === 'admin' ? 'Cannot delete admins' : u.user_id === user.user_id ? 'Cannot delete yourself' : 'Delete User'}
-                                    >
-                                      <Trash2 className="w-4 h-4" />
-                                    </Button>
-                                  </div>
-                                </td>
-                              </tr>
-                            ))
+                            (role === 'parents' ? parentUsers : role === 'teachers' ? teacherUsers : adminUsers).map(u => {
+                              const isElevated = user.is_elevated_admin || false;
+                              const canEditAdmin = u.role !== 'admin' || u.user_id === user.user_id || isElevated;
+                              const canDeleteAdmin = u.role !== 'admin' || (u.user_id !== user.user_id && isElevated);
+                              
+                              return (
+                                <tr key={u.user_id} className="hover:bg-gray-50">
+                                  <td className="px-4 py-4">
+                                    <div className="flex items-center gap-2">
+                                      <span className="font-medium text-gray-900">{u.name}</span>
+                                      {u.is_elevated_admin && (
+                                        <span 
+                                          className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gradient-to-r from-amber-100 to-yellow-100 text-amber-800 border border-amber-300"
+                                          title="Elevated Admin - Can manage other admins"
+                                        >
+                                          ⭐ Elevated
+                                        </span>
+                                      )}
+                                    </div>
+                                  </td>
+                                  <td className="px-4 py-4">
+                                    <span className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${
+                                      u.role === 'admin' ? 'bg-purple-100 text-purple-800' :
+                                      u.role === 'teacher' ? 'bg-emerald-100 text-emerald-800' :
+                                      'bg-blue-100 text-blue-800'
+                                    }`}>
+                                      {u.role}
+                                    </span>
+                                  </td>
+                                  <td className="px-4 py-4 text-sm text-gray-600">{u.email}</td>
+                                  <td className="px-4 py-4 text-sm text-gray-600">{u.phone || 'N/A'}</td>
+                                  <td className="px-4 py-4">
+                                    <div className="flex items-center justify-center gap-2">
+                                      <Button
+                                        variant="ghost"
+                                        size="sm"
+                                        onClick={() => handleViewUser(u)}
+                                        className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+                                        title="View Details"
+                                      >
+                                        <Eye className="w-4 h-4" />
+                                      </Button>
+                                      <Button
+                                        variant="ghost"
+                                        size="sm"
+                                        onClick={() => handleEditUser(u)}
+                                        className={canEditAdmin ? "text-yellow-600 hover:text-yellow-700 hover:bg-yellow-50" : "text-gray-400 cursor-not-allowed"}
+                                        disabled={!canEditAdmin}
+                                        title={canEditAdmin ? "Edit User" : "Only elevated admins can edit other admins"}
+                                      >
+                                        <Edit className="w-4 h-4" />
+                                      </Button>
+                                      <Button
+                                        variant="ghost"
+                                        size="sm"
+                                        onClick={() => handleDelete(u, 'user')}
+                                        className={canDeleteAdmin ? "text-red-600 hover:text-red-700 hover:bg-red-50" : "text-gray-400 cursor-not-allowed"}
+                                        disabled={!canDeleteAdmin}
+                                        title={
+                                          u.user_id === user.user_id ? 'Cannot delete yourself' :
+                                          !canDeleteAdmin ? 'Only elevated admins can delete other admins' :
+                                          'Delete User'
+                                        }
+                                      >
+                                        <Trash2 className="w-4 h-4" />
+                                      </Button>
+                                    </div>
+                                  </td>
+                                </tr>
+                              );
+                            })
+                          )
                           )}
                         </tbody>
                       </table>
