@@ -81,10 +81,6 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
 
       await axios.put(`${API}/students/${student.student_id}`, formData);
       
-      // Log the update (mock email simulation)
-      const logMessage = `Student record updated by ${adminName || 'Admin'} at ${new Date().toLocaleString()}.\n\nChanges:\n${changedFields.join('\n')}`;
-      console.log('📧 MOCK EMAIL LOG:', logMessage);
-      
       toast.success('Student updated successfully! Email notification sent to parent.');
       onSuccess();
       onClose();
