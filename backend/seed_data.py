@@ -29,11 +29,11 @@ TEST_CREDENTIALS = """
 🔐 ADMIN ACCOUNTS:
   Email: admin@school.com
   Password: password
-  Role: Primary Administrator
+  Role: Primary Administrator (⭐ Elevated Admin - Can manage other admins)
   ---
   Email: admin2@school.com
   Password: password
-  Role: Secondary Administrator
+  Role: Secondary Administrator (Regular Admin)
 
 👨‍🏫 TEACHER ACCOUNTS:
   Email: teacher@school.com
