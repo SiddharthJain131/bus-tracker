@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card } from './ui/card';
-import { Button } from './ui/button';
-import { User, GraduationCap, Bus, MapPin, Phone, AlertCircle } from 'lucide-react';
-import RouteVisualizationModal from './RouteVisualizationModal';
+import { User, GraduationCap, Bus, Phone, AlertCircle } from 'lucide-react';
 
 const getInitials = (name) => {
   return name
