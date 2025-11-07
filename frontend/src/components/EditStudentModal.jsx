@@ -104,7 +104,7 @@ export default function EditStudentModal({ student, onClose, onSave }) {
               <label className="text-sm font-medium text-gray-700 mb-1 block">Class</label>
               <Input
                 data-testid="edit-student-class"
-                placeholder="e.g., Grade 5"
+                placeholder="e.g., 5"
                 value={formData.class_name}
                 onChange={(e) => setFormData({ ...formData, class_name: e.target.value })}
               />
