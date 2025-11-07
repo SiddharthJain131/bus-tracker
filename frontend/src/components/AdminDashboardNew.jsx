@@ -65,15 +65,6 @@ function RoutesTable({ searchTerm, onViewRoute, onEditRoute, onDeleteRoute, onAd
 
   return (
     <>
-      <div className="flex justify-end mb-4">
-        <Button
-          onClick={onAddRoute}
-          className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white"
-        >
-          <Plus className="w-4 h-4 mr-2" />
-          Add Route
-        </Button>
-      </div>
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead className="bg-gray-50 border-b-2 border-gray-200">
