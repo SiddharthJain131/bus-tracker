@@ -25,6 +25,12 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 export default function TeacherDashboardNew({ user, onLogout }) {
+  // Helper function to remove "Grade " prefix from class names
+  const formatClassName = (className) => {
+    if (!className) return 'N/A';
+    return className.replace(/^Grade\s+/i, '');
+  };
+
   // Data states
   const [students, setStudents] = useState([]);
   const [notifications, setNotifications] = useState([]);
