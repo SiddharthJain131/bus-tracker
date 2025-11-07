@@ -13,7 +13,7 @@ import sys
 from typing import Dict, Optional
 
 # Get backend URL from environment
-BACKEND_URL = "https://artifact-purge.preview.emergentagent.com/api"
+BACKEND_URL = "https://permission-tests.preview.emergentagent.com/api"
 
 class TestSession:
     def __init__(self):
