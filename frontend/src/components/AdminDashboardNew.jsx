@@ -46,6 +46,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
   const [students, setStudents] = useState([]);
   const [users, setUsers] = useState([]);
   const [buses, setBuses] = useState([]);
+  const [routes, setRoutes] = useState([]);
   const [holidays, setHolidays] = useState([]);
   const [stats, setStats] = useState({ totalStudents: 0, totalTeachers: 0, totalBuses: 0 });
   const [searchTerm, setSearchTerm] = useState('');
