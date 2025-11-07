@@ -792,7 +792,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
                     searchTerm={searchTerm}
                     onViewRoute={(route) => {
                       setSelectedRoute(route);
-                      setShowBusDetail(true);
+                      setShowRouteDetail(true);
                     }}
                     onEditRoute={handleEditRoute}
                     onDeleteRoute={(route) => handleDelete(route, 'route')}
