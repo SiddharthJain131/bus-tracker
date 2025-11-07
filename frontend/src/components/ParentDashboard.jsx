@@ -34,6 +34,15 @@ export default function ParentDashboard({ user, onLogout }) {
       }, 10000);
 
       fetchBusLocation(selectedStudent.bus_id);
+      
+      // Fetch route data if route_id exists
+      if (selectedStudent.route_id) {
+        fetchRoute(selectedStudent.route_id);
+      } else {
+        setRoute(null);
+        setShowRoute(false);
+      }
+      
       return () => clearInterval(interval);
     }
   }, [selectedStudent]);
