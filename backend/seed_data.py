@@ -312,7 +312,8 @@ async def seed_data():
             "address": "School Administration Office, Main Building",
             "assigned_class": None,
             "assigned_section": None,
-            "student_ids": []
+            "student_ids": [],
+            "is_elevated_admin": True
         },
         {
             "user_id": admin2_id,
@@ -325,7 +326,8 @@ async def seed_data():
             "address": "School Administration Office, East Wing",
             "assigned_class": None,
             "assigned_section": None,
-            "student_ids": []
+            "student_ids": [],
+            "is_elevated_admin": False
         },
         
         # TEACHERS
