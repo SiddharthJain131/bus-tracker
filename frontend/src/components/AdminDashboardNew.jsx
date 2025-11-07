@@ -833,6 +833,15 @@ export default function AdminDashboardNew({ user, onLogout }) {
         }}
       />
 
+      <RouteDetailModal
+        route={selectedRoute}
+        open={showRouteDetail}
+        onClose={() => {
+          setShowRouteDetail(false);
+          setSelectedRoute(null);
+        }}
+      />
+
       <EditStudentModalEnhanced
         student={editStudent}
         open={showEditStudent}
