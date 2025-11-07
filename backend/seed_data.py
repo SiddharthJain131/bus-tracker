@@ -386,7 +386,8 @@ async def seed_data():
             "address": "123 Main St, San Francisco, CA 94102",
             "assigned_class": None,
             "assigned_section": None,
-            "student_ids": [student_ids[0]]
+            "student_ids": [student_ids[0]],
+            "is_elevated_admin": False
         },
         {
             "user_id": parent_ids[1],
@@ -399,7 +400,8 @@ async def seed_data():
             "address": "456 Oak Ave, San Francisco, CA 94103",
             "assigned_class": None,
             "assigned_section": None,
-            "student_ids": [student_ids[1]]
+            "student_ids": [student_ids[1]],
+            "is_elevated_admin": False
         },
         {
             "user_id": parent_ids[2],
