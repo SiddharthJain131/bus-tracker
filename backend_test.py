@@ -2056,8 +2056,20 @@ def main():
         
         tester.test_logout()
     
-    # Phase 4: Edge Cases and Missing Endpoints
-    print(f"\n⚠️  PHASE 4: EDGE CASES & MISSING ENDPOINTS")
+    # Phase 4: Dependency-Aware Delete Safeguards Testing
+    print(f"\n🔒 PHASE 4: DEPENDENCY-AWARE DELETE SAFEGUARDS TESTING")
+    print("-" * 50)
+    
+    # Login as admin for dependency tests
+    if tester.test_login("admin@school.com", "password"):
+        dependency_success = tester.test_dependency_aware_delete_safeguards()
+        tester.test_logout()
+        
+        if not dependency_success:
+            print("   ❌ Dependency-aware delete safeguards have issues")
+    
+    # Phase 5: Edge Cases and Missing Endpoints
+    print(f"\n⚠️  PHASE 5: EDGE CASES & MISSING ENDPOINTS")
     print("-" * 50)
     
     tester.test_missing_endpoints()
