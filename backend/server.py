@@ -692,32 +692,49 @@ async def delete_user(user_id: str, current_user: dict = Depends(get_current_use
     if user_id == current_user['user_id']:
         raise HTTPException(status_code=403, detail="Cannot delete your own account")
     
-    # Cannot delete another admin
+    # Check if user exists
     target_user = await db.users.find_one({"user_id": user_id}, {"_id": 0})
     if not target_user:
         raise HTTPException(status_code=404, detail="User not found")
     
+    # Cannot delete another admin
     if target_user['role'] == 'admin':
         raise HTTPException(status_code=403, detail="Cannot delete another admin")
+    
+    # Count dependent records before deletion
+    affected_students = 0
+    affected_notifications = 0
+    
+    # If user is a parent or teacher, check and update student references
+    if target_user['role'] == 'parent':
+        affected_students = await db.students.count_documents({"parent_id": user_id})
+        if affected_students > 0:
+            raise HTTPException(
+                status_code=409,
+                detail=f"Cannot delete parent. {affected_students} student(s) are linked to this parent. Please reassign or delete students first."
+            )
+    elif target_user['role'] == 'teacher':
+        affected_students = await db.students.count_documents({"teacher_id": user_id})
+        if affected_students > 0:
+            raise HTTPException(
+                status_code=409,
+                detail=f"Cannot delete teacher. {affected_students} student(s) are assigned to this teacher. Please reassign students first."
+            )
+    
+    # Cascade delete notifications for this user
+    affected_notifications = await db.notifications.count_documents({"user_id": user_id})
+    if affected_notifications > 0:
+        await db.notifications.delete_many({"user_id": user_id})
     
     # Delete the user
     await db.users.delete_one({"user_id": user_id})
     
-    # If user is a parent or teacher, update student references
-    if target_user['role'] == 'parent':
-        # Set parent_id to null for students linked to this parent
-        await db.students.update_many(
-            {"parent_id": user_id},
-            {"$set": {"parent_id": None}}
-        )
-    elif target_user['role'] == 'teacher':
-        # Set teacher_id to null for students linked to this teacher
-        await db.students.update_many(
-            {"teacher_id": user_id},
-            {"$set": {"teacher_id": None}}
-        )
-    
-    return {"status": "deleted"}
+    return {
+        "status": "deleted",
+        "user_id": user_id,
+        "role": target_user['role'],
+        "cascaded_notifications": affected_notifications
+    }
 
 
 # Bus APIs
