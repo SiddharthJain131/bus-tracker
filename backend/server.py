@@ -48,6 +48,7 @@ class User(BaseModel):
     assigned_section: Optional[str] = None
     address: Optional[str] = None
     student_ids: Optional[List[str]] = []
+    is_elevated_admin: bool = False
 
 class UserUpdate(BaseModel):
     name: Optional[str] = None
