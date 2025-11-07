@@ -132,6 +132,63 @@ export default function AdminDashboardNew({ user, onLogout }) {
     setShowBusDetail(true);
   };
 
+  const handleEditBus = (bus) => {
+    setEditBus(bus);
+    setShowEditBus(true);
+  };
+
+  const handleEditRoute = (route) => {
+    setEditRoute(route);
+    setShowEditRoute(true);
+  };
+
+  const handleDelete = (item, type) => {
+    setDeleteItem({ ...item, type });
+    setShowDeleteConfirm(true);
+  };
+
+  const confirmDelete = async () => {
+    if (!deleteItem) return;
+    
+    setIsDeleting(true);
+    try {
+      let endpoint = '';
+      let successMessage = '';
+      
+      switch (deleteItem.type) {
+        case 'student':
+          endpoint = `${API}/students/${deleteItem.student_id}`;
+          successMessage = `Student ${deleteItem.name} deleted successfully`;
+          break;
+        case 'user':
+          endpoint = `${API}/users/${deleteItem.user_id}`;
+          successMessage = `User ${deleteItem.name} deleted successfully`;
+          break;
+        case 'bus':
+          endpoint = `${API}/buses/${deleteItem.bus_id}`;
+          successMessage = `Bus ${deleteItem.bus_number} deleted successfully`;
+          break;
+        case 'route':
+          endpoint = `${API}/routes/${deleteItem.route_id}`;
+          successMessage = `Route ${deleteItem.route_name} deleted successfully`;
+          break;
+        default:
+          throw new Error('Invalid delete type');
+      }
+      
+      await axios.delete(endpoint);
+      toast.success(successMessage);
+      fetchAllData();
+      setShowDeleteConfirm(false);
+      setDeleteItem(null);
+    } catch (error) {
+      console.error('Delete error:', error);
+      toast.error(error.response?.data?.detail || 'Failed to delete item');
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
   // Filter functions
   const filteredStudents = students.filter(s =>
     s.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
