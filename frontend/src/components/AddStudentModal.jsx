@@ -440,7 +440,7 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="select" id="select" />
                   <Label htmlFor="select" className="cursor-pointer font-normal">
-                    Select Existing Parent (unlinked only)
+                    Select Existing Parent
                   </Label>
                 </div>
               </RadioGroup>
