@@ -107,7 +107,7 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
       photo: '',
       address: ''
     });
-    setAssignedTeacher(null);
+    setStops([]);
   };
 
   const handleNext = () => {
