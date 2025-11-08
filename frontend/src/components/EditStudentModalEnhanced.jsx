@@ -212,7 +212,7 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
             </div>
 
             <div>
-              <Label>Parent</Label>
+              <Label>Parent *</Label>
               <select
                 value={formData.parent_id}
                 onChange={(e) => handleChange('parent_id', e.target.value)}
@@ -226,21 +226,7 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
             </div>
 
             <div>
-              <Label>Teacher</Label>
-              <select
-                value={formData.teacher_id}
-                onChange={(e) => handleChange('teacher_id', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="">Select Teacher</option>
-                {teachers.map(t => (
-                  <option key={t.user_id} value={t.user_id}>{t.name} ({t.email})</option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <Label>Bus</Label>
+              <Label>Bus *</Label>
               <select
                 value={formData.bus_id}
                 onChange={(e) => handleChange('bus_id', e.target.value)}
@@ -251,6 +237,32 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
                   <option key={b.bus_id} value={b.bus_id}>Bus {b.bus_number}</option>
                 ))}
               </select>
+            </div>
+
+            <div>
+              <Label>Stop *</Label>
+              <select
+                value={formData.stop_id}
+                onChange={(e) => handleChange('stop_id', e.target.value)}
+                disabled={!formData.bus_id || loadingStops}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+              >
+                <option value="">
+                  {!formData.bus_id 
+                    ? "Select bus first" 
+                    : loadingStops 
+                    ? "Loading stops..." 
+                    : "Select stop"}
+                </option>
+                {stops.map(s => (
+                  <option key={s.stop_id} value={s.stop_id}>{s.stop_name}</option>
+                ))}
+              </select>
+              {formData.bus_id && stops.length === 0 && !loadingStops && (
+                <p className="text-xs text-amber-600 mt-1">
+                  ⚠️ Selected bus has no route stops configured
+                </p>
+              )}
             </div>
 
             <div>
