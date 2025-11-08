@@ -416,64 +416,15 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
               </div>
             </div>
 
-            <div className="flex justify-between gap-3 pt-4">
-              <Button variant="outline" onClick={handleBack}>
-                <ArrowLeft className="w-4 h-4 mr-2" /> Back
-              </Button>
-              <div className="flex gap-3">
-                <Button variant="outline" onClick={onClose}>
-                  Cancel
-                </Button>
-                <Button onClick={handleNext} className="bg-violet-600 hover:bg-violet-700">
-                  Next <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Step 3: Teacher Assignment */}
-        {step === 3 && (
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900">Teacher Assignment</h3>
-            
-            <div className="bg-gradient-to-br from-violet-50 to-purple-50 p-6 rounded-lg">
-              <h4 className="font-semibold text-gray-900 mb-3">Assigned Class Teacher</h4>
-              
-              {assignedTeacher ? (
-                <div className="bg-white p-4 rounded-lg border-2 border-violet-200">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-violet-100 rounded-full flex items-center justify-center">
-                      <UserPlus className="w-6 h-6 text-violet-600" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-gray-900">{assignedTeacher.name}</p>
-                      <p className="text-sm text-gray-600">{assignedTeacher.email}</p>
-                      <p className="text-sm text-gray-600">
-                        {studentData.class_name} - {studentData.section}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-lg">
-                  <p className="text-sm text-yellow-800">
-                    ⚠️ No teacher assigned to {studentData.class_name} - {studentData.section} yet.
-                  </p>
-                  <p className="text-xs text-yellow-700 mt-1">
-                    Student will be created without a teacher. You can assign a teacher later.
-                  </p>
-                </div>
-              )}
-            </div>
-
-            <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg">
+            {/* Summary Preview */}
+            <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg mt-4">
               <h4 className="font-semibold text-blue-900 mb-2">Summary</h4>
               <ul className="text-sm text-blue-800 space-y-1">
                 <li>• Student: {studentData.name} (Roll #{studentData.roll_number})</li>
                 <li>• Class: {studentData.class_name} - {studentData.section}</li>
-                <li>• Parent: {parentData.name} ({parentData.email})</li>
-                <li>• Teacher: {assignedTeacher ? assignedTeacher.name : 'Not assigned'}</li>
+                <li>• Bus: {buses.find(b => b.bus_id === studentData.bus_id)?.bus_number || 'N/A'}</li>
+                <li>• Stop: {stops.find(s => s.stop_id === studentData.stop_id)?.stop_name || 'N/A'}</li>
+                <li>• Parent: {parentData.name || 'Not entered'} ({parentData.email || 'Not entered'})</li>
               </ul>
             </div>
 
