@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Dependency-Aware Update/Delete Safety Test — Bus Tracker Project. Analyze database schema and data relationships, run dependency-aware Update/Delete Caution Test to ensure all linked entities behave correctly. Define and document entity dependencies. Tasks: Parse data model, run update/delete caution tests, implement dependency safeguards, and document dependencies and safe deletion rules."
+user_problem_statement: "Auto Seed Initialization & Student Form Update — Bus Tracker Project. Configure backend to automatically run seed script on server startup when database is empty. Update Student Add/Edit modals to remove teacher selection field and add dynamic Stop field based on bus selection. Tasks: Auto-seeding on startup, remove teacher field from forms, add required Stop dropdown (dynamic based on bus), update backend with new endpoint for bus stops."
 
 backend:
   - task: "Authentication APIs (login, logout, me)"
