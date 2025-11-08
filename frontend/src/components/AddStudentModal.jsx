@@ -295,42 +295,29 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
                 />
               </div>
               
-              <div>
-                <Label>Class *</Label>
-                <Select
-                  value={studentData.class_name}
-                  onValueChange={(value) => setStudentData({ ...studentData, class_name: value })}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select class" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {CLASS_OPTIONS.map(option => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              
-              <div>
-                <Label>Section *</Label>
-                <Select
-                  value={studentData.section}
-                  onValueChange={(value) => setStudentData({ ...studentData, section: value })}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select section" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {SECTION_OPTIONS.map(option => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+              <div className="col-span-2">
+                <Label>Class and Section *</Label>
+                <Input
+                  value={studentData.class_section}
+                  onChange={(e) => handleClassSectionChange(e.target.value)}
+                  placeholder="Enter Class and Section (e.g., 5A)"
+                  list="class-section-suggestions"
+                />
+                <datalist id="class-section-suggestions">
+                  {classSectionSuggestions.map((suggestion, idx) => (
+                    <option key={idx} value={suggestion} />
+                  ))}
+                </datalist>
+                {studentData.class_section && studentData.class_name && studentData.section && (
+                  <p className="text-xs text-green-600 mt-1">
+                    ✓ Parsed as: Class {studentData.class_name}, Section {studentData.section}
+                  </p>
+                )}
+                {studentData.class_section && (!studentData.class_name || !studentData.section) && (
+                  <p className="text-xs text-amber-600 mt-1">
+                    ⚠️ Please use format like "5A" or "5-A"
+                  </p>
+                )}
               </div>
               
               <div>
