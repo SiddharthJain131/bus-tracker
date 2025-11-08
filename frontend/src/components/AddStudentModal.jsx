@@ -103,6 +103,7 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
     setStudentData({
       name: '',
       roll_number: '',
+      class_section: '',
       class_name: '',
       section: '',
       bus_id: '',
@@ -111,6 +112,8 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
       emergency_contact: '',
       remarks: ''
     });
+    setParentMode('create');
+    setSelectedParentId('');
     setParentData({
       name: '',
       phone: '',
@@ -119,6 +122,38 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
       address: ''
     });
     setStops([]);
+  };
+
+  // Parse class-section input (e.g., "5A", "5-A", "Class 5 A", "Grade 5 A")
+  const parseClassSection = (input) => {
+    if (!input) return { class_name: '', section: '' };
+    
+    // Remove common prefixes
+    const cleaned = input.replace(/^(class|grade)\s*/i, '').trim();
+    
+    // Match patterns like "5A", "5-A", "5 A"
+    const match = cleaned.match(/^(\d+)\s*[-\s]*([A-Za-z])$/i);
+    
+    if (match) {
+      return {
+        class_name: match[1],  // Just the number
+        section: match[2].toUpperCase()
+      };
+    }
+    
+    return { class_name: '', section: '' };
+  };
+
+  const handleClassSectionChange = (value) => {
+    setStudentData(prev => {
+      const parsed = parseClassSection(value);
+      return {
+        ...prev,
+        class_section: value,
+        class_name: parsed.class_name,
+        section: parsed.section
+      };
+    });
   };
 
   const handleNext = () => {
