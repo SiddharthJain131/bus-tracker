@@ -488,6 +488,47 @@ async def get_students(current_user: dict = Depends(get_current_user)):
     
     return students
 
+@api_router.get("/students/class-sections")
+async def get_class_sections():
+    """Get all unique class-section combinations for autocomplete"""
+    try:
+        # Get distinct combinations of class_name and section from students collection
+        pipeline = [
+            {
+                "$group": {
+                    "_id": {
+                        "class_name": "$class_name",
+                        "section": "$section"
+                    }
+                }
+            },
+            {
+                "$project": {
+                    "_id": 0,
+                    "class_name": "$_id.class_name",
+                    "section": "$_id.section"
+                }
+            },
+            {
+                "$sort": {"class_name": 1, "section": 1}
+            }
+        ]
+        
+        combinations = await db.students.aggregate(pipeline).to_list(length=None)
+        
+        # Format as "5A" style
+        formatted = []
+        for combo in combinations:
+            if combo.get('class_name') and combo.get('section'):
+                # Extract just the number from class_name (e.g., "Grade 5" -> "5")
+                class_num = combo['class_name'].replace('Grade', '').replace('Class', '').strip()
+                formatted.append(f"{class_num}{combo['section']}")
+        
+        return formatted
+    except Exception as e:
+        print(f"Error fetching class-sections: {str(e)}")
+        return []
+
 @api_router.get("/students/{student_id}")
 async def get_student(student_id: str, current_user: dict = Depends(get_current_user)):
     student = await db.students.find_one({"student_id": student_id}, {"_id": 0})
