@@ -223,7 +223,12 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
         teacher_id: null  // No longer assigned via UI
       };
 
-      await axios.post(`${API}/students`, studentPayload);
+      const studentResponse = await axios.post(`${API}/students`, studentPayload);
+
+      // Check for capacity warning
+      if (studentResponse.data?.capacity_warning) {
+        toast.warning(studentResponse.data.capacity_warning, { duration: 6000 });
+      }
 
       toast.success(parentMode === 'create' ? 'Student and Parent created successfully!' : 'Student created successfully!');
       onSuccess();
