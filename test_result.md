@@ -441,6 +441,18 @@ backend:
         agent: "testing"
         comment: "✅ PASSED - All SCENARIO B tests successful (3/3). B.1 - Bus with Route: GET /api/buses/{bus_id}/stops returns array of 5 stops with correct structure (stop_id, stop_name, lat, lon, order_index). Stops properly sorted by order_index (0,1,2,3,4). Tested with BUS-001 which has route_id. B.2 - Bus without Route: Created test bus TEST-999 with route_id=null. Endpoint correctly returns empty array []. Test bus cleaned up after test. B.3 - Non-existent Bus: GET /api/buses/invalid-bus-id-12345/stops correctly returns 404 status with error message 'Bus not found'. All edge cases handled properly."
 
+  - task: "Composite Unique Constraint - Student (class_name, section, roll_number)"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Added compound unique index and validation for student uniqueness. BACKEND CHANGES: 1) Created MongoDB compound unique index on (class_name, section, roll_number) in startup event. Index name: 'unique_class_section_roll'. 2) Updated Student model: roll_number, class_name, section now required (removed Optional). 3) Enhanced PUT /api/students/{student_id} with uniqueness validation: checks if another student has same roll_number+class+section combination (excluding current student). Returns 400 error with message 'A student with this roll number already exists in class {class}{section}.' 4) POST endpoint already had basic validation, now enforced at DB level. 5) Added GET /api/students/class-sections endpoint returning existing class-section combinations for autocomplete. 6) Added GET /api/parents/unlinked endpoint returning parents with no student_ids. 7) Enhanced GET /api/students/{student_id} to include stop_name enrichment. Ready for testing: Create duplicate students (should fail), update to duplicate roll (should fail), create different class same roll (should succeed), autocomplete endpoints."
+
   - task: "Holiday CRUD Feature - Admin Dashboard"
     implemented: true
     working: true
