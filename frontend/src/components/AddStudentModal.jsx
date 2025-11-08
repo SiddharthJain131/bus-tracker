@@ -161,7 +161,7 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
     if (step === 1) {
       if (!studentData.name || !studentData.roll_number || !studentData.class_name || 
           !studentData.section || !studentData.bus_id || !studentData.stop_id) {
-        toast.error('Please fill in all required fields (including Stop)');
+        toast.error('Please fill in all required fields (Name, Roll Number, Class-Section, Bus, Stop)');
         return;
       }
     }
