@@ -225,7 +225,7 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
             </div>
 
             <div>
-              <Label>Roll Number</Label>
+              <Label>Roll Number *</Label>
               <Input
                 value={formData.roll_number}
                 onChange={(e) => handleChange('roll_number', e.target.value)}
@@ -242,56 +242,49 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
               />
             </div>
 
-            <div>
-              <Label>Class</Label>
-              <Select
-                value={formData.class_name}
-                onValueChange={(value) => handleChange('class_name', value)}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select class" />
-                </SelectTrigger>
-                <SelectContent>
-                  {CLASS_OPTIONS.map(option => (
-                    <SelectItem key={option.value} value={option.value}>
-                      {option.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div>
-              <Label>Section</Label>
-              <Select
-                value={formData.section}
-                onValueChange={(value) => handleChange('section', value)}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select section" />
-                </SelectTrigger>
-                <SelectContent>
-                  {SECTION_OPTIONS.map(option => (
-                    <SelectItem key={option.value} value={option.value}>
-                      {option.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div>
-              <Label>Parent *</Label>
-              <select
-                value={formData.parent_id}
-                onChange={(e) => handleChange('parent_id', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="">Select Parent</option>
-                {parents.map(p => (
-                  <option key={p.user_id} value={p.user_id}>{p.name} ({p.email})</option>
+            <div className="md:col-span-2">
+              <Label>Class and Section *</Label>
+              <Input
+                value={formData.class_section}
+                onChange={(e) => handleChange('class_section', e.target.value)}
+                placeholder="Enter Class and Section (e.g., 5A)"
+                list="edit-class-section-suggestions"
+              />
+              <datalist id="edit-class-section-suggestions">
+                {classSectionSuggestions.map((suggestion, idx) => (
+                  <option key={idx} value={suggestion} />
                 ))}
-              </select>
+              </datalist>
+              {formData.class_section && formData.class_name && formData.section && (
+                <p className="text-xs text-green-600 mt-1">
+                  ✓ Parsed as: Class {formData.class_name}, Section {formData.section}
+                </p>
+              )}
+              {formData.class_section && (!formData.class_name || !formData.section) && (
+                <p className="text-xs text-amber-600 mt-1">
+                  ⚠️ Please use format like "5A" or "5-A"
+                </p>
+              )}
+            </div>
+
+            <div className="md:col-span-2">
+              <Label>Parent *</Label>
+              <Input
+                value={formData.parent_search}
+                onChange={(e) => handleChange('parent_search', e.target.value)}
+                placeholder="Search parent by name or email"
+                list="parent-suggestions"
+              />
+              <datalist id="parent-suggestions">
+                {parents.map(p => (
+                  <option key={p.user_id} value={`${p.name} (${p.email})`} />
+                ))}
+              </datalist>
+              {formData.parent_id && (
+                <p className="text-xs text-green-600 mt-1">
+                  ✓ Parent selected: {parents.find(p => p.user_id === formData.parent_id)?.name}
+                </p>
+              )}
             </div>
 
             <div>
