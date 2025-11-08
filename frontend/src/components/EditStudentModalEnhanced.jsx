@@ -6,7 +6,6 @@ import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { toast } from 'sonner';
-import { CLASS_OPTIONS, SECTION_OPTIONS } from '../constants/options';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -16,9 +15,11 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
     name: '',
     roll_number: '',
     phone: '',
+    class_section: '',  // Combined field for display
     class_name: '',
     section: '',
     parent_id: '',
+    parent_search: '',  // For searchable parent input
     bus_id: '',
     stop_id: '',
     emergency_contact: '',
@@ -29,6 +30,7 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
   const [buses, setBuses] = useState([]);
   const [stops, setStops] = useState([]);
   const [loadingStops, setLoadingStops] = useState(false);
+  const [classSectionSuggestions, setClassSectionSuggestions] = useState([]);
 
   useEffect(() => {
     if (open && student) {
