@@ -51,6 +51,7 @@ export default function TeacherDashboardNew({ user, onLogout }) {
   const [showStudentDetail, setShowStudentDetail] = useState(false);
   const [showAttendanceModal, setShowAttendanceModal] = useState(false);
   const [attendanceStudentId, setAttendanceStudentId] = useState(null);
+  const [attendanceStudentName, setAttendanceStudentName] = useState('');
 
   useEffect(() => {
     fetchAllData();
