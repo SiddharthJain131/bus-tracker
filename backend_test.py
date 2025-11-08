@@ -56,114 +56,32 @@ def print_result(passed: bool, message: str):
     status = "✅ PASS" if passed else "❌ FAIL"
     print(f"{status}: {message}")
 
-def test_group_1_elevated_admin_permissions():
-    """Test Group 1: Elevated Admin Permissions"""
-    print_test_header("GROUP 1: ELEVATED ADMIN PERMISSIONS")
+def test_scenario_a_auto_seeding():
+    """SCENARIO A: Auto-Seeding Verification"""
+    print_test_header("SCENARIO A: AUTO-SEEDING VERIFICATION")
     
-    session = TestSession()
     results = []
     
-    # Test 1.1: Login as elevated admin
-    print("\n[Test 1.1] Login as elevated admin (admin@school.com)")
-    response = session.login("admin@school.com", "password")
-    
-    if response.status_code == 200:
-        data = response.json()
-        has_field = "is_elevated_admin" in data
-        is_true = data.get("is_elevated_admin") == True
+    # Test A.1: Check backend logs for seeding messages
+    print("\n[Test A.1] Check backend logs for auto-seeding messages")
+    try:
+        import subprocess
+        log_output = subprocess.check_output(
+            "tail -n 100 /var/log/supervisor/backend.out.log | grep -i 'seed'",
+            shell=True,
+            text=True
+        )
         
-        if has_field and is_true:
-            print_result(True, f"Login successful. is_elevated_admin: {data.get('is_elevated_admin')}")
-            results.append(("Test 1.1 - Login response has is_elevated_admin=true", True))
+        if "Auto-seeding completed successfully" in log_output or "Database already populated" in log_output:
+            print_result(True, "Auto-seeding logs found in backend output")
+            print(f"Log excerpt:\n{log_output[:500]}")
+            results.append(("Test A.1 - Auto-seeding logs present", True))
         else:
-            print_result(False, f"Login response missing or incorrect is_elevated_admin field. Got: {data.get('is_elevated_admin')}")
-            results.append(("Test 1.1 - Login response has is_elevated_admin=true", False))
-    else:
-        print_result(False, f"Login failed with status {response.status_code}")
-        results.append(("Test 1.1 - Login response has is_elevated_admin=true", False))
-        return results
-    
-    # Test 1.2: Verify /api/auth/me returns is_elevated_admin
-    print("\n[Test 1.2] GET /api/auth/me returns is_elevated_admin")
-    response = session.get("/auth/me")
-    
-    if response.status_code == 200:
-        data = response.json()
-        has_field = "is_elevated_admin" in data
-        is_true = data.get("is_elevated_admin") == True
-        
-        if has_field and is_true:
-            print_result(True, f"GET /api/auth/me returns is_elevated_admin: {data.get('is_elevated_admin')}")
-            results.append(("Test 1.2 - GET /api/auth/me returns is_elevated_admin=true", True))
-        else:
-            print_result(False, f"GET /api/auth/me missing or incorrect is_elevated_admin. Got: {data.get('is_elevated_admin')}")
-            results.append(("Test 1.2 - GET /api/auth/me returns is_elevated_admin=true", False))
-    else:
-        print_result(False, f"GET /api/auth/me failed with status {response.status_code}")
-        results.append(("Test 1.2 - GET /api/auth/me returns is_elevated_admin=true", False))
-    
-    # Test 1.3: Get admin2 user_id
-    print("\n[Test 1.3] Get admin2@school.com user_id for editing test")
-    response = session.get("/users")
-    
-    admin2_user_id = None
-    if response.status_code == 200:
-        users = response.json()
-        for user in users:
-            if user.get("email") == "admin2@school.com":
-                admin2_user_id = user.get("user_id")
-                print(f"Found admin2 user_id: {admin2_user_id}")
-                break
-    
-    if not admin2_user_id:
-        print_result(False, "Could not find admin2@school.com user")
-        results.append(("Test 1.3 - Edit another admin as elevated admin", False))
-        results.append(("Test 1.4 - Delete another admin as elevated admin", False))
-        return results
-    
-    # Test 1.4: Edit another admin (admin2) as elevated admin
-    print("\n[Test 1.4] PUT /api/users/{admin2_user_id} - Edit admin2 as elevated admin")
-    response = session.put(f"/users/{admin2_user_id}", {"name": "Patricia Williams Updated"})
-    
-    if response.status_code == 200:
-        print_result(True, f"Successfully edited admin2 user. Status: {response.status_code}")
-        results.append(("Test 1.4 - Edit another admin as elevated admin", True))
-        
-        # Revert the change
-        session.put(f"/users/{admin2_user_id}", {"name": "Patricia Williams"})
-    else:
-        print_result(False, f"Failed to edit admin2. Status: {response.status_code}, Response: {response.text}")
-        results.append(("Test 1.4 - Edit another admin as elevated admin", False))
-    
-    # Test 1.5: Create a temporary admin for deletion test
-    print("\n[Test 1.5] Create temporary admin for deletion test")
-    response = session.post("/users", {
-        "email": "temp_admin@school.com",
-        "password": "password",
-        "role": "admin",
-        "name": "Temp Admin",
-        "is_elevated_admin": False
-    })
-    
-    temp_admin_id = None
-    if response.status_code == 200:
-        temp_admin_id = response.json().get("user_id")
-        print(f"Created temp admin with user_id: {temp_admin_id}")
-    else:
-        print_result(False, f"Failed to create temp admin. Status: {response.status_code}")
-        results.append(("Test 1.5 - Delete another admin as elevated admin", False))
-        return results
-    
-    # Test 1.6: Delete the temporary admin as elevated admin
-    print("\n[Test 1.6] DELETE /api/users/{temp_admin_id} - Delete temp admin as elevated admin")
-    response = session.delete(f"/users/{temp_admin_id}")
-    
-    if response.status_code == 200:
-        print_result(True, f"Successfully deleted temp admin. Status: {response.status_code}")
-        results.append(("Test 1.5 - Delete another admin as elevated admin", True))
-    else:
-        print_result(False, f"Failed to delete temp admin. Status: {response.status_code}, Response: {response.text}")
-        results.append(("Test 1.5 - Delete another admin as elevated admin", False))
+            print_result(False, "Auto-seeding logs not found")
+            results.append(("Test A.1 - Auto-seeding logs present", False))
+    except Exception as e:
+        print_result(False, f"Failed to check logs: {str(e)}")
+        results.append(("Test A.1 - Auto-seeding logs present", False))
     
     return results
 
