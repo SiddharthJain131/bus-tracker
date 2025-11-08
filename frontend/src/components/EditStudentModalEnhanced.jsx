@@ -39,15 +39,27 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
         class_name: student.class_name || '',
         section: student.section || '',
         parent_id: student.parent_id || '',
-        teacher_id: student.teacher_id || '',
         bus_id: student.bus_id || '',
         stop_id: student.stop_id || '',
         emergency_contact: student.emergency_contact || '',
         remarks: student.remarks || ''
       });
       fetchDropdownData();
+      // Fetch stops if bus is already selected
+      if (student.bus_id) {
+        fetchStopsForBus(student.bus_id);
+      }
     }
   }, [open, student]);
+
+  // Fetch stops when bus changes
+  useEffect(() => {
+    if (formData.bus_id && open) {
+      fetchStopsForBus(formData.bus_id);
+    } else {
+      setStops([]);
+    }
+  }, [formData.bus_id, open]);
 
   const fetchDropdownData = async () => {
     try {
@@ -57,10 +69,26 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
       ]);
       
       setParents(usersRes.data.filter(u => u.role === 'parent'));
-      setTeachers(usersRes.data.filter(u => u.role === 'teacher'));
       setBuses(busesRes.data);
     } catch (error) {
       console.error('Failed to load dropdown data:', error);
+    }
+  };
+
+  const fetchStopsForBus = async (busId) => {
+    setLoadingStops(true);
+    try {
+      const response = await axios.get(`${API}/buses/${busId}/stops`);
+      setStops(response.data);
+      if (response.data.length === 0) {
+        toast.info('No stops available for this bus route');
+      }
+    } catch (error) {
+      console.error('Failed to load stops:', error);
+      toast.error('Failed to load stops for selected bus');
+      setStops([]);
+    } finally {
+      setLoadingStops(false);
     }
   };
 
