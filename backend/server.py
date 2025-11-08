@@ -1130,6 +1130,32 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+@app.on_event("startup")
+async def startup_db_seed():
+    """Auto-seed database on first startup if collections are empty"""
+    try:
+        # Check if core collections are empty
+        users_count = await db.users.count_documents({})
+        students_count = await db.students.count_documents({})
+        buses_count = await db.buses.count_documents({})
+        routes_count = await db.routes.count_documents({})
+        
+        # If all core collections are empty, run seeding
+        if users_count == 0 and students_count == 0 and buses_count == 0 and routes_count == 0:
+            print("🪴 Auto-seeding database with initial demo data...")
+            
+            # Import and run seed function
+            from seed_data import seed_data
+            await seed_data()
+            
+            print("✅ Auto-seeding completed successfully!")
+        else:
+            print("✅ Database already populated, skipping seeding.")
+            print(f"   Current data: {users_count} users, {students_count} students, {buses_count} buses, {routes_count} routes")
+    except Exception as e:
+        print(f"⚠️ Auto-seeding skipped due to error: {str(e)}")
+        print("   You can manually run seeding with: cd /app/backend && python seed_data.py")
+
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
