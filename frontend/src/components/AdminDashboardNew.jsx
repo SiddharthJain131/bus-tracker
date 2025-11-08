@@ -288,10 +288,6 @@ export default function AdminDashboardNew({ user, onLogout }) {
           endpoint = `${API}/routes/${deleteItem.route_id}`;
           successMessage = `Route ${deleteItem.route_name} deleted successfully`;
           break;
-        case 'holiday':
-          endpoint = `${API}/admin/holidays/${deleteItem.holiday_id}`;
-          successMessage = `Holiday "${deleteItem.name}" deleted successfully`;
-          break;
         default:
           throw new Error('Invalid delete type');
       }
