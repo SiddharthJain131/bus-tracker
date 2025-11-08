@@ -648,6 +648,43 @@ async def update_student(student_id: str, updates: StudentUpdate, current_user: 
                 detail=f"A student with this roll number already exists in class {final_class_name}{final_section}."
             )
     
+    # Check bus capacity if bus is being changed
+    capacity_warning = None
+    if 'bus_id' in update_data and update_data['bus_id'] != old_student.get('bus_id'):
+        new_bus_id = update_data['bus_id']
+        bus = await db.buses.find_one({"bus_id": new_bus_id}, {"_id": 0})
+        if bus:
+            # Count students currently on this bus (excluding current student)
+            current_count = await db.students.count_documents({
+                "bus_id": new_bus_id,
+                "student_id": {"$ne": student_id}
+            })
+            bus_capacity = bus.get('capacity', 0)
+            new_count = current_count + 1
+            
+            if new_count > bus_capacity:
+                capacity_warning = f"Warning: Bus {bus['bus_number']} capacity ({bus_capacity}) will be exceeded. Current: {current_count}, After: {new_count}"
+                print(f"⚠️ CAPACITY WARNING: {capacity_warning}")
+    
+    # Handle parent change - update both old and new parent's student_ids
+    if 'parent_id' in update_data and update_data['parent_id'] != old_student.get('parent_id'):
+        old_parent_id = old_student.get('parent_id')
+        new_parent_id = update_data['parent_id']
+        
+        # Remove from old parent's student_ids
+        if old_parent_id:
+            await db.users.update_one(
+                {"user_id": old_parent_id},
+                {"$pull": {"student_ids": student_id}}
+            )
+        
+        # Add to new parent's student_ids (supports multiple students per parent)
+        if new_parent_id:
+            await db.users.update_one(
+                {"user_id": new_parent_id},
+                {"$addToSet": {"student_ids": student_id}}
+            )
+    
     await db.students.update_one(
         {"student_id": student_id},
         {"$set": update_data}
@@ -655,7 +692,9 @@ async def update_student(student_id: str, updates: StudentUpdate, current_user: 
     
     # Send email notification to parent if admin updated
     if current_user['role'] == 'admin':
-        parent = await db.users.find_one({"user_id": old_student['parent_id']}, {"_id": 0})
+        # Get current parent (after update)
+        updated_student = await db.students.find_one({"student_id": student_id}, {"_id": 0})
+        parent = await db.users.find_one({"user_id": updated_student['parent_id']}, {"_id": 0})
         if parent:
             changed_fields = []
             for key, value in update_data.items():
@@ -673,7 +712,12 @@ async def update_student(student_id: str, updates: StudentUpdate, current_user: 
                     student_id=student_id
                 )
     
-    return {"status": "updated"}
+    # Return response with capacity warning if applicable
+    response = {"status": "updated"}
+    if capacity_warning:
+        response['capacity_warning'] = capacity_warning
+    
+    return response
 
 @api_router.delete("/students/{student_id}")
 async def delete_student(student_id: str, current_user: dict = Depends(get_current_user)):
