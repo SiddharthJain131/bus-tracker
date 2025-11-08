@@ -773,18 +773,95 @@ async def seed_data():
         },
         {
             "student_id": student_ids[14],
-            "name": "Amelia Hall",
+            "name": "Mia Hall",
             "roll_number": "G4A-005",
             "phone": "+1-555-4015",
             "photo": None,
             "class_name": "Grade 4",
             "section": "A",
-            "parent_id": parent_ids[14],
+            "parent_id": parent_ids[8],  # Matthew Lee's first child
             "teacher_id": teacher3_id,
             "bus_id": bus4_id,
             "stop_id": route4_stop_ids[3],
             "emergency_contact": "+1-555-9115",
             "remarks": "Library monitor"
+        },
+        
+        # Additional students to reach 20 total (demonstrating Many:1 parent relationship)
+        {
+            "student_id": student_ids[15],
+            "name": "Alexander Lee",
+            "roll_number": "G5A-006",
+            "phone": "+1-555-4016",
+            "photo": None,
+            "class_name": "Grade 5",
+            "section": "A",
+            "parent_id": parent_ids[8],  # Matthew Lee's second child
+            "teacher_id": teacher1_id,
+            "bus_id": bus1_id,
+            "stop_id": route1_stop_ids[0],
+            "emergency_contact": "+1-555-9116",
+            "remarks": "Science club member"
+        },
+        {
+            "student_id": student_ids[16],
+            "name": "Harper Harris",
+            "roll_number": "G6B-006",
+            "phone": "+1-555-4017",
+            "photo": None,
+            "class_name": "Grade 6",
+            "section": "B",
+            "parent_id": parent_ids[9],  # Jessica Harris's child
+            "teacher_id": teacher2_id,
+            "bus_id": bus3_id,
+            "stop_id": route3_stop_ids[3],
+            "emergency_contact": "+1-555-9117",
+            "remarks": "Drama club member"
+        },
+        {
+            "student_id": student_ids[17],
+            "name": "Evelyn Clark",
+            "roll_number": "G4A-006",
+            "phone": "+1-555-4018",
+            "photo": None,
+            "class_name": "Grade 4",
+            "section": "A",
+            "parent_id": parent_ids[10],  # Daniel Clark's first child
+            "teacher_id": teacher3_id,
+            "bus_id": bus2_id,
+            "stop_id": route2_stop_ids[1],
+            "emergency_contact": "+1-555-9118",
+            "remarks": "Math team member"
+        },
+        {
+            "student_id": student_ids[18],
+            "name": "Henry Clark",
+            "roll_number": "G5A-007",
+            "phone": "+1-555-4019",
+            "photo": None,
+            "class_name": "Grade 5",
+            "section": "A",
+            "parent_id": parent_ids[10],  # Daniel Clark's second child
+            "teacher_id": teacher1_id,
+            "bus_id": bus1_id,
+            "stop_id": route1_stop_ids[2],
+            "emergency_contact": "+1-555-9119",
+            "remarks": "Chess club captain"
+        },
+        {
+            "student_id": student_ids[19],
+            "name": "Sebastian Lewis",
+            "roll_number": "G6B-007",
+            "phone": "+1-555-4020",
+            "photo": None,
+            "class_name": "Grade 6",
+            "section": "B",
+            "parent_id": parent_ids[11],  # Lisa Lewis's child
+            "teacher_id": teacher2_id,
+            "bus_id": bus4_id,
+            "stop_id": route4_stop_ids[4],
+            "emergency_contact": "+1-555-9120",
+            "remarks": "Student council member"
         }
     ]
     
