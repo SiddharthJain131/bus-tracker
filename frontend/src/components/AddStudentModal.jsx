@@ -128,6 +128,12 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
   };
 
   const handleSubmit = async () => {
+    // Final validation
+    if (!parentData.name || !parentData.phone || !parentData.email) {
+      toast.error('Please fill in all required parent fields');
+      return;
+    }
+
     setLoading(true);
     try {
       // Step 1: Create parent account
@@ -141,11 +147,11 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
         address: parentData.address
       });
 
-      // Step 2: Create student with parent_id and teacher_id
+      // Step 2: Create student with parent_id (teacher_id removed from UI)
       const studentPayload = {
         ...studentData,
         parent_id: parentResponse.data.user_id,
-        teacher_id: assignedTeacher ? assignedTeacher.user_id : null
+        teacher_id: null  // No longer assigned via UI
       };
 
       await axios.post(`${API}/students`, studentPayload);
