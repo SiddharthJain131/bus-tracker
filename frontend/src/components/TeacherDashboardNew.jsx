@@ -449,6 +449,15 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                               >
                                 <Eye className="w-4 h-4" />
                               </Button>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => handleViewAttendance(student)}
+                                className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+                                title="View Attendance"
+                              >
+                                <Calendar className="w-4 h-4" />
+                              </Button>
                             </div>
                           </td>
                         </tr>
