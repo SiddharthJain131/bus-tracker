@@ -178,6 +178,7 @@ class ScanEventRequest(BaseModel):
     confidence: float
     lat: float
     lon: float
+    photo_url: Optional[str] = None  # Optional photo URL captured during scan
 
 class UpdateLocationRequest(BaseModel):
     bus_id: str
