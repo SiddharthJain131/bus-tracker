@@ -67,8 +67,14 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
 
   const fetchDropdownData = async () => {
     try {
-      const busesRes = await axios.get(`${API}/buses`);
+      const [busesRes, classSectionsRes, parentsRes] = await Promise.all([
+        axios.get(`${API}/buses`),
+        axios.get(`${API}/students/class-sections`),
+        axios.get(`${API}/parents/unlinked`)
+      ]);
       setBuses(busesRes.data);
+      setClassSectionSuggestions(classSectionsRes.data || []);
+      setUnlinkedParents(parentsRes.data || []);
     } catch (error) {
       console.error('Failed to load dropdown data:', error);
       toast.error('Failed to load form data');
