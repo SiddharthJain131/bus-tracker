@@ -97,15 +97,17 @@ export default function StudentDetailModal({ student, open, onClose, hideTeacher
                   </p>
                 </Card>
 
-                <Card className="p-4">
-                  <div className="flex items-center gap-3 mb-2">
-                    <Users className="w-5 h-5 text-blue-600" />
-                    <span className="text-sm font-medium text-gray-600">Teacher</span>
-                  </div>
-                  <p className="text-lg font-semibold text-gray-900">
-                    {studentDetails.teacher_name || 'Not Assigned'}
-                  </p>
-                </Card>
+                {!hideTeacherField && (
+                  <Card className="p-4">
+                    <div className="flex items-center gap-3 mb-2">
+                      <Users className="w-5 h-5 text-blue-600" />
+                      <span className="text-sm font-medium text-gray-600">Teacher</span>
+                    </div>
+                    <p className="text-lg font-semibold text-gray-900">
+                      {studentDetails.teacher_name || 'Not Assigned'}
+                    </p>
+                  </Card>
+                )}
 
                 <Card className="p-4">
                   <div className="flex items-center gap-3 mb-2">
