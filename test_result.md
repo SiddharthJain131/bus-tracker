@@ -243,7 +243,7 @@ backend:
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: "NA"
         agent: "main"
@@ -254,6 +254,9 @@ backend:
       - working: true
         agent: "testing"
         comment: "✅ ENHANCED ADMIN DASHBOARD VERIFICATION - GET /api/admin/holidays returns holidays list for dashboard overview. Admin-only access properly enforced (403 for non-admin). Holiday data ready for Enhanced Admin Dashboard display."
+      - working: "NA"
+        agent: "main"
+        comment: "UPDATED - Added optional 'description' field to Holiday model. Added PUT endpoint /api/admin/holidays/{holiday_id} for updating holidays (lines 990-1007). Endpoint supports updating name, date, and description with 404 check for non-existent holidays. Admin-only access enforced. Need to test all CRUD operations: GET (existing), POST (existing), PUT (new), DELETE (existing) with the new description field."
 
   - task: "Teacher and Parent specific endpoints"
     implemented: true
