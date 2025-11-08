@@ -534,7 +534,7 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
                 <li>• Parent: {
                   parentMode === 'create' 
                     ? `${parentData.name || 'Not entered'} (${parentData.email || 'Not entered'})` 
-                    : unlinkedParents.find(p => p.user_id === selectedParentId)?.name || 'Not selected'
+                    : allParents.find(p => p.user_id === selectedParentId)?.name || 'Not selected'
                 }</li>
               </ul>
             </div>
