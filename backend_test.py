@@ -222,65 +222,108 @@ def test_scenario_b_bus_stops_endpoint():
     
     return results
 
-def test_group_3_roll_number_data():
-    """Test Group 3: Roll Number Data"""
-    print_test_header("GROUP 3: ROLL NUMBER DATA")
+def test_scenario_c_student_creation_with_stop():
+    """SCENARIO C: Student Creation with Stop Field"""
+    print_test_header("SCENARIO C: STUDENT CREATION WITH STOP FIELD")
     
     session = TestSession()
     results = []
     
-    # Test 3.1: Login as teacher
-    print("\n[Test 3.1] Login as teacher (teacher@school.com)")
-    response = session.login("teacher@school.com", "password")
-    
+    # Login as admin
+    print("\n[Setup] Login as admin")
+    response = session.login("admin@school.com", "password")
     if response.status_code != 200:
-        print_result(False, f"Login failed with status {response.status_code}")
-        results.append(("Test 3.1 - Teacher login", False))
-        return results
+        print_result(False, "Admin login failed")
+        return [("Test C - Setup failed", False)]
     
-    print_result(True, "Teacher login successful")
-    results.append(("Test 3.1 - Teacher login", True))
+    # Get parent_id
+    print("\n[Setup] Get parent user")
+    response = session.get("/users")
+    parent_id = None
+    if response.status_code == 200:
+        users = response.json()
+        for user in users:
+            if user.get('role') == 'parent':
+                parent_id = user.get('user_id')
+                print(f"  Found parent: {user.get('email')} (ID: {parent_id})")
+                break
     
-    # Test 3.2: GET /api/teacher/students and verify roll_number field
-    print("\n[Test 3.2] GET /api/teacher/students - Verify roll_number field present")
-    response = session.get("/teacher/students")
+    if not parent_id:
+        print_result(False, "No parent found in database")
+        return [("Test C - Setup failed", False)]
+    
+    # Get bus_id and stop_id
+    print("\n[Setup] Get bus and stop")
+    response = session.get("/buses")
+    bus_id = None
+    stop_id = None
     
     if response.status_code == 200:
-        students = response.json()
+        buses = response.json()
+        for bus in buses:
+            if bus.get('route_id'):
+                bus_id = bus.get('bus_id')
+                print(f"  Found bus: {bus.get('bus_number')} (ID: {bus_id})")
+                
+                # Get stops for this bus
+                stops_response = session.get(f"/buses/{bus_id}/stops")
+                if stops_response.status_code == 200:
+                    stops = stops_response.json()
+                    if len(stops) > 0:
+                        stop_id = stops[0].get('stop_id')
+                        print(f"  Found stop: {stops[0].get('stop_name')} (ID: {stop_id})")
+                        break
+    
+    if not bus_id or not stop_id:
+        print_result(False, "No bus with stops found in database")
+        return [("Test C - Setup failed", False)]
+    
+    # Test C.1: Create student with stop_id and teacher_id=null
+    print("\n[Test C.1] POST /api/students - Create student with stop_id and teacher_id=null")
+    
+    student_data = {
+        "name": "Test Student Auto",
+        "roll_number": "TEST-001",
+        "class_name": "Grade 5",
+        "section": "A",
+        "parent_id": parent_id,
+        "teacher_id": None,
+        "bus_id": bus_id,
+        "stop_id": stop_id,
+        "phone": "+1-555-1234",
+        "emergency_contact": "+1-555-5678"
+    }
+    
+    response = session.post("/students", student_data)
+    
+    if response.status_code == 200:
+        created_student = response.json()
+        student_id = created_student.get('student_id')
         
-        if len(students) == 0:
-            print_result(False, "No students returned for teacher")
-            results.append(("Test 3.2 - Roll number field present in teacher students", False))
-            return results
+        # Verify fields
+        has_stop_id = created_student.get('stop_id') == stop_id
+        teacher_is_null = created_student.get('teacher_id') is None
         
-        print(f"Found {len(students)} students")
-        
-        # Check if all students have roll_number field
-        all_have_roll_number = True
-        sample_roll_numbers = []
-        
-        for student in students[:5]:  # Check first 5 students
-            student_name = student.get("name", "Unknown")
-            roll_number = student.get("roll_number")
+        if has_stop_id and teacher_is_null:
+            print_result(True, f"Student created successfully with stop_id={stop_id} and teacher_id=null")
+            print(f"  Student ID: {student_id}")
+            print(f"  Name: {created_student.get('name')}")
+            print(f"  Stop ID: {created_student.get('stop_id')}")
+            print(f"  Teacher ID: {created_student.get('teacher_id')}")
+            results.append(("Test C.1 - Create student with stop_id and teacher_id=null", True))
             
-            if roll_number:
-                sample_roll_numbers.append(f"{student_name}: {roll_number}")
-            else:
-                all_have_roll_number = False
-                print(f"  ❌ Student {student_name} missing roll_number field")
-        
-        if all_have_roll_number and len(sample_roll_numbers) > 0:
-            print_result(True, f"All students have roll_number field")
-            print("\nSample roll numbers:")
-            for sample in sample_roll_numbers:
-                print(f"  - {sample}")
-            results.append(("Test 3.2 - Roll number field present in teacher students", True))
+            # Cleanup: Delete test student
+            session.delete(f"/students/{student_id}")
         else:
-            print_result(False, "Some students missing roll_number field")
-            results.append(("Test 3.2 - Roll number field present in teacher students", False))
+            print_result(False, f"Student created but fields incorrect. stop_id={created_student.get('stop_id')}, teacher_id={created_student.get('teacher_id')}")
+            results.append(("Test C.1 - Create student with stop_id and teacher_id=null", False))
+            
+            # Cleanup
+            if student_id:
+                session.delete(f"/students/{student_id}")
     else:
-        print_result(False, f"GET /api/teacher/students failed with status {response.status_code}")
-        results.append(("Test 3.2 - Roll number field present in teacher students", False))
+        print_result(False, f"Failed to create student. Status: {response.status_code}, Response: {response.text}")
+        results.append(("Test C.1 - Create student with stop_id and teacher_id=null", False))
     
     return results
 
