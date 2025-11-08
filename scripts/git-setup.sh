@@ -9,7 +9,7 @@ GITHUB_REPO="https://github.com/SiddharthJain131/bus-tracker.git"
 
 # --- DO NOT EDIT BELOW UNLESS NEEDED ---
 echo "🚀 Starting Git setup for Bus Tracker..."
-
+cd /app
 # Fix HOME if not defined
 if [ -z "$HOME" ]; then
   export HOME=~
