@@ -34,13 +34,19 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
 
   useEffect(() => {
     if (open && student) {
+      // Combine class and section for display
+      const classNum = student.class_name ? student.class_name.replace(/Grade|Class/gi, '').trim() : '';
+      const combinedClassSection = classNum && student.section ? `${classNum}${student.section}` : '';
+      
       setFormData({
         name: student.name || '',
         roll_number: student.roll_number || '',
         phone: student.phone || '',
+        class_section: combinedClassSection,
         class_name: student.class_name || '',
         section: student.section || '',
         parent_id: student.parent_id || '',
+        parent_search: '',  // Will be set after fetching parent details
         bus_id: student.bus_id || '',
         stop_id: student.stop_id || '',
         emergency_contact: student.emergency_contact || '',
