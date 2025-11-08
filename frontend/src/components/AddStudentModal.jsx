@@ -174,35 +174,58 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
   };
 
   const handleSubmit = async () => {
-    // Final validation
-    if (!parentData.name || !parentData.phone || !parentData.email) {
-      toast.error('Please fill in all required parent fields');
-      return;
+    // Final validation based on parent mode
+    if (parentMode === 'create') {
+      if (!parentData.name || !parentData.phone || !parentData.email) {
+        toast.error('Please fill in all required parent fields');
+        return;
+      }
+    } else if (parentMode === 'select') {
+      if (!selectedParentId) {
+        toast.error('Please select a parent from the list');
+        return;
+      }
     }
 
     setLoading(true);
     try {
-      // Step 1: Create parent account
-      const parentResponse = await axios.post(`${API}/users`, {
-        email: parentData.email,
-        password: 'parent123', // Default password
-        role: 'parent',
-        name: parentData.name,
-        phone: parentData.phone,
-        photo: parentData.photo,
-        address: parentData.address
-      });
+      let parentId;
+      
+      if (parentMode === 'create') {
+        // Step 1: Create parent account
+        const parentResponse = await axios.post(`${API}/users`, {
+          email: parentData.email,
+          password: 'parent123', // Default password
+          role: 'parent',
+          name: parentData.name,
+          phone: parentData.phone,
+          photo: parentData.photo,
+          address: parentData.address
+        });
+        parentId = parentResponse.data.user_id;
+      } else {
+        // Use selected existing parent
+        parentId = selectedParentId;
+      }
 
       // Step 2: Create student with parent_id (teacher_id removed from UI)
       const studentPayload = {
-        ...studentData,
-        parent_id: parentResponse.data.user_id,
+        name: studentData.name,
+        roll_number: studentData.roll_number,
+        class_name: studentData.class_name,
+        section: studentData.section,
+        bus_id: studentData.bus_id,
+        stop_id: studentData.stop_id,
+        phone: studentData.phone,
+        emergency_contact: studentData.emergency_contact,
+        remarks: studentData.remarks,
+        parent_id: parentId,
         teacher_id: null  // No longer assigned via UI
       };
 
       await axios.post(`${API}/students`, studentPayload);
 
-      toast.success('Student and Parent created successfully!');
+      toast.success(parentMode === 'create' ? 'Student and Parent created successfully!' : 'Student created successfully!');
       onSuccess();
       onClose();
       resetForm();
