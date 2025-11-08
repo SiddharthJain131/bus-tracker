@@ -229,7 +229,7 @@ async def seed_data():
     print("🚌 CREATING BUSES")
     print("=" * 60)
     
-    # Create buses
+    # Create buses with varying capacities for testing
     bus1_id = str(uuid.uuid4())
     bus2_id = str(uuid.uuid4())
     bus3_id = str(uuid.uuid4())
@@ -242,8 +242,8 @@ async def seed_data():
             "driver_name": "Robert Johnson",
             "driver_phone": "+1-555-0101",
             "route_id": route1_id,
-            "capacity": 40,
-            "remarks": "New bus with AC and GPS tracking"
+            "capacity": 5,  # Small capacity for testing capacity warnings
+            "remarks": "Test bus - Small capacity (5 students)"
         },
         {
             "bus_id": bus2_id,
@@ -251,8 +251,8 @@ async def seed_data():
             "driver_name": "Sarah Martinez",
             "driver_phone": "+1-555-0102",
             "route_id": route2_id,
-            "capacity": 35,
-            "remarks": "Regular maintenance scheduled monthly"
+            "capacity": 3,  # Very small capacity - will trigger warning
+            "remarks": "Test bus - Very small capacity (3 students)"
         },
         {
             "bus_id": bus3_id,
@@ -270,7 +270,7 @@ async def seed_data():
             "driver_phone": "+1-555-0104",
             "route_id": route4_id,
             "capacity": 38,
-            "remarks": "Coastal route specialist"
+            "remarks": "Standard capacity coastal route"
         }
     ]
     
