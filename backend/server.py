@@ -1163,6 +1163,17 @@ logger = logging.getLogger(__name__)
 async def startup_db_seed():
     """Auto-seed database on first startup if collections are empty"""
     try:
+        # Create compound unique index for student uniqueness (class, section, roll_number)
+        try:
+            await db.students.create_index(
+                [("class_name", 1), ("section", 1), ("roll_number", 1)],
+                unique=True,
+                name="unique_class_section_roll"
+            )
+            print("✅ Compound unique index created: (class_name, section, roll_number)")
+        except Exception as idx_error:
+            print(f"ℹ️  Index already exists or creation skipped: {str(idx_error)}")
+        
         # Check if core collections are empty
         users_count = await db.users.count_documents({})
         students_count = await db.students.count_documents({})
