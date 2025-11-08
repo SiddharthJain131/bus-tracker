@@ -79,11 +79,11 @@ class Student(BaseModel):
     model_config = ConfigDict(extra="ignore")
     student_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     name: str
-    roll_number: Optional[str] = None
+    roll_number: str  # Required for uniqueness constraint
     phone: Optional[str] = None
     photo: Optional[str] = None
-    class_name: Optional[str] = None
-    section: Optional[str] = None
+    class_name: str  # Required for uniqueness constraint
+    section: str  # Required for uniqueness constraint
     parent_id: str
     teacher_id: Optional[str] = None
     bus_id: str
