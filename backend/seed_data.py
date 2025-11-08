@@ -372,7 +372,7 @@ async def seed_data():
             "address": "789 School Street, San Francisco, CA",
             "assigned_class": "Grade 4",
             "assigned_section": "A",
-            "student_ids": [student_ids[10], student_ids[11], student_ids[12], student_ids[13], student_ids[14]],
+            "student_ids": [student_ids[10], student_ids[11], student_ids[12], student_ids[13], student_ids[14], student_ids[17]],
             "is_elevated_admin": False
         },
         
