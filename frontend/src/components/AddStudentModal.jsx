@@ -523,10 +523,14 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
               <h4 className="font-semibold text-blue-900 mb-2">Summary</h4>
               <ul className="text-sm text-blue-800 space-y-1">
                 <li>• Student: {studentData.name} (Roll #{studentData.roll_number})</li>
-                <li>• Class: {studentData.class_name} - {studentData.section}</li>
+                <li>• Class: {studentData.class_name}{studentData.section}</li>
                 <li>• Bus: {buses.find(b => b.bus_id === studentData.bus_id)?.bus_number || 'N/A'}</li>
                 <li>• Stop: {stops.find(s => s.stop_id === studentData.stop_id)?.stop_name || 'N/A'}</li>
-                <li>• Parent: {parentData.name || 'Not entered'} ({parentData.email || 'Not entered'})</li>
+                <li>• Parent: {
+                  parentMode === 'create' 
+                    ? `${parentData.name || 'Not entered'} (${parentData.email || 'Not entered'})` 
+                    : unlinkedParents.find(p => p.user_id === selectedParentId)?.name || 'Not selected'
+                }</li>
               </ul>
             </div>
 
