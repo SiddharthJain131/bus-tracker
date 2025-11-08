@@ -865,6 +865,29 @@ async def get_class_sections():
                 # Extract just the number from class_name (e.g., "Grade 5" -> "5")
                 class_num = combo['class_name'].replace('Grade', '').replace('Class', '').strip()
                 formatted.append(f"{class_num}{combo['section']}")
+
+
+@api_router.get("/parents/unlinked")
+async def get_unlinked_parents(current_user: dict = Depends(get_current_user)):
+    """Get all parent users who are not linked to any student"""
+    if current_user['role'] != 'admin':
+        raise HTTPException(status_code=403, detail="Access denied")
+    
+    try:
+        # Get all parents
+        all_parents = await db.users.find({"role": "parent"}, {"_id": 0}).to_list(length=None)
+        
+        # Filter parents who have no students linked (empty or no student_ids array)
+        unlinked_parents = [
+            parent for parent in all_parents 
+            if not parent.get('student_ids') or len(parent.get('student_ids', [])) == 0
+        ]
+        
+        return unlinked_parents
+    except Exception as e:
+        print(f"Error fetching unlinked parents: {str(e)}")
+        return []
+
         
         return formatted
     except Exception as e:
