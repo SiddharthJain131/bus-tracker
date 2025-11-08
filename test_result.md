@@ -450,6 +450,30 @@ backend:
         agent: "testing"
         comment: "✅ HOLIDAY CRUD FEATURE VERIFIED - Successfully tested Holiday management functionality integrated into Admin Dashboard Overview tab. TESTING RESULTS: ✅ Edit Holidays button found and clickable in Overview tab near Upcoming Holidays section. ✅ HolidaysManagementModal opens correctly when Edit Holidays clicked. ✅ Modal displays proper structure: 'Manage Holidays' title, search bar, 'Add Holiday' button. ✅ Holiday table shows correct columns: Date | Title | Description | Status | Actions. ✅ 5 holidays displayed with proper data (New Year's Day, Christmas Day, Thanksgiving Day, Independence Day, etc.). ✅ Visual indicators working: '🌟 Upcoming' for future dates (Jan 1 2026, Dec 25 2025, Nov 28 2025), 'Past' status for past dates (Jul 4 2025, Jan 1 2025). ✅ Chronological sorting confirmed (upcoming holidays first). ✅ Edit and Delete action buttons present for each holiday. ✅ Modal closes properly with Escape key. ✅ Integration with Overview tab seamless - holidays display correctly in main dashboard. Backend Holiday CRUD APIs confirmed working from previous testing (100% success rate). Feature ready for production use. Minor: Console warnings about missing DialogContent Description (accessibility, non-critical)."
 
+  - task: "AddStudentModal - Remove Teacher Selection & Add Dynamic Stop Field"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/AddStudentModal.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "UPDATED - Transformed AddStudentModal from 3-step to 2-step modal. CHANGES: 1) Removed Step 3 (Teacher Assignment) completely including assignedTeacher state and teacher-related logic. 2) Updated step indicator to show only 2 steps. 3) Added dynamic Stop field after Bus field with required validation. Stop dropdown fetches from new /api/buses/{bus_id}/stops endpoint. 4) Stop field disabled until bus selected, shows 'Select bus first' placeholder. 5) Added loadingStops state for UX feedback. 6) When bus changes, stop_id resets. 7) Updated field order: Roll No → Name → Class → Section → Bus → Stop (all required). 8) Moved summary preview to Step 2 showing student, class, bus, stop, and parent info. 9) Submit button on Step 2 creates student with teacher_id=null. Need testing: Add student flow with bus/stop selection, verify stop dropdown loads dynamically, test required validation, confirm student created with stop_id."
+
+  - task: "EditStudentModalEnhanced - Remove Teacher Selection & Add Dynamic Stop Field"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/EditStudentModalEnhanced.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "UPDATED - Removed teacher field and added dynamic stop field with validation. CHANGES: 1) Removed teacher_id from formData state and all teacher-related logic. 2) Removed teachers state and teacher dropdown fetching. 3) Added stops state and loadingStops for dynamic stop loading. 4) Stop field fetches from /api/buses/{bus_id}/stops when bus selected or changes. 5) Stop dropdown disabled until bus selected. 6) When bus changes, stop_id resets to empty. 7) Added validation requiring stop_id before save. 8) Field order maintained: Name, Roll No, Phone, Class, Section, Parent, Bus, Stop, Emergency Contact. 9) Stop shows warning if selected bus has no route stops. Need testing: Edit student flow, verify stop loads based on existing/changed bus, test required validation on save, confirm updates work with stop_id."
+
 frontend:
   - task: "Login page"
     implemented: true
