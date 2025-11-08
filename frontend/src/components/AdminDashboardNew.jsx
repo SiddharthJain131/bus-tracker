@@ -1084,6 +1084,22 @@ export default function AdminDashboardNew({ user, onLogout }) {
         onSuccess={fetchAllData}
       />
 
+      <AddHolidayModal
+        open={showAddHoliday}
+        onClose={() => setShowAddHoliday(false)}
+        onSuccess={fetchAllData}
+      />
+
+      <EditHolidayModal
+        holiday={editHoliday}
+        open={showEditHoliday}
+        onClose={() => {
+          setShowEditHoliday(false);
+          setEditHoliday(null);
+        }}
+        onSuccess={fetchAllData}
+      />
+
       <DeleteConfirmationDialog
         open={showDeleteConfirm}
         onClose={() => {
