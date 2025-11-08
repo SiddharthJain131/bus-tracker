@@ -344,7 +344,7 @@ async def seed_data():
             "address": "321 Teacher Lane, San Francisco, CA",
             "assigned_class": "Grade 5",
             "assigned_section": "A",
-            "student_ids": [student_ids[0], student_ids[1], student_ids[2], student_ids[3], student_ids[4]],
+            "student_ids": [student_ids[0], student_ids[1], student_ids[2], student_ids[3], student_ids[4], student_ids[15], student_ids[18]],
             "is_elevated_admin": False
         },
         {
