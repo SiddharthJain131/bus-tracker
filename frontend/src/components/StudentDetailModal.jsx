@@ -80,16 +80,6 @@ export default function StudentDetailModal({ student, open, onClose }) {
                 <Card className="p-4">
                   <div className="flex items-center gap-3 mb-2">
                     <GraduationCap className="w-5 h-5 text-blue-600" />
-                    <span className="text-sm font-medium text-gray-600">Roll Number</span>
-                  </div>
-                  <p className="text-lg font-semibold text-gray-900">
-                    {studentDetails.roll_number || 'N/A'}
-                  </p>
-                </Card>
-
-                <Card className="p-4">
-                  <div className="flex items-center gap-3 mb-2">
-                    <GraduationCap className="w-5 h-5 text-blue-600" />
                     <span className="text-sm font-medium text-gray-600">Class & Section</span>
                   </div>
                   <p className="text-lg font-semibold text-gray-900">
@@ -124,6 +114,16 @@ export default function StudentDetailModal({ student, open, onClose }) {
                   </div>
                   <p className="text-lg font-semibold text-gray-900">
                     {studentDetails.bus_number || 'N/A'}
+                  </p>
+                </Card>
+
+                <Card className="p-4">
+                  <div className="flex items-center gap-3 mb-2">
+                    <Bus className="w-5 h-5 text-blue-600" />
+                    <span className="text-sm font-medium text-gray-600">Stop</span>
+                  </div>
+                  <p className="text-lg font-semibold text-gray-900">
+                    {studentDetails.stop_name || 'N/A'}
                   </p>
                 </Card>
               </div>
