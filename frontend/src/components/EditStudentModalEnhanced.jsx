@@ -114,12 +114,59 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
     }
   };
 
+  // Parse class-section input (e.g., "5A", "5-A", "Class 5 A", "Grade 5 A")
+  const parseClassSection = (input) => {
+    if (!input) return { class_name: '', section: '' };
+    
+    // Remove common prefixes
+    const cleaned = input.replace(/^(class|grade)\s*/i, '').trim();
+    
+    // Match patterns like "5A", "5-A", "5 A"
+    const match = cleaned.match(/^(\d+)\s*[-\s]*([A-Za-z])$/i);
+    
+    if (match) {
+      return {
+        class_name: match[1],  // Just the number
+        section: match[2].toUpperCase()
+      };
+    }
+    
+    return { class_name: '', section: '' };
+  };
+
   const handleChange = (field, value) => {
     setFormData(prev => {
       // If bus changes, reset stop selection
       if (field === 'bus_id') {
         return { ...prev, [field]: value, stop_id: '' };
       }
+      
+      // If class-section changes, parse it
+      if (field === 'class_section') {
+        const parsed = parseClassSection(value);
+        return {
+          ...prev,
+          class_section: value,
+          class_name: parsed.class_name,
+          section: parsed.section
+        };
+      }
+      
+      // If parent search changes, find matching parent
+      if (field === 'parent_search') {
+        // Try to find parent by matching the search string
+        const matchedParent = parents.find(p => 
+          `${p.name} (${p.email})` === value || 
+          p.name.toLowerCase().includes(value.toLowerCase()) ||
+          p.email.toLowerCase().includes(value.toLowerCase())
+        );
+        return {
+          ...prev,
+          parent_search: value,
+          parent_id: matchedParent ? matchedParent.user_id : prev.parent_id
+        };
+      }
+      
       return { ...prev, [field]: value };
     });
   };
