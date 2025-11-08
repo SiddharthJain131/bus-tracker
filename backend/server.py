@@ -578,9 +578,22 @@ async def create_student(student: Student, current_user: dict = Depends(get_curr
         if existing:
             raise HTTPException(status_code=400, detail=f"Roll number {student.roll_number} already exists in {student.class_name} - {student.section}")
     
+    # Check bus capacity before creating student
+    capacity_warning = None
+    if student.bus_id:
+        bus = await db.buses.find_one({"bus_id": student.bus_id}, {"_id": 0})
+        if bus:
+            current_count = await db.students.count_documents({"bus_id": student.bus_id})
+            bus_capacity = bus.get('capacity', 0)
+            new_count = current_count + 1
+            
+            if new_count > bus_capacity:
+                capacity_warning = f"Warning: Bus {bus['bus_number']} capacity ({bus_capacity}) will be exceeded. Current: {current_count}, After: {new_count}"
+                print(f"⚠️ CAPACITY WARNING: {capacity_warning}")
+    
     await db.students.insert_one(student.model_dump())
     
-    # Update parent's student_ids array
+    # Update parent's student_ids array (supports multiple students per parent)
     if student.parent_id:
         await db.users.update_one(
             {"user_id": student.parent_id},
@@ -594,7 +607,12 @@ async def create_student(student: Student, current_user: dict = Depends(get_curr
             {"$addToSet": {"student_ids": student.student_id}}
         )
     
-    return student
+    # Return student with capacity warning if applicable
+    response = student.model_dump()
+    if capacity_warning:
+        response['capacity_warning'] = capacity_warning
+    
+    return response
 
 @api_router.put("/students/{student_id}")
 async def update_student(student_id: str, updates: StudentUpdate, current_user: dict = Depends(get_current_user)):
