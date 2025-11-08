@@ -1015,7 +1015,7 @@ async def seed_data():
     print(f"   • Admins: 2")
     print(f"   • Teachers: 3")
     print(f"   • Parents: 12")
-    print(f"   • Students: 15")
+    print(f"   • Students: 20")
     print(f"   • Buses: 4")
     print(f"   • Routes: 4")
     print(f"   • Stops: {len(all_stops)}")
