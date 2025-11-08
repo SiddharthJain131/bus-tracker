@@ -50,29 +50,40 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
     }
   }, [open]);
 
+  // Fetch stops when bus is selected
   useEffect(() => {
-    // Auto-find teacher when class and section are selected
-    if (studentData.class_name && studentData.section) {
-      const teacher = teachers.find(
-        t => t.assigned_class === studentData.class_name && t.assigned_section === studentData.section
-      );
-      setAssignedTeacher(teacher || null);
+    if (studentData.bus_id) {
+      fetchStopsForBus(studentData.bus_id);
+    } else {
+      setStops([]);
+      setStudentData(prev => ({ ...prev, stop_id: '' }));
     }
-  }, [studentData.class_name, studentData.section, teachers]);
+  }, [studentData.bus_id]);
 
   const fetchDropdownData = async () => {
     try {
-      const [busesRes, stopsRes, usersRes] = await Promise.all([
-        axios.get(`${API}/buses`),
-        axios.get(`${API}/stops`),
-        axios.get(`${API}/users`)
-      ]);
+      const busesRes = await axios.get(`${API}/buses`);
       setBuses(busesRes.data);
-      setStops(stopsRes.data);
-      setTeachers(usersRes.data.filter(u => u.role === 'teacher'));
     } catch (error) {
       console.error('Failed to load dropdown data:', error);
       toast.error('Failed to load form data');
+    }
+  };
+
+  const fetchStopsForBus = async (busId) => {
+    setLoadingStops(true);
+    try {
+      const response = await axios.get(`${API}/buses/${busId}/stops`);
+      setStops(response.data);
+      if (response.data.length === 0) {
+        toast.info('No stops available for this bus route');
+      }
+    } catch (error) {
+      console.error('Failed to load stops:', error);
+      toast.error('Failed to load stops for selected bus');
+      setStops([]);
+    } finally {
+      setLoadingStops(false);
     }
   };
 
