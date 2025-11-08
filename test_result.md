@@ -468,7 +468,7 @@ backend:
         agent: "main"
         comment: "UPDATED - Enhanced AddStudentModal with merged class-section input and parent selection options. CHANGES: 1) Merged Class and Section into single searchable input field that parses formats like '5A', '5-A', 'Grade 5 A'. 2) Added autocomplete with existing class-section combinations from database via GET /api/students/class-sections. 3) Added radio buttons in Step 2: 'Create New Parent' (default) vs 'Select Existing Parent'. 4) When 'Select Existing' chosen, shows dropdown with unlinked parents only (via GET /api/parents/unlinked) in format 'Name (email)'. 5) Roll Number already required. 6) Dynamic Stop field maintained from previous update. 7) Parsing logic automatically extracts class_name and section from input. Ready for testing: Merged input parsing, autocomplete suggestions, parent selection modes, unlinked parent filtering, roll number validation, duplicate class-section-roll detection."
 
-  - task: "EditStudentModalEnhanced - Remove Teacher Selection & Add Dynamic Stop Field"
+  - task: "EditStudentModalEnhanced - Merged Class-Section Input & Searchable Parent Field"
     implemented: true
     working: "NA"
     file: "/app/frontend/src/components/EditStudentModalEnhanced.jsx"
@@ -478,7 +478,7 @@ backend:
     status_history:
       - working: "NA"
         agent: "main"
-        comment: "UPDATED - Removed teacher field and added dynamic stop field with validation. CHANGES: 1) Removed teacher_id from formData state and all teacher-related logic. 2) Removed teachers state and teacher dropdown fetching. 3) Added stops state and loadingStops for dynamic stop loading. 4) Stop field fetches from /api/buses/{bus_id}/stops when bus selected or changes. 5) Stop dropdown disabled until bus selected. 6) When bus changes, stop_id resets to empty. 7) Added validation requiring stop_id before save. 8) Field order maintained: Name, Roll No, Phone, Class, Section, Parent, Bus, Stop, Emergency Contact. 9) Stop shows warning if selected bus has no route stops. Need testing: Edit student flow, verify stop loads based on existing/changed bus, test required validation on save, confirm updates work with stop_id."
+        comment: "UPDATED - Enhanced EditStudentModalEnhanced with merged class-section input and searchable parent field. CHANGES: 1) Merged Class and Section into single searchable input field that parses formats like '5A', '5-A'. Pre-fills with combined value from existing student data. 2) Added autocomplete with existing class-section combinations from database. 3) Replaced parent dropdown with searchable input field showing 'Name (email)' format with autocomplete. 4) Auto-populates parent_search field with current parent on load. 5) Roll Number marked as required. 6) Dynamic Stop field maintained. 7) Parsing logic automatically updates class_name and section. 8) Parent matching logic finds parent_id based on search input. Ready for testing: Merged input parsing with pre-fill, parent searchable input with auto-population, roll number validation, duplicate detection on edit, stop field functionality."
 
 frontend:
   - task: "Login page"
