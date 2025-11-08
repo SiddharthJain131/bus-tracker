@@ -5,9 +5,9 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import { RadioGroup, RadioGroupItem } from './ui/radio-group';
 import { toast } from 'sonner';
 import { UserPlus, ArrowRight, ArrowLeft, CheckCircle } from 'lucide-react';
-import { CLASS_OPTIONS, SECTION_OPTIONS } from '../constants/options';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -20,11 +20,14 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
   const [buses, setBuses] = useState([]);
   const [stops, setStops] = useState([]);
   const [loadingStops, setLoadingStops] = useState(false);
+  const [classSectionSuggestions, setClassSectionSuggestions] = useState([]);
+  const [unlinkedParents, setUnlinkedParents] = useState([]);
   
   // Step 1: Student basic info
   const [studentData, setStudentData] = useState({
     name: '',
     roll_number: '',
+    class_section: '',  // Combined field
     class_name: '',
     section: '',
     bus_id: '',
@@ -34,7 +37,9 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
     remarks: ''
   });
   
-  // Step 2: Parent info
+  // Step 2: Parent selection mode and data
+  const [parentMode, setParentMode] = useState('create'); // 'create' or 'select'
+  const [selectedParentId, setSelectedParentId] = useState('');
   const [parentData, setParentData] = useState({
     name: '',
     phone: '',
