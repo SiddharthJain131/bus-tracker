@@ -21,7 +21,7 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
   const [stops, setStops] = useState([]);
   const [loadingStops, setLoadingStops] = useState(false);
   const [classSectionSuggestions, setClassSectionSuggestions] = useState([]);
-  const [unlinkedParents, setUnlinkedParents] = useState([]);
+  const [allParents, setAllParents] = useState([]);  // Changed from unlinkedParents to allParents
   
   // Step 1: Student basic info
   const [studentData, setStudentData] = useState({
@@ -70,11 +70,11 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
       const [busesRes, classSectionsRes, parentsRes] = await Promise.all([
         axios.get(`${API}/buses`),
         axios.get(`${API}/students/class-sections`),
-        axios.get(`${API}/parents/unlinked`)
+        axios.get(`${API}/parents/all`)  // Changed to fetch ALL parents
       ]);
       setBuses(busesRes.data);
       setClassSectionSuggestions(classSectionsRes.data || []);
-      setUnlinkedParents(parentsRes.data || []);
+      setAllParents(parentsRes.data || []);  // Changed state variable
     } catch (error) {
       console.error('Failed to load dropdown data:', error);
       toast.error('Failed to load form data');
