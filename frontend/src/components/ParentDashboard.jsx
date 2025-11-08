@@ -203,9 +203,34 @@ export default function ParentDashboard({ user, onLogout }) {
 
                 {/* Attendance Grid */}
                 <Card className="p-6 card-hover">
-                  <div className="flex items-center gap-2 mb-4">
-                    <Calendar className="w-5 h-5 text-blue-600" />
-                    <h2 className="text-xl font-semibold" style={{ fontFamily: 'Space Grotesk' }}>Attendance</h2>
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+                    <div className="flex items-center gap-2">
+                      <Calendar className="w-5 h-5 text-blue-600" />
+                      <h2 className="text-xl font-semibold" style={{ fontFamily: 'Space Grotesk' }}>Attendance</h2>
+                    </div>
+                    {/* Inline Status Legend */}
+                    <div className="flex flex-wrap items-center gap-3 text-xs">
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-2 h-2 rounded-full status-gray"></div>
+                        <span className="text-gray-600">Not Scanned</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-2 h-2 rounded-full status-yellow"></div>
+                        <span className="text-gray-600">On Board</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-2 h-2 rounded-full status-green"></div>
+                        <span className="text-gray-600">Reached</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-2 h-2 rounded-full status-red"></div>
+                        <span className="text-gray-600">Missed</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-2 h-2 rounded-full status-blue"></div>
+                        <span className="text-gray-600">Holiday</span>
+                      </div>
+                    </div>
                   </div>
                   <AttendanceGrid studentId={selectedStudent.student_id} />
                 </Card>
