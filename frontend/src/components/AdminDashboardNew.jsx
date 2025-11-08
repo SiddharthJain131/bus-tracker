@@ -834,6 +834,146 @@ export default function AdminDashboardNew({ user, onLogout }) {
               </Tabs>
             </Card>
           </TabsContent>
+
+          {/* Holidays Tab */}
+          <TabsContent value="holidays" className="space-y-6">
+            <Card className="p-6">
+              <div className="flex justify-between items-center mb-6">
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-6 h-6 text-blue-600" />
+                  <h2 className="text-2xl font-bold" style={{ fontFamily: 'Space Grotesk' }}>
+                    Manage Holidays
+                  </h2>
+                </div>
+                <Button
+                  onClick={() => setShowAddHoliday(true)}
+                  className="bg-blue-600 hover:bg-blue-700 flex items-center gap-2"
+                >
+                  <Plus className="w-4 h-4" />
+                  Add Holiday
+                </Button>
+              </div>
+
+              {/* Search Bar */}
+              <div className="mb-6">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                  <Input
+                    placeholder="Search holidays..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="pl-10"
+                  />
+                </div>
+              </div>
+
+              {/* Holidays Table */}
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b">
+                      <th className="text-left p-3 font-semibold text-gray-700">Date</th>
+                      <th className="text-left p-3 font-semibold text-gray-700">Title</th>
+                      <th className="text-left p-3 font-semibold text-gray-700">Description</th>
+                      <th className="text-left p-3 font-semibold text-gray-700">Status</th>
+                      <th className="text-right p-3 font-semibold text-gray-700">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {holidays.length === 0 ? (
+                      <tr>
+                        <td colSpan="5" className="text-center py-8 text-gray-500">
+                          No holidays found. Click "Add Holiday" to create one.
+                        </td>
+                      </tr>
+                    ) : (
+                      holidays
+                        .filter(holiday => 
+                          holiday.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          holiday.date.includes(searchTerm) ||
+                          (holiday.description && holiday.description.toLowerCase().includes(searchTerm.toLowerCase()))
+                        )
+                        .sort((a, b) => {
+                          // Sort by date - upcoming first
+                          const dateA = new Date(a.date);
+                          const dateB = new Date(b.date);
+                          return dateB - dateA;
+                        })
+                        .map(holiday => {
+                          const holidayDate = new Date(holiday.date);
+                          const today = new Date();
+                          today.setHours(0, 0, 0, 0);
+                          const isPast = holidayDate < today;
+                          const isUpcoming = holidayDate >= today;
+                          
+                          return (
+                            <tr 
+                              key={holiday.holiday_id} 
+                              className={`border-b hover:bg-gray-50 ${isPast ? 'opacity-50' : ''}`}
+                            >
+                              <td className="p-3">
+                                <span className={`font-medium ${isPast ? 'text-gray-400' : 'text-gray-900'}`}>
+                                  {new Date(holiday.date).toLocaleDateString('en-US', {
+                                    year: 'numeric',
+                                    month: 'short',
+                                    day: 'numeric'
+                                  })}
+                                </span>
+                              </td>
+                              <td className="p-3">
+                                <span className={`font-medium ${isPast ? 'text-gray-400' : 'text-gray-900'}`}>
+                                  {holiday.name}
+                                </span>
+                              </td>
+                              <td className="p-3">
+                                <span className={`text-sm ${isPast ? 'text-gray-400' : 'text-gray-600'}`}>
+                                  {holiday.description || '-'}
+                                </span>
+                              </td>
+                              <td className="p-3">
+                                {isUpcoming && (
+                                  <span className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">
+                                    🌟 Upcoming
+                                  </span>
+                                )}
+                                {isPast && (
+                                  <span className="inline-flex items-center px-2 py-1 bg-gray-100 text-gray-500 rounded-full text-xs font-medium">
+                                    Past
+                                  </span>
+                                )}
+                              </td>
+                              <td className="p-3">
+                                <div className="flex justify-end gap-2">
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() => {
+                                      setEditHoliday(holiday);
+                                      setShowEditHoliday(true);
+                                    }}
+                                    className="text-blue-600 hover:text-blue-800 hover:bg-blue-50"
+                                  >
+                                    <Edit className="w-4 h-4" />
+                                  </Button>
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() => handleDelete(holiday, 'holiday')}
+                                    className="text-red-600 hover:text-red-800 hover:bg-red-50"
+                                  >
+                                    <Trash2 className="w-4 h-4" />
+                                  </Button>
+                                </div>
+                              </td>
+                            </tr>
+                          );
+                        })
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </Card>
+          </TabsContent>
         </Tabs>
       </div>
 
