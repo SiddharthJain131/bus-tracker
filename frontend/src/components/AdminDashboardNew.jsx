@@ -446,11 +446,22 @@ export default function AdminDashboardNew({ user, onLogout }) {
 
             {/* Recent Activity / Holidays */}
             <Card className="p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <Calendar className="w-5 h-5 text-violet-600" />
-                <h3 className="text-lg font-semibold" style={{ fontFamily: 'Space Grotesk' }}>
-                  Upcoming Holidays
-                </h3>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-5 h-5 text-violet-600" />
+                  <h3 className="text-lg font-semibold" style={{ fontFamily: 'Space Grotesk' }}>
+                    Upcoming Holidays
+                  </h3>
+                </div>
+                <Button
+                  onClick={() => setShowHolidaysManagement(true)}
+                  variant="outline"
+                  size="sm"
+                  className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 border-blue-200"
+                >
+                  <Edit className="w-4 h-4 mr-1" />
+                  Edit Holidays
+                </Button>
               </div>
               <div className="space-y-2">
                 {holidays.length === 0 ? (
