@@ -428,15 +428,18 @@ backend:
 
   - task: "GET /api/buses/{bus_id}/stops endpoint"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Created new endpoint at line ~805 to fetch stops for a specific bus via its route. Gets bus by bus_id, fetches route via route_id, returns all stops from route's stop_ids array sorted by order_index. Returns empty array if bus has no route or route not found. Endpoint works without authentication for easier form access."
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED - All SCENARIO B tests successful (3/3). B.1 - Bus with Route: GET /api/buses/{bus_id}/stops returns array of 5 stops with correct structure (stop_id, stop_name, lat, lon, order_index). Stops properly sorted by order_index (0,1,2,3,4). Tested with BUS-001 which has route_id. B.2 - Bus without Route: Created test bus TEST-999 with route_id=null. Endpoint correctly returns empty array []. Test bus cleaned up after test. B.3 - Non-existent Bus: GET /api/buses/invalid-bus-id-12345/stops correctly returns 404 status with error message 'Bus not found'. All edge cases handled properly."
 
   - task: "Holiday CRUD Feature - Admin Dashboard"
     implemented: true
