@@ -103,6 +103,13 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
   };
 
   const handleSave = async () => {
+    // Validation
+    if (!formData.name || !formData.roll_number || !formData.class_name || 
+        !formData.section || !formData.bus_id || !formData.stop_id) {
+      toast.error('Please fill in all required fields (including Stop)');
+      return;
+    }
+
     setSaving(true);
     try {
       // Track changed fields
