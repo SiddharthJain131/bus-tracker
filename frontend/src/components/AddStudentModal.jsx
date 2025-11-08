@@ -19,8 +19,7 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
   // Dropdown data
   const [buses, setBuses] = useState([]);
   const [stops, setStops] = useState([]);
-  const [teachers, setTeachers] = useState([]);
-  const [assignedTeacher, setAssignedTeacher] = useState(null);
+  const [loadingStops, setLoadingStops] = useState(false);
   
   // Step 1: Student basic info
   const [studentData, setStudentData] = useState({
