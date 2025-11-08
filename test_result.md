@@ -585,6 +585,7 @@ metadata:
 
 test_plan:
   current_focus:
+    - "Admin Dashboard"
     - "Holiday CRUD Feature - Admin Dashboard"
   stuck_tasks: []
   test_all: false
