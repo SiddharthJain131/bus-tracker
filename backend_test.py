@@ -14,7 +14,7 @@ import sys
 from typing import Dict, Optional, List
 
 # Get backend URL from environment
-BACKEND_URL = "https://student-assign-fix.preview.emergentagent.com/api"
+BACKEND_URL = "https://busdb-validate.preview.emergentagent.com/api"
 
 class TestSession:
     def __init__(self):
