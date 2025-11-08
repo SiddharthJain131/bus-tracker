@@ -150,6 +150,8 @@ class Attendance(BaseModel):
     status: str  # gray, yellow, green, red, blue
     confidence: Optional[float] = None
     last_update: str
+    scan_photo: Optional[str] = None  # Photo URL captured during scan
+    scan_timestamp: Optional[str] = None  # ISO format timestamp of scan
 
 class Event(BaseModel):
     model_config = ConfigDict(extra="ignore")
