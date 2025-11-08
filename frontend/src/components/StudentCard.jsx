@@ -65,6 +65,7 @@ export default function StudentCard({ student, compact = false }) {
             </h3>
             
             <div className="grid md:grid-cols-2 gap-3 mt-4">
+              {/* 1. Class & Section */}
               <div className="flex items-center gap-2 text-gray-700">
                 <GraduationCap className="w-5 h-5 text-blue-600" />
                 <div>
@@ -73,6 +74,7 @@ export default function StudentCard({ student, compact = false }) {
                 </div>
               </div>
 
+              {/* 2. Teacher */}
               <div className="flex items-center gap-2 text-gray-700">
                 <User className="w-5 h-5 text-blue-600" />
                 <div>
@@ -81,33 +83,41 @@ export default function StudentCard({ student, compact = false }) {
                 </div>
               </div>
 
+              {/* 3. Phone */}
+              <div className="flex items-center gap-2 text-gray-700">
+                <Phone className="w-5 h-5 text-blue-600" />
+                <div>
+                  <div className="text-xs text-gray-500">Phone</div>
+                  <div className="font-medium">{student.phone || 'N/A'}</div>
+                </div>
+              </div>
+
+              {/* 4. Emergency Contact */}
+              <div className="flex items-center gap-2 text-gray-700">
+                <AlertCircle className="w-5 h-5 text-red-600" />
+                <div>
+                  <div className="text-xs text-gray-500 font-semibold">Emergency Contact</div>
+                  <div className="font-medium">{student.emergency_contact || 'N/A'}</div>
+                </div>
+              </div>
+
+              {/* 5. Bus */}
               <div className="flex items-center gap-2 text-gray-700">
                 <Bus className="w-5 h-5 text-blue-600" />
                 <div>
-                  <div className="text-xs text-gray-500">Bus Number</div>
+                  <div className="text-xs text-gray-500">Bus</div>
                   <div className="font-medium">{student.bus_number || 'N/A'}</div>
                 </div>
               </div>
 
-              {student.phone && (
-                <div className="flex items-center gap-2 text-gray-700">
-                  <Phone className="w-5 h-5 text-blue-600" />
-                  <div>
-                    <div className="text-xs text-gray-500">Phone</div>
-                    <div className="font-medium">{student.phone}</div>
-                  </div>
+              {/* 6. Stop */}
+              <div className="flex items-center gap-2 text-gray-700">
+                <MapPin className="w-5 h-5 text-blue-600" />
+                <div>
+                  <div className="text-xs text-gray-500">Stop</div>
+                  <div className="font-medium">{student.stop_name || 'N/A'}</div>
                 </div>
-              )}
-
-              {student.emergency_contact && (
-                <div className="flex items-center gap-2 text-gray-700">
-                  <AlertCircle className="w-5 h-5 text-red-600" />
-                  <div>
-                    <div className="text-xs text-gray-500">Emergency Contact</div>
-                    <div className="font-medium">{student.emergency_contact}</div>
-                  </div>
-                </div>
-              )}
+              </div>
             </div>
 
             {student.remarks && (
