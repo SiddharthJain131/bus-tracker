@@ -342,7 +342,7 @@ async def seed_data():
             "phone": "+1-555-2001",
             "photo": None,
             "address": "321 Teacher Lane, San Francisco, CA",
-            "assigned_class": "Grade 5",
+            "assigned_class": "5",
             "assigned_section": "A",
             "student_ids": [student_ids[0], student_ids[1], student_ids[2], student_ids[3], student_ids[4], student_ids[15], student_ids[18]],
             "is_elevated_admin": False
@@ -356,7 +356,7 @@ async def seed_data():
             "phone": "+1-555-2002",
             "photo": None,
             "address": "456 Educator Drive, San Francisco, CA",
-            "assigned_class": "Grade 6",
+            "assigned_class": "6",
             "assigned_section": "B",
             "student_ids": [student_ids[5], student_ids[6], student_ids[7], student_ids[8], student_ids[9], student_ids[16], student_ids[19]],
             "is_elevated_admin": False
@@ -370,7 +370,7 @@ async def seed_data():
             "phone": "+1-555-2003",
             "photo": None,
             "address": "789 School Street, San Francisco, CA",
-            "assigned_class": "Grade 4",
+            "assigned_class": "4",
             "assigned_section": "A",
             "student_ids": [student_ids[10], student_ids[11], student_ids[12], student_ids[13], student_ids[14], student_ids[17]],
             "is_elevated_admin": False
