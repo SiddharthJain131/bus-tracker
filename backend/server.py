@@ -987,6 +987,28 @@ async def create_holiday(holiday: Holiday, current_user: dict = Depends(get_curr
     await db.holidays.insert_one(holiday.model_dump())
     return holiday
 
+@api_router.put("/admin/holidays/{holiday_id}")
+async def update_holiday(holiday_id: str, holiday: Holiday, current_user: dict = Depends(get_current_user)):
+    if current_user['role'] != 'admin':
+        raise HTTPException(status_code=403, detail="Access denied")
+    
+    # Check if holiday exists
+    existing = await db.holidays.find_one({"holiday_id": holiday_id})
+    if not existing:
+        raise HTTPException(status_code=404, detail="Holiday not found")
+    
+    # Update holiday
+    update_data = {
+        "name": holiday.name,
+        "date": holiday.date,
+        "description": holiday.description
+    }
+    await db.holidays.update_one({"holiday_id": holiday_id}, {"$set": update_data})
+    
+    # Return updated holiday
+    updated_holiday = await db.holidays.find_one({"holiday_id": holiday_id}, {"_id": 0})
+    return updated_holiday
+
 @api_router.delete("/admin/holidays/{holiday_id}")
 async def delete_holiday(holiday_id: str, current_user: dict = Depends(get_current_user)):
     if current_user['role'] != 'admin':
