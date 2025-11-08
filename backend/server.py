@@ -334,10 +334,21 @@ async def scan_event(request: ScanEventRequest):
     if request.verified:
         status = "yellow"
         
+        update_data = {
+            "status": status, 
+            "confidence": request.confidence, 
+            "last_update": timestamp
+        }
+        
+        # Add photo and scan timestamp if provided
+        if request.photo_url:
+            update_data["scan_photo"] = request.photo_url
+            update_data["scan_timestamp"] = timestamp
+        
         if existing:
             await db.attendance.update_one(
                 {"student_id": request.student_id, "date": today, "trip": trip},
-                {"$set": {"status": status, "confidence": request.confidence, "last_update": timestamp}}
+                {"$set": update_data}
             )
         else:
             attendance = Attendance(
@@ -346,7 +357,9 @@ async def scan_event(request: ScanEventRequest):
                 trip=trip,
                 status=status,
                 confidence=request.confidence,
-                last_update=timestamp
+                last_update=timestamp,
+                scan_photo=request.photo_url,
+                scan_timestamp=timestamp if request.photo_url else None
             )
             await db.attendance.insert_one(attendance.model_dump())
     else:
