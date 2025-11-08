@@ -196,6 +196,7 @@ class Holiday(BaseModel):
     holiday_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     date: str  # YYYY-MM-DD
     name: str
+    description: str = ""  # Optional description field
 
 # Helper: Send mock email and log
 async def send_email_notification(recipient_email: str, recipient_name: str, subject: str, body: str, student_id: Optional[str] = None, user_id: Optional[str] = None):
