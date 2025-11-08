@@ -548,7 +548,7 @@ async def seed_data():
     ]
     
     await db.users.insert_many(users)
-    print(f"✅ Created {len(users)} users (2 admins, 3 teachers, 15 parents)")
+    print(f"✅ Created {len(users)} users (2 admins, 3 teachers, 12 parents)")
     
     print("\n" + "=" * 60)
     print("👦 CREATING STUDENTS")
