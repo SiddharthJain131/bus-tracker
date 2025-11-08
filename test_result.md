@@ -408,6 +408,18 @@ backend:
         agent: "testing"
         comment: "✅ COMPREHENSIVE TEST COMPLETED - All 3 scenarios passed successfully. SCENARIO 1 (Elevated Admin Edit): admin@school.com can edit other admins including admin2@school.com. Edit modal opens correctly with user form. SCENARIO 2 (Regular Admin Restrictions): admin2@school.com login working, elevated admin badge (⭐ Elevated) visible on James Anderson, UI properly shows permission indicators. SCENARIO 3 (Roll Numbers): teacher@school.com dashboard displays Roll No column with 5 students having G5A-XXX format roll numbers (G5A-001 through G5A-005). All functionality working as expected per review requirements."
 
+  - task: "Holiday CRUD Feature - Admin Dashboard"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/AdminDashboardNew.jsx, /app/frontend/src/components/AddHolidayModal.jsx, /app/frontend/src/components/EditHolidayModal.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Added complete Holiday CRUD functionality to Admin Dashboard. Changes: 1) Added 'Holidays' as 5th tab in AdminDashboardNew (grid-cols-5). 2) Created AddHolidayModal with fields: Title (required), Date (date picker, required), Description (optional textarea). POST to /api/admin/holidays. 3) Created EditHolidayModal with pre-filled form. PUT to /api/admin/holidays/{holiday_id}. 4) Added Holidays TabsContent with: search bar, table (Date | Title | Description | Status | Actions), chronological sorting (upcoming first), visual indicators ('🌟 Upcoming' for future, 'Past' gray with reduced opacity for past dates), Edit/Delete buttons. 5) Integrated DeleteConfirmationDialog for holiday deletion. Updated confirmDelete function to support 'holiday' type. Design matches existing tabs with white background, blue accents, rounded modals. Need comprehensive testing: Create new holiday with/without description, Read/display holidays with search filtering, Update existing holiday, Delete holiday, Verify chronological sorting and visual indicators, Test that holiday dates reflect in attendance (blue status)."
+
 frontend:
   - task: "Login page"
     implemented: true
