@@ -502,13 +502,13 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
             {parentMode === 'select' && (
               <div>
                 <Label>Select Parent *</Label>
-                {unlinkedParents.length > 0 ? (
+                {allParents.length > 0 ? (
                   <Select value={selectedParentId} onValueChange={setSelectedParentId}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select an existing parent" />
+                      <SelectValue placeholder="Select a parent" />
                     </SelectTrigger>
                     <SelectContent>
-                      {unlinkedParents.map(parent => (
+                      {allParents.map(parent => (
                         <SelectItem key={parent.user_id} value={parent.user_id}>
                           {parent.name} ({parent.email})
                         </SelectItem>
@@ -517,7 +517,7 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
                   </Select>
                 ) : (
                   <div className="text-sm text-amber-600 bg-amber-50 border border-amber-200 p-3 rounded">
-                    ⚠️ No unlinked parents available. Please create a new parent account.
+                    ⚠️ No parent accounts available. Please create a new parent account.
                   </div>
                 )}
               </div>
