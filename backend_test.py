@@ -85,87 +85,140 @@ def test_scenario_a_auto_seeding():
     
     return results
 
-def test_group_2_regular_admin_restrictions():
-    """Test Group 2: Regular Admin Restrictions"""
-    print_test_header("GROUP 2: REGULAR ADMIN RESTRICTIONS")
+def test_scenario_b_bus_stops_endpoint():
+    """SCENARIO B: Bus Stops Endpoint Testing"""
+    print_test_header("SCENARIO B: BUS STOPS ENDPOINT TESTING")
     
     session = TestSession()
     results = []
     
-    # Test 2.1: Login as regular admin
-    print("\n[Test 2.1] Login as regular admin (admin2@school.com)")
-    response = session.login("admin2@school.com", "password")
+    # Login as admin
+    print("\n[Setup] Login as admin")
+    response = session.login("admin@school.com", "password")
+    if response.status_code != 200:
+        print_result(False, "Admin login failed")
+        return [("Test B - Setup failed", False)]
+    
+    # Get list of buses
+    print("\n[Setup] Get list of buses")
+    response = session.get("/buses")
+    if response.status_code != 200:
+        print_result(False, "Failed to get buses list")
+        return [("Test B - Setup failed", False)]
+    
+    buses = response.json()
+    print(f"Found {len(buses)} buses")
+    
+    # Find a bus with route
+    bus_with_route = None
+    for bus in buses:
+        if bus.get('route_id'):
+            bus_with_route = bus
+            break
+    
+    # Test B.1: Get stops for bus with route
+    if bus_with_route:
+        print(f"\n[Test B.1] GET /api/buses/{bus_with_route['bus_id']}/stops - Bus with route")
+        print(f"  Bus: {bus_with_route.get('bus_number')}, Route ID: {bus_with_route.get('route_id')}")
+        
+        response = session.get(f"/buses/{bus_with_route['bus_id']}/stops")
+        
+        if response.status_code == 200:
+            stops = response.json()
+            
+            if isinstance(stops, list) and len(stops) > 0:
+                print_result(True, f"Returns array of {len(stops)} stops")
+                
+                # Verify stop structure
+                first_stop = stops[0]
+                required_fields = ['stop_id', 'stop_name', 'lat', 'lon', 'order_index']
+                has_all_fields = all(field in first_stop for field in required_fields)
+                
+                if has_all_fields:
+                    print(f"  Sample stop: {first_stop.get('stop_name')} (order: {first_stop.get('order_index')})")
+                    
+                    # Verify sorting by order_index
+                    is_sorted = all(stops[i].get('order_index', 0) <= stops[i+1].get('order_index', 0) 
+                                   for i in range(len(stops)-1))
+                    
+                    if is_sorted:
+                        print_result(True, "Stops are sorted by order_index")
+                        results.append(("Test B.1 - Get stops for bus with route (sorted)", True))
+                    else:
+                        print_result(False, "Stops are NOT sorted by order_index")
+                        results.append(("Test B.1 - Get stops for bus with route (sorted)", False))
+                else:
+                    print_result(False, f"Stop missing required fields. Has: {list(first_stop.keys())}")
+                    results.append(("Test B.1 - Get stops for bus with route (sorted)", False))
+            else:
+                print_result(False, f"Expected non-empty array, got: {stops}")
+                results.append(("Test B.1 - Get stops for bus with route (sorted)", False))
+        else:
+            print_result(False, f"Request failed with status {response.status_code}")
+            results.append(("Test B.1 - Get stops for bus with route (sorted)", False))
+    else:
+        print_result(False, "No bus with route found in database")
+        results.append(("Test B.1 - Get stops for bus with route (sorted)", False))
+    
+    # Test B.2: Create bus without route and test
+    print("\n[Test B.2] GET /api/buses/{bus_id}/stops - Bus without route")
+    
+    # Create test bus without route
+    test_bus_data = {
+        "bus_number": "TEST-999",
+        "driver_name": "Test Driver",
+        "driver_phone": "+1-555-9999",
+        "capacity": 30,
+        "route_id": None
+    }
+    
+    response = session.post("/buses", test_bus_data)
     
     if response.status_code == 200:
-        data = response.json()
-        has_field = "is_elevated_admin" in data
-        is_false = data.get("is_elevated_admin") == False
+        test_bus = response.json()
+        test_bus_id = test_bus.get('bus_id')
+        print(f"  Created test bus: {test_bus_id}")
         
-        if has_field and is_false:
-            print_result(True, f"Login successful. is_elevated_admin: {data.get('is_elevated_admin')}")
-            results.append(("Test 2.1 - Login response has is_elevated_admin=false", True))
-        else:
-            print_result(False, f"Login response missing or incorrect is_elevated_admin field. Got: {data.get('is_elevated_admin')}")
-            results.append(("Test 2.1 - Login response has is_elevated_admin=false", False))
-    else:
-        print_result(False, f"Login failed with status {response.status_code}")
-        results.append(("Test 2.1 - Login response has is_elevated_admin=false", False))
-        return results
-    
-    # Test 2.2: Get elevated admin (admin@school.com) user_id
-    print("\n[Test 2.2] Get admin@school.com user_id for restriction tests")
-    response = session.get("/users")
-    
-    admin1_user_id = None
-    if response.status_code == 200:
-        users = response.json()
-        for user in users:
-            if user.get("email") == "admin@school.com":
-                admin1_user_id = user.get("user_id")
-                print(f"Found admin1 user_id: {admin1_user_id}")
-                break
-    
-    if not admin1_user_id:
-        print_result(False, "Could not find admin@school.com user")
-        results.append(("Test 2.2 - Edit elevated admin blocked with 403", False))
-        results.append(("Test 2.3 - Delete elevated admin blocked with 403", False))
-        return results
-    
-    # Test 2.3: Try to edit elevated admin as regular admin (should fail)
-    print("\n[Test 2.3] PUT /api/users/{admin1_user_id} - Try to edit elevated admin as regular admin")
-    response = session.put(f"/users/{admin1_user_id}", {"name": "James Anderson Updated"})
-    
-    if response.status_code == 403:
-        error_msg = response.json().get("detail", "")
-        expected_msg = "Only elevated admins can edit other admins"
+        # Get stops for bus without route
+        response = session.get(f"/buses/{test_bus_id}/stops")
         
-        if expected_msg in error_msg:
-            print_result(True, f"Correctly blocked with 403. Error: {error_msg}")
-            results.append(("Test 2.2 - Edit elevated admin blocked with 403 and correct error", True))
+        if response.status_code == 200:
+            stops = response.json()
+            
+            if isinstance(stops, list) and len(stops) == 0:
+                print_result(True, "Returns empty array [] for bus without route")
+                results.append(("Test B.2 - Get stops for bus without route (empty array)", True))
+            else:
+                print_result(False, f"Expected empty array, got: {stops}")
+                results.append(("Test B.2 - Get stops for bus without route (empty array)", False))
         else:
-            print_result(False, f"Blocked with 403 but wrong error message. Got: {error_msg}, Expected: {expected_msg}")
-            results.append(("Test 2.2 - Edit elevated admin blocked with 403 and correct error", False))
-    else:
-        print_result(False, f"Should have been blocked with 403. Got status: {response.status_code}")
-        results.append(("Test 2.2 - Edit elevated admin blocked with 403 and correct error", False))
-    
-    # Test 2.4: Try to delete elevated admin as regular admin (should fail)
-    print("\n[Test 2.4] DELETE /api/users/{admin1_user_id} - Try to delete elevated admin as regular admin")
-    response = session.delete(f"/users/{admin1_user_id}")
-    
-    if response.status_code == 403:
-        error_msg = response.json().get("detail", "")
-        expected_msg = "Only elevated admins can delete other admins"
+            print_result(False, f"Request failed with status {response.status_code}")
+            results.append(("Test B.2 - Get stops for bus without route (empty array)", False))
         
-        if expected_msg in error_msg:
-            print_result(True, f"Correctly blocked with 403. Error: {error_msg}")
-            results.append(("Test 2.3 - Delete elevated admin blocked with 403 and correct error", True))
-        else:
-            print_result(False, f"Blocked with 403 but wrong error message. Got: {error_msg}, Expected: {expected_msg}")
-            results.append(("Test 2.3 - Delete elevated admin blocked with 403 and correct error", False))
+        # Cleanup: Delete test bus
+        session.delete(f"/buses/{test_bus_id}")
     else:
-        print_result(False, f"Should have been blocked with 403. Got status: {response.status_code}")
-        results.append(("Test 2.3 - Delete elevated admin blocked with 403 and correct error", False))
+        print_result(False, f"Failed to create test bus. Status: {response.status_code}")
+        results.append(("Test B.2 - Get stops for bus without route (empty array)", False))
+    
+    # Test B.3: Get stops for non-existent bus
+    print("\n[Test B.3] GET /api/buses/invalid-bus-id-12345/stops - Non-existent bus")
+    
+    response = session.get("/buses/invalid-bus-id-12345/stops")
+    
+    if response.status_code == 404:
+        error_data = response.json()
+        error_msg = error_data.get('detail', '')
+        
+        if 'Bus not found' in error_msg:
+            print_result(True, f"Returns 404 with correct error: {error_msg}")
+            results.append(("Test B.3 - Get stops for non-existent bus (404 error)", True))
+        else:
+            print_result(False, f"Returns 404 but wrong error message: {error_msg}")
+            results.append(("Test B.3 - Get stops for non-existent bus (404 error)", False))
+    else:
+        print_result(False, f"Expected 404, got status {response.status_code}")
+        results.append(("Test B.3 - Get stops for non-existent bus (404 error)", False))
     
     return results
 
