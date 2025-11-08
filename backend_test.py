@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 """
-Backend API Testing for Elevated Admin Permissions and Roll Number Display
+Backend API Testing for Auto Seed Initialization & Student Form Update
 Test Groups:
-1. Elevated Admin Permissions
-2. Regular Admin Restrictions  
-3. Roll Number Data
+1. Auto-Seeding Verification
+2. Bus Stops Endpoint Testing
+3. Student Creation with Stop Field
+4. Student Update with Stop Field
 """
 
 import requests
 import json
 import sys
-from typing import Dict, Optional
+from typing import Dict, Optional, List
 
 # Get backend URL from environment
 BACKEND_URL = "https://bus-tracker-update.preview.emergentagent.com/api"
