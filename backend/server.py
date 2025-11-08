@@ -778,6 +778,35 @@ async def get_bus(bus_id: str):
     
     return bus
 
+@api_router.get("/buses/{bus_id}/stops")
+async def get_bus_stops(bus_id: str):
+    """Get all stops for a specific bus via its route"""
+    # Get bus
+    bus = await db.buses.find_one({"bus_id": bus_id}, {"_id": 0})
+    if not bus:
+        raise HTTPException(status_code=404, detail="Bus not found")
+    
+    # Check if bus has a route
+    if not bus.get('route_id'):
+        return []  # Return empty list if no route assigned
+    
+    # Get route with stops
+    route = await db.routes.find_one({"route_id": bus['route_id']}, {"_id": 0})
+    if not route:
+        return []
+    
+    # Fetch all stops for this route
+    stops = []
+    for stop_id in route.get('stop_ids', []):
+        stop = await db.stops.find_one({"stop_id": stop_id}, {"_id": 0})
+        if stop:
+            stops.append(stop)
+    
+    # Sort by order_index if available
+    stops = sorted(stops, key=lambda x: x.get('order_index', 0))
+    
+    return stops
+
 @api_router.post("/buses")
 async def create_bus(bus: Bus, current_user: dict = Depends(get_current_user)):
     if current_user['role'] != 'admin':
