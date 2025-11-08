@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from './ui/card';
-import { User, GraduationCap, Bus, Phone, AlertCircle } from 'lucide-react';
+import { User, GraduationCap, Bus, Phone, AlertCircle, MapPin } from 'lucide-react';
 
 const getInitials = (name) => {
   return name
