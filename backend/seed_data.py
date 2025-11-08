@@ -376,7 +376,7 @@ async def seed_data():
             "is_elevated_admin": False
         },
         
-        # PARENTS (15 parents for 15 students)
+        # PARENTS (12 parents for 20 students - demonstrating Many:1 relationship)
         {
             "user_id": parent_ids[0],
             "email": "parent@school.com",
@@ -385,10 +385,10 @@ async def seed_data():
             "name": "John Parent",
             "phone": "+1-555-3001",
             "photo": None,
-            "address": "123 Main St, San Francisco, CA 94102",
+            "address": "123 Oak St, San Francisco, CA 94102",
             "assigned_class": None,
             "assigned_section": None,
-            "student_ids": [student_ids[0]],
+            "student_ids": [student_ids[0], student_ids[1]],  # TWO children: Emma & Liam
             "is_elevated_admin": False
         },
         {
@@ -396,13 +396,13 @@ async def seed_data():
             "email": "parent2@school.com",
             "password_hash": password_hash,
             "role": "parent",
-            "name": "Sarah Smith",
+            "name": "Sarah Brown",
             "phone": "+1-555-3002",
             "photo": None,
-            "address": "456 Oak Ave, San Francisco, CA 94103",
+            "address": "456 Pine Ave, San Francisco, CA 94103",
             "assigned_class": None,
             "assigned_section": None,
-            "student_ids": [student_ids[1]],
+            "student_ids": [student_ids[2]],  # ONE child: Sophia
             "is_elevated_admin": False
         },
         {
@@ -410,169 +410,140 @@ async def seed_data():
             "email": "parent3@school.com",
             "password_hash": password_hash,
             "role": "parent",
-            "name": "Michael Brown",
+            "name": "Michael Davis",
             "phone": "+1-555-3003",
             "photo": None,
-            "address": "789 Pine Rd, San Francisco, CA 94104",
+            "address": "789 Elm St, San Francisco, CA 94104",
             "assigned_class": None,
             "assigned_section": None,
-            "student_ids": [student_ids[2]]
+            "student_ids": [student_ids[3], student_ids[4]],  # TWO children: Noah & Olivia
+            "is_elevated_admin": False
         },
         {
             "user_id": parent_ids[3],
             "email": "parent4@school.com",
             "password_hash": password_hash,
             "role": "parent",
-            "name": "Emily Davis",
+            "name": "Emily Martinez",
             "phone": "+1-555-3004",
             "photo": None,
-            "address": "234 Elm St, San Francisco, CA 94105",
+            "address": "234 Maple Dr, San Francisco, CA 94105",
             "assigned_class": None,
             "assigned_section": None,
-            "student_ids": [student_ids[3]]
+            "student_ids": [student_ids[5], student_ids[6], student_ids[7]],  # THREE children: Ethan, Ava, Mason
+            "is_elevated_admin": False
         },
         {
             "user_id": parent_ids[4],
             "email": "parent5@school.com",
             "password_hash": password_hash,
             "role": "parent",
-            "name": "David Martinez",
+            "name": "David Wilson",
             "phone": "+1-555-3005",
             "photo": None,
-            "address": "567 Maple Dr, San Francisco, CA 94106",
+            "address": "567 Cedar Ln, San Francisco, CA 94106",
             "assigned_class": None,
             "assigned_section": None,
-            "student_ids": [student_ids[4]]
+            "student_ids": [student_ids[8], student_ids[9]],  # TWO children: Isabella, James
+            "is_elevated_admin": False
         },
         {
             "user_id": parent_ids[5],
             "email": "parent6@school.com",
             "password_hash": password_hash,
             "role": "parent",
-            "name": "Jennifer Wilson",
+            "name": "Jennifer Taylor",
             "phone": "+1-555-3006",
             "photo": None,
-            "address": "890 Cedar Ln, San Francisco, CA 94107",
+            "address": "890 Birch Ave, San Francisco, CA 94107",
             "assigned_class": None,
             "assigned_section": None,
-            "student_ids": [student_ids[5]]
+            "student_ids": [student_ids[10]],  # ONE child: Charlotte
+            "is_elevated_admin": False
         },
         {
             "user_id": parent_ids[6],
             "email": "parent7@school.com",
             "password_hash": password_hash,
             "role": "parent",
-            "name": "Christopher Taylor",
+            "name": "Christopher Garcia",
             "phone": "+1-555-3007",
             "photo": None,
-            "address": "123 Birch Ave, San Francisco, CA 94108",
+            "address": "123 Walnut St, San Francisco, CA 94108",
             "assigned_class": None,
             "assigned_section": None,
-            "student_ids": [student_ids[6]]
+            "student_ids": [student_ids[11], student_ids[12]],  # TWO children: Benjamin, Amelia
+            "is_elevated_admin": False
         },
         {
             "user_id": parent_ids[7],
             "email": "parent8@school.com",
             "password_hash": password_hash,
             "role": "parent",
-            "name": "Amanda Garcia",
+            "name": "Amanda Rodriguez",
             "phone": "+1-555-3008",
             "photo": None,
-            "address": "456 Walnut St, San Francisco, CA 94109",
+            "address": "456 Sunset Blvd, San Francisco, CA 94109",
             "assigned_class": None,
             "assigned_section": None,
-            "student_ids": [student_ids[7]]
+            "student_ids": [student_ids[13]],  # ONE child: Lucas
+            "is_elevated_admin": False
         },
         {
             "user_id": parent_ids[8],
             "email": "parent9@school.com",
             "password_hash": password_hash,
             "role": "parent",
-            "name": "Matthew Rodriguez",
+            "name": "Matthew Lee",
             "phone": "+1-555-3009",
             "photo": None,
-            "address": "789 Sunset Blvd, San Francisco, CA 94110",
+            "address": "789 Ocean Ave, San Francisco, CA 94110",
             "assigned_class": None,
             "assigned_section": None,
-            "student_ids": [student_ids[8]]
+            "student_ids": [student_ids[14], student_ids[15]],  # TWO children: Mia, Alexander
+            "is_elevated_admin": False
         },
         {
             "user_id": parent_ids[9],
             "email": "parent10@school.com",
             "password_hash": password_hash,
             "role": "parent",
-            "name": "Jessica Lee",
+            "name": "Jessica Harris",
             "phone": "+1-555-3010",
             "photo": None,
-            "address": "234 Ocean Ave, San Francisco, CA 94111",
+            "address": "234 Beach St, San Francisco, CA 94111",
             "assigned_class": None,
             "assigned_section": None,
-            "student_ids": [student_ids[9]]
+            "student_ids": [student_ids[16]],  # ONE child: Harper
+            "is_elevated_admin": False
         },
         {
             "user_id": parent_ids[10],
             "email": "parent11@school.com",
             "password_hash": password_hash,
             "role": "parent",
-            "name": "Daniel Harris",
+            "name": "Daniel Clark",
             "phone": "+1-555-3011",
             "photo": None,
-            "address": "567 Beach St, San Francisco, CA 94112",
+            "address": "567 Harbor Rd, San Francisco, CA 94112",
             "assigned_class": None,
             "assigned_section": None,
-            "student_ids": [student_ids[10]]
+            "student_ids": [student_ids[17], student_ids[18]],  # TWO children: Evelyn, Henry
+            "is_elevated_admin": False
         },
         {
             "user_id": parent_ids[11],
             "email": "parent12@school.com",
             "password_hash": password_hash,
             "role": "parent",
-            "name": "Lisa Clark",
+            "name": "Lisa Lewis",
             "phone": "+1-555-3012",
             "photo": None,
-            "address": "890 Harbor Rd, San Francisco, CA 94113",
+            "address": "890 Market St, San Francisco, CA 94113",
             "assigned_class": None,
             "assigned_section": None,
-            "student_ids": [student_ids[11]]
-        },
-        {
-            "user_id": parent_ids[12],
-            "email": "parent13@school.com",
-            "password_hash": password_hash,
-            "role": "parent",
-            "name": "Kevin Lewis",
-            "phone": "+1-555-3013",
-            "photo": None,
-            "address": "123 Market St, San Francisco, CA 94114",
-            "assigned_class": None,
-            "assigned_section": None,
-            "student_ids": [student_ids[12]]
-        },
-        {
-            "user_id": parent_ids[13],
-            "email": "parent14@school.com",
-            "password_hash": password_hash,
-            "role": "parent",
-            "name": "Nancy Walker",
-            "phone": "+1-555-3014",
-            "photo": None,
-            "address": "456 Park Ave, San Francisco, CA 94115",
-            "assigned_class": None,
-            "assigned_section": None,
-            "student_ids": [student_ids[13]]
-        },
-        {
-            "user_id": parent_ids[14],
-            "email": "parent15@school.com",
-            "password_hash": password_hash,
-            "role": "parent",
-            "name": "Steven Hall",
-            "phone": "+1-555-3015",
-            "photo": None,
-            "address": "789 King St, San Francisco, CA 94116",
-            "assigned_class": None,
-            "assigned_section": None,
-            "student_ids": [student_ids[14]]
+            "student_ids": [student_ids[19]],  # ONE child: Sebastian
+            "is_elevated_admin": False
         }
     ]
     
