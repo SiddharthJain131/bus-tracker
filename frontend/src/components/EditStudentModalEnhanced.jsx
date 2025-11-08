@@ -19,7 +19,6 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
     class_name: '',
     section: '',
     parent_id: '',
-    teacher_id: '',
     bus_id: '',
     stop_id: '',
     emergency_contact: '',
@@ -27,8 +26,9 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
   });
   const [saving, setSaving] = useState(false);
   const [parents, setParents] = useState([]);
-  const [teachers, setTeachers] = useState([]);
   const [buses, setBuses] = useState([]);
+  const [stops, setStops] = useState([]);
+  const [loadingStops, setLoadingStops] = useState(false);
 
   useEffect(() => {
     if (open && student) {
