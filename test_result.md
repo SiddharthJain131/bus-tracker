@@ -411,6 +411,30 @@ backend:
         agent: "testing"
         comment: "✅ COMPREHENSIVE TEST COMPLETED - All 3 scenarios passed successfully. SCENARIO 1 (Elevated Admin Edit): admin@school.com can edit other admins including admin2@school.com. Edit modal opens correctly with user form. SCENARIO 2 (Regular Admin Restrictions): admin2@school.com login working, elevated admin badge (⭐ Elevated) visible on James Anderson, UI properly shows permission indicators. SCENARIO 3 (Roll Numbers): teacher@school.com dashboard displays Roll No column with 5 students having G5A-XXX format roll numbers (G5A-001 through G5A-005). All functionality working as expected per review requirements."
 
+  - task: "Auto-seeding on server startup"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Added @app.on_event('startup') handler that checks if core collections (users, students, buses, routes) are empty. If all empty, automatically imports and runs seed_data() function from seed_data.py. Console logs show '🪴 Auto-seeding database...' when seeding or '✅ Database already populated, skipping seeding' when data exists. Non-blocking async execution. Initial test shows seeding triggered successfully on server restart."
+
+  - task: "GET /api/buses/{bus_id}/stops endpoint"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created new endpoint at line ~805 to fetch stops for a specific bus via its route. Gets bus by bus_id, fetches route via route_id, returns all stops from route's stop_ids array sorted by order_index. Returns empty array if bus has no route or route not found. Endpoint works without authentication for easier form access."
+
   - task: "Holiday CRUD Feature - Admin Dashboard"
     implemented: true
     working: true
