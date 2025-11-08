@@ -184,7 +184,7 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
 
         {/* Step Indicator */}
         <div className="flex items-center justify-center gap-4 mb-6">
-          {[1, 2, 3].map((stepNum) => (
+          {[1, 2].map((stepNum) => (
             <div key={stepNum} className="flex items-center">
               <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
                 step >= stepNum 
@@ -193,7 +193,7 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
               }`}>
                 {stepNum}
               </div>
-              {stepNum < 3 && (
+              {stepNum < 2 && (
                 <div className={`w-12 h-1 mx-2 ${
                   step > stepNum ? 'bg-violet-600' : 'bg-gray-200'
                 }`}></div>
