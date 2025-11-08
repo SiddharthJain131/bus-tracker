@@ -637,6 +637,30 @@ frontend:
         agent: "main"
         comment: "Comprehensive frontend QA test for Admin Add Student flow. Testing multi-step modal (Student Info → Parent Info → Teacher Assignment), automatic parent account creation, teacher auto-assignment based on class/section, and cross-dashboard visibility. Test scenarios: A) Student with assigned teacher (verify in Admin, Parent, Teacher dashboards), B) Student without assigned teacher (verify in Admin, Parent dashboards only), C) Manual user creation via Add User modal (Parent, Teacher, Admin roles). Components involved: AddStudentModal.jsx (3-step wizard), AddUserModal.jsx (role-based form), AdminDashboardNew.jsx (Students & Users tabs), ParentDashboard.jsx, TeacherDashboardNew.jsx. Focus: data linking correctness, dashboard refresh triggers, simulated multi-role login verification."
 
+  - task: "AddStudentModal - Show ALL Parents (Many:1 Support)"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/AddStudentModal.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "UPDATED - Changed parent selection to support multiple students per parent. CHANGES: 1) Fetches from GET /api/parents/all instead of /api/parents/unlinked. 2) State variable changed from unlinkedParents to allParents. 3) Parent dropdown shows ALL parent accounts in format 'Name (email)'. 4) Radio button label updated from 'Select Existing Parent (unlinked only)' to 'Select Existing Parent'. 5) Added capacity warning toast display when backend returns capacity_warning. Ready for testing: Verify all parents shown in dropdown, multiple students can link to same parent, capacity warnings display correctly."
+
+  - task: "EditStudentModalEnhanced - Capacity Warning Display"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/EditStudentModalEnhanced.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "UPDATED - Added bus capacity warning display when editing students. CHANGES: 1) Added capacity warning toast when backend returns capacity_warning in response. 2) Improved error handling to display backend error messages via response.data.detail. 3) Already fetches ALL parents via /api/users (filtered by role=parent), so supports multiple students per parent. Ready for testing: Verify capacity warnings display when bus is changed to full bus, error messages from backend shown correctly."
+
   - task: "Role-based routing"
     implemented: true
     working: "NA"
