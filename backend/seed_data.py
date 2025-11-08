@@ -580,7 +580,7 @@ async def seed_data():
             "photo": None,
             "class_name": "Grade 5",
             "section": "A",
-            "parent_id": parent_ids[1],
+            "parent_id": parent_ids[0],  # John Parent's second child
             "teacher_id": teacher1_id,
             "bus_id": bus1_id,
             "stop_id": route1_stop_ids[2],
