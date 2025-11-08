@@ -93,7 +93,13 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
   };
 
   const handleChange = (field, value) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData(prev => {
+      // If bus changes, reset stop selection
+      if (field === 'bus_id') {
+        return { ...prev, [field]: value, stop_id: '' };
+      }
+      return { ...prev, [field]: value };
+    });
   };
 
   const handleSave = async () => {
