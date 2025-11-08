@@ -527,7 +527,51 @@ export default function TeacherDashboardNew({ user, onLogout }) {
           setShowStudentDetail(false);
           setSelectedStudent(null);
         }}
+        hideTeacherField={true}
       />
+
+      {/* Attendance Modal */}
+      <Dialog open={showAttendanceModal} onOpenChange={setShowAttendanceModal}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold flex items-center gap-2" style={{ fontFamily: 'Space Grotesk' }}>
+              <Calendar className="w-6 h-6 text-blue-600" />
+              Monthly Attendance - {attendanceStudentName}
+            </DialogTitle>
+          </DialogHeader>
+          
+          <div className="mt-4">
+            {/* Status Legend */}
+            <div className="flex flex-wrap items-center justify-center gap-4 mb-6 p-4 bg-gray-50 rounded-lg">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full status-gray"></div>
+                <span className="text-xs font-medium text-gray-600">Not Scanned</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full status-yellow"></div>
+                <span className="text-xs font-medium text-gray-600">On Board</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full status-green"></div>
+                <span className="text-xs font-medium text-gray-600">Reached</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full status-red"></div>
+                <span className="text-xs font-medium text-gray-600">Missed</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full status-blue"></div>
+                <span className="text-xs font-medium text-gray-600">Holiday</span>
+              </div>
+            </div>
+            
+            {/* Attendance Grid */}
+            {attendanceStudentId && (
+              <AttendanceGrid studentId={attendanceStudentId} />
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
