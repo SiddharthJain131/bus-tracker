@@ -642,7 +642,7 @@ async def seed_data():
             "photo": None,
             "class_name": "Grade 6",
             "section": "B",
-            "parent_id": parent_ids[5],
+            "parent_id": parent_ids[3],  # Emily Martinez's first child
             "teacher_id": teacher2_id,
             "bus_id": bus3_id,
             "stop_id": route3_stop_ids[1],
@@ -657,7 +657,7 @@ async def seed_data():
             "photo": None,
             "class_name": "Grade 6",
             "section": "B",
-            "parent_id": parent_ids[6],
+            "parent_id": parent_ids[3],  # Emily Martinez's second child
             "teacher_id": teacher2_id,
             "bus_id": bus3_id,
             "stop_id": route3_stop_ids[2],
@@ -672,7 +672,7 @@ async def seed_data():
             "photo": None,
             "class_name": "Grade 6",
             "section": "B",
-            "parent_id": parent_ids[7],
+            "parent_id": parent_ids[3],  # Emily Martinez's third child
             "teacher_id": teacher2_id,
             "bus_id": bus4_id,
             "stop_id": route4_stop_ids[0],
@@ -687,7 +687,7 @@ async def seed_data():
             "photo": None,
             "class_name": "Grade 6",
             "section": "B",
-            "parent_id": parent_ids[8],
+            "parent_id": parent_ids[4],  # David Wilson's first child
             "teacher_id": teacher2_id,
             "bus_id": bus4_id,
             "stop_id": route4_stop_ids[1],
@@ -702,7 +702,7 @@ async def seed_data():
             "photo": None,
             "class_name": "Grade 6",
             "section": "B",
-            "parent_id": parent_ids[9],
+            "parent_id": parent_ids[4],  # David Wilson's second child
             "teacher_id": teacher2_id,
             "bus_id": bus4_id,
             "stop_id": route4_stop_ids[2],
