@@ -294,10 +294,12 @@ async def seed_data():
     teacher3_id = str(uuid.uuid4())
     
     # Pre-generate student IDs for linking
-    student_ids = [str(uuid.uuid4()) for _ in range(15)]
+    # Creating 20 students with some sharing parents (Many:1 relationship test)
+    student_ids = [str(uuid.uuid4()) for _ in range(20)]
     
-    # Create parent IDs
-    parent_ids = [str(uuid.uuid4()) for _ in range(15)]
+    # Create parent IDs - fewer parents than students to demonstrate Many:1
+    # 12 parents for 20 students = multiple children per parent
+    parent_ids = [str(uuid.uuid4()) for _ in range(12)]
     
     users = [
         # ADMINS
