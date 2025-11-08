@@ -268,7 +268,9 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
                 <Label>Bus *</Label>
                 <Select
                   value={studentData.bus_id}
-                  onValueChange={(value) => setStudentData({ ...studentData, bus_id: value })}
+                  onValueChange={(value) => {
+                    setStudentData({ ...studentData, bus_id: value, stop_id: '' });
+                  }}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Select bus" />
@@ -284,22 +286,40 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
               </div>
               
               <div>
-                <Label>Stop</Label>
+                <Label>Stop *</Label>
                 <Select
                   value={studentData.stop_id}
                   onValueChange={(value) => setStudentData({ ...studentData, stop_id: value })}
+                  disabled={!studentData.bus_id || loadingStops}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Select stop" />
+                    <SelectValue placeholder={
+                      !studentData.bus_id 
+                        ? "Select bus first" 
+                        : loadingStops 
+                        ? "Loading stops..." 
+                        : "Select stop"
+                    } />
                   </SelectTrigger>
                   <SelectContent>
-                    {stops.map(stop => (
-                      <SelectItem key={stop.stop_id} value={stop.stop_id}>
-                        {stop.stop_name}
+                    {stops.length > 0 ? (
+                      stops.map(stop => (
+                        <SelectItem key={stop.stop_id} value={stop.stop_id}>
+                          {stop.stop_name}
+                        </SelectItem>
+                      ))
+                    ) : (
+                      <SelectItem value="no-stops" disabled>
+                        No stops available
                       </SelectItem>
-                    ))}
+                    )}
                   </SelectContent>
                 </Select>
+                {studentData.bus_id && stops.length === 0 && !loadingStops && (
+                  <p className="text-xs text-amber-600 mt-1">
+                    ⚠️ Selected bus has no route stops configured
+                  </p>
+                )}
               </div>
               
               <div>
