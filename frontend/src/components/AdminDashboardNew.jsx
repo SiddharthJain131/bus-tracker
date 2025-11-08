@@ -963,6 +963,12 @@ export default function AdminDashboardNew({ user, onLogout }) {
         onSuccess={fetchAllData}
       />
 
+      <HolidaysManagementModal
+        open={showHolidaysManagement}
+        onClose={() => setShowHolidaysManagement(false)}
+        onSuccess={fetchAllData}
+      />
+
       <DeleteConfirmationDialog
         open={showDeleteConfirm}
         onClose={() => {
