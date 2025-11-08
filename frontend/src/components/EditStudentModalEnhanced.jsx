@@ -189,13 +189,22 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
         }
       });
 
-      await axios.put(`${API}/students/${student.student_id}`, formData);
+      const response = await axios.put(`${API}/students/${student.student_id}`, formData);
+      
+      // Check for capacity warning
+      if (response.data?.capacity_warning) {
+        toast.warning(response.data.capacity_warning, { duration: 6000 });
+      }
       
       toast.success('Student updated successfully! Email notification sent to parent.');
       onSuccess();
       onClose();
     } catch (error) {
-      toast.error('Failed to update student');
+      if (error.response?.data?.detail) {
+        toast.error(error.response.data.detail);
+      } else {
+        toast.error('Failed to update student');
+      }
       console.error('Update error:', error);
     } finally {
       setSaving(false);
