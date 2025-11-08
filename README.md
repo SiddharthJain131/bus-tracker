@@ -326,6 +326,94 @@ db.routes.countDocuments()     # Should show 4 routes
 - `POST /api/simulate_scan` - Simulate RFID scan
 - `POST /api/simulate_bus_movement` - Simulate bus movement
 
+## 🛰️ Attendance Data Upload — Overview
+
+### Purpose
+
+This API endpoint is designed specifically for Raspberry Pi devices equipped with RFID readers and cameras to send attendance records along with photo and scan metadata to the server. The system enables real-time student attendance tracking as students board (AM) and deboard (PM) school buses.
+
+### Request Data Requirements
+
+When uploading attendance data from the Raspberry Pi via the SIM800 module, the request should contain:
+
+**Student & School Information:**
+- Student identifiers (student_id or RFID tag_id)
+- Class, section, and roll number information
+- Student name for verification
+
+**Transport Details:**
+- Bus identification (bus_id or bus_number)
+- Stop identification (stop_id or stop_name)
+- GPS coordinates of the scan location
+
+**Scan Metadata:**
+- Scan type (AM for boarding / PM for deboarding)
+- Timestamp of the scan event (ISO 8601 format)
+- Verification status and confidence score
+
+**Photo Data:**
+- Captured photo data (Base64 encoded or file reference)
+- Photo file format and size
+- Camera device information
+
+**Optional Device Information:**
+- Device ID (Raspberry Pi identifier)
+- GPS coordinates of the device
+- Signal strength data
+- Network information
+
+### Server Behavior
+
+**Automatic Processing:**
+- Attendance entries are automatically marked upon successful upload
+- The system determines trip type (AM/PM) based on timestamp
+- Photos are stored in the server's photo directory and linked to the corresponding attendance record
+- Attendance status is set to "yellow" (On Board) initially and transitions to "green" (Reached) when the bus completes the trip
+
+**Data Validation:**
+- The server validates all incoming data before saving
+- Student identification is verified against the database
+- Duplicate uploads for the same timestamp are safely ignored (idempotent behavior)
+- Invalid or malformed data is rejected with appropriate error responses
+
+**Authentication & Security:**
+- Authentication headers are required for all uploads
+- Each Raspberry Pi device should have unique credentials
+- All requests are validated against the session management system
+- Failed authentication attempts are logged for security monitoring
+
+**Error Handling:**
+- Network interruptions are handled gracefully
+- Failed uploads can be retried without data duplication
+- Clear error messages are returned for troubleshooting
+- Validation failures provide specific details about the issue
+
+### Note for Developers
+
+**Attendance Update Mechanism:**
+- Each attendance upload triggers an update to the student's attendance log and notification system
+- Parents receive real-time notifications when their child boards or deboards the bus
+- The same mechanism handles both AM (boarding) and PM (deboarding) scans
+
+**Photo Management:**
+- The backend automatically categorizes the uploaded photo and associates it with the corresponding attendance entry
+- Photos are stored with the naming convention: `{student_id}/{date}_{trip}.jpg`
+- Failed photo uploads do not block attendance recording; the system creates the attendance record with a photo placeholder
+- Photos can be accessed through the attendance API for display in parent and teacher dashboards
+
+**Integration Points:**
+- The scan event API (`POST /api/scan_event`) is the primary endpoint for attendance uploads
+- Attendance data is immediately available through the get attendance API (`GET /api/get_attendance`)
+- Real-time bus location updates should use the separate location API (`POST /api/update_location`)
+- Identity mismatches (low confidence scores) trigger automatic notifications to parents and administrators
+
+**Best Practices:**
+- Implement retry logic with exponential backoff for network failures
+- Buffer attendance data locally on the Raspberry Pi in case of connectivity loss
+- Compress photos before upload to reduce bandwidth usage via SIM800
+- Include device metadata for troubleshooting and diagnostics
+- Test the upload mechanism thoroughly in offline/online scenarios
+
 ## 🛠️ Development
 
 ### Running Tests
