@@ -513,6 +513,13 @@ async def get_student(student_id: str, current_user: dict = Depends(get_current_
         student['bus_number'] = 'N/A'
         student['route_id'] = None
     
+    # Enrich with stop name
+    if student.get('stop_id'):
+        stop = await db.stops.find_one({"stop_id": student['stop_id']}, {"_id": 0})
+        student['stop_name'] = stop['stop_name'] if stop else 'N/A'
+    else:
+        student['stop_name'] = 'N/A'
+    
     return student
 
 @api_router.post("/students")
