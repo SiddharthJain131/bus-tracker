@@ -41,6 +41,50 @@ export default function AttendanceGrid({ studentId }) {
     return `status-${status}`;
   };
 
+  const handleCellClick = (day, trip) => {
+    const tripData = trip === 'AM' ? {
+      photo: day.am_scan_photo,
+      timestamp: day.am_scan_timestamp,
+      status: day.am_status,
+      trip: 'AM'
+    } : {
+      photo: day.pm_scan_photo,
+      timestamp: day.pm_scan_timestamp,
+      status: day.pm_status,
+      trip: 'PM'
+    };
+
+    // Only open modal if status is green
+    if (tripData.status === 'green') {
+      setSelectedScan({
+        ...tripData,
+        date: day.date,
+        day: day.day
+      });
+      setShowScanModal(true);
+    }
+  };
+
+  const formatTimestamp = (timestamp) => {
+    if (!timestamp) return 'No timestamp available';
+    try {
+      const date = new Date(timestamp);
+      const timeStr = date.toLocaleTimeString('en-US', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: true 
+      });
+      const dateStr = date.toLocaleDateString('en-US', { 
+        day: '2-digit', 
+        month: 'short', 
+        year: 'numeric' 
+      });
+      return `${timeStr}, ${dateStr}`;
+    } catch (e) {
+      return 'Invalid timestamp';
+    }
+  };
+
   const monthName = currentMonth.toLocaleString('default', { month: 'long', year: 'numeric' });
 
   return (
