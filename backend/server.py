@@ -872,6 +872,11 @@ async def get_class_sections():
                 # Extract just the number from class_name (e.g., "Grade 5" -> "5")
                 class_num = combo['class_name'].replace('Grade', '').replace('Class', '').strip()
                 formatted.append(f"{class_num}{combo['section']}")
+        
+        return formatted
+    except Exception as e:
+        print(f"Error fetching class-sections: {str(e)}")
+        return []
 
 
 @api_router.get("/parents/unlinked")
@@ -893,12 +898,6 @@ async def get_unlinked_parents(current_user: dict = Depends(get_current_user)):
         return unlinked_parents
     except Exception as e:
         print(f"Error fetching unlinked parents: {str(e)}")
-        return []
-
-        
-        return formatted
-    except Exception as e:
-        print(f"Error fetching class-sections: {str(e)}")
         return []
 
 
