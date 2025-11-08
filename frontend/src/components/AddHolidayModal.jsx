@@ -8,7 +8,8 @@ import { Textarea } from './ui/textarea';
 import { Calendar } from 'lucide-react';
 import { toast } from 'sonner';
 
-const API = import.meta.env.VITE_API_URL || process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001/api';
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
 
 export default function AddHolidayModal({ open, onClose, onSuccess }) {
   const [formData, setFormData] = useState({
