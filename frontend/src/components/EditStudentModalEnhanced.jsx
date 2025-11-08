@@ -71,13 +71,27 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
 
   const fetchDropdownData = async () => {
     try {
-      const [usersRes, busesRes] = await Promise.all([
+      const [usersRes, busesRes, classSectionsRes] = await Promise.all([
         axios.get(`${API}/users`),
-        axios.get(`${API}/buses`)
+        axios.get(`${API}/buses`),
+        axios.get(`${API}/students/class-sections`)
       ]);
       
-      setParents(usersRes.data.filter(u => u.role === 'parent'));
+      const parentsList = usersRes.data.filter(u => u.role === 'parent');
+      setParents(parentsList);
       setBuses(busesRes.data);
+      setClassSectionSuggestions(classSectionsRes.data || []);
+      
+      // Set parent search field with current parent's name and email
+      if (student && student.parent_id) {
+        const currentParent = parentsList.find(p => p.user_id === student.parent_id);
+        if (currentParent) {
+          setFormData(prev => ({
+            ...prev,
+            parent_search: `${currentParent.name} (${currentParent.email})`
+          }));
+        }
+      }
     } catch (error) {
       console.error('Failed to load dropdown data:', error);
     }
