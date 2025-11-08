@@ -438,7 +438,11 @@ async def get_attendance(student_id: str, month: str, current_user: dict = Depen
             "am_status": am_status,
             "pm_status": pm_status,
             "am_confidence": am_record['confidence'] if am_record else None,
-            "pm_confidence": pm_record['confidence'] if pm_record else None
+            "pm_confidence": pm_record['confidence'] if pm_record else None,
+            "am_scan_photo": am_record.get('scan_photo') if am_record else None,
+            "am_scan_timestamp": am_record.get('scan_timestamp') if am_record else None,
+            "pm_scan_photo": pm_record.get('scan_photo') if pm_record else None,
+            "pm_scan_timestamp": pm_record.get('scan_timestamp') if pm_record else None
         })
     
     total_days = last_day * 2
