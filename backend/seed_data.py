@@ -358,7 +358,7 @@ async def seed_data():
             "address": "456 Educator Drive, San Francisco, CA",
             "assigned_class": "Grade 6",
             "assigned_section": "B",
-            "student_ids": [student_ids[5], student_ids[6], student_ids[7], student_ids[8], student_ids[9]],
+            "student_ids": [student_ids[5], student_ids[6], student_ids[7], student_ids[8], student_ids[9], student_ids[16], student_ids[19]],
             "is_elevated_admin": False
         },
         {
