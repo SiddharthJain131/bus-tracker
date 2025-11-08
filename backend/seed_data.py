@@ -610,7 +610,7 @@ async def seed_data():
             "photo": None,
             "class_name": "Grade 5",
             "section": "A",
-            "parent_id": parent_ids[3],
+            "parent_id": parent_ids[2],  # Michael Davis's first child
             "teacher_id": teacher1_id,
             "bus_id": bus2_id,
             "stop_id": route2_stop_ids[1],
