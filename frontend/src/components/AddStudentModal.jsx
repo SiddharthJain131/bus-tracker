@@ -550,7 +550,7 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
                   {loading ? 'Creating...' : (
                     <>
                       <CheckCircle className="w-4 h-4 mr-2" />
-                      Create Student & Parent
+                      {parentMode === 'create' ? 'Create Student & Parent' : 'Create Student'}
                     </>
                   )}
                 </Button>
