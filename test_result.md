@@ -413,15 +413,18 @@ backend:
 
   - task: "Auto-seeding on server startup"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Added @app.on_event('startup') handler that checks if core collections (users, students, buses, routes) are empty. If all empty, automatically imports and runs seed_data() function from seed_data.py. Console logs show '🪴 Auto-seeding database...' when seeding or '✅ Database already populated, skipping seeding' when data exists. Non-blocking async execution. Initial test shows seeding triggered successfully on server restart."
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED - Auto-seeding functionality verified through backend logs. SCENARIO A TESTING: Checked /var/log/supervisor/backend.out.log and confirmed presence of auto-seeding messages: '✅ Auto-seeding completed successfully!' and '✅ Database already populated, skipping seeding.' The startup handler correctly detects empty database and triggers seeding, or skips when data already exists. Non-blocking async execution working as expected."
 
   - task: "GET /api/buses/{bus_id}/stops endpoint"
     implemented: true
