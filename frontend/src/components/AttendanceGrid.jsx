@@ -123,17 +123,25 @@ export default function AttendanceGrid({ studentId }) {
           >
             <div className="text-center font-semibold text-sm text-gray-700 mb-2">{day.day}</div>
             <div className="space-y-1">
+              {/* AM Status Cell */}
               <div
                 data-testid={`am-status-day-${day.day}`}
-                className={`text-xs py-1 px-2 rounded text-center font-medium ${getStatusClass(day.am_status)}`}
+                className={`text-xs py-1 px-2 rounded text-center font-medium ${getStatusClass(day.am_status)} ${
+                  day.am_status === 'green' ? 'cursor-pointer hover:opacity-80 transition-opacity' : ''
+                }`}
                 title={day.am_confidence ? `Confidence: ${(day.am_confidence * 100).toFixed(0)}%` : ''}
+                onClick={() => handleCellClick(day, 'AM')}
               >
                 AM
               </div>
+              {/* PM Status Cell */}
               <div
                 data-testid={`pm-status-day-${day.day}`}
-                className={`text-xs py-1 px-2 rounded text-center font-medium ${getStatusClass(day.pm_status)}`}
+                className={`text-xs py-1 px-2 rounded text-center font-medium ${getStatusClass(day.pm_status)} ${
+                  day.pm_status === 'green' ? 'cursor-pointer hover:opacity-80 transition-opacity' : ''
+                }`}
                 title={day.pm_confidence ? `Confidence: ${(day.pm_confidence * 100).toFixed(0)}%` : ''}
+                onClick={() => handleCellClick(day, 'PM')}
               >
                 PM
               </div>
@@ -141,6 +149,69 @@ export default function AttendanceGrid({ studentId }) {
           </div>
         ))}
       </div>
+
+      {/* Scan Details Modal */}
+      <Dialog open={showScanModal} onOpenChange={setShowScanModal}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-bold flex items-center gap-2" style={{ fontFamily: 'Space Grotesk' }}>
+              <Calendar className="w-5 h-5 text-blue-600" />
+              {selectedScan?.trip === 'AM' ? 'Arrival Scan' : 'Departure Scan'}
+            </DialogTitle>
+          </DialogHeader>
+          
+          {selectedScan && (
+            <div className="space-y-4">
+              {/* Photo Section */}
+              <div className="flex justify-center">
+                {selectedScan.photo ? (
+                  <img 
+                    src={selectedScan.photo} 
+                    alt="Scan capture" 
+                    className="w-40 h-40 object-cover rounded-lg shadow-md border-2 border-gray-200"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                ) : (
+                  <div className="w-40 h-40 bg-gray-100 rounded-lg flex items-center justify-center border-2 border-gray-200">
+                    <div className="text-center text-gray-500 text-sm">
+                      <Calendar className="w-8 h-8 mx-auto mb-2 opacity-50" />
+                      <p>No photo available</p>
+                    </div>
+                  </div>
+                )}
+                {/* Fallback div for image load error */}
+                <div style={{ display: 'none' }} className="w-40 h-40 bg-gray-100 rounded-lg flex items-center justify-center border-2 border-gray-200">
+                  <div className="text-center text-gray-500 text-sm">
+                    <Calendar className="w-8 h-8 mx-auto mb-2 opacity-50" />
+                    <p>Photo not found</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Timestamp Section */}
+              <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
+                <div className="flex items-center gap-2 justify-center text-blue-900">
+                  <Clock className="w-5 h-5 text-blue-600" />
+                  <div className="text-center">
+                    <p className="text-xs text-blue-600 font-medium mb-1">Scan Time</p>
+                    <p className="font-semibold">{formatTimestamp(selectedScan.timestamp)}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Additional Info */}
+              {!selectedScan.photo && !selectedScan.timestamp && (
+                <div className="text-center text-gray-500 text-sm p-4 bg-gray-50 rounded-lg">
+                  No scan data available for this session.
+                </div>
+              )}
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
