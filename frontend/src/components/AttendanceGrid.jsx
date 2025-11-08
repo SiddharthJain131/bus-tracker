@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button } from './ui/button';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
+import { ChevronLeft, ChevronRight, Calendar, Clock } from 'lucide-react';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -10,6 +11,8 @@ export default function AttendanceGrid({ studentId }) {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [gridData, setGridData] = useState([]);
   const [summary, setSummary] = useState('');
+  const [showScanModal, setShowScanModal] = useState(false);
+  const [selectedScan, setSelectedScan] = useState(null);
 
   useEffect(() => {
     fetchAttendance();
