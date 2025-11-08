@@ -504,6 +504,42 @@ backend:
         agent: "main"
         comment: "FIXED - Removed duplicate roll number display and added Stop field visibility. CHANGES: 1) Removed the Card showing Roll Number (lines 80-88) - roll number now only visible once next to student name in header. 2) Added new Card showing Stop field with stop_name from student details. 3) Backend enrichment updated to include stop_name in GET /api/students/{student_id}. Field order now: Class & Section, Phone, Teacher, Bus Number, Stop. Ready for testing: Verify single roll number display in header, confirm Stop field is visible and shows correct stop_name value."
 
+  - task: "GET /api/parents/all endpoint - Support Many:1 Parent-Student Relationship"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Created new endpoint GET /api/parents/all that returns ALL parent accounts (not just unlinked). Enables multiple students to link to same parent. Returns parents sorted by name with password_hash excluded. Admin-only access enforced."
+
+  - task: "Bus Capacity Validation - POST /api/students"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Added bus capacity checking when creating students. Counts current students on bus, compares to bus.capacity. If exceeded, logs warning and returns capacity_warning in response (does not block creation). Warning format: 'Warning: Bus {bus_number} capacity ({capacity}) will be exceeded. Current: {current_count}, After: {new_count}'"
+
+  - task: "Bus Capacity Validation & Parent Reassignment - PUT /api/students"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Enhanced student update endpoint with: 1) Bus capacity check when bus_id changes (excludes current student from count). 2) Parent reassignment logic: removes student from old parent's student_ids array, adds to new parent's student_ids using $addToSet (supports multiple children per parent). Returns capacity_warning if bus capacity exceeded."
+
 frontend:
   - task: "Login page"
     implemented: true
