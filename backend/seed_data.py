@@ -563,7 +563,7 @@ async def seed_data():
             "roll_number": "G5A-001",
             "phone": "+1-555-4001",
             "photo": None,
-            "class_name": "Grade 5",
+            "class_name": "5",
             "section": "A",
             "parent_id": parent_ids[0],
             "teacher_id": teacher1_id,
@@ -578,7 +578,7 @@ async def seed_data():
             "roll_number": "G5A-002",
             "phone": "+1-555-4002",
             "photo": None,
-            "class_name": "Grade 5",
+            "class_name": "5",
             "section": "A",
             "parent_id": parent_ids[0],  # John Parent's second child
             "teacher_id": teacher1_id,
@@ -593,7 +593,7 @@ async def seed_data():
             "roll_number": "G5A-003",
             "phone": "+1-555-4003",
             "photo": None,
-            "class_name": "Grade 5",
+            "class_name": "5",
             "section": "A",
             "parent_id": parent_ids[1],  # Sarah Brown's child
             "teacher_id": teacher1_id,
@@ -608,7 +608,7 @@ async def seed_data():
             "roll_number": "G5A-004",
             "phone": "+1-555-4004",
             "photo": None,
-            "class_name": "Grade 5",
+            "class_name": "5",
             "section": "A",
             "parent_id": parent_ids[2],  # Michael Davis's first child
             "teacher_id": teacher1_id,
@@ -623,7 +623,7 @@ async def seed_data():
             "roll_number": "G5A-005",
             "phone": "+1-555-4005",
             "photo": None,
-            "class_name": "Grade 5",
+            "class_name": "5",
             "section": "A",
             "parent_id": parent_ids[2],  # Michael Davis's second child
             "teacher_id": teacher1_id,
@@ -640,7 +640,7 @@ async def seed_data():
             "roll_number": "G6B-001",
             "phone": "+1-555-4006",
             "photo": None,
-            "class_name": "Grade 6",
+            "class_name": "6",
             "section": "B",
             "parent_id": parent_ids[3],  # Emily Martinez's first child
             "teacher_id": teacher2_id,
@@ -655,7 +655,7 @@ async def seed_data():
             "roll_number": "G6B-002",
             "phone": "+1-555-4007",
             "photo": None,
-            "class_name": "Grade 6",
+            "class_name": "6",
             "section": "B",
             "parent_id": parent_ids[3],  # Emily Martinez's second child
             "teacher_id": teacher2_id,
@@ -670,7 +670,7 @@ async def seed_data():
             "roll_number": "G6B-003",
             "phone": "+1-555-4008",
             "photo": None,
-            "class_name": "Grade 6",
+            "class_name": "6",
             "section": "B",
             "parent_id": parent_ids[3],  # Emily Martinez's third child
             "teacher_id": teacher2_id,
@@ -685,7 +685,7 @@ async def seed_data():
             "roll_number": "G6B-004",
             "phone": "+1-555-4009",
             "photo": None,
-            "class_name": "Grade 6",
+            "class_name": "6",
             "section": "B",
             "parent_id": parent_ids[4],  # David Wilson's first child
             "teacher_id": teacher2_id,
@@ -700,7 +700,7 @@ async def seed_data():
             "roll_number": "G6B-005",
             "phone": "+1-555-4010",
             "photo": None,
-            "class_name": "Grade 6",
+            "class_name": "6",
             "section": "B",
             "parent_id": parent_ids[4],  # David Wilson's second child
             "teacher_id": teacher2_id,
@@ -717,7 +717,7 @@ async def seed_data():
             "roll_number": "G4A-001",
             "phone": "+1-555-4011",
             "photo": None,
-            "class_name": "Grade 4",
+            "class_name": "4",
             "section": "A",
             "parent_id": parent_ids[5],  # Jennifer Taylor's child
             "teacher_id": teacher3_id,
@@ -732,7 +732,7 @@ async def seed_data():
             "roll_number": "G4A-002",
             "phone": "+1-555-4012",
             "photo": None,
-            "class_name": "Grade 4",
+            "class_name": "4",
             "section": "A",
             "parent_id": parent_ids[6],  # Christopher Garcia's first child
             "teacher_id": teacher3_id,
@@ -747,7 +747,7 @@ async def seed_data():
             "roll_number": "G4A-003",
             "phone": "+1-555-4013",
             "photo": None,
-            "class_name": "Grade 4",
+            "class_name": "4",
             "section": "A",
             "parent_id": parent_ids[6],  # Christopher Garcia's second child
             "teacher_id": teacher3_id,
@@ -762,7 +762,7 @@ async def seed_data():
             "roll_number": "G4A-004",
             "phone": "+1-555-4014",
             "photo": None,
-            "class_name": "Grade 4",
+            "class_name": "4",
             "section": "A",
             "parent_id": parent_ids[7],  # Amanda Rodriguez's child
             "teacher_id": teacher3_id,
@@ -777,7 +777,7 @@ async def seed_data():
             "roll_number": "G4A-005",
             "phone": "+1-555-4015",
             "photo": None,
-            "class_name": "Grade 4",
+            "class_name": "4",
             "section": "A",
             "parent_id": parent_ids[8],  # Matthew Lee's first child
             "teacher_id": teacher3_id,
@@ -794,7 +794,7 @@ async def seed_data():
             "roll_number": "G5A-006",
             "phone": "+1-555-4016",
             "photo": None,
-            "class_name": "Grade 5",
+            "class_name": "5",
             "section": "A",
             "parent_id": parent_ids[8],  # Matthew Lee's second child
             "teacher_id": teacher1_id,
@@ -809,7 +809,7 @@ async def seed_data():
             "roll_number": "G6B-006",
             "phone": "+1-555-4017",
             "photo": None,
-            "class_name": "Grade 6",
+            "class_name": "6",
             "section": "B",
             "parent_id": parent_ids[9],  # Jessica Harris's child
             "teacher_id": teacher2_id,
@@ -824,7 +824,7 @@ async def seed_data():
             "roll_number": "G4A-006",
             "phone": "+1-555-4018",
             "photo": None,
-            "class_name": "Grade 4",
+            "class_name": "4",
             "section": "A",
             "parent_id": parent_ids[10],  # Daniel Clark's first child
             "teacher_id": teacher3_id,
@@ -839,7 +839,7 @@ async def seed_data():
             "roll_number": "G5A-007",
             "phone": "+1-555-4019",
             "photo": None,
-            "class_name": "Grade 5",
+            "class_name": "5",
             "section": "A",
             "parent_id": parent_ids[10],  # Daniel Clark's second child
             "teacher_id": teacher1_id,
@@ -854,7 +854,7 @@ async def seed_data():
             "roll_number": "G6B-007",
             "phone": "+1-555-4020",
             "photo": None,
-            "class_name": "Grade 6",
+            "class_name": "6",
             "section": "B",
             "parent_id": parent_ids[11],  # Lisa Lewis's child
             "teacher_id": teacher2_id,
