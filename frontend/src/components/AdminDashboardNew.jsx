@@ -189,6 +189,9 @@ export default function AdminDashboardNew({ user, onLogout }) {
   const [showAddBus, setShowAddBus] = useState(false);
   const [showAddRoute, setShowAddRoute] = useState(false);
   const [showHolidaysManagement, setShowHolidaysManagement] = useState(false);
+  const [showAddHoliday, setShowAddHoliday] = useState(false);
+  const [showEditHoliday, setShowEditHoliday] = useState(false);
+  const [editHoliday, setEditHoliday] = useState(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
