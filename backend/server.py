@@ -560,6 +560,28 @@ async def update_student(student_id: str, updates: StudentUpdate, current_user: 
     
     # Update student
     update_data = {k: v for k, v in updates.model_dump().items() if v is not None}
+    
+    # Validate roll_number uniqueness if any of the composite key fields are being updated
+    if 'roll_number' in update_data or 'class_name' in update_data or 'section' in update_data:
+        # Get the final values (updated or existing)
+        final_roll_number = update_data.get('roll_number', old_student.get('roll_number'))
+        final_class_name = update_data.get('class_name', old_student.get('class_name'))
+        final_section = update_data.get('section', old_student.get('section'))
+        
+        # Check if another student has this combination
+        existing = await db.students.find_one({
+            "roll_number": final_roll_number,
+            "class_name": final_class_name,
+            "section": final_section,
+            "student_id": {"$ne": student_id}  # Exclude current student
+        })
+        
+        if existing:
+            raise HTTPException(
+                status_code=400, 
+                detail=f"A student with this roll number already exists in class {final_class_name}{final_section}."
+            )
+    
     await db.students.update_one(
         {"student_id": student_id},
         {"$set": update_data}
