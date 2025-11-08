@@ -18,7 +18,7 @@ from typing import Dict, List, Optional
 from datetime import datetime, timedelta
 
 # Backend URL
-BACKEND_URL = "https://bus-tracker-update.preview.emergentagent.com/api"
+BACKEND_URL = "https://student-tracker-ui.preview.emergentagent.com/api"
 
 class TestSession:
     def __init__(self):
