@@ -719,7 +719,7 @@ async def seed_data():
             "photo": None,
             "class_name": "Grade 4",
             "section": "A",
-            "parent_id": parent_ids[10],
+            "parent_id": parent_ids[5],  # Jennifer Taylor's child
             "teacher_id": teacher3_id,
             "bus_id": bus1_id,
             "stop_id": route1_stop_ids[0],
@@ -734,7 +734,7 @@ async def seed_data():
             "photo": None,
             "class_name": "Grade 4",
             "section": "A",
-            "parent_id": parent_ids[11],
+            "parent_id": parent_ids[6],  # Christopher Garcia's first child
             "teacher_id": teacher3_id,
             "bus_id": bus1_id,
             "stop_id": route1_stop_ids[3],
@@ -749,7 +749,7 @@ async def seed_data():
             "photo": None,
             "class_name": "Grade 4",
             "section": "A",
-            "parent_id": parent_ids[12],
+            "parent_id": parent_ids[6],  # Christopher Garcia's second child
             "teacher_id": teacher3_id,
             "bus_id": bus2_id,
             "stop_id": route2_stop_ids[2],
@@ -764,7 +764,7 @@ async def seed_data():
             "photo": None,
             "class_name": "Grade 4",
             "section": "A",
-            "parent_id": parent_ids[13],
+            "parent_id": parent_ids[7],  # Amanda Rodriguez's child
             "teacher_id": teacher3_id,
             "bus_id": bus2_id,
             "stop_id": route2_stop_ids[3],
