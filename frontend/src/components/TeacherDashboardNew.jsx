@@ -167,8 +167,9 @@ export default function TeacherDashboardNew({ user, onLogout }) {
     setShowStudentDetail(true);
   };
 
-  const handleViewAttendance = (studentId) => {
-    setAttendanceStudentId(studentId);
+  const handleViewAttendance = (student) => {
+    setAttendanceStudentId(student.student_id);
+    setAttendanceStudentName(student.name);
     setShowAttendanceModal(true);
   };
 
