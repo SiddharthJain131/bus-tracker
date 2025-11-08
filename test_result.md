@@ -492,6 +492,18 @@ backend:
         agent: "main"
         comment: "UPDATED - Enhanced EditStudentModalEnhanced with merged class-section input and searchable parent field. CHANGES: 1) Merged Class and Section into single searchable input field that parses formats like '5A', '5-A'. Pre-fills with combined value from existing student data. 2) Added autocomplete with existing class-section combinations from database. 3) Replaced parent dropdown with searchable input field showing 'Name (email)' format with autocomplete. 4) Auto-populates parent_search field with current parent on load. 5) Roll Number marked as required. 6) Dynamic Stop field maintained. 7) Parsing logic automatically updates class_name and section. 8) Parent matching logic finds parent_id based on search input. Ready for testing: Merged input parsing with pre-fill, parent searchable input with auto-population, roll number validation, duplicate detection on edit, stop field functionality."
 
+  - task: "StudentDetailModal - Remove Duplicate Roll Number & Add Stop Field"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/StudentDetailModal.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "FIXED - Removed duplicate roll number display and added Stop field visibility. CHANGES: 1) Removed the Card showing Roll Number (lines 80-88) - roll number now only visible once next to student name in header. 2) Added new Card showing Stop field with stop_name from student details. 3) Backend enrichment updated to include stop_name in GET /api/students/{student_id}. Field order now: Class & Section, Phone, Teacher, Bus Number, Stop. Ready for testing: Verify single roll number display in header, confirm Stop field is visible and shows correct stop_name value."
+
 frontend:
   - task: "Login page"
     implemented: true
