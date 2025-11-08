@@ -421,56 +421,102 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
         {step === 2 && (
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-gray-900">Parent Information</h3>
-            <p className="text-sm text-gray-600">A parent account will be created for this student</p>
             
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Label>Parent Name *</Label>
-                <Input
-                  value={parentData.name}
-                  onChange={(e) => setParentData({ ...parentData, name: e.target.value })}
-                  placeholder="Enter parent name"
-                />
-              </div>
-              
-              <div>
-                <Label>Phone *</Label>
-                <Input
-                  value={parentData.phone}
-                  onChange={(e) => setParentData({ ...parentData, phone: e.target.value })}
-                  placeholder="Parent phone number"
-                />
-              </div>
-              
-              <div className="col-span-2">
-                <Label>Email *</Label>
-                <Input
-                  type="email"
-                  value={parentData.email}
-                  onChange={(e) => setParentData({ ...parentData, email: e.target.value })}
-                  placeholder="parent@example.com"
-                />
-                <p className="text-xs text-gray-500 mt-1">Default password will be: parent123</p>
-              </div>
-              
-              <div className="col-span-2">
-                <Label>Address</Label>
-                <Input
-                  value={parentData.address}
-                  onChange={(e) => setParentData({ ...parentData, address: e.target.value })}
-                  placeholder="Home address"
-                />
-              </div>
-              
-              <div className="col-span-2">
-                <Label>Photo URL (optional)</Label>
-                <Input
-                  value={parentData.photo}
-                  onChange={(e) => setParentData({ ...parentData, photo: e.target.value })}
-                  placeholder="https://example.com/photo.jpg"
-                />
-              </div>
+            {/* Radio buttons for parent selection mode */}
+            <div className="bg-gray-50 border border-gray-200 p-4 rounded-lg">
+              <Label className="mb-3 block">Parent Selection</Label>
+              <RadioGroup value={parentMode} onValueChange={setParentMode} className="space-y-3">
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="create" id="create" />
+                  <Label htmlFor="create" className="cursor-pointer font-normal">
+                    Create New Parent Account
+                  </Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="select" id="select" />
+                  <Label htmlFor="select" className="cursor-pointer font-normal">
+                    Select Existing Parent (unlinked only)
+                  </Label>
+                </div>
+              </RadioGroup>
             </div>
+
+            {/* Create New Parent Form */}
+            {parentMode === 'create' && (
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label>Parent Name *</Label>
+                  <Input
+                    value={parentData.name}
+                    onChange={(e) => setParentData({ ...parentData, name: e.target.value })}
+                    placeholder="Enter parent name"
+                  />
+                </div>
+                
+                <div>
+                  <Label>Phone *</Label>
+                  <Input
+                    value={parentData.phone}
+                    onChange={(e) => setParentData({ ...parentData, phone: e.target.value })}
+                    placeholder="Parent phone number"
+                  />
+                </div>
+                
+                <div className="col-span-2">
+                  <Label>Email *</Label>
+                  <Input
+                    type="email"
+                    value={parentData.email}
+                    onChange={(e) => setParentData({ ...parentData, email: e.target.value })}
+                    placeholder="parent@example.com"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Default password will be: parent123</p>
+                </div>
+                
+                <div className="col-span-2">
+                  <Label>Address</Label>
+                  <Input
+                    value={parentData.address}
+                    onChange={(e) => setParentData({ ...parentData, address: e.target.value })}
+                    placeholder="Home address"
+                  />
+                </div>
+                
+                <div className="col-span-2">
+                  <Label>Photo URL (optional)</Label>
+                  <Input
+                    value={parentData.photo}
+                    onChange={(e) => setParentData({ ...parentData, photo: e.target.value })}
+                    placeholder="https://example.com/photo.jpg"
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* Select Existing Parent */}
+            {parentMode === 'select' && (
+              <div>
+                <Label>Select Parent *</Label>
+                {unlinkedParents.length > 0 ? (
+                  <Select value={selectedParentId} onValueChange={setSelectedParentId}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select an existing parent" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {unlinkedParents.map(parent => (
+                        <SelectItem key={parent.user_id} value={parent.user_id}>
+                          {parent.name} ({parent.email})
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                ) : (
+                  <div className="text-sm text-amber-600 bg-amber-50 border border-amber-200 p-3 rounded">
+                    ⚠️ No unlinked parents available. Please create a new parent account.
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Summary Preview */}
             <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg mt-4">
