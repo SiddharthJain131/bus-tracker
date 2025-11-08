@@ -456,32 +456,6 @@ export default function TeacherDashboardNew({ user, onLogout }) {
               </div>
             </Card>
 
-            {/* Status Legend */}
-            <Card className="p-6">
-              <h3 className="text-sm font-semibold text-gray-900 mb-3">Status Legend</h3>
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-3 text-xs">
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 rounded status-gray"></div>
-                  <span>Not Scanned</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 rounded status-yellow"></div>
-                  <span>On Board</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 rounded status-green"></div>
-                  <span>Reached</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 rounded status-red"></div>
-                  <span>Missed</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 rounded status-blue"></div>
-                  <span>Holiday</span>
-                </div>
-              </div>
-            </Card>
           </div>
 
           {/* Notifications Sidebar - 1 column */}
