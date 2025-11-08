@@ -34,6 +34,8 @@ import AddBusModal from './AddBusModal';
 import AddRouteModal from './AddRouteModal';
 import EditBusModal from './EditBusModal';
 import EditRouteModal from './EditRouteModal';
+import AddHolidayModal from './AddHolidayModal';
+import EditHolidayModal from './EditHolidayModal';
 import DeleteConfirmationDialog from './DeleteConfirmationDialog';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
