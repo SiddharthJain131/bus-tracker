@@ -878,9 +878,28 @@ async def get_bus_stops(bus_id: str):
     return stops
 
 
+@api_router.get("/parents/all")
+async def get_all_parents(current_user: dict = Depends(get_current_user)):
+    """Get all parent users - supports many students per parent"""
+    if current_user['role'] != 'admin':
+        raise HTTPException(status_code=403, detail="Access denied")
+    
+    try:
+        # Get all parents sorted by name
+        all_parents = await db.users.find(
+            {"role": "parent"}, 
+            {"_id": 0, "password_hash": 0}
+        ).sort("name", 1).to_list(length=None)
+        
+        return all_parents
+    except Exception as e:
+        print(f"Error fetching parents: {str(e)}")
+        return []
+
+
 @api_router.get("/parents/unlinked")
 async def get_unlinked_parents(current_user: dict = Depends(get_current_user)):
-    """Get all parent users who are not linked to any student"""
+    """Get all parent users who are not linked to any student (legacy endpoint)"""
     if current_user['role'] != 'admin':
         raise HTTPException(status_code=403, detail="Access denied")
     
