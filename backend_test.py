@@ -327,17 +327,106 @@ def test_scenario_c_student_creation_with_stop():
     
     return results
 
+def test_scenario_d_student_update_with_stop():
+    """SCENARIO D: Student Update with Stop Field"""
+    print_test_header("SCENARIO D: STUDENT UPDATE WITH STOP FIELD")
+    
+    session = TestSession()
+    results = []
+    
+    # Login as admin
+    print("\n[Setup] Login as admin")
+    response = session.login("admin@school.com", "password")
+    if response.status_code != 200:
+        print_result(False, "Admin login failed")
+        return [("Test D - Setup failed", False)]
+    
+    # Get an existing student
+    print("\n[Setup] Get existing student")
+    response = session.get("/students")
+    student_id = None
+    original_stop_id = None
+    
+    if response.status_code == 200:
+        students = response.json()
+        if len(students) > 0:
+            student = students[0]
+            student_id = student.get('student_id')
+            original_stop_id = student.get('stop_id')
+            print(f"  Found student: {student.get('name')} (ID: {student_id})")
+            print(f"  Current stop_id: {original_stop_id}")
+    
+    if not student_id:
+        print_result(False, "No students found in database")
+        return [("Test D - Setup failed", False)]
+    
+    # Get a different stop_id
+    print("\n[Setup] Get different stop for update")
+    response = session.get("/stops")
+    different_stop_id = None
+    
+    if response.status_code == 200:
+        stops = response.json()
+        for stop in stops:
+            if stop.get('stop_id') != original_stop_id:
+                different_stop_id = stop.get('stop_id')
+                print(f"  Found different stop: {stop.get('stop_name')} (ID: {different_stop_id})")
+                break
+    
+    if not different_stop_id:
+        print_result(False, "No different stop found for update test")
+        return [("Test D - Setup failed", False)]
+    
+    # Test D.1: Update student's stop_id
+    print(f"\n[Test D.1] PUT /api/students/{student_id} - Update student's stop_id")
+    
+    update_data = {
+        "stop_id": different_stop_id
+    }
+    
+    response = session.put(f"/students/{student_id}", update_data)
+    
+    if response.status_code == 200:
+        print_result(True, f"Student update successful. Status: {response.status_code}")
+        
+        # Verify the update by fetching student details
+        verify_response = session.get(f"/students/{student_id}")
+        
+        if verify_response.status_code == 200:
+            updated_student = verify_response.json()
+            new_stop_id = updated_student.get('stop_id')
+            
+            if new_stop_id == different_stop_id:
+                print_result(True, f"Stop ID successfully updated from {original_stop_id} to {new_stop_id}")
+                results.append(("Test D.1 - Update student's stop_id", True))
+            else:
+                print_result(False, f"Stop ID not updated correctly. Expected: {different_stop_id}, Got: {new_stop_id}")
+                results.append(("Test D.1 - Update student's stop_id", False))
+        else:
+            print_result(False, f"Failed to verify update. Status: {verify_response.status_code}")
+            results.append(("Test D.1 - Update student's stop_id", False))
+        
+        # Revert the change
+        if original_stop_id:
+            session.put(f"/students/{student_id}", {"stop_id": original_stop_id})
+    else:
+        print_result(False, f"Failed to update student. Status: {response.status_code}, Response: {response.text}")
+        results.append(("Test D.1 - Update student's stop_id", False))
+    
+    return results
+
 def main():
     print("\n" + "="*80)
-    print("BACKEND API TESTING - ELEVATED ADMIN PERMISSIONS & ROLL NUMBER DISPLAY")
+    print("BACKEND API TESTING - AUTO SEED INITIALIZATION & STUDENT FORM UPDATE")
     print("="*80)
     
     all_results = []
     
-    # Run all test groups
-    all_results.extend(test_group_1_elevated_admin_permissions())
-    all_results.extend(test_group_2_regular_admin_restrictions())
-    all_results.extend(test_group_3_roll_number_data())
+    # Run all test scenarios
+    all_results.extend(test_scenario_a_auto_seeding())
+    all_results.extend(test_scenario_b_bus_stops_endpoint())
+    all_results.extend(test_scenario_c_student_creation_with_stop())
+    all_results.extend(test_scenario_d_student_update_with_stop())
     
     # Summary
     print("\n" + "="*80)
