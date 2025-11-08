@@ -9,7 +9,7 @@ import RouteVisualizationModal from './RouteVisualizationModal';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
-export default function StudentDetailModal({ student, open, onClose }) {
+export default function StudentDetailModal({ student, open, onClose, hideTeacherField = false }) {
   const [studentDetails, setStudentDetails] = useState(null);
   const [showRouteModal, setShowRouteModal] = useState(false);
   const [loading, setLoading] = useState(false);
