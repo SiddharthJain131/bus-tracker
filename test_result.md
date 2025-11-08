@@ -669,8 +669,10 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Admin Dashboard"
-    - "Holiday CRUD Feature - Admin Dashboard"
+    - "Composite Unique Constraint - Student (class_name, section, roll_number)"
+    - "AddStudentModal - Merged Class-Section Input & Parent Selection with Radio Buttons"
+    - "EditStudentModalEnhanced - Merged Class-Section Input & Searchable Parent Field"
+    - "StudentDetailModal - Remove Duplicate Roll Number & Add Stop Field"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
