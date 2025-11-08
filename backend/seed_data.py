@@ -1026,11 +1026,13 @@ async def seed_data():
     print("\n" + TEST_CREDENTIALS)
     
     print("\n🔗 DATA LINKING:")
-    print("   • Grade 5-A: 5 students → Teacher: Mary Johnson (teacher@school.com)")
-    print("   • Grade 6-B: 5 students → Teacher: Robert Smith (teacher2@school.com)")
-    print("   • Grade 4-A: 5 students → Teacher: Sarah Wilson (teacher3@school.com)")
+    print("   • Grade 5-A: 7 students → Teacher: Mary Johnson (teacher@school.com)")
+    print("   • Grade 6-B: 7 students → Teacher: Robert Smith (teacher2@school.com)")
+    print("   • Grade 4-A: 6 students → Teacher: Sarah Wilson (teacher3@school.com)")
+    print("   • 12 parents managing 20 students (Many:1 relationship)")
+    print("   • Some parents have multiple children (2-3 kids each)")
     print("   • Each student linked to: Parent, Teacher, Bus, and Bus Stop")
-    print("   • Each parent has access to their child's dashboard")
+    print("   • Each parent has access to their children's dashboards")
     print("   • Each teacher can view their assigned students")
     
     print("\n🚀 NEXT STEPS:")
