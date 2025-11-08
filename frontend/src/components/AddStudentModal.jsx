@@ -113,16 +113,9 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
   const handleNext = () => {
     // Validate Step 1
     if (step === 1) {
-      if (!studentData.name || !studentData.roll_number || !studentData.class_name || !studentData.section || !studentData.bus_id) {
-        toast.error('Please fill in all required fields');
-        return;
-      }
-    }
-    
-    // Validate Step 2
-    if (step === 2) {
-      if (!parentData.name || !parentData.phone || !parentData.email) {
-        toast.error('Please fill in all required parent fields');
+      if (!studentData.name || !studentData.roll_number || !studentData.class_name || 
+          !studentData.section || !studentData.bus_id || !studentData.stop_id) {
+        toast.error('Please fill in all required fields (including Stop)');
         return;
       }
     }
