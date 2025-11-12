@@ -503,7 +503,7 @@ INFO: Location updated for bus 550e8400-... by device Raspberry Pi - Bus 001
 
 1. **Test with curl verbose mode**:
    ```bash
-   curl -v -X POST "http://localhost:8001/api/scan_event" \
+   curl -v -X POST "${BACKEND_BASE_URL}/api/scan_event" \
      -H "X-API-Key: your-key" \
      -H "Content-Type: application/json" \
      -d '...'
