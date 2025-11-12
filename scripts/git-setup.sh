@@ -35,7 +35,7 @@ git remote add origin "$GITHUB_REPO"
 # Fetch latest updates from GitHub (pull first)
 echo "📥 Pulling latest changes from GitHub..."
 git fetch origin main 2>/dev/null
-git pull origin main --allow-unrelated-histories || echo "No remote history yet."
+git pull origin main || echo "No remote history yet."
 
 # Stage & commit local files
 echo "📦 Adding all files..."
