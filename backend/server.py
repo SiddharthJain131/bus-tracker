@@ -448,7 +448,12 @@ async def get_student_photo(student_id: str, device: dict = Depends(verify_devic
 
 # Core APIs
 @api_router.post("/scan_event")
-async def scan_event(request: ScanEventRequest):
+async def scan_event(request: ScanEventRequest, device: dict = Depends(verify_device_key)):
+    """
+    Device-only endpoint for recording RFID scan events.
+    Requires X-API-Key header authentication.
+    Supports both Yellow (On Board) and Green (Reached) status based on scan_type.
+    """
     timestamp = datetime.now(timezone.utc).isoformat()
     
     event = Event(
@@ -473,7 +478,8 @@ async def scan_event(request: ScanEventRequest):
     })
     
     if request.verified:
-        status = "yellow"
+        # Use scan_type to determine status: "yellow" = On Board, "green" = Reached
+        status = request.scan_type if request.scan_type in ["yellow", "green"] else "yellow"
         
         update_data = {
             "status": status, 
@@ -503,6 +509,8 @@ async def scan_event(request: ScanEventRequest):
                 scan_timestamp=timestamp if request.photo_url else None
             )
             await db.attendance.insert_one(attendance.model_dump())
+        
+        logging.info(f"Scan event recorded: Student {request.student_id}, Status: {status}, Device: {device['device_name']}")
     else:
         student = await db.students.find_one({"student_id": request.student_id}, {"_id": 0})
         if student:
@@ -514,7 +522,7 @@ async def scan_event(request: ScanEventRequest):
             )
             await db.notifications.insert_one(notification.model_dump())
     
-    return {"status": "success", "event_id": event.event_id}
+    return {"status": "success", "event_id": event.event_id, "attendance_status": status if request.verified else "not_recorded"}
 
 @api_router.post("/update_location")
 async def update_location(request: UpdateLocationRequest):
