@@ -426,6 +426,7 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file for
 | [INSTALLATION.md](./docs/INSTALLATION.md) | Complete installation guide |
 | [USER_GUIDE.md](./docs/USER_GUIDE.md) | User manual for all roles |
 | [API_DOCUMENTATION.md](./docs/API_DOCUMENTATION.md) | REST API reference |
+| [API_TEST_DEVICE.md](./docs/API_TEST_DEVICE.md) | **NEW**: Device API key testing guide |
 | [RASPBERRY_PI_INTEGRATION.md](./docs/RASPBERRY_PI_INTEGRATION.md) | IoT device integration |
 | [DATABASE.md](./docs/DATABASE.md) | Database schema and models |
 | [DEVELOPMENT.md](./docs/DEVELOPMENT.md) | Development workflow |
