@@ -259,7 +259,7 @@ curl -X POST ${BACKEND_BASE_URL}/api/update_location \
 
 **Testing with curl**:
 ```bash
-curl -X GET "http://localhost:8001/api/get_bus_location?bus_id=your-bus-id-here" \
+curl -X GET "${BACKEND_BASE_URL}/api/get_bus_location?bus_id=your-bus-id-here" \
   -H "X-API-Key: your-api-key-here"
 ```
 
