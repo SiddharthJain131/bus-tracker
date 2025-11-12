@@ -812,11 +812,7 @@ metadata:
   run_ui: true
 
 test_plan:
-  current_focus:
-    - "Device API Key System - Models & Dependencies"
-    - "Device Registration Endpoint - POST /api/device/register"
-    - "Device-Only Endpoints - Embedding & Photo Retrieval"
-    - "Protected Device Routes - scan_event, update_location, get_bus_location"
+  current_focus: []
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
