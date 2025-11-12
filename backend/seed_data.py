@@ -94,6 +94,76 @@ TEST_CREDENTIALS = """
 ===========================================
 """
 
+
+def get_latest_backup() -> Optional[Path]:
+    """Find the most recent backup file"""
+    if not BACKUP_DIR.exists():
+        return None
+    
+    backup_files = list(BACKUP_DIR.glob('seed_backup_*.json'))
+    if not backup_files:
+        return None
+    
+    # Sort by filename (timestamp) in descending order
+    backup_files.sort(reverse=True)
+    return backup_files[0]
+
+
+async def restore_from_backup(backup_path: Path) -> bool:
+    """
+    Restore database from backup file
+    Excludes dynamic data (attendance, logs, notifications)
+    Returns True if successful, False otherwise
+    """
+    print("\n" + "=" * 60)
+    print(f"📦 RESTORING FROM BACKUP: {backup_path.name}")
+    print("=" * 60)
+    
+    try:
+        # Load backup data
+        with open(backup_path, 'r') as f:
+            backup_data = json.load(f)
+        
+        backup_timestamp = backup_data.get('timestamp', 'Unknown')
+        print(f"   📅 Backup created: {backup_timestamp}")
+        
+        collections_data = backup_data.get('collections', {})
+        
+        # Restore each collection
+        print("\n📥 Restoring collections:")
+        restored_count = 0
+        
+        for collection_name in RESTORABLE_COLLECTIONS:
+            if collection_name not in collections_data:
+                print(f"   ⚠️  {collection_name}: Not found in backup, skipping")
+                continue
+            
+            documents = collections_data[collection_name]
+            
+            if not documents:
+                print(f"   ℹ️  {collection_name}: Empty in backup, skipping")
+                continue
+            
+            try:
+                # Insert documents
+                await db[collection_name].insert_many(documents)
+                print(f"   ✅ {collection_name}: {len(documents)} document(s) restored")
+                restored_count += 1
+            except Exception as e:
+                print(f"   ❌ {collection_name}: Restore failed - {e}")
+                return False
+        
+        print(f"\n✅ Successfully restored {restored_count} collection(s) from backup")
+        return True
+        
+    except json.JSONDecodeError as e:
+        print(f"\n❌ Backup file is corrupted or invalid JSON: {e}")
+        return False
+    except Exception as e:
+        print(f"\n❌ Restore failed: {e}")
+        return False
+
+
 async def seed_data():
     print("=" * 60)
     print("🌱 STARTING COMPREHENSIVE DATABASE SEEDING")
