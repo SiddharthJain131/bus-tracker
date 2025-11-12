@@ -192,18 +192,19 @@ class PhotoDisplayTester:
     def test_static_file_serving_direct(self):
         """Test direct access to known photo files and non-existent files"""
         try:
-            # Test known photo paths (based on photo organization structure)
+            # Test known photo paths via direct backend access
             test_paths = [
-                "/photos/admins/55b426f6-d039-4c7b-9b20-a4c09af39eec.jpg",  # Example admin photo
-                "/photos/teachers/teacher-photo-1.jpg",  # Example teacher photo
-                "/photos/parents/parent-photo-1.jpg",  # Example parent photo
-                "/photos/students/profile.jpg",  # Example student photo
+                "/photos/admins/55b426f6-d039-4c7b-9b20-a4c09af39eec.jpg",  # Known admin photo
+                "/photos/admins/fcdbb6fa-732a-4214-bf2a-d623ca5e6253.jpg",  # Known admin2 photo
+                "/photos/teachers/6d0e882e-5161-4a95-a6ff-3f45f5ac3265.jpg",  # Known teacher photo
+                "/photos/parents/f8bdc585-52a8-4d0f-8808-6a0393ecba61.jpg",  # Known parent photo
                 "/photos/nonexistent/fake-photo.jpg"  # Non-existent photo (should return 404)
             ]
             
             for photo_path in test_paths:
-                full_url = f"{BACKEND_URL}{photo_path}"
-                response = requests.get(full_url)
+                # Use direct backend access
+                backend_url = f"http://localhost:8001{photo_path}"
+                response = requests.get(backend_url)
                 
                 if photo_path.endswith("fake-photo.jpg"):
                     # This should return 404
@@ -214,13 +215,20 @@ class PhotoDisplayTester:
                         self.log_result(f"Direct Photo Access - Non-existent", False, 
                                       f"Expected 404, got {response.status_code}")
                 else:
-                    # These might exist or not, but should not return server errors
-                    if response.status_code in [200, 404]:
-                        status_msg = "exists" if response.status_code == 200 else "not found"
-                        self.log_result(f"Direct Photo Access - {photo_path}", True, 
-                                      f"Photo {status_msg} (Status: {response.status_code})")
+                    # These should exist and return proper content-type
+                    if response.status_code == 200:
+                        content_type = response.headers.get('content-type', '')
+                        if content_type.startswith('image/'):
+                            self.log_result(f"Direct Photo Access - {photo_path.split('/')[-1]}", True, 
+                                          f"Photo exists with correct content-type: {content_type}")
+                        else:
+                            self.log_result(f"Direct Photo Access - {photo_path.split('/')[-1]}", False, 
+                                          f"Wrong content-type: {content_type}")
+                    elif response.status_code == 404:
+                        self.log_result(f"Direct Photo Access - {photo_path.split('/')[-1]}", False, 
+                                      f"Photo not found (404)")
                     else:
-                        self.log_result(f"Direct Photo Access - {photo_path}", False, 
+                        self.log_result(f"Direct Photo Access - {photo_path.split('/')[-1]}", False, 
                                       f"Unexpected status: {response.status_code}")
             
             return True
