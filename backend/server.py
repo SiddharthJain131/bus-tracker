@@ -180,6 +180,7 @@ class ScanEventRequest(BaseModel):
     lat: float
     lon: float
     photo_url: Optional[str] = None  # Optional photo URL captured during scan
+    scan_type: Optional[str] = "yellow"  # "yellow" = On Board, "green" = Reached
 
 class UpdateLocationRequest(BaseModel):
     bus_id: str
