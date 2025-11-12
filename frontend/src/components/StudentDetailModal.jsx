@@ -1,19 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 import { Button } from './ui/button';
 import { Card } from './ui/card';
-import { User, Phone, GraduationCap, Users, Bus, MapPin, Eye } from 'lucide-react';
+import { User, Phone, GraduationCap, Users, Bus, MapPin, Eye, Camera } from 'lucide-react';
 import RouteVisualizationModal from './RouteVisualizationModal';
+import { toast } from 'sonner';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
-export default function StudentDetailModal({ student, open, onClose, hideTeacherField = false }) {
+export default function StudentDetailModal({ student, open, onClose, hideTeacherField = false, userRole = null }) {
   const [studentDetails, setStudentDetails] = useState(null);
   const [showRouteModal, setShowRouteModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [tempClosed, setTempClosed] = useState(false);
+  const [isHoveredPhoto, setIsHoveredPhoto] = useState(false);
+  const [isUploadingPhoto, setIsUploadingPhoto] = useState(false);
+  const photoFileInputRef = useRef(null);
 
   // Helper function to remove "Grade " prefix from class names
   const formatClassName = (className) => {
