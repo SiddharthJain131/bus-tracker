@@ -4,7 +4,7 @@ Copy this file to the configuration section of local_device_simulator.py
 """
 
 # Backend API base URL
-BASE_URL = "http://localhost:8001"
+BASE_URL = "https://bus-tracker-update.preview.emergentagent.com/"
 
 # Device API Key (EXAMPLE - Replace with your actual key from device registration)
 # Get your key by running: POST /api/device/register as admin
@@ -19,7 +19,7 @@ STUDENT_ID = "9afb783f-7952-476d-8626-0143fdbbc2a1"  # Emma Johnson
 
 # Test image path (for scan events with photo upload)
 # Place a JPEG image in the tests directory
-TEST_IMAGE_PATH = "test_scan_photo.jpg"
+TEST_IMAGE_PATH = "test_scan_photo.txt"
 
 # GPS coordinates for testing (San Francisco coordinates as example)
 TEST_GPS_LAT = 37.7749

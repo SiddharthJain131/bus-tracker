@@ -15,30 +15,7 @@ import os
 # ============================================================
 # CONFIGURATION - Modify these values for your environment
 # ============================================================
-
-# Backend API base URL
-BASE_URL = "http://localhost:8001"
-
-# Device API Key (obtain from admin panel: Device Management > Register Device)
-# Replace with your actual API key after registering a device
-DEVICE_API_KEY = "your_device_api_key_here"
-
-# Bus ID this device is assigned to (UUID format - get from GET /api/buses)
-BUS_ID = "your_bus_id_here"
-
-# Test Student ID for embedding/photo retrieval (UUID format - get from GET /api/students)
-STUDENT_ID = "your_student_id_here"
-
-# Test image path (for scan events with photo upload)
-TEST_IMAGE_PATH = "test_scan_photo.jpg"
-
-# GPS coordinates for testing (San Francisco example)
-TEST_GPS_LAT = 37.7749
-TEST_GPS_LON = -122.4194
-
-# Log file path
-LOG_FILE = Path(__file__).parent / "device_test_log.txt"
-
+import simulator_config.example.py
 # ============================================================
 # COLOR CODES FOR TERMINAL OUTPUT
 # ============================================================
