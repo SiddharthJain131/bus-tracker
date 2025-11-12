@@ -26,9 +26,9 @@ class PhotoDisplayTester:
         self.test_results = []
         self.test_users = [
             {"email": "admin@school.com", "password": "password", "role": "admin", "name": "James Anderson"},
-            {"email": "admin2@school.com", "password": "password", "role": "admin", "name": "Sarah Wilson"},
-            {"email": "teacher@school.com", "password": "password", "role": "teacher", "name": "Mary Teacher"},
-            {"email": "teacher2@school.com", "password": "password", "role": "teacher", "name": "John Teacher"},
+            {"email": "admin2@school.com", "password": "password", "role": "admin", "name": "Patricia Williams"},
+            {"email": "teacher@school.com", "password": "password", "role": "teacher", "name": "Mary Johnson"},
+            {"email": "teacher2@school.com", "password": "password", "role": "teacher", "name": "Robert Smith"},
             {"email": "parent@school.com", "password": "password", "role": "parent", "name": "John Parent"}
         ]
         
