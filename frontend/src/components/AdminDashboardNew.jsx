@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
@@ -20,7 +20,8 @@ import {
   Phone,
   MapPin,
   Trash2,
-  Plus
+  Plus,
+  Camera
 } from 'lucide-react';
 import StudentDetailModal from './StudentDetailModal';
 import UserDetailModal from './UserDetailModal';
