@@ -106,7 +106,12 @@ export default function StudentDetailModal({ student, open, onClose, hideTeacher
             <div className="space-y-6">
               {/* Profile Header */}
               <div className="flex items-center gap-6 p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg">
-                <div className="w-24 h-24 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full flex items-center justify-center text-white text-3xl font-bold overflow-hidden transition-all duration-300 hover:scale-110 hover:shadow-xl hover:ring-4 hover:ring-indigo-300 cursor-pointer">
+                <div 
+                  className={`relative w-24 h-24 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full flex items-center justify-center text-white text-3xl font-bold overflow-hidden transition-all duration-300 hover:scale-110 hover:shadow-xl hover:ring-4 hover:ring-indigo-300 ${userRole === 'admin' ? 'cursor-pointer' : ''}`}
+                  onMouseEnter={() => userRole === 'admin' && setIsHoveredPhoto(true)}
+                  onMouseLeave={() => userRole === 'admin' && setIsHoveredPhoto(false)}
+                  onClick={handlePhotoClick}
+                >
                   {studentDetails.photo_url ? (
                     <img 
                       src={`${BACKEND_URL}${studentDetails.photo_url}`} 
@@ -119,6 +124,28 @@ export default function StudentDetailModal({ student, open, onClose, hideTeacher
                     />
                   ) : (
                     studentDetails.name.charAt(0).toUpperCase()
+                  )}
+                  
+                  {userRole === 'admin' && isHoveredPhoto && !isUploadingPhoto && (
+                    <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-full">
+                      <Camera className="w-8 h-8 text-white" />
+                    </div>
+                  )}
+                  
+                  {isUploadingPhoto && (
+                    <div className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center rounded-full">
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+                    </div>
+                  )}
+                  
+                  {userRole === 'admin' && (
+                    <input
+                      ref={photoFileInputRef}
+                      type="file"
+                      accept="image/*"
+                      onChange={handlePhotoFileChange}
+                      className="hidden"
+                    />
                   )}
                 </div>
                 <div className="flex-1">
