@@ -86,6 +86,7 @@ sudo supervisorctl restart all
 ### For Developers
 - **[API Documentation](./docs/API_DOCUMENTATION.md)** - Complete API reference
 - **[Database Schema](./docs/DATABASE.md)** - Data models and relationships
+- **[Photo Organization](./docs/PHOTO_ORGANIZATION.md)** - Photo structure and management
 - **[Development Guide](./docs/DEVELOPMENT.md)** - Development workflow and testing
 
 ### For IoT Integration
