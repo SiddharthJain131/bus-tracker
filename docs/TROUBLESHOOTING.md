@@ -219,7 +219,8 @@ Undefined REACT_APP_BACKEND_URL
 **Fix:**
 ```bash
 cd frontend
-echo "REACT_APP_BACKEND_URL=http://localhost:8001" > .env
+# Set to your backend URL (e.g., http://localhost:8001 for local dev or your production URL)
+echo "REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}" > .env
 ```
 
 **3. Build Errors:**
