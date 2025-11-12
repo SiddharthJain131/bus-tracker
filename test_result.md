@@ -648,6 +648,18 @@ backend:
         agent: "main"
         comment: "COMPLETED - Populated ALL user role photos using AI-generated images and validated complete structure. PHOTO POPULATION: Created enhanced populate_photos.py script that downloads AI-generated placeholder faces from thispersondoesnotexist.com. Generated 17 new photos: 12 parents, 3 teachers, 2 admins (20 existing student photos retained). Total 37 photos across all roles (20.11 MB storage). DATABASE ALIGNMENT: Updated seed_backup_20251112_0613.json with photo_path fields for all 37 users/students. All 20 students have photo_path and attendance_path. All 17 users (parents/teachers/admins) have photo_path. Database validation shows 100% completion: 20/20 students with photos, 12/12 parents, 3/3 teachers, 2/2 admins. DOCUMENTATION CLEANUP: Assessed /docs/ directory - found NO redundant files, all 8 essential docs (API_DOCUMENTATION, API_TEST_DEVICE, DATABASE, INSTALLATION, PHOTO_ORGANIZATION, RASPBERRY_PI_INTEGRATION, TROUBLESHOOTING, USER_GUIDE) maintained and current. Test files retained as useful for development. LOGGING & VALIDATION: Created comprehensive logging in /app/backend/logs/photo_maker.log (photo generation details) and photo_cleanup.log (validation results). Validation script (photo_cleanup_validator.py) confirms: all photos present, all attendance folders exist, no orphaned files, database fields 100% complete. SCRIPTS CREATED: populate_photos.py (AI photo generation), photo_cleanup_validator.py (validation & reporting). All photos organized by role, database fully aligned, documentation clean, production-ready."
 
+  - task: "Profile Photo Display on All Dashboards"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py, /app/frontend/src/components/ParentDashboard.jsx, /app/frontend/src/components/TeacherDashboardNew.jsx, /app/frontend/src/components/AdminDashboardNew.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Added profile photo display to all three dashboards (Parent, Teacher, Admin). BACKEND CHANGES: 1) Added StaticFiles import and mounted /photos endpoint to serve photo files from backend/photos directory. 2) Created get_photo_url() helper function to convert database photo paths (backend/photos/admins/xyz.jpg) to accessible URLs (/photos/admins/xyz.jpg). 3) Updated /api/auth/login and /api/auth/me endpoints to return photo URLs instead of file paths using get_photo_url() helper. 4) Static file serving verified - photos accessible at http://localhost:8001/photos/{role}/{filename}.jpg. FRONTEND: All three dashboards (ParentDashboard.jsx, TeacherDashboardNew.jsx, AdminDashboardNew.jsx) already had photo display UI with fallback to user initials - no changes needed. FEATURES: Display user profile photo in dashboard header, rounded avatar styling with gradient fallback, automatic fallback to initials for missing photos, consistent design across all dashboards. Ready for comprehensive testing: Login as parent/teacher/admin, verify photos display, test fallback for users without photos."
+
 frontend:
   - task: "Login page"
     implemented: true
