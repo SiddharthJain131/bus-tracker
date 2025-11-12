@@ -103,6 +103,66 @@ The backend automatically runs the seed script on server startup when the databa
 - `✅ Auto-seeding completed successfully!` - When complete
 - `✅ Database already populated, skipping seeding` - When data exists
 
+### Smart Backup & Auto-Restore System
+
+The Bus Tracker includes an intelligent backup rotation and auto-restore system that preserves your data across seeding cycles.
+
+**How It Works:**
+
+1. **Automatic Backup Rotation**
+   - Backups are stored in `/backend/backups/` with timestamp format: `seed_backup_YYYYMMDD_HHMM.json`
+   - Only the **3 most recent backups** are kept automatically
+   - Older backups are deleted when the limit is exceeded
+
+2. **Auto-Restore from Latest Backup**
+   - When seeding runs, the system checks for the latest backup file
+   - If found, data is restored from the backup instead of using default seed data
+   - **Dynamic data is excluded**: attendance, logs, and notifications are NOT restored
+   - If no backup exists, default seed data is used
+
+3. **Scheduled Backup & Seed Cycles**
+   - The system can run automatic backup + restore cycles at configurable intervals
+   - Default: Every 24 hours
+   - Prevents data loss during regular maintenance or reseeding
+
+**Environment Variables:**
+
+Add these to `backend/.env`:
+
+```bash
+# Enable automatic scheduled seeding (default: false)
+AUTO_SEED_ENABLE=true
+
+# Interval between seed cycles in hours (default: 24)
+SEED_INTERVAL_HOURS=24
+
+# Maximum number of backups to keep (default: 3)
+BACKUP_LIMIT=3
+```
+
+**Manual Operations:**
+
+```bash
+# Create a backup manually
+cd backend
+python backup_seed_data.py
+
+# Run a manual backup + seed cycle
+python run_seeder_task.py --manual
+
+# Start the scheduled seeder service
+python run_seeder_task.py
+```
+
+**Console Logs:**
+
+When the system runs, you'll see:
+- `🔁 Running backup rotation` - Backup creation started
+- `📦 Restoring from latest backup: seed_backup_<timestamp>.json` - Using backup
+- `✅ Seeding completed successfully` - Cycle complete
+
+**Note:** The scheduled seeder runs as a background process when `AUTO_SEED_ENABLE=true`. Logs are saved to `/backend/logs/seeder.log` for troubleshooting.
+
 ## Step 5: Start the Application
 
 ### Option 1: Using Supervisor (Production)

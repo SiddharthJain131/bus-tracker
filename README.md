@@ -22,6 +22,7 @@ The Bus Tracker System helps schools manage student transportation efficiently w
 - **📅 Interactive Calendar** - Click green attendance cells to view scan photos and timestamps
 - **🛰️ Raspberry Pi Integration** - Direct uploads via SIM800 GSM module
 - **🗺️ Route Visualization** - Interactive maps with stop markers and paths
+- **💾 Smart Backup & Auto-Restore** - Automatic backup rotation with seamless data restoration
 
 ---
 

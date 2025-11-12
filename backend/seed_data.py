@@ -1,6 +1,7 @@
 """
 Comprehensive Seed Data Generator for Bus Tracker System
 Creates realistic demo data for all roles and entities with proper linking
+NOW WITH AUTO-RESTORE: Automatically restores from latest backup if available
 """
 
 import asyncio
@@ -12,6 +13,8 @@ import bcrypt
 import uuid
 from datetime import datetime, timezone, timedelta
 import random
+import json
+from typing import Optional, Dict, Any
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -19,6 +22,20 @@ load_dotenv(ROOT_DIR / '.env')
 mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
+
+# Backup directory
+BACKUP_DIR = ROOT_DIR / 'backups'
+
+# Collections to restore from backup (excluding dynamic data)
+RESTORABLE_COLLECTIONS = [
+    'users',
+    'students',
+    'buses',
+    'routes',
+    'stops',
+    'holidays',
+    'device_keys'
+]
 
 # Test credentials for easy login
 TEST_CREDENTIALS = """
@@ -77,19 +94,120 @@ TEST_CREDENTIALS = """
 ===========================================
 """
 
+
+def get_latest_backup() -> Optional[Path]:
+    """Find the most recent backup file"""
+    if not BACKUP_DIR.exists():
+        return None
+    
+    backup_files = list(BACKUP_DIR.glob('seed_backup_*.json'))
+    if not backup_files:
+        return None
+    
+    # Sort by filename (timestamp) in descending order
+    backup_files.sort(reverse=True)
+    return backup_files[0]
+
+
+async def restore_from_backup(backup_path: Path) -> bool:
+    """
+    Restore database from backup file
+    Excludes dynamic data (attendance, logs, notifications)
+    Returns True if successful, False otherwise
+    """
+    print("\n" + "=" * 60)
+    print(f"📦 RESTORING FROM BACKUP: {backup_path.name}")
+    print("=" * 60)
+    
+    try:
+        # Load backup data
+        with open(backup_path, 'r') as f:
+            backup_data = json.load(f)
+        
+        backup_timestamp = backup_data.get('timestamp', 'Unknown')
+        print(f"   📅 Backup created: {backup_timestamp}")
+        
+        collections_data = backup_data.get('collections', {})
+        
+        # Restore each collection
+        print("\n📥 Restoring collections:")
+        restored_count = 0
+        
+        for collection_name in RESTORABLE_COLLECTIONS:
+            if collection_name not in collections_data:
+                print(f"   ⚠️  {collection_name}: Not found in backup, skipping")
+                continue
+            
+            documents = collections_data[collection_name]
+            
+            if not documents:
+                print(f"   ℹ️  {collection_name}: Empty in backup, skipping")
+                continue
+            
+            try:
+                # Insert documents
+                await db[collection_name].insert_many(documents)
+                print(f"   ✅ {collection_name}: {len(documents)} document(s) restored")
+                restored_count += 1
+            except Exception as e:
+                print(f"   ❌ {collection_name}: Restore failed - {e}")
+                return False
+        
+        print(f"\n✅ Successfully restored {restored_count} collection(s) from backup")
+        return True
+        
+    except json.JSONDecodeError as e:
+        print(f"\n❌ Backup file is corrupted or invalid JSON: {e}")
+        return False
+    except Exception as e:
+        print(f"\n❌ Restore failed: {e}")
+        return False
+
+
 async def seed_data():
     print("=" * 60)
     print("🌱 STARTING COMPREHENSIVE DATABASE SEEDING")
     print("=" * 60)
     
+    # Check for latest backup
+    latest_backup = get_latest_backup()
+    use_backup = False
+    
+    if latest_backup:
+        print(f"\n🔍 Latest backup found: {latest_backup.name}")
+        print("   Attempting to restore from backup...")
+        use_backup = True
+    else:
+        print("\nℹ️  No backup found, will use default seed data")
+    
     # Clear existing data
     collections = ['users', 'students', 'attendance', 'events', 'bus_locations', 
                   'notifications', 'holidays', 'buses', 'routes', 'stops', 'email_logs']
     
+    print("\n🗑️  Clearing existing data:")
     for collection in collections:
         count = await db[collection].count_documents({})
         await db[collection].delete_many({})
-        print(f"✅ Cleared {count} records from {collection}")
+        print(f"   ✅ Cleared {count} records from {collection}")
+    
+    # Try to restore from backup if available
+    if use_backup:
+        restore_success = await restore_from_backup(latest_backup)
+        
+        if restore_success:
+            print("\n" + "=" * 60)
+            print("✅ SEEDING COMPLETED (FROM BACKUP)")
+            print("=" * 60)
+            print("\n⚠️  Note: Dynamic data (attendance, logs, notifications) not restored")
+            print(TEST_CREDENTIALS)
+            return
+        else:
+            print("\n⚠️  Backup restore failed, falling back to default seed data...")
+    
+    # If no backup or restore failed, proceed with default seeding
+    print("\n" + "=" * 60)
+    print("📝 USING DEFAULT SEED DATA")
+    print("=" * 60)
     
     print("\n" + "=" * 60)
     print("📍 CREATING STOPS AND ROUTES")
