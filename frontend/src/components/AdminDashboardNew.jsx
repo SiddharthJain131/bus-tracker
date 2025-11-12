@@ -195,6 +195,12 @@ export default function AdminDashboardNew({ user, onLogout }) {
   const [editHoliday, setEditHoliday] = useState(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  
+  // Photo upload states
+  const [isHoveredProfile, setIsHoveredProfile] = useState(false);
+  const [isUploadingProfile, setIsUploadingProfile] = useState(false);
+  const profileFileInputRef = useRef(null);
+  const [currentUser, setCurrentUser] = useState(user);
 
   useEffect(() => {
     fetchAllData();
