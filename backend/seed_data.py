@@ -1,6 +1,7 @@
 """
 Comprehensive Seed Data Generator for Bus Tracker System
 Creates realistic demo data for all roles and entities with proper linking
+NOW WITH AUTO-RESTORE: Automatically restores from latest backup if available
 """
 
 import asyncio
@@ -12,6 +13,8 @@ import bcrypt
 import uuid
 from datetime import datetime, timezone, timedelta
 import random
+import json
+from typing import Optional, Dict, Any
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -19,6 +22,20 @@ load_dotenv(ROOT_DIR / '.env')
 mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
+
+# Backup directory
+BACKUP_DIR = ROOT_DIR / 'backups'
+
+# Collections to restore from backup (excluding dynamic data)
+RESTORABLE_COLLECTIONS = [
+    'users',
+    'students',
+    'buses',
+    'routes',
+    'stops',
+    'holidays',
+    'device_keys'
+]
 
 # Test credentials for easy login
 TEST_CREDENTIALS = """
