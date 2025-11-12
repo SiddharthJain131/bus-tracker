@@ -9,13 +9,13 @@ All hardcoded localhost references have been replaced with dynamic environment v
 ```bash
 MONGO_URL="mongodb://localhost:27017"  # Internal MongoDB connection
 DB_NAME="bus_tracker"
-BACKEND_BASE_URL="https://card-portrait-fix.preview.emergentagent.com"  # External backend URL
+BACKEND_BASE_URL="https://gitignore-hover.preview.emergentagent.com"  # External backend URL
 CORS_ORIGINS="*"  # Allowed CORS origins (comma-separated)
 ```
 
 ### Frontend Configuration (`/app/frontend/.env`)
 ```bash
-REACT_APP_BACKEND_URL=https://card-portrait-fix.preview.emergentagent.com  # Backend API endpoint
+REACT_APP_BACKEND_URL=https://gitignore-hover.preview.emergentagent.com  # Backend API endpoint
 WDS_SOCKET_PORT=443
 REACT_APP_ENABLE_VISUAL_EDITS=false
 ENABLE_HEALTH_CHECK=false
@@ -29,7 +29,7 @@ ENABLE_HEALTH_CHECK=false
 
 ### 2. Frontend Changes
 - ✅ Fixed merge conflict in `/app/frontend/.env` 
-- ✅ Kept production URL: `https://card-portrait-fix.preview.emergentagent.com`
+- ✅ Kept production URL: `https://gitignore-hover.preview.emergentagent.com`
 - ✅ Frontend code already has fallback to localhost for development (HolidaysManagementModal.jsx)
 
 ### 3. Documentation Updates
