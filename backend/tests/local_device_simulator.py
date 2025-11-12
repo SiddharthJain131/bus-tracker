@@ -15,7 +15,9 @@ import os
 # ============================================================
 # CONFIGURATION - Modify these values for your environment
 # ============================================================
-import simulator_config.example.py
+from simulator_config import *
+
+LOG_FILE = Path(__file__).parent / "device_test_log.txt"
 # ============================================================
 # COLOR CODES FOR TERMINAL OUTPUT
 # ============================================================
