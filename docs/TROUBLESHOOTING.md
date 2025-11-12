@@ -352,7 +352,7 @@ tail -f /var/log/supervisor/backend.err.log
 
 **1. Backend is running:**
 ```bash
-curl http://localhost:8001/api/auth/me
+curl ${BACKEND_BASE_URL}/api/auth/me
 # Should return JSON (even if not authenticated)
 ```
 
@@ -360,7 +360,7 @@ curl http://localhost:8001/api/auth/me
 ```bash
 cd frontend
 cat .env
-# Should show: REACT_APP_BACKEND_URL=http://localhost:8001
+# Should show: REACT_APP_BACKEND_URL matching your backend's external URL
 ```
 
 **3. API path is correct:**
