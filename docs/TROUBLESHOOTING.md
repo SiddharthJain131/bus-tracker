@@ -172,10 +172,12 @@ KeyError: 'MONGO_URL'
 ```bash
 cd backend
 cat .env  # Verify exists
-# If missing, create it
+# If missing, create it with your configuration
 cat > .env << EOF
 MONGO_URL=mongodb://localhost:27017
 DB_NAME=bus_tracker
+BACKEND_BASE_URL=${BACKEND_BASE_URL}
+CORS_ORIGINS=*
 EOF
 ```
 
