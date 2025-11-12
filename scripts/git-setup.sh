@@ -16,8 +16,8 @@ if [ -z "$HOME" ]; then
 fi
 
 # Configure git identity
-git config --global user.name "$USERNAME"
-git config --global user.email "$USEREMAIL"
+git config --global user.name Siddharth
+git config --global user.email example@email.com
 git config --global init.defaultBranch main
 
 # Initialize repo if not present
