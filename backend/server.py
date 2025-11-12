@@ -334,7 +334,7 @@ async def get_me(current_user: dict = Depends(get_current_user)):
         "role": current_user['role'],
         "name": current_user['name'],
         "phone": current_user.get('phone'),
-        "photo": current_user.get('photo'),
+        "photo": get_photo_url(current_user.get('photo')),
         "address": current_user.get('address'),
         "assigned_class": current_user.get('assigned_class'),
         "assigned_section": current_user.get('assigned_section'),
