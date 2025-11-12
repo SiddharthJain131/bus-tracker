@@ -69,12 +69,12 @@ Create a `.env` file in the `frontend` directory:
 
 ```bash
 cat > .env << EOF
-REACT_APP_BACKEND_URL=http://localhost:8001
+REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}
 EOF
 ```
 
 **Environment Variables:**
-- `REACT_APP_BACKEND_URL` - Backend API endpoint URL
+- `REACT_APP_BACKEND_URL` - Backend API endpoint URL (e.g., https://your-domain.com for production or http://localhost:8001 for local development)
 
 ## Step 4: Seed the Database
 
