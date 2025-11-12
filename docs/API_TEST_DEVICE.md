@@ -327,7 +327,7 @@ curl -X GET "${BACKEND_BASE_URL}/api/students/student-id-here/embedding" \
 
 **Testing with curl**:
 ```bash
-curl -X GET "http://localhost:8001/api/students/student-id-here/photo" \
+curl -X GET "${BACKEND_BASE_URL}/api/students/student-id-here/photo" \
   -H "X-API-Key: your-api-key-here"
 ```
 
