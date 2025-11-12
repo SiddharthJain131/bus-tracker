@@ -190,9 +190,9 @@ def test_scan_event(scan_type: str = "yellow") -> bool:
         # Prepare scan data
         scan_data = {
             "student_id": STUDENT_ID,
-            "bus_id": BUS_ID,
-            "rfid_tag": "RFID-TEST-001",
+            "tag_id": "RFID-TEST-001",
             "verified": True,
+            "confidence": 0.95,  # Face recognition confidence (0.0 to 1.0)
             "scan_type": scan_type,
             "lat": TEST_GPS_LAT,
             "lon": TEST_GPS_LON
