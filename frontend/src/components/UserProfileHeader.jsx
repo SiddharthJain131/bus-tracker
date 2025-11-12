@@ -14,9 +14,9 @@ export default function UserProfileHeader({ user }) {
   return (
     <div className="flex items-center gap-4 bg-white p-4 rounded-lg border border-gray-200" data-testid="user-profile-header">
       {/* Avatar */}
-      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-xl font-bold">
+      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-xl font-bold overflow-hidden transition-all duration-300 hover:scale-110 hover:shadow-xl hover:ring-4 hover:ring-blue-300 cursor-pointer">
         {user.photo ? (
-          <img src={user.photo} alt={user.name} className="w-full h-full rounded-full object-cover" />
+          <img src={user.photo} alt={user.name} className="w-full h-full rounded-full object-cover transition-transform duration-300 hover:scale-110" />
         ) : (
           getInitials(user.name)
         )}
