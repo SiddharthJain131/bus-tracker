@@ -933,6 +933,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
           setShowStudentDetail(false);
           setSelectedStudent(null);
         }}
+        userRole={currentUser.role}
       />
 
       <UserDetailModal
