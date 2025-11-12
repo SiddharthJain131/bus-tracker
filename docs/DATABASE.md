@@ -77,7 +77,9 @@ Complete MongoDB database schema and data models for the Bus Tracker System.
   "name": "Emma Johnson",
   "roll_number": "G5A-001",
   "phone": "+1-555-3001",
-  "photo": "/photos/student123.jpg",
+  "photo": "backend/photos/students/{student_id}/profile.jpg",
+  "photo_path": "backend/photos/students/{student_id}/profile.jpg",
+  "attendance_path": "backend/photos/students/{student_id}/attendance",
   "class_name": "Grade 5",
   "section": "A",
   "parent_id": "parent-uuid",
@@ -85,7 +87,8 @@ Complete MongoDB database schema and data models for the Bus Tracker System.
   "bus_id": "bus-uuid",
   "stop_id": "stop-uuid",
   "emergency_contact": "+1-555-9001",
-  "remarks": "Allergic to peanuts"
+  "remarks": "Allergic to peanuts",
+  "embedding": null
 }
 ```
 
@@ -94,7 +97,9 @@ Complete MongoDB database schema and data models for the Bus Tracker System.
 - `name` (String, Required) - Full name
 - `roll_number` (String, Required) - Format: G{class}{section}-{number}
 - `phone` (String, Optional) - Student phone number
-- `photo` (String, Optional) - Student photo URL
+- `photo` (String, Optional) - Student photo URL (legacy field)
+- `photo_path` (String, Optional) - Organized path to profile photo
+- `attendance_path` (String, Optional) - Path to attendance scan folder
 - `class_name` (String, Required) - Grade/Class
 - `section` (String, Required) - Section letter
 - `parent_id` (String, Required) - Reference to users collection
@@ -103,6 +108,13 @@ Complete MongoDB database schema and data models for the Bus Tracker System.
 - `stop_id` (String, Optional) - Reference to stops collection
 - `emergency_contact` (String, Optional) - Emergency phone
 - `remarks` (String, Optional) - Special notes
+- `embedding` (String, Optional) - Face recognition embedding data
+
+**Photo Organization:**
+- Profile photos stored in: `backend/photos/students/{student_id}/profile.jpg`
+- Attendance scans stored in: `backend/photos/students/{student_id}/attendance/`
+- Attendance scan naming: `YYYY-MM-DD_{AM|PM}.jpg`
+- See [PHOTO_ORGANIZATION.md](PHOTO_ORGANIZATION.md) for details
 
 **Indexes:**
 - `student_id` (Primary)
