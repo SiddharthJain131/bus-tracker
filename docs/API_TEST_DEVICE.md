@@ -298,7 +298,7 @@ curl -X GET "${BACKEND_BASE_URL}/api/get_bus_location?bus_id=your-bus-id-here" \
 
 **Testing with curl**:
 ```bash
-curl -X GET "http://localhost:8001/api/students/student-id-here/embedding" \
+curl -X GET "${BACKEND_BASE_URL}/api/students/student-id-here/embedding" \
   -H "X-API-Key: your-api-key-here"
 ```
 
