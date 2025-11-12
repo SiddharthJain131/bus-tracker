@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter, HTTPException, Depends, Cookie, Response, UploadFile, File
+from fastapi import FastAPI, APIRouter, HTTPException, Depends, Cookie, Response, UploadFile, File, Header
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -82,6 +82,7 @@ class Student(BaseModel):
     roll_number: str  # Required for uniqueness constraint
     phone: Optional[str] = None
     photo: Optional[str] = None
+    embedding: Optional[str] = None  # Face embedding data (base64 encoded)
     class_name: str  # Required for uniqueness constraint
     section: str  # Required for uniqueness constraint
     parent_id: str
@@ -179,6 +180,7 @@ class ScanEventRequest(BaseModel):
     lat: float
     lon: float
     photo_url: Optional[str] = None  # Optional photo URL captured during scan
+    scan_type: Optional[str] = "yellow"  # "yellow" = On Board, "green" = Reached
 
 class UpdateLocationRequest(BaseModel):
     bus_id: str
@@ -201,6 +203,18 @@ class Holiday(BaseModel):
     name: str
     description: str = ""  # Optional description field
 
+class DeviceKey(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    device_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    bus_id: str  # Links device to bus (1:1 relationship)
+    device_name: str
+    key_hash: str  # Hashed API key (using bcrypt)
+    created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+
+class DeviceKeyCreate(BaseModel):
+    bus_id: str
+    device_name: str
+
 # Helper: Send mock email and log
 async def send_email_notification(recipient_email: str, recipient_name: str, subject: str, body: str, student_id: Optional[str] = None, user_id: Optional[str] = None):
     email_log = EmailLog(
@@ -221,6 +235,27 @@ async def get_current_user(session_token: Optional[str] = Cookie(None)):
     if not session_token or session_token not in sessions:
         raise HTTPException(status_code=401, detail="Not authenticated")
     return sessions[session_token]
+
+# Device API Key verification helper
+async def verify_device_key(x_api_key: str = Header(...)):
+    """
+    Dependency to verify device API key from X-API-Key header.
+    Validates against hashed keys stored in device_keys collection.
+    """
+    if not x_api_key:
+        raise HTTPException(status_code=403, detail="Missing X-API-Key header")
+    
+    # Hash the provided key to compare with stored hash
+    # Get all device keys and check each one
+    device_keys = await db.device_keys.find({}, {"_id": 0}).to_list(1000)
+    
+    for device_key in device_keys:
+        # Verify the key using bcrypt
+        if bcrypt.checkpw(x_api_key.encode('utf-8'), device_key['key_hash'].encode('utf-8')):
+            return device_key  # Return the device info if valid
+    
+    # If no match found, raise 403
+    raise HTTPException(status_code=403, detail="Invalid or expired API key")
 
 # Auth endpoints
 @api_router.post("/auth/login")
@@ -305,9 +340,120 @@ async def upload_photo(file: UploadFile = File(...), current_user: dict = Depend
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+# Device API Key Management
+@api_router.post("/device/register")
+async def register_device(device_create: DeviceKeyCreate, current_user: dict = Depends(get_current_user)):
+    """
+    Admin-only endpoint to register a new device and generate an API key.
+    The API key is displayed only once and must be stored securely by the admin.
+    """
+    if current_user['role'] != 'admin':
+        raise HTTPException(status_code=403, detail="Only admins can register devices")
+    
+    # Check if bus exists
+    bus = await db.buses.find_one({"bus_id": device_create.bus_id}, {"_id": 0})
+    if not bus:
+        raise HTTPException(status_code=404, detail="Bus not found")
+    
+    # Check if device already exists for this bus
+    existing_device = await db.device_keys.find_one({"bus_id": device_create.bus_id}, {"_id": 0})
+    if existing_device:
+        raise HTTPException(status_code=400, detail=f"Device already registered for bus {bus['bus_number']}")
+    
+    # Generate secure API key (64 characters)
+    api_key = secrets.token_hex(32)
+    
+    # Hash the API key using bcrypt
+    key_hash = bcrypt.hashpw(api_key.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+    
+    # Create device key record
+    device_key = DeviceKey(
+        bus_id=device_create.bus_id,
+        device_name=device_create.device_name,
+        key_hash=key_hash
+    )
+    
+    await db.device_keys.insert_one(device_key.model_dump())
+    
+    logging.info(f"Device registered: {device_create.device_name} for bus {bus['bus_number']}")
+    
+    # Return the API key ONCE - it cannot be retrieved later
+    return {
+        "message": "Device registered successfully",
+        "device_id": device_key.device_id,
+        "bus_id": device_create.bus_id,
+        "bus_number": bus['bus_number'],
+        "device_name": device_create.device_name,
+        "api_key": api_key,  # ONLY TIME THIS IS SHOWN
+        "warning": "Store this API key securely. It cannot be retrieved later.",
+        "created_at": device_key.created_at
+    }
+
+@api_router.get("/device/list")
+async def list_devices(current_user: dict = Depends(get_current_user)):
+    """
+    Admin-only endpoint to list all registered devices (without API keys).
+    """
+    if current_user['role'] != 'admin':
+        raise HTTPException(status_code=403, detail="Only admins can list devices")
+    
+    devices = await db.device_keys.find({}, {"_id": 0, "key_hash": 0}).to_list(1000)
+    
+    # Enrich with bus information
+    for device in devices:
+        bus = await db.buses.find_one({"bus_id": device['bus_id']}, {"_id": 0})
+        if bus:
+            device['bus_number'] = bus['bus_number']
+    
+    return devices
+
+# Device-Only Endpoints (require X-API-Key header)
+@api_router.get("/students/{student_id}/embedding")
+async def get_student_embedding(student_id: str, device: dict = Depends(verify_device_key)):
+    """
+    Device-only endpoint to retrieve student face embedding data.
+    Used by Raspberry Pi for local face verification.
+    """
+    student = await db.students.find_one({"student_id": student_id}, {"_id": 0})
+    if not student:
+        raise HTTPException(status_code=404, detail="Student not found")
+    
+    embedding = student.get('embedding', '')
+    
+    return {
+        "student_id": student_id,
+        "name": student['name'],
+        "embedding": embedding,
+        "has_embedding": bool(embedding)
+    }
+
+@api_router.get("/students/{student_id}/photo")
+async def get_student_photo(student_id: str, device: dict = Depends(verify_device_key)):
+    """
+    Device-only endpoint to retrieve student photo.
+    Used by Raspberry Pi as fallback when embedding is not available.
+    """
+    student = await db.students.find_one({"student_id": student_id}, {"_id": 0})
+    if not student:
+        raise HTTPException(status_code=404, detail="Student not found")
+    
+    photo_url = student.get('photo', '')
+    
+    return {
+        "student_id": student_id,
+        "name": student['name'],
+        "photo_url": photo_url,
+        "has_photo": bool(photo_url)
+    }
+
 # Core APIs
 @api_router.post("/scan_event")
-async def scan_event(request: ScanEventRequest):
+async def scan_event(request: ScanEventRequest, device: dict = Depends(verify_device_key)):
+    """
+    Device-only endpoint for recording RFID scan events.
+    Requires X-API-Key header authentication.
+    Supports both Yellow (On Board) and Green (Reached) status based on scan_type.
+    """
     timestamp = datetime.now(timezone.utc).isoformat()
     
     event = Event(
@@ -332,7 +478,8 @@ async def scan_event(request: ScanEventRequest):
     })
     
     if request.verified:
-        status = "yellow"
+        # Use scan_type to determine status: "yellow" = On Board, "green" = Reached
+        status = request.scan_type if request.scan_type in ["yellow", "green"] else "yellow"
         
         update_data = {
             "status": status, 
@@ -362,6 +509,8 @@ async def scan_event(request: ScanEventRequest):
                 scan_timestamp=timestamp if request.photo_url else None
             )
             await db.attendance.insert_one(attendance.model_dump())
+        
+        logging.info(f"Scan event recorded: Student {request.student_id}, Status: {status}, Device: {device['device_name']}")
     else:
         student = await db.students.find_one({"student_id": request.student_id}, {"_id": 0})
         if student:
@@ -373,11 +522,19 @@ async def scan_event(request: ScanEventRequest):
             )
             await db.notifications.insert_one(notification.model_dump())
     
-    return {"status": "success", "event_id": event.event_id}
+    return {"status": "success", "event_id": event.event_id, "attendance_status": status if request.verified else "not_recorded"}
 
 @api_router.post("/update_location")
-async def update_location(request: UpdateLocationRequest):
+async def update_location(request: UpdateLocationRequest, device: dict = Depends(verify_device_key)):
+    """
+    Device-only endpoint for updating bus GPS location.
+    Requires X-API-Key header authentication.
+    """
     timestamp = datetime.now(timezone.utc).isoformat()
+    
+    # Verify that the device is authorized for this bus
+    if device['bus_id'] != request.bus_id:
+        raise HTTPException(status_code=403, detail="Device not authorized for this bus")
     
     location = BusLocation(
         bus_id=request.bus_id,
@@ -391,6 +548,8 @@ async def update_location(request: UpdateLocationRequest):
         {"$set": location.model_dump()},
         upsert=True
     )
+    
+    logging.info(f"Location updated for bus {request.bus_id} by device {device['device_name']}")
     
     return {"status": "success", "timestamp": timestamp}
 
@@ -454,7 +613,11 @@ async def get_attendance(student_id: str, month: str, current_user: dict = Depen
     }
 
 @api_router.get("/get_bus_location")
-async def get_bus_location(bus_id: str):
+async def get_bus_location(bus_id: str, device: dict = Depends(verify_device_key)):
+    """
+    Device-only endpoint for retrieving bus GPS location.
+    Requires X-API-Key header authentication.
+    """
     location = await db.bus_locations.find_one({"bus_id": bus_id}, {"_id": 0})
     if not location:
         raise HTTPException(status_code=404, detail="Bus location not found")
