@@ -59,13 +59,13 @@ The Bus Tracker system uses a secure API key-based authentication system for Ras
 **Testing with curl**:
 ```bash
 # First, login as admin to get session cookie
-curl -X POST http://localhost:8001/api/auth/login \
+curl -X POST ${BACKEND_BASE_URL}/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email": "admin@school.com", "password": "password"}' \
   -c cookies.txt
 
 # Register a device
-curl -X POST http://localhost:8001/api/device/register \
+curl -X POST ${BACKEND_BASE_URL}/api/device/register \
   -H "Content-Type: application/json" \
   -b cookies.txt \
   -d '{
@@ -75,10 +75,10 @@ curl -X POST http://localhost:8001/api/device/register \
 ```
 
 **Testing with Postman**:
-1. POST to `http://localhost:8001/api/auth/login`
+1. POST to `${BACKEND_BASE_URL}/api/auth/login`
    - Body: `{"email": "admin@school.com", "password": "password"}`
    - Save the session cookie
-2. POST to `http://localhost:8001/api/device/register`
+2. POST to `${BACKEND_BASE_URL}/api/device/register`
    - Use saved cookie
    - Body: `{"bus_id": "your-bus-id", "device_name": "Raspberry Pi - Bus 001"}`
 
