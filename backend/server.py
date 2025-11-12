@@ -365,6 +365,109 @@ async def upload_photo(file: UploadFile = File(...), current_user: dict = Depend
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+
+# Update user's own photo
+@api_router.put("/users/me/photo")
+async def update_my_photo(file: UploadFile = File(...), current_user: dict = Depends(get_current_user)):
+    """
+    Allow any authenticated user to update their own profile photo
+    """
+    try:
+        # Validate file type
+        if not file.content_type.startswith('image/'):
+            raise HTTPException(status_code=400, detail="File must be an image")
+        
+        file_ext = file.filename.split('.')[-1].lower()
+        if file_ext not in ['jpg', 'jpeg', 'png', 'gif', 'webp']:
+            raise HTTPException(status_code=400, detail="Invalid image format. Use jpg, jpeg, png, gif, or webp")
+        
+        # Determine photo directory based on role
+        role_dirs = {
+            'admin': 'admins',
+            'teacher': 'teachers',
+            'parent': 'parents'
+        }
+        role_dir = role_dirs.get(current_user['role'])
+        if not role_dir:
+            raise HTTPException(status_code=400, detail="Invalid user role")
+        
+        # Create role directory if it doesn't exist
+        role_path = PHOTO_DIR / role_dir
+        role_path.mkdir(parents=True, exist_ok=True)
+        
+        # Save with user_id as filename
+        file_name = f"{current_user['user_id']}.{file_ext}"
+        file_path = role_path / file_name
+        
+        # Save file
+        with open(file_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+        
+        # Update database
+        photo_path = f"backend/photos/{role_dir}/{file_name}"
+        await db.users.update_one(
+            {"user_id": current_user['user_id']},
+            {"$set": {"photo": photo_path}}
+        )
+        
+        photo_url = f"/photos/{role_dir}/{file_name}"
+        return {"success": True, "photo_url": photo_url, "message": "Photo updated successfully"}
+    except HTTPException:
+        raise
+    except Exception as e:
+        logging.error(f"Error updating user photo: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Admin: Update student photo
+@api_router.put("/students/{student_id}/photo")
+async def update_student_photo(student_id: str, file: UploadFile = File(...), current_user: dict = Depends(get_current_user)):
+    """
+    Admin-only endpoint to update a student's profile photo
+    """
+    if current_user['role'] != 'admin':
+        raise HTTPException(status_code=403, detail="Only admins can update student photos")
+    
+    try:
+        # Validate student exists
+        student = await db.students.find_one({"student_id": student_id})
+        if not student:
+            raise HTTPException(status_code=404, detail="Student not found")
+        
+        # Validate file type
+        if not file.content_type.startswith('image/'):
+            raise HTTPException(status_code=400, detail="File must be an image")
+        
+        file_ext = file.filename.split('.')[-1].lower()
+        if file_ext not in ['jpg', 'jpeg', 'png', 'gif', 'webp']:
+            raise HTTPException(status_code=400, detail="Invalid image format. Use jpg, jpeg, png, gif, or webp")
+        
+        # Create student directory if it doesn't exist
+        student_dir = PHOTO_DIR / 'students' / student_id
+        student_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Save as profile.jpg
+        file_name = f"profile.{file_ext}"
+        file_path = student_dir / file_name
+        
+        # Save file
+        with open(file_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+        
+        # Update database
+        photo_path = f"backend/photos/students/{student_id}/profile.{file_ext}"
+        await db.students.update_one(
+            {"student_id": student_id},
+            {"$set": {"photo_path": photo_path}}
+        )
+        
+        photo_url = f"/photos/students/{student_id}/profile.{file_ext}"
+        return {"success": True, "photo_url": photo_url, "message": "Student photo updated successfully"}
+    except HTTPException:
+        raise
+    except Exception as e:
+        logging.error(f"Error updating student photo: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 # Device API Key Management
 @api_router.post("/device/register")
 async def register_device(device_create: DeviceKeyCreate, current_user: dict = Depends(get_current_user)):
