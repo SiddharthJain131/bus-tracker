@@ -693,6 +693,12 @@ async def get_students(current_user: dict = Depends(get_current_user)):
             student['bus_number'] = bus['bus_number'] if bus else 'N/A'
         else:
             student['bus_number'] = 'N/A'
+        
+        # Convert photo_path to accessible URL
+        if student.get('photo_path'):
+            student['photo_url'] = get_photo_url(student['photo_path'])
+        else:
+            student['photo_url'] = None
     
     return students
 
