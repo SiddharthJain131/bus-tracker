@@ -643,7 +643,7 @@ The log file includes:
 ============================================================
 
 Configuration:
-   • Base URL: http://localhost:8001
+   • Base URL: Use ${BACKEND_BASE_URL} from environment
    • Bus ID: BUS-001
    • Student ID: c97f5820-e4a2-479e-8112-b156275a8c52
    • API Key: Configured ✓
