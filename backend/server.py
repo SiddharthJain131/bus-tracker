@@ -361,7 +361,7 @@ async def upload_photo(file: UploadFile = File(...), current_user: dict = Depend
         with open(file_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
         
-        return {"photo_url": f"/photos/{file_name}"}
+        return {"photo_url": f"/api/photos/{file_name}"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
