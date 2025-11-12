@@ -64,12 +64,12 @@ export default function UserDetailModal({ user, open, onClose }) {
         <div className="space-y-6">
           {/* Profile Header */}
           <div className="flex items-center gap-6 p-6 bg-gradient-to-br from-violet-50 to-purple-50 rounded-lg">
-            <div className="w-24 h-24 bg-gradient-to-br from-violet-400 to-purple-600 rounded-full flex items-center justify-center text-white text-3xl font-bold overflow-hidden">
+            <div className="w-24 h-24 bg-gradient-to-br from-violet-400 to-purple-600 rounded-full flex items-center justify-center text-white text-3xl font-bold overflow-hidden transition-all duration-300 hover:scale-110 hover:shadow-xl hover:ring-4 hover:ring-violet-300 cursor-pointer">
               {user.photo_url ? (
                 <img 
                   src={`${BACKEND_URL}${user.photo_url}`} 
                   alt={user.name} 
-                  className="w-full h-full object-cover" 
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" 
                   onError={(e) => {
                     e.target.style.display = 'none';
                     e.target.parentElement.textContent = user.name.charAt(0).toUpperCase();
