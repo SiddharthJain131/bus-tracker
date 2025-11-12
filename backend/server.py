@@ -82,6 +82,7 @@ class Student(BaseModel):
     roll_number: str  # Required for uniqueness constraint
     phone: Optional[str] = None
     photo: Optional[str] = None
+    embedding: Optional[str] = None  # Face embedding data (base64 encoded)
     class_name: str  # Required for uniqueness constraint
     section: str  # Required for uniqueness constraint
     parent_id: str
