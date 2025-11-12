@@ -402,17 +402,26 @@ tail -50 /var/log/supervisor/backend.err.log
 **Fix:**
 
 **1. Check backend CORS settings:**
+```bash
+# In backend/.env
+# Set CORS_ORIGINS to allow your frontend URL
+CORS_ORIGINS=*  # For development (allows all origins)
+# OR for production, specify your frontend domain:
+# CORS_ORIGINS=https://your-frontend-domain.com
+```
+
 ```python
-# In server.py
+# In server.py (already configured to use environment variable)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
     allow_credentials=True,
 )
 ```
 
 **2. Verify frontend uses correct URL:**
-- Must use same origin as CORS config
+- Frontend's REACT_APP_BACKEND_URL must match your backend's external URL
+- Check frontend/.env configuration
 - Don't mix http and https
 
 ---
