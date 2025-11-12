@@ -289,6 +289,21 @@ cd frontend
 yarn test
 ```
 
+### Device API Testing
+Test Raspberry Pi device endpoints without physical hardware:
+```bash
+cd backend/tests
+python3 local_device_simulator.py
+```
+
+Features:
+- Interactive CLI menu for testing individual endpoints
+- Color-coded success/failure indicators
+- Comprehensive logging to `device_test_log.txt`
+- Tests: embedding retrieval, photo fetch, scan events (yellow/green), GPS updates
+
+📖 **Setup Guide**: [API_TEST_DEVICE.md](./docs/API_TEST_DEVICE.md#local-device-simulator)
+
 ### Integration Testing
 ```bash
 # Use demo simulation tools in Admin dashboard
