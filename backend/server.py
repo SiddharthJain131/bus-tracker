@@ -1519,6 +1519,9 @@ async def simulate_bus_movement(bus_id: str):
 # Include router
 app.include_router(api_router)
 
+# Mount static files for photos
+app.mount("/photos", StaticFiles(directory=str(PHOTO_DIR)), name="photos")
+
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
