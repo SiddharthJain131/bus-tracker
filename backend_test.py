@@ -14,7 +14,7 @@ import os
 from datetime import datetime
 
 # Get backend URL from environment
-BACKEND_URL = os.getenv('REACT_APP_BACKEND_URL', 'https://user-photo-view.preview.emergentagent.com')
+BACKEND_URL = os.getenv('REACT_APP_BACKEND_URL', 'https://env-url-handler.preview.emergentagent.com')
 API_BASE = f"{BACKEND_URL}/api"
 
 class DeviceAPITester:
