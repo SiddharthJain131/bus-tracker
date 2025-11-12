@@ -801,10 +801,10 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Composite Unique Constraint - Student (class_name, section, roll_number)"
-    - "AddStudentModal - Merged Class-Section Input & Parent Selection with Radio Buttons"
-    - "EditStudentModalEnhanced - Merged Class-Section Input & Searchable Parent Field"
-    - "StudentDetailModal - Remove Duplicate Roll Number & Add Stop Field"
+    - "Device API Key System - Models & Dependencies"
+    - "Device Registration Endpoint - POST /api/device/register"
+    - "Device-Only Endpoints - Embedding & Photo Retrieval"
+    - "Protected Device Routes - scan_event, update_location, get_bus_location"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
