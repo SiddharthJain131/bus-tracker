@@ -240,9 +240,9 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                 Teacher Profile
               </h2>
               <div className="flex items-center gap-6">
-                <div className="w-20 h-20 bg-gradient-to-br from-emerald-400 to-teal-600 rounded-full flex items-center justify-center text-white text-3xl font-bold">
+                <div className="w-20 h-20 bg-gradient-to-br from-emerald-400 to-teal-600 rounded-full flex items-center justify-center text-white text-3xl font-bold overflow-hidden transition-all duration-300 hover:scale-110 hover:shadow-xl hover:ring-4 hover:ring-emerald-300 cursor-pointer">
                   {user.photo ? (
-                    <img src={user.photo} alt={user.name} className="w-full h-full rounded-full object-cover" />
+                    <img src={user.photo} alt={user.name} className="w-full h-full rounded-full object-cover transition-transform duration-300 hover:scale-110" />
                   ) : (
                     user.name.charAt(0).toUpperCase()
                   )}
