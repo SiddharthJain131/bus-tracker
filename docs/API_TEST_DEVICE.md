@@ -544,6 +544,167 @@ INFO: Location updated for bus 550e8400-... by device Raspberry Pi - Bus 001
 
 ---
 
+## Local Device Simulator
+
+For local testing and development, use the **Local Device Simulator** script to test all device endpoints without needing a physical Raspberry Pi.
+
+### Location
+```bash
+/backend/tests/local_device_simulator.py
+```
+
+### Configuration
+
+Edit the configuration variables at the top of the script:
+
+```python
+# Backend API base URL
+BASE_URL = "http://localhost:8001"
+
+# Device API Key (obtain from admin panel)
+DEVICE_API_KEY = "your_device_api_key_here"
+
+# Bus ID this device is assigned to
+BUS_ID = "BUS-001"
+
+# Test Student ID
+STUDENT_ID = "c97f5820-e4a2-479e-8112-b156275a8c52"
+
+# Test image path (for scan events)
+TEST_IMAGE_PATH = "test_scan_photo.jpg"
+
+# GPS coordinates for testing
+TEST_GPS_LAT = 37.7749
+TEST_GPS_LON = -122.4194
+```
+
+### Getting Your API Key
+
+1. Login as admin: `admin@school.com` / `password`
+2. Navigate to **Device Management** (or use API directly)
+3. Register a new device for your test bus:
+   ```bash
+   curl -X POST http://localhost:8001/api/device/register \
+        -H 'Cookie: session=<admin_session>' \
+        -H 'Content-Type: application/json' \
+        -d '{"bus_id":"BUS-001", "device_name":"Test Device"}'
+   ```
+4. Copy the generated 64-character API key
+5. Update `DEVICE_API_KEY` in the simulator script
+
+### Usage
+
+**Interactive Mode** (Recommended):
+```bash
+cd /app/backend/tests
+python3 local_device_simulator.py
+```
+
+**Menu Options**:
+- `[1]` Get Student Embedding
+- `[2]` Get Student Photo  
+- `[3]` Send Yellow Scan (On Board)
+- `[4]` Send Green Scan (Reached)
+- `[5]` Update GPS Location
+- `[6]` Run All Tests
+- `[0]` Exit
+
+**Non-Interactive Mode** (CI/CD):
+```bash
+python3 local_device_simulator.py --run-all
+```
+
+### Features
+
+✅ **Color-coded output**: Green for success ✅, Red for failure ❌  
+✅ **Comprehensive logging**: All responses logged to `device_test_log.txt`  
+✅ **Detailed responses**: Full API response bodies and headers  
+✅ **Photo upload testing**: Simulates scan events with base64-encoded images  
+✅ **GPS simulation**: Tests location updates with configurable coordinates  
+✅ **Batch testing**: Run all tests sequentially with summary report
+
+### Test Logs
+
+All test runs are logged to:
+```
+/backend/tests/device_test_log.txt
+```
+
+The log file includes:
+- Timestamps for each test
+- Request/response details
+- API response bodies and headers
+- Success/failure indicators
+
+### Example Output
+
+```
+🚌 Bus Tracker - Device API Simulator
+============================================================
+
+Configuration:
+   • Base URL: http://localhost:8001
+   • Bus ID: BUS-001
+   • Student ID: c97f5820-e4a2-479e-8112-b156275a8c52
+   • API Key: Configured ✓
+
+Test Menu:
+   [1] Get Student Embedding
+   [2] Get Student Photo
+   [3] Send Yellow Scan (On Board)
+   [4] Send Green Scan (Reached)
+   [5] Update GPS Location
+   [6] Run All Tests
+   [0] Exit
+
+Select option: 6
+
+🚀 Running All Device API Tests
+============================================================
+
+🔍 Testing: Get Student Embedding
+✅ SUCCESS
+   Student: Emma Johnson
+   Has Embedding: false
+
+📷 Testing: Get Student Photo
+✅ SUCCESS
+   Student: Emma Johnson
+   Has Photo: false
+
+🎫 Testing: Scan Event - On Board (Yellow)
+✅ SUCCESS
+   Status: success
+   Attendance Status: yellow
+   GPS: (37.7749, -122.4194)
+
+📊 Test Summary
+============================================================
+   get_embedding: ✅ PASSED
+   get_photo: ✅ PASSED
+   scan_yellow: ✅ PASSED
+   scan_green: ✅ PASSED
+   update_location: ✅ PASSED
+
+Results: 5/5 tests passed (100%)
+```
+
+### Troubleshooting
+
+**Error: "Device API Key not configured"**
+- Solution: Follow the "Getting Your API Key" steps above
+
+**Error: "Connection refused"**
+- Solution: Ensure backend is running (`sudo supervisorctl status backend`)
+
+**Error: "403 Forbidden"**
+- Solution: Verify API key is correct and device is registered for the specified bus
+
+**Error: "422 Unprocessable Entity"**
+- Solution: Check that X-API-Key header is being sent with requests
+
+---
+
 ## Additional Resources
 
 - [Main API Documentation](./API_DOCUMENTATION.md)
@@ -553,5 +714,5 @@ INFO: Location updated for bus 550e8400-... by device Raspberry Pi - Bus 001
 
 ---
 
-**Last Updated**: July 2025  
-**Version**: 1.0.0
+**Last Updated**: November 2025  
+**Version**: 1.1.0
