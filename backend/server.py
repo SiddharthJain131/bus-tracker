@@ -971,6 +971,14 @@ async def get_users(current_user: dict = Depends(get_current_user)):
         raise HTTPException(status_code=403, detail="Access denied")
     
     users = await db.users.find({}, {"_id": 0, "password_hash": 0}).to_list(1000)
+    
+    # Convert photo_path to accessible URL for each user
+    for user in users:
+        if user.get('photo_path'):
+            user['photo_url'] = get_photo_url(user['photo_path'])
+        else:
+            user['photo_url'] = None
+    
     return users
 
 @api_router.post("/users")
