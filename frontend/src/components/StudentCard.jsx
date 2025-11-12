@@ -19,12 +19,12 @@ export default function StudentCard({ student, compact = false }) {
     return (
       <Card className="p-4 hover:shadow-md transition-shadow" data-testid={`student-card-${student.student_id}`}>
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white font-bold overflow-hidden">
+          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white font-bold overflow-hidden transition-all duration-300 hover:scale-125 hover:shadow-lg hover:ring-4 hover:ring-blue-300 cursor-pointer">
             {student.photo_url ? (
               <img 
                 src={`${BACKEND_URL}${student.photo_url}`} 
                 alt={student.name} 
-                className="w-full h-full object-cover" 
+                className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" 
                 onError={(e) => {
                   e.target.style.display = 'none';
                   e.target.parentElement.textContent = getInitials(student.name);
