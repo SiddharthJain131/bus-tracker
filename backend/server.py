@@ -1519,8 +1519,8 @@ async def simulate_bus_movement(bus_id: str):
 # Include router
 app.include_router(api_router)
 
-# Mount static files for photos
-app.mount("/photos", StaticFiles(directory=str(PHOTO_DIR)), name="photos")
+# Mount static files for photos under /api prefix to match Kubernetes ingress routing
+app.mount("/api/photos", StaticFiles(directory=str(PHOTO_DIR)), name="photos")
 
 app.add_middleware(
     CORSMiddleware,
