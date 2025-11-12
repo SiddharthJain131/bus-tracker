@@ -201,6 +201,18 @@ class Holiday(BaseModel):
     name: str
     description: str = ""  # Optional description field
 
+class DeviceKey(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    device_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    bus_id: str  # Links device to bus (1:1 relationship)
+    device_name: str
+    key_hash: str  # Hashed API key (using bcrypt)
+    created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+
+class DeviceKeyCreate(BaseModel):
+    bus_id: str
+    device_name: str
+
 # Helper: Send mock email and log
 async def send_email_notification(recipient_email: str, recipient_name: str, subject: str, body: str, student_id: Optional[str] = None, user_id: Optional[str] = None):
     email_log = EmailLog(
