@@ -558,8 +558,8 @@ For local testing and development, use the **Local Device Simulator** script to 
 Edit the configuration variables at the top of the script:
 
 ```python
-# Backend API base URL
-BASE_URL = "http://localhost:8001"
+# Backend API base URL (use your environment's BACKEND_BASE_URL)
+BASE_URL = "${BACKEND_BASE_URL}"
 
 # Device API Key (obtain from admin panel)
 DEVICE_API_KEY = "your_device_api_key_here"
