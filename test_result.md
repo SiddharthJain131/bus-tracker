@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Organize Test Photos by Role & Add Attendance Folders — Bus Tracker Backend. Restructure backend/photos directory and update database references so photos are organized by user role, with individual attendance folders for each student. Tasks: Create role-based folder structure (students/parents/teachers/admins), move photos to student folders with profile.jpg naming, create attendance subfolders, update database backup with photo_path and attendance_path fields, create automation script, update documentation."
+user_problem_statement: "Use photo-maker.py to Populate Photos & Remove Redundant Documentation — Bus Tracker Backend. Integrate photo-maker.py utility to automatically populate all required photo directories for each user role and simplify documentation. Tasks: Run photo-maker.py to populate photos for students/parents/teachers/admins, update database backup with photo paths, cleanup redundant docs, comprehensive logging and validation."
 
 backend:
   - task: "Authentication APIs (login, logout, me)"
