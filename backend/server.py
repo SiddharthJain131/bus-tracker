@@ -236,6 +236,27 @@ async def get_current_user(session_token: Optional[str] = Cookie(None)):
         raise HTTPException(status_code=401, detail="Not authenticated")
     return sessions[session_token]
 
+# Device API Key verification helper
+async def verify_device_key(x_api_key: str = Header(...)):
+    """
+    Dependency to verify device API key from X-API-Key header.
+    Validates against hashed keys stored in device_keys collection.
+    """
+    if not x_api_key:
+        raise HTTPException(status_code=403, detail="Missing X-API-Key header")
+    
+    # Hash the provided key to compare with stored hash
+    # Get all device keys and check each one
+    device_keys = await db.device_keys.find({}, {"_id": 0}).to_list(1000)
+    
+    for device_key in device_keys:
+        # Verify the key using bcrypt
+        if bcrypt.checkpw(x_api_key.encode('utf-8'), device_key['key_hash'].encode('utf-8')):
+            return device_key  # Return the device info if valid
+    
+    # If no match found, raise 403
+    raise HTTPException(status_code=403, detail="Invalid or expired API key")
+
 # Auth endpoints
 @api_router.post("/auth/login")
 async def login(user_login: UserLogin, response: Response):
