@@ -183,7 +183,7 @@ Device Simulator Started: 2025-11-12T10:07:47.453947
 
 [2025-11-12 10:08:05] [INFO] 
 🔍 Testing: Get Student Embedding
-[2025-11-12 10:08:05] [INFO] Endpoint: GET https://bus-tracker-update.preview.emergentagent.com//api/students/9afb783f-7952-476d-8626-0143fdbbc2a1/embedding
+[2025-11-12 10:08:05] [INFO] Endpoint: GET https://card-portrait-fix.preview.emergentagent.com//api/students/9afb783f-7952-476d-8626-0143fdbbc2a1/embedding
 [2025-11-12 10:08:05] [DEBUG] 
 ============================================================
 [2025-11-12 10:08:05] [DEBUG] Endpoint: GET /api/students/9afb783f-7952-476d-8626-0143fdbbc2a1/embedding
@@ -196,7 +196,7 @@ Device Simulator Started: 2025-11-12T10:07:47.453947
 [2025-11-12 10:08:05] [INFO]    Error: {"detail":"Invalid or expired API key"}
 [2025-11-12 10:08:10] [INFO] 
 🔍 Testing: Get Student Embedding
-[2025-11-12 10:08:10] [INFO] Endpoint: GET https://bus-tracker-update.preview.emergentagent.com//api/students/9afb783f-7952-476d-8626-0143fdbbc2a1/embedding
+[2025-11-12 10:08:10] [INFO] Endpoint: GET https://card-portrait-fix.preview.emergentagent.com//api/students/9afb783f-7952-476d-8626-0143fdbbc2a1/embedding
 [2025-11-12 10:08:10] [DEBUG] 
 ============================================================
 [2025-11-12 10:08:10] [DEBUG] Endpoint: GET /api/students/9afb783f-7952-476d-8626-0143fdbbc2a1/embedding
@@ -209,7 +209,7 @@ Device Simulator Started: 2025-11-12T10:07:47.453947
 [2025-11-12 10:08:10] [INFO]    Error: {"detail":"Invalid or expired API key"}
 [2025-11-12 10:08:53] [INFO] 
 📷 Testing: Get Student Photo
-[2025-11-12 10:08:53] [INFO] Endpoint: GET https://bus-tracker-update.preview.emergentagent.com//api/students/9afb783f-7952-476d-8626-0143fdbbc2a1/photo
+[2025-11-12 10:08:53] [INFO] Endpoint: GET https://card-portrait-fix.preview.emergentagent.com//api/students/9afb783f-7952-476d-8626-0143fdbbc2a1/photo
 [2025-11-12 10:08:53] [DEBUG] 
 ============================================================
 [2025-11-12 10:08:53] [DEBUG] Endpoint: GET /api/students/9afb783f-7952-476d-8626-0143fdbbc2a1/photo
@@ -226,7 +226,7 @@ Device Simulator Started: 2025-11-12T10:07:47.453947
 [2025-11-12 10:09:04] [INFO] ============================================================
 [2025-11-12 10:09:04] [INFO] 
 🔍 Testing: Get Student Embedding
-[2025-11-12 10:09:04] [INFO] Endpoint: GET https://bus-tracker-update.preview.emergentagent.com//api/students/9afb783f-7952-476d-8626-0143fdbbc2a1/embedding
+[2025-11-12 10:09:04] [INFO] Endpoint: GET https://card-portrait-fix.preview.emergentagent.com//api/students/9afb783f-7952-476d-8626-0143fdbbc2a1/embedding
 [2025-11-12 10:09:04] [DEBUG] 
 ============================================================
 [2025-11-12 10:09:04] [DEBUG] Endpoint: GET /api/students/9afb783f-7952-476d-8626-0143fdbbc2a1/embedding
@@ -239,7 +239,7 @@ Device Simulator Started: 2025-11-12T10:07:47.453947
 [2025-11-12 10:09:04] [INFO]    Error: {"detail":"Invalid or expired API key"}
 [2025-11-12 10:09:04] [INFO] 
 📷 Testing: Get Student Photo
-[2025-11-12 10:09:04] [INFO] Endpoint: GET https://bus-tracker-update.preview.emergentagent.com//api/students/9afb783f-7952-476d-8626-0143fdbbc2a1/photo
+[2025-11-12 10:09:04] [INFO] Endpoint: GET https://card-portrait-fix.preview.emergentagent.com//api/students/9afb783f-7952-476d-8626-0143fdbbc2a1/photo
 [2025-11-12 10:09:04] [DEBUG] 
 ============================================================
 [2025-11-12 10:09:04] [DEBUG] Endpoint: GET /api/students/9afb783f-7952-476d-8626-0143fdbbc2a1/photo
@@ -252,7 +252,7 @@ Device Simulator Started: 2025-11-12T10:07:47.453947
 [2025-11-12 10:09:04] [INFO]    Error: {"detail":"Invalid or expired API key"}
 [2025-11-12 10:09:04] [INFO] 
 🎫 Testing: Scan Event - On Board (Yellow)
-[2025-11-12 10:09:04] [INFO] Endpoint: POST https://bus-tracker-update.preview.emergentagent.com//api/scan_event
+[2025-11-12 10:09:04] [INFO] Endpoint: POST https://card-portrait-fix.preview.emergentagent.com//api/scan_event
 [2025-11-12 10:09:04] [INFO]    ℹ️  No photo file found at test_scan_photo.txt, sending without photo
 [2025-11-12 10:09:04] [DEBUG] 
 ============================================================
@@ -266,7 +266,7 @@ Device Simulator Started: 2025-11-12T10:07:47.453947
 [2025-11-12 10:09:04] [INFO]    Error: {"detail":"Invalid or expired API key"}
 [2025-11-12 10:09:04] [INFO] 
 🎫 Testing: Scan Event - Reached (Green)
-[2025-11-12 10:09:04] [INFO] Endpoint: POST https://bus-tracker-update.preview.emergentagent.com//api/scan_event
+[2025-11-12 10:09:04] [INFO] Endpoint: POST https://card-portrait-fix.preview.emergentagent.com//api/scan_event
 [2025-11-12 10:09:04] [INFO]    ℹ️  No photo file found at test_scan_photo.txt, sending without photo
 [2025-11-12 10:09:04] [DEBUG] 
 ============================================================
@@ -280,7 +280,7 @@ Device Simulator Started: 2025-11-12T10:07:47.453947
 [2025-11-12 10:09:04] [INFO]    Error: {"detail":"Invalid or expired API key"}
 [2025-11-12 10:09:04] [INFO] 
 📍 Testing: Update Bus Location
-[2025-11-12 10:09:04] [INFO] Endpoint: POST https://bus-tracker-update.preview.emergentagent.com//api/update_location
+[2025-11-12 10:09:04] [INFO] Endpoint: POST https://card-portrait-fix.preview.emergentagent.com//api/update_location
 [2025-11-12 10:09:05] [DEBUG] 
 ============================================================
 [2025-11-12 10:09:05] [DEBUG] Endpoint: POST /api/update_location

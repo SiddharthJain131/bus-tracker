@@ -2,6 +2,8 @@ import React from 'react';
 import { Card } from './ui/card';
 import { User, GraduationCap, Bus, Phone, AlertCircle, MapPin } from 'lucide-react';
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 const getInitials = (name) => {
   return name
     .split(' ')
@@ -17,9 +19,17 @@ export default function StudentCard({ student, compact = false }) {
     return (
       <Card className="p-4 hover:shadow-md transition-shadow" data-testid={`student-card-${student.student_id}`}>
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white font-bold">
-            {student.photo ? (
-              <img src={student.photo} alt={student.name} className="w-full h-full rounded-full object-cover" />
+          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white font-bold overflow-hidden">
+            {student.photo_url ? (
+              <img 
+                src={`${BACKEND_URL}${student.photo_url}`} 
+                alt={student.name} 
+                className="w-full h-full object-cover" 
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.parentElement.textContent = getInitials(student.name);
+                }}
+              />
             ) : (
               getInitials(student.name)
             )}
@@ -50,9 +60,17 @@ export default function StudentCard({ student, compact = false }) {
       <Card className="p-6 card-hover" data-testid={`student-detail-card-${student.student_id}`}>
         <div className="flex items-start gap-4">
           {/* Avatar */}
-          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">
-            {student.photo ? (
-              <img src={student.photo} alt={student.name} className="w-full h-full rounded-full object-cover" />
+          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white text-2xl font-bold flex-shrink-0 overflow-hidden">
+            {student.photo_url ? (
+              <img 
+                src={`${BACKEND_URL}${student.photo_url}`} 
+                alt={student.name} 
+                className="w-full h-full object-cover" 
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.parentElement.textContent = getInitials(student.name);
+                }}
+              />
             ) : (
               getInitials(student.name)
             )}

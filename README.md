@@ -48,13 +48,15 @@ pip install -r requirements.txt
 cat > .env << EOF
 MONGO_URL=mongodb://localhost:27017
 DB_NAME=bus_tracker
+BACKEND_BASE_URL=${BACKEND_BASE_URL}
+CORS_ORIGINS=*
 EOF
 
 # Frontend setup
 cd ../frontend
 yarn install
 cat > .env << EOF
-REACT_APP_BACKEND_URL=http://localhost:8001
+REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}
 EOF
 
 # Seed database
@@ -65,7 +67,7 @@ python seed_data.py
 sudo supervisorctl restart all
 ```
 
-**Access:** http://localhost:3000
+**Access:** Use the URL defined in `REACT_APP_BACKEND_URL` environment variable
 
 **Demo Login:**
 - Admin: `admin@school.com` / `password`
@@ -86,6 +88,7 @@ sudo supervisorctl restart all
 ### For Developers
 - **[API Documentation](./docs/API_DOCUMENTATION.md)** - Complete API reference
 - **[Database Schema](./docs/DATABASE.md)** - Data models and relationships
+- **[Photo Organization](./docs/PHOTO_ORGANIZATION.md)** - Photo structure and management
 - **[Development Guide](./docs/DEVELOPMENT.md)** - Development workflow and testing
 
 ### For IoT Integration
@@ -442,7 +445,8 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file for
 | [INSTALLATION.md](./docs/INSTALLATION.md) | Complete installation guide |
 | [USER_GUIDE.md](./docs/USER_GUIDE.md) | User manual for all roles |
 | [API_DOCUMENTATION.md](./docs/API_DOCUMENTATION.md) | REST API reference |
-| [API_TEST_DEVICE.md](./docs/API_TEST_DEVICE.md) | **NEW**: Device API key testing guide |
+| [API_TEST_DEVICE.md](./docs/API_TEST_DEVICE.md) | Device API key testing guide |
+| [PHOTO_ORGANIZATION.md](./docs/PHOTO_ORGANIZATION.md) | **NEW**: Photo structure by role & attendance folders |
 | [RASPBERRY_PI_INTEGRATION.md](./docs/RASPBERRY_PI_INTEGRATION.md) | IoT device integration |
 | [DATABASE.md](./docs/DATABASE.md) | Database schema and models |
 | [DEVELOPMENT.md](./docs/DEVELOPMENT.md) | Development workflow |

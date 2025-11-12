@@ -1,4 +1,5 @@
 from fastapi import FastAPI, APIRouter, HTTPException, Depends, Cookie, Response, UploadFile, File, Header
+from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -236,6 +237,30 @@ async def get_current_user(session_token: Optional[str] = Cookie(None)):
         raise HTTPException(status_code=401, detail="Not authenticated")
     return sessions[session_token]
 
+# Helper function to convert photo path to URL
+def get_photo_url(photo_path: Optional[str]) -> Optional[str]:
+    """
+    Convert backend photo path to accessible URL.
+    Example: "backend/photos/admins/abc123.jpg" -> "/api/photos/admins/abc123.jpg"
+    
+    Note: Uses /api/photos prefix to match Kubernetes ingress routing rules
+    that redirect /api/* requests to backend port 8001.
+    """
+    if not photo_path:
+        return None
+    # Remove 'backend/' prefix if present
+    if photo_path.startswith('backend/'):
+        photo_path = photo_path[8:]  # Remove 'backend/'
+    # Ensure path starts with /api/photos/
+    if not photo_path.startswith('/api/photos/'):
+        if photo_path.startswith('photos/'):
+            photo_path = '/api/' + photo_path
+        elif photo_path.startswith('/photos/'):
+            photo_path = '/api' + photo_path
+        else:
+            photo_path = '/api/photos/' + photo_path
+    return photo_path
+
 # Device API Key verification helper
 async def verify_device_key(x_api_key: str = Header(...)):
     """
@@ -295,7 +320,7 @@ async def login(user_login: UserLogin, response: Response):
         "role": user['role'],
         "name": user['name'],
         "phone": user.get('phone'),
-        "photo": user.get('photo'),
+        "photo": get_photo_url(user.get('photo')),
         "assigned_class": user.get('assigned_class'),
         "assigned_section": user.get('assigned_section'),
         "student_ids": user.get('student_ids', []),
@@ -317,7 +342,7 @@ async def get_me(current_user: dict = Depends(get_current_user)):
         "role": current_user['role'],
         "name": current_user['name'],
         "phone": current_user.get('phone'),
-        "photo": current_user.get('photo'),
+        "photo": get_photo_url(current_user.get('photo')),
         "address": current_user.get('address'),
         "assigned_class": current_user.get('assigned_class'),
         "assigned_section": current_user.get('assigned_section'),
@@ -336,7 +361,7 @@ async def upload_photo(file: UploadFile = File(...), current_user: dict = Depend
         with open(file_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
         
-        return {"photo_url": f"/photos/{file_name}"}
+        return {"photo_url": f"/api/photos/{file_name}"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -668,6 +693,12 @@ async def get_students(current_user: dict = Depends(get_current_user)):
             student['bus_number'] = bus['bus_number'] if bus else 'N/A'
         else:
             student['bus_number'] = 'N/A'
+        
+        # Convert photo_path to accessible URL
+        if student.get('photo_path'):
+            student['photo_url'] = get_photo_url(student['photo_path'])
+        else:
+            student['photo_url'] = None
     
     return students
 
@@ -743,6 +774,12 @@ async def get_student(student_id: str, current_user: dict = Depends(get_current_
         student['stop_name'] = stop['stop_name'] if stop else 'N/A'
     else:
         student['stop_name'] = 'N/A'
+    
+    # Convert photo_path to accessible URL
+    if student.get('photo_path'):
+        student['photo_url'] = get_photo_url(student['photo_path'])
+    else:
+        student['photo_url'] = None
     
     return student
 
@@ -940,6 +977,14 @@ async def get_users(current_user: dict = Depends(get_current_user)):
         raise HTTPException(status_code=403, detail="Access denied")
     
     users = await db.users.find({}, {"_id": 0, "password_hash": 0}).to_list(1000)
+    
+    # Convert photo_path to accessible URL for each user
+    for user in users:
+        if user.get('photo_path'):
+            user['photo_url'] = get_photo_url(user['photo_path'])
+        else:
+            user['photo_url'] = None
+    
     return users
 
 @api_router.post("/users")
@@ -1501,6 +1546,9 @@ async def simulate_bus_movement(bus_id: str):
 
 # Include router
 app.include_router(api_router)
+
+# Mount static files for photos under /api prefix to match Kubernetes ingress routing
+app.mount("/api/photos", StaticFiles(directory=str(PHOTO_DIR)), name="photos")
 
 app.add_middleware(
     CORSMiddleware,

@@ -1,0 +1,62 @@
+FINAL PHOTO ORGANIZATION STRUCTURE
+===================================
+
+backend/photos/
+├── admins/
+│   ├── 55b426f6-d039-4c7b-9b20-a4c09af39eec.jpg    (James Anderson)
+│   └── fcdbb6fa-732a-4214-bf2a-d623ca5e6253.jpg    (Patricia Williams)
+│
+├── teachers/
+│   ├── 6d0e882e-5161-4a95-a6ff-3f45f5ac3265.jpg    (Mary Johnson)
+│   ├── f4846153-2feb-4f65-aad5-5f1d673779f0.jpg    (Robert Smith)
+│   └── 15635048-a709-42fe-9c8b-741cad3254ff.jpg    (Sarah Wilson)
+│
+├── parents/
+│   ├── f8bdc585-52a8-4d0f-8808-6a0393ecba61.jpg    (John Parent)
+│   ├── bf8225ce-1892-49ca-b527-2b758c96b770.jpg    (Sarah Brown)
+│   ├── 05b23308-d849-4464-bd6c-e08ad5d11f50.jpg    (Michael Davis)
+│   └── ... (9 more parent photo paths)
+│
+└── students/
+    ├── 9afb783f-7952-476d-8626-0143fdbbc2a1/    (Emma Johnson - G5A-001)
+    │   ├── profile.jpg                          ← Main student photo
+    │   └── attendance/
+    │       ├── 2025-11-14_AM.jpg               ← Morning scan
+    │       ├── 2025-11-14_PM.jpg               ← Afternoon scan
+    │       ├── 2025-11-13_AM.jpg
+    │       ├── 2025-11-13_PM.jpg
+    │       └── ...
+    │
+    ├── 477b0b0a-57dc-4c53-a152-6dd05aa880c7/    (Liam Smith - G5A-002)
+    │   ├── profile.jpg
+    │   └── attendance/
+    │       └── ...
+    │
+    └── ... (18 more student folders)
+
+NAMING CONVENTIONS:
+===================
+
+✓ Student Profile Photos:    profile.jpg (always)
+✓ Student Attendance Scans:   YYYY-MM-DD_{AM|PM}.jpg
+✓ Parent/Teacher/Admin:       {user_id}.jpg
+
+DATABASE FIELDS:
+================
+
+Student Document:
+  • photo_path: "backend/photos/students/{student_id}/profile.jpg"
+  • attendance_path: "backend/photos/students/{student_id}/attendance"
+
+User Document (Parent/Teacher/Admin):
+  • photo_path: "backend/photos/{role}s/{user_id}.jpg"
+
+STATISTICS:
+===========
+
+✓ 20 student folders created
+✓ 20 attendance subfolders created
+✓ 20 profile photos organized
+✓ 17 user photo paths reserved
+✓ All database records updated
+

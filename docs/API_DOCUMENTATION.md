@@ -4,8 +4,9 @@ Complete API reference for the Bus Tracker System backend.
 
 ## Base URL
 
-**Development:** `http://localhost:8001/api`  
-**Production:** `https://your-domain.com/api`
+Use the `BACKEND_BASE_URL` environment variable defined in your backend `.env` file:
+
+**API Endpoint:** `${BACKEND_BASE_URL}/api`
 
 ## Authentication
 

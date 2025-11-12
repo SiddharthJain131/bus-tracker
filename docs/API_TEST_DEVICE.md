@@ -59,13 +59,13 @@ The Bus Tracker system uses a secure API key-based authentication system for Ras
 **Testing with curl**:
 ```bash
 # First, login as admin to get session cookie
-curl -X POST http://localhost:8001/api/auth/login \
+curl -X POST ${BACKEND_BASE_URL}/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email": "admin@school.com", "password": "password"}' \
   -c cookies.txt
 
 # Register a device
-curl -X POST http://localhost:8001/api/device/register \
+curl -X POST ${BACKEND_BASE_URL}/api/device/register \
   -H "Content-Type: application/json" \
   -b cookies.txt \
   -d '{
@@ -75,10 +75,10 @@ curl -X POST http://localhost:8001/api/device/register \
 ```
 
 **Testing with Postman**:
-1. POST to `http://localhost:8001/api/auth/login`
+1. POST to `${BACKEND_BASE_URL}/api/auth/login`
    - Body: `{"email": "admin@school.com", "password": "password"}`
    - Save the session cookie
-2. POST to `http://localhost:8001/api/device/register`
+2. POST to `${BACKEND_BASE_URL}/api/device/register`
    - Use saved cookie
    - Body: `{"bus_id": "your-bus-id", "device_name": "Raspberry Pi - Bus 001"}`
 
@@ -167,7 +167,7 @@ BACKEND_URL=https://your-backend-url.com/api
 **Testing with curl**:
 ```bash
 # Yellow scan (On Board)
-curl -X POST http://localhost:8001/api/scan_event \
+curl -X POST ${BACKEND_BASE_URL}/api/scan_event \
   -H "Content-Type: application/json" \
   -H "X-API-Key: your-api-key-here" \
   -d '{
@@ -181,7 +181,7 @@ curl -X POST http://localhost:8001/api/scan_event \
   }'
 
 # Green scan (Reached destination)
-curl -X POST http://localhost:8001/api/scan_event \
+curl -X POST ${BACKEND_BASE_URL}/api/scan_event \
   -H "Content-Type: application/json" \
   -H "X-API-Key: your-api-key-here" \
   -d '{
@@ -224,7 +224,7 @@ curl -X POST http://localhost:8001/api/scan_event \
 
 **Testing with curl**:
 ```bash
-curl -X POST http://localhost:8001/api/update_location \
+curl -X POST ${BACKEND_BASE_URL}/api/update_location \
   -H "Content-Type: application/json" \
   -H "X-API-Key: your-api-key-here" \
   -d '{
@@ -259,7 +259,7 @@ curl -X POST http://localhost:8001/api/update_location \
 
 **Testing with curl**:
 ```bash
-curl -X GET "http://localhost:8001/api/get_bus_location?bus_id=your-bus-id-here" \
+curl -X GET "${BACKEND_BASE_URL}/api/get_bus_location?bus_id=your-bus-id-here" \
   -H "X-API-Key: your-api-key-here"
 ```
 
@@ -298,7 +298,7 @@ curl -X GET "http://localhost:8001/api/get_bus_location?bus_id=your-bus-id-here"
 
 **Testing with curl**:
 ```bash
-curl -X GET "http://localhost:8001/api/students/student-id-here/embedding" \
+curl -X GET "${BACKEND_BASE_URL}/api/students/student-id-here/embedding" \
   -H "X-API-Key: your-api-key-here"
 ```
 
@@ -327,7 +327,7 @@ curl -X GET "http://localhost:8001/api/students/student-id-here/embedding" \
 
 **Testing with curl**:
 ```bash
-curl -X GET "http://localhost:8001/api/students/student-id-here/photo" \
+curl -X GET "${BACKEND_BASE_URL}/api/students/student-id-here/photo" \
   -H "X-API-Key: your-api-key-here"
 ```
 
@@ -343,7 +343,7 @@ This example demonstrates a complete device workflow from registration to scan e
 #!/bin/bash
 
 # Configuration
-BACKEND_URL="http://localhost:8001/api"
+BACKEND_URL="${BACKEND_BASE_URL}/api"
 ADMIN_EMAIL="admin@school.com"
 ADMIN_PASSWORD="password"
 
@@ -415,7 +415,7 @@ For Postman users, create a collection with the following requests:
 #### Environment Variables
 ```json
 {
-  "backend_url": "http://localhost:8001/api",
+  "backend_url": "${BACKEND_BASE_URL}/api",
   "api_key": "your-api-key-here",
   "bus_id": "your-bus-id-here",
   "student_id": "your-student-id-here"
@@ -503,7 +503,7 @@ INFO: Location updated for bus 550e8400-... by device Raspberry Pi - Bus 001
 
 1. **Test with curl verbose mode**:
    ```bash
-   curl -v -X POST "http://localhost:8001/api/scan_event" \
+   curl -v -X POST "${BACKEND_BASE_URL}/api/scan_event" \
      -H "X-API-Key: your-key" \
      -H "Content-Type: application/json" \
      -d '...'
@@ -517,7 +517,7 @@ INFO: Location updated for bus 550e8400-... by device Raspberry Pi - Bus 001
 3. **Verify device registration**:
    ```bash
    # Login as admin and check device list
-   curl -X GET "http://localhost:8001/api/device/list" \
+   curl -X GET "${BACKEND_BASE_URL}/api/device/list" \
      -b cookies.txt
    ```
 
@@ -558,8 +558,8 @@ For local testing and development, use the **Local Device Simulator** script to 
 Edit the configuration variables at the top of the script:
 
 ```python
-# Backend API base URL
-BASE_URL = "http://localhost:8001"
+# Backend API base URL (use your environment's BACKEND_BASE_URL)
+BASE_URL = "${BACKEND_BASE_URL}"
 
 # Device API Key (obtain from admin panel)
 DEVICE_API_KEY = "your_device_api_key_here"
@@ -584,7 +584,7 @@ TEST_GPS_LON = -122.4194
 2. Navigate to **Device Management** (or use API directly)
 3. Register a new device for your test bus:
    ```bash
-   curl -X POST http://localhost:8001/api/device/register \
+   curl -X POST ${BACKEND_BASE_URL}/api/device/register \
         -H 'Cookie: session=<admin_session>' \
         -H 'Content-Type: application/json' \
         -d '{"bus_id":"BUS-001", "device_name":"Test Device"}'
@@ -643,7 +643,7 @@ The log file includes:
 ============================================================
 
 Configuration:
-   • Base URL: http://localhost:8001
+   • Base URL: Use ${BACKEND_BASE_URL} from environment
    • Bus ID: BUS-001
    • Student ID: c97f5820-e4a2-479e-8112-b156275a8c52
    • API Key: Configured ✓

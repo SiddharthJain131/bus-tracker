@@ -40,12 +40,16 @@ Create a `.env` file in the `backend` directory:
 cat > .env << EOF
 MONGO_URL=mongodb://localhost:27017
 DB_NAME=bus_tracker
+BACKEND_BASE_URL=${BACKEND_BASE_URL}
+CORS_ORIGINS=*
 EOF
 ```
 
 **Environment Variables:**
-- `MONGO_URL` - MongoDB connection string
+- `MONGO_URL` - MongoDB connection string (internal, typically localhost)
 - `DB_NAME` - Database name to use
+- `BACKEND_BASE_URL` - External base URL for backend API (e.g., https://your-domain.com)
+- `CORS_ORIGINS` - Allowed CORS origins, comma-separated (use * for all origins)
 
 ## Step 3: Frontend Setup
 
@@ -65,12 +69,12 @@ Create a `.env` file in the `frontend` directory:
 
 ```bash
 cat > .env << EOF
-REACT_APP_BACKEND_URL=http://localhost:8001
+REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}
 EOF
 ```
 
 **Environment Variables:**
-- `REACT_APP_BACKEND_URL` - Backend API endpoint URL
+- `REACT_APP_BACKEND_URL` - Backend API endpoint URL (e.g., https://your-domain.com for production or http://localhost:8001 for local development)
 
 ## Step 4: Seed the Database
 
@@ -204,23 +208,23 @@ sudo systemctl start mongod
 
 Once running, access the application at:
 
-- **Frontend Application**: http://localhost:3000
-- **Backend API**: http://localhost:8001
-- **API Documentation**: http://localhost:8001/docs (FastAPI Swagger UI)
-- **MongoDB**: mongodb://localhost:27017
+- **Frontend Application**: Use URL from `REACT_APP_BACKEND_URL` environment variable
+- **Backend API**: Use URL from `BACKEND_BASE_URL` environment variable
+- **API Documentation**: `${BACKEND_BASE_URL}/docs` (FastAPI Swagger UI)
+- **MongoDB**: Internal connection via `MONGO_URL` environment variable
 
 ## Verification Steps
 
 ### 1. Check Backend Status
 
 ```bash
-curl http://localhost:8001/api/auth/me
+curl ${BACKEND_BASE_URL}/api/auth/me
 # Should return: {"detail": "Not authenticated"} (expected)
 ```
 
 ### 2. Check Frontend Status
 
-Open http://localhost:3000 in browser - should show login page.
+Open the URL from `REACT_APP_BACKEND_URL` in your browser - should show login page.
 
 ### 3. Verify Database
 

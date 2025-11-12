@@ -172,10 +172,12 @@ KeyError: 'MONGO_URL'
 ```bash
 cd backend
 cat .env  # Verify exists
-# If missing, create it
+# If missing, create it with your configuration
 cat > .env << EOF
 MONGO_URL=mongodb://localhost:27017
 DB_NAME=bus_tracker
+BACKEND_BASE_URL=${BACKEND_BASE_URL}
+CORS_ORIGINS=*
 EOF
 ```
 
@@ -217,7 +219,8 @@ Undefined REACT_APP_BACKEND_URL
 **Fix:**
 ```bash
 cd frontend
-echo "REACT_APP_BACKEND_URL=http://localhost:8001" > .env
+# Set to your backend URL (e.g., http://localhost:8001 for local dev or your production URL)
+echo "REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}" > .env
 ```
 
 **3. Build Errors:**
@@ -349,7 +352,7 @@ tail -f /var/log/supervisor/backend.err.log
 
 **1. Backend is running:**
 ```bash
-curl http://localhost:8001/api/auth/me
+curl ${BACKEND_BASE_URL}/api/auth/me
 # Should return JSON (even if not authenticated)
 ```
 
@@ -357,7 +360,7 @@ curl http://localhost:8001/api/auth/me
 ```bash
 cd frontend
 cat .env
-# Should show: REACT_APP_BACKEND_URL=http://localhost:8001
+# Should show: REACT_APP_BACKEND_URL matching your backend's external URL
 ```
 
 **3. API path is correct:**
@@ -399,17 +402,26 @@ tail -50 /var/log/supervisor/backend.err.log
 **Fix:**
 
 **1. Check backend CORS settings:**
+```bash
+# In backend/.env
+# Set CORS_ORIGINS to allow your frontend URL
+CORS_ORIGINS=*  # For development (allows all origins)
+# OR for production, specify your frontend domain:
+# CORS_ORIGINS=https://your-frontend-domain.com
+```
+
 ```python
-# In server.py
+# In server.py (already configured to use environment variable)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
     allow_credentials=True,
 )
 ```
 
 **2. Verify frontend uses correct URL:**
-- Must use same origin as CORS config
+- Frontend's REACT_APP_BACKEND_URL must match your backend's external URL
+- Check frontend/.env configuration
 - Don't mix http and https
 
 ---

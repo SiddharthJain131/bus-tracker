@@ -58,9 +58,17 @@ export default function StudentDetailModal({ student, open, onClose, hideTeacher
             <div className="space-y-6">
               {/* Profile Header */}
               <div className="flex items-center gap-6 p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg">
-                <div className="w-24 h-24 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full flex items-center justify-center text-white text-3xl font-bold">
-                  {studentDetails.photo ? (
-                    <img src={studentDetails.photo} alt={studentDetails.name} className="w-full h-full rounded-full object-cover" />
+                <div className="w-24 h-24 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full flex items-center justify-center text-white text-3xl font-bold overflow-hidden">
+                  {studentDetails.photo_url ? (
+                    <img 
+                      src={`${BACKEND_URL}${studentDetails.photo_url}`} 
+                      alt={studentDetails.name} 
+                      className="w-full h-full object-cover" 
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        e.target.parentElement.textContent = studentDetails.name.charAt(0).toUpperCase();
+                      }}
+                    />
                   ) : (
                     studentDetails.name.charAt(0).toUpperCase()
                   )}
