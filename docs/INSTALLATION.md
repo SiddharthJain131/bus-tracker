@@ -40,12 +40,16 @@ Create a `.env` file in the `backend` directory:
 cat > .env << EOF
 MONGO_URL=mongodb://localhost:27017
 DB_NAME=bus_tracker
+BACKEND_BASE_URL=${BACKEND_BASE_URL}
+CORS_ORIGINS=*
 EOF
 ```
 
 **Environment Variables:**
-- `MONGO_URL` - MongoDB connection string
+- `MONGO_URL` - MongoDB connection string (internal, typically localhost)
 - `DB_NAME` - Database name to use
+- `BACKEND_BASE_URL` - External base URL for backend API (e.g., https://your-domain.com)
+- `CORS_ORIGINS` - Allowed CORS origins, comma-separated (use * for all origins)
 
 ## Step 3: Frontend Setup
 
