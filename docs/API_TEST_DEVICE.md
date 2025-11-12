@@ -517,7 +517,7 @@ INFO: Location updated for bus 550e8400-... by device Raspberry Pi - Bus 001
 3. **Verify device registration**:
    ```bash
    # Login as admin and check device list
-   curl -X GET "http://localhost:8001/api/device/list" \
+   curl -X GET "${BACKEND_BASE_URL}/api/device/list" \
      -b cookies.txt
    ```
 
