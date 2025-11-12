@@ -666,7 +666,7 @@ backend:
   - task: "Profile Photo Display in Dashboard Detail Cards"
     implemented: true
     working: "NA"
-    file: "/app/backend/server.py, /app/frontend/src/components/StudentDetailModal.jsx, /app/frontend/src/components/UserDetailModal.jsx"
+    file: "/app/backend/server.py, /app/frontend/src/components/StudentDetailModal.jsx, /app/frontend/src/components/UserDetailModal.jsx, /app/frontend/src/components/StudentCard.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
@@ -674,6 +674,9 @@ backend:
       - working: "NA"
         agent: "main"
         comment: "IMPLEMENTED - Fixed missing profile photos in detail view modals/cards across all dashboards. BACKEND CHANGES: 1) Updated GET /api/students/{student_id} endpoint to convert photo_path to photo_url using get_photo_url() helper function. Now returns photo_url field with accessible URL format (/api/photos/students/{student_id}/profile.jpg). 2) Updated GET /api/users endpoint to convert photo_path to photo_url for all users in the list. FRONTEND CHANGES: 1) Updated StudentDetailModal.jsx to use photo_url field instead of photo field. Added proper BACKEND_URL prefix construction and error handling fallback to initials. Profile photo now displays at 96x96px (w-24 h-24) in rounded circle with gradient fallback. 2) Updated UserDetailModal.jsx to use photo_url field instead of photo field. Added proper BACKEND_URL prefix construction and error handling fallback to initials. Profile photo displays at 96x96px matching student modal design. FEATURES: Medium-sized rounded profile photos (80-100px) in detail cards, proper URL construction using BACKEND_URL environment variable, graceful fallback to user initials when photo missing or fails to load, consistent design across Student and User detail modals, error handling prevents broken images. Ready for testing: View student details from any dashboard (Admin/Teacher/Parent), View user details from Admin dashboard, Verify photos display correctly for all roles, Test fallback behavior for users without photos."
+      - working: "NA"
+        agent: "main"
+        comment: "EXTENDED FIX - Fixed missing children photos in Parent Dashboard student cards. BACKEND CHANGES: 1) Updated GET /api/students endpoint to convert photo_path to photo_url for all students in the list (affects Parent, Teacher, and Admin dashboards). Added photo_url enrichment loop that processes all students before returning. FRONTEND CHANGES: 1) Updated StudentCard.jsx component to use photo_url field instead of photo field. Added BACKEND_URL prefix construction for both compact and full card views. Compact view: 48x48px (w-12 h-12) rounded photo with gradient fallback. Full view: 80x80px (w-20 h-20) rounded photo with gradient fallback. Added error handling with onError callback that falls back to initials. FEATURES: All student photos now display in Parent Dashboard 'My Children' section (compact cards), All student photos display in selected student detail card (full card), Proper URL construction using BACKEND_URL environment variable, Graceful fallback to initials when photo missing or fails to load, Consistent design with gradient backgrounds (blue-purple). Ready for testing: Login as parent@school.com, View children cards in 'My Children' section, Click on a child to view full student card, Verify photos display in both compact and full views, Test fallback for students without photos."
 
 frontend:
   - task: "Login page"
