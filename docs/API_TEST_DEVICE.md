@@ -167,7 +167,7 @@ BACKEND_URL=https://your-backend-url.com/api
 **Testing with curl**:
 ```bash
 # Yellow scan (On Board)
-curl -X POST http://localhost:8001/api/scan_event \
+curl -X POST ${BACKEND_BASE_URL}/api/scan_event \
   -H "Content-Type: application/json" \
   -H "X-API-Key: your-api-key-here" \
   -d '{
