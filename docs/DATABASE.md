@@ -36,7 +36,8 @@ Complete MongoDB database schema and data models for the Bus Tracker System.
   "role": "admin|teacher|parent",
   "name": "John Doe",
   "phone": "+1-555-1234",
-  "photo": "/photos/user123.jpg",
+  "photo": "backend/photos/{role}s/{user_id}.jpg",
+  "photo_path": "backend/photos/{role}s/{user_id}.jpg",
   "address": "123 Main St",
   "assigned_class": "Grade 5",
   "assigned_section": "A",
@@ -52,12 +53,19 @@ Complete MongoDB database schema and data models for the Bus Tracker System.
 - `role` (String, Required) - One of: "admin", "teacher", "parent"
 - `name` (String, Required) - Full name
 - `phone` (String, Optional) - Contact phone number
-- `photo` (String, Optional) - Profile photo URL
+- `photo` (String, Optional) - Profile photo URL (legacy field)
+- `photo_path` (String, Optional) - Organized path to profile photo
 - `address` (String, Optional) - Home address
 - `assigned_class` (String, Optional) - For teachers only
 - `assigned_section` (String, Optional) - For teachers only
 - `student_ids` (Array, Optional) - For parents and teachers
 - `is_elevated_admin` (Boolean, Default: false) - Admin permissions
+
+**Photo Organization:**
+- Parent photos: `backend/photos/parents/{user_id}.jpg`
+- Teacher photos: `backend/photos/teachers/{user_id}.jpg`
+- Admin photos: `backend/photos/admins/{user_id}.jpg`
+- See [PHOTO_ORGANIZATION.md](PHOTO_ORGANIZATION.md) for details
 
 **Indexes:**
 - `email` (Unique)
