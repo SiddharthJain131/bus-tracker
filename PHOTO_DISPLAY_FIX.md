@@ -1,7 +1,7 @@
 # Photo Display Fix - Deployed Environment
 
 ## Issue Summary
-User photos were not displaying on the deployed website (https://env-url-handler.preview.emergentagent.com) while working correctly on localhost.
+User photos were not displaying on the deployed website (https://card-portrait-fix.preview.emergentagent.com) while working correctly on localhost.
 
 ## Root Cause Analysis
 
@@ -103,7 +103,7 @@ The `get_photo_url()` function converts database paths to:
 
 ✅ **New endpoint works:**
 ```bash
-curl -I "https://env-url-handler.preview.emergentagent.com/api/photos/admins/55b426f6-d039-4c7b-9b20-a4c09af39eec.jpg"
+curl -I "https://card-portrait-fix.preview.emergentagent.com/api/photos/admins/55b426f6-d039-4c7b-9b20-a4c09af39eec.jpg"
 # HTTP/2 200 
 # content-type: image/jpeg
 # content-length: 610351
@@ -111,7 +111,7 @@ curl -I "https://env-url-handler.preview.emergentagent.com/api/photos/admins/55b
 
 ❌ **Old endpoint fails (as expected):**
 ```bash
-curl -I "https://env-url-handler.preview.emergentagent.com/photos/admins/55b426f6-d039-4c7b-9b20-a4c09af39eec.jpg"
+curl -I "https://card-portrait-fix.preview.emergentagent.com/photos/admins/55b426f6-d039-4c7b-9b20-a4c09af39eec.jpg"
 # HTTP/2 200 
 # content-type: text/html  <-- Wrong! Returns HTML instead of image
 ```
