@@ -54,6 +54,12 @@ export default function TeacherDashboardNew({ user, onLogout }) {
   const [showAttendanceModal, setShowAttendanceModal] = useState(false);
   const [attendanceStudentId, setAttendanceStudentId] = useState(null);
   const [attendanceStudentName, setAttendanceStudentName] = useState('');
+  
+  // Photo upload states
+  const [isHoveredProfile, setIsHoveredProfile] = useState(false);
+  const [isUploadingProfile, setIsUploadingProfile] = useState(false);
+  const profileFileInputRef = useRef(null);
+  const [currentUser, setCurrentUser] = useState(user);
 
   useEffect(() => {
     fetchAllData();
