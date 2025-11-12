@@ -624,6 +624,18 @@ backend:
         agent: "main"
         comment: "UPDATED - Added comprehensive Device API Key System section to README including: 1) Admin registration process. 2) Raspberry Pi configuration example with .env file. 3) Device authentication flow with X-API-Key header. 4) List of protected endpoints. 5) Yellow/Green scan type explanation. 6) Link to complete API_TEST_DEVICE.md guide. Also updated Documentation Index to include new API_TEST_DEVICE.md reference."
 
+  - task: "Photo Organization by Role & Attendance Folders"
+    implemented: true
+    working: true
+    file: "/app/backend/organize_photos.py, /app/backend/photos/, /app/backend/backups/"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "COMPLETED - Reorganized entire photo structure by user role with attendance folders for students. IMPLEMENTATION: 1) Created role-based directories: students/, parents/, teachers/, admins/. 2) Organized 20 student photos into individual folders with profile.jpg naming. 3) Created attendance/ subfolder for each student (20 folders total). 4) Updated database backup (seed_backup_20251112_0613.json) with photo_path and attendance_path fields for all 20 students and 17 users. 5) Created .bak backup of original database. 6) Created photos_backup_20251112_132303 with all original STU*.jpg files. 7) Cleaned up 30 old STU*.jpg files from root. AUTOMATION: Created organize_photos.py script with automated reorganization, backup creation, database updating, and summary reporting. DOCUMENTATION: Created comprehensive PHOTO_ORGANIZATION.md guide covering structure, naming conventions, database integration, API endpoints, storage planning, security, migration, troubleshooting. Updated README.md and DATABASE.md with photo organization references. NAMING CONVENTIONS: Student profile photos as profile.jpg, attendance scans as YYYY-MM-DD_{AM|PM}.jpg, user photos as {user_id}.jpg. All 20 students now have organized profile photos and empty attendance folders ready for daily scans."
+
 frontend:
   - task: "Login page"
     implemented: true
