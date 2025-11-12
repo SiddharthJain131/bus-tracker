@@ -241,16 +241,24 @@ async def get_current_user(session_token: Optional[str] = Cookie(None)):
 def get_photo_url(photo_path: Optional[str]) -> Optional[str]:
     """
     Convert backend photo path to accessible URL.
-    Example: "backend/photos/admins/abc123.jpg" -> "/photos/admins/abc123.jpg"
+    Example: "backend/photos/admins/abc123.jpg" -> "/api/photos/admins/abc123.jpg"
+    
+    Note: Uses /api/photos prefix to match Kubernetes ingress routing rules
+    that redirect /api/* requests to backend port 8001.
     """
     if not photo_path:
         return None
     # Remove 'backend/' prefix if present
     if photo_path.startswith('backend/'):
-        photo_path = photo_path[8:]  # Remove 'backend/' prefix
-    # Ensure path starts with /
-    if not photo_path.startswith('/'):
-        photo_path = '/' + photo_path
+        photo_path = photo_path[8:]  # Remove 'backend/'
+    # Ensure path starts with /api/photos/
+    if not photo_path.startswith('/api/photos/'):
+        if photo_path.startswith('photos/'):
+            photo_path = '/api/' + photo_path
+        elif photo_path.startswith('/photos/'):
+            photo_path = '/api' + photo_path
+        else:
+            photo_path = '/api/photos/' + photo_path
     return photo_path
 
 # Device API Key verification helper
