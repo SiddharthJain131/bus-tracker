@@ -21,13 +21,13 @@ BASE_URL = "http://localhost:8001"
 
 # Device API Key (obtain from admin panel: Device Management > Register Device)
 # Replace with your actual API key after registering a device
-DEVICE_API_KEY = "your_device_api_key_here"
+DEVICE_API_KEY = "295c6f8e454ebfa3e6d7929272f3ad98435193dba9fee7780dcc1c33c7fdc7fb"
 
-# Bus ID this device is assigned to
-BUS_ID = "BUS-001"
+# Bus ID this device is assigned to (UUID format)
+BUS_ID = "3ca09d6a-2650-40e7-a874-5b2879025aff"
 
 # Test Student ID for embedding/photo retrieval
-STUDENT_ID = "c97f5820-e4a2-479e-8112-b156275a8c52"  # Emma Johnson from seed data
+STUDENT_ID = "9afb783f-7952-476d-8626-0143fdbbc2a1"  # Emma Johnson from seed data
 
 # Test image path (for scan events with photo upload)
 TEST_IMAGE_PATH = "test_scan_photo.jpg"
