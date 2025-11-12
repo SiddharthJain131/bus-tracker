@@ -525,8 +525,16 @@ async def scan_event(request: ScanEventRequest, device: dict = Depends(verify_de
     return {"status": "success", "event_id": event.event_id, "attendance_status": status if request.verified else "not_recorded"}
 
 @api_router.post("/update_location")
-async def update_location(request: UpdateLocationRequest):
+async def update_location(request: UpdateLocationRequest, device: dict = Depends(verify_device_key)):
+    """
+    Device-only endpoint for updating bus GPS location.
+    Requires X-API-Key header authentication.
+    """
     timestamp = datetime.now(timezone.utc).isoformat()
+    
+    # Verify that the device is authorized for this bus
+    if device['bus_id'] != request.bus_id:
+        raise HTTPException(status_code=403, detail="Device not authorized for this bus")
     
     location = BusLocation(
         bus_id=request.bus_id,
@@ -540,6 +548,8 @@ async def update_location(request: UpdateLocationRequest):
         {"$set": location.model_dump()},
         upsert=True
     )
+    
+    logging.info(f"Location updated for bus {request.bus_id} by device {device['device_name']}")
     
     return {"status": "success", "timestamp": timestamp}
 
