@@ -188,6 +188,40 @@ sudo supervisorctl restart all
 - Idempotent behavior prevents duplicate uploads
 - See [RASPBERRY_PI_INTEGRATION.md](./docs/RASPBERRY_PI_INTEGRATION.md)
 
+**🔑 Device API Key System:**
+
+The system uses secure API key authentication for Raspberry Pi devices:
+
+1. **Admin Registration**:
+   - Admin creates device keys via `/api/device/register` endpoint
+   - Each device is linked 1:1 with a bus
+   - API key is displayed **only once** (64-character secure token)
+
+2. **Raspberry Pi Configuration**:
+   ```bash
+   # Store in /etc/bus-tracker/.env or similar
+   DEVICE_API_KEY=<your_assigned_key>
+   BACKEND_URL=https://your-backend-url.com/api
+   ```
+
+3. **Device Authentication**:
+   - All device endpoints require `X-API-Key` header
+   - Keys are hashed in database (SHA-256/bcrypt)
+   - Invalid or missing keys return 403 Forbidden
+
+4. **Protected Endpoints**:
+   - `/api/scan_event` - RFID scan with yellow/green status
+   - `/api/update_location` - GPS tracking
+   - `/api/get_bus_location` - Location retrieval
+   - `/api/students/{id}/embedding` - Face recognition data
+   - `/api/students/{id}/photo` - Student photos
+
+5. **Scan Types**:
+   - **Yellow** (On Board): Student scans when boarding bus
+   - **Green** (Reached): Student scans when reaching destination
+
+📖 **Complete Guide**: [API_TEST_DEVICE.md](./docs/API_TEST_DEVICE.md)
+
 ---
 
 ## 📊 Data Model
