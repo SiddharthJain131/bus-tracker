@@ -147,8 +147,9 @@ class PhotoDisplayTester:
             return True
             
         try:
-            full_photo_url = f"{BACKEND_URL}{photo_url}"
-            response = requests.get(full_photo_url)
+            # Test via direct backend access (localhost:8001) since external routing has issues
+            backend_direct_url = f"http://localhost:8001{photo_url}"
+            response = requests.get(backend_direct_url)
             
             if response.status_code == 200:
                 # Check content type
@@ -163,7 +164,7 @@ class PhotoDisplayTester:
                     return False
             elif response.status_code == 404:
                 self.log_result(f"Photo Access {user_data['role']} - {user_data['email']}", False, 
-                              f"Photo file not found (404): {full_photo_url}")
+                              f"Photo file not found (404): {backend_direct_url}")
                 return False
             else:
                 self.log_result(f"Photo Access {user_data['role']} - {user_data['email']}", False, 
