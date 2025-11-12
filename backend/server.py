@@ -237,6 +237,22 @@ async def get_current_user(session_token: Optional[str] = Cookie(None)):
         raise HTTPException(status_code=401, detail="Not authenticated")
     return sessions[session_token]
 
+# Helper function to convert photo path to URL
+def get_photo_url(photo_path: Optional[str]) -> Optional[str]:
+    """
+    Convert backend photo path to accessible URL.
+    Example: "backend/photos/admins/abc123.jpg" -> "/photos/admins/abc123.jpg"
+    """
+    if not photo_path:
+        return None
+    # Remove 'backend/' prefix if present
+    if photo_path.startswith('backend/'):
+        photo_path = photo_path[8:]  # Remove 'backend/' prefix
+    # Ensure path starts with /
+    if not photo_path.startswith('/'):
+        photo_path = '/' + photo_path
+    return photo_path
+
 # Device API Key verification helper
 async def verify_device_key(x_api_key: str = Header(...)):
     """
