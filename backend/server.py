@@ -769,6 +769,12 @@ async def get_student(student_id: str, current_user: dict = Depends(get_current_
     else:
         student['stop_name'] = 'N/A'
     
+    # Convert photo_path to accessible URL
+    if student.get('photo_path'):
+        student['photo_url'] = get_photo_url(student['photo_path'])
+    else:
+        student['photo_url'] = None
+    
     return student
 
 @api_router.post("/students")
