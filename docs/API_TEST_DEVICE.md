@@ -343,7 +343,7 @@ This example demonstrates a complete device workflow from registration to scan e
 #!/bin/bash
 
 # Configuration
-BACKEND_URL="http://localhost:8001/api"
+BACKEND_URL="${BACKEND_BASE_URL}/api"
 ADMIN_EMAIL="admin@school.com"
 ADMIN_PASSWORD="password"
 
