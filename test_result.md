@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Auto Seed Initialization & Student Form Update — Bus Tracker Project. Configure backend to automatically run seed script on server startup when database is empty. Update Student Add/Edit modals to remove teacher selection field and add dynamic Stop field based on bus selection. Tasks: Auto-seeding on startup, remove teacher field from forms, add required Stop dropdown (dynamic based on bus), update backend with new endpoint for bus stops."
+user_problem_statement: "Organize Test Photos by Role & Add Attendance Folders — Bus Tracker Backend. Restructure backend/photos directory and update database references so photos are organized by user role, with individual attendance folders for each student. Tasks: Create role-based folder structure (students/parents/teachers/admins), move photos to student folders with profile.jpg naming, create attendance subfolders, update database backup with photo_path and attendance_path fields, create automation script, update documentation."
 
 backend:
   - task: "Authentication APIs (login, logout, me)"
