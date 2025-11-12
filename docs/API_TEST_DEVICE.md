@@ -224,7 +224,7 @@ curl -X POST ${BACKEND_BASE_URL}/api/scan_event \
 
 **Testing with curl**:
 ```bash
-curl -X POST http://localhost:8001/api/update_location \
+curl -X POST ${BACKEND_BASE_URL}/api/update_location \
   -H "Content-Type: application/json" \
   -H "X-API-Key: your-api-key-here" \
   -d '{
