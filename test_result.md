@@ -540,6 +540,78 @@ backend:
         agent: "main"
         comment: "IMPLEMENTED - Enhanced student update endpoint with: 1) Bus capacity check when bus_id changes (excludes current student from count). 2) Parent reassignment logic: removes student from old parent's student_ids array, adds to new parent's student_ids using $addToSet (supports multiple children per parent). Returns capacity_warning if bus capacity exceeded."
 
+  - task: "Device API Key System - Models & Dependencies"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Added DeviceKey and DeviceKeyCreate models. DeviceKey stores: device_id, bus_id (1:1 with bus), device_name, key_hash (bcrypt hashed), created_at. Updated Student model to include 'embedding' field for face recognition data (base64/binary). Updated ScanEventRequest to add 'scan_type' field for yellow/green status. Created verify_device_key() dependency that validates X-API-Key header against hashed keys in database, returns 403 if invalid."
+
+  - task: "Device Registration Endpoint - POST /api/device/register"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Admin-only endpoint for device registration. Generates 64-char API key using secrets.token_hex(32). Hashes key with bcrypt before storage. Checks if bus exists and prevents duplicate device registration per bus. Returns API key ONLY ONCE in response with warning message. Also added GET /api/device/list for admins to view registered devices (without keys). Ready for testing: device registration, duplicate prevention, admin-only access."
+
+  - task: "Device-Only Endpoints - Embedding & Photo Retrieval"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Created two new device-only endpoints: 1) GET /api/students/{id}/embedding - Returns student face embedding data (base64/binary) for local verification. 2) GET /api/students/{id}/photo - Returns student photo URL as fallback. Both require X-API-Key authentication via verify_device_key dependency. Return has_embedding/has_photo boolean flags. Ready for testing: API key validation, embedding retrieval, photo retrieval."
+
+  - task: "Protected Device Routes - scan_event, update_location, get_bus_location"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "UPDATED - Protected existing device routes with X-API-Key authentication: 1) POST /api/scan_event - Now requires verify_device_key. Updated to support scan_type parameter ('yellow' for On Board, 'green' for Reached). Status determined from scan_type field. Logs device name on successful scan. 2) POST /api/update_location - Now requires verify_device_key. Validates device is authorized for the bus_id. Logs device name on location update. 3) GET /api/get_bus_location - Now requires verify_device_key. All three endpoints return 403 if X-API-Key missing or invalid. Ready for testing: API key validation, yellow/green scan types, device authorization for bus."
+
+  - task: "API Testing Documentation - /docs/API_TEST_DEVICE.md"
+    implemented: true
+    working: "NA"
+    file: "/app/docs/API_TEST_DEVICE.md"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "CREATED - Comprehensive device API testing documentation including: 1) Device registration workflow with admin login. 2) API key authentication with X-API-Key header format. 3) Raspberry Pi .env configuration examples. 4) Detailed documentation for all 5 device endpoints with curl and Postman examples. 5) Complete workflow test script. 6) Expected responses and error handling. 7) Troubleshooting guide with common issues. 8) Security best practices. Documentation ready for use by IoT integration team."
+
+  - task: "README Updates - Device Key Setup Instructions"
+    implemented: true
+    working: "NA"
+    file: "/app/README.md"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "UPDATED - Added comprehensive Device API Key System section to README including: 1) Admin registration process. 2) Raspberry Pi configuration example with .env file. 3) Device authentication flow with X-API-Key header. 4) List of protected endpoints. 5) Yellow/Green scan type explanation. 6) Link to complete API_TEST_DEVICE.md guide. Also updated Documentation Index to include new API_TEST_DEVICE.md reference."
+
 frontend:
   - task: "Login page"
     implemented: true
