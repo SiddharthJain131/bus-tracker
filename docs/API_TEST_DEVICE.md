@@ -415,7 +415,7 @@ For Postman users, create a collection with the following requests:
 #### Environment Variables
 ```json
 {
-  "backend_url": "http://localhost:8001/api",
+  "backend_url": "${BACKEND_BASE_URL}/api",
   "api_key": "your-api-key-here",
   "bus_id": "your-bus-id-here",
   "student_id": "your-student-id-here"
