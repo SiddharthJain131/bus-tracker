@@ -181,7 +181,7 @@ curl -X POST ${BACKEND_BASE_URL}/api/scan_event \
   }'
 
 # Green scan (Reached destination)
-curl -X POST http://localhost:8001/api/scan_event \
+curl -X POST ${BACKEND_BASE_URL}/api/scan_event \
   -H "Content-Type: application/json" \
   -H "X-API-Key: your-api-key-here" \
   -d '{
