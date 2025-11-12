@@ -48,13 +48,15 @@ pip install -r requirements.txt
 cat > .env << EOF
 MONGO_URL=mongodb://localhost:27017
 DB_NAME=bus_tracker
+BACKEND_BASE_URL=${BACKEND_BASE_URL}
+CORS_ORIGINS=*
 EOF
 
 # Frontend setup
 cd ../frontend
 yarn install
 cat > .env << EOF
-REACT_APP_BACKEND_URL=http://localhost:8001
+REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}
 EOF
 
 # Seed database
@@ -65,7 +67,7 @@ python seed_data.py
 sudo supervisorctl restart all
 ```
 
-**Access:** http://localhost:3000
+**Access:** Use the URL defined in `REACT_APP_BACKEND_URL` environment variable
 
 **Demo Login:**
 - Admin: `admin@school.com` / `password`
