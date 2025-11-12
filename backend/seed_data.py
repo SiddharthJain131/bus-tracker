@@ -169,14 +169,45 @@ async def seed_data():
     print("🌱 STARTING COMPREHENSIVE DATABASE SEEDING")
     print("=" * 60)
     
+    # Check for latest backup
+    latest_backup = get_latest_backup()
+    use_backup = False
+    
+    if latest_backup:
+        print(f"\n🔍 Latest backup found: {latest_backup.name}")
+        print("   Attempting to restore from backup...")
+        use_backup = True
+    else:
+        print("\nℹ️  No backup found, will use default seed data")
+    
     # Clear existing data
     collections = ['users', 'students', 'attendance', 'events', 'bus_locations', 
                   'notifications', 'holidays', 'buses', 'routes', 'stops', 'email_logs']
     
+    print("\n🗑️  Clearing existing data:")
     for collection in collections:
         count = await db[collection].count_documents({})
         await db[collection].delete_many({})
-        print(f"✅ Cleared {count} records from {collection}")
+        print(f"   ✅ Cleared {count} records from {collection}")
+    
+    # Try to restore from backup if available
+    if use_backup:
+        restore_success = await restore_from_backup(latest_backup)
+        
+        if restore_success:
+            print("\n" + "=" * 60)
+            print("✅ SEEDING COMPLETED (FROM BACKUP)")
+            print("=" * 60)
+            print("\n⚠️  Note: Dynamic data (attendance, logs, notifications) not restored")
+            print(TEST_CREDENTIALS)
+            return
+        else:
+            print("\n⚠️  Backup restore failed, falling back to default seed data...")
+    
+    # If no backup or restore failed, proceed with default seeding
+    print("\n" + "=" * 60)
+    print("📝 USING DEFAULT SEED DATA")
+    print("=" * 60)
     
     print("\n" + "=" * 60)
     print("📍 CREATING STOPS AND ROUTES")
