@@ -584,7 +584,7 @@ TEST_GPS_LON = -122.4194
 2. Navigate to **Device Management** (or use API directly)
 3. Register a new device for your test bus:
    ```bash
-   curl -X POST http://localhost:8001/api/device/register \
+   curl -X POST ${BACKEND_BASE_URL}/api/device/register \
         -H 'Cookie: session=<admin_session>' \
         -H 'Content-Type: application/json' \
         -d '{"bus_id":"BUS-001", "device_name":"Test Device"}'
