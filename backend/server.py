@@ -312,7 +312,7 @@ async def login(user_login: UserLogin, response: Response):
         "role": user['role'],
         "name": user['name'],
         "phone": user.get('phone'),
-        "photo": user.get('photo'),
+        "photo": get_photo_url(user.get('photo')),
         "assigned_class": user.get('assigned_class'),
         "assigned_section": user.get('assigned_section'),
         "student_ids": user.get('student_ids', []),
