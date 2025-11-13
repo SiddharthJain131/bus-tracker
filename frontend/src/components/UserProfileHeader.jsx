@@ -2,17 +2,9 @@ import React, { useState } from 'react';
 import { User, Mail, Phone } from 'lucide-react';
 import PhotoViewerModal from './PhotoViewerModal';
 import PhotoAvatar from './PhotoAvatar';
+import { formatClassName } from '../utils/helpers';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-
-const getInitials = (name) => {
-  return name
-    .split(' ')
-    .map((n) => n[0])
-    .join('')
-    .toUpperCase()
-    .substring(0, 2);
-};
 
 export default function UserProfileHeader({ user, onPhotoUpdate }) {
   const [showPhotoViewer, setShowPhotoViewer] = useState(false);
