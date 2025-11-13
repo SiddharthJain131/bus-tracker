@@ -1,0 +1,37 @@
+[
+  {
+    "student_id": "9afb783f-7952-476d-8626-0143fdbbc2a1",
+    "rfid": "RFID-1001",
+    "class": "5",
+    "section": "A",
+    "name": "Emma Johnson"
+  },
+  {
+    "student_id": "00233116-2efb-4e58-8de3-49c86ad023ef",
+    "rfid": "RFID-1002",
+    "class": "5",
+    "section": "A",
+    "name": "Student 2"
+  },
+  {
+    "student_id": "0c405f57-f6e4-4249-9a52-764e74c6514b",
+    "rfid": "RFID-1003",
+    "class": "5",
+    "section": "A",
+    "name": "Student 3"
+  },
+  {
+    "student_id": "37b9b83b-49a8-4100-96d3-e10a591c3ab9",
+    "rfid": "RFID-1004",
+    "class": "5",
+    "section": "A",
+    "name": "Student 4"
+  },
+  {
+    "student_id": "44ff223b-da78-449f-afc3-4f12cdfbfb1f",
+    "rfid": "RFID-1005",
+    "class": "5",
+    "section": "A",
+    "name": "Student 5"
+  }
+]
