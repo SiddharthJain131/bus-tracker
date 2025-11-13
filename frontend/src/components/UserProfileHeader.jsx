@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { User, Mail, Phone, Eye } from 'lucide-react';
+import { User, Mail, Phone } from 'lucide-react';
 import PhotoViewerModal from './PhotoViewerModal';
+import PhotoAvatar from './PhotoAvatar';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
