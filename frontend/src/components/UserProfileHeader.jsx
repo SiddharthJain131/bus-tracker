@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Mail, Phone } from 'lucide-react';
+import { Mail, Phone } from 'lucide-react';
 import PhotoViewerModal from './PhotoViewerModal';
 import PhotoAvatar from './PhotoAvatar';
 import { formatClassName } from '../utils/helpers';
