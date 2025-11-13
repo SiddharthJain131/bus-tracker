@@ -23,6 +23,8 @@ export default function PhotoViewerModal({
 
   // Update photo when prop changes
   React.useEffect(() => {
+    // If photoUrl already has timestamp or query param, use as is
+    // Otherwise this is initial load
     setCurrentPhotoUrl(photoUrl);
   }, [photoUrl]);
 
