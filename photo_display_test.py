@@ -17,7 +17,7 @@ import os
 from datetime import datetime
 
 # Get backend URL from environment
-BACKEND_URL = os.getenv('REACT_APP_BACKEND_URL', 'https://gitignore-hover.preview.emergentagent.com')
+BACKEND_URL = os.getenv('REACT_APP_BACKEND_URL', 'https://quick-pic-update.preview.emergentagent.com')
 API_BASE = f"{BACKEND_URL}/api"
 
 class PhotoDisplayTester:
