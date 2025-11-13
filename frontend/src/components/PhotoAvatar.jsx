@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Eye } from 'lucide-react';
+import { getInitials } from '../utils/helpers';
 
 /**
  * Reusable PhotoAvatar component with eye icon hover effect
@@ -47,16 +48,6 @@ export default function PhotoAvatar({
 
   const gradientKey = `${gradientFrom}-${gradientTo}`;
   const gradientClass = gradientClasses[gradientKey] || 'bg-gradient-to-br from-blue-400 to-indigo-600';
-
-  const getInitials = (name) => {
-    if (!name) return '?';
-    return name
-      .split(' ')
-      .map((n) => n[0])
-      .join('')
-      .toUpperCase()
-      .substring(0, 2);
-  };
 
   return (
     <div
