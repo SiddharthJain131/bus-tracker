@@ -20,7 +20,8 @@ import {
   MapPin,
   Trash2,
   Plus,
-  Camera
+  Camera,
+  Eye
 } from 'lucide-react';
 import StudentDetailModal from './StudentDetailModal';
 import UserDetailModal from './UserDetailModal';
