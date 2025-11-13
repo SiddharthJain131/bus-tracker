@@ -40,6 +40,7 @@ import EditHolidayModal from './EditHolidayModal';
 import DeleteConfirmationDialog from './DeleteConfirmationDialog';
 import PhotoViewerModal from './PhotoViewerModal';
 import PhotoAvatar from './PhotoAvatar';
+import { formatClassName } from '../utils/helpers';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
