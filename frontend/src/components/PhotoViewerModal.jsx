@@ -58,13 +58,14 @@ export default function PhotoViewerModal({
 
       toast.success('Photo updated successfully!');
       
-      // Update local state with new photo
+      // Update local state with new photo URL + cache-busting timestamp
       const newPhotoUrl = response.data.photo_url;
-      setCurrentPhotoUrl(newPhotoUrl);
+      const cacheBustedUrl = `${newPhotoUrl}?t=${Date.now()}`;
+      setCurrentPhotoUrl(cacheBustedUrl);
       
-      // Notify parent component to refresh
+      // Notify parent component to refresh with cache-busted URL
       if (onPhotoUpdate) {
-        onPhotoUpdate(newPhotoUrl);
+        onPhotoUpdate(cacheBustedUrl);
       }
     } catch (error) {
       console.error('Photo upload error:', error);
