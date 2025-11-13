@@ -11,7 +11,6 @@ import {
   GraduationCap,
   Calendar,
   Search,
-  Eye,
   Bell,
   Mail,
   Phone,
@@ -23,6 +22,7 @@ import {
 import StudentDetailModal from './StudentDetailModal';
 import AttendanceGrid from './AttendanceGrid';
 import PhotoViewerModal from './PhotoViewerModal';
+import PhotoAvatar from './PhotoAvatar';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
