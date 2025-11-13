@@ -62,7 +62,8 @@ export default function PhotoViewerModal({
       
       // Update local state with new photo URL + cache-busting timestamp
       const newPhotoUrl = response.data.photo_url;
-      const cacheBustedUrl = `${newPhotoUrl}?t=${Date.now()}`;
+      const timestamp = Date.now();
+      const cacheBustedUrl = `${BACKEND_URL}${newPhotoUrl}?t=${timestamp}`;
       setCurrentPhotoUrl(cacheBustedUrl);
       
       // Notify parent component to refresh with cache-busted URL
