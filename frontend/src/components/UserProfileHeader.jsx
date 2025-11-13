@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Mail, Phone } from 'lucide-react';
+import { User, Mail, Phone, Eye } from 'lucide-react';
 import PhotoViewerModal from './PhotoViewerModal';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -15,6 +15,7 @@ const getInitials = (name) => {
 
 export default function UserProfileHeader({ user, onPhotoUpdate }) {
   const [showPhotoViewer, setShowPhotoViewer] = useState(false);
+  const [isHoveringPhoto, setIsHoveringPhoto] = useState(false);
 
   const handlePhotoClick = () => {
     setShowPhotoViewer(true);
