@@ -1,7 +1,6 @@
-import React, { useState, useRef } from 'react';
-import { User, Mail, Phone, Camera } from 'lucide-react';
-import axios from 'axios';
-import { toast } from 'sonner';
+import React, { useState } from 'react';
+import { User, Mail, Phone } from 'lucide-react';
+import PhotoViewerModal from './PhotoViewerModal';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -15,56 +14,15 @@ const getInitials = (name) => {
 };
 
 export default function UserProfileHeader({ user, onPhotoUpdate }) {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isUploading, setIsUploading] = useState(false);
-  const fileInputRef = useRef(null);
+  const [showPhotoViewer, setShowPhotoViewer] = useState(false);
 
   const handlePhotoClick = () => {
-    fileInputRef.current?.click();
+    setShowPhotoViewer(true);
   };
 
-  const handleFileChange = async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    // Validate file type
-    if (!file.type.startsWith('image/')) {
-      toast.error('Please select an image file');
-      return;
-    }
-
-    // Validate file size (max 5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      toast.error('Image size should be less than 5MB');
-      return;
-    }
-
-    setIsUploading(true);
-    const formData = new FormData();
-    formData.append('file', file);
-
-    try {
-      const response = await axios.put(`${BACKEND_URL}/api/users/me/photo`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-        withCredentials: true,
-      });
-
-      toast.success('Photo updated successfully!');
-      
-      // Notify parent component to refresh user data
-      if (onPhotoUpdate) {
-        onPhotoUpdate(response.data.photo_url);
-      } else {
-        // Force page reload to show new photo
-        window.location.reload();
-      }
-    } catch (error) {
-      console.error('Photo upload error:', error);
-      toast.error(error.response?.data?.detail || 'Failed to update photo');
-    } finally {
-      setIsUploading(false);
+  const handlePhotoUpdateInternal = (newPhotoUrl) => {
+    if (onPhotoUpdate) {
+      onPhotoUpdate(newPhotoUrl);
     }
   };
 
