@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import StudentDetailModal from './StudentDetailModal';
 import AttendanceGrid from './AttendanceGrid';
+import PhotoViewerModal from './PhotoViewerModal';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
