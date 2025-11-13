@@ -16,7 +16,6 @@ const getInitials = (name) => {
 
 export default function UserProfileHeader({ user, onPhotoUpdate }) {
   const [showPhotoViewer, setShowPhotoViewer] = useState(false);
-  const [isHoveringPhoto, setIsHoveringPhoto] = useState(false);
 
   const handlePhotoClick = () => {
     setShowPhotoViewer(true);
