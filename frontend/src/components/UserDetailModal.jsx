@@ -13,7 +13,6 @@ export default function UserDetailModal({ user, open, onClose }) {
   const [linkedStudents, setLinkedStudents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showPhotoViewer, setShowPhotoViewer] = useState(false);
-  const [isHoveringPhoto, setIsHoveringPhoto] = useState(false);
 
   // Helper function to remove "Grade " prefix from class names
   const formatClassName = (className) => {
