@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 import { Card } from './ui/card';
-import { User, Phone, Mail, MapPin, GraduationCap, Users } from 'lucide-react';
+import { User, Phone, Mail, MapPin, GraduationCap, Users, Eye } from 'lucide-react';
+import PhotoViewerModal from './PhotoViewerModal';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -10,6 +11,8 @@ const API = `${BACKEND_URL}/api`;
 export default function UserDetailModal({ user, open, onClose }) {
   const [linkedStudents, setLinkedStudents] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [showPhotoViewer, setShowPhotoViewer] = useState(false);
+  const [isHoveringPhoto, setIsHoveringPhoto] = useState(false);
 
   // Helper function to remove "Grade " prefix from class names
   const formatClassName = (className) => {
