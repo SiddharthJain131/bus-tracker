@@ -78,16 +78,6 @@ export default function PhotoViewerModal({
     }
   };
 
-  const getInitials = (name) => {
-    if (!name) return '?';
-    return name
-      .split(' ')
-      .map((n) => n[0])
-      .join('')
-      .toUpperCase()
-      .substring(0, 2);
-  };
-
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-3xl p-0 overflow-hidden bg-black/95">
