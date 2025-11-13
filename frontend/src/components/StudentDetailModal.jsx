@@ -72,8 +72,10 @@ export default function StudentDetailModal({ student, open, onClose, hideTeacher
               {/* Profile Header */}
               <div className="flex items-center gap-6 p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg">
                 <div 
-                  className="relative w-24 h-24 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full flex items-center justify-center text-white text-3xl font-bold overflow-hidden cursor-pointer"
+                  className="relative w-24 h-24 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full flex items-center justify-center text-white text-3xl font-bold overflow-hidden cursor-pointer group"
                   onClick={handlePhotoClick}
+                  onMouseEnter={() => setIsHoveringPhoto(true)}
+                  onMouseLeave={() => setIsHoveringPhoto(false)}
                 >
                   {studentDetails.photo_url ? (
                     <img 
@@ -87,6 +89,13 @@ export default function StudentDetailModal({ student, open, onClose, hideTeacher
                     />
                   ) : (
                     studentDetails.name.charAt(0).toUpperCase()
+                  )}
+                  
+                  {/* Eye icon overlay on hover */}
+                  {isHoveringPhoto && (
+                    <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center rounded-full">
+                      <Eye className="w-8 h-8 text-white" />
+                    </div>
                   )}
                 </div>
                 <div className="flex-1">
