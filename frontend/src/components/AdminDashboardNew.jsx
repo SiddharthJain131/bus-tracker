@@ -197,10 +197,8 @@ export default function AdminDashboardNew({ user, onLogout }) {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   
-  // Photo upload states
-  const [isHoveredProfile, setIsHoveredProfile] = useState(false);
-  const [isUploadingProfile, setIsUploadingProfile] = useState(false);
-  const profileFileInputRef = useRef(null);
+  // Photo viewer state
+  const [showPhotoViewer, setShowPhotoViewer] = useState(false);
   const [currentUser, setCurrentUser] = useState(user);
 
   useEffect(() => {
