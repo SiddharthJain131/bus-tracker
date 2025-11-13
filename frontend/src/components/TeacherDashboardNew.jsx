@@ -171,9 +171,10 @@ export default function TeacherDashboardNew({ user, onLogout }) {
   };
 
   const handleProfilePhotoUpdate = (newPhotoUrl) => {
+    // newPhotoUrl already includes BACKEND_URL and cache-busting timestamp from PhotoViewerModal
     setCurrentUser(prev => ({
       ...prev,
-      photo: `${BACKEND_URL}${newPhotoUrl}`
+      photo: newPhotoUrl.startsWith('http') ? newPhotoUrl : `${BACKEND_URL}${newPhotoUrl}`
     }));
   };
 
