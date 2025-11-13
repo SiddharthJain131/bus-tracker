@@ -37,6 +37,17 @@ export default function PhotoAvatar({
     xl: 'w-8 h-8'
   };
 
+  // Gradient color mappings (Tailwind safe list - all possible gradients hardcoded)
+  const gradientClasses = {
+    'blue-400-indigo-600': 'bg-gradient-to-br from-blue-400 to-indigo-600',
+    'violet-400-purple-600': 'bg-gradient-to-br from-violet-400 to-purple-600',
+    'emerald-400-teal-600': 'bg-gradient-to-br from-emerald-400 to-teal-600',
+    'blue-500-purple-600': 'bg-gradient-to-br from-blue-500 to-purple-600',
+  };
+
+  const gradientKey = `${gradientFrom}-${gradientTo}`;
+  const gradientClass = gradientClasses[gradientKey] || 'bg-gradient-to-br from-blue-400 to-indigo-600';
+
   const getInitials = (name) => {
     if (!name) return '?';
     return name
@@ -49,7 +60,7 @@ export default function PhotoAvatar({
 
   return (
     <div
-      className={`relative bg-gradient-to-br from-${gradientFrom} to-${gradientTo} rounded-full flex items-center justify-center text-white font-bold overflow-hidden ${onClick ? 'cursor-pointer' : ''} ${sizeClasses[size]} ${className}`}
+      className={`relative ${gradientClass} rounded-full flex items-center justify-center text-white font-bold overflow-hidden ${onClick ? 'cursor-pointer' : ''} ${sizeClasses[size]} ${className}`}
       onClick={onClick}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
