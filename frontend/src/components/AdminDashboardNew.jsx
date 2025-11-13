@@ -396,11 +396,20 @@ export default function AdminDashboardNew({ user, onLogout }) {
                 <div 
                   className="relative w-20 h-20 bg-gradient-to-br from-violet-400 to-purple-600 rounded-full flex items-center justify-center text-white text-3xl font-bold overflow-hidden cursor-pointer"
                   onClick={handleProfilePhotoClick}
+                  onMouseEnter={() => setIsHoveringPhoto(true)}
+                  onMouseLeave={() => setIsHoveringPhoto(false)}
                 >
                   {currentUser.photo ? (
                     <img src={currentUser.photo} alt={currentUser.name} className="w-full h-full rounded-full object-cover" />
                   ) : (
                     currentUser.name.charAt(0).toUpperCase()
+                  )}
+                  
+                  {/* Eye icon overlay on hover */}
+                  {isHoveringPhoto && (
+                    <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center rounded-full">
+                      <Eye className="w-7 h-7 text-white" />
+                    </div>
                   )}
                 </div>
                 <div className="flex-1 space-y-2">
