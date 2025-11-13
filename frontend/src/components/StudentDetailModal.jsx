@@ -3,9 +3,10 @@ import axios from 'axios';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 import { Button } from './ui/button';
 import { Card } from './ui/card';
-import { User, Phone, GraduationCap, Users, Bus, MapPin, Eye } from 'lucide-react';
+import { User, Phone, GraduationCap, Users, Bus, MapPin } from 'lucide-react';
 import RouteVisualizationModal from './RouteVisualizationModal';
 import PhotoViewerModal from './PhotoViewerModal';
+import PhotoAvatar from './PhotoAvatar';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
