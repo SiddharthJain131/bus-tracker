@@ -593,6 +593,17 @@ export default function TeacherDashboardNew({ user, onLogout }) {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Photo Viewer Modal */}
+      <PhotoViewerModal
+        open={showPhotoViewer}
+        onClose={() => setShowPhotoViewer(false)}
+        photoUrl={currentUser.photo}
+        userName={currentUser.name}
+        canEdit={true}
+        uploadEndpoint={`${API}/users/me/photo`}
+        onPhotoUpdate={handleProfilePhotoUpdate}
+      />
     </div>
   );
 }
