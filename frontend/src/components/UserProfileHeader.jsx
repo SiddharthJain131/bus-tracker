@@ -34,11 +34,20 @@ export default function UserProfileHeader({ user, onPhotoUpdate }) {
         <div 
           className="relative w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-xl font-bold overflow-hidden cursor-pointer"
           onClick={handlePhotoClick}
+          onMouseEnter={() => setIsHoveringPhoto(true)}
+          onMouseLeave={() => setIsHoveringPhoto(false)}
         >
           {user.photo ? (
             <img src={user.photo} alt={user.name} className="w-full h-full rounded-full object-cover" />
           ) : (
             getInitials(user.name)
+          )}
+          
+          {/* Eye icon overlay on hover */}
+          {isHoveringPhoto && (
+            <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center rounded-full">
+              <Eye className="w-6 h-6 text-white" />
+            </div>
           )}
         </div>
         
