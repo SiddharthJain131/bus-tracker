@@ -51,7 +51,7 @@ export default function UserProfileHeader({ user, onPhotoUpdate }) {
           </div>
           {user.assigned_class && (
             <div className="mt-1 text-sm text-gray-500">
-              Class: {user.assigned_class} {user.assigned_section && `- Section ${user.assigned_section}`}
+              Class: {formatClassName(user.assigned_class)} {user.assigned_section && `- Section ${user.assigned_section}`}
             </div>
           )}
         </div>
