@@ -186,11 +186,14 @@ See [PI_BOARDING_SIMULATOR_README.md](./PI_BOARDING_SIMULATOR_README.md) for com
 
 | File | Description |
 |------|-------------|
-| `pi_simulator_boarding.py` | **NEW** - Boarding simulator with face recognition |
+| `pi_realtime_scanner.py` | **NEW** - Real-time RFID scanner simulator (RECOMMENDED) |
+| `REALTIME_SCANNER_GUIDE.md` | **NEW** - Real-time scanner complete guide |
+| `pi_simulator_boarding.py` | **NEW** - Batch boarding simulator with face recognition |
 | `students_boarding.json` | **NEW** - Student data for boarding simulation |
-| `PI_BOARDING_SIMULATOR_README.md` | **NEW** - Complete boarding simulator documentation |
+| `PI_BOARDING_SIMULATOR_README.md` | **NEW** - Batch simulator documentation |
+| `USAGE_EXAMPLE.md` | **NEW** - Practical usage examples |
 | `local_device_simulator.py` | Device API testing simulator |
-| `simulator_config.py` | Configuration for both simulators |
+| `simulator_config.py` | Configuration for simulators |
 | `test_scan_photo.txt` | Sample image for scan event testing |
 | `device_test_log.txt` | Auto-generated test log file |
 | `README.md` | This file |
