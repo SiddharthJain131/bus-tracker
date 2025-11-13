@@ -207,6 +207,19 @@ export default function StudentDetailModal({ student, open, onClose, hideTeacher
           }}
         />
       )}
+
+      {/* Photo Viewer Modal */}
+      {showPhotoViewer && studentDetails && (
+        <PhotoViewerModal
+          open={showPhotoViewer}
+          onClose={() => setShowPhotoViewer(false)}
+          photoUrl={studentDetails.photo_url ? `${BACKEND_URL}${studentDetails.photo_url}` : null}
+          userName={studentDetails.name}
+          canEdit={userRole === 'admin'}
+          uploadEndpoint={`${API}/students/${student.student_id}/photo`}
+          onPhotoUpdate={handlePhotoUpdate}
+        />
+      )}
     </>
   );
 }
