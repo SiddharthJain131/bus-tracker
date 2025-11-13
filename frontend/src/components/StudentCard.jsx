@@ -1,17 +1,9 @@
 import React from 'react';
 import { Card } from './ui/card';
 import { User, GraduationCap, Bus, Phone, AlertCircle, MapPin } from 'lucide-react';
+import { getInitials } from '../utils/helpers';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-
-const getInitials = (name) => {
-  return name
-    .split(' ')
-    .map((n) => n[0])
-    .join('')
-    .toUpperCase()
-    .substring(0, 2);
-};
 
 export default function StudentCard({ student, compact = false }) {
 
