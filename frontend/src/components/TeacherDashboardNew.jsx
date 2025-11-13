@@ -170,45 +170,14 @@ export default function TeacherDashboardNew({ user, onLogout }) {
 
 
   const handleProfilePhotoClick = () => {
-    profileFileInputRef.current?.click();
+    setShowPhotoViewer(true);
   };
 
-  const handleProfileFileChange = async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    if (!file.type.startsWith('image/')) {
-      toast.error('Please select an image file');
-      return;
-    }
-
-    if (file.size > 5 * 1024 * 1024) {
-      toast.error('Image size should be less than 5MB');
-      return;
-    }
-
-    setIsUploadingProfile(true);
-    const formData = new FormData();
-    formData.append('file', file);
-
-    try {
-      const response = await axios.put(`${API}/users/me/photo`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-        withCredentials: true,
-      });
-
-      toast.success('Photo updated successfully!');
-      
-      setCurrentUser(prev => ({
-        ...prev,
-        photo: `${BACKEND_URL}${response.data.photo_url}`
-      }));
-    } catch (error) {
-      console.error('Photo upload error:', error);
-      toast.error(error.response?.data?.detail || 'Failed to update photo');
-    } finally {
-      setIsUploadingProfile(false);
-    }
+  const handleProfilePhotoUpdate = (newPhotoUrl) => {
+    setCurrentUser(prev => ({
+      ...prev,
+      photo: `${BACKEND_URL}${newPhotoUrl}`
+    }));
   };
 
   const handleViewStudent = async (student) => {
