@@ -5,7 +5,7 @@ echo "🔧 Updating Bus Tracker backend URLs..."
 NEW_URL="https://bus-tracker-update.preview.emergentagent.com/"
 echo "Using URL: $NEW_URL"
 
-# FRONTEND
+# FRONTEND UPDATE
 FE_ENV="frontend/.env"
 
 if [ -f "$FE_ENV" ]; then
