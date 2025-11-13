@@ -40,7 +40,7 @@ git commit -m "Sync local project with remote - $(date +'%Y-%m-%d %H:%M')" || ec
 
 # Push (using cached or VS Code OAuth credentials)
 echo "🚀 Pushing to GitHub..."
-git push -u origin main
+git push origin main
 
 echo ""
 echo "✅ All done!"
