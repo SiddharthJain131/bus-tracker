@@ -119,13 +119,43 @@ Results: 5/5 tests passed (100%)
 - Check X-API-Key header is being sent
 - Verify request body format matches API requirements
 
+## Pi Boarding Simulator (NEW)
+
+**File**: `pi_simulator_boarding.py`
+
+A comprehensive boarding simulation tool that uses DeepFace for face recognition and processes actual student profile photos.
+
+### Key Features
+
+✅ **Real Face Recognition**: Uses DeepFace (Facenet model) to generate embeddings  
+✅ **Profile Photo Management**: Loads from `backend/photos/students/<student_id>/profile.jpg`  
+✅ **Placeholder Generation**: Downloads from thispersondoesnotexist.com if photo missing  
+✅ **Embedding Comparison**: Compares with backend using cosine similarity  
+✅ **Attendance Photos**: Saves photos to attendance folder with proper naming  
+✅ **Complete Workflow**: Simulates entire Raspberry Pi boarding process  
+
+### Quick Start
+
+```bash
+# Run AM boarding simulation
+python3 pi_simulator_boarding.py --scan-type AM
+
+# Run PM boarding simulation
+python3 pi_simulator_boarding.py --scan-type PM
+```
+
+See [PI_BOARDING_SIMULATOR_README.md](./PI_BOARDING_SIMULATOR_README.md) for complete documentation.
+
 ## Files in This Directory
 
 | File | Description |
 |------|-------------|
-| `local_device_simulator.py` | Main device simulator script |
-| `simulator_config.example.py` | Example configuration reference |
-| `test_scan_photo.jpg` | Sample image for scan event testing |
+| `pi_simulator_boarding.py` | **NEW** - Boarding simulator with face recognition |
+| `students_boarding.json` | **NEW** - Student data for boarding simulation |
+| `PI_BOARDING_SIMULATOR_README.md` | **NEW** - Complete boarding simulator documentation |
+| `local_device_simulator.py` | Device API testing simulator |
+| `simulator_config.py` | Configuration for both simulators |
+| `test_scan_photo.txt` | Sample image for scan event testing |
 | `device_test_log.txt` | Auto-generated test log file |
 | `README.md` | This file |
 
