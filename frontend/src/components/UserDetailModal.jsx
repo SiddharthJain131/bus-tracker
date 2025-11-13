@@ -41,15 +41,6 @@ export default function UserDetailModal({ user, open, onClose }) {
 
   if (!user) return null;
 
-  const getRoleBadgeColor = (role) => {
-    switch (role) {
-      case 'admin': return 'bg-purple-100 text-purple-800';
-      case 'teacher': return 'bg-emerald-100 text-emerald-800';
-      case 'parent': return 'bg-blue-100 text-blue-800';
-      default: return 'bg-gray-100 text-gray-800';
-    }
-  };
-
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
