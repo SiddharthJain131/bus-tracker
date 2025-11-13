@@ -278,9 +278,10 @@ export default function AdminDashboardNew({ user, onLogout }) {
 
   const handleProfilePhotoUpdate = (newPhotoUrl) => {
     // Update current user photo
+    // newPhotoUrl already includes BACKEND_URL and cache-busting timestamp
     setCurrentUser(prev => ({
       ...prev,
-      photo: `${BACKEND_URL}${newPhotoUrl}`
+      photo: newPhotoUrl.startsWith('http') ? newPhotoUrl : `${BACKEND_URL}${newPhotoUrl}`
     }));
   };
 
