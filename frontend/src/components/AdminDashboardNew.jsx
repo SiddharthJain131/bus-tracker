@@ -148,11 +148,6 @@ function RoutesTable({ searchTerm, onViewRoute, onEditRoute, onDeleteRoute, onAd
 }
 
 export default function AdminDashboardNew({ user, onLogout }) {
-  // Helper function to remove "Grade " prefix from class names
-  const formatClassName = (className) => {
-    if (!className) return 'N/A';
-    return className.replace(/^Grade\s+/i, '');
-  };
 
   const [activeTab, setActiveTab] = useState('overview');
   const [userSubTab, setUserSubTab] = useState('parents');
