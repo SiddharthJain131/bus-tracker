@@ -5,6 +5,7 @@ import { Card } from './ui/card';
 import { User, Phone, Mail, MapPin, GraduationCap, Users } from 'lucide-react';
 import PhotoViewerModal from './PhotoViewerModal';
 import PhotoAvatar from './PhotoAvatar';
+import { formatClassName, getRoleBadgeColor } from '../utils/helpers';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -13,12 +14,6 @@ export default function UserDetailModal({ user, open, onClose }) {
   const [linkedStudents, setLinkedStudents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showPhotoViewer, setShowPhotoViewer] = useState(false);
-
-  // Helper function to remove "Grade " prefix from class names
-  const formatClassName = (className) => {
-    if (!className) return 'N/A';
-    return className.replace(/^Grade\s+/i, '');
-  };
 
   useEffect(() => {
     if (open && user) {
