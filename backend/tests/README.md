@@ -119,28 +119,64 @@ Results: 5/5 tests passed (100%)
 - Check X-API-Key header is being sent
 - Verify request body format matches API requirements
 
-## Pi Boarding Simulator (NEW)
+## Pi Real-Time Scanner (NEW - RECOMMENDED)
 
-**File**: `pi_simulator_boarding.py`
+**File**: `pi_realtime_scanner.py`
 
-A comprehensive boarding simulation tool that uses DeepFace for face recognition and processes actual student profile photos.
+A **real-time scanning simulator** that mimics an actual Raspberry Pi device with RFID scanner.
 
 ### Key Features
 
+✅ **Zero Configuration**: Auto-registers device and starts scanning  
+✅ **Continuous Scanning Thread**: Simulates RFID scans one by one  
+✅ **Face Verification**: Uses DeepFace to verify each scan  
+✅ **API Integration**: Fetches embeddings and sends results via API  
+✅ **Realistic Simulation**: Mimics actual Pi device behavior  
+✅ **Automatic AM/PM Cycling**: Switches from morning to afternoon boarding  
+
+### Quick Start (No Config Needed!)
+
+```bash
+# Just run it - everything is automatic!
+python3 pi_realtime_scanner.py
+```
+
+**What it does:**
+1. Logs in as admin automatically
+2. Registers device and gets API key
+3. Starts continuous scanning thread
+4. For each RFID scan:
+   - Fetches student embedding from backend API
+   - Generates embedding from profile photo
+   - Compares and verifies
+   - Sends result to backend
+
+See [REALTIME_SCANNER_GUIDE.md](./REALTIME_SCANNER_GUIDE.md) for complete documentation.
+
+---
+
+## Pi Boarding Simulator (Batch Mode)
+
+**File**: `pi_simulator_boarding.py`
+
+A batch processing tool for testing multiple students at once.
+
+### Key Features
+
+✅ **Batch Processing**: Process all students in one run  
 ✅ **Real Face Recognition**: Uses DeepFace (Facenet model) to generate embeddings  
 ✅ **Profile Photo Management**: Loads from `backend/photos/students/<student_id>/profile.jpg`  
 ✅ **Placeholder Generation**: Downloads from thispersondoesnotexist.com if photo missing  
 ✅ **Embedding Comparison**: Compares with backend using cosine similarity  
 ✅ **Attendance Photos**: Saves photos to attendance folder with proper naming  
-✅ **Complete Workflow**: Simulates entire Raspberry Pi boarding process  
 
 ### Quick Start
 
 ```bash
-# Run AM boarding simulation
+# Run AM boarding simulation (batch)
 python3 pi_simulator_boarding.py --scan-type AM
 
-# Run PM boarding simulation
+# Run PM boarding simulation (batch)
 python3 pi_simulator_boarding.py --scan-type PM
 ```
 
