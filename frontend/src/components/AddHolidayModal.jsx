@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 import { Button } from './ui/button';
@@ -6,45 +6,36 @@ import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Textarea } from './ui/textarea';
 import { Calendar } from 'lucide-react';
-import { toast } from 'sonner';
+import { API_ENDPOINTS } from '../config/api';
+import { useModalForm } from '../hooks/useModalForm';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+const initialFormData = {
+  name: '',
+  date: '',
+  description: ''
+};
 
 export default function AddHolidayModal({ open, onClose, onSuccess }) {
-  const [formData, setFormData] = useState({
-    name: '',
-    date: '',
-    description: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const {
+    formData,
+    loading,
+    updateField,
+    handleSubmit,
+    handleClose,
+  } = useModalForm(
+    initialFormData,
+    async (data) => {
+      const response = await axios.post(API_ENDPOINTS.holidays.create(), data);
+      return response.data;
+    },
+    () => {
+      if (onSuccess) onSuccess();
+    },
+    onClose
+  );
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    if (!formData.name || !formData.date) {
-      toast.error('Please fill in all required fields');
-      return;
-    }
-
-    setIsSubmitting(true);
-    try {
-      await axios.post(`${API}/admin/holidays`, formData);
-      toast.success('Holiday added successfully!');
-      setFormData({ name: '', date: '', description: '' });
-      onSuccess();
-      onClose();
-    } catch (error) {
-      console.error('Error adding holiday:', error);
-      toast.error(error.response?.data?.detail || 'Failed to add holiday');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleClose = () => {
-    setFormData({ name: '', date: '', description: '' });
-    onClose();
+  const onSubmit = (e) => {
+    handleSubmit(e, ['name', 'date']); // Validate required fields
   };
 
   return (
