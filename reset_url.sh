@@ -2,7 +2,7 @@
 
 echo "🔧 Updating Bus Tracker backend URLs..."
 
-NEW_URL="https://profile-scan-test.preview.emergentagent.com"
+NEW_URL="https://bus-tracker-update.preview.emergentagent.com/"
 echo "Using URL: $NEW_URL"
 
 # FRONTEND UPDATE
