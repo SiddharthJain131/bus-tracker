@@ -1009,6 +1009,16 @@ export default function AdminDashboardNew({ user, onLogout }) {
         itemType={deleteItem?.type}
         isDeleting={isDeleting}
       />
+
+      <PhotoViewerModal
+        open={showPhotoViewer}
+        onClose={() => setShowPhotoViewer(false)}
+        photoUrl={currentUser.photo}
+        userName={currentUser.name}
+        canEdit={true}
+        uploadEndpoint={`${API}/users/me/photo`}
+        onPhotoUpdate={handleProfilePhotoUpdate}
+      />
     </div>
   );
 }
