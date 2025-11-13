@@ -7,6 +7,7 @@ import { User, Phone, GraduationCap, Users, Bus, MapPin } from 'lucide-react';
 import RouteVisualizationModal from './RouteVisualizationModal';
 import PhotoViewerModal from './PhotoViewerModal';
 import PhotoAvatar from './PhotoAvatar';
+import { formatClassName } from '../utils/helpers';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -17,12 +18,6 @@ export default function StudentDetailModal({ student, open, onClose, hideTeacher
   const [showPhotoViewer, setShowPhotoViewer] = useState(false);
   const [loading, setLoading] = useState(false);
   const [tempClosed, setTempClosed] = useState(false);
-
-  // Helper function to remove "Grade " prefix from class names
-  const formatClassName = (className) => {
-    if (!className) return 'N/A';
-    return className.replace(/^Grade\s+/i, '');
-  };
 
   useEffect(() => {
     if (open && student) {
