@@ -67,12 +67,17 @@ export default function UserDetailModal({ user, open, onClose }) {
         <div className="space-y-6">
           {/* Profile Header */}
           <div className="flex items-center gap-6 p-6 bg-gradient-to-br from-violet-50 to-purple-50 rounded-lg">
-            <div className="w-24 h-24 bg-gradient-to-br from-violet-400 to-purple-600 rounded-full flex items-center justify-center text-white text-3xl font-bold overflow-hidden transition-all duration-300 hover:scale-110 hover:shadow-xl hover:ring-4 hover:ring-violet-300 cursor-pointer">
+            <div 
+              className="relative w-24 h-24 bg-gradient-to-br from-violet-400 to-purple-600 rounded-full flex items-center justify-center text-white text-3xl font-bold overflow-hidden cursor-pointer"
+              onClick={() => setShowPhotoViewer(true)}
+              onMouseEnter={() => setIsHoveringPhoto(true)}
+              onMouseLeave={() => setIsHoveringPhoto(false)}
+            >
               {user.photo_url ? (
                 <img 
                   src={`${BACKEND_URL}${user.photo_url}`} 
                   alt={user.name} 
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" 
+                  className="w-full h-full object-cover" 
                   onError={(e) => {
                     e.target.style.display = 'none';
                     e.target.parentElement.textContent = user.name.charAt(0).toUpperCase();
@@ -80,6 +85,13 @@ export default function UserDetailModal({ user, open, onClose }) {
                 />
               ) : (
                 user.name.charAt(0).toUpperCase()
+              )}
+              
+              {/* Eye icon overlay on hover */}
+              {isHoveringPhoto && (
+                <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center rounded-full">
+                  <Eye className="w-8 h-8 text-white" />
+                </div>
               )}
             </div>
             <div className="flex-1">
