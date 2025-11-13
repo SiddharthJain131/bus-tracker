@@ -176,6 +176,19 @@ export default function UserDetailModal({ user, open, onClose }) {
           )}
         </div>
       </DialogContent>
+
+      {/* Photo Viewer Modal */}
+      {showPhotoViewer && (
+        <PhotoViewerModal
+          open={showPhotoViewer}
+          onClose={() => setShowPhotoViewer(false)}
+          photoUrl={user.photo_url ? `${BACKEND_URL}${user.photo_url}` : null}
+          userName={user.name}
+          canEdit={false}
+          uploadEndpoint={null}
+          onPhotoUpdate={null}
+        />
+      )}
     </Dialog>
   );
 }
