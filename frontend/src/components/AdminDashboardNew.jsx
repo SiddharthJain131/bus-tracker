@@ -393,36 +393,14 @@ export default function AdminDashboardNew({ user, onLogout }) {
               </h2>
               <div className="flex items-center gap-6">
                 <div 
-                  className="relative w-20 h-20 bg-gradient-to-br from-violet-400 to-purple-600 rounded-full flex items-center justify-center text-white text-3xl font-bold overflow-hidden transition-all duration-300 hover:scale-110 hover:shadow-xl hover:ring-4 hover:ring-violet-300 cursor-pointer"
-                  onMouseEnter={() => setIsHoveredProfile(true)}
-                  onMouseLeave={() => setIsHoveredProfile(false)}
+                  className="relative w-20 h-20 bg-gradient-to-br from-violet-400 to-purple-600 rounded-full flex items-center justify-center text-white text-3xl font-bold overflow-hidden cursor-pointer"
                   onClick={handleProfilePhotoClick}
                 >
                   {currentUser.photo ? (
-                    <img src={currentUser.photo} alt={currentUser.name} className="w-full h-full rounded-full object-cover transition-transform duration-300 hover:scale-110" />
+                    <img src={currentUser.photo} alt={currentUser.name} className="w-full h-full rounded-full object-cover" />
                   ) : (
                     currentUser.name.charAt(0).toUpperCase()
                   )}
-                  
-                  {isHoveredProfile && !isUploadingProfile && (
-                    <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-full">
-                      <Camera className="w-7 h-7 text-white" />
-                    </div>
-                  )}
-                  
-                  {isUploadingProfile && (
-                    <div className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center rounded-full">
-                      <div className="animate-spin rounded-full h-7 w-7 border-b-2 border-white"></div>
-                    </div>
-                  )}
-                  
-                  <input
-                    ref={profileFileInputRef}
-                    type="file"
-                    accept="image/*"
-                    onChange={handleProfileFileChange}
-                    className="hidden"
-                  />
                 </div>
                 <div className="flex-1 space-y-2">
                   <h3 className="text-2xl font-bold text-gray-900">{user.name}</h3>
