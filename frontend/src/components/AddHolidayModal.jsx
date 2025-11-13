@@ -48,7 +48,7 @@ export default function AddHolidayModal({ open, onClose, onSuccess }) {
           </DialogTitle>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={onSubmit} className="space-y-4">
           {/* Holiday Title */}
           <div className="space-y-2">
             <Label htmlFor="name">
@@ -57,7 +57,7 @@ export default function AddHolidayModal({ open, onClose, onSuccess }) {
             <Input
               id="name"
               value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              onChange={(e) => updateField('name', e.target.value)}
               placeholder="e.g., Independence Day"
               required
             />
@@ -72,7 +72,7 @@ export default function AddHolidayModal({ open, onClose, onSuccess }) {
               id="date"
               type="date"
               value={formData.date}
-              onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+              onChange={(e) => updateField('date', e.target.value)}
               required
             />
           </div>
@@ -85,7 +85,7 @@ export default function AddHolidayModal({ open, onClose, onSuccess }) {
             <Textarea
               id="description"
               value={formData.description}
-              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+              onChange={(e) => updateField('description', e.target.value)}
               placeholder="e.g., National holiday celebrating independence"
               rows={3}
               className="resize-none"
@@ -98,16 +98,16 @@ export default function AddHolidayModal({ open, onClose, onSuccess }) {
               type="button"
               variant="outline"
               onClick={handleClose}
-              disabled={isSubmitting}
+              disabled={loading}
             >
               Cancel
             </Button>
             <Button
               type="submit"
-              disabled={isSubmitting}
+              disabled={loading}
               className="bg-blue-600 hover:bg-blue-700"
             >
-              {isSubmitting ? 'Adding...' : 'Add Holiday'}
+              {loading ? 'Adding...' : 'Add Holiday'}
             </Button>
           </div>
         </form>
