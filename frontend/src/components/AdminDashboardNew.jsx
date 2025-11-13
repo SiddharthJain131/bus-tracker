@@ -392,25 +392,14 @@ export default function AdminDashboardNew({ user, onLogout }) {
                 Admin Profile
               </h2>
               <div className="flex items-center gap-6">
-                <div 
-                  className="relative w-20 h-20 bg-gradient-to-br from-violet-400 to-purple-600 rounded-full flex items-center justify-center text-white text-3xl font-bold overflow-hidden cursor-pointer"
+                <PhotoAvatar
+                  photoUrl={currentUser.photo}
+                  userName={currentUser.name}
+                  size="lg"
                   onClick={handleProfilePhotoClick}
-                  onMouseEnter={() => setIsHoveringPhoto(true)}
-                  onMouseLeave={() => setIsHoveringPhoto(false)}
-                >
-                  {currentUser.photo ? (
-                    <img src={currentUser.photo} alt={currentUser.name} className="w-full h-full rounded-full object-cover" />
-                  ) : (
-                    currentUser.name.charAt(0).toUpperCase()
-                  )}
-                  
-                  {/* Eye icon overlay on hover */}
-                  {isHoveringPhoto && (
-                    <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center rounded-full">
-                      <Eye className="w-7 h-7 text-white" />
-                    </div>
-                  )}
-                </div>
+                  gradientFrom="violet-400"
+                  gradientTo="purple-600"
+                />
                 <div className="flex-1 space-y-2">
                   <h3 className="text-2xl font-bold text-gray-900">{user.name}</h3>
                   <div className="flex items-center gap-4 text-sm text-gray-600">
