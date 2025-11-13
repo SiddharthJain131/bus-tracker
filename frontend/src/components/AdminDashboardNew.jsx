@@ -199,7 +199,6 @@ export default function AdminDashboardNew({ user, onLogout }) {
   
   // Photo viewer state
   const [showPhotoViewer, setShowPhotoViewer] = useState(false);
-  const [isHoveringPhoto, setIsHoveringPhoto] = useState(false);
   const [currentUser, setCurrentUser] = useState(user);
 
   useEffect(() => {
