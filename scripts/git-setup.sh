@@ -38,7 +38,7 @@ echo "📦 Adding all files..."
 git add .
 git commit -m "Sync local project with remote - $(date +'%Y-%m-%d %H:%M')" || echo "No new changes to commit."
 
-# Push (using cached or VS Code OAuth credentials)
+# Push
 echo "🚀 Pushing to GitHub..."
 git push origin main
 
