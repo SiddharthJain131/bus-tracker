@@ -4,6 +4,7 @@ import { Button } from './ui/button';
 import { X, Edit2, Upload } from 'lucide-react';
 import { toast } from 'sonner';
 import axios from 'axios';
+import { getInitials } from '../utils/helpers';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
