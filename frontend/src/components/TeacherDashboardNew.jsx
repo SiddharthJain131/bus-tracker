@@ -22,16 +22,14 @@ import {
 } from 'lucide-react';
 import StudentDetailModal from './StudentDetailModal';
 import AttendanceGrid from './AttendanceGrid';
+import PhotoViewerModal from './PhotoViewerModal';
+import PhotoAvatar from './PhotoAvatar';
+import { formatClassName } from '../utils/helpers';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 export default function TeacherDashboardNew({ user, onLogout }) {
-  // Helper function to remove "Grade " prefix from class names
-  const formatClassName = (className) => {
-    if (!className) return 'N/A';
-    return className.replace(/^Grade\s+/i, '');
-  };
 
   // Data states
   const [students, setStudents] = useState([]);
@@ -55,10 +53,8 @@ export default function TeacherDashboardNew({ user, onLogout }) {
   const [attendanceStudentId, setAttendanceStudentId] = useState(null);
   const [attendanceStudentName, setAttendanceStudentName] = useState('');
   
-  // Photo upload states
-  const [isHoveredProfile, setIsHoveredProfile] = useState(false);
-  const [isUploadingProfile, setIsUploadingProfile] = useState(false);
-  const profileFileInputRef = useRef(null);
+  // Photo viewer state
+  const [showPhotoViewer, setShowPhotoViewer] = useState(false);
   const [currentUser, setCurrentUser] = useState(user);
 
   useEffect(() => {
@@ -171,45 +167,15 @@ export default function TeacherDashboardNew({ user, onLogout }) {
 
 
   const handleProfilePhotoClick = () => {
-    profileFileInputRef.current?.click();
+    setShowPhotoViewer(true);
   };
 
-  const handleProfileFileChange = async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    if (!file.type.startsWith('image/')) {
-      toast.error('Please select an image file');
-      return;
-    }
-
-    if (file.size > 5 * 1024 * 1024) {
-      toast.error('Image size should be less than 5MB');
-      return;
-    }
-
-    setIsUploadingProfile(true);
-    const formData = new FormData();
-    formData.append('file', file);
-
-    try {
-      const response = await axios.put(`${API}/users/me/photo`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-        withCredentials: true,
-      });
-
-      toast.success('Photo updated successfully!');
-      
-      setCurrentUser(prev => ({
-        ...prev,
-        photo: `${BACKEND_URL}${response.data.photo_url}`
-      }));
-    } catch (error) {
-      console.error('Photo upload error:', error);
-      toast.error(error.response?.data?.detail || 'Failed to update photo');
-    } finally {
-      setIsUploadingProfile(false);
-    }
+  const handleProfilePhotoUpdate = (newPhotoUrl) => {
+    // newPhotoUrl already includes BACKEND_URL and cache-busting timestamp from PhotoViewerModal
+    setCurrentUser(prev => ({
+      ...prev,
+      photo: newPhotoUrl.startsWith('http') ? newPhotoUrl : `${BACKEND_URL}${newPhotoUrl}`
+    }));
   };
 
   const handleViewStudent = async (student) => {
@@ -290,38 +256,14 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                 Teacher Profile
               </h2>
               <div className="flex items-center gap-6">
-                <div 
-                  className="relative w-20 h-20 bg-gradient-to-br from-emerald-400 to-teal-600 rounded-full flex items-center justify-center text-white text-3xl font-bold overflow-hidden transition-all duration-300 hover:scale-110 hover:shadow-xl hover:ring-4 hover:ring-emerald-300 cursor-pointer"
-                  onMouseEnter={() => setIsHoveredProfile(true)}
-                  onMouseLeave={() => setIsHoveredProfile(false)}
+                <PhotoAvatar
+                  photoUrl={currentUser.photo}
+                  userName={currentUser.name}
+                  size="lg"
                   onClick={handleProfilePhotoClick}
-                >
-                  {currentUser.photo ? (
-                    <img src={currentUser.photo} alt={currentUser.name} className="w-full h-full rounded-full object-cover transition-transform duration-300 hover:scale-110" />
-                  ) : (
-                    currentUser.name.charAt(0).toUpperCase()
-                  )}
-                  
-                  {isHoveredProfile && !isUploadingProfile && (
-                    <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-full">
-                      <Camera className="w-7 h-7 text-white" />
-                    </div>
-                  )}
-                  
-                  {isUploadingProfile && (
-                    <div className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center rounded-full">
-                      <div className="animate-spin rounded-full h-7 w-7 border-b-2 border-white"></div>
-                    </div>
-                  )}
-                  
-                  <input
-                    ref={profileFileInputRef}
-                    type="file"
-                    accept="image/*"
-                    onChange={handleProfileFileChange}
-                    className="hidden"
-                  />
-                </div>
+                  gradientFrom="emerald-400"
+                  gradientTo="teal-600"
+                />
                 <div className="flex-1 space-y-2">
                   <h3 className="text-2xl font-bold text-gray-900">{user.name}</h3>
                   <div className="flex items-center gap-4 text-sm text-gray-600">
@@ -647,6 +589,17 @@ export default function TeacherDashboardNew({ user, onLogout }) {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Photo Viewer Modal */}
+      <PhotoViewerModal
+        open={showPhotoViewer}
+        onClose={() => setShowPhotoViewer(false)}
+        photoUrl={currentUser.photo}
+        userName={currentUser.name}
+        canEdit={true}
+        uploadEndpoint={`${API}/users/me/photo`}
+        onPhotoUpdate={handleProfilePhotoUpdate}
+      />
     </div>
   );
 }

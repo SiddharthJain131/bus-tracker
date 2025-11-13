@@ -4,7 +4,7 @@ Copy this file to the configuration section of local_device_simulator.py
 """
 
 # Backend API base URL
-BASE_URL = "https://gitignore-hover.preview.emergentagent.com/"
+BASE_URL = "https://unused-cleanup.preview.emergentagent.com/"
 
 # Device API Key (EXAMPLE - Replace with your actual key from device registration)
 # Get your key by running: POST /api/device/register as admin

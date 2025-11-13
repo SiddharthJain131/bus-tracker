@@ -16,12 +16,6 @@ git config --global user.name "$USERNAME"
 git config --global user.email "$USEREMAIL"
 git config --global init.defaultBranch main
 
-# Enable credential caching (uses VS Code / system helper if available)
-git config --global credential.helper 'cache --timeout=7200'   # 2 hours
-if git help -a | grep -q "manager"; then
-  git config --global credential.helper manager
-fi
-
 # Initialize repo if missing
 if [ ! -d ".git" ]; then
   git init

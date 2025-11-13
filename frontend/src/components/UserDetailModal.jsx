@@ -3,6 +3,9 @@ import axios from 'axios';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 import { Card } from './ui/card';
 import { User, Phone, Mail, MapPin, GraduationCap, Users } from 'lucide-react';
+import PhotoViewerModal from './PhotoViewerModal';
+import PhotoAvatar from './PhotoAvatar';
+import { formatClassName, getRoleBadgeColor } from '../utils/helpers';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -10,12 +13,7 @@ const API = `${BACKEND_URL}/api`;
 export default function UserDetailModal({ user, open, onClose }) {
   const [linkedStudents, setLinkedStudents] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  // Helper function to remove "Grade " prefix from class names
-  const formatClassName = (className) => {
-    if (!className) return 'N/A';
-    return className.replace(/^Grade\s+/i, '');
-  };
+  const [showPhotoViewer, setShowPhotoViewer] = useState(false);
 
   useEffect(() => {
     if (open && user) {
@@ -43,15 +41,6 @@ export default function UserDetailModal({ user, open, onClose }) {
 
   if (!user) return null;
 
-  const getRoleBadgeColor = (role) => {
-    switch (role) {
-      case 'admin': return 'bg-purple-100 text-purple-800';
-      case 'teacher': return 'bg-emerald-100 text-emerald-800';
-      case 'parent': return 'bg-blue-100 text-blue-800';
-      default: return 'bg-gray-100 text-gray-800';
-    }
-  };
-
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
@@ -64,21 +53,14 @@ export default function UserDetailModal({ user, open, onClose }) {
         <div className="space-y-6">
           {/* Profile Header */}
           <div className="flex items-center gap-6 p-6 bg-gradient-to-br from-violet-50 to-purple-50 rounded-lg">
-            <div className="w-24 h-24 bg-gradient-to-br from-violet-400 to-purple-600 rounded-full flex items-center justify-center text-white text-3xl font-bold overflow-hidden transition-all duration-300 hover:scale-110 hover:shadow-xl hover:ring-4 hover:ring-violet-300 cursor-pointer">
-              {user.photo_url ? (
-                <img 
-                  src={`${BACKEND_URL}${user.photo_url}`} 
-                  alt={user.name} 
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" 
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.parentElement.textContent = user.name.charAt(0).toUpperCase();
-                  }}
-                />
-              ) : (
-                user.name.charAt(0).toUpperCase()
-              )}
-            </div>
+            <PhotoAvatar
+              photoUrl={user.photo_url ? `${BACKEND_URL}${user.photo_url}` : null}
+              userName={user.name}
+              size="xl"
+              onClick={() => setShowPhotoViewer(true)}
+              gradientFrom="violet-400"
+              gradientTo="purple-600"
+            />
             <div className="flex-1">
               <h3 className="text-2xl font-bold text-gray-900" style={{ fontFamily: 'Space Grotesk' }}>
                 {user.name}
@@ -161,6 +143,19 @@ export default function UserDetailModal({ user, open, onClose }) {
           )}
         </div>
       </DialogContent>
+
+      {/* Photo Viewer Modal */}
+      {showPhotoViewer && (
+        <PhotoViewerModal
+          open={showPhotoViewer}
+          onClose={() => setShowPhotoViewer(false)}
+          photoUrl={user.photo_url ? `${BACKEND_URL}${user.photo_url}` : null}
+          userName={user.name}
+          canEdit={false}
+          uploadEndpoint={null}
+          onPhotoUpdate={null}
+        />
+      )}
     </Dialog>
   );
 }

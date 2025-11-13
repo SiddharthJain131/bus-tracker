@@ -1,11 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 import { Button } from './ui/button';
 import { Card } from './ui/card';
-import { User, Phone, GraduationCap, Users, Bus, MapPin, Eye, Camera } from 'lucide-react';
+import { User, Phone, GraduationCap, Users, Bus, MapPin } from 'lucide-react';
 import RouteVisualizationModal from './RouteVisualizationModal';
-import { toast } from 'sonner';
+import PhotoViewerModal from './PhotoViewerModal';
+import PhotoAvatar from './PhotoAvatar';
+import { formatClassName } from '../utils/helpers';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -13,17 +15,9 @@ const API = `${BACKEND_URL}/api`;
 export default function StudentDetailModal({ student, open, onClose, hideTeacherField = false, userRole = null }) {
   const [studentDetails, setStudentDetails] = useState(null);
   const [showRouteModal, setShowRouteModal] = useState(false);
+  const [showPhotoViewer, setShowPhotoViewer] = useState(false);
   const [loading, setLoading] = useState(false);
   const [tempClosed, setTempClosed] = useState(false);
-  const [isHoveredPhoto, setIsHoveredPhoto] = useState(false);
-  const [isUploadingPhoto, setIsUploadingPhoto] = useState(false);
-  const photoFileInputRef = useRef(null);
-
-  // Helper function to remove "Grade " prefix from class names
-  const formatClassName = (className) => {
-    if (!className) return 'N/A';
-    return className.replace(/^Grade\s+/i, '');
-  };
 
   useEffect(() => {
     if (open && student) {
@@ -44,47 +38,13 @@ export default function StudentDetailModal({ student, open, onClose, hideTeacher
     }
   };
 
-
   const handlePhotoClick = () => {
-    if (userRole === 'admin') {
-      photoFileInputRef.current?.click();
-    }
+    setShowPhotoViewer(true);
   };
 
-  const handlePhotoFileChange = async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    if (!file.type.startsWith('image/')) {
-      toast.error('Please select an image file');
-      return;
-    }
-
-    if (file.size > 5 * 1024 * 1024) {
-      toast.error('Image size should be less than 5MB');
-      return;
-    }
-
-    setIsUploadingPhoto(true);
-    const formData = new FormData();
-    formData.append('file', file);
-
-    try {
-      const response = await axios.put(`${API}/students/${student.student_id}/photo`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-        withCredentials: true,
-      });
-
-      toast.success('Student photo updated successfully!');
-      
-      // Refresh student details
-      await fetchStudentDetails();
-    } catch (error) {
-      console.error('Photo upload error:', error);
-      toast.error(error.response?.data?.detail || 'Failed to update photo');
-    } finally {
-      setIsUploadingPhoto(false);
-    }
+  const handlePhotoUpdate = async (newPhotoUrl) => {
+    // Refresh student details to get updated photo
+    await fetchStudentDetails();
   };
 
 
@@ -106,48 +66,14 @@ export default function StudentDetailModal({ student, open, onClose, hideTeacher
             <div className="space-y-6">
               {/* Profile Header */}
               <div className="flex items-center gap-6 p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg">
-                <div 
-                  className={`relative w-24 h-24 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full flex items-center justify-center text-white text-3xl font-bold overflow-hidden transition-all duration-300 hover:scale-110 hover:shadow-xl hover:ring-4 hover:ring-indigo-300 ${userRole === 'admin' ? 'cursor-pointer' : ''}`}
-                  onMouseEnter={() => userRole === 'admin' && setIsHoveredPhoto(true)}
-                  onMouseLeave={() => userRole === 'admin' && setIsHoveredPhoto(false)}
+                <PhotoAvatar
+                  photoUrl={studentDetails.photo_url ? `${BACKEND_URL}${studentDetails.photo_url}` : null}
+                  userName={studentDetails.name}
+                  size="xl"
                   onClick={handlePhotoClick}
-                >
-                  {studentDetails.photo_url ? (
-                    <img 
-                      src={`${BACKEND_URL}${studentDetails.photo_url}`} 
-                      alt={studentDetails.name} 
-                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" 
-                      onError={(e) => {
-                        e.target.style.display = 'none';
-                        e.target.parentElement.textContent = studentDetails.name.charAt(0).toUpperCase();
-                      }}
-                    />
-                  ) : (
-                    studentDetails.name.charAt(0).toUpperCase()
-                  )}
-                  
-                  {userRole === 'admin' && isHoveredPhoto && !isUploadingPhoto && (
-                    <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-full">
-                      <Camera className="w-8 h-8 text-white" />
-                    </div>
-                  )}
-                  
-                  {isUploadingPhoto && (
-                    <div className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center rounded-full">
-                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
-                    </div>
-                  )}
-                  
-                  {userRole === 'admin' && (
-                    <input
-                      ref={photoFileInputRef}
-                      type="file"
-                      accept="image/*"
-                      onChange={handlePhotoFileChange}
-                      className="hidden"
-                    />
-                  )}
-                </div>
+                  gradientFrom="blue-400"
+                  gradientTo="indigo-600"
+                />
                 <div className="flex-1">
                   <h3 className="text-2xl font-bold text-gray-900" style={{ fontFamily: 'Space Grotesk' }}>
                     {studentDetails.name}
@@ -265,6 +191,19 @@ export default function StudentDetailModal({ student, open, onClose, hideTeacher
             setShowRouteModal(false);
             setTempClosed(false);
           }}
+        />
+      )}
+
+      {/* Photo Viewer Modal */}
+      {showPhotoViewer && studentDetails && (
+        <PhotoViewerModal
+          open={showPhotoViewer}
+          onClose={() => setShowPhotoViewer(false)}
+          photoUrl={studentDetails.photo_url ? `${BACKEND_URL}${studentDetails.photo_url}` : null}
+          userName={studentDetails.name}
+          canEdit={userRole === 'admin'}
+          uploadEndpoint={`${API}/students/${student.student_id}/photo`}
+          onPhotoUpdate={handlePhotoUpdate}
         />
       )}
     </>
