@@ -327,12 +327,40 @@ export default function AdminDashboardNew({ user, onLogout }) {
     }
   };
 
-  // Filter functions
-  const filteredStudents = students.filter(s =>
-    s.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (s.parent_name && s.parent_name.toLowerCase().includes(searchTerm.toLowerCase())) ||
-    (s.class_name && s.class_name.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
+  // Filter functions with parameter-based search
+  const filteredStudents = students.filter(s => {
+    const term = searchTerm.toLowerCase().trim();
+    
+    // Check for parameter-based search (e.g., "bus:BUS-001", "roll:G5A-001")
+    if (term.includes(':')) {
+      const [param, value] = term.split(':').map(p => p.trim());
+      const searchValue = value.toLowerCase();
+      
+      switch (param) {
+        case 'bus':
+          return s.bus_number && s.bus_number.toLowerCase().includes(searchValue);
+        case 'roll':
+          return s.roll_number && s.roll_number.toLowerCase().includes(searchValue);
+        case 'name':
+          return s.name.toLowerCase().includes(searchValue);
+        case 'class':
+          return s.class_name && s.class_name.toLowerCase().includes(searchValue);
+        case 'parent':
+          return s.parent_name && s.parent_name.toLowerCase().includes(searchValue);
+        case 'teacher':
+          return s.teacher_name && s.teacher_name.toLowerCase().includes(searchValue);
+        default:
+          return false;
+      }
+    }
+    
+    // Default: search across all fields
+    return s.name.toLowerCase().includes(term) ||
+      (s.parent_name && s.parent_name.toLowerCase().includes(term)) ||
+      (s.class_name && s.class_name.toLowerCase().includes(term)) ||
+      (s.bus_number && s.bus_number.toLowerCase().includes(term)) ||
+      (s.roll_number && s.roll_number.toLowerCase().includes(term));
+  });
 
   const filteredUsers = users.filter(u =>
     u.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
