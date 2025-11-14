@@ -213,6 +213,28 @@ export default function AddRouteModal({ open, onClose, onSuccess }) {
                         required
                       />
                     </div>
+                    <div className="grid grid-cols-2 gap-2">
+                      <div>
+                        <label className="text-xs text-gray-600 block mb-1">Morning Expected Time</label>
+                        <Input
+                          type="time"
+                          placeholder="HH:MM"
+                          value={stop.morning_expected_time || ''}
+                          onChange={(e) => handleStopChange(index, 'morning_expected_time', e.target.value)}
+                          className="text-sm"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-xs text-gray-600 block mb-1">Evening Expected Time</label>
+                        <Input
+                          type="time"
+                          placeholder="HH:MM"
+                          value={stop.evening_expected_time || ''}
+                          onChange={(e) => handleStopChange(index, 'evening_expected_time', e.target.value)}
+                          className="text-sm"
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
