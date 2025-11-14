@@ -396,10 +396,11 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                     <Input
                       type="text"
-                      placeholder="Search by student or parent name..."
+                      placeholder="Search... (try: bus:BUS-001 or roll:G5A-001)"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       className="pl-10"
+                      title="Search by name, or use bus:BUS-001, roll:G5A-001, parent:John"
                     />
                   </div>
                   
