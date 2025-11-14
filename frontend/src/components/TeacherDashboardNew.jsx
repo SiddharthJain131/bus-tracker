@@ -225,11 +225,10 @@ export default function TeacherDashboardNew({ user, onLogout }) {
       }
     }
     
-    const matchesBus = !filterBus || student.bus_number === filterBus;
     const matchesAM = !filterAMStatus || student.am_status === filterAMStatus;
     const matchesPM = !filterPMStatus || student.pm_status === filterPMStatus;
     
-    return matchesSearch && matchesBus && matchesAM && matchesPM;
+    return matchesSearch && matchesAM && matchesPM;
   });
 
   const getStatusClass = (status) => {
