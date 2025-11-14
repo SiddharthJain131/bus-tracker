@@ -25,7 +25,9 @@ export default function AddRouteModal({ open, onClose, onSuccess }) {
     stop_name: '',
     lat: '',
     lon: '',
-    order_index: 0
+    order_index: 0,
+    morning_expected_time: '',
+    evening_expected_time: ''
   }]);
 
   const handleAddStop = () => {
