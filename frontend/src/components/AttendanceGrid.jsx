@@ -138,7 +138,7 @@ export default function AttendanceGrid({ studentId }) {
               <div
                 data-testid={`pm-status-day-${day.day}`}
                 className={`text-xs py-1 px-2 rounded text-center font-medium ${getStatusClass(day.pm_status)} ${
-                  day.pm_status === 'green' ? 'cursor-pointer hover:opacity-80 transition-opacity' : ''
+                  (day.pm_status === 'green' || day.pm_status === 'yellow') ? 'cursor-pointer hover:opacity-80 transition-opacity' : ''
                 }`}
                 title={day.pm_confidence ? `Confidence: ${(day.pm_confidence * 100).toFixed(0)}%` : ''}
                 onClick={() => handleCellClick(day, 'PM')}
