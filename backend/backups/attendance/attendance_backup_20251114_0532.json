@@ -1,0 +1,2333 @@
+{
+  "timestamp": "2025-11-14T05:32:28.676448",
+  "backup_type": "attendance",
+  "collections": {
+    "attendance": [
+      {
+        "_id": "6916bed743c9c10fae9b5a6a",
+        "attendance_id": "d9dee485-fde9-45f2-bf73-eca461101799",
+        "student_id": "04a97662-e3f5-4c71-9283-55f3b2bd4d15",
+        "date": "2025-11-14",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.96,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a6b",
+        "attendance_id": "084dd6a8-8c35-4bf3-96a5-0f3e781ced3b",
+        "student_id": "04a97662-e3f5-4c71-9283-55f3b2bd4d15",
+        "date": "2025-11-14",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.84,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a6c",
+        "attendance_id": "a9dbb6d8-5cff-4ced-a83d-5eadfb2b2a21",
+        "student_id": "d61d7051-16f3-4c80-a28b-55a3d475757c",
+        "date": "2025-11-14",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.9,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a6d",
+        "attendance_id": "6343249d-c313-4cb6-9ce2-cd058ea3990f",
+        "student_id": "d61d7051-16f3-4c80-a28b-55a3d475757c",
+        "date": "2025-11-14",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.88,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a6e",
+        "attendance_id": "35b6372b-2036-4d8a-8938-f54226bf6f54",
+        "student_id": "84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51",
+        "date": "2025-11-14",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.87,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a6f",
+        "attendance_id": "914301b4-1c63-4054-8399-fa74b8497094",
+        "student_id": "90d5e32e-0b2a-451d-be26-67ba1e128b82",
+        "date": "2025-11-14",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.97,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a70",
+        "attendance_id": "8203dc3c-01a6-4c81-9303-ce4982c5268e",
+        "student_id": "90d5e32e-0b2a-451d-be26-67ba1e128b82",
+        "date": "2025-11-14",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.91,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a71",
+        "attendance_id": "368313b1-21aa-4b36-ad8b-80d6e9ac67f8",
+        "student_id": "c1c2005e-22bb-4eb9-9e25-f6555866eeef",
+        "date": "2025-11-14",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.92,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a72",
+        "attendance_id": "c6be1146-7fef-4a98-83f4-d27908098b85",
+        "student_id": "c1c2005e-22bb-4eb9-9e25-f6555866eeef",
+        "date": "2025-11-14",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.83,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a73",
+        "attendance_id": "bbc1e0a1-6f4b-489c-97d6-ee38f866540c",
+        "student_id": "1bb92c14-14df-4014-975a-ada092eb548c",
+        "date": "2025-11-14",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.87,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a74",
+        "attendance_id": "a24a21e2-4345-47a6-b513-bd14728fee32",
+        "student_id": "1bb92c14-14df-4014-975a-ada092eb548c",
+        "date": "2025-11-14",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.92,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a75",
+        "attendance_id": "17fc2ea0-9667-473a-8c26-e36257e764b2",
+        "student_id": "1b85c5e7-3f65-4edc-b113-3e553b272003",
+        "date": "2025-11-14",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.91,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a76",
+        "attendance_id": "e13fef98-0553-49d0-a0a7-9b5aeb9a6a1f",
+        "student_id": "1b85c5e7-3f65-4edc-b113-3e553b272003",
+        "date": "2025-11-14",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.88,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a77",
+        "attendance_id": "8c5b8721-a650-45da-a796-8df0308dd83a",
+        "student_id": "d2bcc8ed-30a1-4313-9e7b-1efba819441f",
+        "date": "2025-11-14",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.86,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a78",
+        "attendance_id": "97bd5f8f-df5a-4153-a8b7-862015822f3e",
+        "student_id": "d2bcc8ed-30a1-4313-9e7b-1efba819441f",
+        "date": "2025-11-14",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.89,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a79",
+        "attendance_id": "4f6e7a02-479e-4bcd-b77b-36cf86e1cd2e",
+        "student_id": "a6d935e2-af68-46e2-8dc2-f37e8b2ae455",
+        "date": "2025-11-14",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.88,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a7a",
+        "attendance_id": "b3cd0d20-bb21-425c-a570-cffcb8833b45",
+        "student_id": "46c917de-44c8-4e36-b237-49b4eac9ccfc",
+        "date": "2025-11-14",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.97,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a7b",
+        "attendance_id": "fe236d95-357f-40e7-87af-3accdc9cd36d",
+        "student_id": "46c917de-44c8-4e36-b237-49b4eac9ccfc",
+        "date": "2025-11-14",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.92,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a7c",
+        "attendance_id": "35ef125f-d550-45ec-951a-18bf82bca4af",
+        "student_id": "d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7",
+        "date": "2025-11-14",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.91,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a7d",
+        "attendance_id": "403f671f-1953-4f3c-9ab6-95d4bba75d7a",
+        "student_id": "d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7",
+        "date": "2025-11-14",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.87,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a7e",
+        "attendance_id": "4f463896-e052-4049-9636-95d5f041473b",
+        "student_id": "ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc",
+        "date": "2025-11-14",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.95,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a7f",
+        "attendance_id": "42364892-a48d-4a28-8286-f4c853b75257",
+        "student_id": "ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc",
+        "date": "2025-11-14",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.95,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a80",
+        "attendance_id": "77849011-62d1-4e37-a6fa-12774984d0a8",
+        "student_id": "de0ae567-9165-4f08-a45f-9e49fa9161b5",
+        "date": "2025-11-14",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.86,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a81",
+        "attendance_id": "bbe8ecd4-80ed-4596-b89d-04cbe2d49680",
+        "student_id": "de0ae567-9165-4f08-a45f-9e49fa9161b5",
+        "date": "2025-11-14",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.93,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a82",
+        "attendance_id": "e4031a1b-b2ff-49a3-9f7f-89857b237070",
+        "student_id": "23535bb2-a11a-4c2c-a15c-06e9236e2bfe",
+        "date": "2025-11-14",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.92,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a83",
+        "attendance_id": "2d2cbfe4-9ad5-4928-bc50-bae83b7728a7",
+        "student_id": "1a68ffb4-5372-48d1-9d79-21c2fc9627c3",
+        "date": "2025-11-14",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.97,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a84",
+        "attendance_id": "327a1bb3-f4a9-4e1a-b657-a7f6142f42fd",
+        "student_id": "ab8cf46d-4359-4543-9e2d-0535f01e8d5d",
+        "date": "2025-11-14",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.93,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a85",
+        "attendance_id": "795d45a0-a967-4f9a-99ad-ccb3d75997a0",
+        "student_id": "ab8cf46d-4359-4543-9e2d-0535f01e8d5d",
+        "date": "2025-11-14",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.89,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a86",
+        "attendance_id": "b69b1150-1a90-4b40-a754-711f08fad356",
+        "student_id": "3d712299-2182-4e89-a352-0f33bf75ad1c",
+        "date": "2025-11-14",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.93,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a87",
+        "attendance_id": "b97321e5-0210-4ea6-b7ad-1bd02ca92355",
+        "student_id": "3d712299-2182-4e89-a352-0f33bf75ad1c",
+        "date": "2025-11-14",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.89,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a88",
+        "attendance_id": "6b72f3f1-1140-4a26-972a-3572688a7a48",
+        "student_id": "ad32bf84-b342-4f4e-b67c-9816781109a2",
+        "date": "2025-11-14",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.88,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a89",
+        "attendance_id": "319bf3bd-352e-4365-ba6e-cb300a2fa46b",
+        "student_id": "84dca95e-7e6b-4073-822b-1b00b14380c5",
+        "date": "2025-11-14",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.94,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a8a",
+        "attendance_id": "875221f2-9688-4868-b276-4037f4f1e31e",
+        "student_id": "84dca95e-7e6b-4073-822b-1b00b14380c5",
+        "date": "2025-11-14",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.95,
+        "last_update": "2025-11-14T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a8b",
+        "attendance_id": "75368e5c-5320-4f88-9f22-6b9665cc7247",
+        "student_id": "04a97662-e3f5-4c71-9283-55f3b2bd4d15",
+        "date": "2025-11-13",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.96,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a8c",
+        "attendance_id": "acc2ff3e-f22b-4b52-ada6-9f948c44d8fd",
+        "student_id": "04a97662-e3f5-4c71-9283-55f3b2bd4d15",
+        "date": "2025-11-13",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.88,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a8d",
+        "attendance_id": "2518c804-c17e-4c9f-a41c-4f24877b7288",
+        "student_id": "d61d7051-16f3-4c80-a28b-55a3d475757c",
+        "date": "2025-11-13",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.97,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a8e",
+        "attendance_id": "22dc4a4e-99c6-40b5-bfea-05d138a0a39c",
+        "student_id": "84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51",
+        "date": "2025-11-13",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.91,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a8f",
+        "attendance_id": "9bce83b6-dd09-4ffb-9dc5-e7ae8179a792",
+        "student_id": "84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51",
+        "date": "2025-11-13",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.85,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a90",
+        "attendance_id": "748ce936-2da6-4fa7-99f2-90bf180489b8",
+        "student_id": "90d5e32e-0b2a-451d-be26-67ba1e128b82",
+        "date": "2025-11-13",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.88,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a91",
+        "attendance_id": "4d32f4b3-5b4b-4a9b-9a21-06e06c4257f8",
+        "student_id": "90d5e32e-0b2a-451d-be26-67ba1e128b82",
+        "date": "2025-11-13",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.85,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a92",
+        "attendance_id": "d2ee1ece-cf58-48e1-8bf9-0e9d96f3c5f6",
+        "student_id": "c1c2005e-22bb-4eb9-9e25-f6555866eeef",
+        "date": "2025-11-13",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.98,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a93",
+        "attendance_id": "ac2e7fb0-5a1b-41a7-8982-aa4b16bac0b0",
+        "student_id": "c1c2005e-22bb-4eb9-9e25-f6555866eeef",
+        "date": "2025-11-13",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.95,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a94",
+        "attendance_id": "e8b02e4f-96cf-4f57-a5f9-b760070774c7",
+        "student_id": "1bb92c14-14df-4014-975a-ada092eb548c",
+        "date": "2025-11-13",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.85,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a95",
+        "attendance_id": "c6bae3e1-85e6-4090-84b8-6c87f57dc8b2",
+        "student_id": "1bb92c14-14df-4014-975a-ada092eb548c",
+        "date": "2025-11-13",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.96,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a96",
+        "attendance_id": "012b0ba2-df18-4628-a7ea-49a5a7a6dab9",
+        "student_id": "1b85c5e7-3f65-4edc-b113-3e553b272003",
+        "date": "2025-11-13",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.89,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a97",
+        "attendance_id": "26c1093a-d2cd-4d51-8429-72b061be2f90",
+        "student_id": "1b85c5e7-3f65-4edc-b113-3e553b272003",
+        "date": "2025-11-13",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.95,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a98",
+        "attendance_id": "07a0cfe3-a492-4649-9058-0882d7286f2e",
+        "student_id": "d2bcc8ed-30a1-4313-9e7b-1efba819441f",
+        "date": "2025-11-13",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.89,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a99",
+        "attendance_id": "de8d7cd4-c244-48ff-a753-991deb70665b",
+        "student_id": "a6d935e2-af68-46e2-8dc2-f37e8b2ae455",
+        "date": "2025-11-13",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.85,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a9a",
+        "attendance_id": "2c1d39e1-bb5e-4485-a288-debce4935d36",
+        "student_id": "a6d935e2-af68-46e2-8dc2-f37e8b2ae455",
+        "date": "2025-11-13",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.82,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a9b",
+        "attendance_id": "8c8affc0-f565-4cba-8e8d-37d44da29748",
+        "student_id": "46c917de-44c8-4e36-b237-49b4eac9ccfc",
+        "date": "2025-11-13",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.89,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a9c",
+        "attendance_id": "33feef27-2a0e-4d84-ba4b-e2e5ac65b01e",
+        "student_id": "46c917de-44c8-4e36-b237-49b4eac9ccfc",
+        "date": "2025-11-13",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.91,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a9d",
+        "attendance_id": "4c4ba26a-9b93-4be5-b67f-5bc90cd9799d",
+        "student_id": "d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7",
+        "date": "2025-11-13",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.98,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a9e",
+        "attendance_id": "fc46004f-2e7b-45c1-b321-ec237e481fd9",
+        "student_id": "ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc",
+        "date": "2025-11-13",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.94,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5a9f",
+        "attendance_id": "59c6adb6-56f4-4b5d-b342-2f9c67a7160a",
+        "student_id": "ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc",
+        "date": "2025-11-13",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.93,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5aa0",
+        "attendance_id": "6fbeda31-7f12-4a24-8167-1f196535fe9a",
+        "student_id": "de0ae567-9165-4f08-a45f-9e49fa9161b5",
+        "date": "2025-11-13",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.85,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5aa1",
+        "attendance_id": "2202a27e-f3b5-4900-a720-c879f66b3b47",
+        "student_id": "de0ae567-9165-4f08-a45f-9e49fa9161b5",
+        "date": "2025-11-13",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.92,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5aa2",
+        "attendance_id": "6a8c1cce-f1d0-419a-b214-ebb4a1088f5f",
+        "student_id": "f086ed31-ddfe-49bc-8c41-73d76131a361",
+        "date": "2025-11-13",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.89,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5aa3",
+        "attendance_id": "bb7688c1-7dbb-42c2-81ec-5c313f81913f",
+        "student_id": "f086ed31-ddfe-49bc-8c41-73d76131a361",
+        "date": "2025-11-13",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.91,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5aa4",
+        "attendance_id": "18bee5f6-c50e-4d6d-8cf0-e65af295c30b",
+        "student_id": "23535bb2-a11a-4c2c-a15c-06e9236e2bfe",
+        "date": "2025-11-13",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.97,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5aa5",
+        "attendance_id": "736eae2b-747d-449b-802c-5c2523474503",
+        "student_id": "1a68ffb4-5372-48d1-9d79-21c2fc9627c3",
+        "date": "2025-11-13",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.82,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5aa6",
+        "attendance_id": "696a28c8-3065-43e2-985b-d810f7f5dc35",
+        "student_id": "ab8cf46d-4359-4543-9e2d-0535f01e8d5d",
+        "date": "2025-11-13",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.91,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5aa7",
+        "attendance_id": "a456d19c-835f-4a9d-9b07-b08d7d18ccb2",
+        "student_id": "3d712299-2182-4e89-a352-0f33bf75ad1c",
+        "date": "2025-11-13",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.86,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5aa8",
+        "attendance_id": "ddffe806-7078-4937-b4d8-80ad53925243",
+        "student_id": "ad32bf84-b342-4f4e-b67c-9816781109a2",
+        "date": "2025-11-13",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.89,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5aa9",
+        "attendance_id": "df9a5024-d5a9-425f-ba57-749b4bd2b213",
+        "student_id": "84dca95e-7e6b-4073-822b-1b00b14380c5",
+        "date": "2025-11-13",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.91,
+        "last_update": "2025-11-13T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5aaa",
+        "attendance_id": "74565f76-5d1b-4f3e-9eae-e44854a95160",
+        "student_id": "04a97662-e3f5-4c71-9283-55f3b2bd4d15",
+        "date": "2025-11-12",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.95,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5aab",
+        "attendance_id": "3228aa49-a6b1-4d23-a5f4-895d226f172f",
+        "student_id": "d61d7051-16f3-4c80-a28b-55a3d475757c",
+        "date": "2025-11-12",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.91,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5aac",
+        "attendance_id": "6b381896-2abb-4478-b4b5-11936a5928dd",
+        "student_id": "84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51",
+        "date": "2025-11-12",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.86,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5aad",
+        "attendance_id": "0ff8016e-4715-4d4f-8555-12764842a48e",
+        "student_id": "90d5e32e-0b2a-451d-be26-67ba1e128b82",
+        "date": "2025-11-12",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.94,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5aae",
+        "attendance_id": "9d0aae0d-2a59-413c-98b6-db9bc671960e",
+        "student_id": "90d5e32e-0b2a-451d-be26-67ba1e128b82",
+        "date": "2025-11-12",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.87,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5aaf",
+        "attendance_id": "0d6c3147-cc6a-46f6-8f54-8fcf5f29b7b1",
+        "student_id": "c1c2005e-22bb-4eb9-9e25-f6555866eeef",
+        "date": "2025-11-12",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.95,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ab0",
+        "attendance_id": "282451f1-b47d-4b39-aad7-b4dc1bc5b1c2",
+        "student_id": "c1c2005e-22bb-4eb9-9e25-f6555866eeef",
+        "date": "2025-11-12",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.92,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ab1",
+        "attendance_id": "73e5d267-c2a7-4f17-8128-19eff71b0251",
+        "student_id": "1bb92c14-14df-4014-975a-ada092eb548c",
+        "date": "2025-11-12",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.95,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ab2",
+        "attendance_id": "8cade66b-e0fa-4835-936b-238a13872e27",
+        "student_id": "1bb92c14-14df-4014-975a-ada092eb548c",
+        "date": "2025-11-12",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.88,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ab3",
+        "attendance_id": "8e94a8d9-a366-4526-9ca1-40ca2a492cfb",
+        "student_id": "1b85c5e7-3f65-4edc-b113-3e553b272003",
+        "date": "2025-11-12",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.88,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ab4",
+        "attendance_id": "f5281bcb-39e7-4d91-a710-36dfb3f29de7",
+        "student_id": "1b85c5e7-3f65-4edc-b113-3e553b272003",
+        "date": "2025-11-12",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.88,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ab5",
+        "attendance_id": "af03a62a-d8bc-4848-b3f0-e0760d02b758",
+        "student_id": "d2bcc8ed-30a1-4313-9e7b-1efba819441f",
+        "date": "2025-11-12",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.86,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ab6",
+        "attendance_id": "14ba80d4-f77f-4a25-a976-9e7d41864a33",
+        "student_id": "d2bcc8ed-30a1-4313-9e7b-1efba819441f",
+        "date": "2025-11-12",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.83,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ab7",
+        "attendance_id": "90bd4022-6cca-4e6a-a8e9-2a33e0d4d118",
+        "student_id": "46c917de-44c8-4e36-b237-49b4eac9ccfc",
+        "date": "2025-11-12",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.98,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ab8",
+        "attendance_id": "0ceb026a-534f-42e3-b3bc-09b840281d05",
+        "student_id": "d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7",
+        "date": "2025-11-12",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.97,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ab9",
+        "attendance_id": "0acaaf15-0cac-4f69-a054-c176ed4982b5",
+        "student_id": "d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7",
+        "date": "2025-11-12",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.95,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5aba",
+        "attendance_id": "d344b7fa-4ea2-4f8a-b4a7-532d6b05b122",
+        "student_id": "ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc",
+        "date": "2025-11-12",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.95,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5abb",
+        "attendance_id": "c04ac91d-51d6-426d-a394-6e248844be3d",
+        "student_id": "ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc",
+        "date": "2025-11-12",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.9,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5abc",
+        "attendance_id": "c3a19fa2-127b-4718-b90a-1a9494eecd05",
+        "student_id": "de0ae567-9165-4f08-a45f-9e49fa9161b5",
+        "date": "2025-11-12",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.94,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5abd",
+        "attendance_id": "786c2b32-cd58-41fe-83cc-8ff80acca3e9",
+        "student_id": "de0ae567-9165-4f08-a45f-9e49fa9161b5",
+        "date": "2025-11-12",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.86,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5abe",
+        "attendance_id": "cdf4603a-ff0b-4f38-bc08-07a2d9950264",
+        "student_id": "f086ed31-ddfe-49bc-8c41-73d76131a361",
+        "date": "2025-11-12",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.86,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5abf",
+        "attendance_id": "f5c32641-e7cf-423f-a23b-00622d95d8e9",
+        "student_id": "23535bb2-a11a-4c2c-a15c-06e9236e2bfe",
+        "date": "2025-11-12",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.97,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ac0",
+        "attendance_id": "2706176f-448b-4cb2-ab41-94da67a0f1aa",
+        "student_id": "1a68ffb4-5372-48d1-9d79-21c2fc9627c3",
+        "date": "2025-11-12",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.87,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ac1",
+        "attendance_id": "8420089d-9b61-4f99-a21b-6f3ac8ab958c",
+        "student_id": "1a68ffb4-5372-48d1-9d79-21c2fc9627c3",
+        "date": "2025-11-12",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.95,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ac2",
+        "attendance_id": "8fa3f4cc-bfb0-45ce-8f0b-0c4014099fc6",
+        "student_id": "ab8cf46d-4359-4543-9e2d-0535f01e8d5d",
+        "date": "2025-11-12",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.94,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ac3",
+        "attendance_id": "081ebb12-c0d2-4ce5-b734-1ab481a5f2b1",
+        "student_id": "ab8cf46d-4359-4543-9e2d-0535f01e8d5d",
+        "date": "2025-11-12",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.94,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ac4",
+        "attendance_id": "1c799957-27fd-4768-b04b-9e8d0471fea2",
+        "student_id": "3d712299-2182-4e89-a352-0f33bf75ad1c",
+        "date": "2025-11-12",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.92,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ac5",
+        "attendance_id": "16a82d61-fd7c-4f34-ad1d-efec64af2ab3",
+        "student_id": "3d712299-2182-4e89-a352-0f33bf75ad1c",
+        "date": "2025-11-12",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.91,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ac6",
+        "attendance_id": "8fd720b2-d0bd-4510-a0f5-8699be4c1e4b",
+        "student_id": "ad32bf84-b342-4f4e-b67c-9816781109a2",
+        "date": "2025-11-12",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.93,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ac7",
+        "attendance_id": "63a1b41f-db06-40cd-8c08-e0eaf82d58bb",
+        "student_id": "84dca95e-7e6b-4073-822b-1b00b14380c5",
+        "date": "2025-11-12",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.88,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ac8",
+        "attendance_id": "b5a297ac-859b-4660-a3c6-1799dd849ae0",
+        "student_id": "84dca95e-7e6b-4073-822b-1b00b14380c5",
+        "date": "2025-11-12",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.96,
+        "last_update": "2025-11-12T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ac9",
+        "attendance_id": "03b426ab-b8bf-4acc-9247-9f82f7429747",
+        "student_id": "04a97662-e3f5-4c71-9283-55f3b2bd4d15",
+        "date": "2025-11-11",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.88,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5aca",
+        "attendance_id": "ac472682-1bd3-4cc6-9e13-1134444f849b",
+        "student_id": "04a97662-e3f5-4c71-9283-55f3b2bd4d15",
+        "date": "2025-11-11",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.87,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5acb",
+        "attendance_id": "c40c767c-d022-499b-a2a3-22d45f7215ac",
+        "student_id": "d61d7051-16f3-4c80-a28b-55a3d475757c",
+        "date": "2025-11-11",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.93,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5acc",
+        "attendance_id": "fb9f8dc3-2983-4faa-ad12-88ec882de0e8",
+        "student_id": "d61d7051-16f3-4c80-a28b-55a3d475757c",
+        "date": "2025-11-11",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.85,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5acd",
+        "attendance_id": "8ead0efb-fa5b-4b44-98fb-444733e46560",
+        "student_id": "84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51",
+        "date": "2025-11-11",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.86,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ace",
+        "attendance_id": "54773439-92c5-45aa-baf5-3e3e8a01105c",
+        "student_id": "84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51",
+        "date": "2025-11-11",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.96,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5acf",
+        "attendance_id": "d6538a79-ba46-4ba7-beaf-a9357342788f",
+        "student_id": "90d5e32e-0b2a-451d-be26-67ba1e128b82",
+        "date": "2025-11-11",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.93,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ad0",
+        "attendance_id": "ad2225da-f61a-4e43-b11e-4e50d23be55d",
+        "student_id": "90d5e32e-0b2a-451d-be26-67ba1e128b82",
+        "date": "2025-11-11",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.83,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ad1",
+        "attendance_id": "8a405b07-412c-4912-9164-39a81e2cc3f8",
+        "student_id": "c1c2005e-22bb-4eb9-9e25-f6555866eeef",
+        "date": "2025-11-11",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.96,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ad2",
+        "attendance_id": "462c81ab-eb64-42c2-b79f-23f037eff061",
+        "student_id": "c1c2005e-22bb-4eb9-9e25-f6555866eeef",
+        "date": "2025-11-11",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.83,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ad3",
+        "attendance_id": "2e67c986-4b08-4b42-b4f7-dc55fd4523d8",
+        "student_id": "1bb92c14-14df-4014-975a-ada092eb548c",
+        "date": "2025-11-11",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.87,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ad4",
+        "attendance_id": "07744088-7c9e-4e07-8b09-a97fe5b74988",
+        "student_id": "1bb92c14-14df-4014-975a-ada092eb548c",
+        "date": "2025-11-11",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.91,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ad5",
+        "attendance_id": "bc640e72-2935-477d-b152-b0d7db5bf6c1",
+        "student_id": "1b85c5e7-3f65-4edc-b113-3e553b272003",
+        "date": "2025-11-11",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.89,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ad6",
+        "attendance_id": "0938071f-0f17-4bb8-ac05-528e4c4e7c25",
+        "student_id": "1b85c5e7-3f65-4edc-b113-3e553b272003",
+        "date": "2025-11-11",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.92,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ad7",
+        "attendance_id": "b060bd65-9de6-4467-9b8b-8139b053d4f9",
+        "student_id": "d2bcc8ed-30a1-4313-9e7b-1efba819441f",
+        "date": "2025-11-11",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.94,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ad8",
+        "attendance_id": "fda95b1d-dad9-45c9-bd3b-55718675fe73",
+        "student_id": "d2bcc8ed-30a1-4313-9e7b-1efba819441f",
+        "date": "2025-11-11",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.95,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ad9",
+        "attendance_id": "d7ff164a-1561-4b15-8951-3797b1d40870",
+        "student_id": "a6d935e2-af68-46e2-8dc2-f37e8b2ae455",
+        "date": "2025-11-11",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.98,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ada",
+        "attendance_id": "77ac209e-d999-4ca4-a02a-5598559c20d0",
+        "student_id": "a6d935e2-af68-46e2-8dc2-f37e8b2ae455",
+        "date": "2025-11-11",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.82,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5adb",
+        "attendance_id": "8c4bd22d-1fed-484e-b600-986feb20a937",
+        "student_id": "46c917de-44c8-4e36-b237-49b4eac9ccfc",
+        "date": "2025-11-11",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.88,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5adc",
+        "attendance_id": "08e85956-80d6-4fe9-b307-0a1532683671",
+        "student_id": "46c917de-44c8-4e36-b237-49b4eac9ccfc",
+        "date": "2025-11-11",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.92,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5add",
+        "attendance_id": "fcb3fde5-1157-4655-b33f-c7296b0496cc",
+        "student_id": "d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7",
+        "date": "2025-11-11",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.97,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ade",
+        "attendance_id": "1a895d69-4822-4e9c-a568-e50cef77a852",
+        "student_id": "d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7",
+        "date": "2025-11-11",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.85,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5adf",
+        "attendance_id": "d4862de1-3172-4626-9ab1-1392554169d3",
+        "student_id": "ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc",
+        "date": "2025-11-11",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.96,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ae0",
+        "attendance_id": "3ac82e5d-cd36-4a32-bfbd-05aa77eaf033",
+        "student_id": "ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc",
+        "date": "2025-11-11",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.93,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ae1",
+        "attendance_id": "af8c940c-61dd-478e-9361-53b7b2f44bde",
+        "student_id": "de0ae567-9165-4f08-a45f-9e49fa9161b5",
+        "date": "2025-11-11",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.94,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ae2",
+        "attendance_id": "6a069f00-17cd-4d1b-b47b-6ffead0ab43a",
+        "student_id": "de0ae567-9165-4f08-a45f-9e49fa9161b5",
+        "date": "2025-11-11",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.84,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ae3",
+        "attendance_id": "afb82464-b59f-47bd-8b6e-edb3640c35f0",
+        "student_id": "f086ed31-ddfe-49bc-8c41-73d76131a361",
+        "date": "2025-11-11",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.92,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ae4",
+        "attendance_id": "4582bf1b-6a23-4e18-b27e-173e27ef9b31",
+        "student_id": "23535bb2-a11a-4c2c-a15c-06e9236e2bfe",
+        "date": "2025-11-11",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.89,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ae5",
+        "attendance_id": "5c3cfc1e-611d-46ee-8580-af7ecae66857",
+        "student_id": "23535bb2-a11a-4c2c-a15c-06e9236e2bfe",
+        "date": "2025-11-11",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.89,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ae6",
+        "attendance_id": "32cb6034-7a66-4894-b6a5-c9ffaaebfc88",
+        "student_id": "1a68ffb4-5372-48d1-9d79-21c2fc9627c3",
+        "date": "2025-11-11",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.94,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ae7",
+        "attendance_id": "0fe9053c-e6c6-4c5d-9d54-b498fa554865",
+        "student_id": "1a68ffb4-5372-48d1-9d79-21c2fc9627c3",
+        "date": "2025-11-11",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.91,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ae8",
+        "attendance_id": "8006a58b-ae12-4519-a436-0fc19f2e0de1",
+        "student_id": "ab8cf46d-4359-4543-9e2d-0535f01e8d5d",
+        "date": "2025-11-11",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.92,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5ae9",
+        "attendance_id": "29bd9330-a8e6-4c71-b713-bad13e8d1553",
+        "student_id": "ab8cf46d-4359-4543-9e2d-0535f01e8d5d",
+        "date": "2025-11-11",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.84,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5aea",
+        "attendance_id": "6b243740-d7e8-48c7-8cc8-706bb50d62c9",
+        "student_id": "3d712299-2182-4e89-a352-0f33bf75ad1c",
+        "date": "2025-11-11",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.9,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5aeb",
+        "attendance_id": "bdcc2811-ba36-4c93-9475-81a98da02056",
+        "student_id": "3d712299-2182-4e89-a352-0f33bf75ad1c",
+        "date": "2025-11-11",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.89,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5aec",
+        "attendance_id": "eb072a12-f6d9-43cb-ac0a-fa2fed420ffb",
+        "student_id": "ad32bf84-b342-4f4e-b67c-9816781109a2",
+        "date": "2025-11-11",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.97,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5aed",
+        "attendance_id": "5119ae35-88e2-4419-a313-9c2933293ce9",
+        "student_id": "ad32bf84-b342-4f4e-b67c-9816781109a2",
+        "date": "2025-11-11",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.82,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5aee",
+        "attendance_id": "15cb0ded-3e57-4f8a-bb3c-8298e8d79cbe",
+        "student_id": "84dca95e-7e6b-4073-822b-1b00b14380c5",
+        "date": "2025-11-11",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.88,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5aef",
+        "attendance_id": "3fd084b7-80d6-4960-8191-6a91d337268e",
+        "student_id": "84dca95e-7e6b-4073-822b-1b00b14380c5",
+        "date": "2025-11-11",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.95,
+        "last_update": "2025-11-11T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5af0",
+        "attendance_id": "037aba52-58b5-4438-b495-1bdb1fe39f30",
+        "student_id": "04a97662-e3f5-4c71-9283-55f3b2bd4d15",
+        "date": "2025-11-10",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.93,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5af1",
+        "attendance_id": "eb2e1815-a5a1-40e7-84b6-29c4b4d899e8",
+        "student_id": "04a97662-e3f5-4c71-9283-55f3b2bd4d15",
+        "date": "2025-11-10",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.86,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5af2",
+        "attendance_id": "f83498d0-2772-4f0c-8d9c-242de7ef3043",
+        "student_id": "d61d7051-16f3-4c80-a28b-55a3d475757c",
+        "date": "2025-11-10",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.87,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5af3",
+        "attendance_id": "d8ba58d3-5239-4276-b877-9bcaaf59cf35",
+        "student_id": "d61d7051-16f3-4c80-a28b-55a3d475757c",
+        "date": "2025-11-10",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.89,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5af4",
+        "attendance_id": "417a5085-c0d5-4bed-a09b-4e4157985abe",
+        "student_id": "84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51",
+        "date": "2025-11-10",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.93,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5af5",
+        "attendance_id": "f316298a-3ba2-4b78-9b31-abf403bb319b",
+        "student_id": "84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51",
+        "date": "2025-11-10",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.85,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5af6",
+        "attendance_id": "3862794c-d306-41a1-8dc9-91c8e52e63ce",
+        "student_id": "90d5e32e-0b2a-451d-be26-67ba1e128b82",
+        "date": "2025-11-10",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.96,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5af7",
+        "attendance_id": "3cbd4885-c638-43a0-966a-7cdb661c5e9f",
+        "student_id": "90d5e32e-0b2a-451d-be26-67ba1e128b82",
+        "date": "2025-11-10",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.84,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5af8",
+        "attendance_id": "0c0716f0-b7cd-45ea-89d4-572133a24c3d",
+        "student_id": "c1c2005e-22bb-4eb9-9e25-f6555866eeef",
+        "date": "2025-11-10",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.88,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5af9",
+        "attendance_id": "b532dd0a-1526-4c5e-a23c-fba4f2966bb5",
+        "student_id": "c1c2005e-22bb-4eb9-9e25-f6555866eeef",
+        "date": "2025-11-10",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.89,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5afa",
+        "attendance_id": "d722cc48-a1ba-47e8-8e36-101ba5693a47",
+        "student_id": "1bb92c14-14df-4014-975a-ada092eb548c",
+        "date": "2025-11-10",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.85,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5afb",
+        "attendance_id": "8c08174c-43ae-4dbb-b159-c47d436e7876",
+        "student_id": "1b85c5e7-3f65-4edc-b113-3e553b272003",
+        "date": "2025-11-10",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.93,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5afc",
+        "attendance_id": "a0ea89d0-41f0-4819-878c-40577fa541cc",
+        "student_id": "1b85c5e7-3f65-4edc-b113-3e553b272003",
+        "date": "2025-11-10",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.87,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5afd",
+        "attendance_id": "fb5c1e40-ec81-4a48-aab2-f9c1f131b870",
+        "student_id": "d2bcc8ed-30a1-4313-9e7b-1efba819441f",
+        "date": "2025-11-10",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.89,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5afe",
+        "attendance_id": "9f4b5c6e-33a3-4b30-99ed-6f1b7d6c974f",
+        "student_id": "d2bcc8ed-30a1-4313-9e7b-1efba819441f",
+        "date": "2025-11-10",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.96,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5aff",
+        "attendance_id": "f073d48c-5731-4990-be33-322a72cd7c7d",
+        "student_id": "a6d935e2-af68-46e2-8dc2-f37e8b2ae455",
+        "date": "2025-11-10",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.94,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b00",
+        "attendance_id": "96a1883e-d46f-4f0c-b98a-0aa0b659b24c",
+        "student_id": "a6d935e2-af68-46e2-8dc2-f37e8b2ae455",
+        "date": "2025-11-10",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.85,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b01",
+        "attendance_id": "b767e3d8-939d-4a95-b6e5-d4b7e653dce1",
+        "student_id": "46c917de-44c8-4e36-b237-49b4eac9ccfc",
+        "date": "2025-11-10",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.91,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b02",
+        "attendance_id": "6a9df7b1-81d5-4882-bf55-41088fb4acf5",
+        "student_id": "46c917de-44c8-4e36-b237-49b4eac9ccfc",
+        "date": "2025-11-10",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.9,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b03",
+        "attendance_id": "b1e2a15c-524a-49b3-89c7-44201fa6c624",
+        "student_id": "d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7",
+        "date": "2025-11-10",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.96,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b04",
+        "attendance_id": "8d1636ca-d3d5-4f07-b6fa-14b79d55a2eb",
+        "student_id": "d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7",
+        "date": "2025-11-10",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.85,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b05",
+        "attendance_id": "ccc521f8-0ece-4da7-ba0e-418e5185392d",
+        "student_id": "ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc",
+        "date": "2025-11-10",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.86,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b06",
+        "attendance_id": "449a9d9e-d401-4375-863a-8dd44e2eea6f",
+        "student_id": "de0ae567-9165-4f08-a45f-9e49fa9161b5",
+        "date": "2025-11-10",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.87,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b07",
+        "attendance_id": "a4ece1a1-f794-446a-902f-0a0c6adb17d5",
+        "student_id": "f086ed31-ddfe-49bc-8c41-73d76131a361",
+        "date": "2025-11-10",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.94,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b08",
+        "attendance_id": "ab66bc1e-7914-4546-bfe0-af808cbc7774",
+        "student_id": "f086ed31-ddfe-49bc-8c41-73d76131a361",
+        "date": "2025-11-10",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.94,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b09",
+        "attendance_id": "643896ea-e959-47f7-8401-f00d6d41bc6f",
+        "student_id": "23535bb2-a11a-4c2c-a15c-06e9236e2bfe",
+        "date": "2025-11-10",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.95,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b0a",
+        "attendance_id": "786c0284-e053-42d6-89c3-dfdcefa71953",
+        "student_id": "23535bb2-a11a-4c2c-a15c-06e9236e2bfe",
+        "date": "2025-11-10",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.85,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b0b",
+        "attendance_id": "e8ff59b6-9dba-48d8-99e9-675a1bf5a1ae",
+        "student_id": "1a68ffb4-5372-48d1-9d79-21c2fc9627c3",
+        "date": "2025-11-10",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.91,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b0c",
+        "attendance_id": "0af4525f-e3a1-48d6-8d05-c492760c082e",
+        "student_id": "ab8cf46d-4359-4543-9e2d-0535f01e8d5d",
+        "date": "2025-11-10",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.85,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b0d",
+        "attendance_id": "f451a449-3ac3-406b-854f-0e662311f797",
+        "student_id": "ab8cf46d-4359-4543-9e2d-0535f01e8d5d",
+        "date": "2025-11-10",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.84,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b0e",
+        "attendance_id": "6d5debb2-43ea-484a-b338-fff85ef68158",
+        "student_id": "3d712299-2182-4e89-a352-0f33bf75ad1c",
+        "date": "2025-11-10",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.93,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b0f",
+        "attendance_id": "6366d88a-ff4d-40bb-931b-1c7faeb07fbc",
+        "student_id": "3d712299-2182-4e89-a352-0f33bf75ad1c",
+        "date": "2025-11-10",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.9,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b10",
+        "attendance_id": "d710cfe1-5a8e-477c-b7f7-ca9e2666435d",
+        "student_id": "ad32bf84-b342-4f4e-b67c-9816781109a2",
+        "date": "2025-11-10",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.96,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b11",
+        "attendance_id": "965961df-dea8-4f88-b4ff-d6c2586f29c8",
+        "student_id": "ad32bf84-b342-4f4e-b67c-9816781109a2",
+        "date": "2025-11-10",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.86,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b12",
+        "attendance_id": "ea9cc0f0-c2f5-4523-b65f-27a1ad7a8fa7",
+        "student_id": "84dca95e-7e6b-4073-822b-1b00b14380c5",
+        "date": "2025-11-10",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.93,
+        "last_update": "2025-11-10T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b13",
+        "attendance_id": "af45f522-8502-4de9-9d25-f477b4ab9275",
+        "student_id": "04a97662-e3f5-4c71-9283-55f3b2bd4d15",
+        "date": "2025-11-09",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.97,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b14",
+        "attendance_id": "5f5df54e-5379-495c-bb1a-360d59749d72",
+        "student_id": "d61d7051-16f3-4c80-a28b-55a3d475757c",
+        "date": "2025-11-09",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.86,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b15",
+        "attendance_id": "d2e34b66-8a3a-4092-84cb-515f65ee98c3",
+        "student_id": "84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51",
+        "date": "2025-11-09",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.92,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b16",
+        "attendance_id": "57e7c1c3-2858-4949-a2da-9749d16c1b74",
+        "student_id": "90d5e32e-0b2a-451d-be26-67ba1e128b82",
+        "date": "2025-11-09",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.92,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b17",
+        "attendance_id": "354780e1-c125-4b66-a07a-4dcf43d815fa",
+        "student_id": "90d5e32e-0b2a-451d-be26-67ba1e128b82",
+        "date": "2025-11-09",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.88,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b18",
+        "attendance_id": "ba5bfbb2-a31d-4a7b-b38a-d5271f77ed85",
+        "student_id": "c1c2005e-22bb-4eb9-9e25-f6555866eeef",
+        "date": "2025-11-09",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.97,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b19",
+        "attendance_id": "94c248b2-4aa3-4858-b02b-7eb25ea62b52",
+        "student_id": "c1c2005e-22bb-4eb9-9e25-f6555866eeef",
+        "date": "2025-11-09",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.83,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b1a",
+        "attendance_id": "a5bbdbed-c9ce-454e-9922-280322f4f85c",
+        "student_id": "1bb92c14-14df-4014-975a-ada092eb548c",
+        "date": "2025-11-09",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.98,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b1b",
+        "attendance_id": "91f3ede7-a655-4f92-8a91-e9f951da32c4",
+        "student_id": "1bb92c14-14df-4014-975a-ada092eb548c",
+        "date": "2025-11-09",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.84,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b1c",
+        "attendance_id": "63937964-fad8-4682-a8b7-1b66d5e0942c",
+        "student_id": "1b85c5e7-3f65-4edc-b113-3e553b272003",
+        "date": "2025-11-09",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.86,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b1d",
+        "attendance_id": "7ff35dea-0c35-44b8-8ebd-1ee1ff8f9403",
+        "student_id": "d2bcc8ed-30a1-4313-9e7b-1efba819441f",
+        "date": "2025-11-09",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.87,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b1e",
+        "attendance_id": "1a1b1114-e424-4d10-92ba-c9024af7dcdc",
+        "student_id": "46c917de-44c8-4e36-b237-49b4eac9ccfc",
+        "date": "2025-11-09",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.93,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b1f",
+        "attendance_id": "44cdc654-24d5-4f03-85aa-aff3928da244",
+        "student_id": "46c917de-44c8-4e36-b237-49b4eac9ccfc",
+        "date": "2025-11-09",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.83,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b20",
+        "attendance_id": "06512743-4758-4abf-afa6-c6e93f26da43",
+        "student_id": "d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7",
+        "date": "2025-11-09",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.96,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b21",
+        "attendance_id": "f71629da-9dbb-456b-b16d-a824d32069f7",
+        "student_id": "d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7",
+        "date": "2025-11-09",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.89,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b22",
+        "attendance_id": "ae3a5c35-5291-423d-b1cc-a8c2f4eedcc5",
+        "student_id": "ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc",
+        "date": "2025-11-09",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.94,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b23",
+        "attendance_id": "39b46804-d4bc-4146-bb7c-f29b38af80af",
+        "student_id": "de0ae567-9165-4f08-a45f-9e49fa9161b5",
+        "date": "2025-11-09",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.9,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b24",
+        "attendance_id": "f97f506a-1f75-4493-af87-2bec9656ae8e",
+        "student_id": "f086ed31-ddfe-49bc-8c41-73d76131a361",
+        "date": "2025-11-09",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.92,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b25",
+        "attendance_id": "c792eaf8-a2cd-4488-8976-9099d0e17664",
+        "student_id": "f086ed31-ddfe-49bc-8c41-73d76131a361",
+        "date": "2025-11-09",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.86,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b26",
+        "attendance_id": "f9ef9813-7317-472e-b56b-3a63e872f08c",
+        "student_id": "23535bb2-a11a-4c2c-a15c-06e9236e2bfe",
+        "date": "2025-11-09",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.89,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b27",
+        "attendance_id": "734a2a25-6f9b-424c-8ba0-fd6a159d6b58",
+        "student_id": "1a68ffb4-5372-48d1-9d79-21c2fc9627c3",
+        "date": "2025-11-09",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.97,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b28",
+        "attendance_id": "2aea993d-511f-4363-86c7-d07e56575704",
+        "student_id": "ab8cf46d-4359-4543-9e2d-0535f01e8d5d",
+        "date": "2025-11-09",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.92,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b29",
+        "attendance_id": "7f8ce963-059a-4969-89b2-045fc9d8cf1a",
+        "student_id": "ab8cf46d-4359-4543-9e2d-0535f01e8d5d",
+        "date": "2025-11-09",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.9,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b2a",
+        "attendance_id": "715fce87-ce6a-47b3-ac26-8ba8ca281c47",
+        "student_id": "3d712299-2182-4e89-a352-0f33bf75ad1c",
+        "date": "2025-11-09",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.98,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b2b",
+        "attendance_id": "727a328a-d54e-4be6-909f-a0feaf09084b",
+        "student_id": "ad32bf84-b342-4f4e-b67c-9816781109a2",
+        "date": "2025-11-09",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.96,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b2c",
+        "attendance_id": "4f573c7f-c4fe-4fdd-97bc-eb893809e0b6",
+        "student_id": "84dca95e-7e6b-4073-822b-1b00b14380c5",
+        "date": "2025-11-09",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.89,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b2d",
+        "attendance_id": "cab6c7e8-2a45-4fad-8b35-ba767db1ef6f",
+        "student_id": "84dca95e-7e6b-4073-822b-1b00b14380c5",
+        "date": "2025-11-09",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.94,
+        "last_update": "2025-11-09T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b2e",
+        "attendance_id": "dfe04d98-f036-452e-aaa0-8c84976caa65",
+        "student_id": "04a97662-e3f5-4c71-9283-55f3b2bd4d15",
+        "date": "2025-11-08",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.88,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b2f",
+        "attendance_id": "77b765c6-1e87-4638-a9fb-f299ce2ee4a7",
+        "student_id": "04a97662-e3f5-4c71-9283-55f3b2bd4d15",
+        "date": "2025-11-08",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.96,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b30",
+        "attendance_id": "e82a46f6-410e-4a09-a6cc-9a8c5fdaa50c",
+        "student_id": "d61d7051-16f3-4c80-a28b-55a3d475757c",
+        "date": "2025-11-08",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.91,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b31",
+        "attendance_id": "4a84fc57-2452-4bea-9b51-5e9a75f43f86",
+        "student_id": "d61d7051-16f3-4c80-a28b-55a3d475757c",
+        "date": "2025-11-08",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.94,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b32",
+        "attendance_id": "14082e3e-af21-4b60-8158-cb68d747499b",
+        "student_id": "84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51",
+        "date": "2025-11-08",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.94,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b33",
+        "attendance_id": "17a9bfd8-da5c-4df6-88bc-03f356b1de5f",
+        "student_id": "84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51",
+        "date": "2025-11-08",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.85,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b34",
+        "attendance_id": "ded5e379-80f4-4583-b429-84723b9f0754",
+        "student_id": "90d5e32e-0b2a-451d-be26-67ba1e128b82",
+        "date": "2025-11-08",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.86,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b35",
+        "attendance_id": "c2517988-36e7-49ab-ad15-70609b815d5d",
+        "student_id": "90d5e32e-0b2a-451d-be26-67ba1e128b82",
+        "date": "2025-11-08",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.82,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b36",
+        "attendance_id": "7a5037a2-0a99-4641-8707-960294e4de1b",
+        "student_id": "c1c2005e-22bb-4eb9-9e25-f6555866eeef",
+        "date": "2025-11-08",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.88,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b37",
+        "attendance_id": "d051348f-5126-4fcb-8060-65cd542f4d5c",
+        "student_id": "1bb92c14-14df-4014-975a-ada092eb548c",
+        "date": "2025-11-08",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.94,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b38",
+        "attendance_id": "c7d6094a-b84e-4b92-937a-ea685ae7e188",
+        "student_id": "1bb92c14-14df-4014-975a-ada092eb548c",
+        "date": "2025-11-08",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.86,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b39",
+        "attendance_id": "c78b43ae-10f6-4a1c-927a-1f134380b590",
+        "student_id": "1b85c5e7-3f65-4edc-b113-3e553b272003",
+        "date": "2025-11-08",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.94,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b3a",
+        "attendance_id": "9a74d7b7-4308-473b-b0a8-a185826b9b10",
+        "student_id": "1b85c5e7-3f65-4edc-b113-3e553b272003",
+        "date": "2025-11-08",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.94,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b3b",
+        "attendance_id": "14c5f9da-be69-4479-9fdd-dd611e6de0bf",
+        "student_id": "d2bcc8ed-30a1-4313-9e7b-1efba819441f",
+        "date": "2025-11-08",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.92,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b3c",
+        "attendance_id": "9ed4b9ae-21dd-4457-aa68-52a44850cc63",
+        "student_id": "d2bcc8ed-30a1-4313-9e7b-1efba819441f",
+        "date": "2025-11-08",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.82,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b3d",
+        "attendance_id": "2ff4c2e0-db49-4cd5-bc56-5645d613170c",
+        "student_id": "a6d935e2-af68-46e2-8dc2-f37e8b2ae455",
+        "date": "2025-11-08",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.89,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b3e",
+        "attendance_id": "467b8ff5-7b73-48d7-b4df-8c4ce48b2549",
+        "student_id": "a6d935e2-af68-46e2-8dc2-f37e8b2ae455",
+        "date": "2025-11-08",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.87,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b3f",
+        "attendance_id": "27f21e89-9223-4af2-b482-61217972fb3c",
+        "student_id": "d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7",
+        "date": "2025-11-08",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.94,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b40",
+        "attendance_id": "c09d68d3-978f-4978-a29c-7e6e020d7244",
+        "student_id": "d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7",
+        "date": "2025-11-08",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.95,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b41",
+        "attendance_id": "e878862e-c55f-482a-93af-d78af5d29306",
+        "student_id": "ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc",
+        "date": "2025-11-08",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.98,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b42",
+        "attendance_id": "ce9bfb90-f51b-4667-91fe-05b0094a94e8",
+        "student_id": "ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc",
+        "date": "2025-11-08",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.85,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b43",
+        "attendance_id": "25854d73-91f4-4bb9-8a3a-e6f2e1241c98",
+        "student_id": "de0ae567-9165-4f08-a45f-9e49fa9161b5",
+        "date": "2025-11-08",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.93,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b44",
+        "attendance_id": "71d2954a-a991-4b68-9002-83ebd17d110c",
+        "student_id": "de0ae567-9165-4f08-a45f-9e49fa9161b5",
+        "date": "2025-11-08",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.84,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b45",
+        "attendance_id": "02eda106-1374-41dd-afb1-9742589fa031",
+        "student_id": "f086ed31-ddfe-49bc-8c41-73d76131a361",
+        "date": "2025-11-08",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.98,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b46",
+        "attendance_id": "ed17c928-c694-4da2-b175-e6701e5c3606",
+        "student_id": "f086ed31-ddfe-49bc-8c41-73d76131a361",
+        "date": "2025-11-08",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.87,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b47",
+        "attendance_id": "9f55f8e8-9130-46b2-a9cf-0d4c8fb78f03",
+        "student_id": "23535bb2-a11a-4c2c-a15c-06e9236e2bfe",
+        "date": "2025-11-08",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.98,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b48",
+        "attendance_id": "17c45078-3604-4046-9907-0bb962e02112",
+        "student_id": "23535bb2-a11a-4c2c-a15c-06e9236e2bfe",
+        "date": "2025-11-08",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.91,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b49",
+        "attendance_id": "a4a8b3f4-ec48-4dbd-b6e7-541069e8777a",
+        "student_id": "1a68ffb4-5372-48d1-9d79-21c2fc9627c3",
+        "date": "2025-11-08",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.92,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b4a",
+        "attendance_id": "abd689ad-eed0-44d0-b920-5d38a4c541fb",
+        "student_id": "ab8cf46d-4359-4543-9e2d-0535f01e8d5d",
+        "date": "2025-11-08",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.95,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b4b",
+        "attendance_id": "60e1f92c-b418-4ad6-b06b-a7dd1de936e8",
+        "student_id": "ab8cf46d-4359-4543-9e2d-0535f01e8d5d",
+        "date": "2025-11-08",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.84,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b4c",
+        "attendance_id": "ea52b977-5ccb-436e-b469-ded149136c02",
+        "student_id": "3d712299-2182-4e89-a352-0f33bf75ad1c",
+        "date": "2025-11-08",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.96,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b4d",
+        "attendance_id": "55cfd158-e41f-4023-81b2-ada33485fc51",
+        "student_id": "3d712299-2182-4e89-a352-0f33bf75ad1c",
+        "date": "2025-11-08",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.93,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b4e",
+        "attendance_id": "e3609ec4-e37f-4e13-ba0d-65a84ec3cf11",
+        "student_id": "ad32bf84-b342-4f4e-b67c-9816781109a2",
+        "date": "2025-11-08",
+        "trip": "AM",
+        "status": "yellow",
+        "confidence": 0.9,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b4f",
+        "attendance_id": "258fd00e-4755-4d40-b71a-5c3a6b7470da",
+        "student_id": "ad32bf84-b342-4f4e-b67c-9816781109a2",
+        "date": "2025-11-08",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.85,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b50",
+        "attendance_id": "64e42cc9-a8b7-4d84-aba9-21315ea66d68",
+        "student_id": "84dca95e-7e6b-4073-822b-1b00b14380c5",
+        "date": "2025-11-08",
+        "trip": "AM",
+        "status": "green",
+        "confidence": 0.89,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      },
+      {
+        "_id": "6916bed743c9c10fae9b5b51",
+        "attendance_id": "7fff7d6b-43e0-4568-aa57-39d3ed748606",
+        "student_id": "84dca95e-7e6b-4073-822b-1b00b14380c5",
+        "date": "2025-11-08",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 0.94,
+        "last_update": "2025-11-08T05:32:07.956201+00:00"
+      }
+    ],
+    "events": []
+  },
+  "photo_references": {
+    "scan_photos": [],
+    "student_attendance_folders": []
+  }
+}
