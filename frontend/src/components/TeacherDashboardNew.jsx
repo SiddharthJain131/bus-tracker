@@ -386,7 +386,7 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                 </div>
                 
                 {/* Search and Filters */}
-                <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
                   <select
                     value={searchBy}
                     onChange={(e) => setSearchBy(e.target.value)}
@@ -408,17 +408,6 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                       className="pl-10"
                     />
                   </div>
-                  
-                  <select
-                    value={filterBus}
-                    onChange={(e) => setFilterBus(e.target.value)}
-                    className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                  >
-                    <option value="">All Buses</option>
-                    {uniqueBuses.map(bus => (
-                      <option key={bus} value={bus}>{bus}</option>
-                    ))}
-                  </select>
 
                   <select
                     value={filterAMStatus}
