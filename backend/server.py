@@ -1948,18 +1948,34 @@ async def startup_db_seed():
         routes_count = await db.routes.count_documents({})
         
         # If all core collections are empty, run seeding
-        if users_count == 0 and students_count == 0 and buses_count == 0 and routes_count == 0:
+        # Check core collections (users, students, buses, routes)
+        core_empty = (
+            users_count == 0 and 
+            students_count == 0 and 
+            buses_count == 0 and 
+            routes_count == 0
+        )
+
+        attendance_count = await db.attendance.count_documents({})
+
+        if core_empty:
             print("🪴 Auto-seeding database with initial demo data...")
-            
-            # Import and run seed function
             from seed_data import seed_data
             await seed_data()
-            
-            print("✅ Auto-seeding completed successfully!")
+            print("✅ Full auto-seeding completed successfully!")
+
+        # Attendance-only seeding
+        elif attendance_count == 0:
+            print("🪴 Attendance missing — seeding attendance only...")
+            from seed_data import seed_attendance  # You must expose this function
+            await seed_attendance()
+            print("✅ Attendance seeding completed!")
+
         else:
             print("✅ Database already populated, skipping seeding.")
             print(f"   Current data: {users_count} users, {students_count} students, {buses_count} buses, {routes_count} routes")
-        
+            print(f"   Attendance records: {attendance_count}")
+
         # Start attendance monitor as background task
         asyncio.create_task(start_attendance_monitor())
         print("🚨 Attendance monitor started in background")
