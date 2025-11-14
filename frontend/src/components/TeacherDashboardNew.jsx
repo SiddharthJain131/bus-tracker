@@ -249,6 +249,52 @@ export default function TeacherDashboardNew({ user, onLogout }) {
     return labels[status] || status;
   };
 
+  const handleStatusClick = (student, trip) => {
+    const tripData = trip === 'AM' ? {
+      photo: student.am_scan_photo,
+      timestamp: student.am_scan_timestamp,
+      status: student.am_status,
+      trip: 'AM'
+    } : {
+      photo: student.pm_scan_photo,
+      timestamp: student.pm_scan_timestamp,
+      status: student.pm_status,
+      trip: 'PM'
+    };
+
+    // Only open modal for yellow and green status (scanned)
+    if (tripData.status === 'green' || tripData.status === 'yellow') {
+      const today = new Date();
+      setSelectedScan({
+        ...tripData,
+        date: today.toISOString().split('T')[0],
+        day: today.getDate(),
+        studentName: student.name
+      });
+      setShowScanModal(true);
+    }
+  };
+
+  const formatTimestamp = (timestamp) => {
+    if (!timestamp) return 'No timestamp available';
+    try {
+      const date = new Date(timestamp);
+      const timeStr = date.toLocaleTimeString('en-US', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: true 
+      });
+      const dateStr = date.toLocaleDateString('en-US', { 
+        day: '2-digit', 
+        month: 'short', 
+        year: 'numeric' 
+      });
+      return `${timeStr}, ${dateStr}`;
+    } catch (e) {
+      return 'Invalid timestamp';
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-emerald-50" data-testid="teacher-dashboard">
       {/* Header */}
