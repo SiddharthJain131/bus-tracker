@@ -443,8 +443,8 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                 <table className="w-full">
                   <thead className="bg-gray-50 border-b-2 border-gray-200">
                     <tr>
-                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Name</th>
                       <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Roll No</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Name</th>
                       <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Parent Name</th>
                       <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Bus No</th>
                       <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">AM Status</th>
@@ -462,11 +462,11 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                     ) : (
                       filteredStudents.map(student => (
                         <tr key={student.student_id} className="hover:bg-gray-50">
-                          <td className="px-4 py-4">
-                            <div className="font-medium text-gray-900">{student.name}</div>
+                          <td className="px-4 py-4 text-sm text-emerald-700 font-medium">
+                            {student.roll_number || 'N/A'}
                           </td>
-                          <td className="px-4 py-4">
-                            <span className="font-medium text-emerald-700">{student.roll_number || 'N/A'}</span>
+                          <td className="px-4 py-4 text-sm text-gray-600">
+                            {student.name}
                           </td>
                           <td className="px-4 py-4 text-sm text-gray-600">
                             {student.parent_name || 'N/A'}
