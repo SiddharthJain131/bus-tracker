@@ -278,10 +278,24 @@ async def seed_data():
         restore_success = await restore_from_backup(latest_backup)
         
         if restore_success:
+            # After successful main backup restore, check for attendance backup
+            latest_attendance_backup = get_latest_attendance_backup()
+            if latest_attendance_backup:
+                print(f"\n🔍 Latest attendance backup found: {latest_attendance_backup.name}")
+                print("   Attempting to restore attendance data...")
+                attendance_restore_success = await restore_attendance_from_backup(latest_attendance_backup)
+                
+                if attendance_restore_success:
+                    print("\n✅ Attendance data restored from separate backup")
+                else:
+                    print("\n⚠️  Attendance backup restore failed, attendance data will be empty")
+            else:
+                print("\nℹ️  No attendance backup found, attendance data will be empty")
+            
             print("\n" + "=" * 60)
             print("✅ SEEDING COMPLETED (FROM BACKUP)")
             print("=" * 60)
-            print("\n⚠️  Note: Dynamic data (attendance, logs, notifications) not restored")
+            print("\n⚠️  Note: Notifications and logs not restored (use fresh data)")
             print(TEST_CREDENTIALS)
             return
         else:
