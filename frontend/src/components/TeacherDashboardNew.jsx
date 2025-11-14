@@ -43,7 +43,6 @@ export default function TeacherDashboardNew({ user, onLogout }) {
   // Filter states
   const [searchTerm, setSearchTerm] = useState('');
   const [searchBy, setSearchBy] = useState('all');
-  const [filterBus, setFilterBus] = useState('');
   const [filterAMStatus, setFilterAMStatus] = useState('');
   const [filterPMStatus, setFilterPMStatus] = useState('');
   
