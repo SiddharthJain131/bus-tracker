@@ -35,7 +35,9 @@ export default function AddRouteModal({ open, onClose, onSuccess }) {
       stop_name: '',
       lat: '',
       lon: '',
-      order_index: stops.length
+      order_index: stops.length,
+      morning_expected_time: '',
+      evening_expected_time: ''
     }]);
   };
 
