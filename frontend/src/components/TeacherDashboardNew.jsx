@@ -56,6 +56,10 @@ export default function TeacherDashboardNew({ user, onLogout }) {
   // Photo viewer state
   const [showPhotoViewer, setShowPhotoViewer] = useState(false);
   const [currentUser, setCurrentUser] = useState(user);
+  
+  // Scan photo modal state
+  const [showScanModal, setShowScanModal] = useState(false);
+  const [selectedScan, setSelectedScan] = useState(null);
 
   useEffect(() => {
     fetchAllData();
