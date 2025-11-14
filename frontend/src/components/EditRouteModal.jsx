@@ -73,6 +73,8 @@ export default function EditRouteModal({ route, open, onClose, onSuccess }) {
       lat: '',
       lon: '',
       order_index: stops.length,
+      morning_expected_time: '',
+      evening_expected_time: '',
       isNew: true
     }]);
   };
