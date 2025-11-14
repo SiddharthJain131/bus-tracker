@@ -130,12 +130,26 @@ export default function StudentDetailModal({ student, open, onClose, hideTeacher
 
                 <Card className="p-4">
                   <div className="flex items-center gap-3 mb-2">
-                    <Bus className="w-5 h-5 text-blue-600" />
-                    <span className="text-sm font-medium text-gray-600">Stop</span>
+                    <MapPin className="w-5 h-5 text-blue-600" />
+                    <span className="text-sm font-medium text-gray-600">Stop Location</span>
                   </div>
                   <p className="text-lg font-semibold text-gray-900">
                     {studentDetails.stop_name || 'N/A'}
                   </p>
+                  {studentDetails.morning_expected_time && studentDetails.morning_expected_time !== 'N/A' && (
+                    <div className="mt-3 pt-3 border-t border-gray-200 space-y-1">
+                      <div className="flex items-center gap-2 text-sm">
+                        <Clock className="w-4 h-4 text-amber-600" />
+                        <span className="text-gray-600">Morning:</span>
+                        <span className="font-semibold text-amber-700">{studentDetails.morning_expected_time}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <Clock className="w-4 h-4 text-indigo-600" />
+                        <span className="text-gray-600">Evening:</span>
+                        <span className="font-semibold text-indigo-700">{studentDetails.evening_expected_time}</span>
+                      </div>
+                    </div>
+                  )}
                 </Card>
               </div>
 
