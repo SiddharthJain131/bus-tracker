@@ -51,6 +51,8 @@ export default function EditRouteModal({ route, open, onClose, onSuccess }) {
           lat: s.lat.toString(),
           lon: s.lon.toString(),
           order_index: s.order_index,
+          morning_expected_time: s.morning_expected_time || '',
+          evening_expected_time: s.evening_expected_time || '',
           isNew: false
         })));
         setOriginalStops(JSON.parse(JSON.stringify(sortedStops.map(s => s.stop_id))));
