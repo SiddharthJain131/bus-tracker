@@ -162,6 +162,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
   const [holidays, setHolidays] = useState([]);
   const [stats, setStats] = useState({ totalStudents: 0, totalTeachers: 0, totalBuses: 0 });
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchBy, setSearchBy] = useState('all');
   
   // Modal states
   const [selectedStudent, setSelectedStudent] = useState(null);
