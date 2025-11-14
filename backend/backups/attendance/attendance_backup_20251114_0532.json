@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-11-14T06:33:38.448607+00:00",
+  "timestamp": "2025-11-14T06:50:07.096447+00:00",
   "backup_type": "attendance",
   "collections": {
     "attendance": [
@@ -11,7 +11,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.96,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/04a97662-e3f5-4c71-9283-55f3b2bd4d15/attendance/2025-11-14_AM_green.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a6b",
@@ -21,7 +23,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.84,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/04a97662-e3f5-4c71-9283-55f3b2bd4d15/attendance/2025-11-14_PM_green.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a6c",
@@ -31,7 +35,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.9,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d61d7051-16f3-4c80-a28b-55a3d475757c/attendance/2025-11-14_AM_green.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a6d",
@@ -41,7 +47,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.88,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d61d7051-16f3-4c80-a28b-55a3d475757c/attendance/2025-11-14_PM_green.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a6e",
@@ -51,7 +59,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.87,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51/attendance/2025-11-14_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a6f",
@@ -61,7 +71,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.97,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/90d5e32e-0b2a-451d-be26-67ba1e128b82/attendance/2025-11-14_AM_green.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a70",
@@ -71,7 +83,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.91,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/90d5e32e-0b2a-451d-be26-67ba1e128b82/attendance/2025-11-14_PM_green.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a71",
@@ -81,7 +95,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.92,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/c1c2005e-22bb-4eb9-9e25-f6555866eeef/attendance/2025-11-14_AM_green.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a72",
@@ -91,7 +107,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.83,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/c1c2005e-22bb-4eb9-9e25-f6555866eeef/attendance/2025-11-14_PM_green.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a73",
@@ -101,7 +119,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.87,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1bb92c14-14df-4014-975a-ada092eb548c/attendance/2025-11-14_AM_green.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a74",
@@ -111,7 +131,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.92,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1bb92c14-14df-4014-975a-ada092eb548c/attendance/2025-11-14_PM_green.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a75",
@@ -121,7 +143,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.91,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1b85c5e7-3f65-4edc-b113-3e553b272003/attendance/2025-11-14_AM_green.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a76",
@@ -131,7 +155,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.88,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1b85c5e7-3f65-4edc-b113-3e553b272003/attendance/2025-11-14_PM_green.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a77",
@@ -141,7 +167,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.86,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d2bcc8ed-30a1-4313-9e7b-1efba819441f/attendance/2025-11-14_AM_green.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a78",
@@ -151,7 +179,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.89,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d2bcc8ed-30a1-4313-9e7b-1efba819441f/attendance/2025-11-14_PM_green.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a79",
@@ -161,7 +191,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.88,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/a6d935e2-af68-46e2-8dc2-f37e8b2ae455/attendance/2025-11-14_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a7a",
@@ -171,7 +203,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.97,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/46c917de-44c8-4e36-b237-49b4eac9ccfc/attendance/2025-11-14_AM_green.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a7b",
@@ -181,7 +215,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.92,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/46c917de-44c8-4e36-b237-49b4eac9ccfc/attendance/2025-11-14_PM_green.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a7c",
@@ -191,7 +227,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.91,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7/attendance/2025-11-14_AM_green.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a7d",
@@ -201,7 +239,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.87,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7/attendance/2025-11-14_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a7e",
@@ -211,7 +251,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.95,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc/attendance/2025-11-14_AM_green.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a7f",
@@ -221,7 +263,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.95,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc/attendance/2025-11-14_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a80",
@@ -231,7 +275,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.86,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/de0ae567-9165-4f08-a45f-9e49fa9161b5/attendance/2025-11-14_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a81",
@@ -241,7 +287,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.93,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/de0ae567-9165-4f08-a45f-9e49fa9161b5/attendance/2025-11-14_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a82",
@@ -251,7 +299,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.92,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/23535bb2-a11a-4c2c-a15c-06e9236e2bfe/attendance/2025-11-14_PM_green.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a83",
@@ -261,7 +311,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.97,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1a68ffb4-5372-48d1-9d79-21c2fc9627c3/attendance/2025-11-14_AM_green.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a84",
@@ -271,7 +323,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.93,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ab8cf46d-4359-4543-9e2d-0535f01e8d5d/attendance/2025-11-14_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a85",
@@ -281,7 +335,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.89,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ab8cf46d-4359-4543-9e2d-0535f01e8d5d/attendance/2025-11-14_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a86",
@@ -291,7 +347,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.93,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/3d712299-2182-4e89-a352-0f33bf75ad1c/attendance/2025-11-14_AM_green.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a87",
@@ -301,7 +359,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.89,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/3d712299-2182-4e89-a352-0f33bf75ad1c/attendance/2025-11-14_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a88",
@@ -311,7 +371,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.88,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ad32bf84-b342-4f4e-b67c-9816781109a2/attendance/2025-11-14_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a89",
@@ -321,7 +383,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.94,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/84dca95e-7e6b-4073-822b-1b00b14380c5/attendance/2025-11-14_AM_green.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a8a",
@@ -331,7 +395,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.95,
-        "last_update": "2025-11-14T05:32:07.956201+00:00"
+        "last_update": "2025-11-14T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/84dca95e-7e6b-4073-822b-1b00b14380c5/attendance/2025-11-14_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-14T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a8b",
@@ -341,7 +407,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.96,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/04a97662-e3f5-4c71-9283-55f3b2bd4d15/attendance/2025-11-13_AM_green.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a8c",
@@ -351,7 +419,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.88,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/04a97662-e3f5-4c71-9283-55f3b2bd4d15/attendance/2025-11-13_PM_green.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a8d",
@@ -361,7 +431,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.97,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d61d7051-16f3-4c80-a28b-55a3d475757c/attendance/2025-11-13_AM_green.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a8e",
@@ -371,7 +443,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.91,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51/attendance/2025-11-13_AM_green.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a8f",
@@ -381,7 +455,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.85,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51/attendance/2025-11-13_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a90",
@@ -391,7 +467,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.88,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/90d5e32e-0b2a-451d-be26-67ba1e128b82/attendance/2025-11-13_AM_green.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a91",
@@ -401,7 +479,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.85,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/90d5e32e-0b2a-451d-be26-67ba1e128b82/attendance/2025-11-13_PM_green.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a92",
@@ -411,7 +491,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.98,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/c1c2005e-22bb-4eb9-9e25-f6555866eeef/attendance/2025-11-13_AM_green.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a93",
@@ -421,7 +503,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.95,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/c1c2005e-22bb-4eb9-9e25-f6555866eeef/attendance/2025-11-13_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a94",
@@ -431,7 +515,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.85,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1bb92c14-14df-4014-975a-ada092eb548c/attendance/2025-11-13_AM_green.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a95",
@@ -441,7 +527,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.96,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1bb92c14-14df-4014-975a-ada092eb548c/attendance/2025-11-13_PM_green.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a96",
@@ -451,7 +539,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.89,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1b85c5e7-3f65-4edc-b113-3e553b272003/attendance/2025-11-13_AM_green.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a97",
@@ -461,7 +551,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.95,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1b85c5e7-3f65-4edc-b113-3e553b272003/attendance/2025-11-13_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a98",
@@ -471,7 +563,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.89,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d2bcc8ed-30a1-4313-9e7b-1efba819441f/attendance/2025-11-13_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a99",
@@ -481,7 +575,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.85,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/a6d935e2-af68-46e2-8dc2-f37e8b2ae455/attendance/2025-11-13_AM_green.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a9a",
@@ -491,7 +587,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.82,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/a6d935e2-af68-46e2-8dc2-f37e8b2ae455/attendance/2025-11-13_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a9b",
@@ -501,7 +599,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.89,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/46c917de-44c8-4e36-b237-49b4eac9ccfc/attendance/2025-11-13_AM_green.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a9c",
@@ -511,7 +611,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.91,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/46c917de-44c8-4e36-b237-49b4eac9ccfc/attendance/2025-11-13_PM_green.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a9d",
@@ -521,7 +623,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.98,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7/attendance/2025-11-13_AM_green.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a9e",
@@ -531,7 +635,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.94,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc/attendance/2025-11-13_AM_green.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5a9f",
@@ -541,7 +647,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.93,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc/attendance/2025-11-13_PM_green.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5aa0",
@@ -551,7 +659,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.85,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/de0ae567-9165-4f08-a45f-9e49fa9161b5/attendance/2025-11-13_AM_green.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5aa1",
@@ -561,7 +671,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.92,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/de0ae567-9165-4f08-a45f-9e49fa9161b5/attendance/2025-11-13_PM_green.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5aa2",
@@ -571,7 +683,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.89,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/f086ed31-ddfe-49bc-8c41-73d76131a361/attendance/2025-11-13_AM_green.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5aa3",
@@ -581,7 +695,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.91,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/f086ed31-ddfe-49bc-8c41-73d76131a361/attendance/2025-11-13_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5aa4",
@@ -591,7 +707,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.97,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/23535bb2-a11a-4c2c-a15c-06e9236e2bfe/attendance/2025-11-13_AM_green.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5aa5",
@@ -601,7 +719,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.82,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1a68ffb4-5372-48d1-9d79-21c2fc9627c3/attendance/2025-11-13_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5aa6",
@@ -611,7 +731,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.91,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ab8cf46d-4359-4543-9e2d-0535f01e8d5d/attendance/2025-11-13_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5aa7",
@@ -621,7 +743,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.86,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/3d712299-2182-4e89-a352-0f33bf75ad1c/attendance/2025-11-13_AM_green.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5aa8",
@@ -631,7 +755,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.89,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ad32bf84-b342-4f4e-b67c-9816781109a2/attendance/2025-11-13_AM_green.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5aa9",
@@ -641,7 +767,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.91,
-        "last_update": "2025-11-13T05:32:07.956201+00:00"
+        "last_update": "2025-11-13T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/84dca95e-7e6b-4073-822b-1b00b14380c5/attendance/2025-11-13_AM_green.jpg",
+        "scan_timestamp": "2025-11-13T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5aaa",
@@ -651,7 +779,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.95,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/04a97662-e3f5-4c71-9283-55f3b2bd4d15/attendance/2025-11-12_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5aab",
@@ -661,7 +791,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.91,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d61d7051-16f3-4c80-a28b-55a3d475757c/attendance/2025-11-12_AM_green.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5aac",
@@ -671,7 +803,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.86,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51/attendance/2025-11-12_AM_green.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5aad",
@@ -681,7 +815,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.94,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/90d5e32e-0b2a-451d-be26-67ba1e128b82/attendance/2025-11-12_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5aae",
@@ -691,7 +827,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.87,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/90d5e32e-0b2a-451d-be26-67ba1e128b82/attendance/2025-11-12_PM_green.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5aaf",
@@ -701,7 +839,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.95,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/c1c2005e-22bb-4eb9-9e25-f6555866eeef/attendance/2025-11-12_AM_green.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ab0",
@@ -711,7 +851,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.92,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/c1c2005e-22bb-4eb9-9e25-f6555866eeef/attendance/2025-11-12_PM_green.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ab1",
@@ -721,7 +863,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.95,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1bb92c14-14df-4014-975a-ada092eb548c/attendance/2025-11-12_AM_green.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ab2",
@@ -731,7 +875,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.88,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1bb92c14-14df-4014-975a-ada092eb548c/attendance/2025-11-12_PM_green.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ab3",
@@ -741,7 +887,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.88,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1b85c5e7-3f65-4edc-b113-3e553b272003/attendance/2025-11-12_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ab4",
@@ -751,7 +899,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.88,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1b85c5e7-3f65-4edc-b113-3e553b272003/attendance/2025-11-12_PM_green.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ab5",
@@ -761,7 +911,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.86,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d2bcc8ed-30a1-4313-9e7b-1efba819441f/attendance/2025-11-12_AM_green.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ab6",
@@ -771,7 +923,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.83,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d2bcc8ed-30a1-4313-9e7b-1efba819441f/attendance/2025-11-12_PM_green.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ab7",
@@ -781,7 +935,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.98,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/46c917de-44c8-4e36-b237-49b4eac9ccfc/attendance/2025-11-12_AM_green.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ab8",
@@ -791,7 +947,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.97,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7/attendance/2025-11-12_AM_green.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ab9",
@@ -801,7 +959,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.95,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7/attendance/2025-11-12_PM_green.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5aba",
@@ -811,7 +971,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.95,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc/attendance/2025-11-12_AM_green.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5abb",
@@ -821,7 +983,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.9,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc/attendance/2025-11-12_PM_green.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5abc",
@@ -831,7 +995,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.94,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/de0ae567-9165-4f08-a45f-9e49fa9161b5/attendance/2025-11-12_AM_green.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5abd",
@@ -841,7 +1007,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.86,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/de0ae567-9165-4f08-a45f-9e49fa9161b5/attendance/2025-11-12_PM_green.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5abe",
@@ -851,7 +1019,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.86,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/f086ed31-ddfe-49bc-8c41-73d76131a361/attendance/2025-11-12_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5abf",
@@ -861,7 +1031,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.97,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/23535bb2-a11a-4c2c-a15c-06e9236e2bfe/attendance/2025-11-12_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ac0",
@@ -871,7 +1043,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.87,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1a68ffb4-5372-48d1-9d79-21c2fc9627c3/attendance/2025-11-12_AM_green.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ac1",
@@ -881,7 +1055,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.95,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1a68ffb4-5372-48d1-9d79-21c2fc9627c3/attendance/2025-11-12_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ac2",
@@ -891,7 +1067,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.94,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ab8cf46d-4359-4543-9e2d-0535f01e8d5d/attendance/2025-11-12_AM_green.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ac3",
@@ -901,7 +1079,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.94,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ab8cf46d-4359-4543-9e2d-0535f01e8d5d/attendance/2025-11-12_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ac4",
@@ -911,7 +1091,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.92,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/3d712299-2182-4e89-a352-0f33bf75ad1c/attendance/2025-11-12_AM_green.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ac5",
@@ -921,7 +1103,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.91,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/3d712299-2182-4e89-a352-0f33bf75ad1c/attendance/2025-11-12_PM_green.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ac6",
@@ -931,7 +1115,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.93,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ad32bf84-b342-4f4e-b67c-9816781109a2/attendance/2025-11-12_AM_green.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ac7",
@@ -941,7 +1127,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.88,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/84dca95e-7e6b-4073-822b-1b00b14380c5/attendance/2025-11-12_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ac8",
@@ -951,7 +1139,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.96,
-        "last_update": "2025-11-12T05:32:07.956201+00:00"
+        "last_update": "2025-11-12T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/84dca95e-7e6b-4073-822b-1b00b14380c5/attendance/2025-11-12_PM_green.jpg",
+        "scan_timestamp": "2025-11-12T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ac9",
@@ -961,7 +1151,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.88,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/04a97662-e3f5-4c71-9283-55f3b2bd4d15/attendance/2025-11-11_AM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5aca",
@@ -971,7 +1163,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.87,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/04a97662-e3f5-4c71-9283-55f3b2bd4d15/attendance/2025-11-11_PM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5acb",
@@ -981,7 +1175,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.93,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d61d7051-16f3-4c80-a28b-55a3d475757c/attendance/2025-11-11_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5acc",
@@ -991,7 +1187,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.85,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d61d7051-16f3-4c80-a28b-55a3d475757c/attendance/2025-11-11_PM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5acd",
@@ -1001,7 +1199,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.86,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51/attendance/2025-11-11_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ace",
@@ -1011,7 +1211,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.96,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51/attendance/2025-11-11_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5acf",
@@ -1021,7 +1223,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.93,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/90d5e32e-0b2a-451d-be26-67ba1e128b82/attendance/2025-11-11_AM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ad0",
@@ -1031,7 +1235,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.83,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/90d5e32e-0b2a-451d-be26-67ba1e128b82/attendance/2025-11-11_PM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ad1",
@@ -1041,7 +1247,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.96,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/c1c2005e-22bb-4eb9-9e25-f6555866eeef/attendance/2025-11-11_AM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ad2",
@@ -1051,7 +1259,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.83,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/c1c2005e-22bb-4eb9-9e25-f6555866eeef/attendance/2025-11-11_PM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ad3",
@@ -1061,7 +1271,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.87,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1bb92c14-14df-4014-975a-ada092eb548c/attendance/2025-11-11_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ad4",
@@ -1071,7 +1283,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.91,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1bb92c14-14df-4014-975a-ada092eb548c/attendance/2025-11-11_PM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ad5",
@@ -1081,7 +1295,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.89,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1b85c5e7-3f65-4edc-b113-3e553b272003/attendance/2025-11-11_AM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ad6",
@@ -1091,7 +1307,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.92,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1b85c5e7-3f65-4edc-b113-3e553b272003/attendance/2025-11-11_PM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ad7",
@@ -1101,7 +1319,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.94,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d2bcc8ed-30a1-4313-9e7b-1efba819441f/attendance/2025-11-11_AM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ad8",
@@ -1111,7 +1331,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.95,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d2bcc8ed-30a1-4313-9e7b-1efba819441f/attendance/2025-11-11_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ad9",
@@ -1121,7 +1343,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.98,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/a6d935e2-af68-46e2-8dc2-f37e8b2ae455/attendance/2025-11-11_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ada",
@@ -1131,7 +1355,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.82,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/a6d935e2-af68-46e2-8dc2-f37e8b2ae455/attendance/2025-11-11_PM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5adb",
@@ -1141,7 +1367,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.88,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/46c917de-44c8-4e36-b237-49b4eac9ccfc/attendance/2025-11-11_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5adc",
@@ -1151,7 +1379,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.92,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/46c917de-44c8-4e36-b237-49b4eac9ccfc/attendance/2025-11-11_PM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5add",
@@ -1161,7 +1391,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.97,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7/attendance/2025-11-11_AM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ade",
@@ -1171,7 +1403,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.85,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7/attendance/2025-11-11_PM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5adf",
@@ -1181,7 +1415,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.96,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc/attendance/2025-11-11_AM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ae0",
@@ -1191,7 +1427,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.93,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc/attendance/2025-11-11_PM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ae1",
@@ -1201,7 +1439,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.94,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/de0ae567-9165-4f08-a45f-9e49fa9161b5/attendance/2025-11-11_AM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ae2",
@@ -1211,7 +1451,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.84,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/de0ae567-9165-4f08-a45f-9e49fa9161b5/attendance/2025-11-11_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ae3",
@@ -1221,7 +1463,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.92,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/f086ed31-ddfe-49bc-8c41-73d76131a361/attendance/2025-11-11_AM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ae4",
@@ -1231,7 +1475,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.89,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/23535bb2-a11a-4c2c-a15c-06e9236e2bfe/attendance/2025-11-11_AM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ae5",
@@ -1241,7 +1487,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.89,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/23535bb2-a11a-4c2c-a15c-06e9236e2bfe/attendance/2025-11-11_PM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ae6",
@@ -1251,7 +1499,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.94,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1a68ffb4-5372-48d1-9d79-21c2fc9627c3/attendance/2025-11-11_AM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ae7",
@@ -1261,7 +1511,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.91,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1a68ffb4-5372-48d1-9d79-21c2fc9627c3/attendance/2025-11-11_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ae8",
@@ -1271,7 +1523,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.92,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ab8cf46d-4359-4543-9e2d-0535f01e8d5d/attendance/2025-11-11_AM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5ae9",
@@ -1281,7 +1535,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.84,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ab8cf46d-4359-4543-9e2d-0535f01e8d5d/attendance/2025-11-11_PM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5aea",
@@ -1291,7 +1547,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.9,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/3d712299-2182-4e89-a352-0f33bf75ad1c/attendance/2025-11-11_AM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5aeb",
@@ -1301,7 +1559,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.89,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/3d712299-2182-4e89-a352-0f33bf75ad1c/attendance/2025-11-11_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5aec",
@@ -1311,7 +1571,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.97,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ad32bf84-b342-4f4e-b67c-9816781109a2/attendance/2025-11-11_AM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5aed",
@@ -1321,7 +1583,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.82,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ad32bf84-b342-4f4e-b67c-9816781109a2/attendance/2025-11-11_PM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5aee",
@@ -1331,7 +1595,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.88,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/84dca95e-7e6b-4073-822b-1b00b14380c5/attendance/2025-11-11_AM_green.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5aef",
@@ -1341,7 +1607,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.95,
-        "last_update": "2025-11-11T05:32:07.956201+00:00"
+        "last_update": "2025-11-11T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/84dca95e-7e6b-4073-822b-1b00b14380c5/attendance/2025-11-11_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-11T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5af0",
@@ -1351,7 +1619,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.93,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/04a97662-e3f5-4c71-9283-55f3b2bd4d15/attendance/2025-11-10_AM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5af1",
@@ -1361,7 +1631,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.86,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/04a97662-e3f5-4c71-9283-55f3b2bd4d15/attendance/2025-11-10_PM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5af2",
@@ -1371,7 +1643,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.87,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d61d7051-16f3-4c80-a28b-55a3d475757c/attendance/2025-11-10_AM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5af3",
@@ -1381,7 +1655,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.89,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d61d7051-16f3-4c80-a28b-55a3d475757c/attendance/2025-11-10_PM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5af4",
@@ -1391,7 +1667,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.93,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51/attendance/2025-11-10_AM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5af5",
@@ -1401,7 +1679,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.85,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51/attendance/2025-11-10_PM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5af6",
@@ -1411,7 +1691,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.96,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/90d5e32e-0b2a-451d-be26-67ba1e128b82/attendance/2025-11-10_AM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5af7",
@@ -1421,7 +1703,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.84,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/90d5e32e-0b2a-451d-be26-67ba1e128b82/attendance/2025-11-10_PM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5af8",
@@ -1431,7 +1715,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.88,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/c1c2005e-22bb-4eb9-9e25-f6555866eeef/attendance/2025-11-10_AM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5af9",
@@ -1441,7 +1727,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.89,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/c1c2005e-22bb-4eb9-9e25-f6555866eeef/attendance/2025-11-10_PM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5afa",
@@ -1451,7 +1739,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.85,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1bb92c14-14df-4014-975a-ada092eb548c/attendance/2025-11-10_PM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5afb",
@@ -1461,7 +1751,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.93,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1b85c5e7-3f65-4edc-b113-3e553b272003/attendance/2025-11-10_AM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5afc",
@@ -1471,7 +1763,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.87,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1b85c5e7-3f65-4edc-b113-3e553b272003/attendance/2025-11-10_PM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5afd",
@@ -1481,7 +1775,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.89,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d2bcc8ed-30a1-4313-9e7b-1efba819441f/attendance/2025-11-10_AM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5afe",
@@ -1491,7 +1787,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.96,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d2bcc8ed-30a1-4313-9e7b-1efba819441f/attendance/2025-11-10_PM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5aff",
@@ -1501,7 +1799,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.94,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/a6d935e2-af68-46e2-8dc2-f37e8b2ae455/attendance/2025-11-10_AM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b00",
@@ -1511,7 +1811,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.85,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/a6d935e2-af68-46e2-8dc2-f37e8b2ae455/attendance/2025-11-10_PM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b01",
@@ -1521,7 +1823,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.91,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/46c917de-44c8-4e36-b237-49b4eac9ccfc/attendance/2025-11-10_AM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b02",
@@ -1531,7 +1835,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.9,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/46c917de-44c8-4e36-b237-49b4eac9ccfc/attendance/2025-11-10_PM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b03",
@@ -1541,7 +1847,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.96,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7/attendance/2025-11-10_AM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b04",
@@ -1551,7 +1859,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.85,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7/attendance/2025-11-10_PM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b05",
@@ -1561,7 +1871,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.86,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc/attendance/2025-11-10_AM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b06",
@@ -1571,7 +1883,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.87,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/de0ae567-9165-4f08-a45f-9e49fa9161b5/attendance/2025-11-10_PM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b07",
@@ -1581,7 +1895,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.94,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/f086ed31-ddfe-49bc-8c41-73d76131a361/attendance/2025-11-10_AM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b08",
@@ -1591,7 +1907,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.94,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/f086ed31-ddfe-49bc-8c41-73d76131a361/attendance/2025-11-10_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b09",
@@ -1601,7 +1919,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.95,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/23535bb2-a11a-4c2c-a15c-06e9236e2bfe/attendance/2025-11-10_AM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b0a",
@@ -1611,7 +1931,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.85,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/23535bb2-a11a-4c2c-a15c-06e9236e2bfe/attendance/2025-11-10_PM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b0b",
@@ -1621,7 +1943,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.91,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1a68ffb4-5372-48d1-9d79-21c2fc9627c3/attendance/2025-11-10_AM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b0c",
@@ -1631,7 +1955,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.85,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ab8cf46d-4359-4543-9e2d-0535f01e8d5d/attendance/2025-11-10_AM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b0d",
@@ -1641,7 +1967,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.84,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ab8cf46d-4359-4543-9e2d-0535f01e8d5d/attendance/2025-11-10_PM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b0e",
@@ -1651,7 +1979,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.93,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/3d712299-2182-4e89-a352-0f33bf75ad1c/attendance/2025-11-10_AM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b0f",
@@ -1661,7 +1991,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.9,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/3d712299-2182-4e89-a352-0f33bf75ad1c/attendance/2025-11-10_PM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b10",
@@ -1671,7 +2003,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.96,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ad32bf84-b342-4f4e-b67c-9816781109a2/attendance/2025-11-10_AM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b11",
@@ -1681,7 +2015,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.86,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ad32bf84-b342-4f4e-b67c-9816781109a2/attendance/2025-11-10_PM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b12",
@@ -1691,7 +2027,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.93,
-        "last_update": "2025-11-10T05:32:07.956201+00:00"
+        "last_update": "2025-11-10T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/84dca95e-7e6b-4073-822b-1b00b14380c5/attendance/2025-11-10_AM_green.jpg",
+        "scan_timestamp": "2025-11-10T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b13",
@@ -1701,7 +2039,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.97,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/04a97662-e3f5-4c71-9283-55f3b2bd4d15/attendance/2025-11-09_AM_green.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b14",
@@ -1711,7 +2051,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.86,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d61d7051-16f3-4c80-a28b-55a3d475757c/attendance/2025-11-09_AM_green.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b15",
@@ -1721,7 +2063,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.92,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51/attendance/2025-11-09_AM_green.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b16",
@@ -1731,7 +2075,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.92,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/90d5e32e-0b2a-451d-be26-67ba1e128b82/attendance/2025-11-09_AM_green.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b17",
@@ -1741,7 +2087,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.88,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/90d5e32e-0b2a-451d-be26-67ba1e128b82/attendance/2025-11-09_PM_green.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b18",
@@ -1751,7 +2099,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.97,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/c1c2005e-22bb-4eb9-9e25-f6555866eeef/attendance/2025-11-09_AM_green.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b19",
@@ -1761,7 +2111,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.83,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/c1c2005e-22bb-4eb9-9e25-f6555866eeef/attendance/2025-11-09_PM_green.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b1a",
@@ -1771,7 +2123,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.98,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1bb92c14-14df-4014-975a-ada092eb548c/attendance/2025-11-09_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b1b",
@@ -1781,7 +2135,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.84,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1bb92c14-14df-4014-975a-ada092eb548c/attendance/2025-11-09_PM_green.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b1c",
@@ -1791,7 +2147,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.86,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1b85c5e7-3f65-4edc-b113-3e553b272003/attendance/2025-11-09_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b1d",
@@ -1801,7 +2159,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.87,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d2bcc8ed-30a1-4313-9e7b-1efba819441f/attendance/2025-11-09_PM_green.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b1e",
@@ -1811,7 +2171,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.93,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/46c917de-44c8-4e36-b237-49b4eac9ccfc/attendance/2025-11-09_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b1f",
@@ -1821,7 +2183,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.83,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/46c917de-44c8-4e36-b237-49b4eac9ccfc/attendance/2025-11-09_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b20",
@@ -1831,7 +2195,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.96,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7/attendance/2025-11-09_AM_green.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b21",
@@ -1841,7 +2207,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.89,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7/attendance/2025-11-09_PM_green.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b22",
@@ -1851,7 +2219,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.94,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc/attendance/2025-11-09_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b23",
@@ -1861,7 +2231,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.9,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/de0ae567-9165-4f08-a45f-9e49fa9161b5/attendance/2025-11-09_PM_green.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b24",
@@ -1871,7 +2243,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.92,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/f086ed31-ddfe-49bc-8c41-73d76131a361/attendance/2025-11-09_AM_green.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b25",
@@ -1881,7 +2255,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.86,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/f086ed31-ddfe-49bc-8c41-73d76131a361/attendance/2025-11-09_PM_green.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b26",
@@ -1891,7 +2267,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.89,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/23535bb2-a11a-4c2c-a15c-06e9236e2bfe/attendance/2025-11-09_AM_green.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b27",
@@ -1901,7 +2279,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.97,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1a68ffb4-5372-48d1-9d79-21c2fc9627c3/attendance/2025-11-09_AM_green.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b28",
@@ -1911,7 +2291,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.92,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ab8cf46d-4359-4543-9e2d-0535f01e8d5d/attendance/2025-11-09_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b29",
@@ -1921,7 +2303,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.9,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ab8cf46d-4359-4543-9e2d-0535f01e8d5d/attendance/2025-11-09_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b2a",
@@ -1931,7 +2315,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.98,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/3d712299-2182-4e89-a352-0f33bf75ad1c/attendance/2025-11-09_AM_green.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b2b",
@@ -1941,7 +2327,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.96,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ad32bf84-b342-4f4e-b67c-9816781109a2/attendance/2025-11-09_PM_green.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b2c",
@@ -1951,7 +2339,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.89,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/84dca95e-7e6b-4073-822b-1b00b14380c5/attendance/2025-11-09_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b2d",
@@ -1961,7 +2351,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.94,
-        "last_update": "2025-11-09T05:32:07.956201+00:00"
+        "last_update": "2025-11-09T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/84dca95e-7e6b-4073-822b-1b00b14380c5/attendance/2025-11-09_PM_green.jpg",
+        "scan_timestamp": "2025-11-09T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b2e",
@@ -1971,7 +2363,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.88,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/04a97662-e3f5-4c71-9283-55f3b2bd4d15/attendance/2025-11-08_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b2f",
@@ -1981,7 +2375,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.96,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/04a97662-e3f5-4c71-9283-55f3b2bd4d15/attendance/2025-11-08_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b30",
@@ -1991,7 +2387,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.91,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d61d7051-16f3-4c80-a28b-55a3d475757c/attendance/2025-11-08_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b31",
@@ -2001,7 +2399,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.94,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d61d7051-16f3-4c80-a28b-55a3d475757c/attendance/2025-11-08_PM_green.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b32",
@@ -2011,7 +2411,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.94,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51/attendance/2025-11-08_AM_green.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b33",
@@ -2021,7 +2423,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.85,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51/attendance/2025-11-08_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b34",
@@ -2031,7 +2435,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.86,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/90d5e32e-0b2a-451d-be26-67ba1e128b82/attendance/2025-11-08_AM_green.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b35",
@@ -2041,7 +2447,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.82,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/90d5e32e-0b2a-451d-be26-67ba1e128b82/attendance/2025-11-08_PM_green.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b36",
@@ -2051,7 +2459,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.88,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/c1c2005e-22bb-4eb9-9e25-f6555866eeef/attendance/2025-11-08_AM_green.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b37",
@@ -2061,7 +2471,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.94,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1bb92c14-14df-4014-975a-ada092eb548c/attendance/2025-11-08_AM_green.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b38",
@@ -2071,7 +2483,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.86,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1bb92c14-14df-4014-975a-ada092eb548c/attendance/2025-11-08_PM_green.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b39",
@@ -2081,7 +2495,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.94,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1b85c5e7-3f65-4edc-b113-3e553b272003/attendance/2025-11-08_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b3a",
@@ -2091,7 +2507,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.94,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1b85c5e7-3f65-4edc-b113-3e553b272003/attendance/2025-11-08_PM_green.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b3b",
@@ -2101,7 +2519,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.92,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d2bcc8ed-30a1-4313-9e7b-1efba819441f/attendance/2025-11-08_AM_green.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b3c",
@@ -2111,7 +2531,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.82,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d2bcc8ed-30a1-4313-9e7b-1efba819441f/attendance/2025-11-08_PM_green.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b3d",
@@ -2121,7 +2543,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.89,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/a6d935e2-af68-46e2-8dc2-f37e8b2ae455/attendance/2025-11-08_AM_green.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b3e",
@@ -2131,7 +2555,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.87,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/a6d935e2-af68-46e2-8dc2-f37e8b2ae455/attendance/2025-11-08_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b3f",
@@ -2141,7 +2567,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.94,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7/attendance/2025-11-08_AM_green.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b40",
@@ -2151,7 +2579,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.95,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7/attendance/2025-11-08_PM_green.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b41",
@@ -2161,7 +2591,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.98,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc/attendance/2025-11-08_AM_green.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b42",
@@ -2171,7 +2603,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.85,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc/attendance/2025-11-08_PM_green.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b43",
@@ -2181,7 +2615,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.93,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/de0ae567-9165-4f08-a45f-9e49fa9161b5/attendance/2025-11-08_AM_green.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b44",
@@ -2191,7 +2627,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.84,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/de0ae567-9165-4f08-a45f-9e49fa9161b5/attendance/2025-11-08_PM_green.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b45",
@@ -2201,7 +2639,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.98,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/f086ed31-ddfe-49bc-8c41-73d76131a361/attendance/2025-11-08_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b46",
@@ -2211,7 +2651,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.87,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/f086ed31-ddfe-49bc-8c41-73d76131a361/attendance/2025-11-08_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b47",
@@ -2221,7 +2663,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.98,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/23535bb2-a11a-4c2c-a15c-06e9236e2bfe/attendance/2025-11-08_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b48",
@@ -2231,7 +2675,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.91,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/23535bb2-a11a-4c2c-a15c-06e9236e2bfe/attendance/2025-11-08_PM_green.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b49",
@@ -2241,7 +2687,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.92,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/1a68ffb4-5372-48d1-9d79-21c2fc9627c3/attendance/2025-11-08_PM_green.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b4a",
@@ -2251,7 +2699,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.95,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ab8cf46d-4359-4543-9e2d-0535f01e8d5d/attendance/2025-11-08_AM_green.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b4b",
@@ -2261,7 +2711,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.84,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ab8cf46d-4359-4543-9e2d-0535f01e8d5d/attendance/2025-11-08_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b4c",
@@ -2271,7 +2723,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.96,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/3d712299-2182-4e89-a352-0f33bf75ad1c/attendance/2025-11-08_AM_green.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b4d",
@@ -2281,7 +2735,9 @@
         "trip": "PM",
         "status": "green",
         "confidence": 0.93,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/3d712299-2182-4e89-a352-0f33bf75ad1c/attendance/2025-11-08_PM_green.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b4e",
@@ -2291,7 +2747,9 @@
         "trip": "AM",
         "status": "yellow",
         "confidence": 0.9,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ad32bf84-b342-4f4e-b67c-9816781109a2/attendance/2025-11-08_AM_yellow.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b4f",
@@ -2301,7 +2759,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.85,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/ad32bf84-b342-4f4e-b67c-9816781109a2/attendance/2025-11-08_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b50",
@@ -2311,7 +2771,9 @@
         "trip": "AM",
         "status": "green",
         "confidence": 0.89,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/84dca95e-7e6b-4073-822b-1b00b14380c5/attendance/2025-11-08_AM_green.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "6916bed743c9c10fae9b5b51",
@@ -2321,7 +2783,9 @@
         "trip": "PM",
         "status": "yellow",
         "confidence": 0.94,
-        "last_update": "2025-11-08T05:32:07.956201+00:00"
+        "last_update": "2025-11-08T05:32:07.956201+00:00",
+        "scan_photo": "/photos/students/84dca95e-7e6b-4073-822b-1b00b14380c5/attendance/2025-11-08_PM_yellow.jpg",
+        "scan_timestamp": "2025-11-08T05:32:07.956201+00:00"
       },
       {
         "_id": "att_aeaf6ad4dfd545bf",
