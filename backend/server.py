@@ -1691,6 +1691,145 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Background task functions
+async def start_attendance_monitor():
+    """Start the attendance monitoring daemon in background"""
+    RED_STATUS_THRESHOLD = int(os.environ.get('RED_STATUS_THRESHOLD', '10'))
+    CHECK_INTERVAL = 60  # Check every 60 seconds
+    
+    logging.info("=" * 60)
+    logging.info("🚨 ATTENDANCE MONITOR STARTED")
+    logging.info(f"Configuration: Threshold={RED_STATUS_THRESHOLD}min, Interval={CHECK_INTERVAL}s")
+    logging.info("=" * 60)
+    
+    while True:
+        try:
+            await check_missed_scans()
+            await asyncio.sleep(CHECK_INTERVAL)
+        except Exception as e:
+            logging.error(f"Attendance monitor error: {e}")
+            await asyncio.sleep(CHECK_INTERVAL)
+
+
+async def check_missed_scans():
+    """Check for students who should have been scanned but weren't"""
+    current_time = datetime.now(timezone.utc)
+    current_hour = current_time.hour
+    today = current_time.strftime("%Y-%m-%d")
+    
+    is_morning = current_hour < 12
+    trip = "AM" if is_morning else "PM"
+    
+    RED_STATUS_THRESHOLD = int(os.environ.get('RED_STATUS_THRESHOLD', '10'))
+    
+    # Get all students with assigned stops
+    students_cursor = db.students.find({"stop_id": {"$exists": True, "$ne": None}})
+    
+    marked_red_count = 0
+    
+    async for student in students_cursor:
+        try:
+            student_id = student['student_id']
+            stop_id = student.get('stop_id')
+            
+            if not stop_id:
+                continue
+            
+            # Get stop with expected times
+            stop = await db.stops.find_one({"stop_id": stop_id}, {"_id": 0})
+            if not stop:
+                continue
+            
+            # Get expected time for current direction
+            expected_time_str = stop.get('morning_expected_time') if is_morning else stop.get('evening_expected_time')
+            if not expected_time_str:
+                continue
+            
+            # Parse expected time (HH:MM format)
+            try:
+                hour, minute = map(int, expected_time_str.split(':'))
+                expected_datetime = current_time.replace(hour=hour, minute=minute, second=0, microsecond=0)
+                threshold_datetime = expected_datetime + timedelta(minutes=RED_STATUS_THRESHOLD)
+            except:
+                continue
+            
+            # Check if we're past the threshold
+            if current_time < threshold_datetime:
+                continue
+            
+            # Check attendance record
+            attendance = await db.attendance.find_one({
+                "student_id": student_id,
+                "date": today,
+                "trip": trip
+            })
+            
+            if not attendance:
+                # No scan - mark as RED
+                red_attendance = Attendance(
+                    student_id=student_id,
+                    date=today,
+                    trip=trip,
+                    status="red",
+                    confidence=0.0,
+                    last_update=current_time.isoformat()
+                )
+                await db.attendance.insert_one(red_attendance.model_dump())
+                marked_red_count += 1
+                logging.warning(f"Marked RED: Student {student_id} - No scan for {trip} (expected {expected_time_str})")
+            
+            elif attendance.get('status') == 'yellow':
+                # Incomplete journey - check duration
+                last_update = attendance.get('last_update')
+                if last_update:
+                    last_update_time = datetime.fromisoformat(last_update)
+                    yellow_duration = (current_time - last_update_time).total_seconds() / 60
+                    
+                    if yellow_duration > RED_STATUS_THRESHOLD:
+                        await db.attendance.update_one(
+                            {"student_id": student_id, "date": today, "trip": trip},
+                            {"$set": {"status": "red", "last_update": current_time.isoformat()}}
+                        )
+                        marked_red_count += 1
+                        logging.warning(f"Marked RED: Student {student_id} - Incomplete journey ({yellow_duration:.1f}min yellow)")
+        
+        except Exception as e:
+            logging.error(f"Error checking student {student.get('student_id')}: {e}")
+            continue
+    
+    if marked_red_count > 0:
+        logging.info(f"Scan check: {marked_red_count} students marked RED")
+
+
+async def start_backup_scheduler():
+    """Schedule regular backups for both main and attendance data"""
+    BACKUP_INTERVAL_HOURS = int(os.environ.get('SEED_INTERVAL_HOURS', '1'))
+    BACKUP_INTERVAL_SECONDS = BACKUP_INTERVAL_HOURS * 3600
+    
+    logging.info("=" * 60)
+    logging.info("💾 BACKUP SCHEDULER STARTED")
+    logging.info(f"Configuration: Interval={BACKUP_INTERVAL_HOURS}h")
+    logging.info("=" * 60)
+    
+    while True:
+        try:
+            await asyncio.sleep(BACKUP_INTERVAL_SECONDS)
+            
+            # Run main backup
+            logging.info("Running scheduled main backup...")
+            import subprocess
+            subprocess.run(["python", "backup_seed_data.py"], cwd="/app/backend")
+            
+            # Run attendance backup
+            logging.info("Running scheduled attendance backup...")
+            subprocess.run(["python", "backup_attendance_data.py"], cwd="/app/backend")
+            
+            logging.info("✅ Scheduled backups completed")
+        except Exception as e:
+            logging.error(f"Backup scheduler error: {e}")
+            await asyncio.sleep(300)  # Retry in 5 minutes on error
+
+
 @app.on_event("startup")
 async def startup_db_seed():
     """Auto-seed database on first startup if collections are empty and start attendance monitor"""
