@@ -1941,41 +1941,12 @@ async def startup_db_seed():
         except Exception as idx_error:
             print(f"ℹ️  Index already exists or creation skipped: {str(idx_error)}")
         
-        # Check if core collections are empty
-        users_count = await db.users.count_documents({})
-        students_count = await db.students.count_documents({})
-        buses_count = await db.buses.count_documents({})
-        routes_count = await db.routes.count_documents({})
         
-        # If all core collections are empty, run seeding
-        # Check core collections (users, students, buses, routes)
-        core_empty = (
-            users_count == 0 and 
-            students_count == 0 and 
-            buses_count == 0 and 
-            routes_count == 0
-        )
-
-        attendance_count = await db.attendance.count_documents({})
-
-        if core_empty:
-            print("🪴 Auto-seeding database with initial demo data...")
-            from seed_data import seed_data
-            await seed_data()
-            print("✅ Full auto-seeding completed successfully!")
-
-        # Attendance-only seeding
-        elif attendance_count == 0:
-            print("🪴 Attendance missing — seeding attendance only...")
-            from seed_data import seed_attendance  # You must expose this function
-            await seed_attendance()
-            print("✅ Attendance seeding completed!")
-
-        else:
-            print("✅ Database already populated, skipping seeding.")
-            print(f"   Current data: {users_count} users, {students_count} students, {buses_count} buses, {routes_count} routes")
-            print(f"   Attendance records: {attendance_count}")
-
+        print("🪴 Auto-seeding database with initial demo data...")
+        from seed_data import seed_data
+        await seed_data()
+        print("✅ Full auto-seeding completed successfully!")
+        
         # Start attendance monitor as background task
         asyncio.create_task(start_attendance_monitor())
         print("🚨 Attendance monitor started in background")
