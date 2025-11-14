@@ -682,6 +682,55 @@ export default function TeacherDashboardNew({ user, onLogout }) {
         uploadEndpoint={`${API}/users/me/photo`}
         onPhotoUpdate={handleProfilePhotoUpdate}
       />
+
+      {/* Scan Photo Modal */}
+      <Dialog open={showScanModal} onOpenChange={setShowScanModal}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-emerald-700">
+              <Camera className="w-5 h-5" />
+              Scan Photo - {selectedScan?.trip} Trip
+            </DialogTitle>
+          </DialogHeader>
+          
+          {selectedScan && (
+            <div className="space-y-4">
+              <div className="bg-emerald-50 rounded-lg p-3 border border-emerald-200">
+                <div className="text-sm text-emerald-900 font-medium">
+                  {selectedScan.studentName}
+                </div>
+                <div className="text-xs text-emerald-700 mt-1">
+                  {new Date(selectedScan.date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                </div>
+              </div>
+              <div className="flex justify-center">
+                {selectedScan.photo ? (
+                  <img src={selectedScan.photo} alt="Scan capture" className="w-40 h-40 object-cover rounded-lg shadow-md border-2 border-gray-200" />
+                ) : (
+                  <div className="w-40 h-40 bg-gray-100 rounded-lg flex items-center justify-center border-2 border-gray-200">
+                    <div className="text-center">
+                      <Camera className="w-10 h-10 text-gray-400 mx-auto mb-2" />
+                      <p className="text-xs text-gray-500">No photo available</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div className="flex justify-center">
+                <span className={`px-4 py-2 rounded-full text-sm font-medium ${getStatusClass(selectedScan.status)}`}>
+                  {getStatusLabel(selectedScan.status)}
+                </span>
+              </div>
+              <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                <div className="flex items-center gap-2 text-sm text-gray-700">
+                  <Calendar className="w-4 h-4 text-gray-500" />
+                  <span className="font-medium">Scan Time:</span>
+                  <span>{formatTimestamp(selectedScan.timestamp)}</span>
+                </div>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
