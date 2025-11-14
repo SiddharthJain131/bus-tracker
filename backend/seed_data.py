@@ -310,40 +310,40 @@ async def seed_data():
     print("📍 CREATING STOPS AND ROUTES")
     print("=" * 60)
     
-    # Create stops for Route 1 (North Route)
+    # Create stops for Route 1 (North Route) - Morning pickup times start at 7:00 AM, Evening dropoff times start at 3:00 PM
     route1_stops_data = [
-        {"name": "Main Gate North", "lat": 37.7749, "lon": -122.4194},
-        {"name": "Park Avenue", "lat": 37.7849, "lon": -122.4094},
-        {"name": "Market Street", "lat": 37.7949, "lon": -122.3994},
-        {"name": "Oak Boulevard", "lat": 37.8019, "lon": -122.3944},
-        {"name": "School North Entrance", "lat": 37.8049, "lon": -122.3894}
+        {"name": "Main Gate North", "lat": 37.7749, "lon": -122.4194, "morning_time": "07:00", "evening_time": "15:00"},
+        {"name": "Park Avenue", "lat": 37.7849, "lon": -122.4094, "morning_time": "07:10", "evening_time": "15:10"},
+        {"name": "Market Street", "lat": 37.7949, "lon": -122.3994, "morning_time": "07:20", "evening_time": "15:20"},
+        {"name": "Oak Boulevard", "lat": 37.8019, "lon": -122.3944, "morning_time": "07:30", "evening_time": "15:30"},
+        {"name": "School North Entrance", "lat": 37.8049, "lon": -122.3894, "morning_time": "07:40", "evening_time": "15:40"}
     ]
     
-    # Create stops for Route 2 (South Route)
+    # Create stops for Route 2 (South Route) - Morning pickup times start at 6:45 AM, Evening dropoff times start at 3:15 PM
     route2_stops_data = [
-        {"name": "South Gate", "lat": 37.7649, "lon": -122.4294},
-        {"name": "Elm Street", "lat": 37.7699, "lon": -122.4244},
-        {"name": "Maple Avenue", "lat": 37.7749, "lon": -122.4194},
-        {"name": "Pine Road", "lat": 37.7799, "lon": -122.4144}
+        {"name": "South Gate", "lat": 37.7649, "lon": -122.4294, "morning_time": "06:45", "evening_time": "15:15"},
+        {"name": "Elm Street", "lat": 37.7699, "lon": -122.4244, "morning_time": "06:55", "evening_time": "15:25"},
+        {"name": "Maple Avenue", "lat": 37.7749, "lon": -122.4194, "morning_time": "07:05", "evening_time": "15:35"},
+        {"name": "Pine Road", "lat": 37.7799, "lon": -122.4144, "morning_time": "07:15", "evening_time": "15:45"}
     ]
     
-    # Create stops for Route 3 (East Route)
+    # Create stops for Route 3 (East Route) - Morning pickup times start at 7:15 AM, Evening dropoff times start at 3:30 PM
     route3_stops_data = [
-        {"name": "East Gate", "lat": 37.7849, "lon": -122.3794},
-        {"name": "Cedar Lane", "lat": 37.7899, "lon": -122.3844},
-        {"name": "Birch Street", "lat": 37.7949, "lon": -122.3894},
-        {"name": "Walnut Drive", "lat": 37.7999, "lon": -122.3944},
-        {"name": "School East Entrance", "lat": 37.8049, "lon": -122.3894}
+        {"name": "East Gate", "lat": 37.7849, "lon": -122.3794, "morning_time": "07:15", "evening_time": "15:30"},
+        {"name": "Cedar Lane", "lat": 37.7899, "lon": -122.3844, "morning_time": "07:25", "evening_time": "15:40"},
+        {"name": "Birch Street", "lat": 37.7949, "lon": -122.3894, "morning_time": "07:35", "evening_time": "15:50"},
+        {"name": "Walnut Drive", "lat": 37.7999, "lon": -122.3944, "morning_time": "07:45", "evening_time": "16:00"},
+        {"name": "School East Entrance", "lat": 37.8049, "lon": -122.3894, "morning_time": "07:55", "evening_time": "16:10"}
     ]
     
-    # Create stops for Route 4 (West Route)
+    # Create stops for Route 4 (West Route) - Morning pickup times start at 6:30 AM, Evening dropoff times start at 3:45 PM
     route4_stops_data = [
-        {"name": "West Gate", "lat": 37.7749, "lon": -122.4394},
-        {"name": "Sunset Boulevard", "lat": 37.7799, "lon": -122.4344},
-        {"name": "Ocean Avenue", "lat": 37.7849, "lon": -122.4294},
-        {"name": "Beach Street", "lat": 37.7899, "lon": -122.4244},
-        {"name": "Harbor Road", "lat": 37.7949, "lon": -122.4194},
-        {"name": "School West Entrance", "lat": 37.8049, "lon": -122.3894}
+        {"name": "West Gate", "lat": 37.7749, "lon": -122.4394, "morning_time": "06:30", "evening_time": "15:45"},
+        {"name": "Sunset Boulevard", "lat": 37.7799, "lon": -122.4344, "morning_time": "06:40", "evening_time": "15:55"},
+        {"name": "Ocean Avenue", "lat": 37.7849, "lon": -122.4294, "morning_time": "06:50", "evening_time": "16:05"},
+        {"name": "Beach Street", "lat": 37.7899, "lon": -122.4244, "morning_time": "07:00", "evening_time": "16:15"},
+        {"name": "Harbor Road", "lat": 37.7949, "lon": -122.4194, "morning_time": "07:10", "evening_time": "16:25"},
+        {"name": "School West Entrance", "lat": 37.8049, "lon": -122.3894, "morning_time": "07:20", "evening_time": "16:35"}
     ]
     
     # Create all stops
