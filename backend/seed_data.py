@@ -361,7 +361,9 @@ async def seed_data():
             "stop_name": stop_data["name"],
             "lat": stop_data["lat"],
             "lon": stop_data["lon"],
-            "order_index": idx
+            "order_index": idx,
+            "morning_expected_time": stop_data["morning_time"],
+            "evening_expected_time": stop_data["evening_time"]
         })
     
     for idx, stop_data in enumerate(route2_stops_data):
@@ -372,7 +374,9 @@ async def seed_data():
             "stop_name": stop_data["name"],
             "lat": stop_data["lat"],
             "lon": stop_data["lon"],
-            "order_index": idx
+            "order_index": idx,
+            "morning_expected_time": stop_data["morning_time"],
+            "evening_expected_time": stop_data["evening_time"]
         })
     
     for idx, stop_data in enumerate(route3_stops_data):
@@ -383,7 +387,9 @@ async def seed_data():
             "stop_name": stop_data["name"],
             "lat": stop_data["lat"],
             "lon": stop_data["lon"],
-            "order_index": idx
+            "order_index": idx,
+            "morning_expected_time": stop_data["morning_time"],
+            "evening_expected_time": stop_data["evening_time"]
         })
     
     for idx, stop_data in enumerate(route4_stops_data):
@@ -394,7 +400,9 @@ async def seed_data():
             "stop_name": stop_data["name"],
             "lat": stop_data["lat"],
             "lon": stop_data["lon"],
-            "order_index": idx
+            "order_index": idx,
+            "morning_expected_time": stop_data["morning_time"],
+            "evening_expected_time": stop_data["evening_time"]
         })
     
     await db.stops.insert_many(all_stops)
