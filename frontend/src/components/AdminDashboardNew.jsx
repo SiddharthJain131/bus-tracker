@@ -539,10 +539,11 @@ export default function AdminDashboardNew({ user, onLogout }) {
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                     <Input
                       type="text"
-                      placeholder="Search students..."
+                      placeholder="Search students... (try: bus:BUS-001 or roll:G5A-001)"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10 w-64"
+                      className="pl-10 w-96"
+                      title="Search by name, or use bus:BUS-001, roll:G5A-001, class:5, parent:John, teacher:Mary"
                     />
                   </div>
                   <Button
