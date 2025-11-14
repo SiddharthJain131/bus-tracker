@@ -531,15 +531,27 @@ export default function AdminDashboardNew({ user, onLogout }) {
                   Students Management
                 </h2>
                 <div className="flex gap-3">
+                  <select
+                    value={searchBy}
+                    onChange={(e) => setSearchBy(e.target.value)}
+                    className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-sm"
+                  >
+                    <option value="all">All Fields</option>
+                    <option value="name">Name</option>
+                    <option value="roll">Roll No</option>
+                    <option value="bus">Bus</option>
+                    <option value="class">Class</option>
+                    <option value="parent">Parent</option>
+                    <option value="teacher">Teacher</option>
+                  </select>
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                     <Input
                       type="text"
-                      placeholder="Search students... (try: bus:BUS-001 or roll:G5A-001)"
+                      placeholder="Search for..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10 w-96"
-                      title="Search by name, or use bus:BUS-001, roll:G5A-001, class:5, parent:John, teacher:Mary"
+                      className="pl-10 w-64"
                     />
                   </div>
                   <Button
