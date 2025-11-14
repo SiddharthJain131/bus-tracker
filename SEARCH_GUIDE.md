@@ -61,14 +61,17 @@ Example: Selecting "All Fields" and typing `Emma` will find students named Emma,
 - Roll number now shows as first column with emerald-700 color
 - Same formatting as other columns (text-sm) but retains the distinctive color
 
-#### Search Input
-- Expanded width in Admin Dashboard (w-96)
-- Helpful placeholder text showing example searches
-- Tooltip on hover explaining all available parameters
+#### Search Interface
+- **Two-field search**: Dropdown + Input box side by side
+- Dropdown labeled "Search By" to select search field
+- Input box labeled "Search For" for entering search terms
+- Clean, intuitive interface with proper spacing
 
-## Notes
+## Features
 
 - Search is **case-insensitive**
-- Partial matches are supported (e.g., `bus:BUS` matches BUS-001, BUS-002)
-- Only one parameter can be used at a time
-- Filters (AM Status, PM Status, Bus) work in combination with search
+- Partial matches are supported (e.g., searching "BUS" matches BUS-001, BUS-002)
+- Select specific fields for precise searching
+- "All Fields" option for comprehensive search
+- Works seamlessly with existing filters (AM Status, PM Status, Bus in Teacher Dashboard)
+- Real-time filtering as you type
