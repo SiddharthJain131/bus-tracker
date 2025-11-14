@@ -820,6 +820,19 @@ frontend:
         agent: "testing"
         comment: "✅ ROUTE VISUALIZATION MODAL CLOSE BUTTON FIX VERIFIED - 100% SUCCESS! Comprehensive testing of the nested modal fix confirms complete resolution of the critical issue. TEST RESULTS: ✅ Login as teacher@school.com working perfectly, ✅ Student list table loaded with 3 view buttons, ✅ StudentDetailModal opens successfully showing Emma Johnson's complete profile, ✅ 'View Route on Map' button click successfully opens RouteVisualizationModal, ✅ StudentDetailModal properly hides (tempClosed=true) when route modal opens - student modal count drops to 0, ✅ RouteVisualizationModal displays correctly with route flowchart (4 stops: Main Gate → Park Avenue → Market Street → School Entrance) and interactive Leaflet map, ✅ CRITICAL FIX CONFIRMED: Close button (X) is now fully clickable without any pointer event interception, ✅ Route modal closes successfully when close button clicked, ✅ StudentDetailModal reappears automatically (tempClosed=false) with all student data intact after route modal closes. TECHNICAL VALIDATION: No Playwright errors about backdrop interception, close button visible and enabled, proper modal state management throughout the cycle. FINAL STATE: Route modal closed (count=0), Student modal visible (count=1). The tempClosed state mechanism successfully eliminates the Radix UI Dialog backdrop conflict. Minor: Console warnings about missing DialogContent Description (accessibility only, non-critical). USER ISSUE RESOLVED: The X button close functionality is now working perfectly. 🎉 THE FIX IS WORKING CORRECTLY!"
 
+
+  - task: "Clickable AM/PM Status Badges in Teacher Dashboard"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py, /app/frontend/src/components/TeacherDashboardNew.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Added clickable status badges for AM/PM columns in Teacher Dashboard to show scan photos, similar to Parent Dashboard calendar. BACKEND CHANGES: 1) Updated GET /api/teacher/students endpoint to include scan photo data: Added am_scan_photo, am_scan_timestamp, pm_scan_photo, pm_scan_timestamp fields to response. These fields are extracted from attendance records and included in student data. 2) Scan photos are returned as URLs (e.g., /api/photos/students/{student_id}/attendance/2025-11-14_AM.jpg). FRONTEND CHANGES: 1) Added scan modal state (showScanModal, selectedScan) to TeacherDashboardNew component. 2) Created handleStatusClick function that opens modal only for yellow/green statuses (scanned students). 3) Created formatTimestamp helper function to display scan timestamps in readable format. 4) Made AM/PM status badges clickable with hover effects (cursor-pointer hover:opacity-80) for yellow/green statuses only. Added tooltip 'Click to view scan photo' for interactive badges. 5) Added Scan Photo Modal using Radix Dialog showing: Student name and date, Scan photo (with fallback for missing photos), Status badge (yellow/green), Scan timestamp with calendar icon, Emerald theme matching Teacher Dashboard design. FEATURES: Click yellow 'On Board' or green 'Reached' status badges to view scan photo, Modal shows photo captured during RFID scan, Timestamp shows exact scan time and date, Gray and red statuses remain non-clickable (no scan data), Consistent with Parent Dashboard calendar photo viewing. Ready for testing: Login as teacher, click on yellow/green status badges in student list, verify modal opens with scan photo and timestamp."
+
   - task: "Admin Dashboard"
     implemented: true
     working: true
