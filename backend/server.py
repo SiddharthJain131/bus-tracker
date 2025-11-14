@@ -131,6 +131,8 @@ class Stop(BaseModel):
     lat: float
     lon: float
     order_index: int
+    morning_expected_time: Optional[str] = None  # HH:MM format
+    evening_expected_time: Optional[str] = None  # HH:MM format
 
 class EmailLog(BaseModel):
     model_config = ConfigDict(extra="ignore")
