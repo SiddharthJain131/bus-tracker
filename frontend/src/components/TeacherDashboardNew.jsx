@@ -520,12 +520,20 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                             {student.bus_number || 'N/A'}
                           </td>
                           <td className="px-4 py-4">
-                            <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${getStatusClass(student.am_status)}`}>
+                            <span 
+                              className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${getStatusClass(student.am_status)} ${(student.am_status === 'yellow' || student.am_status === 'green') ? 'cursor-pointer hover:opacity-80 transition-opacity' : ''}`}
+                              onClick={() => handleStatusClick(student, 'AM')}
+                              title={(student.am_status === 'yellow' || student.am_status === 'green') ? 'Click to view scan photo' : ''}
+                            >
                               {getStatusLabel(student.am_status)}
                             </span>
                           </td>
                           <td className="px-4 py-4">
-                            <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${getStatusClass(student.pm_status)}`}>
+                            <span 
+                              className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${getStatusClass(student.pm_status)} ${(student.pm_status === 'yellow' || student.pm_status === 'green') ? 'cursor-pointer hover:opacity-80 transition-opacity' : ''}`}
+                              onClick={() => handleStatusClick(student, 'PM')}
+                              title={(student.pm_status === 'yellow' || student.pm_status === 'green') ? 'Click to view scan photo' : ''}
+                            >
                               {getStatusLabel(student.pm_status)}
                             </span>
                           </td>
