@@ -1627,6 +1627,12 @@ async def get_teacher_students(current_user: dict = Depends(get_current_user)):
         student['am_status'] = am_attendance['status'] if am_attendance else 'gray'
         student['pm_status'] = pm_attendance['status'] if pm_attendance else 'gray'
         
+        # Add scan photos and timestamps for clickable status badges
+        student['am_scan_photo'] = am_attendance.get('scan_photo') if am_attendance else None
+        student['am_scan_timestamp'] = am_attendance.get('scan_timestamp') if am_attendance else None
+        student['pm_scan_photo'] = pm_attendance.get('scan_photo') if pm_attendance else None
+        student['pm_scan_timestamp'] = pm_attendance.get('scan_timestamp') if pm_attendance else None
+        
         # Add bus info
         if student.get('bus_id'):
             bus = await db.buses.find_one({"bus_id": student['bus_id']}, {"_id": 0})
