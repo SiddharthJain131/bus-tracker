@@ -1667,6 +1667,45 @@ async def get_parent_students(current_user: dict = Depends(get_current_user)):
     
     student_ids = current_user.get('student_ids', [])
     students = await db.students.find({"student_id": {"$in": student_ids}}, {"_id": 0}).to_list(1000)
+    
+    # Enrich with stop name and times, bus info, teacher info
+    for student in students:
+        # Add teacher info
+        if student.get('teacher_id'):
+            teacher = await db.users.find_one({"user_id": student['teacher_id']}, {"_id": 0})
+            student['teacher_name'] = teacher['name'] if teacher else 'N/A'
+        else:
+            student['teacher_name'] = 'N/A'
+        
+        # Add bus info
+        if student.get('bus_id'):
+            bus = await db.buses.find_one({"bus_id": student['bus_id']}, {"_id": 0})
+            student['bus_number'] = bus['bus_number'] if bus else 'N/A'
+        else:
+            student['bus_number'] = 'N/A'
+        
+        # Add stop name and times
+        if student.get('stop_id'):
+            stop = await db.stops.find_one({"stop_id": student['stop_id']}, {"_id": 0})
+            if stop:
+                student['stop_name'] = stop['stop_name']
+                student['morning_expected_time'] = stop.get('morning_expected_time', 'N/A')
+                student['evening_expected_time'] = stop.get('evening_expected_time', 'N/A')
+            else:
+                student['stop_name'] = 'N/A'
+                student['morning_expected_time'] = 'N/A'
+                student['evening_expected_time'] = 'N/A'
+        else:
+            student['stop_name'] = 'N/A'
+            student['morning_expected_time'] = 'N/A'
+            student['evening_expected_time'] = 'N/A'
+        
+        # Convert photo_path to accessible URL
+        if student.get('photo_path'):
+            student['photo_url'] = get_photo_url(student['photo_path'])
+        else:
+            student['photo_url'] = None
+    
     return students
 
 # Demo endpoints
