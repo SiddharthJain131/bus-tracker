@@ -328,39 +328,34 @@ export default function AdminDashboardNew({ user, onLogout }) {
     }
   };
 
-  // Filter functions with parameter-based search
+  // Filter functions with dropdown-based search
   const filteredStudents = students.filter(s => {
+    if (!searchTerm.trim()) return true;
+    
     const term = searchTerm.toLowerCase().trim();
     
-    // Check for parameter-based search (e.g., "bus:BUS-001", "roll:G5A-001")
-    if (term.includes(':')) {
-      const [param, value] = term.split(':').map(p => p.trim());
-      const searchValue = value.toLowerCase();
-      
-      switch (param) {
-        case 'bus':
-          return s.bus_number && s.bus_number.toLowerCase().includes(searchValue);
-        case 'roll':
-          return s.roll_number && s.roll_number.toLowerCase().includes(searchValue);
-        case 'name':
-          return s.name.toLowerCase().includes(searchValue);
-        case 'class':
-          return s.class_name && s.class_name.toLowerCase().includes(searchValue);
-        case 'parent':
-          return s.parent_name && s.parent_name.toLowerCase().includes(searchValue);
-        case 'teacher':
-          return s.teacher_name && s.teacher_name.toLowerCase().includes(searchValue);
-        default:
-          return false;
-      }
+    switch (searchBy) {
+      case 'all':
+        return s.name.toLowerCase().includes(term) ||
+          (s.parent_name && s.parent_name.toLowerCase().includes(term)) ||
+          (s.class_name && s.class_name.toLowerCase().includes(term)) ||
+          (s.bus_number && s.bus_number.toLowerCase().includes(term)) ||
+          (s.roll_number && s.roll_number.toLowerCase().includes(term));
+      case 'name':
+        return s.name.toLowerCase().includes(term);
+      case 'roll':
+        return s.roll_number && s.roll_number.toLowerCase().includes(term);
+      case 'bus':
+        return s.bus_number && s.bus_number.toLowerCase().includes(term);
+      case 'class':
+        return s.class_name && s.class_name.toLowerCase().includes(term);
+      case 'parent':
+        return s.parent_name && s.parent_name.toLowerCase().includes(term);
+      case 'teacher':
+        return s.teacher_name && s.teacher_name.toLowerCase().includes(term);
+      default:
+        return true;
     }
-    
-    // Default: search across all fields
-    return s.name.toLowerCase().includes(term) ||
-      (s.parent_name && s.parent_name.toLowerCase().includes(term)) ||
-      (s.class_name && s.class_name.toLowerCase().includes(term)) ||
-      (s.bus_number && s.bus_number.toLowerCase().includes(term)) ||
-      (s.roll_number && s.roll_number.toLowerCase().includes(term));
   });
 
   const filteredUsers = users.filter(u =>
