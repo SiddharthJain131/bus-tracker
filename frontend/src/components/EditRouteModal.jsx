@@ -157,7 +157,9 @@ export default function EditRouteModal({ route, open, onClose, onSuccess }) {
             stop_name: stop.stop_name,
             lat: parseFloat(stop.lat),
             lon: parseFloat(stop.lon),
-            order_index: stop.order_index
+            order_index: stop.order_index,
+            morning_expected_time: stop.morning_expected_time || null,
+            evening_expected_time: stop.evening_expected_time || null
           });
           processedStops.push(stopResponse.data);
         } else {
@@ -167,7 +169,9 @@ export default function EditRouteModal({ route, open, onClose, onSuccess }) {
             stop_name: stop.stop_name,
             lat: parseFloat(stop.lat),
             lon: parseFloat(stop.lon),
-            order_index: stop.order_index
+            order_index: stop.order_index,
+            morning_expected_time: stop.morning_expected_time || null,
+            evening_expected_time: stop.evening_expected_time || null
           });
           processedStops.push(stopResponse.data);
         }
