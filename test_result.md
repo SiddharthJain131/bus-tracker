@@ -693,6 +693,66 @@ backend:
         agent: "main"
         comment: "ENHANCED - Added Eye icon overlay on hover to indicate photos are viewable, removed all remaining transition effects. CHANGES: 1) Added Eye icon overlay: StudentDetailModal.jsx (w-8 h-8), AdminDashboardNew.jsx (w-7 h-7), TeacherDashboardNew.jsx (w-7 h-7), UserProfileHeader.jsx (w-6 h-6), UserDetailModal.jsx (w-8 h-8). All show Eye icon in semi-transparent black overlay (bg-opacity-40) on hover. 2) Removed all transition effects: removed 'transition-all duration-300', 'transition-transform duration-300' classes from all photo elements. 3) Updated StudentCard.jsx: removed hover scale effects and transitions from both compact and full card views. 4) Updated UserDetailModal.jsx: added PhotoViewerModal integration (view-only, no edit), added Eye icon overlay on hover, removed transition effects. FEATURES: Eye icon appears on hover to indicate photo is clickable/viewable, consistent 40% black overlay across all components, no animations or transitions for cleaner interaction, all photos clickable to view full-size. Ready for testing: Hover over any profile photo to see Eye icon overlay, Click to view photo in full-size modal, Verify no scale/transition animations remain, Test across all dashboards (Admin/Teacher/Parent)."
 
+  - task: "Attendance-Specific Backup System"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/backup_attendance_data.py, /app/backend/seed_data.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Created separate attendance backup subsystem alongside existing main backup. BACKUP SCRIPT: Created /app/backend/backup_attendance_data.py that exports only attendance-related collections (attendance, events) and photo references to separate JSON files. Files stored in /app/backups/attendance/ with naming pattern attendance_backup_YYYYMMDD_HHMM.json. Implements same rotation logic as main backup (keeps 3 most recent by default). AUTO-RESTORE ON STARTUP: Modified seed_data.py to include get_latest_attendance_backup() and restore_attendance_from_backup() functions. On startup, after restoring main backup, system automatically checks for and restores latest attendance backup. Attendance data restored before normal operations begin. FEATURES: Separate backup file for attendance data, automatic rotation maintaining 3 most recent, includes attendance photo references (scan photos, attendance folders), restores automatically on system startup after main backup restore, same backup interval as main system (configurable via SEED_INTERVAL_HOURS). Ready for testing: Verify attendance backup creation, verify rotation works, verify auto-restore on startup, verify attendance data preserved across restarts."
+
+  - task: "Enhanced Stop Model with Time Fields"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Updated Stop model to include expected arrival times for both morning and evening operations. MODEL CHANGES: Added morning_expected_time field (Optional[str], HH:MM format) for morning trip expected arrival, Added evening_expected_time field (Optional[str], HH:MM format) for evening trip expected arrival. These fields are optional to support gradual adoption. CRUD ENDPOINTS: Existing stop CRUD endpoints (GET/POST/PUT /api/stops) automatically support new fields via Pydantic model. No endpoint changes needed. CONFIGURATION: Added RED_STATUS_THRESHOLD=10 to .env file (default 10 minutes for missed scan detection). Ready for testing: Create/update stops with morning/evening times, verify times stored in database, verify stop CRUD operations preserve time fields."
+
+  - task: "Automated Scan Status Logic"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Completely replaced manual yellow/green status with automated backend logic. SCAN_TYPE REMOVED: Removed scan_type field from ScanEventRequest model. Raspberry Pi now sends only basic scan info (student_id, timestamp, location, verified, confidence). AUTOMATED LOGIC: Direction detection based on time of day (morning if hour < 12, evening if hour >= 12). First scan: Creates attendance record with status='yellow' (IN - student boarded). Second scan: Updates attendance to status='green' (reached destination). Morning logic: pickup stop scan = yellow, school scan = green. Evening logic: school scan = yellow, home stop scan = green. IDEMPOTENCY: Duplicate scans handled - existing record check prevents multiple yellow entries. Status transitions: gray -> yellow -> green (or red if threshold exceeded). LOGGING: Enhanced logging shows direction, scan sequence, and final status. Ready for testing: Verify first scan creates yellow status, verify second scan updates to green, verify morning/evening direction detection, verify idempotent behavior with duplicate scans."
+
+  - task: "Attendance Monitor Daemon"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py, /app/backend/attendance_monitor.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Created background daemon that continuously monitors attendance and marks RED status for missed scans. MONITORING LOGIC: Runs as background asyncio task started on server startup. Checks every 60 seconds for students who should have been scanned. Compares current time against stop expected times (morning_expected_time or evening_expected_time based on trip). If current time > expected time + threshold (10 min default), marks as RED. Handles two RED scenarios: 1) No scan at all - creates RED attendance record, 2) Incomplete journey (stuck in yellow) - updates to RED if yellow duration > threshold. BACKGROUND TASKS: Added start_attendance_monitor() function that runs continuously. Added start_backup_scheduler() function for scheduled backups. Both launched as asyncio background tasks in startup event. CONFIGURATION: Uses RED_STATUS_THRESHOLD from .env (default 10 minutes). Check interval: 60 seconds (hardcoded). LOGGING: Logs each RED status marking with student ID, reason, and timing details. Ready for testing: Verify monitor starts on server startup, simulate missed scan and verify RED marking, verify incomplete journey detection, verify threshold timing calculations."
+
+  - task: "Backup Scheduler Background Task"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Added background task scheduler for automatic backups at regular intervals. SCHEDULER LOGIC: Runs both main backup (backup_seed_data.py) and attendance backup (backup_attendance_data.py) at intervals defined by SEED_INTERVAL_HOURS env variable. Uses subprocess to execute backup scripts. Default interval: 1 hour (configurable). Retries on error with 5-minute delay. STARTUP INTEGRATION: Launched as asyncio background task in server startup event. Runs continuously while server is running. Independent of main server request processing. FEATURES: Automated backup rotation (maintains 3 most recent of each type), both main and attendance backups run together, error handling with retry logic, configurable interval via environment variable. Ready for testing: Verify scheduler starts on startup, verify backups run at intervals, verify both backup types execute, verify error handling and retry logic."
+
 frontend:
   - task: "Login page"
     implemented: true
