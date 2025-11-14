@@ -193,11 +193,40 @@ export default function TeacherDashboardNew({ user, onLogout }) {
   const uniqueBuses = [...new Set(students.map(s => s.bus_number).filter(Boolean))];
   const statusOptions = ['gray', 'yellow', 'green', 'red', 'blue'];
 
-  // Apply filters
+  // Apply filters with parameter-based search
   const filteredStudents = students.filter(student => {
-    const matchesSearch = 
-      student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (student.parent_name && student.parent_name.toLowerCase().includes(searchTerm.toLowerCase()));
+    const term = searchTerm.toLowerCase().trim();
+    let matchesSearch = true;
+    
+    // Check for parameter-based search (e.g., "bus:BUS-001", "roll:G5A-001")
+    if (term.includes(':')) {
+      const [param, value] = term.split(':').map(p => p.trim());
+      const searchValue = value.toLowerCase();
+      
+      switch (param) {
+        case 'bus':
+          matchesSearch = student.bus_number && student.bus_number.toLowerCase().includes(searchValue);
+          break;
+        case 'roll':
+          matchesSearch = student.roll_number && student.roll_number.toLowerCase().includes(searchValue);
+          break;
+        case 'name':
+          matchesSearch = student.name.toLowerCase().includes(searchValue);
+          break;
+        case 'parent':
+          matchesSearch = student.parent_name && student.parent_name.toLowerCase().includes(searchValue);
+          break;
+        default:
+          matchesSearch = false;
+      }
+    } else if (term) {
+      // Default: search across all fields
+      matchesSearch = 
+        student.name.toLowerCase().includes(term) ||
+        (student.parent_name && student.parent_name.toLowerCase().includes(term)) ||
+        (student.bus_number && student.bus_number.toLowerCase().includes(term)) ||
+        (student.roll_number && student.roll_number.toLowerCase().includes(term));
+    }
     
     const matchesBus = !filterBus || student.bus_number === filterBus;
     const matchesAM = !filterAMStatus || student.am_status === filterAMStatus;
