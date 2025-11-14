@@ -1640,6 +1640,22 @@ async def get_teacher_students(current_user: dict = Depends(get_current_user)):
             student['parent_name'] = parent['name'] if parent else 'N/A'
         else:
             student['parent_name'] = 'N/A'
+        
+        # Add stop name and times
+        if student.get('stop_id'):
+            stop = await db.stops.find_one({"stop_id": student['stop_id']}, {"_id": 0})
+            if stop:
+                student['stop_name'] = stop['stop_name']
+                student['morning_expected_time'] = stop.get('morning_expected_time', 'N/A')
+                student['evening_expected_time'] = stop.get('evening_expected_time', 'N/A')
+            else:
+                student['stop_name'] = 'N/A'
+                student['morning_expected_time'] = 'N/A'
+                student['evening_expected_time'] = 'N/A'
+        else:
+            student['stop_name'] = 'N/A'
+            student['morning_expected_time'] = 'N/A'
+            student['evening_expected_time'] = 'N/A'
     
     return students
 
