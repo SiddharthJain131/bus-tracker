@@ -79,9 +79,19 @@ export default function RouteVisualizationModal({ routeId, open, onClose }) {
                       <div className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-lg mb-2">
                         {index + 1}
                       </div>
-                      <div className="text-center min-w-[120px]">
+                      <div className="text-center min-w-[140px]">
                         <div className="font-medium text-gray-900">{stop.stop_name}</div>
-                        <div className="text-xs text-gray-500 mt-1">
+                        {stop.morning_expected_time && stop.morning_expected_time !== 'N/A' && (
+                          <div className="text-xs mt-2 space-y-1">
+                            <div className="text-amber-600 font-semibold">
+                              ☀️ {stop.morning_expected_time}
+                            </div>
+                            <div className="text-indigo-600 font-semibold">
+                              🌙 {stop.evening_expected_time}
+                            </div>
+                          </div>
+                        )}
+                        <div className="text-xs text-gray-400 mt-1">
                           {stop.lat.toFixed(4)}, {stop.lon.toFixed(4)}
                         </div>
                       </div>
