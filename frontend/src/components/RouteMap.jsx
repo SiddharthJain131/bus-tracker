@@ -78,7 +78,10 @@ export default function RouteMap({ route }) {
           });
 
           const marker = L.marker([stop.lat, stop.lon], { icon: markerIcon }).addTo(mapInstanceRef.current);
-          marker.bindPopup(`<b>${stop.stop_name}</b><br>Stop ${index + 1}`);
+          const timesHtml = stop.morning_expected_time && stop.morning_expected_time !== 'N/A' 
+            ? `<br><span style="color: #d97706; font-weight: 600;">☀️ ${stop.morning_expected_time}</span><br><span style="color: #4f46e5; font-weight: 600;">🌙 ${stop.evening_expected_time}</span>`
+            : '';
+          marker.bindPopup(`<b>${stop.stop_name}</b><br>Stop ${index + 1}${timesHtml}`);
         });
       }
     }
