@@ -164,6 +164,89 @@ async def restore_from_backup(backup_path: Path) -> bool:
         return False
 
 
+def get_latest_attendance_backup() -> Optional[Path]:
+    """Find the most recent attendance backup file"""
+    attendance_backup_dir = BACKUP_DIR / 'attendance'
+    if not attendance_backup_dir.exists():
+        return None
+    
+    backup_files = list(attendance_backup_dir.glob('attendance_backup_*.json'))
+    if not backup_files:
+        return None
+    
+    # Sort by filename (timestamp) in descending order
+    backup_files.sort(reverse=True)
+    return backup_files[0]
+
+
+async def restore_attendance_from_backup(backup_path: Path) -> bool:
+    """
+    Restore attendance data from attendance-specific backup file
+    Includes: attendance, events (scan events), and photo references
+    Returns True if successful, False otherwise
+    """
+    print("\n" + "=" * 60)
+    print(f"📸 RESTORING ATTENDANCE FROM BACKUP: {backup_path.name}")
+    print("=" * 60)
+    
+    try:
+        # Load backup data
+        with open(backup_path, 'r') as f:
+            backup_data = json.load(f)
+        
+        backup_timestamp = backup_data.get('timestamp', 'Unknown')
+        backup_type = backup_data.get('backup_type', 'Unknown')
+        print(f"   📅 Backup created: {backup_timestamp}")
+        print(f"   📋 Backup type: {backup_type}")
+        
+        collections_data = backup_data.get('collections', {})
+        photo_references = backup_data.get('photo_references', {})
+        
+        # Restore attendance collections
+        print("\n📥 Restoring attendance collections:")
+        restored_count = 0
+        
+        attendance_collections = ['attendance', 'events']
+        for collection_name in attendance_collections:
+            if collection_name not in collections_data:
+                print(f"   ⚠️  {collection_name}: Not found in backup, skipping")
+                continue
+            
+            documents = collections_data[collection_name]
+            
+            if not documents:
+                print(f"   ℹ️  {collection_name}: Empty in backup, skipping")
+                continue
+            
+            try:
+                # Clear existing data first
+                await db[collection_name].delete_many({})
+                # Insert documents
+                await db[collection_name].insert_many(documents)
+                print(f"   ✅ {collection_name}: {len(documents)} document(s) restored")
+                restored_count += 1
+            except Exception as e:
+                print(f"   ❌ {collection_name}: Restore failed - {e}")
+                return False
+        
+        # Log photo references info
+        print("\n📸 Attendance photo references:")
+        scan_photos = photo_references.get('scan_photos', [])
+        attendance_folders = photo_references.get('student_attendance_folders', [])
+        print(f"   ℹ️  Scan photos: {len(scan_photos)} reference(s)")
+        print(f"   ℹ️  Attendance folders: {len(attendance_folders)} folder(s)")
+        
+        print(f"\n✅ Successfully restored {restored_count} attendance collection(s) from backup")
+        return True
+        
+    except json.JSONDecodeError as e:
+        print(f"\n❌ Attendance backup file is corrupted or invalid JSON: {e}")
+        return False
+    except Exception as e:
+        print(f"\n❌ Attendance restore failed: {e}")
+        return False
+
+
 async def seed_data():
     print("=" * 60)
     print("🌱 STARTING COMPREHENSIVE DATABASE SEEDING")
