@@ -126,6 +126,18 @@ export default function StudentCard({ student, compact = false }) {
                 <div>
                   <div className="text-xs text-gray-500">Stop</div>
                   <div className="font-medium">{student.stop_name || 'N/A'}</div>
+                  {student.morning_expected_time && student.morning_expected_time !== 'N/A' && (
+                    <div className="text-xs text-gray-600 mt-1 space-y-0.5">
+                      <div className="flex items-center gap-1">
+                        <Clock className="w-3 h-3 text-amber-600" />
+                        <span>Morning: <span className="font-semibold text-amber-700">{student.morning_expected_time}</span></span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Clock className="w-3 h-3 text-indigo-600" />
+                        <span>Evening: <span className="font-semibold text-indigo-700">{student.evening_expected_time}</span></span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
