@@ -194,39 +194,36 @@ export default function TeacherDashboardNew({ user, onLogout }) {
   const uniqueBuses = [...new Set(students.map(s => s.bus_number).filter(Boolean))];
   const statusOptions = ['gray', 'yellow', 'green', 'red', 'blue'];
 
-  // Apply filters with parameter-based search
+  // Apply filters with dropdown-based search
   const filteredStudents = students.filter(student => {
-    const term = searchTerm.toLowerCase().trim();
     let matchesSearch = true;
     
-    // Check for parameter-based search (e.g., "bus:BUS-001", "roll:G5A-001")
-    if (term.includes(':')) {
-      const [param, value] = term.split(':').map(p => p.trim());
-      const searchValue = value.toLowerCase();
+    if (searchTerm.trim()) {
+      const term = searchTerm.toLowerCase().trim();
       
-      switch (param) {
-        case 'bus':
-          matchesSearch = student.bus_number && student.bus_number.toLowerCase().includes(searchValue);
-          break;
-        case 'roll':
-          matchesSearch = student.roll_number && student.roll_number.toLowerCase().includes(searchValue);
+      switch (searchBy) {
+        case 'all':
+          matchesSearch = 
+            student.name.toLowerCase().includes(term) ||
+            (student.parent_name && student.parent_name.toLowerCase().includes(term)) ||
+            (student.bus_number && student.bus_number.toLowerCase().includes(term)) ||
+            (student.roll_number && student.roll_number.toLowerCase().includes(term));
           break;
         case 'name':
-          matchesSearch = student.name.toLowerCase().includes(searchValue);
+          matchesSearch = student.name.toLowerCase().includes(term);
+          break;
+        case 'roll':
+          matchesSearch = student.roll_number && student.roll_number.toLowerCase().includes(term);
+          break;
+        case 'bus':
+          matchesSearch = student.bus_number && student.bus_number.toLowerCase().includes(term);
           break;
         case 'parent':
-          matchesSearch = student.parent_name && student.parent_name.toLowerCase().includes(searchValue);
+          matchesSearch = student.parent_name && student.parent_name.toLowerCase().includes(term);
           break;
         default:
-          matchesSearch = false;
+          matchesSearch = true;
       }
-    } else if (term) {
-      // Default: search across all fields
-      matchesSearch = 
-        student.name.toLowerCase().includes(term) ||
-        (student.parent_name && student.parent_name.toLowerCase().includes(term)) ||
-        (student.bus_number && student.bus_number.toLowerCase().includes(term)) ||
-        (student.roll_number && student.roll_number.toLowerCase().includes(term));
     }
     
     const matchesBus = !filterBus || student.bus_number === filterBus;
