@@ -390,15 +390,25 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                 
                 {/* Search and Filters */}
                 <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
-                  <div className="md:col-span-2 relative">
+                  <select
+                    value={searchBy}
+                    onChange={(e) => setSearchBy(e.target.value)}
+                    className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white text-sm"
+                  >
+                    <option value="all">All Fields</option>
+                    <option value="name">Name</option>
+                    <option value="roll">Roll No</option>
+                    <option value="bus">Bus</option>
+                    <option value="parent">Parent</option>
+                  </select>
+                  <div className="relative">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                     <Input
                       type="text"
-                      placeholder="Search... (try: bus:BUS-001 or roll:G5A-001)"
+                      placeholder="Search for..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       className="pl-10"
-                      title="Search by name, or use bus:BUS-001, roll:G5A-001, parent:John"
                     />
                   </div>
                   
