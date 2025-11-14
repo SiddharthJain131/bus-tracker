@@ -1722,13 +1722,21 @@ async def simulate_scan():
     lat = 37.7749 + random.uniform(-0.05, 0.05)
     lon = -122.4194 + random.uniform(-0.05, 0.05)
     
+    # Generate photo URL for the scan (matches new naming convention: YYYY-MM-DD_{AM|PM}.jpg)
+    # No status suffix (_green or _yellow) - the same photo is used for both IN and OUT scans
+    current_time = datetime.now(timezone.utc)
+    today = current_time.strftime("%Y-%m-%d")
+    trip = "AM" if current_time.hour < 12 else "PM"
+    photo_url = f"/api/photos/students/{student['student_id']}/attendance/{today}_{trip}.jpg"
+    
     request = ScanEventRequest(
         student_id=student['student_id'],
         tag_id=f"RFID-{random.randint(1000, 9999)}",
         verified=verified,
         confidence=confidence,
         lat=lat,
-        lon=lon
+        lon=lon,
+        photo_url=photo_url
     )
     
     result = await scan_event(request)
