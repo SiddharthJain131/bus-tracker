@@ -189,8 +189,7 @@ export default function TeacherDashboardNew({ user, onLogout }) {
     setShowAttendanceModal(true);
   };
 
-  // Get unique bus numbers for filter
-  const uniqueBuses = [...new Set(students.map(s => s.bus_number).filter(Boolean))];
+  // Status options for filters
   const statusOptions = ['gray', 'yellow', 'green', 'red', 'blue'];
 
   // Apply filters with dropdown-based search
