@@ -582,10 +582,15 @@ async def scan_event(request: ScanEventRequest, device: dict = Depends(verify_de
     """
     Device-only endpoint for recording RFID scan events.
     Requires X-API-Key header authentication.
-    Supports both Yellow (On Board) and Green (Reached) status based on scan_type.
+    Automatically determines status (YELLOW/GREEN) based on:
+    - Time of day (morning < 12:00 PM, evening >= 12:00 PM)
+    - Scan sequence (first scan = IN/YELLOW, second scan = GREEN)
+    - Direction logic (morning: pickup->school, evening: school->home)
     """
     timestamp = datetime.now(timezone.utc).isoformat()
+    current_time = datetime.now(timezone.utc)
     
+    # Record the scan event
     event = Event(
         student_id=request.student_id,
         tag_id=request.tag_id,
@@ -597,9 +602,14 @@ async def scan_event(request: ScanEventRequest, device: dict = Depends(verify_de
     )
     await db.events.insert_one(event.model_dump())
     
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    hour = datetime.now(timezone.utc).hour
-    trip = "AM" if hour < 12 else "PM"
+    today = current_time.strftime("%Y-%m-%d")
+    hour = current_time.hour
+    
+    # Determine trip direction based on time of day
+    # Morning: before 12:00 PM (first scan at pickup = IN/YELLOW, second at school = GREEN)
+    # Evening: at or after 12:00 PM (first scan at school = IN/YELLOW, second at home = OUT/GREEN)
+    is_morning = hour < 12
+    trip = "AM" if is_morning else "PM"
     
     existing = await db.attendance.find_one({
         "student_id": request.student_id,
@@ -608,26 +618,34 @@ async def scan_event(request: ScanEventRequest, device: dict = Depends(verify_de
     })
     
     if request.verified:
-        # Use scan_type to determine status: "yellow" = On Board, "green" = Reached
-        status = request.scan_type if request.scan_type in ["yellow", "green"] else "yellow"
-        
-        update_data = {
-            "status": status, 
-            "confidence": request.confidence, 
-            "last_update": timestamp
-        }
-        
-        # Add photo and scan timestamp if provided
-        if request.photo_url:
-            update_data["scan_photo"] = request.photo_url
-            update_data["scan_timestamp"] = timestamp
-        
+        # Determine status based on scan sequence
         if existing:
+            # This is the second scan
+            # Morning: student reached school (GREEN)
+            # Evening: student reached home (GREEN)
+            status = "green"
+            
+            update_data = {
+                "status": status, 
+                "confidence": request.confidence, 
+                "last_update": timestamp
+            }
+            
+            # Add photo and scan timestamp if provided
+            if request.photo_url:
+                update_data["scan_photo"] = request.photo_url
+                update_data["scan_timestamp"] = timestamp
+            
             await db.attendance.update_one(
                 {"student_id": request.student_id, "date": today, "trip": trip},
                 {"$set": update_data}
             )
         else:
+            # This is the first scan
+            # Morning: student boarded at pickup stop (IN/YELLOW)
+            # Evening: student boarded at school (IN/YELLOW)
+            status = "yellow"
+            
             attendance = Attendance(
                 student_id=request.student_id,
                 date=today,
@@ -640,8 +658,11 @@ async def scan_event(request: ScanEventRequest, device: dict = Depends(verify_de
             )
             await db.attendance.insert_one(attendance.model_dump())
         
-        logging.info(f"Scan event recorded: Student {request.student_id}, Status: {status}, Device: {device['device_name']}")
+        direction = "morning" if is_morning else "evening"
+        scan_sequence = "second" if existing else "first"
+        logging.info(f"Scan event recorded: Student {request.student_id}, Direction: {direction}, Sequence: {scan_sequence}, Status: {status}, Device: {device['device_name']}")
     else:
+        # Identity mismatch - create notification for parent
         student = await db.students.find_one({"student_id": request.student_id}, {"_id": 0})
         if student:
             notification = Notification(
@@ -651,8 +672,9 @@ async def scan_event(request: ScanEventRequest, device: dict = Depends(verify_de
                 type="mismatch"
             )
             await db.notifications.insert_one(notification.model_dump())
+        status = "not_recorded"
     
-    return {"status": "success", "event_id": event.event_id, "attendance_status": status if request.verified else "not_recorded"}
+    return {"status": "success", "event_id": event.event_id, "attendance_status": status}
 
 @api_router.post("/update_location")
 async def update_location(request: UpdateLocationRequest, device: dict = Depends(verify_device_key)):
