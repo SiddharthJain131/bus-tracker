@@ -823,6 +823,22 @@ async def get_students(current_user: dict = Depends(get_current_user)):
         else:
             student['bus_number'] = 'N/A'
         
+        # Enrich with stop name and times
+        if student.get('stop_id'):
+            stop = await db.stops.find_one({"stop_id": student['stop_id']}, {"_id": 0})
+            if stop:
+                student['stop_name'] = stop['stop_name']
+                student['morning_expected_time'] = stop.get('morning_expected_time', 'N/A')
+                student['evening_expected_time'] = stop.get('evening_expected_time', 'N/A')
+            else:
+                student['stop_name'] = 'N/A'
+                student['morning_expected_time'] = 'N/A'
+                student['evening_expected_time'] = 'N/A'
+        else:
+            student['stop_name'] = 'N/A'
+            student['morning_expected_time'] = 'N/A'
+            student['evening_expected_time'] = 'N/A'
+        
         # Convert photo_path to accessible URL
         if student.get('photo_path'):
             student['photo_url'] = get_photo_url(student['photo_path'])
