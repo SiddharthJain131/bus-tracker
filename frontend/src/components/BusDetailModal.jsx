@@ -106,14 +106,24 @@ export default function BusDetailModal({ bus, open, onClose }) {
                 <div className="flex items-center justify-center gap-2 mb-6 overflow-x-auto pb-4">
                   {routeData.stops.map((stop, index) => (
                     <React.Fragment key={stop.stop_id}>
-                      <div className="flex flex-col items-center min-w-[100px]">
+                      <div className="flex flex-col items-center min-w-[140px]">
                         <div className="w-12 h-12 bg-orange-100 border-2 border-orange-500 rounded-full flex items-center justify-center">
                           <MapPin className="w-6 h-6 text-orange-600" />
                         </div>
                         <p className="text-xs font-medium text-center mt-2 text-gray-700">
                           {stop.stop_name}
                         </p>
-                        <p className="text-xs text-gray-500">Stop {stop.order_index + 1}</p>
+                        <p className="text-xs text-gray-500 mb-1">Stop {stop.order_index + 1}</p>
+                        {stop.morning_expected_time && stop.morning_expected_time !== 'N/A' && (
+                          <div className="text-xs mt-1 space-y-0.5 text-center">
+                            <div className="text-amber-600 font-semibold">
+                              ☀️ {stop.morning_expected_time}
+                            </div>
+                            <div className="text-indigo-600 font-semibold">
+                              🌙 {stop.evening_expected_time}
+                            </div>
+                          </div>
+                        )}
                       </div>
                       {index < routeData.stops.length - 1 && (
                         <div className="w-16 h-0.5 bg-orange-300 mt-6"></div>
