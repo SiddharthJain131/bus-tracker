@@ -81,7 +81,7 @@ def generate_sample_attendance_records(students: List[Dict]) -> List[Dict]:
             
             # Morning sequence (yellow → green)
             # First scan at pickup stop (yellow)
-            morning_pickup_time = date.replace(hour=7, minute=30 + (day_offset * 5))
+            morning_pickup_time = date.replace(hour=7, minute=30) + timedelta(minutes=(day_offset * 5))
             records.append({
                 "_id": f"att_{uuid.uuid4().hex[:16]}",
                 "attendance_id": str(uuid.uuid4()),
@@ -113,7 +113,7 @@ def generate_sample_attendance_records(students: List[Dict]) -> List[Dict]:
             
             # Evening sequence (yellow → green)
             # First scan at school (yellow)
-            evening_school_time = date.replace(hour=15, minute=10 + (day_offset * 3))
+            evening_school_time = date.replace(hour=15, minute=10) + timedelta(minutes=(day_offset * 3))
             records.append({
                 "_id": f"att_{uuid.uuid4().hex[:16]}",
                 "attendance_id": str(uuid.uuid4()),
