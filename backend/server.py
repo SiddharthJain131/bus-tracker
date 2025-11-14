@@ -1693,7 +1693,7 @@ logger = logging.getLogger(__name__)
 
 @app.on_event("startup")
 async def startup_db_seed():
-    """Auto-seed database on first startup if collections are empty"""
+    """Auto-seed database on first startup if collections are empty and start attendance monitor"""
     try:
         # Create compound unique index for student uniqueness (class, section, roll_number)
         try:
@@ -1724,6 +1724,15 @@ async def startup_db_seed():
         else:
             print("✅ Database already populated, skipping seeding.")
             print(f"   Current data: {users_count} users, {students_count} students, {buses_count} buses, {routes_count} routes")
+        
+        # Start attendance monitor as background task
+        asyncio.create_task(start_attendance_monitor())
+        print("🚨 Attendance monitor started in background")
+        
+        # Start backup scheduler as background task
+        asyncio.create_task(start_backup_scheduler())
+        print("💾 Backup scheduler started in background")
+        
     except Exception as e:
         print(f"⚠️ Auto-seeding skipped due to error: {str(e)}")
         print("   You can manually run seeding with: cd /app/backend && python seed_data.py")
