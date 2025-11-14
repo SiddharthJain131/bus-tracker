@@ -54,8 +54,8 @@ export default function AttendanceGrid({ studentId }) {
       trip: 'PM'
     };
 
-    // Only open modal if status is green
-    if (tripData.status === 'green') {
+    // Open modal for both yellow and green status
+    if (tripData.status === 'green' || tripData.status === 'yellow') {
       setSelectedScan({
         ...tripData,
         date: day.date,
