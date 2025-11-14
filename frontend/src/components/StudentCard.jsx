@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from './ui/card';
-import { User, GraduationCap, Bus, Phone, AlertCircle, MapPin } from 'lucide-react';
+import { User, GraduationCap, Bus, Phone, AlertCircle, MapPin, Clock } from 'lucide-react';
 import { getInitials } from '../utils/helpers';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
