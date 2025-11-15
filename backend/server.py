@@ -189,7 +189,7 @@ class ScanEventRequest(BaseModel):
     # Note: scan_type removed - status determined automatically by backend
 
 class UpdateLocationRequest(BaseModel):
-    bus_id: str
+    bus_number: str
     lat: float
     lon: float
 
