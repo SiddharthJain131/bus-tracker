@@ -825,7 +825,6 @@ async def seed_data():
             "name": "Emma Johnson",
             "roll_number": "G5A-001",
             "tag_id": "RFID-1001",
-            "tag_id": "RFID-1001",
             "phone": "+1-555-4001",
             "photo": f"/api/photos/students/{student_ids[0]}/profile.jpg",
             "class_name": "5",
