@@ -84,11 +84,11 @@ def init_rfid_reader() -> bool:
 
 def init_camera() -> bool:
     """Initialize Pi camera"""
+    global camera
     try:
         # Try to import picamera2 (newer) or picamera (legacy)
         try:
             from picamera2 import Picamera2
-            global camera
             camera = Picamera2()
             camera.configure(camera.create_still_configuration())
             print(f"{Colors.GREEN}✓ Camera initialized (picamera2){Colors.RESET}")
@@ -97,7 +97,6 @@ def init_camera() -> bool:
         except ImportError:
             try:
                 import picamera
-                global camera
                 camera = picamera.PiCamera()
                 print(f"{Colors.GREEN}✓ Camera initialized (picamera){Colors.RESET}")
                 return True
