@@ -292,10 +292,50 @@ async def seed_data():
             else:
                 print("\nℹ️  No attendance backup found, attendance data will be empty")
             
+            # Create sample notifications for admin even when restoring from backup
+            print("\n" + "=" * 60)
+            print("🔔 CREATING SAMPLE NOTIFICATIONS FOR ADMIN")
+            print("=" * 60)
+            
+            admin_user = await db.users.find_one({"role": "admin"})
+            if admin_user:
+                now = datetime.now(timezone.utc)
+                admin_notifications = [
+                    {
+                        "notification_id": str(uuid.uuid4()),
+                        "user_id": admin_user['user_id'],
+                        "title": "System Update",
+                        "message": "Bus tracking system has been updated with new features",
+                        "type": "update",
+                        "timestamp": (now - timedelta(hours=2)).isoformat(),
+                        "read": False
+                    },
+                    {
+                        "notification_id": str(uuid.uuid4()),
+                        "user_id": admin_user['user_id'],
+                        "title": "New Device Registered",
+                        "message": "A new Raspberry Pi device was registered for BUS-001",
+                        "type": "update",
+                        "timestamp": (now - timedelta(hours=5)).isoformat(),
+                        "read": False
+                    },
+                    {
+                        "notification_id": str(uuid.uuid4()),
+                        "user_id": admin_user['user_id'],
+                        "title": "Attendance Summary",
+                        "message": "Daily attendance report: 18/20 students marked present",
+                        "type": "update",
+                        "timestamp": (now - timedelta(days=1)).isoformat(),
+                        "read": True
+                    }
+                ]
+                await db.notifications.insert_many(admin_notifications)
+                print(f"✅ Created {len(admin_notifications)} notifications for admin")
+            
             print("\n" + "=" * 60)
             print("✅ SEEDING COMPLETED (FROM BACKUP)")
             print("=" * 60)
-            print("\n⚠️  Note: Notifications and logs not restored (use fresh data)")
+            print("\n⚠️  Note: Notifications created fresh (not from backup)")
             print(TEST_CREDENTIALS)
             return
         else:
