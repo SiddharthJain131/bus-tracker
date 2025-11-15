@@ -197,6 +197,8 @@ export default function AdminDashboardNew({ user, onLogout }) {
   const [editHoliday, setEditHoliday] = useState(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [showNotificationDetail, setShowNotificationDetail] = useState(false);
+  const [selectedNotification, setSelectedNotification] = useState(null);
   
   // Photo viewer state
   const [showPhotoViewer, setShowPhotoViewer] = useState(false);
