@@ -757,7 +757,7 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                 <div className="flex items-center gap-2 text-sm text-gray-700">
                   <Calendar className="w-4 h-4 text-gray-500" />
                   <span className="font-medium">Scan Time:</span>
-                  <span>{formatTimestamp(selectedScan.timestamp)}</span>
+                  <span>{formatScanTimestamp(selectedScan.timestamp)}</span>
                 </div>
               </div>
             </div>
