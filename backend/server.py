@@ -83,6 +83,7 @@ class Student(BaseModel):
     student_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     name: str
     roll_number: str  # Required for uniqueness constraint
+    tag_id: str  # RFID tag identifier for Pi scanning (unique per student)
     phone: Optional[str] = None
     photo: Optional[str] = None
     embedding: Optional[str] = None  # Face embedding data (base64 encoded)
