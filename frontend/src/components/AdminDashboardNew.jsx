@@ -1227,6 +1227,12 @@ export default function AdminDashboardNew({ user, onLogout }) {
         uploadEndpoint={`${API}/users/me/photo`}
         onPhotoUpdate={handleProfilePhotoUpdate}
       />
+
+      <NotificationDetailModal
+        notification={selectedNotification}
+        isOpen={showNotificationDetail}
+        onClose={() => setShowNotificationDetail(false)}
+      />
     </div>
   );
 }
