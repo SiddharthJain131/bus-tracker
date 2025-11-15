@@ -213,13 +213,13 @@ class Holiday(BaseModel):
 class DeviceKey(BaseModel):
     model_config = ConfigDict(extra="ignore")
     device_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    bus_id: str  # Links device to bus (1:1 relationship)
+    bus_number: str  # Links device to bus (1:1 relationship)
     device_name: str
     key_hash: str  # Hashed API key (using bcrypt)
     created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
 class DeviceKeyCreate(BaseModel):
-    bus_id: str
+    bus_number: str
     device_name: str
 
 # Helper: Send mock email and log
