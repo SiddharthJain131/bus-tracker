@@ -21,7 +21,7 @@ API_BASE = f"{BACKEND_URL}/api"
 # Test configuration
 ADMIN_EMAIL = "admin@school.com"
 ADMIN_PASSWORD = "password"
-BUS_NUMBER = "BUS-001"
+BUS_NUMBER = "BUS-002"
 DEVICE_NAME = "Pi-Test-Device"
 TEST_RFID = "RFID-1001"  # Emma Johnson
 
