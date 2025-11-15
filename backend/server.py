@@ -552,6 +552,248 @@ async def update_student_photo(student_id: str, file: UploadFile = File(...), cu
         logging.error(f"Error updating student photo: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
+# Generate embedding from existing student photo
+@api_router.post("/students/{student_id}/generate-embedding")
+async def generate_student_embedding(student_id: str, current_user: dict = Depends(get_current_user)):
+    """
+    Generate face embedding from student's existing photo.
+    Admin-only endpoint.
+    """
+    if current_user['role'] != 'admin':
+        raise HTTPException(status_code=403, detail="Only admins can generate embeddings")
+    
+    try:
+        # Validate student exists
+        student = await db.students.find_one({"student_id": student_id})
+        if not student:
+            raise HTTPException(status_code=404, detail="Student not found")
+        
+        # Check if student has a photo
+        photo_url = student.get('photo')
+        if not photo_url:
+            raise HTTPException(status_code=400, detail="Student has no photo. Please upload a photo first.")
+        
+        # Convert photo URL to file path
+        # Example: "/api/photos/students/{student_id}/profile.jpg" -> "photos/students/{student_id}/profile.jpg"
+        if photo_url.startswith('/api/photos/'):
+            photo_path = PHOTO_DIR / photo_url.replace('/api/photos/', '')
+        elif photo_url.startswith('/photos/'):
+            photo_path = PHOTO_DIR / photo_url.replace('/photos/', '')
+        else:
+            photo_path = PHOTO_DIR / photo_url
+        
+        if not photo_path.exists():
+            raise HTTPException(status_code=404, detail="Photo file not found on server")
+        
+        # Generate embedding
+        result = await generate_face_embedding(str(photo_path))
+        
+        if not result['success']:
+            raise HTTPException(status_code=400, detail=result['message'])
+        
+        # Update student record with embedding
+        await db.students.update_one(
+            {"student_id": student_id},
+            {"$set": {"embedding": result['embedding']}}
+        )
+        
+        logging.info(f"Generated embedding for student {student_id}: {student.get('name', 'Unknown')}")
+        
+        return {
+            "success": True,
+            "student_id": student_id,
+            "message": result['message'],
+            "has_embedding": True
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        logging.error(f"Error generating student embedding: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Upload photo and generate embedding in one step
+@api_router.post("/students/{student_id}/upload-photo-embedding")
+async def upload_student_photo_and_embedding(
+    student_id: str, 
+    file: UploadFile = File(...), 
+    current_user: dict = Depends(get_current_user)
+):
+    """
+    Upload student photo and generate face embedding in one step.
+    Admin-only endpoint.
+    """
+    if current_user['role'] != 'admin':
+        raise HTTPException(status_code=403, detail="Only admins can upload photos and generate embeddings")
+    
+    try:
+        # Validate student exists
+        student = await db.students.find_one({"student_id": student_id})
+        if not student:
+            raise HTTPException(status_code=404, detail="Student not found")
+        
+        # Validate file type
+        if not file.content_type.startswith('image/'):
+            raise HTTPException(status_code=400, detail="File must be an image")
+        
+        file_ext = file.filename.split('.')[-1].lower()
+        if file_ext not in ['jpg', 'jpeg', 'png', 'gif', 'webp']:
+            raise HTTPException(status_code=400, detail="Invalid image format. Use jpg, jpeg, png, gif, or webp")
+        
+        # Generate embedding first (before saving)
+        embedding_result = await generate_face_embedding(file)
+        
+        if not embedding_result['success']:
+            raise HTTPException(status_code=400, detail=embedding_result['message'])
+        
+        # If embedding generation succeeded, save the photo
+        student_dir = PHOTO_DIR / 'students' / student_id
+        student_dir.mkdir(parents=True, exist_ok=True)
+        
+        file_name = f"profile.{file_ext}"
+        file_path = student_dir / file_name
+        
+        # Save file
+        await file.seek(0)  # Reset file pointer after reading for embedding
+        with open(file_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+        
+        # Update database with both photo and embedding
+        photo_url = f"/api/photos/students/{student_id}/profile.{file_ext}"
+        await db.students.update_one(
+            {"student_id": student_id},
+            {"$set": {
+                "photo": photo_url,
+                "embedding": embedding_result['embedding']
+            }}
+        )
+        
+        logging.info(f"Uploaded photo and generated embedding for student {student_id}: {student.get('name', 'Unknown')}")
+        
+        return {
+            "success": True,
+            "student_id": student_id,
+            "photo_url": photo_url,
+            "has_embedding": True,
+            "message": f"Photo uploaded and {embedding_result['message']}"
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        logging.error(f"Error uploading photo and generating embedding: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Batch generate embeddings for all students with photos
+@api_router.post("/students/bulk-generate-embeddings")
+async def bulk_generate_embeddings(current_user: dict = Depends(get_current_user)):
+    """
+    Generate embeddings for all students who have photos but no embeddings.
+    Admin-only endpoint. Useful for initial setup or migration.
+    """
+    if current_user['role'] != 'admin':
+        raise HTTPException(status_code=403, detail="Only admins can bulk generate embeddings")
+    
+    try:
+        # Find all students with photos but no embeddings
+        students = await db.students.find({
+            "photo": {"$exists": True, "$ne": None, "$ne": ""},
+            "$or": [
+                {"embedding": {"$exists": False}},
+                {"embedding": None},
+                {"embedding": ""}
+            ]
+        }).to_list(length=None)
+        
+        if not students:
+            return {
+                "success": True,
+                "total_processed": 0,
+                "successful": 0,
+                "failed": 0,
+                "message": "No students found needing embeddings"
+            }
+        
+        results = {
+            "total_processed": len(students),
+            "successful": 0,
+            "failed": 0,
+            "details": []
+        }
+        
+        for student in students:
+            student_id = student['student_id']
+            student_name = student.get('name', 'Unknown')
+            photo_url = student.get('photo', '')
+            
+            try:
+                # Convert photo URL to file path
+                if photo_url.startswith('/api/photos/'):
+                    photo_path = PHOTO_DIR / photo_url.replace('/api/photos/', '')
+                elif photo_url.startswith('/photos/'):
+                    photo_path = PHOTO_DIR / photo_url.replace('/photos/', '')
+                else:
+                    photo_path = PHOTO_DIR / photo_url
+                
+                if not photo_path.exists():
+                    results['failed'] += 1
+                    results['details'].append({
+                        "student_id": student_id,
+                        "name": student_name,
+                        "success": False,
+                        "message": "Photo file not found"
+                    })
+                    continue
+                
+                # Generate embedding
+                embedding_result = await generate_face_embedding(str(photo_path))
+                
+                if embedding_result['success']:
+                    # Update student record
+                    await db.students.update_one(
+                        {"student_id": student_id},
+                        {"$set": {"embedding": embedding_result['embedding']}}
+                    )
+                    results['successful'] += 1
+                    results['details'].append({
+                        "student_id": student_id,
+                        "name": student_name,
+                        "success": True,
+                        "message": "Embedding generated successfully"
+                    })
+                else:
+                    results['failed'] += 1
+                    results['details'].append({
+                        "student_id": student_id,
+                        "name": student_name,
+                        "success": False,
+                        "message": embedding_result['message']
+                    })
+            
+            except Exception as e:
+                results['failed'] += 1
+                results['details'].append({
+                    "student_id": student_id,
+                    "name": student_name,
+                    "success": False,
+                    "message": str(e)
+                })
+        
+        logging.info(f"Bulk embedding generation: {results['successful']}/{results['total_processed']} successful")
+        
+        return {
+            "success": True,
+            "total_processed": results['total_processed'],
+            "successful": results['successful'],
+            "failed": results['failed'],
+            "message": f"Processed {results['total_processed']} students: {results['successful']} successful, {results['failed']} failed",
+            "details": results['details']
+        }
+    
+    except Exception as e:
+        logging.error(f"Error in bulk embedding generation: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 # Device API Key Management
 @api_router.post("/device/register")
 async def register_device(device_create: DeviceKeyCreate, current_user: dict = Depends(get_current_user)):
