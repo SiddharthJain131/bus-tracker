@@ -62,13 +62,13 @@ def install_deepface() -> bool:
 
 def init_rfid_reader() -> bool:
     """Initialize RFID reader hardware"""
+    global rfid_reader
     try:
         # Try to import RFID library (MFRC522 for RC522 module)
         try:
             import RPi.GPIO as GPIO
             from mfrc522 import SimpleMFRC522
             
-            global rfid_reader
             rfid_reader = SimpleMFRC522()
             print(f"{Colors.GREEN}✓ RFID reader initialized{Colors.RESET}")
             return True
