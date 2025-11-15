@@ -91,10 +91,17 @@ async def restore_from_backup(backup_path: Path) -> bool:
                 continue
             
             try:
+                # Remove _id field from documents (let MongoDB generate new ones)
+                clean_documents = []
+                for doc in documents:
+                    clean_doc = {k: v for k, v in doc.items() if k != '_id'}
+                    clean_documents.append(clean_doc)
+                
                 # Insert documents
-                await db[collection_name].insert_many(documents)
-                print(f"   ✅ {collection_name}: {len(documents)} document(s) restored")
-                restored_count += 1
+                if clean_documents:
+                    await db[collection_name].insert_many(clean_documents)
+                    print(f"   ✅ {collection_name}: {len(clean_documents)} document(s) restored")
+                    restored_count += 1
             except Exception as e:
                 print(f"   ❌ {collection_name}: Restore failed - {e}")
                 return False
