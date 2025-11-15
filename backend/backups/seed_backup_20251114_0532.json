@@ -329,7 +329,8 @@
         "stop_id": "aef02188-feea-4afb-b5cf-80607666023c",
         "emergency_contact": "+1-555-9101",
         "remarks": "Allergic to peanuts",
-        "attendance_path": "backend/photos/students/04a97662-e3f5-4c71-9283-55f3b2bd4d15/attendance"
+        "attendance_path": "backend/photos/students/04a97662-e3f5-4c71-9283-55f3b2bd4d15/attendance",
+        "tag_id": "RFID-1001"
       },
       {
         "_id": "6916bed743c9c10fae9b5a57",
@@ -346,7 +347,8 @@
         "stop_id": "9a29897e-bf69-42de-9298-1820e14e42f7",
         "emergency_contact": "+1-555-9102",
         "remarks": null,
-        "attendance_path": "backend/photos/students/d61d7051-16f3-4c80-a28b-55a3d475757c/attendance"
+        "attendance_path": "backend/photos/students/d61d7051-16f3-4c80-a28b-55a3d475757c/attendance",
+        "tag_id": "RFID-1002"
       },
       {
         "_id": "6916bed743c9c10fae9b5a58",
@@ -363,7 +365,8 @@
         "stop_id": "aa9f7e82-b8ab-4130-8e0f-dcafb818f4a1",
         "emergency_contact": "+1-555-9103",
         "remarks": "Needs glasses for reading",
-        "attendance_path": "backend/photos/students/84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51/attendance"
+        "attendance_path": "backend/photos/students/84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51/attendance",
+        "tag_id": "RFID-1003"
       },
       {
         "_id": "6916bed743c9c10fae9b5a59",
@@ -380,7 +383,8 @@
         "stop_id": "abe02119-1e83-4951-9e62-5201b73b8362",
         "emergency_contact": "+1-555-9104",
         "remarks": null,
-        "attendance_path": "backend/photos/students/90d5e32e-0b2a-451d-be26-67ba1e128b82/attendance"
+        "attendance_path": "backend/photos/students/90d5e32e-0b2a-451d-be26-67ba1e128b82/attendance",
+        "tag_id": "RFID-1004"
       },
       {
         "_id": "6916bed743c9c10fae9b5a5a",
@@ -397,7 +401,8 @@
         "stop_id": "d434f4a2-0ebe-4fbe-bc09-2c4a29b27f99",
         "emergency_contact": "+1-555-9105",
         "remarks": "School choir member",
-        "attendance_path": "backend/photos/students/c1c2005e-22bb-4eb9-9e25-f6555866eeef/attendance"
+        "attendance_path": "backend/photos/students/c1c2005e-22bb-4eb9-9e25-f6555866eeef/attendance",
+        "tag_id": "RFID-1005"
       },
       {
         "_id": "6916bed743c9c10fae9b5a5b",
@@ -414,7 +419,8 @@
         "stop_id": "a7a4cecb-d285-4720-aada-51ea9cca32b1",
         "emergency_contact": "+1-555-9106",
         "remarks": null,
-        "attendance_path": "backend/photos/students/1bb92c14-14df-4014-975a-ada092eb548c/attendance"
+        "attendance_path": "backend/photos/students/1bb92c14-14df-4014-975a-ada092eb548c/attendance",
+        "tag_id": "RFID-1006"
       },
       {
         "_id": "6916bed743c9c10fae9b5a5c",
@@ -431,7 +437,8 @@
         "stop_id": "da6b63da-8b0c-49e3-badb-3e81a011cd22",
         "emergency_contact": "+1-555-9107",
         "remarks": "Basketball team captain",
-        "attendance_path": "backend/photos/students/1b85c5e7-3f65-4edc-b113-3e553b272003/attendance"
+        "attendance_path": "backend/photos/students/1b85c5e7-3f65-4edc-b113-3e553b272003/attendance",
+        "tag_id": "RFID-1007"
       },
       {
         "_id": "6916bed743c9c10fae9b5a5d",
@@ -448,7 +455,8 @@
         "stop_id": "2024014d-504b-4358-8df9-d9677f4ace5a",
         "emergency_contact": "+1-555-9108",
         "remarks": null,
-        "attendance_path": "backend/photos/students/d2bcc8ed-30a1-4313-9e7b-1efba819441f/attendance"
+        "attendance_path": "backend/photos/students/d2bcc8ed-30a1-4313-9e7b-1efba819441f/attendance",
+        "tag_id": "RFID-1008"
       },
       {
         "_id": "6916bed743c9c10fae9b5a5e",
@@ -465,7 +473,8 @@
         "stop_id": "f4df1874-b28a-4fcb-bc39-9fa179415810",
         "emergency_contact": "+1-555-9109",
         "remarks": "Debate club member",
-        "attendance_path": "backend/photos/students/a6d935e2-af68-46e2-8dc2-f37e8b2ae455/attendance"
+        "attendance_path": "backend/photos/students/a6d935e2-af68-46e2-8dc2-f37e8b2ae455/attendance",
+        "tag_id": "RFID-1009"
       },
       {
         "_id": "6916bed743c9c10fae9b5a5f",
@@ -482,7 +491,8 @@
         "stop_id": "0a5c0acb-503a-430a-9ea3-5034c929f95c",
         "emergency_contact": "+1-555-9110",
         "remarks": null,
-        "attendance_path": "backend/photos/students/46c917de-44c8-4e36-b237-49b4eac9ccfc/attendance"
+        "attendance_path": "backend/photos/students/46c917de-44c8-4e36-b237-49b4eac9ccfc/attendance",
+        "tag_id": "RFID-1010"
       },
       {
         "_id": "6916bed743c9c10fae9b5a60",
@@ -499,7 +509,8 @@
         "stop_id": "5b1145df-b0bc-4ccf-b55a-f852190c32f9",
         "emergency_contact": "+1-555-9111",
         "remarks": null,
-        "attendance_path": "backend/photos/students/d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7/attendance"
+        "attendance_path": "backend/photos/students/d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7/attendance",
+        "tag_id": "RFID-1011"
       },
       {
         "_id": "6916bed743c9c10fae9b5a61",
@@ -516,7 +527,8 @@
         "stop_id": "2f95e5fd-9339-4661-b37e-659bd196a024",
         "emergency_contact": "+1-555-9112",
         "remarks": "Art club member",
-        "attendance_path": "backend/photos/students/ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc/attendance"
+        "attendance_path": "backend/photos/students/ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc/attendance",
+        "tag_id": "RFID-1012"
       },
       {
         "_id": "6916bed743c9c10fae9b5a62",
@@ -533,7 +545,8 @@
         "stop_id": "1e3dad17-42db-42bd-a9bb-689d62bbcf29",
         "emergency_contact": "+1-555-9113",
         "remarks": null,
-        "attendance_path": "backend/photos/students/de0ae567-9165-4f08-a45f-9e49fa9161b5/attendance"
+        "attendance_path": "backend/photos/students/de0ae567-9165-4f08-a45f-9e49fa9161b5/attendance",
+        "tag_id": "RFID-1013"
       },
       {
         "_id": "6916bed743c9c10fae9b5a63",
@@ -550,7 +563,8 @@
         "stop_id": "c606ec84-037b-409e-abf8-2adc038ced24",
         "emergency_contact": "+1-555-9114",
         "remarks": "Soccer team member",
-        "attendance_path": "backend/photos/students/f086ed31-ddfe-49bc-8c41-73d76131a361/attendance"
+        "attendance_path": "backend/photos/students/f086ed31-ddfe-49bc-8c41-73d76131a361/attendance",
+        "tag_id": "RFID-1014"
       },
       {
         "_id": "6916bed743c9c10fae9b5a64",
@@ -567,7 +581,8 @@
         "stop_id": "55bc67b1-acc8-4721-991c-77c6cc8ca651",
         "emergency_contact": "+1-555-9115",
         "remarks": "Library monitor",
-        "attendance_path": "backend/photos/students/23535bb2-a11a-4c2c-a15c-06e9236e2bfe/attendance"
+        "attendance_path": "backend/photos/students/23535bb2-a11a-4c2c-a15c-06e9236e2bfe/attendance",
+        "tag_id": "RFID-1015"
       },
       {
         "_id": "6916bed743c9c10fae9b5a65",
@@ -584,7 +599,8 @@
         "stop_id": "5b1145df-b0bc-4ccf-b55a-f852190c32f9",
         "emergency_contact": "+1-555-9116",
         "remarks": "Science club member",
-        "attendance_path": "backend/photos/students/1a68ffb4-5372-48d1-9d79-21c2fc9627c3/attendance"
+        "attendance_path": "backend/photos/students/1a68ffb4-5372-48d1-9d79-21c2fc9627c3/attendance",
+        "tag_id": "RFID-1016"
       },
       {
         "_id": "6916bed743c9c10fae9b5a66",
@@ -601,7 +617,8 @@
         "stop_id": "0a87032e-ed4d-408f-9ffa-e7eb51df2cd4",
         "emergency_contact": "+1-555-9117",
         "remarks": "Drama club member",
-        "attendance_path": "backend/photos/students/ab8cf46d-4359-4543-9e2d-0535f01e8d5d/attendance"
+        "attendance_path": "backend/photos/students/ab8cf46d-4359-4543-9e2d-0535f01e8d5d/attendance",
+        "tag_id": "RFID-1017"
       },
       {
         "_id": "6916bed743c9c10fae9b5a67",
@@ -618,7 +635,8 @@
         "stop_id": "abe02119-1e83-4951-9e62-5201b73b8362",
         "emergency_contact": "+1-555-9118",
         "remarks": "Math team member",
-        "attendance_path": "backend/photos/students/3d712299-2182-4e89-a352-0f33bf75ad1c/attendance"
+        "attendance_path": "backend/photos/students/3d712299-2182-4e89-a352-0f33bf75ad1c/attendance",
+        "tag_id": "RFID-1018"
       },
       {
         "_id": "6916bed743c9c10fae9b5a68",
@@ -635,7 +653,8 @@
         "stop_id": "9a29897e-bf69-42de-9298-1820e14e42f7",
         "emergency_contact": "+1-555-9119",
         "remarks": "Chess club captain",
-        "attendance_path": "backend/photos/students/ad32bf84-b342-4f4e-b67c-9816781109a2/attendance"
+        "attendance_path": "backend/photos/students/ad32bf84-b342-4f4e-b67c-9816781109a2/attendance",
+        "tag_id": "RFID-1019"
       },
       {
         "_id": "6916bed743c9c10fae9b5a69",
@@ -652,7 +671,8 @@
         "stop_id": "b6b015e9-ab2c-4af8-a951-50e91ef0276e",
         "emergency_contact": "+1-555-9120",
         "remarks": "Student council member",
-        "attendance_path": "backend/photos/students/84dca95e-7e6b-4073-822b-1b00b14380c5/attendance"
+        "attendance_path": "backend/photos/students/84dca95e-7e6b-4073-822b-1b00b14380c5/attendance",
+        "tag_id": "RFID-1020"
       }
     ],
     "buses": [
