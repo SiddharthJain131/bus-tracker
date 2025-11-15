@@ -476,15 +476,15 @@ def main():
         
         # Prompt for registration details
         backend_url = input(f"{Colors.CYAN}Backend URL [{DEFAULT_BACKEND_URL}]: {Colors.RESET}").strip() or DEFAULT_BACKEND_URL
-        bus_id = input(f"{Colors.CYAN}Bus ID: {Colors.RESET}").strip()
+        bus_number = input(f"{Colors.CYAN}Bus Number (e.g., 'BUS-001'): {Colors.RESET}").strip()
         device_name = input(f"{Colors.CYAN}Device Name (e.g., 'Pi-Bus-001'): {Colors.RESET}").strip()
         
-        if not bus_id or not device_name:
-            print(f"{Colors.RED}Bus ID and Device Name are required!{Colors.RESET}")
+        if not bus_number or not device_name:
+            print(f"{Colors.RED}Bus Number and Device Name are required!{Colors.RESET}")
             sys.exit(1)
         
         # Register device
-        config = register_device(backend_url, bus_id, device_name)
+        config = register_device(backend_url, bus_number, device_name)
         
         if not config:
             print(f"{Colors.RED}Failed to register device. Exiting.{Colors.RESET}")
