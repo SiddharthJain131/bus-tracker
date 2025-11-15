@@ -201,28 +201,32 @@ export default function ParentDashboard({ user, onLogout }) {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="space-y-6">
 
-        {/* Student Cards - Multiple Children */}
-        {students.length > 1 ? (
-          <div>
-            <h2 className="text-xl font-semibold mb-4" style={{ fontFamily: 'Space Grotesk' }}>My Children</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-              {students.map((student) => (
-                <div
-                  key={student.student_id}
-                  onClick={() => setSelectedStudent(student)}
-                  className={`cursor-pointer ${selectedStudent?.student_id === student.student_id ? 'ring-2 ring-blue-500 rounded-lg' : ''}`}
-                >
-                  <StudentCard student={student} compact={true} />
-                </div>
-              ))}
+          {/* Student Cards - Multiple Children */}
+          {students.length > 1 && (
+            <div>
+              <h2 className="text-xl font-semibold mb-4 text-gray-900" style={{ fontFamily: 'Space Grotesk' }}>My Children</h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {students.map((student) => (
+                  <div
+                    key={student.student_id}
+                    onClick={() => setSelectedStudent(student)}
+                    className={`cursor-pointer transition-all ${
+                      selectedStudent?.student_id === student.student_id
+                        ? 'ring-2 ring-blue-500 rounded-lg shadow-lg'
+                        : 'hover:shadow-md'
+                    }`}
+                  >
+                    <StudentCard student={student} compact={true} />
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        ) : null}
+          )}
 
-        {selectedStudent && selectedStudentDetails && (
-          <div className="space-y-6">
-            {/* Student Details */}
-            <StudentCard student={selectedStudentDetails} />
+          {selectedStudent && selectedStudentDetails && (
+            <>
+              {/* Full Student Card (single child or selected child) */}
+              {students.length === 1 && <StudentCard student={selectedStudentDetails} />}
 
             <div className="grid lg:grid-cols-3 gap-6">
               {/* Left column - Map and Attendance */}
