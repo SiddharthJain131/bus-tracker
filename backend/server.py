@@ -99,6 +99,7 @@ class Student(BaseModel):
 class StudentUpdate(BaseModel):
     name: Optional[str] = None
     roll_number: Optional[str] = None
+    tag_id: Optional[str] = None
     phone: Optional[str] = None
     class_name: Optional[str] = None
     section: Optional[str] = None
