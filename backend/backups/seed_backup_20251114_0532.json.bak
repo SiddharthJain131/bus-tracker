@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-11-15T02:01:22.341638",
+  "timestamp": "2025-11-14T06:52:01.654513+00:00",
   "collections": {
     "users": [
       {
@@ -10,7 +10,7 @@
         "role": "admin",
         "name": "James Anderson",
         "phone": "+1-555-9001",
-        "photo": "/api/photos/admins/947a42ed-cc60-40f8-ac40-6a712a7e36a8.jpg",
+        "photo": null,
         "address": "School Administration Office, Main Building",
         "assigned_class": null,
         "assigned_section": null,
@@ -25,7 +25,7 @@
         "role": "admin",
         "name": "Patricia Williams",
         "phone": "+1-555-9002",
-        "photo": "/api/photos/admins/a2e67214-b998-4385-ade1-fecfee1d711a.jpg",
+        "photo": null,
         "address": "School Administration Office, East Wing",
         "assigned_class": null,
         "assigned_section": null,
@@ -40,7 +40,7 @@
         "role": "teacher",
         "name": "Mary Johnson",
         "phone": "+1-555-2001",
-        "photo": "/api/photos/teachers/c169100f-627c-4e59-8b91-2beb4052ffb2.jpg",
+        "photo": null,
         "address": "321 Teacher Lane, San Francisco, CA",
         "assigned_class": "5",
         "assigned_section": "A",
@@ -63,7 +63,7 @@
         "role": "teacher",
         "name": "Robert Smith",
         "phone": "+1-555-2002",
-        "photo": "/api/photos/teachers/abb0715f-1910-42fc-84f2-540df008ac40.jpg",
+        "photo": null,
         "address": "456 Educator Drive, San Francisco, CA",
         "assigned_class": "6",
         "assigned_section": "B",
@@ -86,7 +86,7 @@
         "role": "teacher",
         "name": "Sarah Wilson",
         "phone": "+1-555-2003",
-        "photo": "/api/photos/teachers/1693e1ca-758f-4333-8472-0259d54e5b36.jpg",
+        "photo": null,
         "address": "789 School Street, San Francisco, CA",
         "assigned_class": "4",
         "assigned_section": "A",
@@ -108,7 +108,7 @@
         "role": "parent",
         "name": "John Parent",
         "phone": "+1-555-3001",
-        "photo": "/api/photos/parents/1b983d91-1e5f-461e-a0af-f6b045e1301f.jpg",
+        "photo": null,
         "address": "123 Oak St, San Francisco, CA 94102",
         "assigned_class": null,
         "assigned_section": null,
@@ -126,7 +126,7 @@
         "role": "parent",
         "name": "Sarah Brown",
         "phone": "+1-555-3002",
-        "photo": "/api/photos/parents/43a5ce45-55cb-433b-910e-5e93e049042a.jpg",
+        "photo": null,
         "address": "456 Pine Ave, San Francisco, CA 94103",
         "assigned_class": null,
         "assigned_section": null,
@@ -143,7 +143,7 @@
         "role": "parent",
         "name": "Michael Davis",
         "phone": "+1-555-3003",
-        "photo": "/api/photos/parents/146044fe-0888-4ed0-900f-fc63db32ee1e.jpg",
+        "photo": null,
         "address": "789 Elm St, San Francisco, CA 94104",
         "assigned_class": null,
         "assigned_section": null,
@@ -161,7 +161,7 @@
         "role": "parent",
         "name": "Emily Martinez",
         "phone": "+1-555-3004",
-        "photo": "/api/photos/parents/2b2def4d-c266-402e-8530-791c4adbbd51.jpg",
+        "photo": null,
         "address": "234 Maple Dr, San Francisco, CA 94105",
         "assigned_class": null,
         "assigned_section": null,
@@ -180,7 +180,7 @@
         "role": "parent",
         "name": "David Wilson",
         "phone": "+1-555-3005",
-        "photo": "/api/photos/parents/0dfe4919-5fb6-4960-b88a-de121e5c5e71.jpg",
+        "photo": null,
         "address": "567 Cedar Ln, San Francisco, CA 94106",
         "assigned_class": null,
         "assigned_section": null,
@@ -198,7 +198,7 @@
         "role": "parent",
         "name": "Jennifer Taylor",
         "phone": "+1-555-3006",
-        "photo": "/api/photos/parents/cfa8a9d1-c835-4848-bdf7-5c0d79c3cf98.jpg",
+        "photo": null,
         "address": "890 Birch Ave, San Francisco, CA 94107",
         "assigned_class": null,
         "assigned_section": null,
@@ -215,7 +215,7 @@
         "role": "parent",
         "name": "Christopher Garcia",
         "phone": "+1-555-3007",
-        "photo": "/api/photos/parents/a33c0799-0c3c-44a0-bd1d-543e930f49ae.jpg",
+        "photo": null,
         "address": "123 Walnut St, San Francisco, CA 94108",
         "assigned_class": null,
         "assigned_section": null,
@@ -233,7 +233,7 @@
         "role": "parent",
         "name": "Amanda Rodriguez",
         "phone": "+1-555-3008",
-        "photo": "/api/photos/parents/2877eaec-8458-48cb-a023-4ca52ac78d8c.jpg",
+        "photo": null,
         "address": "456 Sunset Blvd, San Francisco, CA 94109",
         "assigned_class": null,
         "assigned_section": null,
@@ -250,7 +250,7 @@
         "role": "parent",
         "name": "Matthew Lee",
         "phone": "+1-555-3009",
-        "photo": "/api/photos/parents/4dfd2d0f-7aa4-4182-9f9c-b5ff21558fc6.jpg",
+        "photo": null,
         "address": "789 Ocean Ave, San Francisco, CA 94110",
         "assigned_class": null,
         "assigned_section": null,
@@ -268,7 +268,7 @@
         "role": "parent",
         "name": "Jessica Harris",
         "phone": "+1-555-3010",
-        "photo": "/api/photos/parents/d20eda4a-e890-4773-a0b4-642351c8c389.jpg",
+        "photo": null,
         "address": "234 Beach St, San Francisco, CA 94111",
         "assigned_class": null,
         "assigned_section": null,
@@ -285,7 +285,7 @@
         "role": "parent",
         "name": "Daniel Clark",
         "phone": "+1-555-3011",
-        "photo": "/api/photos/parents/da495d2f-7174-4cbf-b1b1-0b31b8f69ec9.jpg",
+        "photo": null,
         "address": "567 Harbor Rd, San Francisco, CA 94112",
         "assigned_class": null,
         "assigned_section": null,
@@ -303,7 +303,7 @@
         "role": "parent",
         "name": "Lisa Lewis",
         "phone": "+1-555-3012",
-        "photo": "/api/photos/parents/4711ecb0-15d4-4134-ad48-3e73a238b28e.jpg",
+        "photo": null,
         "address": "890 Market St, San Francisco, CA 94113",
         "assigned_class": null,
         "assigned_section": null,
@@ -320,7 +320,7 @@
         "name": "Emma Johnson",
         "roll_number": "G5A-001",
         "phone": "+1-555-4001",
-        "photo": "/api/photos/students/04a97662-e3f5-4c71-9283-55f3b2bd4d15/profile.jpg",
+        "photo": null,
         "class_name": "5",
         "section": "A",
         "parent_id": "1b983d91-1e5f-461e-a0af-f6b045e1301f",
@@ -329,7 +329,8 @@
         "stop_id": "aef02188-feea-4afb-b5cf-80607666023c",
         "emergency_contact": "+1-555-9101",
         "remarks": "Allergic to peanuts",
-        "attendance_path": "backend/photos/students/04a97662-e3f5-4c71-9283-55f3b2bd4d15/attendance"
+        "attendance_path": "backend/photos/students/04a97662-e3f5-4c71-9283-55f3b2bd4d15/attendance",
+        "photo_path": "backend/photos/students/04a97662-e3f5-4c71-9283-55f3b2bd4d15/profile.jpg"
       },
       {
         "_id": "6916bed743c9c10fae9b5a57",
@@ -337,7 +338,7 @@
         "name": "Liam Smith",
         "roll_number": "G5A-002",
         "phone": "+1-555-4002",
-        "photo": "/api/photos/students/d61d7051-16f3-4c80-a28b-55a3d475757c/profile.jpg",
+        "photo": null,
         "class_name": "5",
         "section": "A",
         "parent_id": "1b983d91-1e5f-461e-a0af-f6b045e1301f",
@@ -346,7 +347,8 @@
         "stop_id": "9a29897e-bf69-42de-9298-1820e14e42f7",
         "emergency_contact": "+1-555-9102",
         "remarks": null,
-        "attendance_path": "backend/photos/students/d61d7051-16f3-4c80-a28b-55a3d475757c/attendance"
+        "attendance_path": "backend/photos/students/d61d7051-16f3-4c80-a28b-55a3d475757c/attendance",
+        "photo_path": "backend/photos/students/d61d7051-16f3-4c80-a28b-55a3d475757c/profile.jpg"
       },
       {
         "_id": "6916bed743c9c10fae9b5a58",
@@ -354,7 +356,7 @@
         "name": "Sophia Brown",
         "roll_number": "G5A-003",
         "phone": "+1-555-4003",
-        "photo": "/api/photos/students/84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51/profile.jpg",
+        "photo": null,
         "class_name": "5",
         "section": "A",
         "parent_id": "43a5ce45-55cb-433b-910e-5e93e049042a",
@@ -363,7 +365,8 @@
         "stop_id": "aa9f7e82-b8ab-4130-8e0f-dcafb818f4a1",
         "emergency_contact": "+1-555-9103",
         "remarks": "Needs glasses for reading",
-        "attendance_path": "backend/photos/students/84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51/attendance"
+        "attendance_path": "backend/photos/students/84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51/attendance",
+        "photo_path": "backend/photos/students/84aa65dc-7598-4bc9-b0fa-c9ab7cbdda51/profile.jpg"
       },
       {
         "_id": "6916bed743c9c10fae9b5a59",
@@ -371,7 +374,7 @@
         "name": "Noah Davis",
         "roll_number": "G5A-004",
         "phone": "+1-555-4004",
-        "photo": "/api/photos/students/90d5e32e-0b2a-451d-be26-67ba1e128b82/profile.jpg",
+        "photo": null,
         "class_name": "5",
         "section": "A",
         "parent_id": "146044fe-0888-4ed0-900f-fc63db32ee1e",
@@ -380,7 +383,8 @@
         "stop_id": "abe02119-1e83-4951-9e62-5201b73b8362",
         "emergency_contact": "+1-555-9104",
         "remarks": null,
-        "attendance_path": "backend/photos/students/90d5e32e-0b2a-451d-be26-67ba1e128b82/attendance"
+        "attendance_path": "backend/photos/students/90d5e32e-0b2a-451d-be26-67ba1e128b82/attendance",
+        "photo_path": "backend/photos/students/90d5e32e-0b2a-451d-be26-67ba1e128b82/profile.jpg"
       },
       {
         "_id": "6916bed743c9c10fae9b5a5a",
@@ -388,7 +392,7 @@
         "name": "Olivia Martinez",
         "roll_number": "G5A-005",
         "phone": "+1-555-4005",
-        "photo": "/api/photos/students/c1c2005e-22bb-4eb9-9e25-f6555866eeef/profile.jpg",
+        "photo": null,
         "class_name": "5",
         "section": "A",
         "parent_id": "146044fe-0888-4ed0-900f-fc63db32ee1e",
@@ -397,7 +401,8 @@
         "stop_id": "d434f4a2-0ebe-4fbe-bc09-2c4a29b27f99",
         "emergency_contact": "+1-555-9105",
         "remarks": "School choir member",
-        "attendance_path": "backend/photos/students/c1c2005e-22bb-4eb9-9e25-f6555866eeef/attendance"
+        "attendance_path": "backend/photos/students/c1c2005e-22bb-4eb9-9e25-f6555866eeef/attendance",
+        "photo_path": "backend/photos/students/c1c2005e-22bb-4eb9-9e25-f6555866eeef/profile.jpg"
       },
       {
         "_id": "6916bed743c9c10fae9b5a5b",
@@ -405,7 +410,7 @@
         "name": "Ethan Wilson",
         "roll_number": "G6B-001",
         "phone": "+1-555-4006",
-        "photo": "/api/photos/students/1bb92c14-14df-4014-975a-ada092eb548c/profile.jpg",
+        "photo": null,
         "class_name": "6",
         "section": "B",
         "parent_id": "2b2def4d-c266-402e-8530-791c4adbbd51",
@@ -414,7 +419,8 @@
         "stop_id": "a7a4cecb-d285-4720-aada-51ea9cca32b1",
         "emergency_contact": "+1-555-9106",
         "remarks": null,
-        "attendance_path": "backend/photos/students/1bb92c14-14df-4014-975a-ada092eb548c/attendance"
+        "attendance_path": "backend/photos/students/1bb92c14-14df-4014-975a-ada092eb548c/attendance",
+        "photo_path": "backend/photos/students/1bb92c14-14df-4014-975a-ada092eb548c/profile.jpg"
       },
       {
         "_id": "6916bed743c9c10fae9b5a5c",
@@ -422,7 +428,7 @@
         "name": "Ava Taylor",
         "roll_number": "G6B-002",
         "phone": "+1-555-4007",
-        "photo": "/api/photos/students/1b85c5e7-3f65-4edc-b113-3e553b272003/profile.jpg",
+        "photo": null,
         "class_name": "6",
         "section": "B",
         "parent_id": "2b2def4d-c266-402e-8530-791c4adbbd51",
@@ -431,7 +437,8 @@
         "stop_id": "da6b63da-8b0c-49e3-badb-3e81a011cd22",
         "emergency_contact": "+1-555-9107",
         "remarks": "Basketball team captain",
-        "attendance_path": "backend/photos/students/1b85c5e7-3f65-4edc-b113-3e553b272003/attendance"
+        "attendance_path": "backend/photos/students/1b85c5e7-3f65-4edc-b113-3e553b272003/attendance",
+        "photo_path": "backend/photos/students/1b85c5e7-3f65-4edc-b113-3e553b272003/profile.jpg"
       },
       {
         "_id": "6916bed743c9c10fae9b5a5d",
@@ -439,7 +446,7 @@
         "name": "Mason Garcia",
         "roll_number": "G6B-003",
         "phone": "+1-555-4008",
-        "photo": "/api/photos/students/d2bcc8ed-30a1-4313-9e7b-1efba819441f/profile.jpg",
+        "photo": null,
         "class_name": "6",
         "section": "B",
         "parent_id": "2b2def4d-c266-402e-8530-791c4adbbd51",
@@ -448,7 +455,8 @@
         "stop_id": "2024014d-504b-4358-8df9-d9677f4ace5a",
         "emergency_contact": "+1-555-9108",
         "remarks": null,
-        "attendance_path": "backend/photos/students/d2bcc8ed-30a1-4313-9e7b-1efba819441f/attendance"
+        "attendance_path": "backend/photos/students/d2bcc8ed-30a1-4313-9e7b-1efba819441f/attendance",
+        "photo_path": "backend/photos/students/d2bcc8ed-30a1-4313-9e7b-1efba819441f/profile.jpg"
       },
       {
         "_id": "6916bed743c9c10fae9b5a5e",
@@ -456,7 +464,7 @@
         "name": "Isabella Rodriguez",
         "roll_number": "G6B-004",
         "phone": "+1-555-4009",
-        "photo": "/api/photos/students/a6d935e2-af68-46e2-8dc2-f37e8b2ae455/profile.jpg",
+        "photo": null,
         "class_name": "6",
         "section": "B",
         "parent_id": "0dfe4919-5fb6-4960-b88a-de121e5c5e71",
@@ -465,7 +473,8 @@
         "stop_id": "f4df1874-b28a-4fcb-bc39-9fa179415810",
         "emergency_contact": "+1-555-9109",
         "remarks": "Debate club member",
-        "attendance_path": "backend/photos/students/a6d935e2-af68-46e2-8dc2-f37e8b2ae455/attendance"
+        "attendance_path": "backend/photos/students/a6d935e2-af68-46e2-8dc2-f37e8b2ae455/attendance",
+        "photo_path": "backend/photos/students/a6d935e2-af68-46e2-8dc2-f37e8b2ae455/profile.jpg"
       },
       {
         "_id": "6916bed743c9c10fae9b5a5f",
@@ -473,7 +482,7 @@
         "name": "Lucas Lee",
         "roll_number": "G6B-005",
         "phone": "+1-555-4010",
-        "photo": "/api/photos/students/46c917de-44c8-4e36-b237-49b4eac9ccfc/profile.jpg",
+        "photo": null,
         "class_name": "6",
         "section": "B",
         "parent_id": "0dfe4919-5fb6-4960-b88a-de121e5c5e71",
@@ -482,7 +491,8 @@
         "stop_id": "0a5c0acb-503a-430a-9ea3-5034c929f95c",
         "emergency_contact": "+1-555-9110",
         "remarks": null,
-        "attendance_path": "backend/photos/students/46c917de-44c8-4e36-b237-49b4eac9ccfc/attendance"
+        "attendance_path": "backend/photos/students/46c917de-44c8-4e36-b237-49b4eac9ccfc/attendance",
+        "photo_path": "backend/photos/students/46c917de-44c8-4e36-b237-49b4eac9ccfc/profile.jpg"
       },
       {
         "_id": "6916bed743c9c10fae9b5a60",
@@ -490,7 +500,7 @@
         "name": "Mia Harris",
         "roll_number": "G4A-001",
         "phone": "+1-555-4011",
-        "photo": "/api/photos/students/d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7/profile.jpg",
+        "photo": null,
         "class_name": "4",
         "section": "A",
         "parent_id": "cfa8a9d1-c835-4848-bdf7-5c0d79c3cf98",
@@ -499,7 +509,8 @@
         "stop_id": "5b1145df-b0bc-4ccf-b55a-f852190c32f9",
         "emergency_contact": "+1-555-9111",
         "remarks": null,
-        "attendance_path": "backend/photos/students/d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7/attendance"
+        "attendance_path": "backend/photos/students/d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7/attendance",
+        "photo_path": "backend/photos/students/d96fb6d5-5f8e-49ef-bd79-91dfb5ffe1b7/profile.jpg"
       },
       {
         "_id": "6916bed743c9c10fae9b5a61",
@@ -507,7 +518,7 @@
         "name": "Benjamin Clark",
         "roll_number": "G4A-002",
         "phone": "+1-555-4012",
-        "photo": "/api/photos/students/ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc/profile.jpg",
+        "photo": null,
         "class_name": "4",
         "section": "A",
         "parent_id": "a33c0799-0c3c-44a0-bd1d-543e930f49ae",
@@ -516,7 +527,8 @@
         "stop_id": "2f95e5fd-9339-4661-b37e-659bd196a024",
         "emergency_contact": "+1-555-9112",
         "remarks": "Art club member",
-        "attendance_path": "backend/photos/students/ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc/attendance"
+        "attendance_path": "backend/photos/students/ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc/attendance",
+        "photo_path": "backend/photos/students/ee5e3e53-bf75-45ca-bbaa-7c53861dc0fc/profile.jpg"
       },
       {
         "_id": "6916bed743c9c10fae9b5a62",
@@ -524,7 +536,7 @@
         "name": "Charlotte Lewis",
         "roll_number": "G4A-003",
         "phone": "+1-555-4013",
-        "photo": "/api/photos/students/de0ae567-9165-4f08-a45f-9e49fa9161b5/profile.jpg",
+        "photo": null,
         "class_name": "4",
         "section": "A",
         "parent_id": "a33c0799-0c3c-44a0-bd1d-543e930f49ae",
@@ -533,7 +545,8 @@
         "stop_id": "1e3dad17-42db-42bd-a9bb-689d62bbcf29",
         "emergency_contact": "+1-555-9113",
         "remarks": null,
-        "attendance_path": "backend/photos/students/de0ae567-9165-4f08-a45f-9e49fa9161b5/attendance"
+        "attendance_path": "backend/photos/students/de0ae567-9165-4f08-a45f-9e49fa9161b5/attendance",
+        "photo_path": "backend/photos/students/de0ae567-9165-4f08-a45f-9e49fa9161b5/profile.jpg"
       },
       {
         "_id": "6916bed743c9c10fae9b5a63",
@@ -541,7 +554,7 @@
         "name": "James Walker",
         "roll_number": "G4A-004",
         "phone": "+1-555-4014",
-        "photo": "/api/photos/students/f086ed31-ddfe-49bc-8c41-73d76131a361/profile.jpg",
+        "photo": null,
         "class_name": "4",
         "section": "A",
         "parent_id": "2877eaec-8458-48cb-a023-4ca52ac78d8c",
@@ -550,7 +563,8 @@
         "stop_id": "c606ec84-037b-409e-abf8-2adc038ced24",
         "emergency_contact": "+1-555-9114",
         "remarks": "Soccer team member",
-        "attendance_path": "backend/photos/students/f086ed31-ddfe-49bc-8c41-73d76131a361/attendance"
+        "attendance_path": "backend/photos/students/f086ed31-ddfe-49bc-8c41-73d76131a361/attendance",
+        "photo_path": "backend/photos/students/f086ed31-ddfe-49bc-8c41-73d76131a361/profile.jpg"
       },
       {
         "_id": "6916bed743c9c10fae9b5a64",
@@ -558,7 +572,7 @@
         "name": "Mia Hall",
         "roll_number": "G4A-005",
         "phone": "+1-555-4015",
-        "photo": "/api/photos/students/23535bb2-a11a-4c2c-a15c-06e9236e2bfe/profile.jpg",
+        "photo": null,
         "class_name": "4",
         "section": "A",
         "parent_id": "4dfd2d0f-7aa4-4182-9f9c-b5ff21558fc6",
@@ -567,7 +581,8 @@
         "stop_id": "55bc67b1-acc8-4721-991c-77c6cc8ca651",
         "emergency_contact": "+1-555-9115",
         "remarks": "Library monitor",
-        "attendance_path": "backend/photos/students/23535bb2-a11a-4c2c-a15c-06e9236e2bfe/attendance"
+        "attendance_path": "backend/photos/students/23535bb2-a11a-4c2c-a15c-06e9236e2bfe/attendance",
+        "photo_path": "backend/photos/students/23535bb2-a11a-4c2c-a15c-06e9236e2bfe/profile.jpg"
       },
       {
         "_id": "6916bed743c9c10fae9b5a65",
@@ -575,7 +590,7 @@
         "name": "Alexander Lee",
         "roll_number": "G5A-006",
         "phone": "+1-555-4016",
-        "photo": "/api/photos/students/1a68ffb4-5372-48d1-9d79-21c2fc9627c3/profile.jpg",
+        "photo": null,
         "class_name": "5",
         "section": "A",
         "parent_id": "4dfd2d0f-7aa4-4182-9f9c-b5ff21558fc6",
@@ -584,7 +599,8 @@
         "stop_id": "5b1145df-b0bc-4ccf-b55a-f852190c32f9",
         "emergency_contact": "+1-555-9116",
         "remarks": "Science club member",
-        "attendance_path": "backend/photos/students/1a68ffb4-5372-48d1-9d79-21c2fc9627c3/attendance"
+        "attendance_path": "backend/photos/students/1a68ffb4-5372-48d1-9d79-21c2fc9627c3/attendance",
+        "photo_path": "backend/photos/students/1a68ffb4-5372-48d1-9d79-21c2fc9627c3/profile.jpg"
       },
       {
         "_id": "6916bed743c9c10fae9b5a66",
@@ -592,7 +608,7 @@
         "name": "Harper Harris",
         "roll_number": "G6B-006",
         "phone": "+1-555-4017",
-        "photo": "/api/photos/students/ab8cf46d-4359-4543-9e2d-0535f01e8d5d/profile.jpg",
+        "photo": null,
         "class_name": "6",
         "section": "B",
         "parent_id": "d20eda4a-e890-4773-a0b4-642351c8c389",
@@ -601,7 +617,8 @@
         "stop_id": "0a87032e-ed4d-408f-9ffa-e7eb51df2cd4",
         "emergency_contact": "+1-555-9117",
         "remarks": "Drama club member",
-        "attendance_path": "backend/photos/students/ab8cf46d-4359-4543-9e2d-0535f01e8d5d/attendance"
+        "attendance_path": "backend/photos/students/ab8cf46d-4359-4543-9e2d-0535f01e8d5d/attendance",
+        "photo_path": "backend/photos/students/ab8cf46d-4359-4543-9e2d-0535f01e8d5d/profile.jpg"
       },
       {
         "_id": "6916bed743c9c10fae9b5a67",
@@ -609,7 +626,7 @@
         "name": "Evelyn Clark",
         "roll_number": "G4A-006",
         "phone": "+1-555-4018",
-        "photo": "/api/photos/students/3d712299-2182-4e89-a352-0f33bf75ad1c/profile.jpg",
+        "photo": null,
         "class_name": "4",
         "section": "A",
         "parent_id": "da495d2f-7174-4cbf-b1b1-0b31b8f69ec9",
@@ -618,7 +635,8 @@
         "stop_id": "abe02119-1e83-4951-9e62-5201b73b8362",
         "emergency_contact": "+1-555-9118",
         "remarks": "Math team member",
-        "attendance_path": "backend/photos/students/3d712299-2182-4e89-a352-0f33bf75ad1c/attendance"
+        "attendance_path": "backend/photos/students/3d712299-2182-4e89-a352-0f33bf75ad1c/attendance",
+        "photo_path": "backend/photos/students/3d712299-2182-4e89-a352-0f33bf75ad1c/profile.jpg"
       },
       {
         "_id": "6916bed743c9c10fae9b5a68",
@@ -626,7 +644,7 @@
         "name": "Henry Clark",
         "roll_number": "G5A-007",
         "phone": "+1-555-4019",
-        "photo": "/api/photos/students/ad32bf84-b342-4f4e-b67c-9816781109a2/profile.jpg",
+        "photo": null,
         "class_name": "5",
         "section": "A",
         "parent_id": "da495d2f-7174-4cbf-b1b1-0b31b8f69ec9",
@@ -635,7 +653,8 @@
         "stop_id": "9a29897e-bf69-42de-9298-1820e14e42f7",
         "emergency_contact": "+1-555-9119",
         "remarks": "Chess club captain",
-        "attendance_path": "backend/photos/students/ad32bf84-b342-4f4e-b67c-9816781109a2/attendance"
+        "attendance_path": "backend/photos/students/ad32bf84-b342-4f4e-b67c-9816781109a2/attendance",
+        "photo_path": "backend/photos/students/ad32bf84-b342-4f4e-b67c-9816781109a2/profile.jpg"
       },
       {
         "_id": "6916bed743c9c10fae9b5a69",
@@ -643,7 +662,7 @@
         "name": "Sebastian Lewis",
         "roll_number": "G6B-007",
         "phone": "+1-555-4020",
-        "photo": "/api/photos/students/84dca95e-7e6b-4073-822b-1b00b14380c5/profile.jpg",
+        "photo": null,
         "class_name": "6",
         "section": "B",
         "parent_id": "4711ecb0-15d4-4134-ad48-3e73a238b28e",
@@ -652,7 +671,8 @@
         "stop_id": "b6b015e9-ab2c-4af8-a951-50e91ef0276e",
         "emergency_contact": "+1-555-9120",
         "remarks": "Student council member",
-        "attendance_path": "backend/photos/students/84dca95e-7e6b-4073-822b-1b00b14380c5/attendance"
+        "attendance_path": "backend/photos/students/84dca95e-7e6b-4073-822b-1b00b14380c5/attendance",
+        "photo_path": "backend/photos/students/84dca95e-7e6b-4073-822b-1b00b14380c5/profile.jpg"
       }
     ],
     "buses": [
@@ -1074,7 +1094,5 @@
       }
     ],
     "device_keys": []
-  },
-  "last_modified": "2025-11-15T02:01:22.341659",
-  "modification_note": "Replaced photo_path with photo field and updated all photo URLs"
+  }
 }
