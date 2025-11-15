@@ -90,7 +90,7 @@ def load_rfid_mapping() -> Dict[str, Dict]:
 # DEVICE REGISTRATION
 # ============================================================
 
-def register_device(backend_url: str, bus_id: str, device_name: str) -> Optional[Dict]:
+def register_device(backend_url: str, bus_number: str, device_name: str) -> Optional[Dict]:
     """
     Register this Pi device with the backend.
     Requires admin authentication.
@@ -137,7 +137,7 @@ def register_device(backend_url: str, bus_id: str, device_name: str) -> Optional
         register_response = requests.post(
             f"{backend_url}/api/device/register",
             json={
-                "bus_id": bus_id,
+                "bus_number": bus_number,
                 "device_name": device_name
             },
             cookies={"session_token": session_cookie}
@@ -150,13 +150,13 @@ def register_device(backend_url: str, bus_id: str, device_name: str) -> Optional
         device_data = register_response.json()
         print(f"{Colors.GREEN}✓ Device registered successfully!{Colors.RESET}")
         print(f"{Colors.GREEN}  Device ID: {device_data['device_id']}{Colors.RESET}")
-        print(f"{Colors.GREEN}  Bus: {device_data.get('bus_number', bus_id)}{Colors.RESET}")
+        print(f"{Colors.GREEN}  Bus: {device_data.get('bus_number', bus_number)}{Colors.RESET}")
         
         return {
             "backend_url": backend_url,
             "device_id": device_data['device_id'],
             "device_name": device_name,
-            "bus_id": bus_id,
+            "bus_number": bus_number,
             "api_key": device_data['api_key'],
             "registered_at": datetime.now(timezone.utc).isoformat()
         }
