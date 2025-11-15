@@ -34,6 +34,7 @@ Authenticate user and create session.
   "role": "admin",
   "name": "James Anderson",
   "phone": "+1-555-9001",
+  "photo": "/photos/admins/uuid.jpg",
   "student_ids": [],
   "is_elevated_admin": true
 }
@@ -72,10 +73,13 @@ Get currently authenticated user info.
   "role": "parent",
   "name": "John Parent",
   "phone": "+1-555-1001",
+  "photo": "/photos/parents/uuid.jpg",
   "student_ids": ["student-uuid"],
   "address": "123 Main St"
 }
 ```
+
+**Note:** Returns `photo` URL for profile photo display.
 
 ---
 
@@ -110,11 +114,14 @@ Get list of students (filtered by role).
     "bus_number": "BUS-001",
     "stop_id": "uuid",
     "stop_name": "Main Gate",
+    "photo_url": "/photos/students/uuid/profile.jpg",
     "emergency_contact": "+1-555-9001",
     "remarks": "Allergic to peanuts"
   }
 ]
 ```
+
+**Note:** Returns `photo_url` for profile photo display.
 
 ---
 
@@ -143,6 +150,7 @@ Get complete student information.
   "route_id": "uuid",
   "stop_id": "uuid",
   "stop_name": "Main Gate",
+  "photo_url": "/photos/students/uuid/profile.jpg",
   "emergency_contact": "+1-555-9001",
   "remarks": "Allergic to peanuts"
 }
@@ -293,7 +301,7 @@ Get attendance grid for a student for specific month.
 
 **POST** `/api/scan_event`
 
-Record RFID scan event (used by Raspberry Pi).
+Record RFID scan event (used by Raspberry Pi). Requires X-API-Key header.
 
 **Request Body:**
 ```json
@@ -312,15 +320,17 @@ Record RFID scan event (used by Raspberry Pi).
 ```json
 {
   "status": "success",
-  "event_id": "event-uuid"
+  "event_id": "event-uuid",
+  "attendance_status": "yellow"
 }
 ```
 
 **Behavior:**
-- Creates attendance record with status "yellow" if verified=true
+- First scan: Creates attendance with status "yellow" (On Board)
+- Second scan: Updates to status "green" (Reached)
+- Status determined automatically by backend based on time and scan sequence
 - Creates identity mismatch notification if verified=false
 - Idempotent: Duplicate uploads for same timestamp are ignored
-- See [RASPBERRY_PI_INTEGRATION.md](./RASPBERRY_PI_INTEGRATION.md) for details
 
 ---
 
@@ -378,7 +388,7 @@ Get complete bus information.
 
 **GET** `/api/get_bus_location`
 
-Get current GPS location of bus.
+Get current GPS location of bus. Requires X-API-Key header.
 
 **Query Parameters:**
 - `bus_id` (required)
@@ -399,7 +409,7 @@ Get current GPS location of bus.
 
 **POST** `/api/update_location`
 
-Update bus GPS location (used by tracking device).
+Update bus GPS location (used by tracking device). Requires X-API-Key header.
 
 **Request Body:**
 ```json
@@ -437,7 +447,9 @@ Get complete route with stops.
       "stop_name": "Main Gate North",
       "lat": 37.7749,
       "lon": -122.4194,
-      "order_index": 0
+      "order_index": 0,
+      "morning_expected_time": "07:30",
+      "evening_expected_time": "15:30"
     }
   ],
   "map_path": [
@@ -446,6 +458,8 @@ Get complete route with stops.
   ]
 }
 ```
+
+**Note:** `morning_expected_time` and `evening_expected_time` are optional fields for automated attendance status determination.
 
 ---
 
@@ -494,6 +508,7 @@ Get all users in the system.
     "role": "parent",
     "name": "John Parent",
     "phone": "+1-555-1001",
+    "photo_url": "/photos/parents/uuid.jpg",
     "address": "123 Main St",
     "student_ids": ["student-uuid"],
     "is_elevated_admin": false
@@ -501,7 +516,7 @@ Get all users in the system.
 ]
 ```
 
-**Note:** `password_hash` is excluded from response.
+**Note:** `password_hash` is excluded from response. Returns `photo_url` for profile photos.
 
 ---
 
@@ -603,7 +618,7 @@ Get parent accounts with no students linked.
 
 **GET** `/api/get_notifications`
 
-Get notifications for current user.
+Get notifications for current user (filtered by user_id).
 
 **Response (200 OK):**
 ```json
@@ -611,35 +626,48 @@ Get notifications for current user.
   {
     "notification_id": "uuid",
     "user_id": "uuid",
-    "message": "Identity mismatch detected for Emma Johnson",
+    "title": "Bus Approaching",
+    "message": "BUS-001 is approaching your child's stop. Estimated arrival in 5 minutes.",
     "timestamp": "2025-01-15T08:00:00.000Z",
-    "type": "mismatch",
-    "read": false,
-    "student_id": "uuid"
+    "type": "update",
+    "read": false
   }
 ]
 ```
 
 **Types:**
 - `"mismatch"` - Identity verification failed
-- `"update"` - Student information updated
+- `"update"` - General updates (bus alerts, system messages)
 - `"missed"` - Student missed bus
 - `"announcement"` - System announcement
+
+**Permission Model:**
+- Each user sees only their own notifications
+- Filtered by `user_id` matching authenticated user
+- Limited to 50 most recent notifications
+- Sorted by timestamp (newest first)
 
 ---
 
 ### Mark Notification as Read
 
-**PUT** `/api/mark_notification_read/{notification_id}`
+**POST** `/api/mark_notification_read`
 
 Mark notification as read.
+
+**Query Parameters:**
+- `notification_id` (required)
 
 **Response (200 OK):**
 ```json
 {
-  "status": "updated"
+  "status": "success"
 }
 ```
+
+**Behavior:**
+- Only marks notification if it belongs to authenticated user
+- Idempotent: Can be called multiple times
 
 ---
 
@@ -781,6 +809,90 @@ Get all children of authenticated parent.
 
 ---
 
+## Device Authentication
+
+### Register Device
+
+**POST** `/api/device/register` (Admin only)
+
+Register new Raspberry Pi device and generate API key.
+
+**Request Body:**
+```json
+{
+  "bus_id": "uuid",
+  "device_name": "Bus-001-Scanner"
+}
+```
+
+**Response (200 OK):**
+```json
+{
+  "device_id": "uuid",
+  "bus_id": "uuid",
+  "bus_number": "BUS-001",
+  "device_name": "Bus-001-Scanner",
+  "api_key": "34f135326bbc30ff28bd37e14670e034240eefd9ac76c586e6cb17de6736cbac",
+  "warning": "Store this API key securely. It cannot be retrieved later."
+}
+```
+
+**Behavior:**
+- Generates 64-character API key using `secrets.token_hex(32)`
+- Keys are bcrypt hashed before storage
+- One device per bus (1:1 relationship)
+- Duplicate registration for same bus returns 400
+
+---
+
+### List Devices
+
+**GET** `/api/device/list` (Admin only)
+
+Get all registered devices.
+
+**Response (200 OK):**
+```json
+[
+  {
+    "device_id": "uuid",
+    "bus_id": "uuid",
+    "bus_number": "BUS-001",
+    "device_name": "Bus-001-Scanner",
+    "created_at": "2025-01-15T08:00:00.000Z"
+  }
+]
+```
+
+**Note:** `key_hash` excluded from response for security.
+
+---
+
+### Device-Protected Endpoints
+
+The following endpoints require `X-API-Key` header:
+
+- **POST** `/api/scan_event` - Record RFID scan
+- **POST** `/api/update_location` - Update bus GPS
+- **GET** `/api/get_bus_location` - Get bus location
+- **GET** `/api/students/{id}/embedding` - Get face recognition data
+- **GET** `/api/students/{id}/photo` - Get student photo
+
+**Authentication:**
+```bash
+curl -H "X-API-Key: your_64_char_api_key" \
+     -X POST https://api.example.com/api/scan_event
+```
+
+**Error Response (403 Forbidden):**
+```json
+{
+  "detail": "Invalid or missing API key"
+}
+```
+
+---
+
 ## Demo & Simulation
 
 ### Simulate Scan
@@ -915,6 +1027,7 @@ X-RateLimit-Reset: 1642089600
 ## Additional Resources
 
 - **Raspberry Pi Integration:** [RASPBERRY_PI_INTEGRATION.md](./RASPBERRY_PI_INTEGRATION.md)
+- **Device API Testing:** [API_TEST_DEVICE.md](./API_TEST_DEVICE.md)
 - **Database Schema:** [DATABASE.md](./DATABASE.md)
 - **User Guide:** [USER_GUIDE.md](./USER_GUIDE.md)
 

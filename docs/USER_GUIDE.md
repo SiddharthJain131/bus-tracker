@@ -83,11 +83,18 @@ Complete guide for using the Bus Tracker System across all three user roles.
 - 🔴 **Red** - Missed bus
 - ⚪ **Gray** - Not scanned yet
 
-#### 4. Notifications Panel
-- Real-time alerts about your child
-- Identity mismatch warnings
-- Route changes and updates
-- Bus delay notifications
+#### 4. Unified Notifications Panel
+- Real-time alerts with purple-pink gradient design
+- Click notifications to view full details in modal
+- Automatically marks as read when clicked
+- Shows relative timestamps ("5m ago", "2h ago")
+- "New" badge for unread notifications
+- Displays up to 5 most recent notifications
+- **Sample notifications:**
+  - Bus approaching alerts
+  - Student boarding confirmations
+  - Arrival notifications
+  - Identity mismatch warnings
 
 ### Common Parent Tasks
 
@@ -103,8 +110,8 @@ Complete guide for using the Bus Tracker System across all three user roles.
 
 **Check Notifications:**
 1. Scroll to Notifications panel on right
-2. Unread notifications appear at top
-3. Click to mark as read
+2. Unread notifications appear at top with "New" badge
+3. Click notification to view details and mark as read
 
 ---
 
@@ -156,11 +163,17 @@ Opens when clicking 📅 View Attendance button:
 - Month navigation
 - Attendance summary
 
-#### 6. Notifications Panel
-- System events for your students
-- Identity mismatches
-- Attendance updates
-- Administrative notifications
+#### 6. Unified Notifications Panel
+- System events for your students with purple-pink gradient design
+- Click notifications to view full details in modal
+- Automatically marks as read when clicked
+- Shows relative timestamps
+- "New" badge for unread notifications
+- **Sample notifications:**
+  - Class schedule updates
+  - Parent meeting reminders
+  - Attendance alerts
+  - Administrative announcements
 
 ### Common Teacher Tasks
 
@@ -180,10 +193,10 @@ Opens when clicking 📅 View Attendance button:
 2. Review student information
 3. Click "View Route on Map" for bus route
 
-**Search Specific Student:**
-1. Type name in search bar
-2. Or use filter dropdowns
-3. Results update instantly
+**Check Notifications:**
+1. View Notifications panel on right sidebar
+2. Unread notifications appear at top with "New" badge
+3. Click notification to view details and mark as read
 
 ---
 
@@ -205,16 +218,24 @@ Opens when clicking 📅 View Attendance button:
 - Total Students count
 - Total Teachers count
 - Total Buses count
-- Active Routes count
 
 **Upcoming Holidays Section:**
 - List of upcoming school holidays
 - "Edit Holidays" button for management
+- Shows past holidays in gray
+- Visual indicators (🌟 for upcoming)
 
-**Quick Actions:**
-- Add new entities
-- View recent activities
-- System health indicators
+**Unified Notifications Panel:**
+- System-wide notifications with purple-pink gradient design
+- Click notifications to view full details in modal
+- Automatically marks as read when clicked
+- Shows relative timestamps
+- "New" badge for unread notifications
+- **Sample notifications:**
+  - System updates
+  - Device registrations
+  - Attendance summaries
+  - Holiday reminders
 
 ### 2. Students Tab
 
@@ -397,7 +418,7 @@ Opens when clicking 📅 View Attendance button:
 ### Status Colors Explained
 
 | Color | Status | Meaning | Actions |
-|-------|--------|---------|---------|
+|-------|--------|---------|---------|  
 | 🟢 Green | Reached | Student scanned and reached destination | Click to view photo & timestamp |
 | 🟡 Yellow | On Board | Student scanned but bus still traveling | Non-clickable |
 | 🔴 Red | Missed | Student did not board the bus | Non-clickable |
@@ -413,37 +434,55 @@ Each day has 2 sessions, making 60 sessions per month (30 days × 2).
 
 ---
 
-## 🚨 Notifications Explained
+## 🚨 Notifications System
+
+### Unified Notification Panel
+
+All three dashboards (Parent, Teacher, Admin) now use a consistent notification system:
+
+**Design Features:**
+- Purple-pink gradient background
+- White bell icon in circular badge
+- Click to view full notification details in modal
+- Automatically marks as read when clicked
+- Relative timestamps ("Just now", "5m ago", "2h ago", "3d ago")
+- "New" badge for unread notifications
+- Displays up to 5 most recent notifications
+- Hover effect with shadow transition
 
 ### Notification Types
 
-**Identity Mismatch:**
-- Triggered when RFID scan has low confidence
-- Alerts parents and admins immediately
-- Requires manual verification
+**For Parents:**
+- **Bus Approaching** - Bus arrival alerts
+- **Student Boarded** - Boarding confirmations
+- **Reached School/Home** - Arrival confirmations
+- **Identity Mismatch** - RFID verification failures
+- **Route Changes** - Bus reassignments
 
-**Missed Bus:**
-- Generated when student marked as red
-- Sent to parents
-- Helps track attendance issues
+**For Teachers:**
+- **Class Schedule Updates** - Assembly or class changes
+- **Parent Meeting Reminders** - Scheduled meetings
+- **Attendance Alerts** - Absence reports
+- **Administrative Announcements** - System messages
 
-**System Updates:**
-- Route changes
-- Bus reassignments
-- Schedule modifications
-- Administrative announcements
+**For Admins:**
+- **System Updates** - Feature releases
+- **Device Registrations** - New Raspberry Pi devices
+- **Attendance Summaries** - Daily reports
+- **Holiday Reminders** - Upcoming holidays
+- **Backup Status** - Database backup confirmations
 
 ### Managing Notifications
 
-**Mark as Read:**
-1. Click on notification
-2. Automatically marked as read
-3. Moves to bottom of list
+**View Notification Details:**
+1. Click on notification card
+2. Modal opens with full details
+3. Automatically marked as read
 
 **Notification Priority:**
-- Unread appear first
+- Unread appear first with "New" badge
 - Most recent at top
-- Color-coded by type
+- Consistent purple-pink design across all roles
 
 ---
 
@@ -455,7 +494,7 @@ Each day has 2 sessions, making 60 sessions per month (30 days × 2).
 - ✅ Own children only
 - ✅ Own children's attendance
 - ✅ Own children's bus locations
-- ✅ Own notifications
+- ✅ Own notifications (filtered by user_id)
 - ❌ Other students' data
 - ❌ System-wide information
 
@@ -464,6 +503,7 @@ Each day has 2 sessions, making 60 sessions per month (30 days × 2).
 - ✅ Student details for their class
 - ✅ Attendance for their students
 - ✅ Parent contact information
+- ✅ Own notifications (filtered by user_id)
 - ❌ Students from other classes
 - ❌ System administration
 
@@ -474,6 +514,7 @@ Each day has 2 sessions, making 60 sessions per month (30 days × 2).
 - ✅ System configuration
 - ✅ Full CRUD operations
 - ✅ Demo and simulation tools
+- ✅ All admin notifications (filtered by user_id)
 
 ---
 
@@ -485,7 +526,8 @@ Each day has 2 sessions, making 60 sessions per month (30 days × 2).
 2. **Enable notifications** for real-time alerts
 3. **Use route toggle** to understand bus path and timing
 4. **Click green cells** to verify your child's actual scan photos
-5. **Contact admin** if you notice discrepancies
+5. **Click notifications** to view full details and mark them as read
+6. **Contact admin** if you notice discrepancies
 
 ### For Teachers
 
@@ -493,7 +535,8 @@ Each day has 2 sessions, making 60 sessions per month (30 days × 2).
 2. **Use filters** to quickly find students by bus or status
 3. **Check attendance patterns** for students with frequent issues
 4. **Verify parent contact info** is up to date
-5. **Report systematic issues** to administration
+5. **Monitor notifications panel** for class-related alerts
+6. **Report systematic issues** to administration
 
 ### For Admins
 
@@ -504,6 +547,7 @@ Each day has 2 sessions, making 60 sessions per month (30 days × 2).
 5. **Test before holidays** - Ensure holiday dates are marked
 6. **User account hygiene** - Remove inactive accounts
 7. **Dependency checks** - Understand deletion restrictions
+8. **Monitor system notifications** - Stay informed of system events
 
 ---
 
