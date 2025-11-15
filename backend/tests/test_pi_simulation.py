@@ -49,7 +49,7 @@ def register_device(cookies):
     response = requests.post(
         f"{API_BASE}/device/register",
         json={
-            "bus_id": BUS_NUMBER,
+            "bus_number": BUS_NUMBER,
             "device_name": DEVICE_NAME
         },
         cookies=cookies
