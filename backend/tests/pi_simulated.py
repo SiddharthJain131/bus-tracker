@@ -33,10 +33,8 @@ def initialize() -> bool:
         return True
     except ImportError:
         print(f"{Colors.YELLOW}⚠ DeepFace not installed{Colors.RESET}")
-        response = input(f"{Colors.CYAN}Install DeepFace? [y/n]: {Colors.RESET}").lower()
-        if response == 'y':
-            return install_deepface()
-        return False
+        print(f"{Colors.YELLOW}  Continuing without face recognition (API testing mode){Colors.RESET}")
+        return True
 
 def install_deepface() -> bool:
     """Install DeepFace and dependencies"""
