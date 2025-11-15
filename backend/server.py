@@ -903,8 +903,8 @@ async def get_student(student_id: str, current_user: dict = Depends(get_current_
         student['bus_number'] = 'N/A'
     
     # Still need to fetch route_id from bus if needed
-    if student.get('bus_id'):
-        bus = await db.buses.find_one({"bus_id": student['bus_id']}, {"_id": 0})
+    if student.get('bus_number'):
+        bus = await db.buses.find_one({"bus_number": student['bus_number']}, {"_id": 0})
         student['route_id'] = bus.get('route_id') if bus else None
     else:
         student['route_id'] = None
