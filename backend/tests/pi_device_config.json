@@ -1,5 +1,5 @@
 {
-  "backend_url": "https://pi-system-verify.preview.emergentagent.com/",
+  "backend_url": "http://localhost:8001",
   "device_id": "0bf393f8-873e-441c-9c9b-632952379682",
   "device_name": "pi1",
   "bus_number": "BUS-001",
