@@ -1741,8 +1741,8 @@ async def simulate_scan():
     return {**result, "student_name": student['name'], "verified": verified}
 
 @api_router.post("/demo/simulate_bus_movement")
-async def simulate_bus_movement(bus_id: str):
-    current = await db.bus_locations.find_one({"bus_id": bus_id}, {"_id": 0})
+async def simulate_bus_movement(bus_number: str):
+    current = await db.bus_locations.find_one({"bus_number": bus_number}, {"_id": 0})
     
     if current:
         lat = current['lat'] + random.uniform(-0.001, 0.001)
@@ -1752,7 +1752,7 @@ async def simulate_bus_movement(bus_id: str):
         lon = -122.4194
     
     request = UpdateLocationRequest(
-        bus_id=bus_id,
+        bus_number=bus_number,
         lat=lat,
         lon=lon
     )
