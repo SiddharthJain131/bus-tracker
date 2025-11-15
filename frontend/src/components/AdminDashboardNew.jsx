@@ -491,7 +491,8 @@ export default function AdminDashboardNew({ user, onLogout }) {
               </Card>
             </div>
 
-            {/* Recent Activity / Holidays */}
+            {/* Recent Activity / Holidays & Notifications */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card className="p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
