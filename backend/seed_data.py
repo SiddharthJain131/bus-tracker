@@ -887,7 +887,7 @@ async def seed_data():
             "section": "A",
             "parent_id": parent_ids[2],  # Michael Davis's second child
             "teacher_id": teacher1_id,
-            "bus_id": bus3_id,
+            "bus_number": "BUS-003",
             "stop_id": route3_stop_ids[0],
             "emergency_contact": "+1-555-9105",
             "remarks": "School choir member"
@@ -905,7 +905,7 @@ async def seed_data():
             "section": "B",
             "parent_id": parent_ids[3],  # Emily Martinez's first child
             "teacher_id": teacher2_id,
-            "bus_id": bus3_id,
+            "bus_number": "BUS-003",
             "stop_id": route3_stop_ids[1],
             "emergency_contact": "+1-555-9106",
             "remarks": None
@@ -921,7 +921,7 @@ async def seed_data():
             "section": "B",
             "parent_id": parent_ids[3],  # Emily Martinez's second child
             "teacher_id": teacher2_id,
-            "bus_id": bus3_id,
+            "bus_number": "BUS-003",
             "stop_id": route3_stop_ids[2],
             "emergency_contact": "+1-555-9107",
             "remarks": "Basketball team captain"
@@ -1085,7 +1085,7 @@ async def seed_data():
             "section": "B",
             "parent_id": parent_ids[9],  # Jessica Harris's child
             "teacher_id": teacher2_id,
-            "bus_id": bus3_id,
+            "bus_number": "BUS-003",
             "stop_id": route3_stop_ids[3],
             "emergency_contact": "+1-555-9117",
             "remarks": "Drama club member"
@@ -1201,7 +1201,7 @@ async def seed_data():
             "timestamp": datetime.now(timezone.utc).isoformat()
         },
         {
-            "bus_id": bus3_id,
+            "bus_number": "BUS-003",
             "lat": route3_stops_data[1]["lat"],
             "lon": route3_stops_data[1]["lon"],
             "timestamp": datetime.now(timezone.utc).isoformat()
