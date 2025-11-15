@@ -105,7 +105,7 @@ class StudentUpdate(BaseModel):
     section: Optional[str] = None
     parent_id: Optional[str] = None
     teacher_id: Optional[str] = None
-    bus_id: Optional[str] = None
+    bus_number: Optional[str] = None
     stop_id: Optional[str] = None
     emergency_contact: Optional[str] = None
     remarks: Optional[str] = None
