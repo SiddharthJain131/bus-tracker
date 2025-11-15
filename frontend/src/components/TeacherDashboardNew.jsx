@@ -24,6 +24,7 @@ import StudentDetailModal from './StudentDetailModal';
 import AttendanceGrid from './AttendanceGrid';
 import PhotoViewerModal from './PhotoViewerModal';
 import PhotoAvatar from './PhotoAvatar';
+import NotificationDetailModal from './NotificationDetailModal';
 import { formatClassName } from '../utils/helpers';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
