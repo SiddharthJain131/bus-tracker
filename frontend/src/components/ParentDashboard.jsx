@@ -160,34 +160,46 @@ export default function ParentDashboard({ user, onLogout }) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50" data-testid="parent-dashboard">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 shadow-sm">
+      <header className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg">
                 <Bus className="w-6 h-6 text-white" />
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: 'Space Grotesk' }}>Parent Dashboard</h1>
-                <p className="text-sm text-gray-600">Welcome, {user.name}</p>
+                <p className="text-sm text-gray-600">Welcome, {currentUser.name}</p>
               </div>
             </div>
-            <Button
-              data-testid="logout-button"
-              onClick={onLogout}
-              variant="outline"
-              className="flex items-center gap-2"
-            >
-              <LogOut className="w-4 h-4" />
-              Logout
-            </Button>
+            <div className="flex items-center gap-4">
+              <div className="relative group cursor-pointer" onClick={handleProfilePhotoClick}>
+                <PhotoAvatar
+                  src={currentUser.photo}
+                  name={currentUser.name}
+                  size="md"
+                  className="border-2 border-white shadow-md hover:shadow-lg transition-shadow"
+                />
+                <div className="absolute inset-0 rounded-full bg-black bg-opacity-0 group-hover:bg-opacity-40 flex items-center justify-center transition-all">
+                  <Eye className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+              </div>
+              <Button
+                data-testid="logout-button"
+                onClick={onLogout}
+                variant="outline"
+                className="flex items-center gap-2"
+              >
+                <LogOut className="w-4 h-4" />
+                Logout
+              </Button>
+            </div>
           </div>
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
-        {/* User Profile */}
-        <UserProfileHeader user={user} />
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="space-y-6">
 
         {/* Student Cards - Multiple Children */}
         {students.length > 1 ? (
