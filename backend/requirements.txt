@@ -28,3 +28,4 @@ deepface>=0.0.79
 tf-keras>=2.16.0
 tensorflow>=2.16.0
 opencv-python>=4.9.0
+Pillow==12.0.0
