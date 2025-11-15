@@ -483,12 +483,12 @@ async def register_device(device_create: DeviceKeyCreate, current_user: dict = D
         raise HTTPException(status_code=403, detail="Only admins can register devices")
     
     # Check if bus exists
-    bus = await db.buses.find_one({"bus_id": device_create.bus_id}, {"_id": 0})
+    bus = await db.buses.find_one({"bus_number": device_create.bus_number}, {"_id": 0})
     if not bus:
         raise HTTPException(status_code=404, detail="Bus not found")
     
     # Check if device already exists for this bus
-    existing_device = await db.device_keys.find_one({"bus_id": device_create.bus_id}, {"_id": 0})
+    existing_device = await db.device_keys.find_one({"bus_number": device_create.bus_number}, {"_id": 0})
     if existing_device:
         raise HTTPException(status_code=400, detail=f"Device already registered for bus {bus['bus_number']}")
     
@@ -500,7 +500,7 @@ async def register_device(device_create: DeviceKeyCreate, current_user: dict = D
     
     # Create device key record
     device_key = DeviceKey(
-        bus_id=device_create.bus_id,
+        bus_number=device_create.bus_number,
         device_name=device_create.device_name,
         key_hash=key_hash
     )
@@ -513,8 +513,7 @@ async def register_device(device_create: DeviceKeyCreate, current_user: dict = D
     return {
         "message": "Device registered successfully",
         "device_id": device_key.device_id,
-        "bus_id": device_create.bus_id,
-        "bus_number": bus['bus_number'],
+        "bus_number": device_create.bus_number,
         "device_name": device_create.device_name,
         "api_key": api_key,  # ONLY TIME THIS IS SHOWN
         "warning": "Store this API key securely. It cannot be retrieved later.",
