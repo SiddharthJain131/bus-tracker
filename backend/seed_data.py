@@ -38,61 +38,7 @@ RESTORABLE_COLLECTIONS = [
 ]
 
 # Test credentials for easy login
-TEST_CREDENTIALS = """
-===========================================
-📝 DEMO LOGIN CREDENTIALS
-===========================================
-
-🔐 ADMIN ACCOUNTS:
-  Email: admin@school.com
-  Password: password
-  Role: Primary Administrator (⭐ Elevated Admin - Can manage other admins)
-  ---
-  Email: admin2@school.com
-  Password: password
-  Role: Secondary Administrator (Regular Admin)
-
-👨‍🏫 TEACHER ACCOUNTS:
-  Email: teacher@school.com
-  Password: password
-  Name: Mary Johnson
-  Class: Grade 5 - Section A
-  ---
-  Email: teacher2@school.com
-  Password: password
-  Name: Robert Smith
-  Class: Grade 6 - Section B
-  ---
-  Email: teacher3@school.com
-  Password: password
-  Name: Sarah Wilson
-  Class: Grade 4 - Section A
-
-👪 PARENT ACCOUNTS:
-  Email: parent@school.com
-  Password: password
-  Children: Emma Johnson (Grade 5-A)
-  ---
-  Email: parent2@school.com
-  Password: password
-  Children: Liam Smith (Grade 5-A)
-  ---
-  Email: parent3@school.com
-  Password: password
-  Children: Olivia Brown (Grade 4-A)
-  ---
-  Email: parent4@school.com
-  Password: password
-  Children: Noah Davis (Grade 6-B)
-  ---
-  Email: parent5@school.com
-  Password: password
-  Children: Ava Martinez (Grade 6-B)
-  ---
-  [... and more parents linked to students]
-
-===========================================
-"""
+TEST_CREDENTIALS = ""
 
 
 def get_latest_backup() -> Optional[Path]:
