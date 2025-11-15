@@ -1293,11 +1293,29 @@ async def seed_data():
             "type": "update",
             "timestamp": (datetime.now(timezone.utc) - timedelta(days=1)).isoformat(),
             "read": True
+        },
+        {
+            "notification_id": str(uuid.uuid4()),
+            "user_id": teacher_ids[0],
+            "title": "Class Attendance Alert",
+            "message": "3 students from your class were marked absent today",
+            "type": "update",
+            "timestamp": (datetime.now(timezone.utc) - timedelta(hours=3)).isoformat(),
+            "read": False
+        },
+        {
+            "notification_id": str(uuid.uuid4()),
+            "user_id": teacher_ids[0],
+            "title": "Route Change Notice",
+            "message": "Bus route schedule has been updated for your assigned students",
+            "type": "update",
+            "timestamp": (datetime.now(timezone.utc) - timedelta(days=2)).isoformat(),
+            "read": True
         }
     ]
     
     await db.notifications.insert_many(notifications)
-    print(f"✅ Created {len(notifications)} sample notifications (including {3} for admin)")
+    print(f"✅ Created {len(notifications)} sample notifications (3 admin, 2 teacher, 2 parent)")
     
     print("\n" + "=" * 60)
     print("✅ DATABASE SEEDING COMPLETED SUCCESSFULLY!")
