@@ -3,11 +3,13 @@ import axios from 'axios';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { toast } from 'sonner';
-import { LogOut, Bus, Bell, Calendar, MapPin, Eye, EyeOff } from 'lucide-react';
+import { LogOut, Bus, Bell, Calendar, MapPin, Eye, EyeOff, Camera } from 'lucide-react';
 import BusMap from './BusMap';
 import AttendanceGrid from './AttendanceGrid';
-import UserProfileHeader from './UserProfileHeader';
+import PhotoViewerModal from './PhotoViewerModal';
+import PhotoAvatar from './PhotoAvatar';
 import StudentCard from './StudentCard';
+import NotificationDetailModal from './NotificationDetailModal';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -20,6 +22,10 @@ export default function ParentDashboard({ user, onLogout }) {
   const [busLocation, setBusLocation] = useState(null);
   const [showRoute, setShowRoute] = useState(false);
   const [route, setRoute] = useState(null);
+  const [showPhotoViewer, setShowPhotoViewer] = useState(false);
+  const [showNotificationDetail, setShowNotificationDetail] = useState(false);
+  const [selectedNotification, setSelectedNotification] = useState(null);
+  const [currentUser, setCurrentUser] = useState(user);
 
   useEffect(() => {
     fetchStudents();
