@@ -457,14 +457,13 @@ async def update_student_photo(student_id: str, file: UploadFile = File(...), cu
             shutil.copyfileobj(file.file, buffer)
         
         # Update database
-        photo_path = f"backend/photos/students/{student_id}/profile.{file_ext}"
+        photo = f"/api/photos/students/{student_id}/profile.{file_ext}"
         await db.students.update_one(
             {"student_id": student_id},
-            {"$set": {"photo_path": photo_path}}
+            {"$set": {"photo": photo}}
         )
         
-        photo_url = f"/photos/students/{student_id}/profile.{file_ext}"
-        return {"success": True, "photo_url": photo_url, "message": "Student photo updated successfully"}
+        return {"success": True, "photo_url": photo, "message": "Student photo updated successfully"}
     except HTTPException:
         raise
     except Exception as e:
