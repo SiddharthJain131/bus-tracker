@@ -25,6 +25,8 @@ BACKUP_DIR = ROOT_DIR / 'backups'
 BACKUP_LIMIT = int(os.environ.get('BACKUP_LIMIT', '3'))
 
 # Collections to backup (excluding dynamic data)
+# Note: users and students collections use 'photo' field (not 'photo_path')
+# Photo field contains accessible URLs like '/api/photos/students/{id}/profile.jpg'
 COLLECTIONS_TO_BACKUP = [
     'users',
     'students', 
