@@ -1842,23 +1842,7 @@ async def delete_stop(stop_id: str, current_user: dict = Depends(get_current_use
     return {"status": "deleted", "stop_id": stop_id}
 
 # Email logs
-@api_router.get("/email_logs")
-async def get_email_logs(current_user: dict = Depends(get_current_user)):
-    if current_user['role'] != 'admin':
-        raise HTTPException(status_code=403, detail="Access denied")
-    
-    logs = await db.email_logs.find({}, {"_id": 0}).sort("timestamp", -1).limit(100).to_list(100)
-    return logs
-
 # Admin CRUD
-@api_router.get("/admin/students")
-async def admin_get_students(current_user: dict = Depends(get_current_user)):
-    if current_user['role'] not in ['admin', 'teacher']:
-        raise HTTPException(status_code=403, detail="Access denied")
-    
-    students = await db.students.find({}, {"_id": 0}).to_list(1000)
-    return students
-
 @api_router.get("/admin/holidays")
 async def get_holidays(current_user: dict = Depends(get_current_user)):
     if current_user['role'] != 'admin':
