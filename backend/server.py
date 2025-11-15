@@ -950,10 +950,10 @@ async def create_student(student: Student, current_user: dict = Depends(get_curr
     
     # Check bus capacity before creating student
     capacity_warning = None
-    if student.bus_id:
-        bus = await db.buses.find_one({"bus_id": student.bus_id}, {"_id": 0})
+    if student.bus_number:
+        bus = await db.buses.find_one({"bus_number": student.bus_number}, {"_id": 0})
         if bus:
-            current_count = await db.students.count_documents({"bus_id": student.bus_id})
+            current_count = await db.students.count_documents({"bus_number": student.bus_number})
             bus_capacity = bus.get('capacity', 0)
             new_count = current_count + 1
             
