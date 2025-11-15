@@ -2247,7 +2247,7 @@ async def check_missed_scans():
                 hour, minute = map(int, expected_time_str.split(':'))
                 expected_datetime = current_time.replace(hour=hour, minute=minute, second=0, microsecond=0)
                 threshold_datetime = expected_datetime + timedelta(minutes=RED_STATUS_THRESHOLD)
-            except:
+            except (ValueError, AttributeError):
                 continue
             
             # Check if we're past the threshold
