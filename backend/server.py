@@ -273,6 +273,80 @@ def get_photo_url(photo_path: Optional[str]) -> Optional[str]:
             photo_path = '/api/photos/' + photo_path
     return photo_path
 
+# Face embedding generation helper
+async def generate_face_embedding(image_source) -> dict:
+    """
+    Generate face embedding from image using DeepFace.
+    
+    Args:
+        image_source: Can be file path (str/Path), bytes, or UploadFile
+    
+    Returns:
+        dict with 'success', 'embedding' (base64), and 'message' keys
+    """
+    try:
+        # Convert image_source to numpy array for DeepFace
+        if isinstance(image_source, (str, Path)):
+            # File path
+            img = cv2.imread(str(image_source))
+            if img is None:
+                return {"success": False, "embedding": None, "message": "Could not read image file"}
+        elif isinstance(image_source, bytes):
+            # Bytes data
+            nparr = np.frombuffer(image_source, np.uint8)
+            img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+            if img is None:
+                return {"success": False, "embedding": None, "message": "Could not decode image data"}
+        elif hasattr(image_source, 'read'):
+            # File-like object (UploadFile)
+            contents = await image_source.read()
+            await image_source.seek(0)  # Reset file pointer for potential reuse
+            nparr = np.frombuffer(contents, np.uint8)
+            img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+            if img is None:
+                return {"success": False, "embedding": None, "message": "Could not decode uploaded image"}
+        else:
+            return {"success": False, "embedding": None, "message": "Invalid image source type"}
+        
+        # Generate embedding using DeepFace
+        # Using Facenet model for compatibility and speed
+        embedding_objs = DeepFace.represent(
+            img_path=img,
+            model_name="Facenet",
+            enforce_detection=True,
+            detector_backend="opencv"
+        )
+        
+        if not embedding_objs or len(embedding_objs) == 0:
+            return {"success": False, "embedding": None, "message": "No face detected in image"}
+        
+        if len(embedding_objs) > 1:
+            logging.warning(f"Multiple faces detected ({len(embedding_objs)}), using first face")
+        
+        # Get the first face's embedding
+        embedding_vector = embedding_objs[0]['embedding']
+        
+        # Convert to base64 for storage
+        embedding_array = np.array(embedding_vector, dtype=np.float32)
+        embedding_bytes = embedding_array.tobytes()
+        embedding_b64 = base64.b64encode(embedding_bytes).decode('utf-8')
+        
+        return {
+            "success": True,
+            "embedding": embedding_b64,
+            "message": f"Successfully generated embedding (dimension: {len(embedding_vector)})"
+        }
+        
+    except ValueError as e:
+        # DeepFace throws ValueError when no face is detected
+        error_msg = str(e)
+        if "Face could not be detected" in error_msg or "no face" in error_msg.lower():
+            return {"success": False, "embedding": None, "message": "No face detected in image"}
+        return {"success": False, "embedding": None, "message": f"Face detection error: {error_msg}"}
+    except Exception as e:
+        logging.error(f"Error generating face embedding: {str(e)}")
+        return {"success": False, "embedding": None, "message": f"Error generating embedding: {str(e)}"}
+
 # Device API Key verification helper
 async def verify_device_key(x_api_key: str = Header(...)):
     """
