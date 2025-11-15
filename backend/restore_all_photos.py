@@ -351,6 +351,87 @@ async def restore_entity_photos(
             stats.add(entity_name, 'errors')
 
 
+async def restore_attendance_photos(stats: PhotoRestoreStats, generate_placeholders: bool = True) -> None:
+    """
+    Restore attendance photos from database records
+    Generates placeholders for missing attendance scan photos
+    """
+    print(f"\n{'=' * 70}")
+    print(f"📸 PROCESSING ATTENDANCE PHOTOS")
+    print(f"{'=' * 70}")
+    
+    entity_name = 'attendance'
+    stats.init_entity(entity_name)
+    
+    # Get all attendance records with scan photos
+    attendance_records = await db.attendance.find(
+        {'scan_photo': {'$exists': True, '$ne': None}}
+    ).to_list(None)
+    
+    if not attendance_records:
+        print("⚠️  No attendance records with photos found")
+        return
+    
+    print(f"📚 Found {len(attendance_records)} attendance records with photos\n")
+    
+    # Process each attendance record
+    for idx, record in enumerate(attendance_records, 1):
+        student_id = record.get('student_id')
+        date = record.get('date')
+        trip = record.get('trip')
+        scan_photo = record.get('scan_photo')
+        
+        if not student_id or not scan_photo:
+            continue
+        
+        stats.add(entity_name, 'processed')
+        
+        # Parse photo path to get file location
+        # Expected format: /api/photos/students/{student_id}/attendance/{date}_{trip}.jpg
+        try:
+            # Extract file path from API path
+            if scan_photo.startswith('/api/photos/'):
+                relative_path = scan_photo.replace('/api/photos/', '')
+                file_path = PHOTO_DIR / relative_path
+            else:
+                continue
+            
+            # Check if photo exists
+            photo_exists = file_path.exists()
+            
+            if photo_exists:
+                # Verify it's a valid image
+                try:
+                    img = Image.open(file_path)
+                    img.verify()
+                    stats.add(entity_name, 'photos_verified')
+                    if idx % 10 == 0:  # Print every 10th to avoid spam
+                        print(f"   [{idx}/{len(attendance_records)}] ✅ Verified")
+                except Exception as e:
+                    print(f"   [{idx}/{len(attendance_records)}] ⚠️  Corrupted, regenerating...")
+                    photo_exists = False
+            
+            # Generate placeholder if missing
+            if not photo_exists and generate_placeholders:
+                print(f"   [{idx}/{len(attendance_records)}] 🎨 Generating placeholder for {date} {trip}...")
+                if save_placeholder_image(file_path, 'attendance', student_id, f'{date}_{trip}'):
+                    stats.add(entity_name, 'photos_generated')
+                    print(f"      ✅ Placeholder generated")
+                else:
+                    print(f"      ❌ Failed to generate placeholder")
+                    stats.add(entity_name, 'errors')
+            elif not photo_exists:
+                if idx % 10 == 0:
+                    print(f"   [{idx}/{len(attendance_records)}] ⚠️  Photo missing (placeholder generation disabled)")
+        
+        except Exception as e:
+            error_msg = f"Attendance {student_id} {date} {trip}: {str(e)}"
+            stats.errors.append(error_msg)
+            stats.add(entity_name, 'errors')
+    
+    print(f"\n✅ Processed {len(attendance_records)} attendance photos")
+
+
 async def restore_all_photos(backup_path: Optional[Path] = None, generate_placeholders: bool = True) -> PhotoRestoreStats:
     """
     Main restoration function for all entities
