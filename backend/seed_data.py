@@ -937,7 +937,7 @@ async def seed_data():
             "section": "B",
             "parent_id": parent_ids[3],  # Emily Martinez's third child
             "teacher_id": teacher2_id,
-            "bus_id": bus4_id,
+            "bus_number": "BUS-004",
             "stop_id": route4_stop_ids[0],
             "emergency_contact": "+1-555-9108",
             "remarks": None
@@ -953,7 +953,7 @@ async def seed_data():
             "section": "B",
             "parent_id": parent_ids[4],  # David Wilson's first child
             "teacher_id": teacher2_id,
-            "bus_id": bus4_id,
+            "bus_number": "BUS-004",
             "stop_id": route4_stop_ids[1],
             "emergency_contact": "+1-555-9109",
             "remarks": "Debate club member"
@@ -969,7 +969,7 @@ async def seed_data():
             "section": "B",
             "parent_id": parent_ids[4],  # David Wilson's second child
             "teacher_id": teacher2_id,
-            "bus_id": bus4_id,
+            "bus_number": "BUS-004",
             "stop_id": route4_stop_ids[2],
             "emergency_contact": "+1-555-9110",
             "remarks": None
@@ -1051,7 +1051,7 @@ async def seed_data():
             "section": "A",
             "parent_id": parent_ids[8],  # Matthew Lee's first child
             "teacher_id": teacher3_id,
-            "bus_id": bus4_id,
+            "bus_number": "BUS-004",
             "stop_id": route4_stop_ids[3],
             "emergency_contact": "+1-555-9115",
             "remarks": "Library monitor"
@@ -1133,7 +1133,7 @@ async def seed_data():
             "section": "B",
             "parent_id": parent_ids[11],  # Lisa Lewis's child
             "teacher_id": teacher2_id,
-            "bus_id": bus4_id,
+            "bus_number": "BUS-004",
             "stop_id": route4_stop_ids[4],
             "emergency_contact": "+1-555-9120",
             "remarks": "Student council member"
@@ -1207,7 +1207,7 @@ async def seed_data():
             "timestamp": datetime.now(timezone.utc).isoformat()
         },
         {
-            "bus_id": bus4_id,
+            "bus_number": "BUS-004",
             "lat": route4_stops_data[2]["lat"],
             "lon": route4_stops_data[2]["lon"],
             "timestamp": datetime.now(timezone.utc).isoformat()
