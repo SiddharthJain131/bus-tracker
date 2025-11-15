@@ -65,7 +65,8 @@ def verify_scans():
     )
     
     if attendance_response.status_code != 200:
-        print(f"✗ Failed to fetch attendance")
+        print(f"✗ Failed to fetch attendance: {attendance_response.status_code}")
+        print(f"  Response: {attendance_response.text}")
         return False
     
     attendance_data = attendance_response.json()
