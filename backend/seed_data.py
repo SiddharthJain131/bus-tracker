@@ -823,7 +823,7 @@ async def seed_data():
             "section": "A",
             "parent_id": parent_ids[0],
             "teacher_id": teacher1_id,
-            "bus_id": bus1_id,
+            "bus_number": "BUS-001",
             "stop_id": route1_stop_ids[1],
             "emergency_contact": "+1-555-9101",
             "remarks": "Allergic to peanuts"
@@ -839,7 +839,7 @@ async def seed_data():
             "section": "A",
             "parent_id": parent_ids[0],  # John Parent's second child
             "teacher_id": teacher1_id,
-            "bus_id": bus1_id,
+            "bus_number": "BUS-001",
             "stop_id": route1_stop_ids[2],
             "emergency_contact": "+1-555-9102",
             "remarks": None
@@ -987,7 +987,7 @@ async def seed_data():
             "section": "A",
             "parent_id": parent_ids[5],  # Jennifer Taylor's child
             "teacher_id": teacher3_id,
-            "bus_id": bus1_id,
+            "bus_number": "BUS-001",
             "stop_id": route1_stop_ids[0],
             "emergency_contact": "+1-555-9111",
             "remarks": None
@@ -1003,7 +1003,7 @@ async def seed_data():
             "section": "A",
             "parent_id": parent_ids[6],  # Christopher Garcia's first child
             "teacher_id": teacher3_id,
-            "bus_id": bus1_id,
+            "bus_number": "BUS-001",
             "stop_id": route1_stop_ids[3],
             "emergency_contact": "+1-555-9112",
             "remarks": "Art club member"
@@ -1069,7 +1069,7 @@ async def seed_data():
             "section": "A",
             "parent_id": parent_ids[8],  # Matthew Lee's second child
             "teacher_id": teacher1_id,
-            "bus_id": bus1_id,
+            "bus_number": "BUS-001",
             "stop_id": route1_stop_ids[0],
             "emergency_contact": "+1-555-9116",
             "remarks": "Science club member"
@@ -1117,7 +1117,7 @@ async def seed_data():
             "section": "A",
             "parent_id": parent_ids[10],  # Daniel Clark's second child
             "teacher_id": teacher1_id,
-            "bus_id": bus1_id,
+            "bus_number": "BUS-001",
             "stop_id": route1_stop_ids[2],
             "emergency_contact": "+1-555-9119",
             "remarks": "Chess club captain"
@@ -1189,7 +1189,7 @@ async def seed_data():
     # Create initial bus locations
     bus_locations = [
         {
-            "bus_id": bus1_id,
+            "bus_number": "BUS-001",
             "lat": route1_stops_data[1]["lat"],
             "lon": route1_stops_data[1]["lon"],
             "timestamp": datetime.now(timezone.utc).isoformat()
