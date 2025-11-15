@@ -682,23 +682,23 @@ async def update_location(request: UpdateLocationRequest, device: dict = Depends
     timestamp = datetime.now(timezone.utc).isoformat()
     
     # Verify that the device is authorized for this bus
-    if device['bus_id'] != request.bus_id:
+    if device['bus_number'] != request.bus_number:
         raise HTTPException(status_code=403, detail="Device not authorized for this bus")
     
     location = BusLocation(
-        bus_id=request.bus_id,
+        bus_number=request.bus_number,
         lat=request.lat,
         lon=request.lon,
         timestamp=timestamp
     )
     
     await db.bus_locations.update_one(
-        {"bus_id": request.bus_id},
+        {"bus_number": request.bus_number},
         {"$set": location.model_dump()},
         upsert=True
     )
     
-    logging.info(f"Location updated for bus {request.bus_id} by device {device['device_name']}")
+    logging.info(f"Location updated for bus {request.bus_number} by device {device['device_name']}")
     
     return {"status": "success", "timestamp": timestamp}
 
