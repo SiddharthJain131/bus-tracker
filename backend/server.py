@@ -837,9 +837,9 @@ async def get_students(current_user: dict = Depends(get_current_user)):
             student['morning_expected_time'] = 'N/A'
             student['evening_expected_time'] = 'N/A'
         
-        # Convert photo_path to accessible URL
-        if student.get('photo_path'):
-            student['photo_url'] = get_photo_url(student['photo_path'])
+        # Convert photo to accessible URL (photo field already contains the URL)
+        if student.get('photo'):
+            student['photo_url'] = student['photo']
         else:
             student['photo_url'] = None
     
@@ -1704,9 +1704,9 @@ async def get_parent_students(current_user: dict = Depends(get_current_user)):
             student['morning_expected_time'] = 'N/A'
             student['evening_expected_time'] = 'N/A'
         
-        # Convert photo_path to accessible URL
-        if student.get('photo_path'):
-            student['photo_url'] = get_photo_url(student['photo_path'])
+        # Convert photo to accessible URL (photo field already contains the URL)
+        if student.get('photo'):
+            student['photo_url'] = student['photo']
         else:
             student['photo_url'] = None
     
