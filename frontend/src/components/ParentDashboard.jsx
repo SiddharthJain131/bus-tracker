@@ -21,6 +21,8 @@ export default function ParentDashboard({ user, onLogout }) {
   const [busLocation, setBusLocation] = useState(null);
   const [showRoute, setShowRoute] = useState(false);
   const [route, setRoute] = useState(null);
+  const [showNotificationDetail, setShowNotificationDetail] = useState(false);
+  const [selectedNotification, setSelectedNotification] = useState(null);
 
   useEffect(() => {
     fetchStudents();
