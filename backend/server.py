@@ -91,7 +91,7 @@ class Student(BaseModel):
     section: str  # Required for uniqueness constraint
     parent_id: str
     teacher_id: Optional[str] = None
-    bus_id: str
+    bus_number: str
     stop_id: Optional[str] = None
     emergency_contact: Optional[str] = None
     remarks: Optional[str] = None
