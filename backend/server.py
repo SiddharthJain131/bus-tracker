@@ -112,7 +112,6 @@ class StudentUpdate(BaseModel):
 
 class Bus(BaseModel):
     model_config = ConfigDict(extra="ignore")
-    bus_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     bus_number: str
     driver_name: str
     driver_phone: str
