@@ -408,14 +408,13 @@ async def update_my_photo(file: UploadFile = File(...), current_user: dict = Dep
             shutil.copyfileobj(file.file, buffer)
         
         # Update database
-        photo_path = f"backend/photos/{role_dir}/{file_name}"
+        photo = f"/api/photos/{role_dir}/{file_name}"
         await db.users.update_one(
             {"user_id": current_user['user_id']},
-            {"$set": {"photo": photo_path}}
+            {"$set": {"photo": photo}}
         )
         
-        photo_url = f"/photos/{role_dir}/{file_name}"
-        return {"success": True, "photo_url": photo_url, "message": "Photo updated successfully"}
+        return {"success": True, "photo_url": photo, "message": "Photo updated successfully"}
     except HTTPException:
         raise
     except Exception as e:
