@@ -1,0 +1,8 @@
+{
+  "backend_url": "https://bus-tracker-update.preview.emergentagent.com/",
+  "device_id": "0bf393f8-873e-441c-9c9b-632952379682",
+  "device_name": "pi1",
+  "bus_number": "BUS-001",
+  "api_key": "4d2993c3b21d1640df713aaf25ce27b62ccc65a96dd41d1e51ad74833d34db24",
+  "registered_at": "2025-11-15T08:11:47.934944+00:00"
+}
