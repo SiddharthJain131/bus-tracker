@@ -1378,26 +1378,26 @@ async def update_bus(bus_number: str, bus: Bus, current_user: dict = Depends(get
     )
     return bus
 
-@api_router.delete("/buses/{bus_id}")
-async def delete_bus(bus_id: str, current_user: dict = Depends(get_current_user)):
+@api_router.delete("/buses/{bus_number}")
+async def delete_bus(bus_number: str, current_user: dict = Depends(get_current_user)):
     if current_user['role'] != 'admin':
         raise HTTPException(status_code=403, detail="Access denied")
     
     # Check if bus exists
-    bus = await db.buses.find_one({"bus_id": bus_id}, {"_id": 0})
+    bus = await db.buses.find_one({"bus_number": bus_number}, {"_id": 0})
     if not bus:
         raise HTTPException(status_code=404, detail="Bus not found")
     
     # Check for students assigned to this bus
-    student_count = await db.students.count_documents({"bus_id": bus_id})
+    student_count = await db.students.count_documents({"bus_number": bus_number})
     if student_count > 0:
         raise HTTPException(
             status_code=409,
             detail=f"Cannot delete bus. {student_count} student(s) are assigned to this bus. Please reassign students first."
         )
     
-    await db.buses.delete_one({"bus_id": bus_id})
-    return {"status": "deleted", "bus_id": bus_id}
+    await db.buses.delete_one({"bus_number": bus_number})
+    return {"status": "deleted", "bus_number": bus_number}
 
 # Route APIs
 @api_router.get("/routes")
