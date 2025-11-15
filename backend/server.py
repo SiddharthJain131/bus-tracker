@@ -898,12 +898,15 @@ async def get_student(student_id: str, current_user: dict = Depends(get_current_
     student['parent_name'] = parent['name'] if parent else 'N/A'
     student['parent_email'] = parent['email'] if parent else 'N/A'
     
+    # bus_number is already in student record, no need to fetch
+    if not student.get('bus_number'):
+        student['bus_number'] = 'N/A'
+    
+    # Still need to fetch route_id from bus if needed
     if student.get('bus_id'):
         bus = await db.buses.find_one({"bus_id": student['bus_id']}, {"_id": 0})
-        student['bus_number'] = bus['bus_number'] if bus else 'N/A'
         student['route_id'] = bus.get('route_id') if bus else None
     else:
-        student['bus_number'] = 'N/A'
         student['route_id'] = None
     
     # Enrich with stop name and times
