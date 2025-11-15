@@ -605,6 +605,69 @@ export default function AdminDashboardNew({ user, onLogout }) {
                 })()}
               </div>
             </Card>
+
+            <Card className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <Bell className="w-5 h-5 text-violet-600" />
+                  <h3 className="text-lg font-semibold" style={{ fontFamily: 'Space Grotesk' }}>
+                    Notifications
+                  </h3>
+                </div>
+              </div>
+              <div className="space-y-3">
+                {notifications.length === 0 ? (
+                  <p className="text-sm text-gray-500 text-center py-4">No notifications</p>
+                ) : (
+                  notifications.slice(0, 5).map(notification => {
+                    const formatTimestamp = (timestamp) => {
+                      if (!timestamp) return '';
+                      const date = new Date(timestamp);
+                      const now = new Date();
+                      const diffMs = now - date;
+                      const diffMins = Math.floor(diffMs / 60000);
+                      const diffHours = Math.floor(diffMs / 3600000);
+                      const diffDays = Math.floor(diffMs / 86400000);
+                      
+                      if (diffMins < 1) return 'Just now';
+                      if (diffMins < 60) return `${diffMins}m ago`;
+                      if (diffHours < 24) return `${diffHours}h ago`;
+                      if (diffDays < 7) return `${diffDays}d ago`;
+                      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                    };
+
+                    return (
+                      <div
+                        key={notification.notification_id}
+                        className="flex items-start gap-4 p-4 rounded-lg border bg-gradient-to-r from-purple-50 to-pink-50 border-purple-200 shadow-sm hover:shadow-md transition-all"
+                      >
+                        <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white text-purple-600 shadow-sm flex-shrink-0">
+                          <Bell className="w-5 h-5" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center justify-between gap-2">
+                            <h3 className="font-semibold text-gray-800 truncate">
+                              {notification.title}
+                            </h3>
+                            {notification.timestamp && (
+                              <span className="text-xs text-gray-500 whitespace-nowrap">
+                                {formatTimestamp(notification.timestamp)}
+                              </span>
+                            )}
+                          </div>
+                          {notification.message && (
+                            <p className="text-sm text-gray-600 mt-1 line-clamp-2">
+                              {notification.message}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })
+                )}
+              </div>
+            </Card>
+            </div>
           </TabsContent>
 
           {/* Students Tab */}
