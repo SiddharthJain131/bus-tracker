@@ -668,6 +668,7 @@ async def scan_event(request: ScanEventRequest, device: dict = Depends(verify_de
         if student:
             notification = Notification(
                 user_id=student['parent_id'],
+                title="Identity Mismatch Detected",
                 message=f"Identity mismatch detected for {student['name']} (Confidence: {request.confidence:.0%})",
                 timestamp=timestamp,
                 type="mismatch"
