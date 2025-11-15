@@ -530,12 +530,7 @@ async def list_devices(current_user: dict = Depends(get_current_user)):
     
     devices = await db.device_keys.find({}, {"_id": 0, "key_hash": 0}).to_list(1000)
     
-    # Enrich with bus information
-    for device in devices:
-        bus = await db.buses.find_one({"bus_id": device['bus_id']}, {"_id": 0})
-        if bus:
-            device['bus_number'] = bus['bus_number']
-    
+    # bus_number is already in device records, no need for enrichment
     return devices
 
 # Device-Only Endpoints (require X-API-Key header)
