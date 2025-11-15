@@ -86,6 +86,7 @@ export default function ParentDashboard({ user, onLogout }) {
   };
 
   const fetchBusLocation = async (busId) => {
+    if (!busId) return;
     try {
       const response = await axios.get(`${API}/get_bus_location?bus_id=${busId}`);
       setBusLocation(response.data);
@@ -104,8 +105,56 @@ export default function ParentDashboard({ user, onLogout }) {
     }
   };
 
+  const handleNotificationClick = async (notification) => {
+    if (!notification) return;
+    
+    setSelectedNotification(notification);
+    setShowNotificationDetail(true);
+    
+    if (!notification.read) {
+      try {
+        await axios.post(`${API}/mark_notification_read?notification_id=${notification.notification_id}`);
+        await fetchNotifications();
+      } catch (error) {
+        console.error('Error marking notification as read:', error);
+      }
+    }
+  };
+
+  const handleCloseNotificationModal = () => {
+    setShowNotificationDetail(false);
+    setSelectedNotification(null);
+  };
+
   const toggleRoute = () => {
     setShowRoute(!showRoute);
+  };
+
+  const handleProfilePhotoClick = () => {
+    setShowPhotoViewer(true);
+  };
+
+  const handleProfilePhotoUpdate = (newPhotoUrl) => {
+    setCurrentUser(prevUser => ({
+      ...prevUser,
+      photo: newPhotoUrl.startsWith('http') ? newPhotoUrl : `${BACKEND_URL}${newPhotoUrl}`
+    }));
+  };
+
+  const formatTimestamp = (timestamp) => {
+    if (!timestamp) return '';
+    const date = new Date(timestamp);
+    const now = new Date();
+    const diffMs = now - date;
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+    
+    if (diffMins < 1) return 'Just now';
+    if (diffMins < 60) return `${diffMins}m ago`;
+    if (diffHours < 24) return `${diffHours}h ago`;
+    if (diffDays < 7) return `${diffDays}d ago`;
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
   };
 
   return (
