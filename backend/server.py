@@ -1020,13 +1020,13 @@ async def update_student(student_id: str, updates: StudentUpdate, current_user: 
     
     # Check bus capacity if bus is being changed
     capacity_warning = None
-    if 'bus_id' in update_data and update_data['bus_id'] != old_student.get('bus_id'):
-        new_bus_id = update_data['bus_id']
-        bus = await db.buses.find_one({"bus_id": new_bus_id}, {"_id": 0})
+    if 'bus_number' in update_data and update_data['bus_number'] != old_student.get('bus_number'):
+        new_bus_number = update_data['bus_number']
+        bus = await db.buses.find_one({"bus_number": new_bus_number}, {"_id": 0})
         if bus:
             # Count students currently on this bus (excluding current student)
             current_count = await db.students.count_documents({
-                "bus_id": new_bus_id,
+                "bus_number": new_bus_number,
                 "student_id": {"$ne": student_id}
             })
             bus_capacity = bus.get('capacity', 0)
