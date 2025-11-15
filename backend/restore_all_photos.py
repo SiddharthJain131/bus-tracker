@@ -472,6 +472,14 @@ async def restore_all_photos(backup_path: Optional[Path] = None, generate_placeh
             print(f"\n❌ {error_msg}")
             stats.errors.append(error_msg)
     
+    # Process attendance photos
+    try:
+        await restore_attendance_photos(stats, generate_placeholders)
+    except Exception as e:
+        error_msg = f"Failed to process attendance photos: {str(e)}"
+        print(f"\n❌ {error_msg}")
+        stats.errors.append(error_msg)
+    
     # Print summary
     stats.print_summary()
     
