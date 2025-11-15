@@ -507,19 +507,98 @@ export default function AdminDashboardNew({ user, onLogout }) {
                   Edit Holidays
                 </Button>
               </div>
-              <div className="space-y-2">
-                {holidays.length === 0 ? (
-                  <p className="text-sm text-gray-500 text-center py-4">No holidays scheduled</p>
-                ) : (
-                  holidays.slice(0, 5).map(holiday => (
-                    <div key={holiday.holiday_id} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                      <div>
-                        <p className="font-medium text-gray-900">{holiday.name}</p>
-                        <p className="text-sm text-gray-600">{new Date(holiday.date).toLocaleDateString()}</p>
-                      </div>
-                    </div>
-                  ))
-                )}
+              <div className="space-y-3">
+                {(() => {
+                  const getTodayInKolkata = () => {
+                    const now = new Date();
+                    const kolkataDate = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
+                    kolkataDate.setHours(0, 0, 0, 0);
+                    return kolkataDate;
+                  };
+
+                  const today = getTodayInKolkata();
+                  const upcoming = [];
+                  const past = [];
+
+                  holidays.forEach(holiday => {
+                    const holidayDate = new Date(holiday.date);
+                    holidayDate.setHours(0, 0, 0, 0);
+                    if (holidayDate > today) {
+                      upcoming.push({ ...holiday, isPast: false });
+                    } else {
+                      past.push({ ...holiday, isPast: true });
+                    }
+                  });
+
+                  upcoming.sort((a, b) => new Date(a.date) - new Date(b.date));
+                  past.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                  const displayedHolidays = showAllHolidays ? [...upcoming, ...past] : upcoming;
+
+                  const formatDate = (dateStr) => {
+                    const date = new Date(dateStr);
+                    const month = date.toLocaleDateString('en-US', { month: 'short' });
+                    const day = date.getDate();
+                    return { month, day };
+                  };
+
+                  return (
+                    <>
+                      {past.length > 0 && (
+                        <div className="mb-3">
+                          <button
+                            onClick={() => setShowAllHolidays(!showAllHolidays)}
+                            aria-expanded={showAllHolidays}
+                            className="w-full px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-lg text-sm font-medium transition-colors shadow-sm"
+                          >
+                            {showAllHolidays ? 'Show upcoming only' : 'Show all holidays'}
+                          </button>
+                        </div>
+                      )}
+                      {displayedHolidays.length === 0 ? (
+                        <p className="text-sm text-gray-500 text-center py-4">No holidays scheduled</p>
+                      ) : (
+                        displayedHolidays.slice(0, showAllHolidays ? undefined : 5).map(holiday => {
+                          const { month, day } = formatDate(holiday.date);
+                          return (
+                            <div
+                              key={holiday.holiday_id}
+                              className={`flex items-start gap-4 p-4 rounded-lg border transition-all ${
+                                holiday.isPast
+                                  ? 'bg-gray-50 border-gray-200 opacity-60'
+                                  : 'bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200 shadow-sm'
+                              }`}
+                            >
+                              <div className={`flex flex-col items-center justify-center w-16 h-16 rounded-lg flex-shrink-0 ${
+                                holiday.isPast ? 'bg-gray-200 text-gray-600' : 'bg-white text-blue-600 shadow-sm'
+                              }`}>
+                                <span className="text-xs font-semibold uppercase">{month}</span>
+                                <span className="text-2xl font-bold">{day}</span>
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-center gap-2">
+                                  <h3 className={`font-semibold ${holiday.isPast ? 'text-gray-600' : 'text-gray-800'}`}>
+                                    {holiday.name}
+                                  </h3>
+                                  {holiday.isPast && (
+                                    <span className="px-2 py-0.5 bg-gray-300 text-gray-600 text-xs rounded-full">
+                                      Past
+                                    </span>
+                                  )}
+                                </div>
+                                {holiday.description && (
+                                  <p className={`text-sm mt-1 ${holiday.isPast ? 'text-gray-500' : 'text-gray-600'}`}>
+                                    {holiday.description}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })
+                      )}
+                    </>
+                  );
+                })()}
               </div>
             </Card>
           </TabsContent>
