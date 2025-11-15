@@ -1276,9 +1276,9 @@ async def get_buses(current_user: dict = Depends(get_current_user)):
     
     return buses
 
-@api_router.get("/buses/{bus_id}")
-async def get_bus(bus_id: str):
-    bus = await db.buses.find_one({"bus_id": bus_id}, {"_id": 0})
+@api_router.get("/buses/{bus_number}")
+async def get_bus(bus_number: str):
+    bus = await db.buses.find_one({"bus_number": bus_number}, {"_id": 0})
     if not bus:
         raise HTTPException(status_code=404, detail="Bus not found")
     
