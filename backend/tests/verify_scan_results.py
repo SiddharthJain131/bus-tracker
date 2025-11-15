@@ -60,7 +60,7 @@ def verify_scans():
     print(f"→ Fetching attendance for {year_month}...")
     attendance_response = requests.get(
         f"{backend_url}/api/get_attendance",
-        params={"student_id": student_id, "year_month": year_month},
+        params={"student_id": student_id, "month": year_month},
         cookies={"session_token": session_cookie}
     )
     
