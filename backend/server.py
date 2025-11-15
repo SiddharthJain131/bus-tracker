@@ -697,7 +697,7 @@ async def bulk_generate_embeddings(current_user: dict = Depends(get_current_user
     try:
         # Find all students with photos but no embeddings
         students = await db.students.find({
-            "photo": {"$exists": True, "$ne": None, "$ne": ""},
+            "photo": {"$exists": True, "$ne": None},
             "$or": [
                 {"embedding": {"$exists": False}},
                 {"embedding": None},
