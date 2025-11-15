@@ -55,8 +55,6 @@ def register_device(cookies):
         cookies=cookies
     )
     
-    print(f"DEBUG: Status={response.status_code}, Response={response.text[:200]}")
-    
     if response.status_code == 200:
         data = response.json()
         api_key = data.get('api_key')
