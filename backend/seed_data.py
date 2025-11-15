@@ -493,14 +493,9 @@ async def seed_data():
     print("=" * 60)
     
     # Create buses with varying capacities for testing
-    bus1_id = str(uuid.uuid4())
-    bus2_id = str(uuid.uuid4())
-    bus3_id = str(uuid.uuid4())
-    bus4_id = str(uuid.uuid4())
-    
+    # Using bus_number as the sole identifier
     buses = [
         {
-            "bus_id": bus1_id,
             "bus_number": "BUS-001",
             "driver_name": "Robert Johnson",
             "driver_phone": "+1-555-0101",
@@ -509,7 +504,6 @@ async def seed_data():
             "remarks": "Test bus - Small capacity (5 students)"
         },
         {
-            "bus_id": bus2_id,
             "bus_number": "BUS-002",
             "driver_name": "Sarah Martinez",
             "driver_phone": "+1-555-0102",
@@ -518,7 +512,6 @@ async def seed_data():
             "remarks": "Test bus - Very small capacity (3 students)"
         },
         {
-            "bus_id": bus3_id,
             "bus_number": "BUS-003",
             "driver_name": "Michael Chen",
             "driver_phone": "+1-555-0103",
@@ -527,7 +520,6 @@ async def seed_data():
             "remarks": "Large capacity bus for busy route"
         },
         {
-            "bus_id": bus4_id,
             "bus_number": "BUS-004",
             "driver_name": "Lisa Anderson",
             "driver_phone": "+1-555-0104",
