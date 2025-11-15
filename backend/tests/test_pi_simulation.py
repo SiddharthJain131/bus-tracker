@@ -79,11 +79,11 @@ def send_scan_event(api_key, student_id, rfid_tag, verified=True, confidence=1.0
         f"{API_BASE}/scan_event",
         json={
             "student_id": student_id,
-            "rfid_tag": rfid_tag,
-            "timestamp": datetime.utcnow().isoformat() + "Z",
-            "location": {"lat": 40.7128, "lon": -74.0060},
+            "tag_id": rfid_tag,
             "verified": verified,
-            "confidence": confidence
+            "confidence": confidence,
+            "lat": 40.7128,
+            "lon": -74.0060
         },
         headers={"X-API-Key": api_key}
     )
