@@ -762,12 +762,12 @@ async def get_attendance(student_id: str, month: str, current_user: dict = Depen
     }
 
 @api_router.get("/get_bus_location")
-async def get_bus_location(bus_id: str, device: dict = Depends(verify_device_key)):
+async def get_bus_location(bus_number: str, device: dict = Depends(verify_device_key)):
     """
     Device-only endpoint for retrieving bus GPS location.
     Requires X-API-Key header authentication.
     """
-    location = await db.bus_locations.find_one({"bus_id": bus_id}, {"_id": 0})
+    location = await db.bus_locations.find_one({"bus_number": bus_number}, {"_id": 0})
     if not location:
         raise HTTPException(status_code=404, detail="Bus location not found")
     return location
