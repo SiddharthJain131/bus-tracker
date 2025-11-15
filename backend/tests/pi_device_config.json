@@ -1,8 +1,8 @@
 {
   "backend_url": "http://localhost:8001",
-  "device_id": "0bf393f8-873e-441c-9c9b-632952379682",
-  "device_name": "pi1",
+  "device_id": "5b2f9269-f820-48e1-9262-2a5c0ed6f1b0",
+  "device_name": "pi-test-device",
   "bus_number": "BUS-001",
-  "api_key": "4d2993c3b21d1640df713aaf25ce27b62ccc65a96dd41d1e51ad74833d34db24",
-  "registered_at": "2025-11-15T08:11:47.934944+00:00"
+  "api_key": "ddac4737d30d0067b283e9518d5f509e652bbfdf3cb14419075345921646e7f0",
+  "registered_at": "2025-11-15T09:30:03.638149+00:00"
 }
