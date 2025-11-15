@@ -812,10 +812,8 @@ async def get_students(current_user: dict = Depends(get_current_user)):
         parent = await db.users.find_one({"user_id": student['parent_id']}, {"_id": 0})
         student['parent_name'] = parent['name'] if parent else 'N/A'
         
-        if student.get('bus_id'):
-            bus = await db.buses.find_one({"bus_id": student['bus_id']}, {"_id": 0})
-            student['bus_number'] = bus['bus_number'] if bus else 'N/A'
-        else:
+        # bus_number is already in student record, no need to fetch
+        if not student.get('bus_number'):
             student['bus_number'] = 'N/A'
         
         # Enrich with stop name and times
@@ -1629,10 +1627,8 @@ async def get_teacher_students(current_user: dict = Depends(get_current_user)):
         student['pm_scan_timestamp'] = pm_attendance.get('scan_timestamp') if pm_attendance else None
         
         # Add bus info
-        if student.get('bus_id'):
-            bus = await db.buses.find_one({"bus_id": student['bus_id']}, {"_id": 0})
-            student['bus_number'] = bus['bus_number'] if bus else 'N/A'
-        else:
+        # bus_number is already in student record, no need to fetch
+        if not student.get('bus_number'):
             student['bus_number'] = 'N/A'
         
         # Add parent info
@@ -1679,10 +1675,8 @@ async def get_parent_students(current_user: dict = Depends(get_current_user)):
             student['teacher_name'] = 'N/A'
         
         # Add bus info
-        if student.get('bus_id'):
-            bus = await db.buses.find_one({"bus_id": student['bus_id']}, {"_id": 0})
-            student['bus_number'] = bus['bus_number'] if bus else 'N/A'
-        else:
+        # bus_number is already in student record, no need to fetch
+        if not student.get('bus_number'):
             student['bus_number'] = 'N/A'
         
         # Add stop name and times
