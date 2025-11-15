@@ -1953,53 +1953,6 @@ async def get_teacher_students(current_user: dict = Depends(get_current_user)):
     
     return students
 
-# Parent endpoint
-@api_router.get("/parent/students")
-async def get_parent_students(current_user: dict = Depends(get_current_user)):
-    if current_user['role'] != 'parent':
-        raise HTTPException(status_code=403, detail="Access denied")
-    
-    student_ids = current_user.get('student_ids', [])
-    students = await db.students.find({"student_id": {"$in": student_ids}}, {"_id": 0}).to_list(1000)
-    
-    # Enrich with stop name and times, bus info, teacher info
-    for student in students:
-        # Add teacher info
-        if student.get('teacher_id'):
-            teacher = await db.users.find_one({"user_id": student['teacher_id']}, {"_id": 0})
-            student['teacher_name'] = teacher['name'] if teacher else 'N/A'
-        else:
-            student['teacher_name'] = 'N/A'
-        
-        # Add bus info
-        # bus_number is already in student record, no need to fetch
-        if not student.get('bus_number'):
-            student['bus_number'] = 'N/A'
-        
-        # Add stop name and times
-        if student.get('stop_id'):
-            stop = await db.stops.find_one({"stop_id": student['stop_id']}, {"_id": 0})
-            if stop:
-                student['stop_name'] = stop['stop_name']
-                student['morning_expected_time'] = stop.get('morning_expected_time', 'N/A')
-                student['evening_expected_time'] = stop.get('evening_expected_time', 'N/A')
-            else:
-                student['stop_name'] = 'N/A'
-                student['morning_expected_time'] = 'N/A'
-                student['evening_expected_time'] = 'N/A'
-        else:
-            student['stop_name'] = 'N/A'
-            student['morning_expected_time'] = 'N/A'
-            student['evening_expected_time'] = 'N/A'
-        
-        # Convert photo to accessible URL (photo field already contains the URL)
-        if student.get('photo'):
-            student['photo_url'] = student['photo']
-        else:
-            student['photo_url'] = None
-    
-    return students
-
 # Include router
 app.include_router(api_router)
 
