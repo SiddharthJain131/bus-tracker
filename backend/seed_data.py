@@ -239,70 +239,19 @@ async def seed_data():
         restore_success = await restore_from_backup(latest_backup)
         
         if restore_success:
-            # After successful main backup restore, regenerate attendance records
-            # to ensure they match current student IDs (don't restore from backup)
-            print(f"\n🔄 Regenerating attendance records for current students...")
-            
-            # Get all current students
-            students = await db.students.find({}, {'_id': 0, 'student_id': 1}).to_list(None)
-            student_ids = [s['student_id'] for s in students]
-            
-            if student_ids:
-                attendance_records = []
-                today = datetime.now(timezone.utc)
+            # After successful main backup restore, check for attendance backup
+            latest_attendance_backup = get_latest_attendance_backup()
+            if latest_attendance_backup:
+                print(f"\n🔍 Latest attendance backup found: {latest_attendance_backup.name}")
+                print("   Attempting to restore attendance data...")
+                attendance_restore_success = await restore_attendance_from_backup(latest_attendance_backup)
                 
-                # Generate for past 14 days
-                for day_offset in range(14):
-                    date = (today - timedelta(days=day_offset)).strftime("%Y-%m-%d")
-                    timestamp = (today - timedelta(days=day_offset)).isoformat()
-                    
-                    for student_id in student_ids:
-                        # AM attendance (90% present for recent days, lower for older days)
-                        presence_rate = 0.90 if day_offset < 7 else 0.75
-                        
-                        if random.random() < presence_rate:
-                            status = random.choice(["green", "green", "green", "yellow"])
-                            confidence = round(random.uniform(0.85, 0.98), 2)
-                            
-                            attendance_records.append({
-                                "attendance_id": str(uuid.uuid4()),
-                                "student_id": student_id,
-                                "date": date,
-                                "trip": "AM",
-                                "status": status,
-                                "confidence": confidence,
-                                "last_update": timestamp,
-                                "scan_photo": f"/api/photos/students/{student_id}/attendance/{date}_AM.jpg",
-                                "scan_timestamp": timestamp
-                            })
-                        
-                        # PM attendance (85% present)
-                        presence_rate = 0.85 if day_offset < 7 else 0.70
-                        
-                        if random.random() < presence_rate:
-                            status = random.choice(["green", "green", "green", "yellow"])
-                            confidence = round(random.uniform(0.82, 0.96), 2)
-                            
-                            attendance_records.append({
-                                "attendance_id": str(uuid.uuid4()),
-                                "student_id": student_id,
-                                "date": date,
-                                "trip": "PM",
-                                "status": status,
-                                "confidence": confidence,
-                                "last_update": timestamp,
-                                "scan_photo": f"/api/photos/students/{student_id}/attendance/{date}_PM.jpg",
-                                "scan_timestamp": timestamp
-                            })
-                
-                # Insert new records
-                if attendance_records:
-                    await db.attendance.insert_many(attendance_records)
-                    print(f"✅ Generated {len(attendance_records)} attendance records for {len(student_ids)} students")
+                if attendance_restore_success:
+                    print("\n✅ Attendance data restored from separate backup")
                 else:
-                    print("⚠️  No attendance records generated")
+                    print("\n⚠️  Attendance backup restore failed, attendance data will be empty")
             else:
-                print("⚠️  No students found, skipping attendance generation")
+                print("\nℹ️  No attendance backup found, attendance data will be empty")
             
             # Create sample notifications for admin even when restoring from backup
             print("\n" + "=" * 60)
