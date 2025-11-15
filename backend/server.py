@@ -17,6 +17,12 @@ import secrets
 import random
 import shutil
 import hashlib
+import base64
+import io
+import numpy as np
+from deepface import DeepFace
+import cv2
+from PIL import Image
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
