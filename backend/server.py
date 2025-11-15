@@ -2084,59 +2084,6 @@ async def get_parent_students(current_user: dict = Depends(get_current_user)):
     
     return students
 
-# Demo endpoints
-@api_router.post("/demo/simulate_scan")
-async def simulate_scan():
-    students = await db.students.find({}, {"_id": 0}).to_list(1000)
-    if not students:
-        raise HTTPException(status_code=404, detail="No students found")
-    
-    student = random.choice(students)
-    verified = random.choice([True, True, True, False])
-    confidence = random.uniform(0.85, 0.99) if verified else random.uniform(0.40, 0.70)
-    
-    lat = 37.7749 + random.uniform(-0.05, 0.05)
-    lon = -122.4194 + random.uniform(-0.05, 0.05)
-    
-    # Generate photo URL for the scan (matches new naming convention: YYYY-MM-DD_{AM|PM}.jpg)
-    # No status suffix (_green or _yellow) - the same photo is used for both IN and OUT scans
-    current_time = datetime.now(timezone.utc)
-    today = current_time.strftime("%Y-%m-%d")
-    trip = "AM" if current_time.hour < 12 else "PM"
-    photo_url = f"/api/photos/students/{student['student_id']}/attendance/{today}_{trip}.jpg"
-    
-    request = ScanEventRequest(
-        student_id=student['student_id'],
-        tag_id=f"RFID-{random.randint(1000, 9999)}",
-        verified=verified,
-        confidence=confidence,
-        lat=lat,
-        lon=lon,
-        photo_url=photo_url
-    )
-    
-    result = await scan_event(request)
-    return {**result, "student_name": student['name'], "verified": verified}
-
-@api_router.post("/demo/simulate_bus_movement")
-async def simulate_bus_movement(bus_number: str):
-    current = await db.bus_locations.find_one({"bus_number": bus_number}, {"_id": 0})
-    
-    if current:
-        lat = current['lat'] + random.uniform(-0.001, 0.001)
-        lon = current['lon'] + random.uniform(-0.001, 0.001)
-    else:
-        lat = 37.7749
-        lon = -122.4194
-    
-    request = UpdateLocationRequest(
-        bus_number=bus_number,
-        lat=lat,
-        lon=lon
-    )
-    
-    return await update_location(request)
-
 # Include router
 app.include_router(api_router)
 
