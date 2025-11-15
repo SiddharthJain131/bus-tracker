@@ -16,6 +16,7 @@ import json
 import base64
 import requests
 import numpy as np
+import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Optional
@@ -93,7 +94,7 @@ def save_config(config: Dict):
         raise
 
 def load_rfid_mapping() -> Dict[str, Dict]:
-    """Load RFID to student mapping from local file"""
+    """Load RFID to student mapping from local file with error handling"""
     if RFID_MAPPING_FILE.exists():
         try:
             with open(RFID_MAPPING_FILE, 'r') as f:
@@ -113,12 +114,25 @@ def load_rfid_mapping() -> Dict[str, Dict]:
     return {}
 
 def save_rfid_mapping(rfid_mapping: Dict[str, Dict]):
-    """Save updated RFID mapping to local file"""
+    """Save updated RFID mapping to local file atomically"""
     try:
         students_list = list(rfid_mapping.values())
-        with open(RFID_MAPPING_FILE, 'w') as f:
-            json.dump(students_list, f, indent=2)
-        print(f"{Colors.GREEN}✓ RFID mapping cache updated{Colors.RESET}")
+        
+        # Use atomic write: write to temp file then rename
+        temp_fd, temp_path = tempfile.mkstemp(dir=SCRIPT_DIR, suffix='.json.tmp')
+        try:
+            with os.fdopen(temp_fd, 'w') as f:
+                json.dump(students_list, f, indent=2)
+            
+            # Atomic rename
+            os.replace(temp_path, RFID_MAPPING_FILE)
+            print(f"{Colors.GREEN}✓ RFID mapping cache updated{Colors.RESET}")
+        except:
+            # Clean up temp file if something went wrong
+            if os.path.exists(temp_path):
+                os.unlink(temp_path)
+            raise
+            
     except Exception as e:
         print(f"{Colors.RED}Error saving RFID mapping: {e}{Colors.RESET}")
 
