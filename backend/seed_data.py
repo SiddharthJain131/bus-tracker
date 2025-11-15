@@ -1212,23 +1212,52 @@ async def seed_data():
         {
             "notification_id": str(uuid.uuid4()),
             "user_id": parent_ids[0],
+            "title": "Identity Mismatch Detected",
             "message": "Identity verification failed for Emma Johnson during morning bus boarding",
-            "event_type": "identity_mismatch",
+            "type": "identity_mismatch",
             "timestamp": (datetime.now(timezone.utc) - timedelta(hours=2)).isoformat(),
             "read": False
         },
         {
             "notification_id": str(uuid.uuid4()),
             "user_id": parent_ids[2],
+            "title": "Route Update",
             "message": "Sophia Brown's bus route has been updated",
-            "event_type": "route_update",
+            "type": "route_update",
             "timestamp": (datetime.now(timezone.utc) - timedelta(days=1)).isoformat(),
             "read": False
+        },
+        {
+            "notification_id": str(uuid.uuid4()),
+            "user_id": admin_ids[0],
+            "title": "System Update",
+            "message": "Bus tracking system has been updated with new features",
+            "type": "update",
+            "timestamp": (datetime.now(timezone.utc) - timedelta(hours=2)).isoformat(),
+            "read": False
+        },
+        {
+            "notification_id": str(uuid.uuid4()),
+            "user_id": admin_ids[0],
+            "title": "New Device Registered",
+            "message": "A new Raspberry Pi device was registered for BUS-001",
+            "type": "update",
+            "timestamp": (datetime.now(timezone.utc) - timedelta(hours=5)).isoformat(),
+            "read": False
+        },
+        {
+            "notification_id": str(uuid.uuid4()),
+            "user_id": admin_ids[0],
+            "title": "Attendance Summary",
+            "message": "Daily attendance report: 18/20 students marked present",
+            "type": "update",
+            "timestamp": (datetime.now(timezone.utc) - timedelta(days=1)).isoformat(),
+            "read": True
         }
     ]
     
     await db.notifications.insert_many(notifications)
-    print(f"✅ Created {len(notifications)} sample notifications")
+    print(f"✅ Created {len(notifications)} sample notifications (including {3} for admin)")
     
     print("\n" + "=" * 60)
     print("✅ DATABASE SEEDING COMPLETED SUCCESSFULLY!")
