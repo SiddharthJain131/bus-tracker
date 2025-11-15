@@ -293,6 +293,23 @@ export default function AdminDashboardNew({ user, onLogout }) {
     }));
   };
 
+  const handleNotificationClick = async (notification) => {
+    setSelectedNotification(notification);
+    setShowNotificationDetail(true);
+    
+    // Mark as read if unread
+    if (!notification.read) {
+      try {
+        await axios.post(`${API}/mark_notification_read?notification_id=${notification.notification_id}`);
+        // Refresh notifications
+        const notificationsRes = await axios.get(`${API}/get_notifications`);
+        setNotifications(notificationsRes.data);
+      } catch (error) {
+        console.error('Error marking notification as read:', error);
+      }
+    }
+  };
+
   const confirmDelete = async () => {
     if (!deleteItem) return;
     
