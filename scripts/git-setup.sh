@@ -1,5 +1,5 @@
 #!/bin/bash
-# === School Bus Tracker Git Setup Script (Updated for GitHub OAuth) ===
+# === School Bus Tracker Git Setup Script (Updated with Hard Reset Fallback) ===
 
 USERNAME="Siddharth Jain"
 USEREMAIL="your_email@example.com"
@@ -28,15 +28,20 @@ fi
 git remote remove origin 2>/dev/null
 git remote add origin "$GITHUB_REPO"
 
-# Pull & merge safely
+# Pull & fallback to hard reset if needed
 echo "📥 Pulling latest changes from GitHub..."
-git fetch origin main 2>/dev/null
-git pull origin main --allow-unrelated-histories --no-rebase || echo "No remote history yet."
+if ! git pull origin main --allow-unrelated-histories --no-rebase; then
+  echo "⚠️ Pull failed — performing HARD RESET to remote main..."
+  git fetch origin main
+  git reset --hard origin/main || echo "⚠️ Remote main branch not available yet."
+else
+  echo "✅ Pull successful."
+fi
 
 # Stage & commit
 echo "📦 Adding all files..."
 git add .
-git commit -m "Sync local project with remote - $(date +'%Y-%m-%d %H:%M')" || echo "No new changes to commit."
+git commit -m "Sync local project with remote - $(date +'%Y-%m-%d %H:%M')" || echo "ℹ️ No new changes to commit."
 
 # Push
 echo "🚀 Pushing to GitHub..."
