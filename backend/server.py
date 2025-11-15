@@ -173,7 +173,7 @@ class Event(BaseModel):
 
 class BusLocation(BaseModel):
     model_config = ConfigDict(extra="ignore")
-    bus_id: str
+    bus_number: str
     lat: float
     lon: float
     timestamp: str
