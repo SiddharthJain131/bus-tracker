@@ -1367,13 +1367,13 @@ async def create_bus(bus: Bus, current_user: dict = Depends(get_current_user)):
     await db.buses.insert_one(bus.model_dump())
     return bus
 
-@api_router.put("/buses/{bus_id}")
-async def update_bus(bus_id: str, bus: Bus, current_user: dict = Depends(get_current_user)):
+@api_router.put("/buses/{bus_number}")
+async def update_bus(bus_number: str, bus: Bus, current_user: dict = Depends(get_current_user)):
     if current_user['role'] != 'admin':
         raise HTTPException(status_code=403, detail="Access denied")
     
     await db.buses.update_one(
-        {"bus_id": bus_id},
+        {"bus_number": bus_number},
         {"$set": bus.model_dump()}
     )
     return bus
