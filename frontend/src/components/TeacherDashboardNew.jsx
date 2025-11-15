@@ -302,7 +302,7 @@ export default function TeacherDashboardNew({ user, onLogout }) {
     }
   };
 
-  const formatTimestamp = (timestamp) => {
+  const formatScanTimestamp = (timestamp) => {
     if (!timestamp) return 'No timestamp available';
     try {
       const date = new Date(timestamp);
