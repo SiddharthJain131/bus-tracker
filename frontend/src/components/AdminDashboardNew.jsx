@@ -659,7 +659,8 @@ export default function AdminDashboardNew({ user, onLogout }) {
                     return (
                       <div
                         key={notification.notification_id}
-                        className="flex items-start gap-4 p-4 rounded-lg border bg-gradient-to-r from-purple-50 to-pink-50 border-purple-200 shadow-sm hover:shadow-md transition-all"
+                        onClick={() => handleNotificationClick(notification)}
+                        className="flex items-start gap-4 p-4 rounded-lg border bg-gradient-to-r from-purple-50 to-pink-50 border-purple-200 shadow-sm hover:shadow-md transition-all cursor-pointer"
                       >
                         <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white text-purple-600 shadow-sm flex-shrink-0">
                           <Bell className="w-5 h-5" />
@@ -679,6 +680,13 @@ export default function AdminDashboardNew({ user, onLogout }) {
                             <p className="text-sm text-gray-600 mt-1 line-clamp-2">
                               {notification.message}
                             </p>
+                          )}
+                          {!notification.read && (
+                            <div className="mt-2">
+                              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-purple-600 text-white">
+                                New
+                              </span>
+                            </div>
                           )}
                         </div>
                       </div>
