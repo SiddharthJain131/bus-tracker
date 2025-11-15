@@ -207,12 +207,13 @@ export default function AdminDashboardNew({ user, onLogout }) {
 
   const fetchAllData = async () => {
     try {
-      const [studentsRes, usersRes, busesRes, routesRes, holidaysRes] = await Promise.all([
+      const [studentsRes, usersRes, busesRes, routesRes, holidaysRes, notificationsRes] = await Promise.all([
         axios.get(`${API}/students`),
         axios.get(`${API}/users`),
         axios.get(`${API}/buses`),
         axios.get(`${API}/routes`),
-        axios.get(`${API}/admin/holidays`)
+        axios.get(`${API}/admin/holidays`),
+        axios.get(`${API}/get_notifications`)
       ]);
 
       setStudents(studentsRes.data);
@@ -220,6 +221,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
       setBuses(busesRes.data);
       setRoutes(routesRes.data);
       setHolidays(holidaysRes.data);
+      setNotifications(notificationsRes.data);
 
       // Calculate stats
       const teachers = usersRes.data.filter(u => u.role === 'teacher');
