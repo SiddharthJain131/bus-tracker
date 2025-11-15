@@ -307,43 +307,80 @@ export default function ParentDashboard({ user, onLogout }) {
                   </Card>
                 </div>
 
-              {/* Right column - Notifications */}
-              <div>
-                <Card className="p-6 card-hover">
-                  <div className="flex items-center gap-2 mb-4">
-                    <Bell className="w-5 h-5 text-blue-600" />
-                    <h2 className="text-xl font-semibold" style={{ fontFamily: 'Space Grotesk' }}>Notifications</h2>
-                  </div>
-                  <div className="space-y-3 max-h-96 overflow-y-auto" data-testid="notifications-container">
-                    {notifications.length === 0 ? (
-                      <p className="text-sm text-gray-500 text-center py-8">No notifications</p>
-                    ) : (
-                      notifications.map((notification) => (
-                        <div
-                          key={notification.notification_id}
-                          data-testid={`notification-${notification.type}`}
-                          className={`p-3 rounded-lg border ${
-                            notification.type === 'mismatch'
-                              ? 'bg-red-50 border-red-200'
-                              : notification.type === 'update'
-                              ? 'bg-blue-50 border-blue-200'
-                              : 'bg-yellow-50 border-yellow-200'
-                          }`}
-                        >
-                          <p className="text-sm font-medium text-gray-900">{notification.message}</p>
-                          <p className="text-xs text-gray-500 mt-1">
-                            {new Date(notification.timestamp).toLocaleString()}
-                          </p>
-                        </div>
-                      ))
-                    )}
-                  </div>
-                </Card>
+                {/* Right column - Notifications */}
+                <div>
+                  <Card className="p-6 shadow-md hover:shadow-lg transition-shadow">
+                    <div className="flex items-center gap-2 mb-4">
+                      <Bell className="w-5 h-5 text-violet-600" />
+                      <h2 className="text-xl font-semibold text-gray-900" style={{ fontFamily: 'Space Grotesk' }}>Notifications</h2>
+                    </div>
+                    <div className="space-y-3 max-h-[600px] overflow-y-auto" data-testid="notifications-container">
+                      {notifications.length === 0 ? (
+                        <p className="text-sm text-gray-500 text-center py-8">No notifications</p>
+                      ) : (
+                        notifications.slice(0, 5).map((notification) => (
+                          <div
+                            key={notification.notification_id}
+                            onClick={() => handleNotificationClick(notification)}
+                            data-testid={`notification-${notification.type}`}
+                            className="flex items-start gap-4 p-4 rounded-lg border bg-gradient-to-r from-purple-50 to-pink-50 border-purple-200 shadow-sm hover:shadow-md transition-all cursor-pointer"
+                          >
+                            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white text-purple-600 shadow-sm flex-shrink-0">
+                              <Bell className="w-5 h-5" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between gap-2">
+                                <h3 className="font-semibold text-gray-800 truncate">
+                                  {notification.title}
+                                </h3>
+                                {notification.timestamp && (
+                                  <span className="text-xs text-gray-500 whitespace-nowrap">
+                                    {formatTimestamp(notification.timestamp)}
+                                  </span>
+                                )}
+                              </div>
+                              {notification.message && (
+                                <p className="text-sm text-gray-600 mt-1 line-clamp-2">
+                                  {notification.message}
+                                </p>
+                              )}
+                              {!notification.read && (
+                                <div className="mt-2">
+                                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-purple-600 text-white">
+                                    New
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        ))
+                      )}
+                    </div>
+                  </Card>
+                </div>
               </div>
-            </div>
-          </div>
-        )}
-      </div>
+            </>
+          )}
+        </div>
+      </main>
+
+      {/* Photo Viewer Modal */}
+      <PhotoViewerModal
+        isOpen={showPhotoViewer}
+        onClose={() => setShowPhotoViewer(false)}
+        photoUrl={currentUser.photo}
+        userName={currentUser.name}
+        canEdit={true}
+        uploadEndpoint={`${API}/users/me/photo`}
+        onPhotoUpdate={handleProfilePhotoUpdate}
+      />
+
+      {/* Notification Detail Modal */}
+      <NotificationDetailModal
+        notification={selectedNotification}
+        isOpen={showNotificationDetail}
+        onClose={handleCloseNotificationModal}
+      />
     </div>
   );
 }
