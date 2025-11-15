@@ -437,21 +437,6 @@ async def get_me(current_user: dict = Depends(get_current_user)):
     }
 
 # Photo upload
-@api_router.post("/upload_photo")
-async def upload_photo(file: UploadFile = File(...), current_user: dict = Depends(get_current_user)):
-    try:
-        file_ext = file.filename.split('.')[-1]
-        file_name = f"{uuid.uuid4()}.{file_ext}"
-        file_path = PHOTO_DIR / file_name
-        
-        with open(file_path, "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
-        
-        return {"photo_url": f"/api/photos/{file_name}"}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
 # Update user's own photo
 @api_router.put("/users/me/photo")
 async def update_my_photo(file: UploadFile = File(...), current_user: dict = Depends(get_current_user)):
