@@ -1288,11 +1288,11 @@ async def get_bus(bus_number: str):
     
     return bus
 
-@api_router.get("/buses/{bus_id}/stops")
-async def get_bus_stops(bus_id: str):
+@api_router.get("/buses/{bus_number}/stops")
+async def get_bus_stops(bus_number: str):
     """Get all stops for a specific bus via its route"""
     # Get bus
-    bus = await db.buses.find_one({"bus_id": bus_id}, {"_id": 0})
+    bus = await db.buses.find_one({"bus_number": bus_number}, {"_id": 0})
     if not bus:
         raise HTTPException(status_code=404, detail="Bus not found")
     
