@@ -785,7 +785,7 @@ async def seed_data():
             "name": "Emma Johnson",
             "roll_number": "G5A-001",
             "phone": "+1-555-4001",
-            "photo": None,
+            "photo": f"/api/photos/students/{student_ids[0]}/profile.jpg",
             "class_name": "5",
             "section": "A",
             "parent_id": parent_ids[0],
@@ -800,7 +800,7 @@ async def seed_data():
             "name": "Liam Smith",
             "roll_number": "G5A-002",
             "phone": "+1-555-4002",
-            "photo": None,
+            "photo": f"/api/photos/students/{student_ids[1]}/profile.jpg",
             "class_name": "5",
             "section": "A",
             "parent_id": parent_ids[0],  # John Parent's second child
@@ -815,7 +815,7 @@ async def seed_data():
             "name": "Sophia Brown",
             "roll_number": "G5A-003",
             "phone": "+1-555-4003",
-            "photo": None,
+            "photo": f"/api/photos/students/{student_ids[2]}/profile.jpg",
             "class_name": "5",
             "section": "A",
             "parent_id": parent_ids[1],  # Sarah Brown's child
@@ -830,7 +830,7 @@ async def seed_data():
             "name": "Noah Davis",
             "roll_number": "G5A-004",
             "phone": "+1-555-4004",
-            "photo": None,
+            "photo": f"/api/photos/students/{student_ids[3]}/profile.jpg",
             "class_name": "5",
             "section": "A",
             "parent_id": parent_ids[2],  # Michael Davis's first child
@@ -845,7 +845,7 @@ async def seed_data():
             "name": "Olivia Martinez",
             "roll_number": "G5A-005",
             "phone": "+1-555-4005",
-            "photo": None,
+            "photo": f"/api/photos/students/{student_ids[4]}/profile.jpg",
             "class_name": "5",
             "section": "A",
             "parent_id": parent_ids[2],  # Michael Davis's second child
@@ -862,7 +862,7 @@ async def seed_data():
             "name": "Ethan Wilson",
             "roll_number": "G6B-001",
             "phone": "+1-555-4006",
-            "photo": None,
+            "photo": f"/api/photos/students/{student_ids[5]}/profile.jpg",
             "class_name": "6",
             "section": "B",
             "parent_id": parent_ids[3],  # Emily Martinez's first child
@@ -877,7 +877,7 @@ async def seed_data():
             "name": "Ava Taylor",
             "roll_number": "G6B-002",
             "phone": "+1-555-4007",
-            "photo": None,
+            "photo": f"/api/photos/students/{student_ids[6]}/profile.jpg",
             "class_name": "6",
             "section": "B",
             "parent_id": parent_ids[3],  # Emily Martinez's second child
@@ -892,7 +892,7 @@ async def seed_data():
             "name": "Mason Garcia",
             "roll_number": "G6B-003",
             "phone": "+1-555-4008",
-            "photo": None,
+            "photo": f"/api/photos/students/{student_ids[7]}/profile.jpg",
             "class_name": "6",
             "section": "B",
             "parent_id": parent_ids[3],  # Emily Martinez's third child
@@ -907,7 +907,7 @@ async def seed_data():
             "name": "Isabella Rodriguez",
             "roll_number": "G6B-004",
             "phone": "+1-555-4009",
-            "photo": None,
+            "photo": f"/api/photos/students/{student_ids[8]}/profile.jpg",
             "class_name": "6",
             "section": "B",
             "parent_id": parent_ids[4],  # David Wilson's first child
@@ -922,7 +922,7 @@ async def seed_data():
             "name": "Lucas Lee",
             "roll_number": "G6B-005",
             "phone": "+1-555-4010",
-            "photo": None,
+            "photo": f"/api/photos/students/{student_ids[9]}/profile.jpg",
             "class_name": "6",
             "section": "B",
             "parent_id": parent_ids[4],  # David Wilson's second child
@@ -939,7 +939,7 @@ async def seed_data():
             "name": "Mia Harris",
             "roll_number": "G4A-001",
             "phone": "+1-555-4011",
-            "photo": None,
+            "photo": f"/api/photos/students/{student_ids[10]}/profile.jpg",
             "class_name": "4",
             "section": "A",
             "parent_id": parent_ids[5],  # Jennifer Taylor's child
@@ -954,7 +954,7 @@ async def seed_data():
             "name": "Benjamin Clark",
             "roll_number": "G4A-002",
             "phone": "+1-555-4012",
-            "photo": None,
+            "photo": f"/api/photos/students/{student_ids[11]}/profile.jpg",
             "class_name": "4",
             "section": "A",
             "parent_id": parent_ids[6],  # Christopher Garcia's first child
@@ -969,7 +969,7 @@ async def seed_data():
             "name": "Charlotte Lewis",
             "roll_number": "G4A-003",
             "phone": "+1-555-4013",
-            "photo": None,
+            "photo": f"/api/photos/students/{student_ids[12]}/profile.jpg",
             "class_name": "4",
             "section": "A",
             "parent_id": parent_ids[6],  # Christopher Garcia's second child
@@ -984,7 +984,7 @@ async def seed_data():
             "name": "James Walker",
             "roll_number": "G4A-004",
             "phone": "+1-555-4014",
-            "photo": None,
+            "photo": f"/api/photos/students/{student_ids[13]}/profile.jpg",
             "class_name": "4",
             "section": "A",
             "parent_id": parent_ids[7],  # Amanda Rodriguez's child
@@ -999,7 +999,7 @@ async def seed_data():
             "name": "Mia Hall",
             "roll_number": "G4A-005",
             "phone": "+1-555-4015",
-            "photo": None,
+            "photo": f"/api/photos/students/{student_ids[14]}/profile.jpg",
             "class_name": "4",
             "section": "A",
             "parent_id": parent_ids[8],  # Matthew Lee's first child
@@ -1016,7 +1016,7 @@ async def seed_data():
             "name": "Alexander Lee",
             "roll_number": "G5A-006",
             "phone": "+1-555-4016",
-            "photo": None,
+            "photo": f"/api/photos/students/{student_ids[15]}/profile.jpg",
             "class_name": "5",
             "section": "A",
             "parent_id": parent_ids[8],  # Matthew Lee's second child
@@ -1031,7 +1031,7 @@ async def seed_data():
             "name": "Harper Harris",
             "roll_number": "G6B-006",
             "phone": "+1-555-4017",
-            "photo": None,
+            "photo": f"/api/photos/students/{student_ids[16]}/profile.jpg",
             "class_name": "6",
             "section": "B",
             "parent_id": parent_ids[9],  # Jessica Harris's child
@@ -1046,7 +1046,7 @@ async def seed_data():
             "name": "Evelyn Clark",
             "roll_number": "G4A-006",
             "phone": "+1-555-4018",
-            "photo": None,
+            "photo": f"/api/photos/students/{student_ids[17]}/profile.jpg",
             "class_name": "4",
             "section": "A",
             "parent_id": parent_ids[10],  # Daniel Clark's first child
@@ -1061,7 +1061,7 @@ async def seed_data():
             "name": "Henry Clark",
             "roll_number": "G5A-007",
             "phone": "+1-555-4019",
-            "photo": None,
+            "photo": f"/api/photos/students/{student_ids[18]}/profile.jpg",
             "class_name": "5",
             "section": "A",
             "parent_id": parent_ids[10],  # Daniel Clark's second child
@@ -1076,7 +1076,7 @@ async def seed_data():
             "name": "Sebastian Lewis",
             "roll_number": "G6B-007",
             "phone": "+1-555-4020",
-            "photo": None,
+            "photo": f"/api/photos/students/{student_ids[19]}/profile.jpg",
             "class_name": "6",
             "section": "B",
             "parent_id": parent_ids[11],  # Lisa Lewis's child
