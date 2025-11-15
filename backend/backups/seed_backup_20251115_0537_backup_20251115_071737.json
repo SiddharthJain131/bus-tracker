@@ -329,8 +329,7 @@
         "bus_number": "BUS-001",
         "stop_id": "5eb9784d-9763-4bdd-9a5e-99e67630883e",
         "emergency_contact": "+1-555-9101",
-        "remarks": "Allergic to peanuts",
-        "embedding": "6KdPvPgaUD90qwQ/oz6bP1XKlz4zOpO/wzBeQN6kib+pCnm/q6wMQCRTYD5/ByC+fLuAP+4vU7+kUdE+JFwcPzUAtz4aN+e/0xBDwJY/D7+AZSU/ITLKv0+ezz0mL2O+x2gqvoaSPz+GAIQ/OPP8vrMIrj/iUBk/UGU8vveZer/v1ue/hT2vv/YLnT8hgO2/uF34v46Loz9ZRgc+hLeev1fVYL+S8Y2+u+S6Pi+OBz8cMlg+3VMNvoZtsD/GfR8+MIe4v09qGL6F2pO/7E73P3wwQb9b1P09z2pivzO66j6v0HM/MtHYPHFyYT+DR48/dEgUv5ioNz8fwjG/JAV5vqg1YD7GYA0/jrLRvzIfW74sKh0+HLOjP+4uQz5dZL++cQ8sP/YTIr56h88/y1m4PoiSzzxCfKC++V5Lvfqxvr8mvlo/qOoMPjZ8JL9yotu/1edYP7ko0T6Btmc+LN4YwLuU3r4y8AY+B2OTv1IDAD8f+QtA1Uxvv+6eLj80/gVAVG/YPsl3lz9gaGK+H8Wivynfir8bCdc9cq8ivulADz8DtOY/hkWAPsMcOD+m4KE/Bz8qP1PXqD++t50+9PG5P5fo4j5fzh+//5G3vxxgYz+8576/yWl7PyYOtr9O7iW/JyROQITadr8MnAG/J9n4PZrjpb/kKyw/j9cQv/hpj78="
+        "remarks": "Allergic to peanuts"
       },
       {
         "_id": "691810ee8c4c905ca392a763",
@@ -347,8 +346,7 @@
         "bus_number": "BUS-001",
         "stop_id": "b5f21bcb-3433-4c52-abaf-6ed1f17770a0",
         "emergency_contact": "+1-555-9102",
-        "remarks": null,
-        "embedding": "ljzRP6mj0b8bWua8/8Zrvz22Gr/jyLQ+clDZverZKr92Y+G/SXzBPwRuKL6ex1m/2s+CviCadbzHWQg+tRoWvg4ULT9vH8i/Yil2Pa87Ej99hJs/EZGTvjzMTr7E0M6+U00RQPJdDz7QZIc/5RwXP6ljCT/Zwcy+iqsFv4ZI4D9iN5c92EmVv+790r3eXPW+oQwyP8VTXr+vXya/4cqEvzK8LD++kCg+gnxgP2CLWr+iZr2+zr15v1s0ZD+SbFk/O9qxv5cnrTz0omK/6/LSPjF/vL04rhM+7NC8vuHmrb5bj4Q/zXg0PiR9Lz6QzhU+XmwlP6i+4L5g/oY/1+nnP475U71b5lw/61+gP4/ugD/0yWk/BYDVPiNGWL9oAxe/9fu+vqBDZ7w6Z6q97smxvjg8Wj8UAJi/rJI2P4Sr0L63ELW+XAgSPylENz7I3WE/NpKvP1ZFeL/5a0E/mlDPv5RMEz+czcI+y6j7vpzxML8WCJo/aEc9PoL4bz9oo4M+Yg2LPxzSED+Y3p2/pCsvvXxk3D6QYFa/x+77Pk8fhT6oZlG+FEfEPDx7774UcIO8UZ87P688QD/lQ4K/0sqWPthR6z+gy169tQyTvPOh1b96M7G/t3jWP8AUiT8e1pK+BUDMP6AJ8j4iV0A9F4XzP+aR3z9kmW++RAVHP11Foz8="
+        "remarks": null
       },
       {
         "_id": "691810ee8c4c905ca392a764",
@@ -365,8 +363,7 @@
         "bus_number": "BUS-002",
         "stop_id": "b0b1e853-718a-4403-ace7-6e90fbe1306b",
         "emergency_contact": "+1-555-9103",
-        "remarks": "Needs glasses for reading",
-        "embedding": "NMLMvoVP4j7C6BfAsOa4PylNUT6hggLAxN+dP1Joeb/+pNG/GCSfPRccor4UKai+GXwFP/8gkz7rWA5AA9Iav4MG1r7bibG/FExcwMgbvT0aTTa+QmqYv65FST+6SuS/6INMP/gKKb22iKU9AhHBPtyj6z2USNM/jghIP9zESrzFkHC/0KL8P7xFpD6gb40+Tpjwv5MoCL+kJao+/CWVv8JuLb/wthhAvfTDv85KhT3t6is/Ta0YwPKntz1XW74/QOFrvbAXgT35a349o9ZTvxcf0b6dr8Q/3eXfvkldu787VMo+Y2NiP82Uor7SSYW/naL8vzxGgb8RPwq/Eilqv3DrUD9GWQLAoocowL1Thz5OMo+/GBUfP5a6vjySELk/usCrv2Coa79zoI+/VaYLv7OBmj9RER0+8RyuPuIpZb+teMW+YhrxPVViRL6QFQC97KOYvtc7wT5f+cI+QFvAv9ZzkL9VBbC/2bycP+A4dD6KDJK/fBBHvb6I/r6zxHM/nShkPVEAMb/gySQ/P5/CvtzTEb/uG40/TDKgv6mvhT4TRFY/9IZeP+6hBj5YTgDA2LE5PGV6eT89BWm/KVMwPr5XBb9iEfC+gCHaP90dmT9kEju/EPWwv/gWqr7meKk+kzvGPwoL0j7We3Y/wxamv7rZer+rU1u/lvbzvnzWyz0="
+        "remarks": "Needs glasses for reading"
       },
       {
         "_id": "691810ee8c4c905ca392a765",
@@ -383,8 +380,7 @@
         "bus_number": "BUS-002",
         "stop_id": "f2557f18-cf6d-47e2-8759-5031649748d0",
         "emergency_contact": "+1-555-9104",
-        "remarks": null,
-        "embedding": "OgOgvdwLvD88SWO/rNq8P5RfUj06rzE/b8MOQMzRFD+n2xa/ZhbjvqUs2T/IkGu/JdF1vmeN2r+shXe97c4svwfW4b76vHG/1E4ZwDMjTT9EhRq/FiurvWOTDb+U2zDAVlMiPbzWib//tsw+Lz1kPzZVyr+g8S0/BwROv5nCWb8mRt2/R2+Rv6noMz9HAmO/HH67v/3tEr/BLau+hZH/vhO0076tmUW9YGpPv+yemj+xvilAtvcJwIUW3T4Sps0/OPztP+zqSr+K7A+/IkuYPyZrTT9FBQ8/vZ7lv2UVAr+Th7s+ul2MP/4PFsANI4y+1U9wv8/IRj+jYa4/SsypPZFMMT8W6OC9jUNjv6zE7b2lOPS985Kwvfya0j6YHXg+ORwLwEgShb/X4UW/9T+Zv9sWOL6iKek/tTVZP7tayT+CSps/stRBv528XT/2JYe/VCY7vhaqJj4OuDy/LiPkv97o7r5s1x/AQ91PP+crF796Lsk8hrvCPwHnhr4FbUw/cuoav3vyyL+Oo2q+2jSZP8GpCD7yq58/csKEPi3jyT+kFWS/cSmqP21Seb7RWgHAQTSov+8vuD9QAo6/UGdNP/ZeAD/VzQg/Hq1kv9Hylj8J0PK/XeigPSeak79TzQU9brhXPghFUz+4g1k/0HznvTnJnL+XcdY+sM7Bvv1mSr4="
+        "remarks": null
       },
       {
         "_id": "691810ee8c4c905ca392a766",
@@ -401,8 +397,7 @@
         "bus_number": "BUS-003",
         "stop_id": "15784615-15fa-46fe-a137-08ace1088585",
         "emergency_contact": "+1-555-9105",
-        "remarks": "School choir member",
-        "embedding": "XETPv05Ji773zDk/5VCdvxJAsD5mav6/jV5DP/g2FT7rELC/LoQcPhC0NEBjBg4/JH8/wEuMnr4KOxk+vJK/P0r7Tj/ySaC/qf81wEAhtT3U9Wq/a1ndv5gC1b+imhG/zUsCv9WZjD/HMqs/LPFxvkYj4b4xLWo/2IHPP7H4PT9s5zi+xGYbv+DGtT4JQPY/2dVEv5Limz/gmxpA5DC/PToNR7/rutm+FPB2v3SWIT8nme0/pzHLvxh5r79qaN0+KlWTvzB1Zbvm7JA+/1QAv2PR5D9pIf4+x9dmvt1sHrxedC8/Wva7PiiL/b2dGZm+4vWMvxr/wj39+ou/TiWOv6CwAT8qZWs+mqEgv3uMgL8T+0O/jtkcQJnAkD5Rop0+gkH3vyOMOz5gWrG+VHCMvyD4OL+9abA9ak4cPjP0OT93pbA+tuaKv0as0L7njT2/wVlrPZq7sD8B20y+fFaqPbCQBL+eXDe/v/pIv7M3Pb9pdsS+DYC1vnqIiT66MIO+g+QFPz+nS7+BXeQ+ycCgPv2Fzb88Zy+//j6avxXSFb5STVE/6OylPpADaj9KKzm/jHL0PQluNUDAZwM/9I+GvVLP+z8Kt4q/C2UBv2T5TT98b4C+diqePgyemL/qY8i/S8+SP8OY+r6DO48/lb25v6QXXr8FMZU+z9kNv4D67b4="
+        "remarks": "School choir member"
       },
       {
         "_id": "691810ee8c4c905ca392a767",
@@ -419,8 +414,7 @@
         "bus_number": "BUS-003",
         "stop_id": "08b55e6a-f2d0-4472-a755-43d7b1110b14",
         "emergency_contact": "+1-555-9106",
-        "remarks": null,
-        "embedding": "gMuZvxMW7r6MZWC/csDQvWk6IT+0C0o9VrvKvyazzz7M4ru/sfvbvkvhtz8s0iO/qT+NvhczgD5JzYg/TJuevsTfHT8ETC2/KtOcPkvh7D6k85q/slCSv5DV4T+crjW/c4XMvzW3ab/L66O/mJ7OPymtcj7YWNg/cgxfvssRMz/9VGK/YmMLvwfANr5VkR0/Sc2UP+3bHEC2WJw/Yq/Wvdwkbz/rSlu/reiyvwjycj//6Ec/wEXvvYATlr1ZlJ2/hRSjPyjrxb35TnC/Mwe8PkjMxz0ArVQ8atcRwNLVgD/AbWi/QSWvP5sTcr9cp0K/vG6Tv/0TQT8x6/m+UdUQv6bdF8DgS9Q+itGxPxHsAb+MGcg/VFFXPtltOD30hy8/IAxZvzhHiz/xbbu/Sl+HP+SSk78QIyS/0wkAwOERIz5sUVk/DMFTv4U7Sb7r8Fs/MTbcvtbHCL/b7rk9+IIVP/Yd9L+tu76//VO5Px9eCcBjbHO/rWTfPi/OnL/6m0E/uU+zPsSCTb+IEom/kC9OvyRVJsACk4A+iCsNvjBqhL/SidK8oXA8P90OC0BfGxTAYBGtP6lT4T/Ls3O/R6BIPxTWEL8GnAS/lVsPPkQGuLxfU8I9mfEOwJV3JsBKPCy/QtEcv0Evgz9Gt98/r3FIv5Ayk76Z5UK/iK8UPj7NgT4="
+        "remarks": null
       },
       {
         "_id": "691810ee8c4c905ca392a768",
@@ -437,8 +431,7 @@
         "bus_number": "BUS-003",
         "stop_id": "59fd3265-4598-4b32-887a-d57f37731024",
         "emergency_contact": "+1-555-9107",
-        "remarks": "Basketball team captain",
-        "embedding": "XB2JPuk7iz+AdPC/ICSoP+7snr1eu0y+IyddP2Ewgb8MuWK/2J9Kv8EGUT9rxJI+ybw7v3hCfb/5DMc+yiLwvDBtzLzRQqC/g2UcwGLuKz/CnQ6/Cr2Bv4Y6BT+MnxzAt+KAvlmXGj9NZQQ/RzkHP5lGbT9zLAxAbF8UPYyICz9Oct2+vgkfv0vWij9uVW6/LR0jwJmx6T91OtY+f6SRP16QKr+BWJo/7nF5v90GEr+PQx1AmzgJwHp0CT/n97Y/69sOQMbN4b7ACo29Yq/xvrVCFUDExTm+npvXvMfWlL90QA4/U+n1P/ci4j4myHA/LlaJv/Y0v71NMki/htkBv3kk2D2ckES//O6fviLahj/vB7I/UebMvv5UcL8gSte7o7EgwM0pDT8Ouoe/jGsBvruRoj4EFkM/MiuGP2Dy4799vaQ/Jqwpv0oD/zxQxca/9kqOv61w2D7j6zM+o/mAv0YeC8BV2eW/9aHNPjK3LT/28pE+vExdv/CPkb7u94g/cJWpvxpyG78DjM6+1rzmPvMjqb/fzSC/cjZ1v/+Khj/6/SE+BQR9PkUEOD9Qgrq/a8Glv425GT9udYS+d9IvP72err+qD809OLLjvpdesj/Zbf6/ZTeivo3VtT5RwJo/Gk2WPzBbib3E1YE+w1eJv59RSL7wniA+UpKCvkoxob4="
+        "remarks": "Basketball team captain"
       },
       {
         "_id": "691810ee8c4c905ca392a769",
@@ -455,8 +448,7 @@
         "bus_number": "BUS-004",
         "stop_id": "c4864d43-a2f7-4b4d-8b07-27caf5be5952",
         "emergency_contact": "+1-555-9108",
-        "remarks": null,
-        "embedding": "84H8v0lq9j6l0O2/3/fHP6huZD9MibO/wLc3PuD5tL+90fa9GuWdviHWYD8v3rK/7naUv3p5qD7loNy+ibF8PywjSb30D8W+Xq4MwJ3Oa76Tcw6+Io9Gv4dYpT6I3ZS+s2S/PkJL1z+WUkg+GBX8PS2cRT+F5i1AaZaBPuVoET/x7G2+A325vugTXz7c6mE/9T+5v7QIBEAaDns/fiYGQHiKbj85GPi+H1iPPpuU0D/5MNo/dXH8vkPjqb4yI3o94ub9Pq7zg7/7npm/ZI06P/DCCr8ocBg/TWjgv31UIj/JfYw/T8CuPiyIUr4KbxE99EKhv1hGY75xWJy/64vcvwiYZ7+ElcE+ijhLvjyxlz8lQwU/GJxhPZcDhD7X0Is/MqfHvltwNT48yVW/Mt41v8yJsj/RJYi+brzFv+Tsir7YXms/queOv08pOz1tFyI/yNd4vylGwT92iYO/ITmUvve4z7+/qD+/PGESQBYBbb9AK90/djUDv+Ac/L/rD4I/xDh9PlhSGD9V7jnA1iSTv1Pc779JuYW/nLADvuYHFr+vHLw9p/S2v3afDj9qUdi/Va2YvmE1MUBkeCc+sKAlP/kQhz9rcwY/Rav2PvtAlb829+C+t1E9v5n3mj6dQHI+bUO9P2JVOD9I6Ko/yi2pv2gc8r5CbFS/7mBhPwoK0z8="
+        "remarks": null
       },
       {
         "_id": "691810ee8c4c905ca392a76a",
@@ -473,8 +465,7 @@
         "bus_number": "BUS-004",
         "stop_id": "3d99b8fc-375f-421c-84e9-4a7939031541",
         "emergency_contact": "+1-555-9109",
-        "remarks": "Debate club member",
-        "embedding": "HDJzvy9Bcr5hjCJAanG/vzsbWb8btF+/jmRbPxSvlT6na5S+22gQPbvyjT/xHai/G2yXv2zolD/fxsy+pLERQCGQsz8snwrAZLqTv0/0q74w/i285Jiivy4mCsB1XbY/Z7BAP3yTWj9lsZk/GF4xP+2Nvz9sw9A/L28ZP+BURj6A2Xy/zSKFvsY2RD5QHx2/ixkDvgtbnD+PKyxACOxbP0C8EL9/Nl6/x7orPnEWJj/iedw+Rls8Phc6UL/O1ki/M67avywt+z3aPdK+lS/EPs7hVD9S9ic/zjisv5wWVr+ZbQtA3CwSv3Jj2j5U/7g//z4Gv1lroD9GX0A/48F4Pbaynr+Apay9vjuYvphITb5Auxi+jgJFPxL0CL83kv29Nnqov1wZsL/nYpo+TKFsPzPcbL66rZo+HixCP8oMiT4VXwg/Xt55v8XVpr4zkxnA8WIMP+Szij+06JG+aFOTPnrMs7/JfGi/MdqLP/+2Nr86aEk/wctQv+zGTT+syEc/FoNvvh7jQr+eBgG+uzWnvjZM277yid0/we/fPjQVMr+ghUS/QwVKPkGI9b8eC+a9MQmKvycI0j/qSA8/zhe5v6cXrD9GkP2/GiX4vxozHL81q/0+2jmUP6Uz/b/0OZG/C1ymP9rTXD9B8Pw/T+EnwHEIuT084F0+UjoOPsfTX78="
+        "remarks": "Debate club member"
       },
       {
         "_id": "691810ee8c4c905ca392a76b",
@@ -491,8 +482,7 @@
         "bus_number": "BUS-004",
         "stop_id": "04fbf812-8296-431e-a3fc-8454a825e05b",
         "emergency_contact": "+1-555-9110",
-        "remarks": null,
-        "embedding": "Wb27v/zBsj9YRpC/IeK7Pgihwz/A+O6/YFyqP3ndl7/wXOK/lpTYPbwNpz6xPGy/ASAlv2YuN78Qc5U+kQTePzZgTD5FHYa/V08cwB6K7L4SOGw/q7VTvy6qvb+LAfi+sxtdv9IOp75kts8+cCotP635jb9xw8g/6bTJvckJjT8bjKy/9MgWvq9QNj/vhJy+kQpZvqTrGr60t+c/o3jxPTZfAj8oYgk/8FZUv2Mygz/12LS9v+u8v0ZFpj9/ope+Ysi7vvhOkT804kfAvC/LPxTF3T5gVZ8/UWZcPgjxMr6Lcn2+NBADv4Xy3z1JZI0/baaMv/xnsr9PlRY/ZWpRv4qzAr9qCYc/KOrdvrtGsD++eFo/zSKqP2Mncb5VD64/R3GEvxg3374ZIS2/pqHwPSoYO75OB+09CTxbvXvLD794N3s+svdxvzU6NT19VoM/tj+PP48aBkB6FGO/QGT+vxheqL+9yCU+GDW9P7NAOr8uMKU+OL4xv3pSJr/95ok/eroXv3NRXr+54HG/om++vFGK978VmcY/pMmav6HaY7/IENU+6c/Hv4SFf78slvg9JpXav7PiJ0AQsTK+POHRPrLEzz9z+w4/uqzBv3t5i74vopK/u+sMv62pzb9jiF0+gXHjPxuKwT0t9LA/t1gWwAHo3L85Qy2/iK8kP6YDwL4="
+        "remarks": null
       },
       {
         "_id": "691810ee8c4c905ca392a76c",
@@ -509,8 +499,7 @@
         "bus_number": "BUS-001",
         "stop_id": "2f9104f6-ee83-4eef-8011-6fac47675526",
         "emergency_contact": "+1-555-9111",
-        "remarks": null,
-        "embedding": "/njMP//LgT+fH4s/7mKxv+XO/z5qF1g/Y9duPkc8Hj9detU+Lspkv7ONmT5sMkm+mlwxvxnzvD7FRc8+h3dgP2cHoT4VjBzAdGepv6v/WL/eXVI/o0Vyv7K7H794ODy/qZJyP2yvQ79XThc/fa9APoCzkb7d6w5ATwIrvyqKHD2FG6y/KMZHPmIfWz8o3vO+egh4v69UEz1Utvs8TnZiP6PbB79hJrm+G3P+v+P8SL99Opa+PY2mv5oYOT8OcG0+umJAP2Epjr5T2eK/O8K7P8fQ3z/xdze/xqMlP01JtL9Rv6c/JVaLv7Tt8T6+Yw1AO8CCvhUbRT5TpwlAAk2oPmeBjT7T6xm+/BuavAtpqD/YmGm+u7QCQOmMij9kSlE90Ui9v8CoNr9HP3M/1Rs4Pk5Rcb6LO68/aNJ+PgMCEL+XvKk+gjqmv+JQ1T2sAV6/Zoy+P6A2Lz/+4bW/T0lHwG1L2774c82/96q2P3a2xr4usOU9BDfcv69czj75BEZABrmgv66C5z6U4Sy/64YGPxEOYr5OeXA/ioaEvwpD2b5Gtma+yQ5aP7uKDsDBuYW+5ECRv4Mmxz8z2tu/oW2MPh6/dj6GAPK/nIXPvv2Qi764EOe/oMIlvlFSOL+bfxK/GssbQHcPmL/IH1k/pvwQwGRTJz9S9QO/5UEHv8A4474="
+        "remarks": null
       },
       {
         "_id": "691810ee8c4c905ca392a76d",
@@ -527,8 +516,7 @@
         "bus_number": "BUS-001",
         "stop_id": "64fb9fc0-234f-439b-89b5-750c4ac01ed1",
         "emergency_contact": "+1-555-9112",
-        "remarks": "Art club member",
-        "embedding": "rJCMPuGJ/D/MUBNAVhynv2HAKb9uBfO/qichQPflB79SzDS//eAfP0rcUz6ZqKo+3MqyvgrZGr/D1IQ/FUB0Pvh82D7xFR+/Itngvxwgqb+Oupq9giDcvz2R1r8mpgW/TnCdv0bshT+YXjO+UFPivpwf177vAcU/3UmCv7Nveb9CNpy/Q4pxv8+pIj+l+jE+uSpvv0f1ST8COiS+11eCvm+nNb+We1u/9NAhv2J9Iz8E0y6/fCQbP5CkgD8H0G49EM4awN7Omb82mqO+tfKZP4n/Er8oil2/JKHMvQZpw73s3So/gIdLP58rzj5AhzU/aZQfv/rYAb7psza/xQbtPlixyD/PepE9nRnJvzC9nL7Yu20/jq4BQFw5JkAAHmu/X/t7PouLGb/U+/Y/fo+BP/dp8L67QSk99E65vnUDWr9ljbQ/BMWQv8ZbxL9TNtK/i4KePz06+j50Z1K/rXcAwIaNhL9U7649FYdHv7AYhb76qRZAIMKpvzH+ZL9Uyeo/qgDKPnlxwj/8t9+9uAH0vpmvlb+cbYM/HGgsPhK4Wb8U7SO/FtxkPda7J79uKdS9wPpRPvvUFED5QK+/6wfdP5C3ML35iWm/7YErv0Q4TT87soy/0AAOvb3VML+s7iw/MEPmP1rVWb+seqa+ceWpv20snb84v5k/SmHHvnAOGz4="
+        "remarks": "Art club member"
       },
       {
         "_id": "691810ee8c4c905ca392a76e",
@@ -545,8 +533,7 @@
         "bus_number": "BUS-002",
         "stop_id": "509efd0e-c615-43c9-9c38-71249909fa41",
         "emergency_contact": "+1-555-9113",
-        "remarks": null,
-        "embedding": "/X1fPSDdaT/oZjw+xYQlvwajdL4EnpC/YIAWQLXFPb4wk9C/B8sTPvU6uD+5obi/EYhavuKhDb5dhqo/iCYtP8jIhD9vl2u/imYRwL46kL8lNIK/IjeGv5V2eD8+eUK+jh4KPhGPiT9Xy5Y/OXsmv5e+gD55CaY9nlxhvtiHtbsnRwS/SBLSvv41wT0hUhG+rsz6vguhmD8SZDs/JDwav5PoFcDt6f6/wJ0Dv+LWaT+hbrU/TWN/vicRpj9imkK/4AHiPKrhfL/QxP2+3w8mv4P9+b8fGlQ/v+mxv+Mtdj93qYe++j8ZPyRSoT9e/bI/pdKpv4rMuD6iClm/OTlzv6e0XD+ALDu/6icNwHyhN79koxC+i4ibP+aZpr/xc8k+trMTP4hfP79s1oc/Zrv4PqLXRb8ojIy/pKFDviBg9b4QwJU+c5X1PjGz3r98RKu+apRQPwv4sz7M+Jw+440KwF8zyb7H7Lu+HQAhP29wDD62WYQ+94ZiwANXhL/AYPQ/T3S2vvGF8L0en4I+w+ulvyb92r8meGS/JvcUPxFTwT57k+w/1SgkvUSGyj5lAN0+If25P2n9Gz9QKoy9I1hWv1Uesb5SsYi+m6NsPvgmaT5w52q+qCMbP7eWDr9CdSk/P1cHQPK4u75oPNK+RBG/P08n8r83FvO9iHNavz/0e78="
+        "remarks": null
       },
       {
         "_id": "691810ee8c4c905ca392a76f",
@@ -563,8 +550,7 @@
         "bus_number": "BUS-002",
         "stop_id": "432c23cc-84e0-45d6-92d3-db59f65c0b12",
         "emergency_contact": "+1-555-9114",
-        "remarks": "Soccer team member",
-        "embedding": "TdwdvjK8DsANyNC+//Gevm0JsL0KZb+/yPSBvyFkFr+plte/99MJQJIjtD6QlBS/9sIBwIDm2715kYs/lXp3Px970z4XkYO/5h0BPyYANj7qT/e+1Knav37daz61/c++Nk21PpcByL3UZya++A+CPgSyCr/mMKq/hB9KvaLdkDxASRy+KrECwBgvfb0gKhJAhSzUv4NkgT+cUl0/tNVAv3oZC77hzs6+4kYcv3EAB7+4REA/4hUvvarkl7/jUgNAa3vIv+nWIz34p1s+MMf9PYrMtT4RuIa+jxmMPmAROr/arYQ++vZFP4hj3z9zxbE9JsxAP6yjTb80uqW/h3hUPgGTcT/a+BS/AeaSPw+fd7/vxh0/+jF9P1vWDcCaOX+/B/u6v0713z7qjwm/XMwzPzAuor4/2b++EGyavuJf/b4L46y8VnmoPSWLhb9k0Rk9wPzAPnCFO8Dhv8S+Ej74vTsIkb8DdoA+yzPZPr8yAL+u42k/9FCvP/uvkr/rGt6/dWMlP3XjwD908fO+uoJ5P6WWQ78bWAHAX2KWvl57Hr6vxjE/525Uv8B1kz+51Js/wDC/PmyAbj80VAI/Oj4xP75pgT/fzWy+JYgJPs8/2r7eqJc/VXAKP67+eL/HBqs/Q064P7Hmk76FIOq/XayDP3WtlD89hqS/gnOnvuQfyb4="
+        "remarks": "Soccer team member"
       },
       {
         "_id": "691810ee8c4c905ca392a770",
@@ -581,8 +567,7 @@
         "bus_number": "BUS-004",
         "stop_id": "2318fa39-bada-4dc8-9529-a1f4366ac33b",
         "emergency_contact": "+1-555-9115",
-        "remarks": "Library monitor",
-        "embedding": "8g5XP+sKnD5vT/k+hzmcv4buYD/9PSC/UT5jPlHP8b6iTqU8XIocQD7PYT9vA8k/RdC9v4DAFD+OMaw/8qXpPfeF+T/GQQDAxgYKwD/pPL80gkA+R2wIwMrpoL8lK7e/8elzvjQq7r6vif4/mYgyv8TjgD7hb8k/Irh2PjJX0L4iRyE/aI25v6u/YD/Nxw+/KBy5vkWeCz8qjpe9BO4Vv6DojL8536y/Qa6tv1o0wj2nbB6/wtDtvzGHGj7kITs+SLDCvrQvEL8TMri/o2g0Puzg4z0HEha/b3H9P7UBxL9+XtI/GoRDP+dF3j8woXu+ozmCv+43rb5FS/Q/yVlxPSpIdD96a5Q/E5HsvxdsFT9aLKo94I6zP/xRLL/Ce2i/aIADv2r5RD9C2gC/mGGGvXum/D66phPAST/SP361iL/K1z2+2Iogv7siBL9PCbY+MsdpPq4GQL48gI+/TwvKv995/L0koLg+dFHev9EaqjyuIaI/vvPIv2HeHj5EOjc/lS8RPxhF/D8IW1u/5U2kvlINp79AtYG/qaLNv8Khtj8xKOo/EkmaP4IYT75MqFu/6vZIP/LjBUAns0U+WJRiPmi2Pj9DCTC/VLwPvzIkeL/WcNy/qzYhPnbJBEDzSS09kTmjP8EpSb7qtJ6/qQEWv/G1C7/elgxAgq8zP9yVor4="
+        "remarks": "Library monitor"
       },
       {
         "_id": "691810ee8c4c905ca392a771",
@@ -599,8 +584,7 @@
         "bus_number": "BUS-001",
         "stop_id": "2f9104f6-ee83-4eef-8011-6fac47675526",
         "emergency_contact": "+1-555-9116",
-        "remarks": "Science club member",
-        "embedding": "IusYvzQ9nz+HPcc/T0ynvmw9FL9FlZC/DkH1P2Ftg78v4Qq/BvBbP6J14j4Kct++K1xJPgjlKz5O/BI/HjnTPhHdlT/CmxLAZKR8v5qFr76l9Rm/Op5DvhFro78Qe5m/EIXqvxgFPj+ec9Y/zJisPQrQDz0egp8/vsCpv0qNhLwwece+EHrzv09SmD8/fno9vHLJv1ULRL/2hDQ/30cBwKekFsCwxhbAq8v4v4IVgT733/o/B387PTkbjL4LrsY+8OF0vzCd673lOhI/IKl5P4UbpL/cw3m+Un65v9HTCb8I+iw/QiiXvQhFJD8HtQA/3HG7v3foRT9maic/qwLAvryIRD+8Us48cIfRPNnb3b9M/bE+MvsCQILnxT53gse/8hIGPh7ow77tywg/jvqPPrBwT75H+v6/PdFrPy5WW7/XRuE/mD9KP8oRf7+XQBe/48FUP6x+e7/Rl5i+ujDLv5Jhjb8bja+/iGlUvwa9hT+8H60/pCtqv74kSb95678/R7AkP1bK3z/2H5K/c662vktYVr8n0mm/oE2ZPtI6gz/EYm0+wCuaP1Kk6D2On4U/SDt0P4lguT9cA7K+oCw4vxhsp77nGiE/87JevrRy6j2Nyfw+yoOEPp0Dvr+6lgQ/YsjuP3pEBj7yGsy+ccIpPDrSkD5OyJs/duaQPfXEgL8="
+        "remarks": "Science club member"
       },
       {
         "_id": "691810ee8c4c905ca392a772",
@@ -617,8 +601,7 @@
         "bus_number": "BUS-003",
         "stop_id": "e33d9f69-fdfe-4048-a69f-e8f3abf11c5d",
         "emergency_contact": "+1-555-9117",
-        "remarks": "Drama club member",
-        "embedding": "Si4jv3SMnj+0qRy+obLrPmRB0r35CnK/LSXqPyEyhj8AfcA+vOg2P61jZT/ijwDA5Ye3v7P07j7FJCs+kdiUPx1sAD8GqTS/RryBvpufFr8LBoG/BcTAPrvM8r8HHRI/GXQ5wPZ1dD8yaHm9hj1SvrqZDT4bhQlAVdQJP/kJKD8iNUg/9TIhv8VWjj7uB3I/xzq9v3gjWz8+Sxg/VOQTP6RAH79XqY6/3tNYPhDelz1jPXQ/aqoPPw+u9z7ShwS+sZBKv0SgAb/Vvso/1rfYPud/p79r8Qo/9K4NwBtvbj9Xy8A8hNYtP2kWUL4j3qg/Odyzv8tVcj8Josm/+caePkFALEBM+9O/6aYqP4Uhr77WTiY+PZO2P5lczD+kI0u/OlLEPwJmhT4Pxkw/DnpGP6ItGz8rxjW/HbSpv5/7FD/q6Ik/8OUAP5OhUD+xWCTAJ+L5v+XQr76oX/u+dLoqvn2YRr4neHW/Je/nvuV+nz9r1IO+eSyovr9ZQr9FXB6/ZQKkvzkdCD+8NTK/K8JgP26Es798FsO+s/Oyv3e3gj42EYs+LBeHv+4TqT+QYZU+G2y0P95Dij+2POa+eB1Iv7nan79Y498/JzNmv0Fqmr81ChFAk+dJvwFxgL9NQNo+jcU9P8i/Oz9ybfO+GPr6vu3cV7+nUn0/pKLCvghgrr4="
+        "remarks": "Drama club member"
       },
       {
         "_id": "691810ee8c4c905ca392a773",
@@ -635,8 +618,7 @@
         "bus_number": "BUS-002",
         "stop_id": "f2557f18-cf6d-47e2-8759-5031649748d0",
         "emergency_contact": "+1-555-9118",
-        "remarks": "Math team member",
-        "embedding": "troFwA0enD994Wa/FJEGPrqVE0CMEQHAeNCcP22+qr+LGg3AdgvDPkqVyD88n4y+yuuzv4MVAsDov4Y/h5KSP0ADkj5kp/m+JE6zvx8YGD48G0Q/H1k/v+dxjb9m/Q6+4QqZv8Rm/z7ZIOG9HviEP0WVbL7Xbco/9cgwP6uAhL5AYw89TFiFvwN71j9fP+0+T1q2vx5CBz/I3EVAfeMnPq8+oL9h/1I+slECwNB/dz+ZnsU+dZA4v01ZvL+2fA4/SWcyvfAMCj/2TMm/xw7RPy6hJj+aPjE/Oqsmvod3+z/+7pc+a+ijv3EPlb+R8ew+u8XAv2BzLL9QvHg8YlXcv4F4Xb9xF4c/ZKXQvqDLKD8nkYc/fcYLQDOpkD5+OhQ/V7K7v8PXab/KI+W9iZ2Fvtwknr42SuK9BWzVv/kZgj8mzAU/QZObv2pMRr/n5GI/zv0MQDFIBUCuAoa/ogKDvutmrb9WR/+9TYzbP7OrID+W7zQ/as1DP/pFnb88vTq+z7BdPt3ku79ow86/NQVrv2SJ9L9fMgg/TXZqPhIHUr/faow/gjniv1BEVD8vurK/7AfJvuM5IEDvjUE96vKbPpiBvj3EOBU/JSwUPrnWgT5238W+COWjP4grmbzP/A4/INW+P87UWT9qmO8/r+MEwMP9bL/N/Zq/O9XavhiTUj8="
+        "remarks": "Math team member"
       },
       {
         "_id": "691810ee8c4c905ca392a774",
@@ -653,8 +635,7 @@
         "bus_number": "BUS-001",
         "stop_id": "b5f21bcb-3433-4c52-abaf-6ed1f17770a0",
         "emergency_contact": "+1-555-9119",
-        "remarks": "Chess club captain",
-        "embedding": "XPV2P9apUb9BmfK/RAOJP8euQL+F/oy/oXl/vmSMCT/df/6/ONlevpi55z7Y1he+bGRlv/6UWb+0qk2/5/LvvUwPN75pOSjAU5Rmv9dt2b2UUt+/bIwsvw6/uD812sW+JJ2RvlDHaL8eZew+mvcUvoY4DUBtuvA/X0g9v4C1DL/67mK/qu2NP5p/Jj0iB30+IJpKvzJMwj/htWY/uC36vfT6l76u/as/LZ/gv9+wIz/IXvY/T2yxv9gyhD/oIOw/d4NVvy4rUr/6uZe+djAxPV3Z7T5CWLI/xGTfv0mM3b3oli2+AqHOP6J44L6AKK4+mdvkvuCYWL9k2kC/U/XSvw0ggL+dDJ0/rWiJv2iFgD++Zb6/CFqZv3/EpL1CTsC+fjPxvwixiz8Ya3U/g3aRP1ojNb3k0T1ADxq+P7l2qb/kHk++pVQfvh9Vrb/j2rW/jeQtvwiyyb5iUU0+jnuKv3RmEL97L92/g1kbPyAvTD//cvQ+peECvwsa4z7V0ak/SrTxvq1V6r/IKFS/TBftO6k1wr8JG8U9VJdjvkYB1D6eIwQ/5ix0PzlShz8FisG/HdRgv8sGmj4Yz6g+bjWsPOgBIj25sQvA2HlAv1Ho1j+LtCDAPxslv4Gvzr+07G+87ahWv9jv673+F7891tjNvkd2Tj9VLms/vsdKv/Sfpb8="
+        "remarks": "Chess club captain"
       },
       {
         "_id": "691810ee8c4c905ca392a775",
@@ -671,8 +652,7 @@
         "bus_number": "BUS-004",
         "stop_id": "ceac4144-de2d-4266-be6d-dd7b04921333",
         "emergency_contact": "+1-555-9120",
-        "remarks": "Student council member",
-        "embedding": "JP8avk+GqT9t9FS/ZZ1OPyo9hT8nGYy/T9ItP6HgCsC7afq/F8dcP4r5Uj+BiMC/Bb3+v3e5mr+UCK6/brQuP1wYvD7Znca/wwDJvzVTdL+GWSu/LpgMPyz1dz4Ii16+ZQmav4NwPz95F3i8FJviPqaK8z4/Lrs/PKyMvB6ou74whhm/yzZQv1qtBT/tcApAsDXvvYegxT+2AxRAfNWePg/LNz4moGc9xpHTv+/dWT825Lo/T84KP3vjlb7Sw1A/2cfbv6zhG7+9kO2/4QTZPlnMa7+3+AdAZiysv/zN9z9SbTy+os/ovqL9Br9+3I2/mRBwvyoe5L/tfi0/DxnXv2EJ6b9ogDpAfEvPviahZz+CtQY/QF+LP9yI9L5DksQ/l/PovhAfRr547rG+jH0oP2QebL+10lg/sQuHPuRFMT+LEb0+zstCv1bKQ79IYtk/j3qGvnLrjD+JXgO+ROEPv8ThqD2hZIe+T339P+u6ZL7bGxpAfFClPkPo0b7q4oY+WJN1P/rKf79iMeW/3jVkv2i9FMD6GlQ+1Oo4vybGFj5JUZk/E/BWv2wKgb3hSPu+H56gvu7jC0CVOEQ/xTpMvlYbXz+04MA/eb9iv6x/bT9KHRLAdjLtvjkzW79hKp++sswgvxxulj80+YY/CmHcvwkrAb//mJo9oQaJP1s+Pr8="
+        "remarks": "Student council member"
       }
     ],
     "buses": [
