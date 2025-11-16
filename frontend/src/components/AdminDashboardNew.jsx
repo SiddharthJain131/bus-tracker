@@ -439,7 +439,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
               </h2>
               <div className="flex items-center gap-6">
                 <PhotoAvatar
-                  photoUrl={currentUser.photo}
+                  photoUrl={currentUser.photo ? `${BACKEND_URL}${currentUser.photo}` : null}
                   userName={currentUser.name}
                   size="lg"
                   onClick={handleProfilePhotoClick}
@@ -1221,7 +1221,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
       <PhotoViewerModal
         open={showPhotoViewer}
         onClose={() => setShowPhotoViewer(false)}
-        photoUrl={currentUser.photo}
+        photoUrl={currentUser.photo ? `${BACKEND_URL}${currentUser.photo}` : null}
         userName={currentUser.name}
         canEdit={true}
         uploadEndpoint={`${API}/users/me/photo`}

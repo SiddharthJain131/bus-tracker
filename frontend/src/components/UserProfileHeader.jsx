@@ -24,7 +24,7 @@ export default function UserProfileHeader({ user, onPhotoUpdate }) {
       <div className="flex items-center gap-4 bg-white p-4 rounded-lg border border-gray-200" data-testid="user-profile-header">
         {/* Avatar */}
         <PhotoAvatar
-          photoUrl={user.photo}
+          photoUrl={user.photo ? `${BACKEND_URL}${user.photo}` : null}
           userName={user.name}
           size="md"
           onClick={handlePhotoClick}
@@ -61,7 +61,7 @@ export default function UserProfileHeader({ user, onPhotoUpdate }) {
       <PhotoViewerModal
         open={showPhotoViewer}
         onClose={() => setShowPhotoViewer(false)}
-        photoUrl={user.photo}
+        photoUrl={user.photo ? `${BACKEND_URL}${user.photo}` : null}
         userName={user.name}
         canEdit={true}
         uploadEndpoint={`${BACKEND_URL}/api/users/me/photo`}

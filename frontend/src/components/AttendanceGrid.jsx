@@ -166,7 +166,7 @@ export default function AttendanceGrid({ studentId }) {
               <div className="flex justify-center">
                 {selectedScan.photo ? (
                   <img 
-                    src={selectedScan.photo} 
+                    src={`${BACKEND_URL}${selectedScan.photo}`}
                     alt="Scan capture" 
                     className="w-40 h-40 object-cover rounded-lg shadow-md border-2 border-gray-200"
                     onError={(e) => {
