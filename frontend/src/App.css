@@ -26,6 +26,37 @@ h1, h2, h3, h4, h5, h6 {
   height: 100%;
   width: 100%;
   border-radius: 12px;
+  z-index: 1;
+  position: relative;
+}
+
+/* Lower z-index for all leaflet panes to prevent overlap with modals */
+.leaflet-pane {
+  z-index: auto !important;
+}
+
+.leaflet-tile-pane {
+  z-index: 1 !important;
+}
+
+.leaflet-overlay-pane {
+  z-index: 2 !important;
+}
+
+.leaflet-shadow-pane {
+  z-index: 3 !important;
+}
+
+.leaflet-marker-pane {
+  z-index: 4 !important;
+}
+
+.leaflet-tooltip-pane {
+  z-index: 5 !important;
+}
+
+.leaflet-popup-pane {
+  z-index: 6 !important;
 }
 
 /* Custom scrollbar */
