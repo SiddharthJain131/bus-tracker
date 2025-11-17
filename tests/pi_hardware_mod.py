@@ -94,6 +94,14 @@ def init_gpio() -> bool:
         default_gpio_state()
         print(f"{Colors.GREEN}[OK] GPIO initialized{Colors.RESET}")
         return True
+    except ImportError:
+        print(f"{Colors.YELLOW}[WARN] RPi.GPIO not installed - LED controls disabled{Colors.RESET}")
+        print(f"{Colors.YELLOW}  Install: pip install RPi.GPIO{Colors.RESET}")
+        return False
+    except RuntimeError as e:
+        # This happens when not running on actual Raspberry Pi hardware
+        print(f"{Colors.YELLOW}[WARN] GPIO not available (not running on Pi hardware): {e}{Colors.RESET}")
+        return False
     except Exception as e:
         print(f"{Colors.YELLOW}[WARN] GPIO initialization failed: {e}{Colors.RESET}")
         return False
