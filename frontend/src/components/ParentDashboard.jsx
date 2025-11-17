@@ -278,44 +278,46 @@ export default function ParentDashboard({ user, onLogout }) {
 
               {/* Right column - Notifications */}
               <div>
-                <Card className="p-6 card-hover">
-                  <div className="flex items-center gap-2 mb-4">
-                    <Bell className="w-5 h-5 text-violet-600" />
-                    <h2 className="text-xl font-semibold" style={{ fontFamily: 'Space Grotesk' }}>Notifications</h2>
+                <Card className="p-6 hover:shadow-modern-lg transition-shadow">
+                  <div className="flex items-center gap-3 mb-5">
+                    <div className="p-2 bg-soft-cyan/10 rounded-lg">
+                      <Bell className="w-5 h-5 text-soft-cyan" />
+                    </div>
+                    <h2 className="text-2xl font-semibold text-navy">Notifications</h2>
                   </div>
                   <div className="space-y-3 max-h-96 overflow-y-auto" data-testid="notifications-container">
                     {notifications.length === 0 ? (
-                      <p className="text-sm text-gray-500 text-center py-8">No notifications</p>
+                      <p className="text-sm text-muted-foreground text-center py-8">No notifications</p>
                     ) : (
                       notifications.slice(0, 5).map((notification) => (
                         <div
                           key={notification.notification_id}
                           data-testid={`notification-${notification.type}`}
                           onClick={() => handleNotificationClick(notification)}
-                          className="flex items-start gap-4 p-4 rounded-lg border bg-gradient-to-r from-purple-50 to-pink-50 border-purple-200 shadow-sm hover:shadow-md transition-all cursor-pointer"
+                          className="flex items-start gap-4 p-4 rounded-xl border border-border bg-card shadow-modern hover:shadow-modern-md transition-all cursor-pointer"
                         >
-                          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white text-purple-600 shadow-sm flex-shrink-0">
+                          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-soft-cyan/20 text-soft-cyan shadow-sm flex-shrink-0">
                             <Bell className="w-5 h-5" />
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between gap-2">
-                              <h3 className="font-semibold text-gray-800 truncate">
+                              <h3 className="font-semibold text-navy truncate">
                                 {notification.title}
                               </h3>
                               {notification.timestamp && (
-                                <span className="text-xs text-gray-500 whitespace-nowrap">
+                                <span className="text-xs text-muted-foreground whitespace-nowrap">
                                   {formatTimestamp(notification.timestamp)}
                                 </span>
                               )}
                             </div>
                             {notification.message && (
-                              <p className="text-sm text-gray-600 mt-1 line-clamp-2">
+                              <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
                                 {notification.message}
                               </p>
                             )}
                             {!notification.read && (
                               <div className="mt-2">
-                                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-purple-600 text-white">
+                                <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-xs font-medium bg-accent-blue text-white shadow-sm">
                                   New
                                 </span>
                               </div>
