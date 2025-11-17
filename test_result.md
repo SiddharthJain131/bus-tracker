@@ -753,6 +753,18 @@ backend:
         agent: "main"
         comment: "IMPLEMENTED - Added background task scheduler for automatic backups at regular intervals. SCHEDULER LOGIC: Runs both main backup (backup_seed_data.py) and attendance backup (backup_attendance_data.py) at intervals defined by SEED_INTERVAL_HOURS env variable. Uses subprocess to execute backup scripts. Default interval: 1 hour (configurable). Retries on error with 5-minute delay. STARTUP INTEGRATION: Launched as asyncio background task in server startup event. Runs continuously while server is running. Independent of main server request processing. FEATURES: Automated backup rotation (maintains 3 most recent of each type), both main and attendance backups run together, error handling with retry logic, configurable interval via environment variable. Ready for testing: Verify scheduler starts on startup, verify backups run at intervals, verify both backup types execute, verify error handling and retry logic."
 
+  - task: "Raspberry Pi Testing Script Integration & Synchronization"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py, /app/tests/pi_server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "COMPLETED - Integrated and synchronized Raspberry Pi testing scripts with backend server.py. BACKEND CHANGES: 1) Added /api/bus-locations/update endpoint as alias to /update_location for Pi script compatibility. Both endpoints now accept optional timestamp field from device. 2) Enhanced UpdateLocationRequest model to accept optional timestamp parameter. 3) Verified /api/students/embedding-by-rfid endpoint exists and works correctly for RFID-based student lookup. 4) All device endpoints (/scan_event, /update_location, /students/{id}/embedding, /students/{id}/photo) properly protected with X-API-Key authentication via verify_device_key dependency. PI SCRIPT FIXES: 1) Fixed bug in pi_server.py where bus location update call used incorrect parameter (json=payload changed to data=payload) to match api_request function signature. 2) Verified all API endpoints match Pi script expectations (device registration, embedding retrieval, scan events, bus location updates). FRONTEND CLEANUP: 1) Removed unused components: AdminDashboard.jsx, TeacherDashboard.jsx, EditStudentModal.jsx, EditUserModal.jsx (old versions superseded by *New or *Enhanced variants). 2) Verified all remaining components are properly imported and used. TESTING FILES: All Pi testing scripts preserved in /app/tests/ (pi_server.py, pi_hardware.py, pi_hardware_mod.py, pi_simulated.py, auto-prog.py, cam_test.py, rfid_student_mapping.json). These are essential for Raspberry Pi device integration and testing. VERIFICATION: Backend and frontend dependencies installed, all services restarted successfully, no import errors or missing modules. Integration complete and ready for Pi device testing."
+
 frontend:
   - task: "Login page"
     implemented: true
