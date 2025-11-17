@@ -435,8 +435,8 @@ export default function AdminDashboardNew({ user, onLogout }) {
           {/* Overview Tab */}
           <TabsContent value="overview" className="space-y-6">
             {/* Admin Profile */}
-            <Card className="p-6">
-              <h2 className="text-xl font-semibold mb-4" style={{ fontFamily: 'Space Grotesk' }}>
+            <Card className="p-6 hover:shadow-modern-lg transition-shadow">
+              <h2 className="text-2xl font-semibold mb-5 text-navy">
                 Admin Profile
               </h2>
               <div className="flex items-center gap-6">
@@ -445,8 +445,8 @@ export default function AdminDashboardNew({ user, onLogout }) {
                   userName={currentUser.name}
                   size="lg"
                   onClick={handleProfilePhotoClick}
-                  gradientFrom="violet-400"
-                  gradientTo="purple-600"
+                  gradientFrom="navy"
+                  gradientTo="accent-blue"
                 />
                 <div className="flex-1 space-y-2">
                   <h3 className="text-2xl font-bold text-gray-900">{user.name}</h3>
