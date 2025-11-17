@@ -69,7 +69,7 @@ def capture_student_photo(config: Dict, student_id: str, script_dir: Path) -> Op
     
     try:
         # Get photo directly from backend
-        photo = Path(__file__).resolve().parent.parent / "bus-tracker" / "backend" / "photos" / "students" / f"{student_id}" / "profile.jpg" 
+        photo = Path(__file__).resolve().parent.parent / "backend" / "photos" / "students" / f"{student_id}" / "profile.jpg" 
 
         # Save to temp directory
         temp_dir = script_dir / "temp_photos"
