@@ -68,6 +68,21 @@ Complete guide for using the Bus Tracker System across all three user roles.
 - Route displays all stops with numbered markers
 - Map auto-fits to show both bus and route
 
+**GPS Status Indicators:**
+- **Normal Location** (blue/purple bus icon)
+  - GPS signal available
+  - Location updating in real-time
+  - Popup shows "Live Location"
+- **GPS Unavailable** (gray bus icon with 🔴❓)
+  - GPS signal temporarily unavailable
+  - Bus marker stays at last known position
+  - Popup shows "GPS Unavailable"
+  - System continues working - attendance still recorded
+- **Stale Location** (older timestamp)
+  - Location not updated recently (>60 seconds)
+  - May indicate connectivity issues
+  - Check with school if persists
+
 #### 3. Monthly Attendance Calendar
 - Color-coded AM/PM attendance grid
 - **Interactive Green Cells:**
