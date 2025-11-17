@@ -76,7 +76,7 @@ function RoutesTable({ searchTerm, onViewRoute, onEditRoute, onDeleteRoute, onAd
     <>
       <div className="overflow-x-auto">
         <table className="w-full">
-          <thead className="bg-gray-50 border-b-2 border-gray-200">
+          <thead className="bg-muted/50 border-b-2 border-border">
             <tr>
               <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Route Name</th>
               <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Stops</th>
@@ -743,7 +743,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
 
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-gray-50 border-b-2 border-gray-200">
+                  <thead className="bg-muted/50 border-b-2 border-border">
                     <tr>
                       <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Roll No</th>
                       <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Name</th>
@@ -855,7 +855,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
                   <TabsContent key={role} value={role}>
                     <div className="overflow-x-auto">
                       <table className="w-full">
-                        <thead className="bg-gray-50 border-b-2 border-gray-200">
+                        <thead className="bg-muted/50 border-b-2 border-border">
                           <tr>
                             <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Name</th>
                             <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Role</th>
@@ -997,7 +997,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
                 <TabsContent value="buses">
                   <div className="overflow-x-auto">
                     <table className="w-full">
-                      <thead className="bg-gray-50 border-b-2 border-gray-200">
+                      <thead className="bg-muted/50 border-b-2 border-border">
                         <tr>
                           <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Bus No</th>
                           <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Driver</th>
