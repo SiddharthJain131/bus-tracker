@@ -1001,6 +1001,15 @@ async def update_location(request: UpdateLocationRequest, device: dict = Depends
     
     return {"status": "success", "timestamp": timestamp}
 
+@api_router.post("/bus-locations/update")
+async def update_bus_location_alias(request: UpdateLocationRequest, device: dict = Depends(verify_device_key)):
+    """
+    Alias endpoint for /update_location to maintain compatibility with Pi testing scripts.
+    Device-only endpoint for updating bus GPS location.
+    Requires X-API-Key header authentication.
+    """
+    return await update_location(request, device)
+
 @api_router.get("/get_attendance")
 async def get_attendance(student_id: str, month: str, current_user: dict = Depends(get_current_user)):
     if current_user['role'] == 'parent':
