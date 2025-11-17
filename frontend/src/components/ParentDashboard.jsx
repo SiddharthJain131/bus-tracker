@@ -209,7 +209,7 @@ export default function ParentDashboard({ user, onLogout }) {
                       </span>
                     )}
                   </div>
-                  <div className="h-96 rounded-lg overflow-hidden relative" data-testid="bus-map-container">
+                  <div className="h-96 rounded-xl overflow-hidden relative border border-border" data-testid="bus-map-container">
                     <BusMap location={busLocation} route={route} showRoute={showRoute} />
                     
                     {/* Toggle Route Button */}
