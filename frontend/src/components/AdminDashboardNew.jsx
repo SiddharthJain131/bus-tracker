@@ -42,6 +42,7 @@ import DeleteConfirmationDialog from './DeleteConfirmationDialog';
 import PhotoViewerModal from './PhotoViewerModal';
 import PhotoAvatar from './PhotoAvatar';
 import NotificationDetailModal from './NotificationDetailModal';
+import BackupManagement from './BackupManagement';
 import { formatClassName } from '../utils/helpers';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
