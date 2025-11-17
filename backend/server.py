@@ -201,6 +201,7 @@ class UpdateLocationRequest(BaseModel):
     bus_number: str
     lat: float
     lon: float
+    timestamp: Optional[str] = None  # Optional timestamp from device (will use server time if not provided)
 
 class Notification(BaseModel):
     model_config = ConfigDict(extra="ignore")
