@@ -480,6 +480,26 @@ def send_packet(config: Dict, payload: Dict) -> bool:
         return False
 
 
+def get_gps() -> Optional[Dict[str, Optional[float]]]:
+    """
+    Get GPS location from Android device via ADB.
+    Returns dict with 'lat' and 'lon' keys, or None values if GPS unavailable.
+    
+    This function is called by pi_server.py for location updates.
+    
+    Returns:
+        Dict with 'lat' and 'lon' keys (float or None)
+        Example: {"lat": 37.7749, "lon": -122.4194} or {"lat": None, "lon": None}
+    """
+    try:
+        lat, lon = get_gps_location_adb()
+        return {"lat": lat, "lon": lon}
+    except Exception as e:
+        print(f"{Colors.YELLOW}[WARN] GPS error: {e}{Colors.RESET}")
+        return {"lat": None, "lon": None}
+
+
+
 def cleanup():
     """Cleanup hardware resources"""
     try:
