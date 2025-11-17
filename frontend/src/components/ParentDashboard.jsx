@@ -173,8 +173,8 @@ export default function ParentDashboard({ user, onLogout }) {
         {/* Student Cards - Multiple Children */}
         {students.length > 1 ? (
           <div>
-            <h2 className="text-xl font-semibold mb-4" style={{ fontFamily: 'Space Grotesk' }}>My Children</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+            <h2 className="text-2xl font-semibold mb-5 text-navy">My Children</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-6">
               {students.map((student) => (
                 <div
                   key={student.student_id}
