@@ -101,6 +101,7 @@ sudo supervisorctl restart all
 - **[Auto-Start Configuration](./tests/README_AUTOSTART.md)** - Systemd service setup for auto-run on boot
 
 ### Operations
+- **[Backup System](./docs/BACKUP_SYSTEM.md)** - ⭐ Production-ready backup with integrity verification
 - **[Dependency Management](./docs/DEPENDENCY_MANAGEMENT.md)** - Safe deletion rules and constraints
 - **[Troubleshooting](./docs/TROUBLESHOOTING.md)** - Common issues and solutions
 
