@@ -2294,6 +2294,8 @@ async def start_main_backup_scheduler():
 
 async def start_attendance_backup_scheduler():
     """Schedule regular attendance backups using ATTENDANCE_INTERVAL_HOURS"""
+    from backup_manager import BackupManager
+    
     interval_hours = int(os.environ.get('ATTENDANCE_INTERVAL_HOURS', os.environ.get('SEED_INTERVAL_HOURS', '1')))
     interval_seconds = max(1, int(interval_hours)) * 3600
 
@@ -2306,8 +2308,19 @@ async def start_attendance_backup_scheduler():
         try:
             await asyncio.sleep(interval_seconds)
             logging.info("Running scheduled attendance backup...")
-            subprocess.run(["python", "backup_attendance_data.py"], cwd=str(ROOT_DIR))
-            logging.info("✅ Attendance backup completed")
+            
+            # Use new BackupManager
+            manager = BackupManager()
+            await manager.connect()
+            try:
+                success, message, metadata = await manager.create_attendance_backup()
+                if success:
+                    logging.info(f"✅ Attendance backup completed: {message}")
+                else:
+                    logging.error(f"❌ Attendance backup failed: {message}")
+            finally:
+                manager.close()
+                
         except Exception as e:
             logging.error(f"Attendance backup scheduler error: {e}")
             await asyncio.sleep(300)
