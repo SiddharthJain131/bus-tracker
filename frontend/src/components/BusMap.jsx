@@ -177,14 +177,24 @@ export default function BusMap({ location, route, showRoute }) {
 
         // Fit bounds to include both route and bus location
         const bounds = polyline.getBounds();
-        if (location) {
+        
+        // Only extend bounds with bus location if coordinates are valid
+        if (location && location.lat !== null && location.lon !== null && 
+            typeof location.lat === 'number' && typeof location.lon === 'number') {
           bounds.extend([location.lat, location.lon]);
         }
+        
         mapInstanceRef.current.fitBounds(bounds, { padding: [50, 50] });
       }
     } else if (location && mapInstanceRef.current) {
-      // When route is hidden, center on bus location
-      mapInstanceRef.current.setView([location.lat, location.lon], 15, { animate: true });
+      // When route is hidden, center on bus location only if coordinates are valid
+      const hasValidLocation = location.lat !== null && location.lon !== null && 
+                               typeof location.lat === 'number' && typeof location.lon === 'number';
+      
+      if (hasValidLocation) {
+        mapInstanceRef.current.setView([location.lat, location.lon], 15, { animate: true });
+      }
+      // If location is invalid, keep map at current view (don't attempt to center on invalid coords)
     }
   }, [showRoute, route, location]);
 
