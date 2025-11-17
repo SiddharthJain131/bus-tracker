@@ -411,12 +411,25 @@ Get current GPS location of bus. Requires X-API-Key header.
 
 Update bus GPS location (used by tracking device). Requires X-API-Key header.
 
-**Request Body:**
+**Supports GPS Fallback:** Accepts `null` values for `lat`/`lon` when GPS unavailable.
+
+**Request Body (GPS Available):**
 ```json
 {
-  "bus_id": "uuid",
+  "bus_number": "BUS-001",
   "lat": 37.7749,
-  "lon": -122.4194
+  "lon": -122.4194,
+  "timestamp": "2025-11-17T14:00:00Z"
+}
+```
+
+**Request Body (GPS Unavailable):**
+```json
+{
+  "bus_number": "BUS-001",
+  "lat": null,
+  "lon": null,
+  "timestamp": "2025-11-17T14:00:00Z"
 }
 ```
 
@@ -424,9 +437,17 @@ Update bus GPS location (used by tracking device). Requires X-API-Key header.
 ```json
 {
   "status": "success",
-  "timestamp": "2025-01-15T08:30:00.000Z"
+  "bus_number": "BUS-001",
+  "timestamp": "2025-11-17T14:00:00Z",
+  "location_updated": true
 }
 ```
+
+**Notes:**
+- System accepts and stores null coordinates
+- Frontend displays GPS unavailable indicator (🔴❓)
+- Attendance recording continues normally without GPS
+- No errors or failures when GPS unavailable
 
 ---
 
