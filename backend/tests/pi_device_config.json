@@ -1,8 +1,0 @@
-{
-  "backend_url": "http://localhost:8001",
-  "device_id": "5b2f9269-f820-48e1-9262-2a5c0ed6f1b0",
-  "device_name": "pi-test-device",
-  "bus_number": "BUS-001",
-  "api_key": "ddac4737d30d0067b283e9518d5f509e652bbfdf3cb14419075345921646e7f0",
-  "registered_at": "2025-11-15T09:30:03.638149+00:00"
-}

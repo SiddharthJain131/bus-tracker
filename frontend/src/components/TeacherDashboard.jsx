@@ -96,7 +96,7 @@ export default function TeacherDashboard({ user, onLogout }) {
                     >
                       <div>
                         <p className="font-medium text-gray-900">{student.name}</p>
-                        <p className="text-sm text-gray-500">Bus: {student.bus_id}</p>
+                        <p className="text-sm text-gray-500">Bus: {student.bus_number}</p>
                       </div>
                       <div className="flex gap-2">
                         <div className="flex items-center gap-1">

@@ -56,7 +56,7 @@ export const API_ENDPOINTS = {
     update: (id) => `${API_BASE_URL}/buses/${id}`,
     delete: (id) => `${API_BASE_URL}/buses/${id}`,
     stops: (id) => `${API_BASE_URL}/buses/${id}/stops`,
-    location: (id) => `${API_BASE_URL}/get_bus_location?bus_id=${id}`,
+    location: (id) => `${API_BASE_URL}/get_bus_location?bus_number=${id}`,
   },
   
   // Routes

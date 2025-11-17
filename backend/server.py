@@ -14,6 +14,7 @@ import uuid
 from datetime import datetime, timezone, timedelta
 import bcrypt
 import secrets
+import pytz
 import random
 import shutil
 import hashlib
@@ -31,6 +32,7 @@ load_dotenv(ROOT_DIR / '.env')
 mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
+TIMEZONE = os.environ.get('TIMEZONE', 'Asia/Kolkata')
 
 # Session storage (in-memory for simplicity)
 sessions = {}
@@ -191,7 +193,8 @@ class ScanEventRequest(BaseModel):
     confidence: float
     lat: float
     lon: float
-    photo_url: Optional[str] = None  # Optional photo URL captured during scan
+    present: bool  # True for boarding, False for alighting
+    photo: Optional[str] = None  # Optional photo URL captured during scan
     # Note: scan_type removed - status determined automatically by backend
 
 class UpdateLocationRequest(BaseModel):
@@ -222,7 +225,7 @@ class DeviceKey(BaseModel):
     bus_number: str  # Links device to bus (1:1 relationship)
     device_name: str
     key_hash: str  # Hashed API key (using bcrypt)
-    created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    created_at: str = Field(default_factory=lambda: datetime.now(pytz.timezone(TIMEZONE)).isoformat())
 
 class DeviceKeyCreate(BaseModel):
     bus_number: str
@@ -235,6 +238,7 @@ async def send_email_notification(recipient_email: str, recipient_name: str, sub
         recipient_name=recipient_name,
         subject=subject,
         body=body,
+        # store email log timestamp in UTC
         timestamp=datetime.now(timezone.utc).isoformat(),
         student_id=student_id,
         user_id=user_id
@@ -518,6 +522,16 @@ async def update_student_photo(student_id: str, file: UploadFile = File(...), cu
         # Save as profile.jpg
         file_name = f"profile.{file_ext}"
         file_path = student_dir / file_name
+
+        # Generate embedding
+        result = await generate_face_embedding(str(file_path))
+        if not result['success']:
+            raise HTTPException(status_code=400, detail=f"Error generating embedding: {result['message']}")
+        # Update student record with embedding
+        await db.students.update_one(
+            {"student_id": student_id},
+            {"$set": {"embedding": result['embedding']}}
+        )
         
         # Save file
         with open(file_path, "wb") as buffer:
@@ -537,8 +551,6 @@ async def update_student_photo(student_id: str, file: UploadFile = File(...), cu
         logging.error(f"Error updating student photo: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
-# Generate embedding from existing student photo
-@api_router.post("/students/{student_id}/generate-embedding")
 async def generate_student_embedding(student_id: str, current_user: dict = Depends(get_current_user)):
     """
     Generate face embedding from student's existing photo.
@@ -597,80 +609,9 @@ async def generate_student_embedding(student_id: str, current_user: dict = Depen
         logging.error(f"Error generating student embedding: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
-# Upload photo and generate embedding in one step
-@api_router.post("/students/{student_id}/upload-photo-embedding")
-async def upload_student_photo_and_embedding(
-    student_id: str, 
-    file: UploadFile = File(...), 
-    current_user: dict = Depends(get_current_user)
-):
-    """
-    Upload student photo and generate face embedding in one step.
-    Admin-only endpoint.
-    """
-    if current_user['role'] != 'admin':
-        raise HTTPException(status_code=403, detail="Only admins can upload photos and generate embeddings")
-    
-    try:
-        # Validate student exists
-        student = await db.students.find_one({"student_id": student_id})
-        if not student:
-            raise HTTPException(status_code=404, detail="Student not found")
-        
-        # Validate file type
-        if not file.content_type.startswith('image/'):
-            raise HTTPException(status_code=400, detail="File must be an image")
-        
-        file_ext = file.filename.split('.')[-1].lower()
-        if file_ext not in ['jpg', 'jpeg', 'png', 'gif', 'webp']:
-            raise HTTPException(status_code=400, detail="Invalid image format. Use jpg, jpeg, png, gif, or webp")
-        
-        # Generate embedding first (before saving)
-        embedding_result = await generate_face_embedding(file)
-        
-        if not embedding_result['success']:
-            raise HTTPException(status_code=400, detail=embedding_result['message'])
-        
-        # If embedding generation succeeded, save the photo
-        student_dir = PHOTO_DIR / 'students' / student_id
-        student_dir.mkdir(parents=True, exist_ok=True)
-        
-        file_name = f"profile.{file_ext}"
-        file_path = student_dir / file_name
-        
-        # Save file
-        await file.seek(0)  # Reset file pointer after reading for embedding
-        with open(file_path, "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
-        
-        # Update database with both photo and embedding
-        photo_url = f"/api/photos/students/{student_id}/profile.{file_ext}"
-        await db.students.update_one(
-            {"student_id": student_id},
-            {"$set": {
-                "photo": photo_url,
-                "embedding": embedding_result['embedding']
-            }}
-        )
-        
-        logging.info(f"Uploaded photo and generated embedding for student {student_id}: {student.get('name', 'Unknown')}")
-        
-        return {
-            "success": True,
-            "student_id": student_id,
-            "photo_url": photo_url,
-            "has_embedding": True,
-            "message": f"Photo uploaded and {embedding_result['message']}"
-        }
-    
-    except HTTPException:
-        raise
-    except Exception as e:
-        logging.error(f"Error uploading photo and generating embedding: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
 
 # Batch generate embeddings for all students with photos
-@api_router.post("/students/bulk-generate-embeddings")
+# @api_router.post("/students/bulk-generate-embeddings")
 async def bulk_generate_embeddings(current_user: dict = Depends(get_current_user)):
     """
     Generate embeddings for all students who have photos but no embeddings.
@@ -860,7 +801,7 @@ async def get_student_embedding(student_id: str, device: dict = Depends(verify_d
         "has_embedding": bool(embedding)
     }
 
-@api_router.get("/students/{student_id}/photo")
+# @api_router.get("/students/{student_id}/photo")
 async def get_student_photo(student_id: str, device: dict = Depends(verify_device_key)):
     """
     Device-only endpoint to retrieve student photo.
@@ -879,21 +820,38 @@ async def get_student_photo(student_id: str, device: dict = Depends(verify_devic
         "has_photo": bool(photo_url)
     }
 
+@api_router.get("/students/embedding-by-rfid")
+async def get_embedding_by_rfid(rfid: str, device: dict = Depends(verify_device_key)):
+    """
+    Return student_id and embedding for a given RFID (tag_id).
+    Device calls this endpoint with X-API-Key header.
+    Response:
+      200 -> {"student_id": "...", "embedding": "<base64>"}
+      404 -> {"detail": "Student not found"}
+    """
+    if not rfid:
+        raise HTTPException(status_code=400, detail="Missing rfid parameter")
+
+    student = await db.students.find_one({"tag_id": rfid}, {"_id": 0})
+    if not student:
+        raise HTTPException(status_code=404, detail="Student not found")
+
+    return {
+        "student_id": student["student_id"],
+        "embedding": student.get("embedding", "") or ""
+    }
+
 # Core APIs
 @api_router.post("/scan_event")
-async def scan_event(request: ScanEventRequest, device: dict = Depends(verify_device_key)):
-    """
-    Device-only endpoint for recording RFID scan events.
-    Requires X-API-Key header authentication.
-    Automatically determines status (YELLOW/GREEN) based on:
-    - Time of day (morning < 12:00 PM, evening >= 12:00 PM)
-    - Scan sequence (first scan = IN/YELLOW, second scan = GREEN)
-    - Direction logic (morning: pickup->school, evening: school->home)
-    """
-    timestamp = datetime.now(timezone.utc).isoformat()
-    current_time = datetime.now(timezone.utc)
-    
-    # Record the scan event
+async def scan_event(
+    request: ScanEventRequest,
+    device: dict = Depends(verify_device_key)
+):
+    utc_now = datetime.now(timezone.utc)
+    timestamp = utc_now.isoformat()
+    local_time = utc_now.astimezone(pytz.timezone(TIMEZONE))
+
+    # ALWAYS store this in DB:
     event = Event(
         student_id=request.student_id,
         tag_id=request.tag_id,
@@ -901,84 +859,117 @@ async def scan_event(request: ScanEventRequest, device: dict = Depends(verify_de
         confidence=request.confidence,
         lat=request.lat,
         lon=request.lon,
-        timestamp=timestamp
+        timestamp=timestamp,     # string
     )
     await db.events.insert_one(event.model_dump())
-    
-    today = current_time.strftime("%Y-%m-%d")
-    hour = current_time.hour
-    
-    # Determine trip direction based on time of day
-    # Morning: before 12:00 PM (first scan at pickup = IN/YELLOW, second at school = GREEN)
-    # Evening: at or after 12:00 PM (first scan at school = IN/YELLOW, second at home = OUT/GREEN)
+
+    # Trip detection (safe because it's LOCAL)
+    hour = local_time.hour
+    today = local_time.strftime("%Y-%m-%d")
     is_morning = hour < 12
     trip = "AM" if is_morning else "PM"
-    
+
+    # Check if attendance record exists → determines scan sequencing
     existing = await db.attendance.find_one({
         "student_id": request.student_id,
         "date": today,
         "trip": trip
     })
-    
+
+    # ============================
+    #  CASE 1: VERIFIED SCAN
+    # ============================
     if request.verified:
-        # Determine status based on scan sequence
-        if existing:
-            # This is the second scan
-            # Morning: student reached school (GREEN)
-            # Evening: student reached home (GREEN)
-            status = "green"
-            
-            update_data = {
-                "status": status, 
-                "confidence": request.confidence, 
-                "last_update": timestamp
-            }
-            
-            # Add photo and scan timestamp if provided
-            if request.photo_url:
-                update_data["scan_photo"] = request.photo_url
-                update_data["scan_timestamp"] = timestamp
-            
-            await db.attendance.update_one(
-                {"student_id": request.student_id, "date": today, "trip": trip},
-                {"$set": update_data}
-            )
-        else:
-            # This is the first scan
-            # Morning: student boarded at pickup stop (IN/YELLOW)
-            # Evening: student boarded at school (IN/YELLOW)
+
+        # Save photo only for IN scans (optional)
+        photo_path = None
+        if request.photo:
+            photo_path = f"photos/attendance/{request.student_id}_{today}_{trip}.jpg"
+            os.makedirs(os.path.dirname(photo_path), exist_ok=True)
+            with open(photo_path, "wb") as f:
+                f.write(base64.b64decode(request.photo))
+
+        # =====================================
+        # present == 0  →  Boarding IN (YELLOW)
+        # =====================================
+        if request.present == 0:
             status = "yellow"
-            
+
             attendance = Attendance(
                 student_id=request.student_id,
                 date=today,
                 trip=trip,
-                status=status,
+                status="yellow",
                 confidence=request.confidence,
                 last_update=timestamp,
-                scan_photo=request.photo_url,
-                scan_timestamp=timestamp if request.photo_url else None
+                scan_photo=photo_path,
+                scan_timestamp=timestamp if photo_path else None
             )
+
             await db.attendance.insert_one(attendance.model_dump())
-        
-        direction = "morning" if is_morning else "evening"
-        scan_sequence = "second" if existing else "first"
-        logging.info(f"Scan event recorded: Student {request.student_id}, Direction: {direction}, Sequence: {scan_sequence}, Status: {status}, Device: {device['device_name']}")
+
+            logging.info(
+                f"[YELLOW] Boarding IN: Student {request.student_id}, "
+                f"Device: {device['device_name']}"
+            )
+
+        # =====================================
+        # present == 1  →  Boarding OUT (GREEN)
+        # =====================================
+        else:
+            status = "green"
+
+            await db.attendance.update_one(
+                {"student_id": request.student_id, "date": today, "trip": trip},
+                {
+                    "$set": {
+                        "status": "green",
+                        "confidence": request.confidence,
+                        "last_update": timestamp,
+                        "scan_photo": photo_path,
+                        "scan_timestamp": timestamp if photo_path else None,
+                    }
+                }
+            )
+
+            logging.info(
+                f"[GREEN] Boarding OUT: Student {request.student_id}, "
+                f"Device: {device['device_name']}"
+            )
+
+
+    # ============================
+    #  CASE 2: NOT VERIFIED (FAIL)
+    # ============================
     else:
-        # Identity mismatch - create notification for parent
-        student = await db.students.find_one({"student_id": request.student_id}, {"_id": 0})
+        student = await db.students.find_one(
+            {"student_id": request.student_id}, {"_id": 0}
+        )
+
         if student:
             notification = Notification(
                 user_id=student['parent_id'],
                 title="Identity Mismatch Detected",
-                message=f"Identity mismatch detected for {student['name']} (Confidence: {request.confidence:.0%})",
+                message=(
+                    f"Identity mismatch detected for {student['name']} "
+                    f"(Confidence: {request.confidence:.0%})"
+                ),
                 timestamp=timestamp,
-                type="mismatch"
+                type="mismatch",
             )
             await db.notifications.insert_one(notification.model_dump())
+
         status = "not_recorded"
-    
-    return {"status": "success", "event_id": event.event_id, "attendance_status": status}
+
+    # ============================
+    # FINAL RESPONSE
+    # ============================
+    return {
+        "status": "success",
+        "event_id": event.event_id,
+        "attendance_status": status
+    }
+
 
 @api_router.post("/update_location")
 async def update_location(request: UpdateLocationRequest, device: dict = Depends(verify_device_key)):
@@ -986,6 +977,7 @@ async def update_location(request: UpdateLocationRequest, device: dict = Depends
     Device-only endpoint for updating bus GPS location.
     Requires X-API-Key header authentication.
     """
+    # store location update timestamp in UTC
     timestamp = datetime.now(timezone.utc).isoformat()
     
     # Verify that the device is authorized for this bus
@@ -1069,7 +1061,7 @@ async def get_attendance(student_id: str, month: str, current_user: dict = Depen
     }
 
 @api_router.get("/get_bus_location")
-async def get_bus_location(bus_number: str, device: dict = Depends(verify_device_key)):
+async def get_bus_location(bus_number: str, device: dict = Depends(get_current_user)):
     """
     Device-only endpoint for retrieving bus GPS location.
     Requires X-API-Key header authentication.
@@ -1901,7 +1893,7 @@ async def get_teacher_students(current_user: dict = Depends(get_current_user)):
     student_ids = current_user.get('student_ids', [])
     students = await db.students.find({"student_id": {"$in": student_ids}}, {"_id": 0}).to_list(1000)
     
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    today = datetime.now(pytz.timezone(TIMEZONE)).strftime("%Y-%m-%d")
     for student in students:
         am_attendance = await db.attendance.find_one({
             "student_id": student['student_id'],
@@ -1995,7 +1987,9 @@ async def start_attendance_monitor():
 
 async def check_missed_scans():
     """Check for students who should have been scanned but weren't"""
-    current_time = datetime.now(timezone.utc)
+    # compute current UTC then convert to configured local timezone for schedule logic
+    utc_now = datetime.now(timezone.utc)
+    current_time = utc_now.astimezone(pytz.timezone(TIMEZONE))
     current_hour = current_time.hour
     today = current_time.strftime("%Y-%m-%d")
     
@@ -2064,7 +2058,12 @@ async def check_missed_scans():
                 # Incomplete journey - check duration
                 last_update = attendance.get('last_update')
                 if last_update:
+                    # parse stored ISO timestamp robustly, convert to local timezone
                     last_update_time = datetime.fromisoformat(last_update)
+                    if last_update_time.tzinfo is None:
+                        # assume UTC if no tz info
+                        last_update_time = last_update_time.replace(tzinfo=timezone.utc)
+                    last_update_time = last_update_time.astimezone(pytz.timezone(TIMEZONE))
                     yellow_duration = (current_time - last_update_time).total_seconds() / 60
                     
                     if yellow_duration > RED_STATUS_THRESHOLD:
@@ -2083,33 +2082,46 @@ async def check_missed_scans():
         logging.info(f"Scan check: {marked_red_count} students marked RED")
 
 
-async def start_backup_scheduler():
-    """Schedule regular backups for both main and attendance data"""
-    BACKUP_INTERVAL_HOURS = int(os.environ.get('SEED_INTERVAL_HOURS', '1'))
-    BACKUP_INTERVAL_SECONDS = BACKUP_INTERVAL_HOURS * 3600
-    
+async def start_main_backup_scheduler():
+    """Schedule regular main (seed) backups using SEED_INTERVAL_HOURS"""
+    interval_hours = int(os.environ.get('SEED_INTERVAL_HOURS', '1'))
+    interval_seconds = max(1, interval_hours) * 3600
+
     logging.info("=" * 60)
-    logging.info("💾 BACKUP SCHEDULER STARTED")
-    logging.info(f"Configuration: Interval={BACKUP_INTERVAL_HOURS}h")
+    logging.info("💾 MAIN BACKUP SCHEDULER STARTED")
+    logging.info(f"Configuration: SEED_INTERVAL_HOURS={interval_hours}h")
     logging.info("=" * 60)
     
     while True:
         try:
-            await asyncio.sleep(BACKUP_INTERVAL_SECONDS)
-            
-            # Run main backup
+            await asyncio.sleep(interval_seconds)
             logging.info("Running scheduled main backup...")
-            import subprocess
-            subprocess.run(["python", "backup_seed_data.py"], cwd="/app/backend")
-            
-            # Run attendance backup
-            logging.info("Running scheduled attendance backup...")
-            subprocess.run(["python", "backup_attendance_data.py"], cwd="/app/backend")
-            
-            logging.info("✅ Scheduled backups completed")
+            subprocess.run(["python", "backup_seed_data.py"], cwd=str(ROOT_DIR))
+            logging.info("✅ Main backup completed")
         except Exception as e:
-            logging.error(f"Backup scheduler error: {e}")
-            await asyncio.sleep(300)  # Retry in 5 minutes on error
+            logging.error(f"Main backup scheduler error: {e}")
+            await asyncio.sleep(300)
+
+
+async def start_attendance_backup_scheduler():
+    """Schedule regular attendance backups using ATTENDANCE_INTERVAL_HOURS"""
+    interval_hours = int(os.environ.get('ATTENDANCE_INTERVAL_HOURS', os.environ.get('SEED_INTERVAL_HOURS', '1')))
+    interval_seconds = max(1, int(interval_hours)) * 3600
+
+    logging.info("=" * 60)
+    logging.info("💾 ATTENDANCE BACKUP SCHEDULER STARTED")
+    logging.info(f"Configuration: ATTENDANCE_INTERVAL_HOURS={interval_hours}h")
+    logging.info("=" * 60)
+    
+    while True:
+        try:
+            await asyncio.sleep(interval_seconds)
+            logging.info("Running scheduled attendance backup...")
+            subprocess.run(["python", "backup_attendance_data.py"], cwd=str(ROOT_DIR))
+            logging.info("✅ Attendance backup completed")
+        except Exception as e:
+            logging.error(f"Attendance backup scheduler error: {e}")
+            await asyncio.sleep(300)
 
 
 @app.on_event("startup")
@@ -2136,15 +2148,124 @@ async def startup_db_seed():
         # Start attendance monitor as background task
         asyncio.create_task(start_attendance_monitor())
         print("🚨 Attendance monitor started in background")
-        
-        # Start backup scheduler as background task
-        asyncio.create_task(start_backup_scheduler())
-        print("💾 Backup scheduler started in background")
-        
+            
+        # Start backup schedulers as background tasks (main & attendance)
+        asyncio.create_task(start_main_backup_scheduler())
+        asyncio.create_task(start_attendance_backup_scheduler())
+        print("💾 Backup schedulers started in background (main & attendance)")
+         
     except Exception as e:
-        print(f"⚠️ Auto-seeding skipped due to error: {str(e)}")
-        print("   You can manually run seeding with: cd /app/backend && python seed_data.py")
-
+         print(f"⚠️ Auto-seeding skipped due to error: {str(e)}")
+         print("   You can manually run seeding with: cd /app/backend && python seed_data.py")
+ 
 @app.on_event("shutdown")
 async def shutdown_db_client():
-    client.close()
+     client.close()
+
+# add collection handle for bus locations
+bus_locations = db["bus_locations"]
+
+class BusLocationUpdate(BaseModel):
+    bus_number: str
+    lat: float
+    lon: float
+    timestamp: Optional[str] = None  # ISO8601 string, optional - will be normalized to UTC
+
+# ensure index on bus_number at startup
+@app.on_event("startup")
+async def ensure_bus_locations_index():
+    try:
+        await bus_locations.create_index("bus_number", unique=True)
+    except Exception:
+        # ignore if index exists or creation fails
+        pass
+
+def _normalize_timestamp_to_utc(ts: Optional[str]) -> str:
+    if not ts:
+        return datetime.now(timezone.utc).isoformat()
+    try:
+        dt = datetime.fromisoformat(ts)
+        if dt.tzinfo is None:
+            # assume UTC when no tzinfo
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt.astimezone(timezone.utc).isoformat()
+    except Exception:
+        return datetime.now(timezone.utc).isoformat()
+
+@api_router.post("/bus-locations/update", summary="Update last known location for a bus")
+async def api_update_bus_location(payload: BusLocationUpdate, device: dict = Depends(verify_device_key)):
+    """
+    Upsert the last known location for a bus. Keeps only the latest location per bus.
+    Device should call this to report its current position.
+    """
+    bus = payload.bus_number
+    lat = payload.lat
+    lon = payload.lon
+    ts = _normalize_timestamp_to_utc(payload.timestamp)
+    doc = {
+        "bus_number": bus,
+        "lat": float(lat),
+        "lon": float(lon),
+        "updated_at": ts
+    }
+    await bus_locations.update_one({"bus_number": bus}, {"$set": doc}, upsert=True)
+    return {"ok": True, "bus_number": bus, "updated_at": ts}
+
+@api_router.post("/admin/fetch_bus_locations", summary="Fetch last locations from device records and update bus_locations")
+async def fetch_bus_locations_from_devices(device: dict = Depends(verify_device_key)):
+    """
+    Scan devices collection for any last-known location fields and upsert the last location
+    into bus_locations collection. This keeps only one (the latest) document per bus_number.
+    Useful to import location values that devices previously wrote into their device record.
+    """
+    updated = 0
+    skipped = 0
+    devices_cursor = db.devices.find({})
+    async for dev in devices_cursor:
+        bus_num = dev.get("bus_number") or dev.get("bus")
+        if not bus_num:
+            skipped += 1
+            continue
+
+        # try common location shapes
+        loc = dev.get("last_location") or dev.get("last_known_location") or dev.get("location") or dev.get("last_update")
+        lat = lon = ts = None
+
+        if isinstance(loc, dict):
+            lat = loc.get("lat") or loc.get("latitude")
+            lon = loc.get("lon") or loc.get("longitude")
+            ts = loc.get("timestamp") or loc.get("updated_at") or loc.get("ts")
+        elif isinstance(loc, str):
+            # not structured - try parse if it's "lat,lon" or a json string
+            try:
+                if "," in loc:
+                    parts = [p.strip() for p in loc.split(",")]
+                    lat = float(parts[0]); lon = float(parts[1])
+                else:
+                    import json
+                    j = json.loads(loc)
+                    lat = j.get("lat") or j.get("latitude")
+                    lon = j.get("lon") or j.get("longitude")
+                    ts = j.get("timestamp") or j.get("updated_at")
+            except Exception:
+                # ignore parse errors
+                pass
+        else:
+            # no recognizable location in device record
+            pass
+
+        if lat is None or lon is None:
+            skipped += 1
+            continue
+
+        ts_norm = _normalize_timestamp_to_utc(ts)
+        doc = {
+            "bus_number": bus_num,
+            "lat": float(lat),
+            "lon": float(lon),
+            "updated_at": ts_norm
+        }
+        await bus_locations.update_one({"bus_number": bus_num}, {"$set": doc}, upsert=True)
+        updated += 1
+
+    return {"ok": True, "updated": updated, "skipped": skipped}

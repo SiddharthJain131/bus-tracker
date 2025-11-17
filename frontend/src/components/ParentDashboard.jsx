@@ -33,10 +33,10 @@ export default function ParentDashboard({ user, onLogout }) {
     if (selectedStudent) {
       fetchStudentDetails(selectedStudent.student_id);
       const interval = setInterval(() => {
-        fetchBusLocation(selectedStudent.bus_id);
+        fetchBusLocation(selectedStudent.bus_number);
       }, 10000);
 
-      fetchBusLocation(selectedStudent.bus_id);
+      fetchBusLocation(selectedStudent.bus_number);
       
       return () => clearInterval(interval);
     }
@@ -82,9 +82,9 @@ export default function ParentDashboard({ user, onLogout }) {
     }
   };
 
-  const fetchBusLocation = async (busId) => {
+  const fetchBusLocation = async (busNumber) => {
     try {
-      const response = await axios.get(`${API}/get_bus_location?bus_id=${busId}`);
+      const response = await axios.get(`${API}/get_bus_location?bus_number=${busNumber}`);
       setBusLocation(response.data);
     } catch (error) {
       console.error('Failed to load bus location:', error);

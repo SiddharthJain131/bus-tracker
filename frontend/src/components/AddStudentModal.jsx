@@ -30,7 +30,7 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
     class_section: '',  // Combined field
     class_name: '',
     section: '',
-    bus_id: '',
+    bus_number: '',
     stop_id: '',
     phone: '',
     emergency_contact: '',
@@ -57,13 +57,13 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
 
   // Fetch stops when bus is selected
   useEffect(() => {
-    if (studentData.bus_id) {
-      fetchStopsForBus(studentData.bus_id);
+    if (studentData.bus_number) {
+      fetchStopsForBus(studentData.bus_number);
     } else {
       setStops([]);
       setStudentData(prev => ({ ...prev, stop_id: '' }));
     }
-  }, [studentData.bus_id]);
+  }, [studentData.bus_number]);
 
   const fetchDropdownData = async () => {
     try {
@@ -106,7 +106,7 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
       class_section: '',
       class_name: '',
       section: '',
-      bus_id: '',
+      bus_number: '',
       stop_id: '',
       phone: '',
       emergency_contact: '',
@@ -160,7 +160,7 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
     // Validate Step 1
     if (step === 1) {
       if (!studentData.name || !studentData.roll_number || !studentData.class_name || 
-          !studentData.section || !studentData.bus_id || !studentData.stop_id) {
+          !studentData.section || !studentData.bus_number || !studentData.stop_id) {
         toast.error('Please fill in all required fields (Name, Roll Number, Class-Section, Bus, Stop)');
         return;
       }
@@ -214,7 +214,7 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
         roll_number: studentData.roll_number,
         class_name: studentData.class_name,
         section: studentData.section,
-        bus_id: studentData.bus_id,
+        bus_number: studentData.bus_number,
         stop_id: studentData.stop_id,
         phone: studentData.phone,
         emergency_contact: studentData.emergency_contact,
@@ -328,9 +328,9 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
               <div>
                 <Label>Bus *</Label>
                 <Select
-                  value={studentData.bus_id}
+                  value={studentData.bus_number}
                   onValueChange={(value) => {
-                    setStudentData({ ...studentData, bus_id: value, stop_id: '' });
+                    setStudentData({ ...studentData, bus_number: value, stop_id: '' });
                   }}
                 >
                   <SelectTrigger>
@@ -338,7 +338,7 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
                   </SelectTrigger>
                   <SelectContent>
                     {buses.map(bus => (
-                      <SelectItem key={bus.bus_id} value={bus.bus_id}>
+                      <SelectItem key={bus.bus_number} value={bus.bus_number}>
                         {bus.bus_number}
                       </SelectItem>
                     ))}
@@ -351,11 +351,11 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
                 <Select
                   value={studentData.stop_id}
                   onValueChange={(value) => setStudentData({ ...studentData, stop_id: value })}
-                  disabled={!studentData.bus_id || loadingStops}
+                  disabled={!studentData.bus_number || loadingStops}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder={
-                      !studentData.bus_id 
+                      !studentData.bus_number 
                         ? "Select bus first" 
                         : loadingStops 
                         ? "Loading stops..." 
@@ -376,7 +376,7 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
                     )}
                   </SelectContent>
                 </Select>
-                {studentData.bus_id && stops.length === 0 && !loadingStops && (
+                {studentData.bus_number && stops.length === 0 && !loadingStops && (
                   <p className="text-xs text-amber-600 mt-1">
                     ⚠️ Selected bus has no route stops configured
                   </p>
@@ -529,7 +529,7 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
               <ul className="text-sm text-blue-800 space-y-1">
                 <li>• Student: {studentData.name} (Roll #{studentData.roll_number})</li>
                 <li>• Class: {studentData.class_name}{studentData.section}</li>
-                <li>• Bus: {buses.find(b => b.bus_id === studentData.bus_id)?.bus_number || 'N/A'}</li>
+                <li>• Bus: {buses.find(b => b.bus_number === studentData.bus_number)?.bus_number || 'N/A'}</li>
                 <li>• Stop: {stops.find(s => s.stop_id === studentData.stop_id)?.stop_name || 'N/A'}</li>
                 <li>• Parent: {
                   parentMode === 'create' 

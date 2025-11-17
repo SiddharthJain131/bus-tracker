@@ -16,7 +16,7 @@ export default function EditStudentModal({ student, onClose, onSave }) {
     section: student.section || '',
     parent_id: student.parent_id || '',
     teacher_id: student.teacher_id || '',
-    bus_id: student.bus_id || '',
+    bus_number: student.bus_number || '',
     stop_id: student.stop_id || '',
     emergency_contact: student.emergency_contact || '',
     remarks: student.remarks || '',
@@ -158,13 +158,13 @@ export default function EditStudentModal({ student, onClose, onSave }) {
               <label className="text-sm font-medium text-gray-700 mb-1 block">Bus</label>
               <select
                 data-testid="edit-student-bus"
-                value={formData.bus_id}
-                onChange={(e) => setFormData({ ...formData, bus_id: e.target.value })}
+                value={formData.bus_number}
+                onChange={(e) => setFormData({ ...formData, bus_number: e.target.value })}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="">Select Bus</option>
                 {buses.map((bus) => (
-                  <option key={bus.bus_id} value={bus.bus_id}>
+                  <option key={bus.bus_number} value={bus.bus_number}>
                     {bus.bus_number} - {bus.driver_name}
                   </option>
                 ))}

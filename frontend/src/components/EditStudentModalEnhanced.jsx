@@ -20,7 +20,7 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
     section: '',
     parent_id: '',
     parent_search: '',  // For searchable parent input
-    bus_id: '',
+    bus_number: '',
     stop_id: '',
     emergency_contact: '',
     remarks: ''
@@ -47,27 +47,27 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
         section: student.section || '',
         parent_id: student.parent_id || '',
         parent_search: '',  // Will be set after fetching parent details
-        bus_id: student.bus_id || '',
+        bus_number: student.bus_number || '',
         stop_id: student.stop_id || '',
         emergency_contact: student.emergency_contact || '',
         remarks: student.remarks || ''
       });
       fetchDropdownData();
       // Fetch stops if bus is already selected
-      if (student.bus_id) {
-        fetchStopsForBus(student.bus_id);
+      if (student.bus_number) {
+        fetchStopsForBus(student.bus_number);
       }
     }
   }, [open, student]);
 
   // Fetch stops when bus changes
   useEffect(() => {
-    if (formData.bus_id && open) {
-      fetchStopsForBus(formData.bus_id);
+    if (formData.bus_number && open) {
+      fetchStopsForBus(formData.bus_number);
     } else {
       setStops([]);
     }
-  }, [formData.bus_id, open]);
+  }, [formData.bus_number, open]);
 
   const fetchDropdownData = async () => {
     try {
@@ -137,7 +137,7 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
   const handleChange = (field, value) => {
     setFormData(prev => {
       // If bus changes, reset stop selection
-      if (field === 'bus_id') {
+      if (field === 'bus_number') {
         return { ...prev, [field]: value, stop_id: '' };
       }
       
@@ -174,7 +174,7 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
   const handleSave = async () => {
     // Validation
     if (!formData.name || !formData.roll_number || !formData.class_name || 
-        !formData.section || !formData.bus_id || !formData.stop_id) {
+        !formData.section || !formData.bus_number || !formData.stop_id) {
       toast.error('Please fill in all required fields (including Stop)');
       return;
     }
@@ -299,13 +299,13 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
             <div>
               <Label>Bus *</Label>
               <select
-                value={formData.bus_id}
-                onChange={(e) => handleChange('bus_id', e.target.value)}
+                value={formData.bus_number}
+                onChange={(e) => handleChange('bus_number', e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="">Select Bus</option>
                 {buses.map(b => (
-                  <option key={b.bus_id} value={b.bus_id}>Bus {b.bus_number}</option>
+                  <option key={b.bus_number} value={b.bus_number}>Bus {b.bus_number}</option>
                 ))}
               </select>
             </div>
@@ -315,11 +315,11 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
               <select
                 value={formData.stop_id}
                 onChange={(e) => handleChange('stop_id', e.target.value)}
-                disabled={!formData.bus_id || loadingStops}
+                disabled={!formData.bus_number || loadingStops}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
               >
                 <option value="">
-                  {!formData.bus_id 
+                  {!formData.bus_number 
                     ? "Select bus first" 
                     : loadingStops 
                     ? "Loading stops..." 
@@ -329,7 +329,7 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
                   <option key={s.stop_id} value={s.stop_id}>{s.stop_name}</option>
                 ))}
               </select>
-              {formData.bus_id && stops.length === 0 && !loadingStops && (
+              {formData.bus_number && stops.length === 0 && !loadingStops && (
                 <p className="text-xs text-amber-600 mt-1">
                   ⚠️ Selected bus has no route stops configured
                 </p>

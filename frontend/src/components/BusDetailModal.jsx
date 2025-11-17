@@ -22,7 +22,7 @@ export default function BusDetailModal({ bus, open, onClose }) {
   const fetchBusDetails = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`${API}/buses/${bus.bus_id}`);
+      const response = await axios.get(`${API}/buses/${bus.bus_number}`);
       setBusDetails(response.data);
       
       if (response.data.route_id) {

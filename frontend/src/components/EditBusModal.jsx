@@ -61,13 +61,13 @@ export default function EditBusModal({ bus, open, onClose, onSuccess }) {
     setLoading(true);
     try {
       const payload = {
-        bus_id: bus.bus_id,
+        bus_number: bus.bus_number,
         ...formData,
         capacity: parseInt(formData.capacity),
         route_id: formData.route_id || null
       };
 
-      await axios.put(`${API}/buses/${bus.bus_id}`, payload);
+      await axios.put(`${API}/buses/${bus.bus_number}`, payload);
       toast.success(`Bus ${formData.bus_number} updated successfully!`);
       onSuccess();
       onClose();

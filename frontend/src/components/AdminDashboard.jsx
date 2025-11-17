@@ -20,7 +20,7 @@ export default function AdminDashboard({ user, onLogout }) {
   const [newStudent, setNewStudent] = useState({
     name: '',
     parent_id: '',
-    bus_id: '',
+    bus_number: '',
   });
   const [newHoliday, setNewHoliday] = useState({
     date: '',
@@ -65,7 +65,7 @@ export default function AdminDashboard({ user, onLogout }) {
       await axios.post(`${API}/admin/students`, newStudent);
       toast.success('Student added successfully');
       setShowAddStudent(false);
-      setNewStudent({ name: '', parent_id: '', bus_id: '' });
+      setNewStudent({ name: '', parent_id: '', bus_number: '' });
       fetchStudents();
     } catch (error) {
       toast.error('Failed to add student');
@@ -238,8 +238,8 @@ export default function AdminDashboard({ user, onLogout }) {
                     <Input
                       data-testid="new-student-bus-id"
                       placeholder="Bus ID"
-                      value={newStudent.bus_id}
-                      onChange={(e) => setNewStudent({ ...newStudent, bus_id: e.target.value })}
+                      value={newStudent.bus_number}
+                      onChange={(e) => setNewStudent({ ...newStudent, bus_number: e.target.value })}
                     />
                   </div>
                   <div className="flex gap-2 mt-4">
@@ -257,7 +257,7 @@ export default function AdminDashboard({ user, onLogout }) {
                   >
                     <div>
                       <p className="font-medium text-gray-900">{student.name}</p>
-                      <p className="text-sm text-gray-500">Bus: {student.bus_id} | Parent: {student.parent_id}</p>
+                      <p className="text-sm text-gray-500">Bus: {student.bus_number} | Parent: {student.parent_id}</p>
                     </div>
                     <Button
                       data-testid={`delete-student-${student.name.toLowerCase().replace(' ', '-')}`}
@@ -389,7 +389,7 @@ function DemoControls() {
 
   const simulateBusMovement = async () => {
     try {
-      await axios.post(`${API}/demo/simulate_bus_movement?bus_id=${busId}`);
+      await axios.post(`${API}/demo/simulate_bus_movement?bus_number=${busId}`);
       toast.success('Bus location updated');
     } catch (error) {
       toast.error('Failed to simulate bus movement');

@@ -21,7 +21,7 @@ BACKUP_DIR = ROOT_DIR / 'backups'
 PHOTO_DIR = ROOT_DIR / 'photos'
 
 
-async def generate_face_embedding(image_path):
+def generate_face_embedding(image_path):
     """Generate face embedding from image using DeepFace."""
     try:
         if not image_path.exists():
@@ -90,7 +90,7 @@ async def main():
     
     # Create backup of current seed file
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    backup_file = seed_file.parent / f"{seed_file.stem}_backup_{timestamp}.json"
+    backup_file = seed_file.parent / f"{seed_file.stem}.bak"
     shutil.copy2(seed_file, backup_file)
     print(f"💾 Backup created: {backup_file.name}")
     
@@ -136,7 +136,7 @@ async def main():
             photo_path = PHOTO_DIR / photo_url
         
         # Generate embedding
-        result = await generate_face_embedding(photo_path)
+        result = generate_face_embedding(photo_path)
         
         if result['success']:
             student['embedding'] = result['embedding']

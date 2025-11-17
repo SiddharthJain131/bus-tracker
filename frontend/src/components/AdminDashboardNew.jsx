@@ -328,7 +328,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
           successMessage = `User ${deleteItem.name} deleted successfully`;
           break;
         case 'bus':
-          endpoint = `${API}/buses/${deleteItem.bus_id}`;
+          endpoint = `${API}/buses/${deleteItem.bus_number}`;
           successMessage = `Bus ${deleteItem.bus_number} deleted successfully`;
           break;
         case 'route':
@@ -1014,7 +1014,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
                           </tr>
                         ) : (
                           filteredBuses.map(bus => (
-                            <tr key={bus.bus_id} className="hover:bg-gray-50">
+                            <tr key={bus.bus_number} className="hover:bg-gray-50">
                               <td className="px-4 py-4">
                                 <div className="font-medium text-gray-900">{bus.bus_number}</div>
                               </td>
