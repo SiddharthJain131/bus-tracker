@@ -99,7 +99,7 @@ function RoutesTable({ searchTerm, onViewRoute, onEditRoute, onDeleteRoute, onAd
               </tr>
             ) : (
               filteredRoutes.map(route => (
-                <tr key={route.route_id} className="hover:bg-gray-50">
+                <tr key={route.route_id} className="hover:bg-muted/30">
                   <td className="px-4 py-4">
                     <div className="font-medium text-gray-900">{route.route_name}</div>
                   </td>
@@ -764,7 +764,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
                       </tr>
                     ) : (
                       filteredStudents.map(student => (
-                        <tr key={student.student_id} className="hover:bg-gray-50">
+                        <tr key={student.student_id} className="hover:bg-muted/30">
                           <td className="px-4 py-4">
                             <div className="font-medium text-gray-900">{student.roll_number || 'N/A'}</div>
                           </td>
@@ -878,7 +878,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
                               const canDeleteAdmin = u.role !== 'admin' || (u.user_id !== user.user_id && isElevated);
                               
                               return (
-                                <tr key={u.user_id} className="hover:bg-gray-50">
+                                <tr key={u.user_id} className="hover:bg-muted/30">
                                   <td className="px-4 py-4">
                                     <div className="flex items-center gap-2">
                                       <span className="font-medium text-gray-900">{u.name}</span>
@@ -1016,7 +1016,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
                           </tr>
                         ) : (
                           filteredBuses.map(bus => (
-                            <tr key={bus.bus_number} className="hover:bg-gray-50">
+                            <tr key={bus.bus_number} className="hover:bg-muted/30">
                               <td className="px-4 py-4">
                                 <div className="font-medium text-gray-900">{bus.bus_number}</div>
                               </td>
