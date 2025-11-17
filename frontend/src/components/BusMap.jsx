@@ -16,6 +16,55 @@ export default function BusMap({ location, route, showRoute }) {
   const markerRef = useRef(null);
   const routeLayersRef = useRef([]);
 
+  const createBusIcon = (isStale = false) => {
+    return L.divIcon({
+      className: 'custom-bus-marker',
+      html: `
+        <div style="
+          width: 40px;
+          height: 40px;
+          background: linear-gradient(135deg, ${isStale ? '#9ca3af 0%, #6b7280 100%' : '#3b82f6 0%, #8b5cf6 100%'});
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+          border: 3px solid white;
+          position: relative;
+        ">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 6v6"/>
+            <path d="M15 6v6"/>
+            <path d="M2 12h19.6"/>
+            <path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3"/>
+            <circle cx="7" cy="18" r="2"/>
+            <circle cx="16" cy="18" r="2"/>
+          </svg>
+          ${isStale ? `
+            <div style="
+              position: absolute;
+              top: -8px;
+              right: -8px;
+              width: 20px;
+              height: 20px;
+              background: #ef4444;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border: 2px solid white;
+              box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            ">
+              <span style="color: white; font-size: 14px; font-weight: bold;">?</span>
+            </div>
+          ` : ''}
+        </div>
+      `,
+      iconSize: [40, 40],
+      iconAnchor: [20, 20],
+    });
+  };
+
   useEffect(() => {
     if (!mapInstanceRef.current && mapRef.current) {
       // Initialize map
@@ -27,35 +76,8 @@ export default function BusMap({ location, route, showRoute }) {
         maxZoom: 19,
       }).addTo(mapInstanceRef.current);
 
-      // Custom bus icon
-      const busIcon = L.divIcon({
-        className: 'custom-bus-marker',
-        html: `
-          <div style="
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-            border: 3px solid white;
-          ">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M8 6v6"/>
-              <path d="M15 6v6"/>
-              <path d="M2 12h19.6"/>
-              <path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3"/>
-              <circle cx="7" cy="18" r="2"/>
-              <circle cx="16" cy="18" r="2"/>
-            </svg>
-          </div>
-        `,
-        iconSize: [40, 40],
-        iconAnchor: [20, 20],
-      });
-
+      // Create initial bus marker with normal icon
+      const busIcon = createBusIcon(false);
       markerRef.current = L.marker([37.7749, -122.4194], { icon: busIcon }).addTo(mapInstanceRef.current);
       markerRef.current.bindPopup('<b>School Bus</b><br>Live Location');
     }
@@ -63,13 +85,37 @@ export default function BusMap({ location, route, showRoute }) {
 
   useEffect(() => {
     if (location && markerRef.current && mapInstanceRef.current) {
-      const newLatLng = [location.lat, location.lon];
-      markerRef.current.setLatLng(newLatLng);
+      // Check if location is stale or missing
+      const isStale = location.is_stale === true || location.is_missing === true;
+      const hasValidLocation = location.lat !== null && location.lon !== null && 
+                               typeof location.lat === 'number' && typeof location.lon === 'number';
       
-      // If route is not shown, center on bus location
-      if (!showRoute) {
-        mapInstanceRef.current.setView(newLatLng, 15, { animate: true });
+      // Update marker icon based on stale status
+      const busIcon = createBusIcon(isStale);
+      markerRef.current.setIcon(busIcon);
+      
+      // Update popup text
+      let popupText = '<b>School Bus</b><br>';
+      if (!hasValidLocation) {
+        popupText += 'GPS Unavailable';
+      } else if (isStale) {
+        popupText += 'Location Uncertain<br><span style="color: #ef4444; font-size: 11px;">Last updated: >60s ago</span>';
+      } else {
+        popupText += 'Live Location';
       }
+      markerRef.current.bindPopup(popupText);
+      
+      // Update marker position only if location is valid
+      if (hasValidLocation) {
+        const newLatLng = [location.lat, location.lon];
+        markerRef.current.setLatLng(newLatLng);
+        
+        // If route is not shown, center on bus location
+        if (!showRoute) {
+          mapInstanceRef.current.setView(newLatLng, 15, { animate: true });
+        }
+      }
+      // If location is invalid, keep marker at last known position or default
     }
   }, [location, showRoute]);
 

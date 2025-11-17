@@ -182,8 +182,8 @@ class Event(BaseModel):
 class BusLocation(BaseModel):
     model_config = ConfigDict(extra="ignore")
     bus_number: str
-    lat: float
-    lon: float
+    lat: Optional[float] = None  # Allow None for GPS unavailable
+    lon: Optional[float] = None  # Allow None for GPS unavailable
     timestamp: str
 
 class ScanEventRequest(BaseModel):
@@ -199,8 +199,8 @@ class ScanEventRequest(BaseModel):
 
 class UpdateLocationRequest(BaseModel):
     bus_number: str
-    lat: float
-    lon: float
+    lat: Optional[float] = None  # Allow None for GPS unavailable
+    lon: Optional[float] = None  # Allow None for GPS unavailable
     timestamp: Optional[str] = None  # Optional timestamp from device (will use server time if not provided)
 
 class Notification(BaseModel):
@@ -1073,12 +1073,40 @@ async def get_attendance(student_id: str, month: str, current_user: dict = Depen
 @api_router.get("/get_bus_location")
 async def get_bus_location(bus_number: str, device: dict = Depends(get_current_user)):
     """
-    Device-only endpoint for retrieving bus GPS location.
-    Requires X-API-Key header authentication.
+    Endpoint for retrieving bus GPS location.
+    Returns location with stale flag if not updated in last 60 seconds.
     """
     location = await db.bus_locations.find_one({"bus_number": bus_number}, {"_id": 0})
     if not location:
-        raise HTTPException(status_code=404, detail="Bus location not found")
+        # Return default structure with stale flag
+        return {
+            "bus_number": bus_number,
+            "lat": None,
+            "lon": None,
+            "timestamp": None,
+            "is_stale": True,
+            "is_missing": True
+        }
+    
+    # Check if location is stale (not updated in last 60 seconds)
+    is_stale = False
+    is_missing = location.get("lat") is None or location.get("lon") is None
+    
+    if location.get("timestamp"):
+        try:
+            last_update = datetime.fromisoformat(location["timestamp"].replace('Z', '+00:00'))
+            now = datetime.now(timezone.utc)
+            age_seconds = (now - last_update).total_seconds()
+            is_stale = age_seconds > 60
+        except Exception:
+            is_stale = True
+    else:
+        is_stale = True
+    
+    # Add flags to response
+    location["is_stale"] = is_stale
+    location["is_missing"] = is_missing
+    
     return location
 
 @api_router.get("/get_notifications")

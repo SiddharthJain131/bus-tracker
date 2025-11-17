@@ -17,6 +17,8 @@ import base64
 import requests
 import numpy as np
 import tempfile
+import threading
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Optional, Tuple
@@ -562,6 +564,90 @@ def send_bus_location(config: Dict, bus_number: Optional[str] = None, lat: Optio
         print(f"{Colors.RED}   [ERROR] Exception reporting bus location: {e}{Colors.RESET}")
         return False
 
+# ============================================================
+# CONTINUOUS LOCATION UPDATE LOOP
+# ============================================================
+
+def continuous_location_updater(config: Dict, stop_event: threading.Event):
+    """
+    Background thread that continuously updates bus location every 10 seconds.
+    Sends fallback null location if GPS unavailable.
+    """
+    print(f"{Colors.CYAN}[INFO] Starting continuous location updater...{Colors.RESET}")
+    
+    update_interval = 10  # seconds
+    consecutive_failures = 0
+    max_consecutive_failures = 5
+    
+    while not stop_event.is_set():
+        try:
+            # Get bus number from config
+            bus_number = config.get("bus_number") or config.get("bus")
+            
+            if not bus_number:
+                print(f"{Colors.YELLOW}[WARN] No bus number in config, skipping location update{Colors.RESET}")
+                time.sleep(update_interval)
+                continue
+            
+            # Try to get GPS location
+            lat, lon = None, None
+            
+            # First try: Check if GPS data is in config
+            if config.get("gps"):
+                lat = config["gps"].get("lat")
+                lon = config["gps"].get("lon")
+            
+            # Second try: Use backend module's GPS function if available
+            if (lat is None or lon is None) and hasattr(pi_backend, "get_gps"):
+                try:
+                    gps_data = pi_backend.get_gps()
+                    if gps_data:
+                        lat = gps_data.get("lat")
+                        lon = gps_data.get("lon")
+                except Exception as e:
+                    print(f"{Colors.YELLOW}[WARN] Failed to get GPS from backend: {e}{Colors.RESET}")
+            
+            # Prepare payload with fallback to null if GPS unavailable
+            timestamp = datetime.now(timezone.utc).isoformat()
+            payload = {
+                "bus_number": bus_number,
+                "lat": float(lat) if lat is not None else None,
+                "lon": float(lon) if lon is not None else None,
+                "timestamp": timestamp
+            }
+            
+            # Send location update
+            success, response = api_request(config, "/api/bus-locations/update", method="POST", data=payload)
+            
+            if success:
+                consecutive_failures = 0
+                if lat is not None and lon is not None:
+                    print(f"{Colors.GREEN}[OK] Location updated: {bus_number} @ ({lat:.6f}, {lon:.6f}){Colors.RESET}")
+                else:
+                    print(f"{Colors.YELLOW}[OK] Fallback location sent: {bus_number} (GPS unavailable){Colors.RESET}")
+            else:
+                consecutive_failures += 1
+                error_msg = response.get("error", "Unknown error")
+                print(f"{Colors.RED}[ERROR] Location update failed ({consecutive_failures}/{max_consecutive_failures}): {error_msg}{Colors.RESET}")
+                
+                # If too many consecutive failures, increase retry interval
+                if consecutive_failures >= max_consecutive_failures:
+                    print(f"{Colors.YELLOW}[WARN] Too many failures, increasing retry interval to 30s{Colors.RESET}")
+                    time.sleep(30)
+                    consecutive_failures = 0
+                    continue
+            
+        except Exception as e:
+            consecutive_failures += 1
+            print(f"{Colors.RED}[ERROR] Exception in location updater: {e}{Colors.RESET}")
+            import traceback
+            traceback.print_exc()
+        
+        # Wait before next update
+        time.sleep(update_interval)
+    
+    print(f"{Colors.CYAN}[INFO] Location updater stopped{Colors.RESET}")
+
 # ...existing code...
 
 def main():
@@ -612,6 +698,47 @@ def main():
         cached_count = sum(1 for s in rfid_mapping.values() if s.get('embedding'))
         print(f"{Colors.CYAN}  Cached embeddings: {cached_count}/{len(rfid_mapping)}{Colors.RESET}")
     
+    # Start continuous location updater in background thread
+    stop_event = threading.Event()
+    location_thread = threading.Thread(
+        target=continuous_location_updater,
+        args=(config, stop_event),
+        daemon=True,
+        name="LocationUpdater"
+    )
+    location_thread.start()
+    print(f"{Colors.GREEN}[OK] Location updater started{Colors.RESET}")
+    
+    # Send initial location immediately
+    try:
+        bus_number = config.get("bus_number") or config.get("bus")
+        if bus_number:
+            lat, lon = None, None
+            if config.get("gps"):
+                lat = config["gps"].get("lat")
+                lon = config["gps"].get("lon")
+            if (lat is None or lon is None) and hasattr(pi_backend, "get_gps"):
+                try:
+                    gps_data = pi_backend.get_gps()
+                    if gps_data:
+                        lat = gps_data.get("lat")
+                        lon = gps_data.get("lon")
+                except Exception:
+                    pass
+            
+            timestamp = datetime.now(timezone.utc).isoformat()
+            payload = {
+                "bus_number": bus_number,
+                "lat": float(lat) if lat is not None else None,
+                "lon": float(lon) if lon is not None else None,
+                "timestamp": timestamp
+            }
+            success, _ = api_request(config, "/api/bus-locations/update", method="POST", data=payload)
+            if success:
+                print(f"{Colors.GREEN}[OK] Initial location sent{Colors.RESET}")
+    except Exception as e:
+        print(f"{Colors.YELLOW}[WARN] Could not send initial location: {e}{Colors.RESET}")
+    
     # Main scanning loop
     print(f"\n{Colors.BOLD}{Colors.GREEN}Scanner ready!{Colors.RESET}\n")
     
@@ -656,6 +783,11 @@ def main():
     except KeyboardInterrupt:
         print(f"\n\n{Colors.YELLOW}Scanner interrupted.{Colors.RESET}")
     finally:
+        # Stop location updater thread
+        print(f"{Colors.CYAN}Stopping location updater...{Colors.RESET}")
+        stop_event.set()
+        location_thread.join(timeout=5)
+        
         pi_backend.cleanup()
         print(f"{Colors.CYAN}Exiting...{Colors.RESET}\n")
 
