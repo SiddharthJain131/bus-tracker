@@ -78,10 +78,10 @@ function RoutesTable({ searchTerm, onViewRoute, onEditRoute, onDeleteRoute, onAd
         <table className="w-full">
           <thead className="bg-muted/50 border-b-2 border-border">
             <tr>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Route Name</th>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Stops</th>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Remarks</th>
-              <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">Actions</th>
+              <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Route Name</th>
+              <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Stops</th>
+              <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Remarks</th>
+              <th className="px-4 py-3 text-center text-xs font-bold text-navy uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -745,14 +745,14 @@ export default function AdminDashboardNew({ user, onLogout }) {
                 <table className="w-full">
                   <thead className="bg-muted/50 border-b-2 border-border">
                     <tr>
-                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Roll No</th>
-                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Name</th>
-                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Phone</th>
-                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Parent</th>
-                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Class</th>
-                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Section</th>
-                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Bus</th>
-                      <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">Actions</th>
+                      <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Roll No</th>
+                      <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Name</th>
+                      <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Phone</th>
+                      <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Parent</th>
+                      <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Class</th>
+                      <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Section</th>
+                      <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Bus</th>
+                      <th className="px-4 py-3 text-center text-xs font-bold text-navy uppercase tracking-wider">Actions</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
@@ -857,11 +857,11 @@ export default function AdminDashboardNew({ user, onLogout }) {
                       <table className="w-full">
                         <thead className="bg-muted/50 border-b-2 border-border">
                           <tr>
-                            <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Name</th>
-                            <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Role</th>
-                            <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Email</th>
-                            <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Phone</th>
-                            <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">Actions</th>
+                            <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Name</th>
+                            <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Role</th>
+                            <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Email</th>
+                            <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Phone</th>
+                            <th className="px-4 py-3 text-center text-xs font-bold text-navy uppercase tracking-wider">Actions</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200">
@@ -999,12 +999,12 @@ export default function AdminDashboardNew({ user, onLogout }) {
                     <table className="w-full">
                       <thead className="bg-muted/50 border-b-2 border-border">
                         <tr>
-                          <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Bus No</th>
-                          <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Driver</th>
-                          <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Phone</th>
-                          <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Route</th>
-                          <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Capacity</th>
-                          <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">Actions</th>
+                          <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Bus No</th>
+                          <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Driver</th>
+                          <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Phone</th>
+                          <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Route</th>
+                          <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Capacity</th>
+                          <th className="px-4 py-3 text-center text-xs font-bold text-navy uppercase tracking-wider">Actions</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-200">
