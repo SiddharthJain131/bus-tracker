@@ -451,6 +451,363 @@ Fetch student details:
 
 ---
 
+## 📍 GPS Fallback & Location Handling
+
+### Overview
+
+The Bus Tracker system supports graceful GPS fallback when location data is unavailable. The system continues to operate normally with null coordinates, ensuring uninterrupted attendance recording.
+
+### GPS Data Flow
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    GPS Data Priority System                     │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+              ┌───────────────────────────────┐
+              │  1. Try: Android ADB GPS      │
+              │     (get_gps_location_adb())  │
+              └───────────────┬───────────────┘
+                              │
+                    ┌─────────┴─────────┐
+                    │   GPS Available?  │
+                    └─────────┬─────────┘
+                              │
+                    ┌─────────┴─────────┐
+                    │                   │
+                  YES                  NO
+                    │                   │
+                    ▼                   ▼
+        ┌──────────────────┐  ┌────────────────────┐
+        │ Return {lat, lon}│  │ Return {null, null}│
+        └──────────────────┘  └────────────────────┘
+                    │                   │
+                    └─────────┬─────────┘
+                              ▼
+                  ┌─────────────────────┐
+                  │  Send to Backend    │
+                  │ (lat/lon or null)   │
+                  └──────────┬──────────┘
+                              │
+                              ▼
+              ┌───────────────────────────────┐
+              │   Backend Accepts Both        │
+              │   - Valid coordinates: Store  │
+              │   - Null coordinates: Store   │
+              │   - Marks as is_missing=true  │
+              └───────────────┬───────────────┘
+                              │
+                              ▼
+              ┌───────────────────────────────┐
+              │     Frontend Display          │
+              │  - Valid: Show on map         │
+              │  - Null: Show 🔴❓ indicator  │
+              │  - Keep at last known position│
+              └───────────────────────────────┘
+```
+
+### Raspberry Pi Implementation
+
+**Hardware Module: `/app/tests/pi_hardware_mod.py`**
+
+The module provides two GPS functions:
+
+#### 1. `get_gps_location_adb()` - ADB GPS Retrieval
+
+```python
+def get_gps_location_adb() -> Tuple[Optional[float], Optional[float]]:
+    """Get GPS location from Android device via ADB"""
+    # Returns: (latitude, longitude) or (None, None) if unavailable
+```
+
+**Behavior:**
+- Executes `adb shell dumpsys location` command
+- Parses GPS coordinates from Android location services
+- Returns `(None, None)` if:
+  - ADB device disconnected
+  - GPS disabled on Android
+  - Location permissions not granted
+  - No recent GPS fix available
+- Logs warnings for GPS failures without crashing
+
+#### 2. `get_gps()` - Standardized GPS Interface
+
+```python
+def get_gps() -> Optional[Dict[str, Optional[float]]]:
+    """
+    Get GPS location in standardized dictionary format.
+    Called by pi_server.py for location updates.
+    
+    Returns:
+        {"lat": 37.7749, "lon": -122.4194}  # When available
+        {"lat": None, "lon": None}          # When unavailable
+    """
+```
+
+**Behavior:**
+- Wraps `get_gps_location_adb()` in dictionary format
+- Provides consistent interface for pi_server.py
+- Handles exceptions gracefully
+- Never crashes on GPS failure
+
+### Backend GPS Handling
+
+**Models Support Null Coordinates:**
+
+```python
+class UpdateLocationRequest(BaseModel):
+    bus_number: str
+    lat: Optional[float] = None  # ✅ Accepts null
+    lon: Optional[float] = None  # ✅ Accepts null
+    timestamp: Optional[str] = None
+
+class BusLocation(BaseModel):
+    bus_number: str
+    lat: Optional[float] = None  # ✅ Stores null
+    lon: Optional[float] = None  # ✅ Stores null
+    timestamp: str
+```
+
+**Endpoint Behavior:**
+
+```python
+# POST /api/update_location
+{
+  "bus_number": "BUS-001",
+  "lat": null,               # ✅ Accepted
+  "lon": null,               # ✅ Accepted
+  "timestamp": "2025-11-17T14:00:00Z"
+}
+
+# Response includes:
+{
+  "is_missing": true,        # Indicates GPS unavailable
+  "is_stale": false,         # Updated recently
+  "last_update": "2025-11-17T14:00:00Z"
+}
+```
+
+### Frontend Map Handling
+
+**Component: `/app/frontend/src/components/BusMap.jsx`**
+
+**Null-Safe Coordinate Validation:**
+
+```javascript
+// Line 182-185: Route bounds extension
+if (location && location.lat !== null && location.lon !== null && 
+    typeof location.lat === 'number' && typeof location.lon === 'number') {
+  bounds.extend([location.lat, location.lon]);
+}
+
+// Line 190-196: Map centering
+const hasValidLocation = location.lat !== null && location.lon !== null && 
+                         typeof location.lat === 'number' && typeof location.lon === 'number';
+
+if (hasValidLocation) {
+  mapInstanceRef.current.setView([location.lat, location.lon], 15, { animate: true });
+}
+// If invalid, keeps map at current view - no errors
+```
+
+**Visual Indicators:**
+
+1. **GPS Unavailable Marker:**
+   - Gray bus icon (reduced opacity)
+   - Red badge with question mark (🔴❓)
+   - Popup shows "GPS Unavailable"
+   - Marker stays at last known position
+
+2. **Stale Location Indicator:**
+   - Appears when location not updated >60 seconds
+   - Shows timestamp of last update
+   - Different from GPS unavailable
+
+3. **Normal Location:**
+   - Blue/purple gradient bus icon
+   - "Live Location" popup
+   - Real-time position updates
+
+### Transition Scenarios
+
+**Scenario A: GPS Becomes Unavailable**
+
+```
+State: Valid GPS (37.7749, -122.4194)
+Action: GPS signal lost
+Result: Next update → {lat: null, lon: null}
+
+Frontend Behavior:
+  - Bus marker stays at last known position (37.7749, -122.4194)
+  - Icon changes to gray with red ❓ badge
+  - Popup updates to "GPS Unavailable"
+  - Map doesn't attempt to pan/zoom to invalid coordinates
+  - No JavaScript errors or crashes
+  - Route display continues working normally
+```
+
+**Scenario B: GPS Becomes Available**
+
+```
+State: Null GPS {lat: null, lon: null}
+Action: GPS signal acquired
+Result: Next update → {lat: 37.7850, lon: -122.4250}
+
+Frontend Behavior:
+  - Bus marker animates to new position
+  - Icon changes back to blue/purple gradient
+  - Popup updates to "Live Location"
+  - Map smoothly centers on new coordinates
+  - Route bounds recalculated if route visible
+```
+
+**Scenario C: Intermittent GPS**
+
+```
+Updates: 
+  Valid → Null → Null → Valid → Null → Valid
+
+Frontend Behavior:
+  - Handles transitions smoothly
+  - No flickering or visual glitches
+  - Maintains last good position during null periods
+  - Updates normally when GPS returns
+```
+
+### Testing GPS Fallback
+
+#### 1. Simulate GPS Unavailable
+
+**On Raspberry Pi:**
+
+```bash
+# Disconnect ADB device
+adb disconnect
+
+# Or disable GPS on Android
+# Settings → Location → Off
+
+# Run pi_server.py and verify it continues working
+python3 /app/tests/pi_server.py
+```
+
+**Expected Output:**
+
+```
+[WARN] GPS location failed: error: device offline
+-> Sending location update: BUS-001 (None, None)
+[OK] Location updated successfully
+```
+
+#### 2. Backend Testing
+
+```bash
+# Send null coordinates
+curl -X POST http://localhost:8001/api/update_location \
+  -H "X-API-Key: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "bus_number": "BUS-001",
+    "lat": null,
+    "lon": null,
+    "timestamp": "2025-11-17T14:00:00Z"
+  }'
+
+# Response should be 200 OK with is_missing=true
+```
+
+#### 3. Frontend Testing
+
+```bash
+# Verify map renders without errors
+# Open Parent Dashboard → Live Map
+# Check browser console for errors (should be none)
+# Verify question mark indicator appears
+# Verify "GPS Unavailable" popup shows
+```
+
+### GPS Troubleshooting
+
+**Issue: GPS always returns null**
+
+**Causes & Solutions:**
+
+1. **ADB Device Disconnected**
+   ```bash
+   adb devices  # Check connection
+   adb connect <ANDROID_IP>:5555  # Reconnect
+   ```
+
+2. **GPS Disabled on Android**
+   - Enable Location: Settings → Location → On
+   - Grant location permissions to system
+
+3. **No GPS Fix**
+   - Move to open area with sky view
+   - Wait 1-2 minutes for GPS satellites
+   - Check: `adb shell dumpsys location`
+
+4. **Location Services Not Running**
+   ```bash
+   # Restart location services on Android
+   adb shell settings put secure location_providers_allowed +gps
+   ```
+
+**Issue: GPS works but coordinates are inaccurate**
+
+**Solutions:**
+
+1. **Improve GPS Accuracy:**
+   - Enable High Accuracy mode on Android
+   - Use GPS + Network location
+   - Ensure good antenna/sky view
+
+2. **Add Validation:**
+   ```python
+   def validate_gps(lat, lon):
+       # Basic sanity checks
+       if lat is None or lon is None:
+           return False
+       if not (-90 <= lat <= 90):
+           return False
+       if not (-180 <= lon <= 180):
+           return False
+       # Add geofencing if needed
+       if not is_within_city_bounds(lat, lon):
+           return False
+       return True
+   ```
+
+### Best Practices
+
+1. **Always Support Null Coordinates:**
+   - Never assume GPS is available
+   - Design all features to work without GPS
+   - Use GPS as enhancement, not requirement
+
+2. **Log GPS Status:**
+   - Track GPS availability percentage
+   - Monitor GPS quality metrics
+   - Alert when GPS unavailable >15 minutes
+
+3. **Fallback Strategies:**
+   - Use last known position for approximate location
+   - Consider cell tower triangulation
+   - Manual location entry as last resort
+
+4. **User Communication:**
+   - Clear indicators when GPS unavailable
+   - Explain why GPS needed
+   - Provide troubleshooting steps
+
+5. **Testing:**
+   - Test with GPS disabled
+   - Test transition scenarios
+   - Verify no crashes on null coordinates
+
+---
+
 ## 🛠️ Best Practices
 
 ### Device-Side Implementation
