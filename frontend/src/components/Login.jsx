@@ -34,21 +34,21 @@ export default function Login({ onLogin }) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
-      <Card className="w-full max-w-md p-8 bg-white/95 backdrop-blur-sm shadow-2xl">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-navy via-primary to-charcoal">
+      <Card className="w-full max-w-md p-8 bg-white/95 backdrop-blur-xl shadow-modern-xl border-0">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mb-4">
-            <Bus className="w-8 h-8 text-white" />
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-accent-blue to-soft-cyan rounded-2xl mb-4 shadow-modern-lg">
+            <Bus className="w-10 h-10 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'Space Grotesk' }}>School Bus Tracker</h1>
-          <p className="text-gray-600">RFID + Face Recognition System</p>
+          <h1 className="text-4xl font-bold text-navy mb-2">School Bus Tracker</h1>
+          <p className="text-muted-foreground text-base">RFID + Face Recognition System</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6" data-testid="login-form">
+        <form onSubmit={handleSubmit} className="space-y-5" data-testid="login-form">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700">Email</label>
+            <label className="text-sm font-semibold text-navy">Email</label>
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
               <Input
                 data-testid="email-input"
                 type="email"
@@ -56,15 +56,15 @@ export default function Login({ onLogin }) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="pl-10"
+                className="pl-12 h-12"
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700">Password</label>
+            <label className="text-sm font-semibold text-navy">Password</label>
             <div className="relative">
-              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
               <Input
                 data-testid="password-input"
                 type="password"
@@ -72,7 +72,7 @@ export default function Login({ onLogin }) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="pl-10"
+                className="pl-12 h-12"
               />
             </div>
           </div>
@@ -81,7 +81,8 @@ export default function Login({ onLogin }) {
             data-testid="login-button"
             type="submit"
             disabled={loading}
-            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 rounded-lg font-medium"
+            variant="accent"
+            className="w-full h-12 text-base font-semibold"
           >
             {loading ? (
               <div className="flex items-center justify-center gap-2">
@@ -94,9 +95,9 @@ export default function Login({ onLogin }) {
           </Button>
         </form>
 
-        <div className="mt-8 p-4 bg-blue-50 rounded-lg">
-          <p className="text-sm font-semibold text-gray-900 mb-2">Demo Credentials:</p>
-          <div className="text-xs text-gray-700 space-y-1">
+        <div className="mt-8 p-5 bg-muted rounded-xl border">
+          <p className="text-sm font-semibold text-navy mb-3">Demo Credentials:</p>
+          <div className="text-sm text-foreground space-y-2">
             <p><strong>Parent:</strong> parent@school.com / password</p>
             <p><strong>Teacher:</strong> teacher@school.com / password</p>
             <p><strong>Admin:</strong> admin@school.com / password</p>
