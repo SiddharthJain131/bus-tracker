@@ -94,6 +94,11 @@ sudo supervisorctl restart all
 
 ### For IoT Integration
 - **[Raspberry Pi Integration](./docs/RASPBERRY_PI_INTEGRATION.md)** - Attendance upload via RFID + Camera + SIM800
+  - Complete GPS fallback documentation included
+  - Null coordinate handling across full stack
+  - Frontend/backend integration details
+- **[Pi Hardware Setup](./tests/README_PI_HARDWARE.md)** - Hardware wiring and GPIO configuration
+- **[Auto-Start Configuration](./tests/README_AUTOSTART.md)** - Systemd service setup for auto-run on boot
 
 ### Operations
 - **[Dependency Management](./docs/DEPENDENCY_MANAGEMENT.md)** - Safe deletion rules and constraints
