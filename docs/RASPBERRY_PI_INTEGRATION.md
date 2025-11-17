@@ -71,10 +71,13 @@ When uploading attendance data, the request must contain the following informati
 - `order_index` (Integer) - Stop sequence number in route
 
 **GPS Coordinates:**
-- `lat` (Float) - Latitude of scan location
-- `lon` (Float) - Longitude of scan location
+- `lat` (Float or null) - Latitude of scan location
+- `lon` (Float or null) - Longitude of scan location
+- **Note**: Both fields support `null` values when GPS is unavailable
+- **Fallback behavior**: System continues operating normally with null coordinates
+- **Frontend handling**: Map shows "GPS Unavailable" indicator with question mark (🔴❓)
 
-**Purpose:** Tracks student location and verifies they boarded at correct stop.
+**Purpose:** Tracks student location and verifies they boarded at correct stop. GPS unavailability does not prevent scan recording.
 
 #### Scan Metadata
 
