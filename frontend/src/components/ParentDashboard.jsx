@@ -217,10 +217,10 @@ export default function ParentDashboard({ user, onLogout }) {
                       <button
                         onClick={toggleRoute}
                         data-testid="toggle-route-button"
-                        className={`absolute top-4 right-4 z-[1000] flex items-center gap-2 px-4 py-2 rounded-lg shadow-lg transition-all ${
+                        className={`absolute top-4 right-4 z-[1000] flex items-center gap-2 px-4 py-2 rounded-xl shadow-modern-lg transition-all font-medium ${
                           showRoute
-                            ? 'bg-blue-600 text-white hover:bg-blue-700'
-                            : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300'
+                            ? 'bg-accent-blue text-white hover:bg-accent-blue/90'
+                            : 'bg-white text-navy hover:bg-muted border-2 border-border'
                         }`}
                       >
                         {showRoute ? (
