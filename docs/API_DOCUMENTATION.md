@@ -391,17 +391,40 @@ Get complete bus information.
 Get current GPS location of bus. Requires X-API-Key header.
 
 **Query Parameters:**
-- `bus_id` (required)
+- `bus_number` (required) - Bus number (e.g., "BUS-001")
 
-**Response (200 OK):**
+**Response (200 OK - GPS Available):**
 ```json
 {
-  "bus_id": "uuid",
+  "bus_number": "BUS-001",
   "lat": 37.7749,
   "lon": -122.4194,
-  "timestamp": "2025-01-15T08:30:00.000Z"
+  "timestamp": "2025-11-17T14:00:00Z",
+  "is_missing": false,
+  "is_stale": false
 }
 ```
+
+**Response (200 OK - GPS Unavailable):**
+```json
+{
+  "bus_number": "BUS-001",
+  "lat": null,
+  "lon": null,
+  "timestamp": "2025-11-17T14:00:00Z",
+  "is_missing": true,
+  "is_stale": false
+}
+```
+
+**Response Flags:**
+- `is_missing`: true if GPS coordinates are null
+- `is_stale`: true if location not updated in last 60 seconds
+
+**Frontend Behavior:**
+- When `is_missing: true`, displays 🔴❓ indicator
+- When `is_stale: true`, shows timestamp warning
+- Map keeps bus at last known position when coordinates null
 
 ---
 
