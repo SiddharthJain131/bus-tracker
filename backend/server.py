@@ -978,8 +978,8 @@ async def update_location(request: UpdateLocationRequest, device: dict = Depends
     Device-only endpoint for updating bus GPS location.
     Requires X-API-Key header authentication.
     """
-    # store location update timestamp in UTC
-    timestamp = datetime.now(timezone.utc).isoformat()
+    # Use provided timestamp or generate server timestamp in UTC
+    timestamp = request.timestamp if request.timestamp else datetime.now(timezone.utc).isoformat()
     
     # Verify that the device is authorized for this bus
     if device['bus_number'] != request.bus_number:
