@@ -50,34 +50,49 @@ BINARY_PINS = [BIN0, BIN1, BIN2]
 
 
 def initialize() -> bool:
-    """Initialize hardware components"""
+    """
+    Initialize hardware components with graceful degradation.
+    Returns True if critical components initialized successfully.
+    Non-critical failures (like GPIO LEDs) will warn but not fail.
+    """
     print(f"{Colors.CYAN}-> Initializing HARDWARE mode{Colors.RESET}")
     
-    # Initialize GPIO for LEDs
+    critical_failures = []
+    
+    # Initialize GPIO for LEDs (non-critical - for visual feedback only)
     if not init_gpio():
-        return False
+        print(f"{Colors.YELLOW}[WARN] Continuing without GPIO LED controls{Colors.RESET}")
     
-    # Initialize RFID reader
+    # Initialize RFID reader (CRITICAL)
     if not init_rfid_reader():
-        return False
+        critical_failures.append("RFID reader")
     
-    # Initialize camera (ADB or DroidCam)
+    # Initialize camera (CRITICAL)
     if not init_camera():
-        return False
+        critical_failures.append("Camera")
     
-    # Initialize face detector
+    # Initialize face detector (CRITICAL)
     if not init_face_detector():
-        return False
+        critical_failures.append("Face detector")
     
-    # Check DeepFace
+    # Check DeepFace (CRITICAL)
     try:
         import deepface
         print(f"{Colors.GREEN}[OK] DeepFace available{Colors.RESET}")
     except ImportError:
-        print(f"{Colors.YELLOW}[WARN] DeepFace not installed{Colors.RESET}")
+        print(f"{Colors.YELLOW}[WARN] DeepFace not installed, attempting installation...{Colors.RESET}")
         if not install_deepface():
-            return False
+            critical_failures.append("DeepFace")
     
+    # Report initialization status
+    if critical_failures:
+        print(f"\n{Colors.RED}[ERROR] Critical component failures:{Colors.RESET}")
+        for component in critical_failures:
+            print(f"  ❌ {component}")
+        print(f"{Colors.RED}Cannot proceed without these components.{Colors.RESET}")
+        return False
+    
+    print(f"\n{Colors.GREEN}[OK] All critical hardware components initialized{Colors.RESET}")
     return True
 
 
