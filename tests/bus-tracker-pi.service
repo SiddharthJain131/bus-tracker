@@ -1,0 +1,79 @@
+# Systemd Service for Bus Tracker Raspberry Pi Scanner
+# ====================================================
+# This service automatically starts the Pi boarding scanner on boot
+# and manages its lifecycle (restart on failure, logging, etc.)
+#
+# Installation:
+#   sudo cp bus-tracker-pi.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable bus-tracker-pi.service
+#   sudo systemctl start bus-tracker-pi.service
+#
+# Management:
+#   sudo systemctl status bus-tracker-pi     # Check status
+#   sudo systemctl restart bus-tracker-pi    # Restart service
+#   sudo systemctl stop bus-tracker-pi       # Stop service
+#   journalctl -u bus-tracker-pi -f          # View live logs
+
+[Unit]
+Description=Bus Tracker Raspberry Pi Boarding Scanner
+Documentation=file:///app/tests/README_PI_HARDWARE.md
+After=network-online.target time-sync.target
+Wants=network-online.target
+
+# Ensure network is actually available (not just interface up)
+Requires=network-online.target
+
+# Wait for hardware interfaces
+After=systemd-modules-load.service
+After=local-fs.target
+
+# Human-readable description
+Documentation=https://github.com/SiddharthJain131/bus-tracker
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+WorkingDirectory=/app/tests
+
+# Environment configuration
+EnvironmentFile=/app/tests/.env
+Environment="PYTHONUNBUFFERED=1"
+Environment="PI_MODE=hardware"
+
+# Main command - run pi_server.py with Python 3
+ExecStart=/usr/bin/python3 /app/tests/pi_server.py
+
+# Restart policy
+Restart=always
+RestartSec=10
+
+# Restart on any exit code except clean exit (0)
+# This includes crashes, exceptions, etc.
+StartLimitInterval=300
+StartLimitBurst=5
+
+# After 5 restarts in 300 seconds, wait 60s before trying again
+StartLimitAction=reboot
+
+# Resource limits (prevent runaway processes)
+MemoryLimit=512M
+CPUQuota=80%
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=bus-tracker-pi
+
+# Security hardening (optional, adjust based on hardware needs)
+# NoNewPrivileges=true
+# PrivateTmp=yes
+
+# Kill settings
+KillMode=mixed
+KillSignal=SIGTERM
+TimeoutStopSec=30
+
+[Install]
+WantedBy=multi-user.target
