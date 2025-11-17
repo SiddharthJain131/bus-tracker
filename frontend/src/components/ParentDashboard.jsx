@@ -240,11 +240,13 @@ export default function ParentDashboard({ user, onLogout }) {
                 </Card>
 
                 {/* Attendance Grid */}
-                <Card className="p-6 card-hover">
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
-                    <div className="flex items-center gap-2">
-                      <Calendar className="w-5 h-5 text-blue-600" />
-                      <h2 className="text-xl font-semibold" style={{ fontFamily: 'Space Grotesk' }}>Attendance</h2>
+                <Card className="p-6 hover:shadow-modern-lg transition-shadow">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-5">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-accent-blue/10 rounded-lg">
+                        <Calendar className="w-5 h-5 text-accent-blue" />
+                      </div>
+                      <h2 className="text-2xl font-semibold text-navy">Attendance</h2>
                     </div>
                     {/* Inline Status Legend */}
                     <div className="flex flex-wrap items-center gap-3 text-xs">
