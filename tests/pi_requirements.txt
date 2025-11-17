@@ -1,0 +1,54 @@
+# Raspberry Pi Hardware Module Requirements
+# ==========================================
+# Install on Raspberry Pi with: pip install -r pi_requirements.txt
+
+# Core Pi Libraries
+RPi.GPIO>=0.7.1          # GPIO control for LEDs and hardware interfaces
+mfrc522>=0.0.7           # RFID reader (MFRC522) support
+
+# Computer Vision & Face Recognition
+opencv-python>=4.8.0     # Image processing and computer vision
+numpy>=1.24.0            # Numerical operations for arrays/matrices
+deepface>=0.0.79         # Face recognition and embedding generation
+tf-keras>=2.15.0         # Keras for DeepFace
+tensorflow>=2.15.0       # TensorFlow backend for face recognition
+ultralight>=0.1.0        # Fast face detection
+
+# Network & Communication
+requests>=2.31.0         # HTTP requests to backend API
+python-dotenv>=1.0.0     # Environment variable management
+
+# Optional: ADB for Android camera integration
+# Note: ADB (Android Debug Bridge) must be installed separately
+# Install with: sudo apt-get install android-tools-adb
+
+# Optional: GPS Module Support (if using hardware GPS instead of ADB)
+# gpsd-py3>=0.3.0        # GPS daemon interface
+# gps3>=0.38.0           # Alternative GPS library
+
+# System Requirements:
+# -------------------
+# 1. Raspberry Pi OS (Raspbian Buster or later)
+# 2. Python 3.9+
+# 3. Enable SPI interface: sudo raspi-config -> Interface Options -> SPI -> Enable
+# 4. Enable I2C interface: sudo raspi-config -> Interface Options -> I2C -> Enable
+# 5. ADB tools: sudo apt-get install android-tools-adb
+# 6. Camera permissions: Add user to video group: sudo usermod -a -G video $USER
+
+# Hardware Connections:
+# --------------------
+# RFID MFRC522:
+#   - SDA  -> GPIO 8 (CE0)
+#   - SCK  -> GPIO 11 (SCKL)
+#   - MOSI -> GPIO 10 (MOSI)
+#   - MISO -> GPIO 9 (MISO)
+#   - GND  -> GND
+#   - RST  -> GPIO 25
+#   - 3.3V -> 3.3V
+#
+# LEDs:
+#   - Scan LED -> GPIO 22
+#   - Binary Display (3-bit):
+#     - BIN0 -> GPIO 23
+#     - BIN1 -> GPIO 24
+#     - BIN2 -> GPIO 25
