@@ -197,10 +197,12 @@ export default function ParentDashboard({ user, onLogout }) {
               {/* Left column - Map and Attendance */}
               <div className="lg:col-span-2 space-y-6">
                 {/* Live Bus Map */}
-                <Card className="p-6 card-hover">
-                  <div className="flex items-center gap-2 mb-4">
-                    <MapPin className="w-5 h-5 text-blue-600" />
-                    <h2 className="text-xl font-semibold" style={{ fontFamily: 'Space Grotesk' }}>Live Bus Location</h2>
+                <Card className="p-6 hover:shadow-modern-lg transition-shadow">
+                  <div className="flex items-center gap-3 mb-5">
+                    <div className="p-2 bg-accent-blue/10 rounded-lg">
+                      <MapPin className="w-5 h-5 text-accent-blue" />
+                    </div>
+                    <h2 className="text-2xl font-semibold text-navy">Live Bus Location</h2>
                     {busLocation && (
                       <span className="ml-auto text-xs text-gray-500">
                         Updated: {new Date(busLocation.timestamp).toLocaleTimeString()}
