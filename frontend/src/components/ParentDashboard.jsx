@@ -179,7 +179,7 @@ export default function ParentDashboard({ user, onLogout }) {
                 <div
                   key={student.student_id}
                   onClick={() => setSelectedStudent(student)}
-                  className={`cursor-pointer ${selectedStudent?.student_id === student.student_id ? 'ring-2 ring-blue-500 rounded-lg' : ''}`}
+                  className={`cursor-pointer transition-all ${selectedStudent?.student_id === student.student_id ? 'ring-2 ring-accent-blue rounded-xl' : ''}`}
                 >
                   <StudentCard student={student} compact={true} />
                 </div>
