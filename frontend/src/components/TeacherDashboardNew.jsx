@@ -431,10 +431,10 @@ export default function TeacherDashboardNew({ user, onLogout }) {
             </div>
 
             {/* Students List */}
-            <Card className="p-6">
+            <Card className="p-6 hover:shadow-modern-lg transition-shadow">
               <div className="mb-6">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
-                  <h2 className="text-xl font-semibold" style={{ fontFamily: 'Space Grotesk' }}>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5">
+                  <h2 className="text-2xl font-semibold text-navy">
                     My Students
                   </h2>
                   {/* Inline Status Legend */}
