@@ -139,18 +139,18 @@ export default function ParentDashboard({ user, onLogout }) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50" data-testid="parent-dashboard">
+    <div className="min-h-screen bg-muted" data-testid="parent-dashboard">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <header className="bg-card border-b border-border shadow-modern">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
           <div className="flex justify-between items-center">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                <Bus className="w-6 h-6 text-white" />
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 bg-gradient-to-br from-accent-blue to-soft-cyan rounded-xl flex items-center justify-center shadow-modern">
+                <Bus className="w-7 h-7 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: 'Space Grotesk' }}>Parent Dashboard</h1>
-                <p className="text-sm text-gray-600">Welcome, {user.name}</p>
+                <h1 className="text-3xl font-bold text-navy">Parent Dashboard</h1>
+                <p className="text-sm text-muted-foreground mt-0.5">Welcome, {user.name}</p>
               </div>
             </div>
             <Button
