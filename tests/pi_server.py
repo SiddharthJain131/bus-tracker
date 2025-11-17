@@ -551,7 +551,7 @@ def send_bus_location(config: Dict, bus_number: Optional[str] = None, lat: Optio
         }
 
         # use existing api_request helper (POST)
-        success, data = api_request(config, "/api/bus-locations/update", method="POST", json=payload)
+        success, data = api_request(config, "/api/bus-locations/update", method="POST", data=payload)
         if success:
             print(f"{Colors.GREEN}   [OK] Bus location reported: {bn} @ {lat},{lon}{Colors.RESET}")
             return True
