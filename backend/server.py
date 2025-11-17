@@ -1921,6 +1921,144 @@ async def delete_holiday(holiday_id: str, current_user: dict = Depends(get_curre
 
 
 # ================================================================================
+# BACKUP MANAGEMENT API ENDPOINTS
+# ================================================================================
+
+@api_router.get("/admin/backups/status")
+async def get_backup_status(backup_type: str = "both", current_user: dict = Depends(get_current_user)):
+    """Get current backup status for main and/or attendance backups"""
+    if current_user['role'] != 'admin':
+        raise HTTPException(status_code=403, detail="Access denied")
+    
+    try:
+        from backup_manager import BackupManager
+        manager = BackupManager()
+        
+        if backup_type == "both":
+            result = {
+                'main': manager.get_backup_status('main'),
+                'attendance': manager.get_backup_status('attendance')
+            }
+        else:
+            result = manager.get_backup_status(backup_type)
+        
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get backup status: {str(e)}")
+
+
+@api_router.get("/admin/backups/list")
+async def list_backups(backup_type: str = "both", current_user: dict = Depends(get_current_user)):
+    """List all backups with metadata"""
+    if current_user['role'] != 'admin':
+        raise HTTPException(status_code=403, detail="Access denied")
+    
+    try:
+        from backup_manager import BackupManager
+        manager = BackupManager()
+        
+        if backup_type == "both":
+            result = {
+                'main': manager.get_all_backups('main'),
+                'attendance': manager.get_all_backups('attendance')
+            }
+        else:
+            result = manager.get_all_backups(backup_type)
+        
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to list backups: {str(e)}")
+
+
+@api_router.get("/admin/backups/health")
+async def get_backup_health(current_user: dict = Depends(get_current_user)):
+    """Get overall backup system health"""
+    if current_user['role'] != 'admin':
+        raise HTTPException(status_code=403, detail="Access denied")
+    
+    try:
+        from backup_manager import BackupManager
+        manager = BackupManager()
+        health_info = manager.get_overall_health()
+        return health_info
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get backup health: {str(e)}")
+
+
+@api_router.post("/admin/backups/trigger")
+async def trigger_backup(backup_type: str = "both", current_user: dict = Depends(get_current_user)):
+    """Manually trigger a backup operation"""
+    if current_user['role'] != 'admin':
+        raise HTTPException(status_code=403, detail="Access denied")
+    
+    try:
+        from backup_manager import BackupManager
+        manager = BackupManager()
+        await manager.connect()
+        
+        results = {}
+        
+        try:
+            if backup_type in ["main", "both"]:
+                success, message, metadata = await manager.create_main_backup()
+                results['main'] = {
+                    'success': success,
+                    'message': message,
+                    'metadata': metadata
+                }
+            
+            if backup_type in ["attendance", "both"]:
+                success, message, metadata = await manager.create_attendance_backup()
+                results['attendance'] = {
+                    'success': success,
+                    'message': message,
+                    'metadata': metadata
+                }
+            
+            return results
+        finally:
+            manager.close()
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Backup failed: {str(e)}")
+
+
+@api_router.post("/admin/backups/verify/{backup_id}")
+async def verify_backup(backup_id: str, current_user: dict = Depends(get_current_user)):
+    """Verify backup integrity by checksum"""
+    if current_user['role'] != 'admin':
+        raise HTTPException(status_code=403, detail="Access denied")
+    
+    try:
+        from backup_manager import BackupManager, BACKUP_DIR, ATTENDANCE_BACKUP_DIR
+        from pathlib import Path
+        
+        manager = BackupManager()
+        
+        # Check main backups
+        backup_path = BACKUP_DIR / f"{backup_id}.json"
+        if not backup_path.exists():
+            # Check attendance backups
+            backup_path = ATTENDANCE_BACKUP_DIR / f"{backup_id}.json"
+        
+        if not backup_path.exists():
+            raise HTTPException(status_code=404, detail="Backup not found")
+        
+        is_valid, message = manager.verify_backup(backup_path)
+        
+        return {
+            'backup_id': backup_id,
+            'is_valid': is_valid,
+            'message': message
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Verification failed: {str(e)}")
+
+
+# ================================================================================
 # PHOTO RESTORATION ENDPOINT
 # Teacher endpoints
 @api_router.get("/teacher/students")
