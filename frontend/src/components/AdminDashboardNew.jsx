@@ -1078,6 +1078,11 @@ export default function AdminDashboardNew({ user, onLogout }) {
               </Tabs>
             </Card>
           </TabsContent>
+
+          {/* Backups Tab */}
+          <TabsContent value="backups">
+            <BackupManagement />
+          </TabsContent>
         </Tabs>
       </div>
 
