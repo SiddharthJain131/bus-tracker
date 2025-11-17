@@ -480,6 +480,271 @@ db.bus_locations.find()
 
 ---
 
+### GPS Issues & Location Tracking
+
+#### Issue: Bus Shows Question Mark (🔴❓) on Map
+
+**Symptoms:**
+- Gray bus marker with red question mark badge
+- Popup shows "GPS Unavailable"
+- Location not updating
+
+**This is Expected Behavior when:**
+- GPS signal is unavailable (e.g., underground, poor sky view)
+- ADB device disconnected (if using Android GPS)
+- GPS disabled on Android device
+- Location services not running
+
+**System continues operating normally** - this is graceful GPS fallback.
+
+**To Resolve:**
+
+**1. For ADB GPS (Primary Method):**
+```bash
+# On Raspberry Pi, check ADB connection
+adb devices
+
+# If device offline, reconnect
+adb kill-server
+adb start-server
+adb connect <ANDROID_IP>:5555
+
+# Verify location services
+adb shell dumpsys location | grep "last location"
+```
+
+**2. Enable GPS on Android:**
+- Settings → Location → Enable
+- Grant location permissions
+- Wait 1-2 minutes for GPS fix
+- Move to area with sky view
+
+**3. Check GPS Function:**
+```bash
+# On Raspberry Pi, test GPS function
+python3 -c "
+from pi_hardware_mod import get_gps
+gps = get_gps()
+print(f'GPS: {gps}')
+"
+
+# Expected outputs:
+# {"lat": 37.7749, "lon": -122.4194}  # GPS working
+# {"lat": None, "lon": None}          # GPS unavailable (expected)
+```
+
+**4. Verify Backend Receiving Data:**
+```bash
+# Check backend logs for location updates
+tail -f /var/log/supervisor/backend.out.log | grep "update_location"
+
+# Look for:
+# POST /api/update_location {"lat": null, "lon": null}  # Null is OK
+# POST /api/update_location {"lat": 37.77, "lon": -122.41}  # Valid
+```
+
+**5. Check Database:**
+```bash
+mongosh
+use bus_tracker
+db.bus_locations.find({bus_number: "BUS-001"})
+
+# Output will show:
+# { lat: null, lon: null }  # GPS unavailable (system working as designed)
+# or
+# { lat: 37.7749, lon: -122.4194 }  # GPS working
+```
+
+#### Issue: Map Crashes or JavaScript Errors
+
+**Symptoms:**
+- Console error: "Cannot read property 'lat' of null"
+- Map rendering stops
+- Frontend becomes unresponsive
+
+**Cause:** Old frontend code not handling null coordinates
+
+**Solution:**
+
+**1. Check BusMap.jsx has null-safe validation:**
+```javascript
+// Should have these checks around lines 182-196
+if (location && location.lat !== null && location.lon !== null && 
+    typeof location.lat === 'number' && typeof location.lon === 'number') {
+  bounds.extend([location.lat, location.lon]);
+}
+```
+
+**2. Update frontend if needed:**
+```bash
+cd /app/frontend
+git pull  # Get latest null-safe code
+yarn install
+sudo supervisorctl restart frontend
+```
+
+**3. Clear browser cache:**
+- Hard reload: Ctrl+Shift+R (Windows/Linux) or Cmd+Shift+R (Mac)
+- Or clear cache: DevTools → Application → Clear Storage
+
+#### Issue: GPS Coordinates Inaccurate
+
+**Symptoms:**
+- Bus showing in wrong location
+- Location jumps around map
+- Coordinates don't match actual position
+
+**Solutions:**
+
+**1. Improve GPS Accuracy on Android:**
+- Settings → Location → Mode → High Accuracy
+- Enable "Wi-Fi scanning" and "Bluetooth scanning"
+- Ensure good sky view for satellite signals
+
+**2. Wait for GPS Fix:**
+```bash
+# Monitor GPS quality
+adb shell dumpsys location
+
+# Look for:
+# accuracy: 15.0  # Good (< 20m)
+# accuracy: 50.0  # Fair (20-100m)
+# accuracy: 500.0 # Poor (> 100m) - wait for better fix
+```
+
+**3. Add Coordinate Validation:**
+```python
+# In pi_hardware_mod.py, add validation
+def validate_gps(lat, lon):
+    if lat is None or lon is None:
+        return False
+    # Check reasonable bounds for your region
+    if not (30.0 <= lat <= 45.0):  # Example: adjust for your area
+        return False
+    if not (-130.0 <= lon <= -70.0):
+        return False
+    return True
+```
+
+**4. Use GPS Test Apps:**
+- Install "GPS Status & Toolbox" on Android
+- Check satellite count (need 4+ for good fix)
+- Check HDOP value (lower is better, < 2.0 is good)
+
+#### Issue: Location Not Updating (Stale)
+
+**Symptoms:**
+- Bus marker shows old position
+- Timestamp is old
+- No recent updates
+
+**Diagnosis:**
+```bash
+# Check when last update received
+mongosh
+use bus_tracker
+db.bus_locations.find({bus_number: "BUS-001"}).sort({timestamp: -1}).limit(1)
+
+# Check timestamp - should be recent (< 60 seconds)
+```
+
+**Solutions:**
+
+**1. Check Pi Server Running:**
+```bash
+# On Raspberry Pi
+sudo systemctl status bus-tracker-pi
+
+# Or check process
+ps aux | grep pi_server
+```
+
+**2. Check Network Connectivity:**
+```bash
+# On Raspberry Pi, test backend connection
+curl -I http://your-backend:8001/docs
+
+# Test with API key
+curl -H "X-API-Key: YOUR_KEY" http://your-backend:8001/api/device/list
+```
+
+**3. Check Location Updater Thread:**
+```bash
+# Review pi_server.py logs
+journalctl -u bus-tracker-pi | grep "location update"
+
+# Should see regular updates every 30 seconds:
+# [OK] Location updated: BUS-001 (37.7749, -122.4194)
+```
+
+**4. Restart Pi Service:**
+```bash
+sudo systemctl restart bus-tracker-pi
+```
+
+#### Issue: "is_missing: true" in API Response
+
+**This is Not an Error** - it's the system correctly reporting GPS unavailability.
+
+**API Response Example:**
+```json
+{
+  "bus_number": "BUS-001",
+  "lat": null,
+  "lon": null,
+  "timestamp": "2025-11-17T14:00:00Z",
+  "is_missing": true,     ← GPS unavailable (expected)
+  "is_stale": false        ← Updated recently (good)
+}
+```
+
+**What it means:**
+- `is_missing: true` = GPS coordinates are null (system knows GPS is unavailable)
+- `is_stale: false` = System received update recently (Pi is communicating)
+- **System is working correctly** - this is graceful GPS fallback
+
+**Action:** Fix GPS (see solutions above), or accept that GPS is temporarily unavailable. Attendance recording continues normally.
+
+#### Issue: Rapid GPS Coordinates Changes
+
+**Symptoms:**
+- Location "jumps" frequently
+- Erratic bus movement on map
+- Coordinates unstable
+
+**Causes & Solutions:**
+
+**1. GPS Multipath Interference:**
+- Move away from tall buildings
+- Avoid underground areas
+- Ensure clear sky view
+
+**2. Implement Smoothing:**
+```python
+# Add to pi_hardware_mod.py
+from collections import deque
+
+last_positions = deque(maxlen=5)
+
+def get_smoothed_gps():
+    lat, lon = get_gps_location_adb()
+    if lat and lon:
+        last_positions.append((lat, lon))
+        # Average last 5 positions
+        avg_lat = sum(p[0] for p in last_positions) / len(last_positions)
+        avg_lon = sum(p[1] for p in last_positions) / len(last_positions)
+        return avg_lat, avg_lon
+    return None, None
+```
+
+**3. Reduce Update Frequency:**
+```python
+# In pi_server.py, increase LOCATION_UPDATE_INTERVAL
+LOCATION_UPDATE_INTERVAL = 60  # From 30 to 60 seconds
+```
+
+---
+
 ### Images Not Loading
 
 **Symptoms:**
