@@ -2260,6 +2260,8 @@ async def check_missed_scans():
 
 async def start_main_backup_scheduler():
     """Schedule regular main (seed) backups using SEED_INTERVAL_HOURS"""
+    from backup_manager import BackupManager
+    
     interval_hours = int(os.environ.get('SEED_INTERVAL_HOURS', '1'))
     interval_seconds = max(1, interval_hours) * 3600
 
@@ -2272,8 +2274,19 @@ async def start_main_backup_scheduler():
         try:
             await asyncio.sleep(interval_seconds)
             logging.info("Running scheduled main backup...")
-            subprocess.run(["python", "backup_seed_data.py"], cwd=str(ROOT_DIR))
-            logging.info("✅ Main backup completed")
+            
+            # Use new BackupManager
+            manager = BackupManager()
+            await manager.connect()
+            try:
+                success, message, metadata = await manager.create_main_backup()
+                if success:
+                    logging.info(f"✅ Main backup completed: {message}")
+                else:
+                    logging.error(f"❌ Main backup failed: {message}")
+            finally:
+                manager.close()
+                
         except Exception as e:
             logging.error(f"Main backup scheduler error: {e}")
             await asyncio.sleep(300)
