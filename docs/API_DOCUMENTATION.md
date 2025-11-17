@@ -303,7 +303,9 @@ Get attendance grid for a student for specific month.
 
 Record RFID scan event (used by Raspberry Pi). Requires X-API-Key header.
 
-**Request Body:**
+**⚠️ Important: scan_type field removed** - Backend now determines status automatically.
+
+**Request Body (GPS Available):**
 ```json
 {
   "student_id": "uuid",
@@ -312,7 +314,22 @@ Record RFID scan event (used by Raspberry Pi). Requires X-API-Key header.
   "confidence": 0.97,
   "lat": 37.7749,
   "lon": -122.4194,
-  "photo_url": "/photos/uuid/2025-01-15_AM.jpg"
+  "photo_url": "/photos/uuid/2025-01-15_AM.jpg",
+  "timestamp": "2025-11-17T07:58:23.456Z"
+}
+```
+
+**Request Body (GPS Unavailable):**
+```json
+{
+  "student_id": "uuid",
+  "tag_id": "RFID-1234",
+  "verified": true,
+  "confidence": 0.97,
+  "lat": null,
+  "lon": null,
+  "photo_url": "/photos/uuid/2025-01-15_AM.jpg",
+  "timestamp": "2025-11-17T07:58:23.456Z"
 }
 ```
 
@@ -321,16 +338,30 @@ Record RFID scan event (used by Raspberry Pi). Requires X-API-Key header.
 {
   "status": "success",
   "event_id": "event-uuid",
-  "attendance_status": "yellow"
+  "attendance_id": "att-uuid",
+  "attendance_status": "yellow",
+  "trip": "AM"
 }
 ```
 
-**Behavior:**
-- First scan: Creates attendance with status "yellow" (On Board)
-- Second scan: Updates to status "green" (Reached)
-- Status determined automatically by backend based on time and scan sequence
-- Creates identity mismatch notification if verified=false
-- Idempotent: Duplicate uploads for same timestamp are ignored
+**Automated Status Logic:**
+
+**Direction Detection (by time):**
+- Morning (hour < 12): First scan at pickup → yellow, Second scan at school → green
+- Evening (hour >= 12): First scan at school → yellow, Second scan at home → green
+
+**Status Transitions:**
+1. **First scan**: Creates attendance record with status "yellow" (On Board)
+2. **Second scan**: Updates attendance to status "green" (Reached destination)
+3. **No scan by threshold**: Auto-marks as "red" (Missed) after expected time
+4. **Holiday**: Shows as "blue" based on holiday calendar
+
+**Special Behaviors:**
+- GPS null coordinates accepted (system continues normally)
+- Creates identity mismatch notification if `verified=false`
+- Idempotent: Duplicate uploads with same timestamp are ignored
+- Photo upload optional (attendance recorded without photo)
+- Timestamp determines trip direction (AM vs PM automatically)
 
 ---
 
