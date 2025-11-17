@@ -1,0 +1,55 @@
+# Logrotate configuration for Bus Tracker Pi Service
+# ==================================================
+# This file manages log rotation for the systemd journal logs
+# to prevent disk space issues on Raspberry Pi.
+#
+# Installation:
+#   sudo cp bus-tracker-pi-logrotate /etc/logrotate.d/bus-tracker-pi
+#   sudo chmod 644 /etc/logrotate.d/bus-tracker-pi
+#
+# Test rotation manually:
+#   sudo logrotate -f /etc/logrotate.d/bus-tracker-pi
+#
+# ==================================================
+
+# Note: systemd journal logs are managed by journald, but we can
+# export to traditional log files for easier access
+
+/var/log/bus-tracker/*.log {
+    # Rotate daily
+    daily
+    
+    # Keep 7 days of logs
+    rotate 7
+    
+    # Compress old logs
+    compress
+    delaycompress
+    
+    # Don't error if log file is missing
+    missingok
+    
+    # Don't rotate if empty
+    notifempty
+    
+    # Create new log file with these permissions
+    create 0644 pi pi
+    
+    # Use date as extension
+    dateext
+    dateformat -%Y%m%d
+    
+    # Run after rotation (optional)
+    postrotate
+        # Signal service to reopen log file if needed
+        /bin/systemctl reload-or-restart bus-tracker-pi > /dev/null 2>&1 || true
+    endscript
+}
+
+# Archive old compressed logs monthly
+/var/log/bus-tracker/*.gz {
+    monthly
+    rotate 3
+    missingok
+    notifempty
+}
