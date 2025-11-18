@@ -458,6 +458,46 @@ async def login(user_login: UserLogin, response: Response):
         logging.error(f"Password verification error: {e}")
         raise HTTPException(status_code=401, detail="Invalid credentials")
     
+    # Check if email authentication is required
+    if EMAIL_AUTH_ENABLED:
+        # Generate 6-digit verification code
+        verification_code = ''.join([str(random.randint(0, 9)) for _ in range(6)])
+        code_expiry = datetime.now() + timedelta(minutes=10)
+        
+        # Store verification code
+        email_verification_codes[user['email']] = {
+            'code': verification_code,
+            'expiry': code_expiry,
+            'user': user
+        }
+        
+        # Send verification email
+        email_body = f"""
+        <html>
+        <body style="font-family: Arial, sans-serif; padding: 20px; background-color: #f4f5f7;">
+            <div style="max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                <h2 style="color: #4F46E5; margin-bottom: 20px;">Login Verification Code</h2>
+                <p style="font-size: 16px; color: #374151; margin-bottom: 20px;">Hello {user['name']},</p>
+                <p style="font-size: 16px; color: #374151; margin-bottom: 20px;">Your verification code is:</p>
+                <div style="background: #EEF2FF; padding: 20px; text-align: center; border-radius: 8px; margin: 20px 0;">
+                    <span style="font-size: 32px; font-weight: bold; color: #4F46E5; letter-spacing: 5px;">{verification_code}</span>
+                </div>
+                <p style="font-size: 14px; color: #6B7280; margin-top: 20px;">This code will expire in 10 minutes.</p>
+                <p style="font-size: 14px; color: #6B7280;">If you didn't request this code, please ignore this email.</p>
+            </div>
+        </body>
+        </html>
+        """
+        
+        await send_email(user['email'], "Login Verification Code - School Bus Tracker", email_body)
+        
+        return {
+            "requires_verification": True,
+            "email": user['email'],
+            "message": "Verification code sent to your email"
+        }
+    
+    # No email verification required, proceed with login
     session_token = secrets.token_urlsafe(32)
     sessions[session_token] = user
     
@@ -468,6 +508,61 @@ async def login(user_login: UserLogin, response: Response):
         max_age=86400,
         samesite="lax"
     )
+    
+    # Create welcome notification asynchronously
+    asyncio.create_task(create_welcome_notification(user['user_id'], user['name'], user['role']))
+    
+    return {
+        "user_id": user['user_id'],
+        "email": user['email'],
+        "role": user['role'],
+        "name": user['name'],
+        "phone": user.get('phone'),
+        "photo": get_photo_url(user.get('photo')),
+        "assigned_class": user.get('assigned_class'),
+        "assigned_section": user.get('assigned_section'),
+        "student_ids": user.get('student_ids', []),
+        "is_elevated_admin": user.get('is_elevated_admin', False)
+    }
+
+@api_router.post("/auth/verify-code")
+async def verify_code(email: str, code: str, response: Response):
+    """Verify email authentication code"""
+    if not EMAIL_AUTH_ENABLED:
+        raise HTTPException(status_code=400, detail="Email authentication is not enabled")
+    
+    if email not in email_verification_codes:
+        raise HTTPException(status_code=401, detail="Invalid or expired verification code")
+    
+    stored_data = email_verification_codes[email]
+    
+    # Check if code expired
+    if datetime.now() > stored_data['expiry']:
+        del email_verification_codes[email]
+        raise HTTPException(status_code=401, detail="Verification code expired")
+    
+    # Check if code matches
+    if stored_data['code'] != code:
+        raise HTTPException(status_code=401, detail="Invalid verification code")
+    
+    # Code is valid, create session
+    user = stored_data['user']
+    session_token = secrets.token_urlsafe(32)
+    sessions[session_token] = user
+    
+    response.set_cookie(
+        key="session_token",
+        value=session_token,
+        httponly=True,
+        max_age=86400,
+        samesite="lax"
+    )
+    
+    # Clean up verification code
+    del email_verification_codes[email]
+    
+    # Create welcome notification asynchronously
+    asyncio.create_task(create_welcome_notification(user['user_id'], user['name'], user['role']))
     
     return {
         "user_id": user['user_id'],
