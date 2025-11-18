@@ -49,10 +49,10 @@ export default function StudentCard({ student, compact = false }) {
 
   return (
     <>
-      <Card className="p-6 card-hover" data-testid={`student-detail-card-${student.student_id}`}>
+      <Card className="p-6 dashboard-card-enhanced parent-accent-border hover-lift" data-testid={`student-detail-card-${student.student_id}`}>
         <div className="flex items-start gap-4">
           {/* Avatar */}
-          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white text-2xl font-bold flex-shrink-0 overflow-hidden">
+          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-parent-primary to-parent-secondary flex items-center justify-center text-white text-2xl font-bold flex-shrink-0 overflow-hidden shadow-md">
             {student.photo_url ? (
               <img 
                 src={`${BACKEND_URL}${student.photo_url}`} 
