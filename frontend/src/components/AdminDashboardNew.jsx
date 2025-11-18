@@ -435,8 +435,8 @@ export default function AdminDashboardNew({ user, onLogout }) {
           {/* Overview Tab */}
           <TabsContent value="overview" className="space-y-6">
             {/* Admin Profile */}
-            <Card className="p-6 hover:shadow-modern-lg transition-shadow">
-              <h2 className="text-2xl font-semibold mb-5 text-navy">
+            <Card className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+              <h2 className="text-xl font-semibold mb-5 text-gray-900">
                 Admin Profile
               </h2>
               <div className="flex items-center gap-6">
@@ -445,28 +445,28 @@ export default function AdminDashboardNew({ user, onLogout }) {
                   userName={currentUser.name}
                   size="lg"
                   onClick={handleProfilePhotoClick}
-                  gradientFrom="navy"
-                  gradientTo="accent-blue"
+                  gradientFrom="admin-secondary"
+                  gradientTo="admin-primary"
                 />
                 <div className="flex-1 space-y-2">
                   <h3 className="text-2xl font-bold text-gray-900">{user.name}</h3>
                   <div className="flex items-center gap-4 text-sm text-gray-600">
                     {user.email && (
-                      <div className="flex items-center gap-1">
-                        <Mail className="w-4 h-4" />
+                      <div className="flex items-center gap-2">
+                        <Mail className="w-4 h-4 text-admin-primary" />
                         {user.email}
                       </div>
                     )}
                     {user.phone && (
-                      <div className="flex items-center gap-1">
-                        <Phone className="w-4 h-4" />
+                      <div className="flex items-center gap-2">
+                        <Phone className="w-4 h-4 text-admin-primary" />
                         {user.phone}
                       </div>
                     )}
                   </div>
                   {user.address && (
-                    <div className="flex items-center gap-1 text-sm text-gray-600">
-                      <MapPin className="w-4 h-4" />
+                    <div className="flex items-center gap-2 text-sm text-gray-600">
+                      <MapPin className="w-4 h-4 text-admin-primary" />
                       {user.address}
                     </div>
                   )}
