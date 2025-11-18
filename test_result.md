@@ -128,44 +128,7 @@ backend:
     status_history:
       - working: "NA"
         agent: "main"
-        comment: "IMPLEMENTED - Added send_new_user_email() function that sends welcome email with login credentials when admin creates a new user. Added NEW_USER_EMAIL_ENABLED toggle to .env (default: true). Email includes: welcome message, role-specific color theming, login URL, email address, temporary password, instructions to change password. Non-breaking: if email fails, user creation completes successfully and response includes email_warning field for admin notification. Uses existing SMTP configuration (EMAIL_AUTH_ENABLED, SMTP_HOST, etc.). POST /api/users endpoint updated to call send_new_user_email after successful user creation."
-
-frontend:
-  - task: "Demo credential autofill on login page"
-    implemented: true
-    working: "NA"
-    file: "/app/frontend/src/components/Login.jsx"
-    stuck_count: 0
-    priority: "high"
-    needs_retesting: true
-    status_history:
-      - working: "NA"
-        agent: "main"
-        comment: "IMPLEMENTED - Added onClick handlers to demo credential boxes. Clicking Parent/Teacher/Admin boxes now autofills email and password fields. No auto-submit - user must click Login button. Added hover background effects (orange-50 for parent, teal-50 for teacher, indigo-50 for admin) with padding and rounded corners for better UX."
-
-  - task: "Notification actions - Mark as Read & Delete with three-dot menu"
-    implemented: true
-    working: "NA"
-    file: "/app/frontend/src/components/NotificationBell.jsx"
-    stuck_count: 0
-    priority: "high"
-    needs_retesting: true
-    status_history:
-      - working: "NA"
-        agent: "main"
-        comment: "IMPLEMENTED - Added three-dot menu (MoreVertical icon) to each notification with dropdown actions. Menu includes: 1) Mark as Read action (only shown for unread notifications) with CheckCircle icon in green. 2) Delete action with Trash2 icon in red with hover effect. Updated markAsRead and added deleteNotification functions with API calls. Added toast notifications for success/error feedback. Menu closes after action. Click on notification content opens detail modal. Menu closes when clicking outside. Imported toast from sonner for notifications."
-
-  - task: "Notification actions - Mark as Read & Delete (existing backend endpoint)"
-    implemented: true
-    working: true
-    file: "/app/backend/server.py"
-    stuck_count: 0
-    priority: "high"
-    needs_retesting: false
-    status_history:
-      - working: true
-        agent: "main"
-        comment: "Mark as read endpoint already exists at line 1280. Works correctly."
+        comment: "IMPLEMENTED - Added send_new_user_email() function that sends HTML welcome email with login credentials when admin creates a new user via POST /api/users. Added NEW_USER_EMAIL_ENABLED toggle to .env (default: true). Email includes: role-specific color theming (admin: indigo, teacher: teal, parent: orange), welcome message, login URL, email address, temporary password in code block, instructions to change password. Non-breaking: if email fails, user creation still completes successfully and response includes email_sent flag and email_warning message for admin notification. Uses existing SMTP configuration (SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS)."
 
   - task: "Authentication APIs (login, logout, me)"
 
