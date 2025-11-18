@@ -44,12 +44,12 @@ export default function Login({ onLogin }) {
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-indigo-400/10 rounded-full blur-3xl floating-shape" style={{ animationDelay: '5s' }}></div>
       <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-cyan-400/10 rounded-full blur-3xl floating-shape" style={{ animationDelay: '10s' }}></div>
       
-      <Card className="w-full max-w-md p-8 bg-white/95 backdrop-blur-xl shadow-modern-xl border-0 fade-in hover:scale-[1.01] transition-transform duration-300 rounded-2xl">
+      <Card className={`w-full max-w-md p-8 bg-white/95 backdrop-blur-xl shadow-modern-xl border-0 fade-in hover:scale-[1.01] transition-transform duration-300 rounded-2xl ${shake ? 'animate-shake' : ''}`}>
         <div className="text-center mb-8 slide-in-left">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-500 rounded-2xl mb-4 shadow-lg hover:shadow-xl transition-shadow duration-300">
-            <Bus className="w-10 h-10 text-white" />
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-gray-50 via-indigo-50 to-blue-50 animate-gradient rounded-2xl mb-4 shadow-lg hover:shadow-xl transition-shadow duration-300 border-2 border-indigo-100">
+            <Bus className="w-10 h-10 text-indigo-600" />
           </div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-900 via-indigo-800 to-blue-900 bg-clip-text text-transparent mb-2">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-700 via-indigo-600 to-blue-600 bg-clip-text text-transparent mb-2">
             School Bus Tracker
           </h1>
           <p className="text-gray-600 text-base font-medium">RFID + Face Recognition System</p>
