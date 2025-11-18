@@ -102,12 +102,15 @@ export default function Login({ onLogin }) {
           </Button>
         </form>
 
-        <div className="mt-8 p-5 bg-muted rounded-xl border">
-          <p className="text-sm font-semibold text-navy mb-3">Demo Credentials:</p>
-          <div className="text-sm text-foreground space-y-2">
-            <p><strong>Parent:</strong> parent@school.com / password</p>
-            <p><strong>Teacher:</strong> teacher@school.com / password</p>
-            <p><strong>Admin:</strong> admin@school.com / password</p>
+        <div className="mt-8 p-5 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-200/50 shadow-sm">
+          <p className="text-sm font-semibold text-blue-900 mb-3 flex items-center gap-2">
+            <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
+            Demo Credentials:
+          </p>
+          <div className="text-sm text-gray-700 space-y-2">
+            <p className="hover:text-blue-700 transition-colors"><strong className="text-orange-600">Parent:</strong> parent@school.com / password</p>
+            <p className="hover:text-green-700 transition-colors"><strong className="text-teal-600">Teacher:</strong> teacher@school.com / password</p>
+            <p className="hover:text-blue-700 transition-colors"><strong className="text-indigo-600">Admin:</strong> admin@school.com / password</p>
           </div>
         </div>
       </Card>
