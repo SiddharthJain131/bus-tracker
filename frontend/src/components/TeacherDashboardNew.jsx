@@ -709,7 +709,7 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                   {getStatusLabel(selectedScan.status)}
                 </span>
               </div>
-              <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+              <div className="dashboard-content rounded-lg p-3 border dashboard-separator">
                 <div className="flex items-center gap-2 text-sm text-gray-700">
                   <Calendar className="w-4 h-4 text-gray-500" />
                   <span className="font-medium">Scan Time:</span>
