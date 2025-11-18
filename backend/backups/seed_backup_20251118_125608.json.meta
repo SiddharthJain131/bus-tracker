@@ -1,0 +1,22 @@
+{
+  "backup_id": "seed_backup_20251118_125608",
+  "backup_type": "main",
+  "filename": "seed_backup_20251118_125608.json",
+  "timestamp": "2025-11-18T12:56:08.172427",
+  "checksum": "1661f3ed8233b7dad4ae48693c88ea04995b6649054de8001efd82c03b99ddc6",
+  "checksum_algorithm": "SHA256",
+  "file_size_bytes": 56371,
+  "file_size_mb": 0.05,
+  "collections": {
+    "users": 17,
+    "students": 20,
+    "buses": 4,
+    "routes": 4,
+    "stops": 20,
+    "holidays": 5,
+    "device_keys": 7
+  },
+  "mongo_url": "mongodb://127.0.0.1:27017",
+  "db_name": "bus_tracker",
+  "version": "2.0"
+}

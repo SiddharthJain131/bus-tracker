@@ -25,7 +25,6 @@ import AttendanceGrid from './AttendanceGrid';
 import PhotoViewerModal from './PhotoViewerModal';
 import PhotoAvatar from './PhotoAvatar';
 import NotificationDetailModal from './NotificationDetailModal';
-import NotificationDropdown from './NotificationDropdown';
 import { formatClassName } from '../utils/helpers';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -325,8 +324,8 @@ export default function TeacherDashboardNew({ user, onLogout }) {
 
   return (
     <div className="min-h-screen dashboard-bg" data-testid="teacher-dashboard">
-      {/* Header with Dynamic Gradient */}
-      <header className="bg-gradient-to-r from-teal-50 via-green-50 to-teal-50 animate-gradient dashboard-panel teacher-accent-border border-b dashboard-separator shadow-md sticky top-0 z-10">
+      {/* Header */}
+      <header className="dashboard-panel teacher-accent-border border-b dashboard-separator shadow-md sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-4 slide-in-left">
@@ -342,24 +341,18 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <NotificationDropdown
-                notifications={notifications}
-                onNotificationClick={handleNotificationClick}
-                onRefresh={fetchNotifications}
-                themeColor="teacher"
-              />
-              <Button onClick={onLogout} variant="outline" className="logout-button logout-button-teacher">
-                <LogOut className="w-4 h-4" />
-                Logout
-              </Button>
-            </div>
+            <Button onClick={onLogout} variant="outline" className="logout-button logout-button-teacher">
+              <LogOut className="w-4 h-4" />
+              Logout
+            </Button>
           </div>
         </div>
       </header>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="space-y-6">
+        <div className="grid lg:grid-cols-4 gap-6">
+          {/* Main Content - 3 columns */}
+          <div className="lg:col-span-3 space-y-6">
             {/* Teacher Profile Card */}
             <Card className="p-6 dashboard-card teacher-accent-border hover:shadow-lg transition-shadow">
               <h2 className="text-xl font-semibold mb-5 text-teacher-primary">
@@ -522,7 +515,7 @@ export default function TeacherDashboardNew({ user, onLogout }) {
               {/* Students Table */}
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="dashboard-content border-b-2 dashboard-separator">
+                  <thead className="bg-gray-50 border-b-2 border-gray-200">
                     <tr>
                       <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Roll No</th>
                       <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Name</th>
@@ -542,7 +535,7 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                       </tr>
                     ) : (
                       filteredStudents.map(student => (
-                        <tr key={student.student_id} className="hover:bg-dashboard-content transition-colors">
+                        <tr key={student.student_id} className="hover:bg-gray-50 transition-colors">
                           <td className="px-4 py-4 text-sm text-teacher-primary font-medium">
                             {student.roll_number || 'N/A'}
                           </td>
@@ -604,7 +597,63 @@ export default function TeacherDashboardNew({ user, onLogout }) {
             </Card>
 
           </div>
+
+          {/* Notifications Sidebar - 1 column */}
+          <div className="lg:col-span-1">
+            <Card className="p-6 dashboard-card teacher-accent-border sticky top-24">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-10 h-10 bg-teacher-light rounded-lg flex items-center justify-center">
+                  <Bell className="w-5 h-5 text-teacher-primary" />
+                </div>
+                <h2 className="text-lg font-semibold text-gray-900">
+                  Notifications
+                </h2>
+              </div>
+              <div className="space-y-3 max-h-[calc(100vh-200px)] overflow-y-auto">
+                {notifications.length === 0 ? (
+                  <p className="text-sm text-gray-500 text-center py-8">No notifications</p>
+                ) : (
+                  notifications.slice(0, 5).map((notification) => (
+                    <div
+                      key={notification.notification_id}
+                      onClick={() => handleNotificationClick(notification)}
+                      className="flex items-start gap-4 p-4 rounded-lg border border-gray-200 bg-white hover:border-teacher-primary/40 hover:shadow-md transition-all cursor-pointer"
+                    >
+                      <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-teacher-light text-teacher-primary flex-shrink-0">
+                        <Bell className="w-5 h-5" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between gap-2">
+                          <h3 className="font-semibold text-gray-900 truncate">
+                            {notification.title}
+                          </h3>
+                          {notification.timestamp && (
+                            <span className="text-xs text-gray-500 whitespace-nowrap">
+                              {formatTimestamp(notification.timestamp)}
+                            </span>
+                          )}
+                        </div>
+                        {notification.message && (
+                          <p className="text-sm text-gray-600 mt-1 line-clamp-2">
+                            {notification.message}
+                          </p>
+                        )}
+                        {!notification.read && (
+                          <div className="mt-2">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-teacher-primary text-white">
+                              New
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            </Card>
+          </div>
         </div>
+      </div>
 
       {/* Student Detail Modal */}
       <StudentDetailModal
@@ -629,7 +678,7 @@ export default function TeacherDashboardNew({ user, onLogout }) {
           
           <div className="mt-4">
             {/* Status Legend */}
-            <div className="flex flex-wrap items-center justify-center gap-4 mb-6 p-4 dashboard-content rounded-lg border dashboard-separator">
+            <div className="flex flex-wrap items-center justify-center gap-4 mb-6 p-4 bg-gray-50 rounded-lg">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full status-gray"></div>
                 <span className="text-xs font-medium text-gray-600">Not Scanned</span>
@@ -708,7 +757,7 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                   {getStatusLabel(selectedScan.status)}
                 </span>
               </div>
-              <div className="dashboard-content rounded-lg p-3 border dashboard-separator">
+              <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
                 <div className="flex items-center gap-2 text-sm text-gray-700">
                   <Calendar className="w-4 h-4 text-gray-500" />
                   <span className="font-medium">Scan Time:</span>

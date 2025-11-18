@@ -9,7 +9,6 @@ import AttendanceGrid from './AttendanceGrid';
 import UserProfileHeader from './UserProfileHeader';
 import StudentCard from './StudentCard';
 import NotificationDetailModal from './NotificationDetailModal';
-import NotificationDropdown from './NotificationDropdown';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -141,8 +140,8 @@ export default function ParentDashboard({ user, onLogout }) {
 
   return (
     <div className="min-h-screen dashboard-bg" data-testid="parent-dashboard">
-      {/* Header with Dynamic Gradient */}
-      <header className="bg-gradient-to-r from-amber-50 via-orange-50 to-amber-50 animate-gradient dashboard-panel parent-accent-border border-b dashboard-separator shadow-md sticky top-0 z-10">
+      {/* Header */}
+      <header className="dashboard-panel parent-accent-border border-b dashboard-separator shadow-md sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-4 slide-in-left">
@@ -158,23 +157,15 @@ export default function ParentDashboard({ user, onLogout }) {
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <NotificationDropdown
-                notifications={notifications}
-                onNotificationClick={handleNotificationClick}
-                onRefresh={fetchNotifications}
-                themeColor="parent"
-              />
-              <Button
-                data-testid="logout-button"
-                onClick={onLogout}
-                variant="outline"
-                className="logout-button logout-button-parent"
-              >
-                <LogOut className="w-4 h-4" />
-                Logout
-              </Button>
-            </div>
+            <Button
+              data-testid="logout-button"
+              onClick={onLogout}
+              variant="outline"
+              className="logout-button logout-button-parent"
+            >
+              <LogOut className="w-4 h-4" />
+              Logout
+            </Button>
           </div>
         </div>
       </header>
@@ -203,29 +194,25 @@ export default function ParentDashboard({ user, onLogout }) {
 
         {selectedStudent && selectedStudentDetails && (
           <div className="space-y-6">
-            {/* Unified Student Information Container */}
-            <Card className="dashboard-card-enhanced parent-accent-border overflow-hidden">
-              {/* Student Details Section */}
-              <div className="p-6 bg-gradient-to-r from-amber-50/30 via-orange-50/30 to-amber-50/30">
-                <StudentCard student={selectedStudentDetails} />
-              </div>
+            {/* Student Details */}
+            <StudentCard student={selectedStudentDetails} />
 
-              {/* Section Divider */}
-              <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
-
-              {/* Live Bus Map Section */}
-              <div className="p-6">
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="w-12 h-12 bg-gradient-to-br from-parent-primary to-parent-secondary rounded-xl flex items-center justify-center shadow-sm">
-                    <MapPin className="w-6 h-6 text-white" />
+            <div className="grid lg:grid-cols-3 gap-6">
+              {/* Left column - Map and Attendance */}
+              <div className="lg:col-span-2 space-y-6">
+                {/* Live Bus Map */}
+                <Card className="p-6 dashboard-card-enhanced parent-accent-border hover-lift">
+                  <div className="flex items-center gap-3 mb-5 pb-4 border-b border-gray-100">
+                    <div className="w-12 h-12 bg-gradient-to-br from-parent-primary to-parent-secondary rounded-xl flex items-center justify-center shadow-sm">
+                      <MapPin className="w-6 h-6 text-white" />
+                    </div>
+                    <h2 className="text-xl font-semibold text-parent-primary">Live Bus Location</h2>
+                    {busLocation && (
+                      <span className="ml-auto text-xs text-gray-500">
+                        Updated: {new Date(busLocation.timestamp).toLocaleTimeString()}
+                      </span>
+                    )}
                   </div>
-                  <h2 className="text-xl font-semibold text-parent-primary">Live Bus Location</h2>
-                  {busLocation && (
-                    <span className="ml-auto text-xs text-gray-500">
-                      Updated: {new Date(busLocation.timestamp).toLocaleTimeString()}
-                    </span>
-                  )}
-                </div>
                   <div className="h-96 rounded-xl overflow-hidden relative border border-gray-200" data-testid="bus-map-container">
                     <BusMap location={busLocation} route={route} showRoute={showRoute} />
                     
@@ -237,7 +224,7 @@ export default function ParentDashboard({ user, onLogout }) {
                         className={`absolute top-4 right-4 z-[1000] flex items-center gap-2 px-4 py-2 rounded-xl shadow-md transition-all font-medium ${
                           showRoute
                             ? 'bg-parent-primary text-white hover:bg-parent-hover'
-                            : 'dashboard-panel text-gray-900 hover:bg-dashboard-content border-2 dashboard-separator'
+                            : 'bg-white text-gray-900 hover:bg-gray-50 border-2 border-gray-300'
                         }`}
                       >
                         {showRoute ? (
@@ -254,14 +241,11 @@ export default function ParentDashboard({ user, onLogout }) {
                       </button>
                     )}
                   </div>
-                </div>
+                </Card>
 
-              {/* Section Divider */}
-              <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
-
-              {/* Attendance Calendar Section */}
-              <div className="p-6 dashboard-content/30">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-5">
+                {/* Attendance Grid */}
+                <Card className="p-6 dashboard-card-enhanced parent-accent-border hover-lift">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-5 pb-4 border-b border-gray-100">
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 bg-gradient-to-br from-parent-primary to-parent-secondary rounded-xl flex items-center justify-center shadow-sm">
                         <Calendar className="w-6 h-6 text-white" />
@@ -292,9 +276,64 @@ export default function ParentDashboard({ user, onLogout }) {
                       </div>
                     </div>
                   </div>
-                <AttendanceGrid studentId={selectedStudent.student_id} />
+                  <AttendanceGrid studentId={selectedStudent.student_id} />
+                </Card>
               </div>
-            </Card>
+
+              {/* Right column - Notifications */}
+              <div>
+                <Card className="p-6 dashboard-card-enhanced parent-accent-border hover-lift">
+                  <div className="flex items-center gap-3 mb-5 pb-4 border-b border-gray-100">
+                    <div className="w-12 h-12 bg-gradient-to-br from-parent-primary to-parent-secondary rounded-xl flex items-center justify-center shadow-sm">
+                      <Bell className="w-6 h-6 text-white" />
+                    </div>
+                    <h2 className="text-xl font-semibold text-parent-primary">Notifications</h2>
+                  </div>
+                  <div className="space-y-3 max-h-96 overflow-y-auto" data-testid="notifications-container">
+                    {notifications.length === 0 ? (
+                      <p className="text-sm text-muted-foreground text-center py-8">No notifications</p>
+                    ) : (
+                      notifications.slice(0, 5).map((notification) => (
+                        <div
+                          key={notification.notification_id}
+                          data-testid={`notification-${notification.type}`}
+                          onClick={() => handleNotificationClick(notification)}
+                          className="flex items-start gap-4 p-4 rounded-xl border border-border bg-card shadow-modern hover:shadow-modern-md transition-all cursor-pointer"
+                        >
+                          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-soft-cyan/20 text-soft-cyan shadow-sm flex-shrink-0">
+                            <Bell className="w-5 h-5" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center justify-between gap-2">
+                              <h3 className="font-semibold text-navy truncate">
+                                {notification.title}
+                              </h3>
+                              {notification.timestamp && (
+                                <span className="text-xs text-muted-foreground whitespace-nowrap">
+                                  {formatTimestamp(notification.timestamp)}
+                                </span>
+                              )}
+                            </div>
+                            {notification.message && (
+                              <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
+                                {notification.message}
+                              </p>
+                            )}
+                            {!notification.read && (
+                              <div className="mt-2">
+                                <span className="inline-flex items-center px-2 py-0.5 rounded-lg text-xs font-medium bg-accent-blue text-white shadow-sm">
+                                  New
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </Card>
+              </div>
+            </div>
           </div>
         )}
       </div>

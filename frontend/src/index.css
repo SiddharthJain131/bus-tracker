@@ -155,172 +155,143 @@
     h3 {
         @apply text-2xl lg:text-3xl;
     }
+    
+    h4 {
+        @apply text-xl lg:text-2xl;
+    }
 }
 
 @layer utilities {
-    /* Animation for gradient shimmer */
-    @keyframes gradient-shimmer {
-        0%, 100% {
+    .text-balance {
+        text-wrap: balance;
+    }
+    
+    .shadow-modern {
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -1px rgb(0 0 0 / 0.06);
+    }
+    
+    .shadow-modern-lg {
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -2px rgb(0 0 0 / 0.05);
+    }
+    
+    .shadow-modern-xl {
+        box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.08), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+    }
+    
+    .glass-effect {
+        @apply bg-white/80 backdrop-blur-xl border border-white/20;
+    }
+    
+    .dark .glass-effect {
+        @apply bg-gray-900/80 backdrop-blur-xl border border-white/10;
+    }
+    
+    /* Dashboard Theme Utilities */
+    .dashboard-bg {
+        background-color: #F4F5F7;
+    }
+    
+    .dashboard-content {
+        background-color: #F9FAFB;
+    }
+    
+    .dashboard-panel {
+        @apply bg-white shadow-sm;
+    }
+    
+    .dashboard-card {
+        @apply bg-white rounded-lg shadow-md border border-gray-100;
+    }
+    
+    .dashboard-separator {
+        @apply border-gray-200;
+    }
+    
+    /* Enhanced card styling with micro-shadows */
+    .dashboard-card-enhanced {
+        @apply bg-white rounded-lg shadow-sm border border-gray-100;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+    }
+    
+    /* Role-based accent borders */
+    .admin-accent-border {
+        @apply border-t-4 border-t-admin-primary;
+    }
+    
+    .teacher-accent-border {
+        @apply border-t-4 border-t-teacher-primary;
+    }
+    
+    .parent-accent-border {
+        @apply border-t-4 border-t-parent-primary;
+    }
+    
+    /* Subtle dividers with role colors */
+    .divider-subtle {
+        @apply border-b border-gray-100;
+    }
+    
+    /* Animated gradient background for login */
+    .animated-gradient-bg {
+        background: linear-gradient(-45deg, #1e3a8a, #2563eb, #3b82f6, #1e40af);
+        background-size: 400% 400%;
+        animation: gradient-shift 15s ease infinite;
+    }
+    
+    @keyframes gradient-shift {
+        0% {
             background-position: 0% 50%;
         }
         50% {
             background-position: 100% 50%;
         }
+        100% {
+            background-position: 0% 50%;
+        }
     }
     
-    .animate-gradient {
-        background-size: 200% 200%;
-        animation: gradient-shimmer 12s ease infinite;
+    /* Floating shapes animation */
+    .floating-shape {
+        animation: float 20s ease-in-out infinite;
     }
     
-    /* Animation for notification bell shake */
-    @keyframes shake {
+    @keyframes float {
         0%, 100% {
-            transform: rotate(0deg);
+            transform: translate(0, 0);
         }
-        10%, 30%, 50%, 70%, 90% {
-            transform: rotate(-10deg);
+        25% {
+            transform: translate(10px, -15px);
         }
-        20%, 40%, 60%, 80% {
-            transform: rotate(10deg);
+        50% {
+            transform: translate(-15px, 10px);
+        }
+        75% {
+            transform: translate(15px, 15px);
         }
     }
     
-    .animate-shake {
-        animation: shake 0.8s ease-in-out;
+    /* Fade in animation */
+    .fade-in {
+        animation: fadeIn 0.6s ease-out;
     }
     
-    /* Dashboard background layers */
-    .dashboard-bg {
-        background-color: hsl(var(--dashboard-bg));
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
     
-    .dashboard-content {
-        background-color: hsl(var(--dashboard-content));
+    /* Slide in from left */
+    .slide-in-left {
+        animation: slideInLeft 0.5s ease-out;
     }
     
-    .dashboard-panel {
-        background-color: hsl(var(--dashboard-panel));
-    }
-    
-    .dashboard-separator {
-        border-color: hsl(var(--dashboard-separator));
-    }
-    
-    /* Dashboard cards */
-    .dashboard-card {
-        @apply bg-white shadow-md rounded-xl;
-    }
-    
-    .dashboard-card-enhanced {
-        @apply bg-white shadow-md rounded-xl border border-gray-100;
-    }
-    
-    /* Role-specific accent borders */
-    .admin-accent-border {
-        border-top: 3px solid hsl(var(--admin-primary));
-    }
-    
-    .teacher-accent-border {
-        border-top: 3px solid hsl(var(--teacher-primary));
-    }
-    
-    .parent-accent-border {
-        border-top: 3px solid hsl(var(--parent-primary));
-    }
-    
-    /* Enhanced tab styles for Admin */
-    .admin-tabs [data-state="active"] {
-        @apply border-b-[3px] border-admin-primary shadow-sm;
-        color: hsl(var(--admin-primary));
-    }
-    
-    .admin-tabs [data-state="inactive"] {
-        @apply text-gray-500 hover:text-gray-700;
-    }
-    
-    /* Utility classes for role-based colors */
-    .text-admin-primary {
-        color: hsl(var(--admin-primary));
-    }
-    
-    .bg-admin-primary {
-        background-color: hsl(var(--admin-primary));
-    }
-    
-    .bg-admin-light {
-        background-color: hsl(var(--admin-light));
-    }
-    
-    .text-teacher-primary {
-        color: hsl(var(--teacher-primary));
-    }
-    
-    .bg-teacher-primary {
-        background-color: hsl(var(--teacher-primary));
-    }
-    
-    .bg-teacher-light {
-        background-color: hsl(var(--teacher-light));
-    }
-    
-    .text-parent-primary {
-        color: hsl(var(--parent-primary));
-    }
-    
-    .bg-parent-primary {
-        background-color: hsl(var(--parent-primary));
-    }
-    
-    .bg-parent-light {
-        background-color: hsl(var(--parent-light));
-    }
-    
-    /* Logout button styles */
-    .logout-button {
-        @apply border-2 hover:shadow-lg transition-all duration-300;
-    }
-    
-    .logout-button-admin {
-        @apply border-admin-primary/20 text-admin-primary hover:border-admin-primary hover:bg-admin-light;
-    }
-    
-    .logout-button-teacher {
-        @apply border-teacher-primary/20 text-teacher-primary hover:border-teacher-primary hover:bg-teacher-light;
-    }
-    
-    .logout-button-parent {
-        @apply border-parent-primary/20 text-parent-primary hover:border-parent-primary hover:bg-parent-light;
-    }
-    
-    /* Status color utilities */
-    .status-gray {
-        background-color: hsl(var(--status-gray));
-    }
-    
-    .status-yellow {
-        background-color: hsl(var(--status-yellow));
-    }
-    
-    .status-green {
-        background-color: hsl(var(--status-green));
-    }
-    
-    .status-red {
-        background-color: hsl(var(--status-red));
-    }
-    
-    .status-blue {
-        background-color: hsl(var(--status-blue));
-    }
-    
-    /* Hover effects */
-    .hover-lift {
-        @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
-    }
-    
-    /* Slide animations */
-    @keyframes slide-in-left {
+    @keyframes slideInLeft {
         from {
             opacity: 0;
             transform: translateX(-20px);
@@ -331,60 +302,58 @@
         }
     }
     
-    .slide-in-left {
-        animation: slide-in-left 0.5s ease-out;
+    /* Card hover lift effect */
+    .hover-lift {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     
-    /* Modern shadows */
-    .shadow-modern {
-        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    .hover-lift:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.12);
     }
     
-    .shadow-modern-md {
-        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    /* Unified logout button styles */
+    .logout-button {
+        @apply flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-gray-200 bg-white text-gray-700 font-medium transition-all duration-200;
     }
     
-    /* Scrollbar styling */
-    .custom-scrollbar::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
+    .logout-button:hover {
+        @apply shadow-md;
     }
     
-    .custom-scrollbar::-webkit-scrollbar-track {
-        @apply bg-gray-100 rounded-lg;
+    .logout-button-admin:hover {
+        @apply border-admin-primary text-admin-primary bg-admin-light;
     }
     
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-        @apply bg-gray-300 rounded-lg hover:bg-gray-400;
+    .logout-button-teacher:hover {
+        @apply border-teacher-primary text-teacher-primary bg-teacher-light;
     }
     
-    /* Thin scrollbar for horizontal overflow */
-    .scrollbar-thin::-webkit-scrollbar {
-        width: 4px;
-        height: 4px;
+    .logout-button-parent:hover {
+        @apply border-parent-primary text-parent-primary bg-parent-light;
     }
-    
-    .scrollbar-thin::-webkit-scrollbar-track {
-        background: transparent;
+}
+
+@layer base {
+    [data-debug-wrapper="true"] {
+        display: contents !important;
     }
-    
-    .scrollbar-thin::-webkit-scrollbar-thumb {
-        @apply bg-gray-300 rounded;
-    }
-    
-    .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-        @apply bg-gray-400;
-    }
-    
-    .scrollbar-thumb-gray-300::-webkit-scrollbar-thumb {
-        @apply bg-gray-300;
-    }
-    
-    .scrollbar-thumb-gray-400::-webkit-scrollbar-thumb {
-        @apply bg-gray-400;
-    }
-    
-    .scrollbar-track-gray-100::-webkit-scrollbar-track {
-        @apply bg-gray-100;
+
+    [data-debug-wrapper="true"] > * {
+        margin-left: inherit;
+        margin-right: inherit;
+        margin-top: inherit;
+        margin-bottom: inherit;
+        padding-left: inherit;
+        padding-right: inherit;
+        padding-top: inherit;
+        padding-bottom: inherit;
+        column-gap: inherit;
+        row-gap: inherit;
+        gap: inherit;
+        border-left-width: inherit;
+        border-right-width: inherit;
+        border-top-width: inherit;
+        border-bottom-width: inherit;
     }
 }

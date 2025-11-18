@@ -1,0 +1,1152 @@
+{
+  "timestamp": "2025-11-18T12:56:08.102426",
+  "backup_type": "main",
+  "collections": {
+    "users": [
+      {
+        "_id": "691c1daeecf7e2e1f115cfc5",
+        "user_id": "45616b09-90cd-467f-be6c-5fbfd1232a72",
+        "email": "admin@school.com",
+        "password_hash": "$2b$12$0vcPCu6KgIowHlLo4/dNaeked2kUor/vfsUFZDIopJoR2FdMI3R3G",
+        "role": "admin",
+        "name": "James Anderson",
+        "phone": "+1-555-9001",
+        "photo": "/api/photos/admins/45616b09-90cd-467f-be6c-5fbfd1232a72.jpg",
+        "address": "School Administration Office, Main Building",
+        "assigned_class": null,
+        "assigned_section": null,
+        "student_ids": [],
+        "is_elevated_admin": true
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfc6",
+        "user_id": "6c8b9744-b1d0-4621-b0cd-8e991de5fb7d",
+        "email": "admin2@school.com",
+        "password_hash": "$2b$12$0vcPCu6KgIowHlLo4/dNaeked2kUor/vfsUFZDIopJoR2FdMI3R3G",
+        "role": "admin",
+        "name": "Patricia Williams",
+        "phone": "+1-555-9002",
+        "photo": "/api/photos/admins/6c8b9744-b1d0-4621-b0cd-8e991de5fb7d.jpg",
+        "address": "School Administration Office, East Wing",
+        "assigned_class": null,
+        "assigned_section": null,
+        "student_ids": [],
+        "is_elevated_admin": false
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfc7",
+        "user_id": "b5645d0e-feb0-4c51-a03b-27edd63f4d79",
+        "email": "teacher@school.com",
+        "password_hash": "$2b$12$0vcPCu6KgIowHlLo4/dNaeked2kUor/vfsUFZDIopJoR2FdMI3R3G",
+        "role": "teacher",
+        "name": "Mary Johnson",
+        "phone": "+1-555-2001",
+        "photo": "/api/photos/teachers/b5645d0e-feb0-4c51-a03b-27edd63f4d79.jpg",
+        "address": "321 Teacher Lane, San Francisco, CA",
+        "assigned_class": "5",
+        "assigned_section": "A",
+        "student_ids": [
+          "770f57ab-da26-4830-9615-a22451c61808",
+          "e56bcd37-26b4-4c31-b1d3-644c453312fb",
+          "56327f08-ac77-4a62-9346-5e4cbc8dbd52",
+          "66e7301e-b8f7-429b-a65d-cc8a78999c12",
+          "f38f3c0d-4171-4468-a20d-56b0ba071087",
+          "e67f2a69-7053-4201-896e-427d27718c8c",
+          "ffe94c7f-6b92-4a58-8abf-0a9c0dc227fd"
+        ],
+        "is_elevated_admin": false
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfc8",
+        "user_id": "d3b1b12a-3c06-4bcc-a582-1a8e7eb159f1",
+        "email": "teacher2@school.com",
+        "password_hash": "$2b$12$0vcPCu6KgIowHlLo4/dNaeked2kUor/vfsUFZDIopJoR2FdMI3R3G",
+        "role": "teacher",
+        "name": "Robert Smith",
+        "phone": "+1-555-2002",
+        "photo": "/api/photos/teachers/d3b1b12a-3c06-4bcc-a582-1a8e7eb159f1.jpg",
+        "address": "456 Educator Drive, San Francisco, CA",
+        "assigned_class": "6",
+        "assigned_section": "B",
+        "student_ids": [
+          "0b87b7d8-34f3-4f7f-a34c-8a595dccf3eb",
+          "29fb1bbb-a518-4995-a77a-ffb763a1360c",
+          "f544dba6-639b-47a5-b459-a0b72efc0520",
+          "bcabe810-8588-43fe-99ff-88ebfe271ffb",
+          "e84d445d-186a-439f-929f-874aabcb45a3",
+          "d7ecd370-4231-4303-a2aa-4dfe7e177fd0",
+          "dc1e7ad7-3b88-486d-ba96-cb7dfb6e408e"
+        ],
+        "is_elevated_admin": false
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfc9",
+        "user_id": "f9a05c8c-8de5-4521-9a0d-33d96ef9ea39",
+        "email": "teacher3@school.com",
+        "password_hash": "$2b$12$0vcPCu6KgIowHlLo4/dNaeked2kUor/vfsUFZDIopJoR2FdMI3R3G",
+        "role": "teacher",
+        "name": "Sarah Wilson",
+        "phone": "+1-555-2003",
+        "photo": "/api/photos/teachers/f9a05c8c-8de5-4521-9a0d-33d96ef9ea39.jpg",
+        "address": "789 School Street, San Francisco, CA",
+        "assigned_class": "4",
+        "assigned_section": "A",
+        "student_ids": [
+          "f6e65577-023e-4bed-baa2-e0dd8f8a5a13",
+          "b56c225e-1ee9-4d13-b44a-10cccb4def24",
+          "f7e63f02-2b0f-4457-981d-b4ef56337440",
+          "4c613ede-dcde-4d36-9dc2-7557da95b145",
+          "e60ca573-b21d-41bd-9c01-ee8f59292cf4",
+          "45fd3a68-5335-4b0c-8e4c-f6a17709e9cb"
+        ],
+        "is_elevated_admin": false
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfca",
+        "user_id": "3bbe2bf9-68bd-460f-8d2d-dc6ba9648a0e",
+        "email": "parent@school.com",
+        "password_hash": "$2b$12$0vcPCu6KgIowHlLo4/dNaeked2kUor/vfsUFZDIopJoR2FdMI3R3G",
+        "role": "parent",
+        "name": "John Parent",
+        "phone": "+1-555-3001",
+        "photo": "/api/photos/parents/3bbe2bf9-68bd-460f-8d2d-dc6ba9648a0e.jpg",
+        "address": "123 Oak St, San Francisco, CA 94102",
+        "assigned_class": null,
+        "assigned_section": null,
+        "student_ids": [
+          "770f57ab-da26-4830-9615-a22451c61808",
+          "e56bcd37-26b4-4c31-b1d3-644c453312fb"
+        ],
+        "is_elevated_admin": false
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfcb",
+        "user_id": "f25a7d26-cc0f-4a6e-8295-05a26abe3338",
+        "email": "parent2@school.com",
+        "password_hash": "$2b$12$0vcPCu6KgIowHlLo4/dNaeked2kUor/vfsUFZDIopJoR2FdMI3R3G",
+        "role": "parent",
+        "name": "Sarah Brown",
+        "phone": "+1-555-3002",
+        "photo": "/api/photos/parents/f25a7d26-cc0f-4a6e-8295-05a26abe3338.jpg",
+        "address": "456 Pine Ave, San Francisco, CA 94103",
+        "assigned_class": null,
+        "assigned_section": null,
+        "student_ids": [
+          "56327f08-ac77-4a62-9346-5e4cbc8dbd52"
+        ],
+        "is_elevated_admin": false
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfcc",
+        "user_id": "5022b972-6015-4f2c-8387-8b3b6892e2a2",
+        "email": "parent3@school.com",
+        "password_hash": "$2b$12$0vcPCu6KgIowHlLo4/dNaeked2kUor/vfsUFZDIopJoR2FdMI3R3G",
+        "role": "parent",
+        "name": "Michael Davis",
+        "phone": "+1-555-3003",
+        "photo": "/api/photos/parents/5022b972-6015-4f2c-8387-8b3b6892e2a2.jpg",
+        "address": "789 Elm St, San Francisco, CA 94104",
+        "assigned_class": null,
+        "assigned_section": null,
+        "student_ids": [
+          "66e7301e-b8f7-429b-a65d-cc8a78999c12",
+          "f38f3c0d-4171-4468-a20d-56b0ba071087"
+        ],
+        "is_elevated_admin": false
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfcd",
+        "user_id": "dd99bba1-e8a2-42c0-b8d7-773448d658f4",
+        "email": "parent4@school.com",
+        "password_hash": "$2b$12$0vcPCu6KgIowHlLo4/dNaeked2kUor/vfsUFZDIopJoR2FdMI3R3G",
+        "role": "parent",
+        "name": "Emily Martinez",
+        "phone": "+1-555-3004",
+        "photo": "/api/photos/parents/dd99bba1-e8a2-42c0-b8d7-773448d658f4.jpg",
+        "address": "234 Maple Dr, San Francisco, CA 94105",
+        "assigned_class": null,
+        "assigned_section": null,
+        "student_ids": [
+          "0b87b7d8-34f3-4f7f-a34c-8a595dccf3eb",
+          "29fb1bbb-a518-4995-a77a-ffb763a1360c",
+          "f544dba6-639b-47a5-b459-a0b72efc0520"
+        ],
+        "is_elevated_admin": false
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfce",
+        "user_id": "dee28b5f-99c6-438d-a988-b0cadcb5aaf0",
+        "email": "parent5@school.com",
+        "password_hash": "$2b$12$0vcPCu6KgIowHlLo4/dNaeked2kUor/vfsUFZDIopJoR2FdMI3R3G",
+        "role": "parent",
+        "name": "David Wilson",
+        "phone": "+1-555-3005",
+        "photo": "/api/photos/parents/dee28b5f-99c6-438d-a988-b0cadcb5aaf0.jpg",
+        "address": "567 Cedar Ln, San Francisco, CA 94106",
+        "assigned_class": null,
+        "assigned_section": null,
+        "student_ids": [
+          "bcabe810-8588-43fe-99ff-88ebfe271ffb",
+          "e84d445d-186a-439f-929f-874aabcb45a3"
+        ],
+        "is_elevated_admin": false
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfcf",
+        "user_id": "4b1746fe-7460-4a32-8f64-a302a80d7d64",
+        "email": "parent6@school.com",
+        "password_hash": "$2b$12$0vcPCu6KgIowHlLo4/dNaeked2kUor/vfsUFZDIopJoR2FdMI3R3G",
+        "role": "parent",
+        "name": "Jennifer Taylor",
+        "phone": "+1-555-3006",
+        "photo": "/api/photos/parents/4b1746fe-7460-4a32-8f64-a302a80d7d64.jpg",
+        "address": "890 Birch Ave, San Francisco, CA 94107",
+        "assigned_class": null,
+        "assigned_section": null,
+        "student_ids": [
+          "f6e65577-023e-4bed-baa2-e0dd8f8a5a13"
+        ],
+        "is_elevated_admin": false
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfd0",
+        "user_id": "23e0224b-c8e9-4c81-8905-9be9ac508993",
+        "email": "parent7@school.com",
+        "password_hash": "$2b$12$0vcPCu6KgIowHlLo4/dNaeked2kUor/vfsUFZDIopJoR2FdMI3R3G",
+        "role": "parent",
+        "name": "Christopher Garcia",
+        "phone": "+1-555-3007",
+        "photo": "/api/photos/parents/23e0224b-c8e9-4c81-8905-9be9ac508993.jpg",
+        "address": "123 Walnut St, San Francisco, CA 94108",
+        "assigned_class": null,
+        "assigned_section": null,
+        "student_ids": [
+          "b56c225e-1ee9-4d13-b44a-10cccb4def24",
+          "f7e63f02-2b0f-4457-981d-b4ef56337440"
+        ],
+        "is_elevated_admin": false
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfd1",
+        "user_id": "02218599-75f7-4357-a064-aa6622520d85",
+        "email": "parent8@school.com",
+        "password_hash": "$2b$12$0vcPCu6KgIowHlLo4/dNaeked2kUor/vfsUFZDIopJoR2FdMI3R3G",
+        "role": "parent",
+        "name": "Amanda Rodriguez",
+        "phone": "+1-555-3008",
+        "photo": "/api/photos/parents/02218599-75f7-4357-a064-aa6622520d85.jpg",
+        "address": "456 Sunset Blvd, San Francisco, CA 94109",
+        "assigned_class": null,
+        "assigned_section": null,
+        "student_ids": [
+          "4c613ede-dcde-4d36-9dc2-7557da95b145"
+        ],
+        "is_elevated_admin": false
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfd2",
+        "user_id": "4d14bfb7-ecb1-42ac-82f2-e7a2e65d68a4",
+        "email": "parent9@school.com",
+        "password_hash": "$2b$12$0vcPCu6KgIowHlLo4/dNaeked2kUor/vfsUFZDIopJoR2FdMI3R3G",
+        "role": "parent",
+        "name": "Matthew Lee",
+        "phone": "+1-555-3009",
+        "photo": "/api/photos/parents/4d14bfb7-ecb1-42ac-82f2-e7a2e65d68a4.jpg",
+        "address": "789 Ocean Ave, San Francisco, CA 94110",
+        "assigned_class": null,
+        "assigned_section": null,
+        "student_ids": [
+          "e60ca573-b21d-41bd-9c01-ee8f59292cf4",
+          "e67f2a69-7053-4201-896e-427d27718c8c"
+        ],
+        "is_elevated_admin": false
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfd3",
+        "user_id": "298d8e3e-a021-4ec9-8a33-d6bf625db541",
+        "email": "parent10@school.com",
+        "password_hash": "$2b$12$0vcPCu6KgIowHlLo4/dNaeked2kUor/vfsUFZDIopJoR2FdMI3R3G",
+        "role": "parent",
+        "name": "Jessica Harris",
+        "phone": "+1-555-3010",
+        "photo": "/api/photos/parents/298d8e3e-a021-4ec9-8a33-d6bf625db541.jpg",
+        "address": "234 Beach St, San Francisco, CA 94111",
+        "assigned_class": null,
+        "assigned_section": null,
+        "student_ids": [
+          "d7ecd370-4231-4303-a2aa-4dfe7e177fd0"
+        ],
+        "is_elevated_admin": false
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfd4",
+        "user_id": "5e8b1d12-d345-4f89-92eb-dcd548d01afa",
+        "email": "parent11@school.com",
+        "password_hash": "$2b$12$0vcPCu6KgIowHlLo4/dNaeked2kUor/vfsUFZDIopJoR2FdMI3R3G",
+        "role": "parent",
+        "name": "Daniel Clark",
+        "phone": "+1-555-3011",
+        "photo": "/api/photos/parents/5e8b1d12-d345-4f89-92eb-dcd548d01afa.jpg",
+        "address": "567 Harbor Rd, San Francisco, CA 94112",
+        "assigned_class": null,
+        "assigned_section": null,
+        "student_ids": [
+          "45fd3a68-5335-4b0c-8e4c-f6a17709e9cb",
+          "ffe94c7f-6b92-4a58-8abf-0a9c0dc227fd"
+        ],
+        "is_elevated_admin": false
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfd5",
+        "user_id": "409f41d4-4496-450b-a19b-471f9f8d0f4f",
+        "email": "parent12@school.com",
+        "password_hash": "$2b$12$0vcPCu6KgIowHlLo4/dNaeked2kUor/vfsUFZDIopJoR2FdMI3R3G",
+        "role": "parent",
+        "name": "Lisa Lewis",
+        "phone": "+1-555-3012",
+        "photo": "/api/photos/parents/409f41d4-4496-450b-a19b-471f9f8d0f4f.jpg",
+        "address": "890 Market St, San Francisco, CA 94113",
+        "assigned_class": null,
+        "assigned_section": null,
+        "student_ids": [
+          "dc1e7ad7-3b88-486d-ba96-cb7dfb6e408e"
+        ],
+        "is_elevated_admin": false
+      }
+    ],
+    "students": [
+      {
+        "_id": "691c1daeecf7e2e1f115cfd6",
+        "student_id": "770f57ab-da26-4830-9615-a22451c61808",
+        "name": "Emma Johnson",
+        "roll_number": "G5A-001",
+        "tag_id": "RFID-1001",
+        "phone": "+1-555-4001",
+        "photo": "/api/photos/students/770f57ab-da26-4830-9615-a22451c61808/profile.jpg",
+        "class_name": "5",
+        "section": "A",
+        "parent_id": "3bbe2bf9-68bd-460f-8d2d-dc6ba9648a0e",
+        "teacher_id": "b5645d0e-feb0-4c51-a03b-27edd63f4d79",
+        "bus_number": "BUS-001",
+        "stop_id": "5eb9784d-9763-4bdd-9a5e-99e67630883e",
+        "emergency_contact": "+1-555-9101",
+        "remarks": "Allergic to peanuts",
+        "embedding": "GKVPvAQbUD9lqwQ/nT6bP3DKlz42OpO/wDBeQNqkib+0Cnm/qKwMQPRSYD5xByC+c7uAP9ovU7/SUdE+FFwcPwoAtz4PN+e/1xBDwKs/D79iZSU/EjLKv7Wezz1CL2O+lWgqvpKSPz91AIQ/QvP8vrkIrj/SUBk//2Q8vgOaer/21ue/gz2vv/8LnT8ogO2/sV34v5mLoz+FRgc+hLeevz3VYL9v8Y2+yeS6PhuOBz9HMlg+ClQNvoVtsD/5fR8+MIe4v91pGL6M2pO/8073P30wQb+p1P096Wpiv1u66j610HM/qs/YPGxyYT+KR48/VkgUv32oNz8mwjG/FgV5vrA1YD7EYA0/jrLRvz0fW74WKh0+G7OjPxAvQz4/ZL++ew8sPwYUIr57h88/i1m4PgCTzzxOfKC+PWBLvfqxvr8mvlo/5OoMPil8JL9yotu/zOdYP6Yo0T6jtmc+MN4YwH+U3r5+8AY+G2OTv0UDAD8d+QtA2Uxvv/OeLj8x/gVARm/YPsx3lz9BaGK+HsWivyTfir/ZCNc9pK8ivvFADz8PtOY/rkWAPsocOD+j4KE/DD8qP1PXqD+yt50+APK5P5ro4j5Vzh+/95G3vwxgYz++576/xWl7PyEOtr9d7iW/KyROQILadr8KnAG/zNn4PaDjpb/kKyw/ptcQv/dpj78="
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfd7",
+        "student_id": "e56bcd37-26b4-4c31-b1d3-644c453312fb",
+        "name": "Liam Smith",
+        "roll_number": "G5A-002",
+        "tag_id": "RFID-1002",
+        "phone": "+1-555-4002",
+        "photo": "/api/photos/students/e56bcd37-26b4-4c31-b1d3-644c453312fb/profile.jpg",
+        "class_name": "5",
+        "section": "A",
+        "parent_id": "3bbe2bf9-68bd-460f-8d2d-dc6ba9648a0e",
+        "teacher_id": "b5645d0e-feb0-4c51-a03b-27edd63f4d79",
+        "bus_number": "BUS-001",
+        "stop_id": "b5f21bcb-3433-4c52-abaf-6ed1f17770a0",
+        "emergency_contact": "+1-555-9102",
+        "remarks": null,
+        "embedding": "lDzRP62j0b/2WOa8+sZrvze2Gr/myLQ+V1DZvd7ZKr9uY+G/TnzBP0RuKL6ox1m/5M+CviCfdbxdWQg+5hoWvgwULT9oH8i/2yl2PZc7Ej+JhJs/JpGTvijMTr6g0M6+Tk0RQB5eDz7KZIc/3xwXP6VjCT/uwcy+gqsFv4lI4D+gN5c930mVv1j+0r30XPW+mQwyP7BTXr+4Xya/4MqEvzG8LD/SkCg+fHxgP26LWr+8Zr2+x715v2o0ZD+UbFk/NtqxvzQnrTz0omK/5fLSPhF/vL3srRM+wNC8vrnmrb5Zj4Q/aXg0Pld9Lz6gzhU+SmwlP8C+4L5a/oY/2unnP275U71e5lw/5l+gP53ugD/4yWk/CoDVPi5GWL9sAxe/7Pu+vpBFZ7wqZ6q9/cmxvhQ8Wj8QAJi/lZI2P5Cr0L6/ELW+OAgSPxFENz623WE/N5KvPzxFeL/5a0E/llDPv5pMEz/pzcI+p6j7vpHxML8aCJo/UEc9Po/4bz9so4M+YA2LPyfSED+U3p2/vCsvvYRk3D6WYFa/3u77Pg8fhT6wZlG+VEbEPFZ77740b4O8Tp87P7I8QD/nQ4K/4sqWPspR6z8YzF69kwyTvPWh1b+CM7G/s3jWP8cUiT8s1pK+AEDMP4MJ8j6pVUA9HIXzP+aR3z+xmW++QwVHP19Foz8="
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfd8",
+        "student_id": "56327f08-ac77-4a62-9346-5e4cbc8dbd52",
+        "name": "Sophia Brown",
+        "roll_number": "G5A-003",
+        "tag_id": "RFID-1003",
+        "phone": "+1-555-4003",
+        "photo": "/api/photos/students/56327f08-ac77-4a62-9346-5e4cbc8dbd52/profile.jpg",
+        "class_name": "5",
+        "section": "A",
+        "parent_id": "f25a7d26-cc0f-4a6e-8295-05a26abe3338",
+        "teacher_id": "b5645d0e-feb0-4c51-a03b-27edd63f4d79",
+        "bus_number": "BUS-002",
+        "stop_id": "b0b1e853-718a-4403-ace7-6e90fbe1306b",
+        "emergency_contact": "+1-555-9103",
+        "remarks": "Needs glasses for reading",
+        "embedding": "oMLMvjlP4j7L6BfAt+a4Py1NUT6jggLAvd+dPzRoeb/3pNG/MiSfPSUcor7vKKi+H3wFP8cgkz7sWA5ANtIav1kG1r7UibG/F0xcwFwcvT3yTDa+X2qYv55FST/BSuS/xoNMP5wJKb2oiaU9EBHBPgyj6z2QSNM/dghIP7S+SrzikHC/wKL8P7lFpD58b40+WJjwv7IoCL/WJao+BCaVv7ZuLb/nthhAzPTDvzpLhT316is/UK0YwAiptz1GW74/LuFrvVgXgT1Wan49jtZTvyAf0b6Rr8Q/suXfvkVdu79eVMo+bWNiP6qUor7ZSYW/mqL8v0pGgb/uPgq/KClqv4LrUD9AWQLAqIcowMNThz5MMo+/EBUfP0K3vjyTELk/u8Crv1moa79xoI+/ZqYLv6GBmj/+EB0+2hyuPu0pZb+4eMW+1BnxPS5iRL4oFgC9+qOYvgg8wT4W+cI+PFvAv+ZzkL9CBbC/17ycP0I4dD6kDJK/4hBHvfSI/r66xHM/lylkPU0AMb/nySQ/RJ/CvvXTEb/wG40/PzKgv9GvhT4MRFY/A4dePzuiBj5XTgDA4LY5PG16eT8yBWm/VFMwPrRXBb9mEfC+iiHaP9wdmT9uEju/DPWwv70Wqr7JeKk+ljvGPxQL0j7Ie3Y/yBamv/rZer+tU1u/i/bzvkrWyz0="
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfd9",
+        "student_id": "66e7301e-b8f7-429b-a65d-cc8a78999c12",
+        "name": "Noah Davis",
+        "roll_number": "G5A-004",
+        "tag_id": "RFID-1004",
+        "phone": "+1-555-4004",
+        "photo": "/api/photos/students/66e7301e-b8f7-429b-a65d-cc8a78999c12/profile.jpg",
+        "class_name": "5",
+        "section": "A",
+        "parent_id": "5022b972-6015-4f2c-8387-8b3b6892e2a2",
+        "teacher_id": "b5645d0e-feb0-4c51-a03b-27edd63f4d79",
+        "bus_number": "BUS-002",
+        "stop_id": "f2557f18-cf6d-47e2-8759-5031649748d0",
+        "emergency_contact": "+1-555-9104",
+        "remarks": null,
+        "embedding": "CAOgvdULvD8bSWO/stq8PxphUj1LrzE/csMOQNDRFD+s2xa/QRbjvqQs2T/fkGu/LdF1vnON2r/whne93s4svxnW4b4EvXG/zE4ZwCojTT8+hRq/USurvWWTDb+N2zDAGlIiPcPWib/2tsw+Mj1kPzVVyr+j8S0/8ANOv7XCWb8eRt2/Rm+Rv6HoMz9DAmO/JH67v/3tEr+1Lau+eZH/vuqz077KmkW9PmpPv+iemj+1vilAsfcJwKQW3T4lps0/MfztP/jqSr+c7A+/LkuYPxVrTT9ZBQ8/yJ7lv00VAr/Kh7s+t12MP/wPFsDFIoy+0U9wv9HIRj+lYa4/4sypPYtMMT+G6OC9dkNjvxXF7b2hOfS9FZKwvRmb0j4gHXg+MxwLwDMShb/T4UW/8D+Zv+gWOL6sKek/uzVZP8dayT+MSps/vtRBv6q8XT8LJoe/LCY7vrapJj4HuDy/KyPkv83o7r5s1x/AIt1PP80rF7+2Mck8hbvCP+Xmhr7qbEw/n+oav3vyyL8YpGq+3jSZP8mpCD7hq58/Y8KEPizjyT+mFWS/bymqP35Seb7NWgHARjSov+gvuD9YAo6/U2dNP/ReAD/hzQg/Mq1kv8fylj8E0PK/OeigPSiak795zQU9dbhXPvZEUz/Gg1k/rXvnvSvJnL+TcdY+f87BvtZmSr4="
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfda",
+        "student_id": "f38f3c0d-4171-4468-a20d-56b0ba071087",
+        "name": "Olivia Martinez",
+        "roll_number": "G5A-005",
+        "tag_id": "RFID-1005",
+        "phone": "+1-555-4005",
+        "photo": "/api/photos/students/f38f3c0d-4171-4468-a20d-56b0ba071087/profile.jpg",
+        "class_name": "5",
+        "section": "A",
+        "parent_id": "5022b972-6015-4f2c-8387-8b3b6892e2a2",
+        "teacher_id": "b5645d0e-feb0-4c51-a03b-27edd63f4d79",
+        "bus_number": "BUS-003",
+        "stop_id": "15784615-15fa-46fe-a137-08ace1088585",
+        "emergency_contact": "+1-555-9105",
+        "remarks": "School choir member",
+        "embedding": "VETPv1BJi74FzTk/61Cdvx1AsD5Yav6/lV5DPyk3FT7dELC/TYQcPhG0NEBVBg4/JH8/wE6Mnr7COhk+t5K/Pzz7Tj/vSaC/ov81wN4htT3A9Wq/aFndv5EC1b+rmhG/0ksCv9WZjD/RMqs/qvFxvkgj4b4nLWo/14HPP734PT9t5zi+yGYbv+fGtT74P/Y/0tVEv5Ximz/imxpAyTC/PUwNR7/rutm+IvB2v3eWIT8lme0/qDHLvx55r79kaN0+JFWTv2B4Zbvg7JA+/lQAv2TR5D9hIf4+k9dmvjx2HrxVdC8/dva7Ph6L/b28GZm+3/WMvzT/wj33+ou/VyWOv4ewAT9cZWs+n6Egv3aMgL8Y+0O/kNkcQG3AkD4sop0+gkH3v/eLOz6EWrG+UHCMvyr4OL8LarA9Uk4cPjH0OT9ypbA+ueaKv0es0L7kjT2/kFlrPZy7sD8T20y+PlaqPbSQBL+oXDe/v/pIv7I3Pb+ZdsS+HYC1vmGIiT6kMIO+ZuQFP1mnS7+PXeQ+scCgPvyFzb8xZy+/+T6av0fSFb5JTVE/+uylPpQDaj9CKzm/iHL0PQhuNUDVZwM/JpGGvUjP+z8Qt4q/FGUBv3j5TT+gb4C+TCqePgqemL/oY8i/Qc+SP7eY+r54O48/m725v5gXXr/9MJU+ztkNv5j67b4="
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfdb",
+        "student_id": "0b87b7d8-34f3-4f7f-a34c-8a595dccf3eb",
+        "name": "Ethan Wilson",
+        "roll_number": "G6B-001",
+        "tag_id": "RFID-1006",
+        "phone": "+1-555-4006",
+        "photo": "/api/photos/students/0b87b7d8-34f3-4f7f-a34c-8a595dccf3eb/profile.jpg",
+        "class_name": "6",
+        "section": "B",
+        "parent_id": "dd99bba1-e8a2-42c0-b8d7-773448d658f4",
+        "teacher_id": "d3b1b12a-3c06-4bcc-a582-1a8e7eb159f1",
+        "bus_number": "BUS-003",
+        "stop_id": "08b55e6a-f2d0-4472-a755-43d7b1110b14",
+        "emergency_contact": "+1-555-9106",
+        "remarks": null,
+        "embedding": "fcuZvy8W7r5wZWC/C8HQvWE6IT+MDEo9WbvKv0ezzz7I4ru/uvvbvk3htz8z0iO/lj+NvhwzgD5LzYg/cJuevs7fHT/2Sy2/SNOcPjzh7D6Y85q/tFCSv43V4T+YrjW/d4XMvyu3ab/X66O/lJ7OP4itcj7TWNg/Fgxfvs4RMz/uVGK/dGMLv7+/Nr5DkR0/SM2UP+3bHEC4WJw/Pq/WvdQkbz/pSlu/ruiyv+bxcj/z6Ec/dUXvvZgTlr1XlJ2/fhSjP1rrxb3rTnC/Lwe8PhbMxz1orlQ8ZdcRwNbVgD+6bWi/QSWvP5YTcr9mp0K/tm6Tv+0TQT8B6/m+S9UQv6jdF8DSS9Q+kdGxPxfsAb+SGcg/LlFXPpdtOD3ghy8/HAxZvzJHiz/2bbu/RF+HP+WSk78UIyS/1AkAwOURIz5zUVk/HsFTv6Y7Sb7J8Fs/Uzbcvt3HCL/b7rk98YIVP+od9L+iu76/+VO5PyBeCcB4bHO/pGTfPi7OnL/+m0E/tE+zPsSCTb+AEom/lS9Ovx9VJsA3k4A+QCsNvjBqhL/SiNK8vnA8P9kOC0BiGxTAZRGtP55T4T/Ts3O/TaBIPyDWEL8UnAS/olsPPqAGuLx2U8I9ofEOwJJ3JsBjPCy/adEcv0Evgz9Ct98/p3FIv3wyk76A5UK/ba8UPizNgT4="
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfdc",
+        "student_id": "29fb1bbb-a518-4995-a77a-ffb763a1360c",
+        "name": "Ava Taylor",
+        "roll_number": "G6B-002",
+        "tag_id": "RFID-1007",
+        "phone": "+1-555-4007",
+        "photo": "/api/photos/students/29fb1bbb-a518-4995-a77a-ffb763a1360c/profile.jpg",
+        "class_name": "6",
+        "section": "B",
+        "parent_id": "dd99bba1-e8a2-42c0-b8d7-773448d658f4",
+        "teacher_id": "d3b1b12a-3c06-4bcc-a582-1a8e7eb159f1",
+        "bus_number": "BUS-003",
+        "stop_id": "59fd3265-4598-4b32-887a-d57f37731024",
+        "emergency_contact": "+1-555-9107",
+        "remarks": "Basketball team captain",
+        "embedding": "Qh2JPuw7iz+MdPC/HySoP3jtnr1iu0y+GCddP1gwgb8GuWK/159Kv8sGUT9WxJI+1rw7v2xCfb8DDcc+qiHwvLBuzLzCQqC/imUcwHTuKz+0nQ6//7yBv386BT+MnxzAxeKAvl6XGj9EZQQ/SjkHP65GbT9xLAxAIF8UPZGICz9Kct2+sgkfv1nWij9lVW6/MR0jwJCx6T9vOtY+haSRP1qQKr9+WJo/6HF5v+UGEr+NQx1AmTgJwHN0CT/h97Y/69sOQNXN4b6mCo29WK/xvrJCFUCMxTm+SJzXvMLWlL9VQA4/VOn1Pwgj4j4WyHA/K1aJvzQ0v71XMki/idkBv9Mk2D2OkES/6O6fvivahj/3B7I/cebMvvhUcL8ARte7nLEgwL0pDT8Nuoe/w2sBvs+Roj7wFUM/KCuGP2Hy4796vaQ/Lqwpv/oC/zxHxca//EqOv39w2D6O6zM+n/mAv0UeC8Bd2eW//6HNPi63LT/M8pE+qkxdvxWQkb7n94g/YpWpvxtyG7/ji86+/rzmPu0jqb/VzSC/djZ1vxaLhj8q/iE+KQR9PlkEOD9Qgrq/ccGlv5O5GT8mdYS+bNIvP7merr/FD809JrLjvpdesj/Ybf6/STeivqLVtT5HwJo/IU2WP01aib201YE+x1eJv/VRSL78niA+Y5KCvk8xob4="
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfdd",
+        "student_id": "f544dba6-639b-47a5-b459-a0b72efc0520",
+        "name": "Mason Garcia",
+        "roll_number": "G6B-003",
+        "tag_id": "RFID-1008",
+        "phone": "+1-555-4008",
+        "photo": "/api/photos/students/f544dba6-639b-47a5-b459-a0b72efc0520/profile.jpg",
+        "class_name": "6",
+        "section": "B",
+        "parent_id": "dd99bba1-e8a2-42c0-b8d7-773448d658f4",
+        "teacher_id": "d3b1b12a-3c06-4bcc-a582-1a8e7eb159f1",
+        "bus_number": "BUS-004",
+        "stop_id": "c4864d43-a2f7-4b4d-8b07-27caf5be5952",
+        "emergency_contact": "+1-555-9108",
+        "remarks": null,
+        "embedding": "9YH8vz9q9j6g0O2/3/fHP7puZD9NibO/nrc3PuL5tL+K0fa9AOWdvhfWYD8x3rK/+XaUv1l5qD7HoNy+h7F8P9QiSb3UD8W+Xa4MwOXOa76ccw6+Jo9Gv4NYpT5t3ZS+xmS/Pk1L1z9FUkg+vxX8PUOcRT+I5i1AhJaBPtNoET9H7W2+A325viEUXz7c6mE/9j+5v7IIBEAHDns/fyYGQHiKbj9ZGPi+OliPPqOU0D8AMdo/aHH8viXjqb6KI3o9xOb9PrTzg7/6npm/U406P/7CCr88cBg/V2jgv4VUIj/TfYw/PcCuPjCIUr6UbxE98EKhv2tGY75nWJy/64vcvw6YZ7+ilcE+jDhLvkCxlz8jQwU/NJxhPagDhD7P0Is/CafHvktwNT5AyVW/N941v9KJsj/EJYi+cbzFv8Tsir7LXms/reeOv20pOz1pFyI/6Nd4vydGwT90iYO/LzmUvuO4z7+1qD+/PGESQB4Bbb89K90/hjUDv9Ic/L/mD4I/4jh9PlJSGD9V7jnA1CSTv0zc779HuYW/lbADvtMHFr8PHbw9nfS2v2KfDj9xUdi/GK2Yvl81MUAweCc+tKAlP/cQhz9qcwY/dav2PgRBlb9B9+C+tVE9v7b3mj47QHI+bkO9P2xVOD9M6Ko/xy2pv2Ac8r5BbFS//WBhPwEK0z8="
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfde",
+        "student_id": "bcabe810-8588-43fe-99ff-88ebfe271ffb",
+        "name": "Isabella Rodriguez",
+        "roll_number": "G6B-004",
+        "tag_id": "RFID-1009",
+        "phone": "+1-555-4009",
+        "photo": "/api/photos/students/bcabe810-8588-43fe-99ff-88ebfe271ffb/profile.jpg",
+        "class_name": "6",
+        "section": "B",
+        "parent_id": "dee28b5f-99c6-438d-a988-b0cadcb5aaf0",
+        "teacher_id": "d3b1b12a-3c06-4bcc-a582-1a8e7eb159f1",
+        "bus_number": "BUS-004",
+        "stop_id": "3d99b8fc-375f-421c-84e9-4a7939031541",
+        "emergency_contact": "+1-555-9109",
+        "remarks": "Debate club member",
+        "embedding": "HDJzvzpBcr5mjCJAbXG/v0sbWb8dtF+/g2RbPw+vlT6ya5S+9WgQPbjyjT/6Hai/IGyXv2/olD+uxsy+pLERQBWQsz8qnwrAY7qTv230q77o+y284JiivywmCsB8XbY/e7BAP4iTWj9jsZk/EF4xP+qNvz9zw9A/OG8ZPxRVRj6E2Xy/tiKFvts2RD5aHx2/ixkDvgxbnD+RKyxAEOxbP0W8EL+BNl6/yrorPl8WJj/nedw+YVs8Phw6UL/I1ki/M67avz4t+z3gPdK+gy/EPtbhVD9P9ic/yTisv7QWVr+dbQtA2CwSv19j2j5Q/7g/9j4Gv1proD9DX0A/hMJ4PcKynr/Epay9vTuYvvZITb5Auxi+igJFPwP0CL8Fk/29KHqov2AZsL/QYpo+PaFsP1TcbL7GrZo+ISxCP9YMiT4jXwg/ct55v97Vpr4skxnA9WIMP+ezij+w6JG+blOTPnbMs7/QfGi/NNqLP+62Nr84aEk/tctQv/LGTT/DyEc/LINvvhLjQr+0BgG+1zWnvi5M277xid0/w+/fPkQVMr+YhUS/NwVKPk2I9b8kC+a9LQmKvzEI0j/XSA8/2Be5v6gXrD9NkP2/GSX4vxwzHL8vq/0+zzmUP7Ez/b/wOZG/BlymP9DTXD838Pw/TOEnwJIIuT1i4F0+YzoOPsfTX78="
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfdf",
+        "student_id": "e84d445d-186a-439f-929f-874aabcb45a3",
+        "name": "Lucas Lee",
+        "roll_number": "G6B-005",
+        "tag_id": "RFID-1010",
+        "phone": "+1-555-4010",
+        "photo": "/api/photos/students/e84d445d-186a-439f-929f-874aabcb45a3/profile.jpg",
+        "class_name": "6",
+        "section": "B",
+        "parent_id": "dee28b5f-99c6-438d-a988-b0cadcb5aaf0",
+        "teacher_id": "d3b1b12a-3c06-4bcc-a582-1a8e7eb159f1",
+        "bus_number": "BUS-004",
+        "stop_id": "04fbf812-8296-431e-a3fc-8454a825e05b",
+        "emergency_contact": "+1-555-9110",
+        "remarks": null,
+        "embedding": "S727v/nBsj9VRpC/FuK7Pgahwz+4+O6/b1yqP4jdl7/lXOK/2pTYPakNpz61PGy/ACAlv3wuN7/icpU+owTePx9gTD49HYa/UE8cwPGJ7L42OGw/nrVTvyiqvb9NAfi+sBtdv6AOp755ts8+VyotP6f5jb9mw8g/5rTJvcsJjT8cjKy/4sgWvrJQNj8UhZy+owpZvprrGr64t+c/dHjxPS5fAj8gYgk/6FZUv2Aygz/02LS9vuu8v0ZFpj+Yope+Zsi7vvROkT814kfAuS/LPyHF3T5iVZ8/VWZcPsXwMr47cn2+MhADvzXz3z1TZI0/bKaMv+5nsr9elRY/U2pRv5izAr9zCYc/0undvrtGsD/ZeFo/zCKqP3wncb5KD64/T3GEv9g2374eIS2/sqHwPWwYO74aB+09dztbvZTLD7/EN3s+wvdxv0c6NT1/VoM/vz+PP4oaBkBpFGO/QWT+vxdeqL+9yCU+DjW9P6tAOr9PMKU+O74xv4RSJr/75ok/iboXv4NRXr+w4HG/r2++vFyK978JmcY/ncmav5/aY7/WENU+8c/Hv5GFf7+vlvg9LpXav7DiJ0DSsDK+RuHRPrHEzz+J+w4/xKzBv2l5i74xopK/p+sMv6upzb/IiF0+k3HjPxeKwT0l9LA/tVgWwPnn3L84Qy2/na8kP+sDwL4="
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfe0",
+        "student_id": "f6e65577-023e-4bed-baa2-e0dd8f8a5a13",
+        "name": "Mia Harris",
+        "roll_number": "G4A-001",
+        "tag_id": "RFID-1011",
+        "phone": "+1-555-4011",
+        "photo": "/api/photos/students/f6e65577-023e-4bed-baa2-e0dd8f8a5a13/profile.jpg",
+        "class_name": "4",
+        "section": "A",
+        "parent_id": "4b1746fe-7460-4a32-8f64-a302a80d7d64",
+        "teacher_id": "f9a05c8c-8de5-4521-9a0d-33d96ef9ea39",
+        "bus_number": "BUS-001",
+        "stop_id": "2f9104f6-ee83-4eef-8011-6fac47675526",
+        "emergency_contact": "+1-555-9111",
+        "remarks": null,
+        "embedding": "+3jMP/bLgT+gH4s/6mKxvxXP/z6BF1g//9ZuPlk8Hj+BetU+Lcpkv8KNmT5LMkm+p1wxv93yvD6iRc8+d3dgP64HoT4OjBzAdWepv5P/WL/6XVI/rEVyv5m7H7+SODy/oJJyP3WvQ79uThc/rK9APnCzkb7c6w5AWAIrvw+KHD2FG6y/ssVHPmIfWz8a3vO+gQh4vwlUEz1gsvs8QHZiP7LbB7+NJrm+IXP+v9L8SL9mOpa+OY2mv6cYOT/cb20+s2JAP24pjr5b2eK/NsK7P8fQ3z/ldze/0KMlP0tJtL9Hv6c/JlaLv6/t8T64Yw1AV8CCvjMbRT5cpwlAB02oPlCBjT6C6xm+ZB2avBRpqD/YmGm+u7QCQN2Mij8ISlE92Ei9v8GoNr9OP3M/Mxw4PldRcb6HO68/bNJ+PgICEL93vKk+fjqmv/5Q1T2vAV6/Z4y+P5U2Lz8E4rW/VklHwFVL2772c82/9qq2P3O2xr7wr+U9CTfcv6Nczj73BEZAALmgv4OC5z6Q4Sy/74YGP/ENYr5YeXA/gYaEvwFD2b44tma+1g5aP7iKDsDbuYW+2UCRv4Ymxz8y2tu/qG2MPhm/dj6JAPK/lYXPvvqQi77GEOe/XsIlvjtSOL+zfxK/HMsbQHIPmL/IH1k/pvwQwGxTJz9a9QO/10EHv6c4474="
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfe1",
+        "student_id": "b56c225e-1ee9-4d13-b44a-10cccb4def24",
+        "name": "Benjamin Clark",
+        "roll_number": "G4A-002",
+        "tag_id": "RFID-1012",
+        "phone": "+1-555-4012",
+        "photo": "/api/photos/students/b56c225e-1ee9-4d13-b44a-10cccb4def24/profile.jpg",
+        "class_name": "4",
+        "section": "A",
+        "parent_id": "23e0224b-c8e9-4c81-8905-9be9ac508993",
+        "teacher_id": "f9a05c8c-8de5-4521-9a0d-33d96ef9ea39",
+        "bus_number": "BUS-001",
+        "stop_id": "64fb9fc0-234f-439b-89b5-750c4ac01ed1",
+        "emergency_contact": "+1-555-9112",
+        "remarks": "Art club member",
+        "embedding": "yJCMPtWJ/D/QUBNAUBynv2DAKb9wBfO/rCchQPLlB79kzDS/FeEfP7DbUz6cqKo+kMqyvuTYGr/E1IQ/8z90Prd82D7xFR+/Gdngvx4gqb9wu5q9biDcvzmR1r8xpgW/SHCdv0PshT9dXjO+PFPivrIf1775AcU/7kmCv7dveb9INpy/Ropxv8upIj9D+jE+tCpvvz71ST8EOiS+F1iCvkqnNb+Ve1u/9tAhv2x9Iz8d0y6/fSQbP46kgD9wzm49E84awM7Omb9kmqO+w/KZP47/Er87il2/pKHMvXZpw73t3So/hodLP58rzj40hzU/UpQfv0vZAb7Ysza/2gbtPlSxyD/bepE9oxnJvz29nL7Ku20/lK4BQGA5JkD+HWu/gft7PoyLGb/a+/Y/eY+BP99p8L4SQik91E65vmsDWr9fjbQ//cSQv7hbxL9BNtK/j4KePyM6+j5jZ1K/r3cAwI2NhL9K7649LYdHv8cYhb74qRZAHMKpvyP+ZL9Lyeo/3ADKPoBxwj/Ut9+94QH0vp2vlb+sbYM/RmgsPgO4Wb8W7SO/mN1kPdi7J78cKdS9gvpRPv3UFEDrQK+/6wfdPwa3ML3fiWm/2oErvz44TT8xsoy/rAAOvcjVML+h7iw/OEPmP0bVWb/eeqa+beWpv3wsnb83v5k/f2HHvpEOGz4="
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfe2",
+        "student_id": "f7e63f02-2b0f-4457-981d-b4ef56337440",
+        "name": "Charlotte Lewis",
+        "roll_number": "G4A-003",
+        "tag_id": "RFID-1013",
+        "phone": "+1-555-4013",
+        "photo": "/api/photos/students/f7e63f02-2b0f-4457-981d-b4ef56337440/profile.jpg",
+        "class_name": "4",
+        "section": "A",
+        "parent_id": "23e0224b-c8e9-4c81-8905-9be9ac508993",
+        "teacher_id": "f9a05c8c-8de5-4521-9a0d-33d96ef9ea39",
+        "bus_number": "BUS-002",
+        "stop_id": "509efd0e-c615-43c9-9c38-71249909fa41",
+        "emergency_contact": "+1-555-9113",
+        "remarks": null,
+        "embedding": "Hn5fPTjdaT/4Zjw+voQlvwqjdL77nZC/XYAWQJPFPb4ok9C/5soTPvo6uD+9obi/J4havjOiDb5Zhqo/cCYtP9HIhD99l2u/jGYRwLs6kL8gNIK/JjeGv392eD8ieUK+Ph4KPhSPiT9gy5Y/QHsmv6i+gD7UCaY93FxhviiJtbs0RwS/cRLSvlI2wT1GUhG+ucz6vgqhmD8GZDs/HDwav4/oFcDq6f6/yp0Dv+rWaT+ibrU/WmN/viwRpj9SmkK/yAPiPLDhfL+8xP2+1Q8mv3/9+b8bGlQ/wemxv+8tdj9TqYe+5j8ZPx9SoT9l/bI/r9Kpv4zMuD6UClm/NDlzv6S0XD9sLDu/6CcNwGihN79DoxC+kIibP+iZpr8FdMk+q7MTP3lfP79k1oc/bbv4PpjXRb8hjIy/9qFDvihg9b72v5U+XJX1PjSz3r+fRKu+gZRQP/33sz7U+Jw+6Y0KwHEzyb7e7Lu+FgAhP2dwDD7dWYQ+9IZiwABXhL/DYPQ/JHS2vomF8L0Fn4I+xOulvyD92r8keGS/NvcUP0NTwT5xk+w/mCckvUCGyj5pAN0+If25P3f9Gz97Koy9KlhWv2Uesb5LsYi+P6NsPhInaT6X52q+piMbP6+WDr8/dSk/QFcHQOa4u750PNK+PRG/P1An8r8DFvO9k3Navz/0e78="
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfe3",
+        "student_id": "4c613ede-dcde-4d36-9dc2-7557da95b145",
+        "name": "James Walker",
+        "roll_number": "G4A-004",
+        "tag_id": "RFID-1014",
+        "phone": "+1-555-4014",
+        "photo": "/api/photos/students/4c613ede-dcde-4d36-9dc2-7557da95b145/profile.jpg",
+        "class_name": "4",
+        "section": "A",
+        "parent_id": "02218599-75f7-4357-a064-aa6622520d85",
+        "teacher_id": "f9a05c8c-8de5-4521-9a0d-33d96ef9ea39",
+        "bus_number": "BUS-002",
+        "stop_id": "432c23cc-84e0-45d6-92d3-db59f65c0b12",
+        "emergency_contact": "+1-555-9114",
+        "remarks": "Soccer team member",
+        "embedding": "Z9wdvjS8DsAvyNC+BPKevtkIsL0HZb+/0vSBvx5kFr+mlte/+tMJQLAjtD5ylBS/+cIBwMPm2716kYs/hXp3P1N70z4RkYO/8B0BPwQANj4TUPe+2qnav7jdaz6f/c++X021PncByL2PZya+9A+CPgmyCr/zMKq/gB5KvYjekDwwSRy+MbECwBYwfb0jKhJAgSzUv5BkgT+AUl0/pNVAv8MZC77czs6+1EYcv2cAB7+/REA/KRYvvazkl7/hUgNAW3vIv7bXIz34p1s+OMf9PZXMtT4CuIa+lxmMPl4ROr+prYQ+/PZFP5Nj3z8hxbE9MsxAP7ujTb8ruqW/V3hUPgWTcT/N+BS//OWSP/yed7/sxh0//DF9P2XWDcCYOX+/A/u6v2L13z7vjwm/P8wzPyQuor5S2b++O2yavupf/b6K5ay8wHmoPSyLhb+O0hk9j/zAPmmFO8D2v8S+nD74vTcIkb8tdoA+3DPZPssyAL+u42k/51CvP/mvkr/oGt6/bmMlP3PjwD9u8fO+woJ5P7aWQ78ZWAHAIGKWvph7Hr6yxjE/625Uv7Z1kz/D1Js/2zC/PlKAbj8wVAI/PT4xP75pgT+8zWy+WIgJPsY/2r7SqJc/RHAKP5z+eL/FBqs/M064P9/mk76QIOq/X6yDP3StlD9AhqS/Y3Onvu4fyb4="
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfe4",
+        "student_id": "e60ca573-b21d-41bd-9c01-ee8f59292cf4",
+        "name": "Mia Hall",
+        "roll_number": "G4A-005",
+        "tag_id": "RFID-1015",
+        "phone": "+1-555-4015",
+        "photo": "/api/photos/students/e60ca573-b21d-41bd-9c01-ee8f59292cf4/profile.jpg",
+        "class_name": "4",
+        "section": "A",
+        "parent_id": "4d14bfb7-ecb1-42ac-82f2-e7a2e65d68a4",
+        "teacher_id": "f9a05c8c-8de5-4521-9a0d-33d96ef9ea39",
+        "bus_number": "BUS-004",
+        "stop_id": "2318fa39-bada-4dc8-9529-a1f4366ac33b",
+        "emergency_contact": "+1-555-9115",
+        "remarks": "Library monitor",
+        "embedding": "/g5XP+YKnD6PT/k+jTmcv5PuYD/7PSC/Hz5jPoLP8b74T6U8XYocQFDPYT90A8k/R9C9v2LAFD+WMaw/zqXpPfqF+T/JQQDAxAYKwEDpPL80gkA+TmwIwNXpoL8NK7e/SepzvlAq7r6vif4/k4gyv9bjgD7rb8k/Trh2PkFX0L4WRyE/bI25v6C/YD+6xw+/Lhy5vjmeCz+cjpe9+O0Vv4vojL8036y/Q66tvxw1wj3BbB6/uNDtv2WHGj6xITs+WLDCvsQvEL8SMri/dGg0Phrh4z0JEha/cHH9P7ABxL93XtI/A4RDP+dF3j/yoHu+mTmCvxo4rb5bS/Q/clhxPSJIdD+Ja5Q/FZHsvypsFT/ILKo95o6zP/9RLL+2e2i/bIADv2D5RD9I2gC/NGGGvWmm/D63phPARz/SP321iL8Q2D2+4oogv8AiBL9ECbY+HMdpPs4GQL5HgI+/TQvKv2p5/L0yoLg+aFHev8UZqjy2IaI/rPPIv5LeHj43Ojc/oy8RPxFF/D8UW1u/1k2kvkkNp789tYG/nqLNv8ehtj8nKOo/FEmaP8UYT75OqFu/3PZIP/LjBUAms0U+gZRiPnC2Pj9fCTC/W7wPvzYkeL/bcNy/bTYhPnTJBEABSi09iDmjP60pSb7dtJ6/0gEWv+y1C7/elgxAfa8zP+mVor4="
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfe5",
+        "student_id": "e67f2a69-7053-4201-896e-427d27718c8c",
+        "name": "Alexander Lee",
+        "roll_number": "G5A-006",
+        "tag_id": "RFID-1016",
+        "phone": "+1-555-4016",
+        "photo": "/api/photos/students/e67f2a69-7053-4201-896e-427d27718c8c/profile.jpg",
+        "class_name": "5",
+        "section": "A",
+        "parent_id": "4d14bfb7-ecb1-42ac-82f2-e7a2e65d68a4",
+        "teacher_id": "b5645d0e-feb0-4c51-a03b-27edd63f4d79",
+        "bus_number": "BUS-001",
+        "stop_id": "2f9104f6-ee83-4eef-8011-6fac47675526",
+        "emergency_contact": "+1-555-9116",
+        "remarks": "Science club member",
+        "embedding": "GOsYvyw9nz+hPcc/PEynvnQ9FL9ClZC/G0H1P2xtg78r4Qq/A/BbP7p14j75cd++I1xJPoLkKz42/BI/CjnTPhHdlT+8mxLAcKR8v2KFr76Y9Rm/uZ5DvgVro78Oe5m/BYXqvx8FPj+gc9Y/JJmsPWTODz0ngp8/wsCpv6KNhLxwece+Bnrzv0RSmD9pfXo9yXLJv2MLRL/zhDQ/5EcBwKekFsCuxhbAs8v4v7IVgT793/o/Tn47PSMbjL4prsY+7+F0v/ac673vOhI/CKl5P34bpL8qxHm+Un65v9XTCb8P+iw/MSiXvfJEJD8ctQA/2HG7v3voRT9eaic/rQLAvr6IRD9gVs48ZIbRPN3b3b9q/bE+OvsCQIznxT55gse/VxMGPgrow77xywg/ffqPPslwT749+v6/Q9FrPyBWW7/SRuE/hD9KP7IRf7+aQBe/98FUP5Z+e7+Kl5i+xzDLv4thjb8Mja+/hWlUvwi9hT+yH60/jitqv6UkSb94678/TrAkP0zK3z8AIJK/la62vixYVr8d0mm/sU2ZPtE6gz/UYm0+ySuaP0Kk6D2Kn4U/PDt0P4RguT9NA7K+iiw4vyJsp77iGiE/0rJevsZz6j1Vyfw+1oOEPpoDvr+blgQ/ccjuPyZEBj4aG8y+YMIpPBXSkD4+yJs/U+aQPfnEgL8="
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfe6",
+        "student_id": "d7ecd370-4231-4303-a2aa-4dfe7e177fd0",
+        "name": "Harper Harris",
+        "roll_number": "G6B-006",
+        "tag_id": "RFID-1017",
+        "phone": "+1-555-4017",
+        "photo": "/api/photos/students/d7ecd370-4231-4303-a2aa-4dfe7e177fd0/profile.jpg",
+        "class_name": "6",
+        "section": "B",
+        "parent_id": "298d8e3e-a021-4ec9-8a33-d6bf625db541",
+        "teacher_id": "d3b1b12a-3c06-4bcc-a582-1a8e7eb159f1",
+        "bus_number": "BUS-003",
+        "stop_id": "e33d9f69-fdfe-4048-a69f-e8f3abf11c5d",
+        "emergency_contact": "+1-555-9117",
+        "remarks": "Drama club member",
+        "embedding": "Ii4jv3SMnj+KqRy+p7LrPolC0r3ZCnK/LiXqPygyhj8HfcA+xOg2P5tjZT/fjwDA7Ie3v5f07j5KJCs+g9iUPxZsAD8RqTS/P7yBvo+fFr8CBoG/BcTAPqjM8r/DHBI/GnQ5wNh1dD9kZnm9rj1SvmGZDT4ehQlAOtQJPwUKKD89NUg/FDMhv5tWjj7uB3I/yzq9v1MjWz8qSxg/RuQTP7lAH79eqY6/hNNYPmbdlz2CPXQ/ZaoPP/mt9z5zhwS+0JBKv1CgAb/Vvso/5LfYPuZ/p79n8Qo/9K4NwB9vbj9Oy8A8o9YtP8wWUL4I3qg/QNyzv7VVcj8Aosm//8aePkFALEBF+9O/AacqP4chr75cTiY+OpO2P51czD+iI0u/QVLEPyZmhT4Qxkw/E3pGP5YtGz8txjW/FLSpv5n7FD/r6Ik/D+YAP6GhUD+uWCTAH+L5vyrRr76iX/u+/LoqviWYRr4ReHW/de/nvuR+nz9Q1IO+PiyovtNZQr9EXB6/ZwKkv0sdCD/KNTK/K8JgP2yEs7+/FsO+rvOyv6m3gj4dEYs+JReHv+kTqT/CYZU+I2y0P+pDij/PPOa+Yx1Iv7Xan79g498/JDNmvzVqmr8wChFAoOdJvwBxgL8NQNo+lsU9P8K/Oz+2bfO+sfn6vtzcV7+xUn0/xqLCvvhfrr4="
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfe7",
+        "student_id": "45fd3a68-5335-4b0c-8e4c-f6a17709e9cb",
+        "name": "Evelyn Clark",
+        "roll_number": "G4A-006",
+        "tag_id": "RFID-1018",
+        "phone": "+1-555-4018",
+        "photo": "/api/photos/students/45fd3a68-5335-4b0c-8e4c-f6a17709e9cb/profile.jpg",
+        "class_name": "4",
+        "section": "A",
+        "parent_id": "5e8b1d12-d345-4f89-92eb-dcd548d01afa",
+        "teacher_id": "f9a05c8c-8de5-4521-9a0d-33d96ef9ea39",
+        "bus_number": "BUS-002",
+        "stop_id": "f2557f18-cf6d-47e2-8759-5031649748d0",
+        "emergency_contact": "+1-555-9118",
+        "remarks": "Math team member",
+        "embedding": "s7oFwAwenD9o4Wa/1pAGPr2VE0CNEQHAd9CcP3u+qr+EGg3AjwvDPkKVyD86n4y+wuuzv4QVAsDpv4Y/kpKSPzgDkj5Yp/m+G06zvz8YGD5gG0Q/Jlk/v+Vxjb++/A6+4gqZv/Rm/z5OIOG9IPiEPz+VbL7Sbco/7MgwP5iAhL5HYg89QliFvwN71j9SP+0+XFq2vxVCBz/M3EVAjOMnPrI+oL8q/1I+rVECwMJ/dz9/nsU+YpA4v01ZvL+kfA4/42gyveQMCj/9TMm/xA7RPyOhJj+VPjE/9aomvnp3+z8Y75c+ZOijv3APlb+d8ew+tMXAv2BzLL9su3g8WlXcv5J4Xb91F4c/NKXQvpnLKD8skYc/fcYLQEipkD54OhQ/UbK7v6TXab82JOW9i52FvuAknr6OSuK9+2vVv+kZgj8rzAU/Q5Obv19MRr/r5GI/zv0MQDJIBUCjAoa/vwKDvuhmrb90R/+9TYzbP7GrID+d7zQ/aM1DP/JFnb8evTq+eLBdPtrku79uw86/PAVrv2mJ9L9xMgg/OnZqPiIHUr/haow/jTnivz9EVD8rurK/9QfJvt05IEDGjUE93fKbPvuBvj3EOBU/9isUPuLWgT5738W+C+WjP+Qsmbzb/A4/HNW+P+DUWT9mmO8/s+MEwLP9bL/M/Zq/+dTavvOSUj8="
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfe8",
+        "student_id": "ffe94c7f-6b92-4a58-8abf-0a9c0dc227fd",
+        "name": "Henry Clark",
+        "roll_number": "G5A-007",
+        "tag_id": "RFID-1019",
+        "phone": "+1-555-4019",
+        "photo": "/api/photos/students/ffe94c7f-6b92-4a58-8abf-0a9c0dc227fd/profile.jpg",
+        "class_name": "5",
+        "section": "A",
+        "parent_id": "5e8b1d12-d345-4f89-92eb-dcd548d01afa",
+        "teacher_id": "b5645d0e-feb0-4c51-a03b-27edd63f4d79",
+        "bus_number": "BUS-001",
+        "stop_id": "b5f21bcb-3433-4c52-abaf-6ed1f17770a0",
+        "emergency_contact": "+1-555-9119",
+        "remarks": "Chess club captain",
+        "embedding": "RPV2P86pUb86mfK/NgOJP9iuQL+C/oy/qHl/vmuMCT/cf/6/TdlevoK55z5u1he+cmRlvxSVWb+wqk2/rfLvvTwPN75nOSjAV5Rmv9tt2b2QUt+/e4wsvwS/uD9A2sW+UJ2RvkfHaL/4ZOw+mvcUvoc4DUBmuvA/dkg9v3q1DL8O72K/rO2NPyiAJj3IBn0+GJpKvytMwj/otWY/4C36vfL6l762/as/M5/gv/uwIz+7XvY/Smyxv9oyhD/kIOw/gYNVvyQrUr8Aupe+ezAxPT/Z7T5FWLI/xGTfv2SM3b0ely2+AqHOP6p44L57KK4+f9vkvt2YWL9o2kC/UfXSvw4ggL+vDJ0/tGiJv22FgD+xZb6/E1qZvwDFpL1CTsC+fDPxvwSxiz8ua3U/hXaRP/IjNb3h0T1ACRq+P692qb9GH0++8lQfvjBVrb/j2rW/j+QtvxSyyb5XUU0+j3uKv35mEL9yL92/i1kbPxkvTD/5cvQ+tOECvxEa4z7Z0ak/DbTxvq5V6r/KKFS/1BftO6k1wr9dG8U9aJdjvmcB1D6fIwQ/4Cx0PzpShz8PisG/JNRgv+0Gmj5Dz6g+ojOsPPIBIj29sQvA43lAv1bo1j+NtCDAMBslv4Wvzr8e8W+89ahWv6Dv670LGL892tjNvjV2Tj9BLms/y8dKv+yfpb8="
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfe9",
+        "student_id": "dc1e7ad7-3b88-486d-ba96-cb7dfb6e408e",
+        "name": "Sebastian Lewis",
+        "roll_number": "G6B-007",
+        "tag_id": "RFID-1020",
+        "phone": "+1-555-4020",
+        "photo": "/api/photos/students/dc1e7ad7-3b88-486d-ba96-cb7dfb6e408e/profile.jpg",
+        "class_name": "6",
+        "section": "B",
+        "parent_id": "409f41d4-4496-450b-a19b-471f9f8d0f4f",
+        "teacher_id": "d3b1b12a-3c06-4bcc-a582-1a8e7eb159f1",
+        "bus_number": "BUS-004",
+        "stop_id": "ceac4144-de2d-4266-be6d-dd7b04921333",
+        "emergency_contact": "+1-555-9120",
+        "remarks": "Student council member",
+        "embedding": "7v4avlSGqT9j9FS/WZ1OPyc9hT8YGYy/P9ItP5/gCsC/afq/GsdcP5T5Uj95iMC/+rz+v3q5mr+WCK6/cbQuP2YYvD7hnca/vADJv0lTdL+IWSu/OZgMPzz1dz4ai16+bAmav3JwPz+AGXi8K5viPnCK8z5BLrs/fKyMvCOou740hhm/2DZQv1qtBT/rcApA/jTvvYSgxT+vAxRAmtWePj/LNz60nmc9vJHTvwDeWT8y5Lo/bs4KP07jlb7Iw1A/2sfbv7LhG7+7kO2/yQTZPlfMa7+1+AdAaiysv/3N9z9cbTy+ns/ovqf9Br+K3I2/nBBwvx4e5L/wfi0/AxnXv2EJ6b9kgDpAdEvPvhehZz93tQY/OV+LP9CI9L5DksQ/hvPovhgfRr5v7rG+nX0oP14ebL/N0lg/mguHPuRFMT+XEb0+yMtCv2HKQ79AYtk/k3qGvmXrjD+XXgO+O+EPv9DhqD2+ZIe+TH39P1y7ZL7dGxpAc1ClPv3n0b7t4oY+dZN1P+LKf79gMeW/4zVkv2m9FMCqGlQ+0uo4v0/GFj48UZk/D/BWvw4Kgb2/SPu++J2gvuzjC0B4OEQ/zTpMvmIbXz+74MA/hr9iv6B/bT9IHRLAfjLtvjwzW79wKp++v8wgvxdulj84+YY/DmHcv/kqAb8PmZo9ngaJP1E+Pr8="
+      }
+    ],
+    "buses": [
+      {
+        "_id": "691c1daeecf7e2e1f115cfea",
+        "bus_number": "BUS-001",
+        "driver_name": "Robert Johnson",
+        "driver_phone": "+1-555-0101",
+        "route_id": "b4e12e63-e505-4d28-b453-287b4745846c",
+        "capacity": 5,
+        "remarks": "Test bus - Small capacity (5 students)"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfeb",
+        "bus_number": "BUS-002",
+        "driver_name": "Sarah Martinez",
+        "driver_phone": "+1-555-0102",
+        "route_id": "8ec51223-03f0-4889-9254-7d8728378ed1",
+        "capacity": 3,
+        "remarks": "Test bus - Very small capacity (3 students)"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfec",
+        "bus_number": "BUS-003",
+        "driver_name": "Michael Chen",
+        "driver_phone": "+1-555-0103",
+        "route_id": "993a78d3-0b07-48a6-98a9-861a676bdacd",
+        "capacity": 45,
+        "remarks": "Large capacity bus for busy route"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfed",
+        "bus_number": "BUS-004",
+        "driver_name": "Lisa Anderson",
+        "driver_phone": "+1-555-0104",
+        "route_id": "b75fa1cf-1e86-4fb5-8f89-734b61978fde",
+        "capacity": 38,
+        "remarks": "Standard capacity coastal route"
+      }
+    ],
+    "routes": [
+      {
+        "_id": "691c1daeecf7e2e1f115cfee",
+        "route_id": "b4e12e63-e505-4d28-b453-287b4745846c",
+        "route_name": "Route A - North District",
+        "stop_ids": [
+          "2f9104f6-ee83-4eef-8011-6fac47675526",
+          "5eb9784d-9763-4bdd-9a5e-99e67630883e",
+          "b5f21bcb-3433-4c52-abaf-6ed1f17770a0",
+          "64fb9fc0-234f-439b-89b5-750c4ac01ed1",
+          "487a4336-2f06-4cfe-a73a-347be5065455"
+        ],
+        "map_path": [
+          {
+            "lat": 37.7749,
+            "lon": -122.4194
+          },
+          {
+            "lat": 37.7849,
+            "lon": -122.4094
+          },
+          {
+            "lat": 37.7949,
+            "lon": -122.3994
+          },
+          {
+            "lat": 37.8019,
+            "lon": -122.3944
+          },
+          {
+            "lat": 37.8049,
+            "lon": -122.3894
+          }
+        ],
+        "remarks": "Morning route covering north residential area"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfef",
+        "route_id": "8ec51223-03f0-4889-9254-7d8728378ed1",
+        "route_name": "Route B - South District",
+        "stop_ids": [
+          "b0b1e853-718a-4403-ace7-6e90fbe1306b",
+          "f2557f18-cf6d-47e2-8759-5031649748d0",
+          "509efd0e-c615-43c9-9c38-71249909fa41",
+          "432c23cc-84e0-45d6-92d3-db59f65c0b12"
+        ],
+        "map_path": [
+          {
+            "lat": 37.7649,
+            "lon": -122.4294
+          },
+          {
+            "lat": 37.7699,
+            "lon": -122.4244
+          },
+          {
+            "lat": 37.7749,
+            "lon": -122.4194
+          },
+          {
+            "lat": 37.7799,
+            "lon": -122.4144
+          }
+        ],
+        "remarks": "Morning route covering south residential area"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cff0",
+        "route_id": "993a78d3-0b07-48a6-98a9-861a676bdacd",
+        "route_name": "Route C - East District",
+        "stop_ids": [
+          "15784615-15fa-46fe-a137-08ace1088585",
+          "08b55e6a-f2d0-4472-a755-43d7b1110b14",
+          "59fd3265-4598-4b32-887a-d57f37731024",
+          "e33d9f69-fdfe-4048-a69f-e8f3abf11c5d",
+          "0919ecf4-10cb-4ddb-8c27-5d1df4d4b3b7"
+        ],
+        "map_path": [
+          {
+            "lat": 37.7849,
+            "lon": -122.3794
+          },
+          {
+            "lat": 37.7899,
+            "lon": -122.3844
+          },
+          {
+            "lat": 37.7949,
+            "lon": -122.3894
+          },
+          {
+            "lat": 37.7999,
+            "lon": -122.3944
+          },
+          {
+            "lat": 37.8049,
+            "lon": -122.3894
+          }
+        ],
+        "remarks": "Afternoon route covering east business district"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cff1",
+        "route_id": "b75fa1cf-1e86-4fb5-8f89-734b61978fde",
+        "route_name": "Route D - West District",
+        "stop_ids": [
+          "c4864d43-a2f7-4b4d-8b07-27caf5be5952",
+          "3d99b8fc-375f-421c-84e9-4a7939031541",
+          "04fbf812-8296-431e-a3fc-8454a825e05b",
+          "2318fa39-bada-4dc8-9529-a1f4366ac33b",
+          "ceac4144-de2d-4266-be6d-dd7b04921333",
+          "dea1fc8e-33ea-4035-bb81-f40f343c7e8d"
+        ],
+        "map_path": [
+          {
+            "lat": 37.7749,
+            "lon": -122.4394
+          },
+          {
+            "lat": 37.7799,
+            "lon": -122.4344
+          },
+          {
+            "lat": 37.7849,
+            "lon": -122.4294
+          },
+          {
+            "lat": 37.7899,
+            "lon": -122.4244
+          },
+          {
+            "lat": 37.7949,
+            "lon": -122.4194
+          },
+          {
+            "lat": 37.8049,
+            "lon": -122.3894
+          }
+        ],
+        "remarks": "Afternoon route covering west coastal area"
+      }
+    ],
+    "stops": [
+      {
+        "_id": "691c1daeecf7e2e1f115cff2",
+        "stop_id": "2f9104f6-ee83-4eef-8011-6fac47675526",
+        "stop_name": "Main Gate North",
+        "lat": 37.7749,
+        "lon": -122.4194,
+        "order_index": 0,
+        "morning_expected_time": "07:00",
+        "evening_expected_time": "15:00"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cff3",
+        "stop_id": "5eb9784d-9763-4bdd-9a5e-99e67630883e",
+        "stop_name": "Park Avenue",
+        "lat": 37.7849,
+        "lon": -122.4094,
+        "order_index": 1,
+        "morning_expected_time": "07:10",
+        "evening_expected_time": "15:10"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cff4",
+        "stop_id": "b5f21bcb-3433-4c52-abaf-6ed1f17770a0",
+        "stop_name": "Market Street",
+        "lat": 37.7949,
+        "lon": -122.3994,
+        "order_index": 2,
+        "morning_expected_time": "07:20",
+        "evening_expected_time": "15:20"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cff5",
+        "stop_id": "64fb9fc0-234f-439b-89b5-750c4ac01ed1",
+        "stop_name": "Oak Boulevard",
+        "lat": 37.8019,
+        "lon": -122.3944,
+        "order_index": 3,
+        "morning_expected_time": "07:30",
+        "evening_expected_time": "15:30"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cff6",
+        "stop_id": "487a4336-2f06-4cfe-a73a-347be5065455",
+        "stop_name": "School North Entrance",
+        "lat": 37.8049,
+        "lon": -122.3894,
+        "order_index": 4,
+        "morning_expected_time": "07:40",
+        "evening_expected_time": "15:40"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cff7",
+        "stop_id": "b0b1e853-718a-4403-ace7-6e90fbe1306b",
+        "stop_name": "South Gate",
+        "lat": 37.7649,
+        "lon": -122.4294,
+        "order_index": 0,
+        "morning_expected_time": "06:45",
+        "evening_expected_time": "15:15"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cff8",
+        "stop_id": "f2557f18-cf6d-47e2-8759-5031649748d0",
+        "stop_name": "Elm Street",
+        "lat": 37.7699,
+        "lon": -122.4244,
+        "order_index": 1,
+        "morning_expected_time": "06:55",
+        "evening_expected_time": "15:25"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cff9",
+        "stop_id": "509efd0e-c615-43c9-9c38-71249909fa41",
+        "stop_name": "Maple Avenue",
+        "lat": 37.7749,
+        "lon": -122.4194,
+        "order_index": 2,
+        "morning_expected_time": "07:05",
+        "evening_expected_time": "15:35"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cffa",
+        "stop_id": "432c23cc-84e0-45d6-92d3-db59f65c0b12",
+        "stop_name": "Pine Road",
+        "lat": 37.7799,
+        "lon": -122.4144,
+        "order_index": 3,
+        "morning_expected_time": "07:15",
+        "evening_expected_time": "15:45"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cffb",
+        "stop_id": "15784615-15fa-46fe-a137-08ace1088585",
+        "stop_name": "East Gate",
+        "lat": 37.7849,
+        "lon": -122.3794,
+        "order_index": 0,
+        "morning_expected_time": "07:15",
+        "evening_expected_time": "15:30"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cffc",
+        "stop_id": "08b55e6a-f2d0-4472-a755-43d7b1110b14",
+        "stop_name": "Cedar Lane",
+        "lat": 37.7899,
+        "lon": -122.3844,
+        "order_index": 1,
+        "morning_expected_time": "07:25",
+        "evening_expected_time": "15:40"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cffd",
+        "stop_id": "59fd3265-4598-4b32-887a-d57f37731024",
+        "stop_name": "Birch Street",
+        "lat": 37.7949,
+        "lon": -122.3894,
+        "order_index": 2,
+        "morning_expected_time": "07:35",
+        "evening_expected_time": "15:50"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cffe",
+        "stop_id": "e33d9f69-fdfe-4048-a69f-e8f3abf11c5d",
+        "stop_name": "Walnut Drive",
+        "lat": 37.7999,
+        "lon": -122.3944,
+        "order_index": 3,
+        "morning_expected_time": "07:45",
+        "evening_expected_time": "16:00"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115cfff",
+        "stop_id": "0919ecf4-10cb-4ddb-8c27-5d1df4d4b3b7",
+        "stop_name": "School East Entrance",
+        "lat": 37.8049,
+        "lon": -122.3894,
+        "order_index": 4,
+        "morning_expected_time": "07:55",
+        "evening_expected_time": "16:10"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115d000",
+        "stop_id": "c4864d43-a2f7-4b4d-8b07-27caf5be5952",
+        "stop_name": "West Gate",
+        "lat": 37.7749,
+        "lon": -122.4394,
+        "order_index": 0,
+        "morning_expected_time": "06:30",
+        "evening_expected_time": "15:45"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115d001",
+        "stop_id": "3d99b8fc-375f-421c-84e9-4a7939031541",
+        "stop_name": "Sunset Boulevard",
+        "lat": 37.7799,
+        "lon": -122.4344,
+        "order_index": 1,
+        "morning_expected_time": "06:40",
+        "evening_expected_time": "15:55"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115d002",
+        "stop_id": "04fbf812-8296-431e-a3fc-8454a825e05b",
+        "stop_name": "Ocean Avenue",
+        "lat": 37.7849,
+        "lon": -122.4294,
+        "order_index": 2,
+        "morning_expected_time": "06:50",
+        "evening_expected_time": "16:05"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115d003",
+        "stop_id": "2318fa39-bada-4dc8-9529-a1f4366ac33b",
+        "stop_name": "Beach Street",
+        "lat": 37.7899,
+        "lon": -122.4244,
+        "order_index": 3,
+        "morning_expected_time": "07:00",
+        "evening_expected_time": "16:15"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115d004",
+        "stop_id": "ceac4144-de2d-4266-be6d-dd7b04921333",
+        "stop_name": "Harbor Road",
+        "lat": 37.7949,
+        "lon": -122.4194,
+        "order_index": 4,
+        "morning_expected_time": "07:10",
+        "evening_expected_time": "16:25"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115d005",
+        "stop_id": "dea1fc8e-33ea-4035-bb81-f40f343c7e8d",
+        "stop_name": "School West Entrance",
+        "lat": 37.8049,
+        "lon": -122.3894,
+        "order_index": 5,
+        "morning_expected_time": "07:20",
+        "evening_expected_time": "16:35"
+      }
+    ],
+    "holidays": [
+      {
+        "_id": "691c1daeecf7e2e1f115d006",
+        "holiday_id": "2696e01a-3c28-4d9e-b9ed-67b9dcedc1e8",
+        "date": "2025-01-01",
+        "name": "New Year's Day"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115d007",
+        "holiday_id": "91f48484-0461-49f8-b431-aa310320b176",
+        "date": "2025-07-04",
+        "name": "Independence Day"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115d008",
+        "holiday_id": "6ba14717-ccb5-4b44-9d73-aa189cba7698",
+        "date": "2025-11-28",
+        "name": "Thanksgiving Day"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115d009",
+        "holiday_id": "488469f0-495f-4223-8a28-970a9f56290c",
+        "date": "2025-12-25",
+        "name": "Christmas Day"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115d00a",
+        "holiday_id": "b4d8c117-38b8-49e9-a660-dfe268bddcc9",
+        "date": "2026-01-01",
+        "name": "New Year's Day"
+      }
+    ],
+    "device_keys": [
+      {
+        "_id": "691aae54d272e12721a20cab",
+        "device_id": "d05bc36b-19b9-4722-98f7-bb7944784c35",
+        "bus_number": "BUS-001",
+        "device_name": "PI1",
+        "key_hash": "$2b$12$TkE06hgeuYvo9OEM86bAm.HGWDtQDfWSQGqx2aF7KteHKNFPU3BHS",
+        "created_at": "2025-11-17T05:10:44.958094+00:00"
+      },
+      {
+        "_id": "691b4a08149a8544bf46ca70",
+        "device_id": "d05bc36b-19b9-4722-98f7-bb7944784c35",
+        "bus_number": "BUS-001",
+        "device_name": "PI1",
+        "key_hash": "$2b$12$TkE06hgeuYvo9OEM86bAm.HGWDtQDfWSQGqx2aF7KteHKNFPU3BHS",
+        "created_at": "2025-11-17T05:10:44.958094+00:00"
+      },
+      {
+        "_id": "691b4a8cb1de6b997e106c65",
+        "device_id": "d05bc36b-19b9-4722-98f7-bb7944784c35",
+        "bus_number": "BUS-001",
+        "device_name": "PI1",
+        "key_hash": "$2b$12$TkE06hgeuYvo9OEM86bAm.HGWDtQDfWSQGqx2aF7KteHKNFPU3BHS",
+        "created_at": "2025-11-17T05:10:44.958094+00:00"
+      },
+      {
+        "_id": "691bd1580749e1ceb1a0a54c",
+        "device_id": "d05bc36b-19b9-4722-98f7-bb7944784c35",
+        "bus_number": "BUS-001",
+        "device_name": "PI1",
+        "key_hash": "$2b$12$TkE06hgeuYvo9OEM86bAm.HGWDtQDfWSQGqx2aF7KteHKNFPU3BHS",
+        "created_at": "2025-11-17T05:10:44.958094+00:00"
+      },
+      {
+        "_id": "691bd77acca689ead16a7f32",
+        "device_id": "d05bc36b-19b9-4722-98f7-bb7944784c35",
+        "bus_number": "BUS-001",
+        "device_name": "PI1",
+        "key_hash": "$2b$12$TkE06hgeuYvo9OEM86bAm.HGWDtQDfWSQGqx2aF7KteHKNFPU3BHS",
+        "created_at": "2025-11-17T05:10:44.958094+00:00"
+      },
+      {
+        "_id": "691bdfa9b1bd393ae30c1d09",
+        "device_id": "d05bc36b-19b9-4722-98f7-bb7944784c35",
+        "bus_number": "BUS-001",
+        "device_name": "PI1",
+        "key_hash": "$2b$12$TkE06hgeuYvo9OEM86bAm.HGWDtQDfWSQGqx2aF7KteHKNFPU3BHS",
+        "created_at": "2025-11-17T05:10:44.958094+00:00"
+      },
+      {
+        "_id": "691c1daeecf7e2e1f115d00b",
+        "device_id": "d05bc36b-19b9-4722-98f7-bb7944784c35",
+        "bus_number": "BUS-001",
+        "device_name": "PI1",
+        "key_hash": "$2b$12$TkE06hgeuYvo9OEM86bAm.HGWDtQDfWSQGqx2aF7KteHKNFPU3BHS",
+        "created_at": "2025-11-17T05:10:44.958094+00:00"
+      }
+    ]
+  }
+}
