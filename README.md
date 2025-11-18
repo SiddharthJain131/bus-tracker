@@ -15,15 +15,17 @@ The Bus Tracker System helps schools manage student transportation efficiently w
 
 ### Key Features
 
+- **🎨 Modern, Polished UI/UX** - Rich visual theme with role-based colors, smooth animations, and personalized greetings
 - **🗺️ Real-time Bus Tracking** - Live GPS monitoring on interactive maps with GPS fallback support
 - **🎫 RFID Attendance** - Automated student verification with photo capture
-- **👥 Role-based Dashboards** - Separate interfaces for Parents, Teachers, and Admins
+- **👥 Role-based Dashboards** - Separate interfaces for Parents, Teachers, and Admins with unified design language
 - **📱 Instant Notifications** - Alerts for identity mismatches and important updates
 - **📅 Interactive Calendar** - Click green attendance cells to view scan photos and timestamps
 - **🛰️ Raspberry Pi Integration** - Direct uploads via SIM800 GSM module with graceful GPS degradation
 - **🗺️ Route Visualization** - Interactive maps with stop markers and paths
 - **💾 Production Backup System** - SHA256 integrity checks, auto-rotation, frontend monitoring
 - **📍 GPS Fallback Handling** - System operates normally even when GPS unavailable (shows 🔴❓ indicator)
+- **✨ Micro-interactions** - Hover effects, card elevations, and smooth transitions for professional feel
 
 ---
 
