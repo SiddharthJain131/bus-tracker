@@ -45,6 +45,7 @@ email_verification_codes = {}
 
 # Email Authentication Configuration
 EMAIL_AUTH_ENABLED = os.environ.get('EMAIL_AUTH_ENABLED', 'false').lower() == 'true'
+NEW_USER_EMAIL_ENABLED = os.environ.get('NEW_USER_EMAIL_ENABLED', 'true').lower() == 'true'
 SMTP_HOST = os.environ.get('SMTP_HOST', 'smtp.gmail.com')
 SMTP_PORT = int(os.environ.get('SMTP_PORT', '587'))
 SMTP_USER = os.environ.get('SMTP_USER', '')
