@@ -822,9 +822,9 @@ export default function AdminDashboardNew({ user, onLogout }) {
 
           {/* Users Tab */}
           <TabsContent value="users" className="space-y-6">
-            <Card className="p-6">
+            <Card className="p-6 dashboard-card admin-accent-border">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-semibold" style={{ fontFamily: 'Space Grotesk' }}>
+                <h2 className="text-xl font-semibold text-admin-primary" style={{ fontFamily: 'Space Grotesk' }}>
                   Users Management
                 </h2>
                 <div className="flex gap-3">
