@@ -182,6 +182,32 @@ sudo supervisorctl restart all
 
 ### Recent Features
 
+**🎨 Enhanced Visual Theme System (Latest):**
+- **Rich, Dynamic Login Page:**
+  - Animated gradient background with floating shapes
+  - Smooth fade-in and hover effects
+  - Role-specific colored demo credentials
+  - Professional, inviting first impression
+  
+- **Unified Dashboard Experience:**
+  - Consistent logout button across all roles with role-specific hover colors
+  - Personalized headers with randomized greetings ("Welcome back", "Good to see you")
+  - Gradient text titles and enhanced icon containers
+  - Smooth slide-in animations on page load
+  
+- **Parent Dashboard Refinement:**
+  - Matched Teacher dashboard visual depth and polish
+  - Micro-shadows and layered card surfaces
+  - Role-aware warm gradient colors (gold/orange)
+  - Enhanced hover effects with card elevation
+  - Refined typography hierarchy and spacing
+  
+- **New CSS Animations:**
+  - `hover-lift`: Smooth card elevation on hover
+  - `fade-in`: Gentle fade and slide animations
+  - `slide-in-left`: Icon and title entrance effects
+  - Optimized for performance and accessibility
+
 **Interactive Attendance Calendar:**
 - Click any green (Reached) attendance cell to view:
   - 📸 Photo captured during scan
