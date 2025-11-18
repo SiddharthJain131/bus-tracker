@@ -250,6 +250,12 @@
         }
     }
     
+    /* Dynamic gradient animation for headers */
+    .animate-gradient {
+        background-size: 200% 200%;
+        animation: gradient-shift 8s ease infinite;
+    }
+    
     /* Floating shapes animation */
     .floating-shape {
         animation: float 20s ease-in-out infinite;
