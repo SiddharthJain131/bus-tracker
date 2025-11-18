@@ -282,12 +282,12 @@ export default function ParentDashboard({ user, onLogout }) {
 
               {/* Right column - Notifications */}
               <div>
-                <Card className="p-6 hover:shadow-modern-lg transition-shadow">
-                  <div className="flex items-center gap-3 mb-5">
-                    <div className="p-2 bg-soft-cyan/10 rounded-lg">
-                      <Bell className="w-5 h-5 text-soft-cyan" />
+                <Card className="p-6 dashboard-card-enhanced parent-accent-border hover-lift">
+                  <div className="flex items-center gap-3 mb-5 pb-4 border-b border-gray-100">
+                    <div className="w-12 h-12 bg-gradient-to-br from-parent-primary to-parent-secondary rounded-xl flex items-center justify-center shadow-sm">
+                      <Bell className="w-6 h-6 text-white" />
                     </div>
-                    <h2 className="text-2xl font-semibold text-navy">Notifications</h2>
+                    <h2 className="text-xl font-semibold text-parent-primary">Notifications</h2>
                   </div>
                   <div className="space-y-3 max-h-96 overflow-y-auto" data-testid="notifications-container">
                     {notifications.length === 0 ? (
