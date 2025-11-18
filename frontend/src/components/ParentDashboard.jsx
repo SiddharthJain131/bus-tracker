@@ -253,17 +253,6 @@ export default function ParentDashboard({ user, onLogout }) {
           </div>
         )}
       </div>
-
-      {/* Notification Detail Modal */}
-      {showNotificationDetail && selectedNotification && (
-        <NotificationDetailModal
-          notification={selectedNotification}
-          onClose={() => {
-            setShowNotificationDetail(false);
-            setSelectedNotification(null);
-          }}
-        />
-      )}
     </div>
   );
 }
