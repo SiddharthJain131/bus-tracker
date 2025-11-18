@@ -152,7 +152,8 @@ export default function TeacherDashboardNew({ user, onLogout }) {
   };
 
   const handleStudentClick = (student) => {
-    // Handle student click logic here
+    setSelectedStudent(student);
+    setShowStudentDetail(true);
   };
 
   const formatTimestamp = (timestamp) => {
