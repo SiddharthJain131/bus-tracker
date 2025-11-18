@@ -23,7 +23,6 @@ export default function ParentDashboard({ user, onLogout }) {
 
   useEffect(() => {
     fetchStudents();
-    fetchNotifications();
   }, []);
 
   useEffect(() => {
