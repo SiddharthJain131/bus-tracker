@@ -747,9 +747,9 @@ export default function AdminDashboardNew({ user, onLogout }) {
 
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-muted/50 border-b-2 border-border">
+                  <thead className="dashboard-content border-b-2 dashboard-separator">
                     <tr>
-                      <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Roll No</th>
+                      <th className="px-4 py-3 text-left text-xs font-bold text-admin-primary uppercase tracking-wider">Roll No</th>
                       <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Name</th>
                       <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Phone</th>
                       <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Parent</th>
