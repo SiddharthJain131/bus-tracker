@@ -197,7 +197,7 @@ export default function ParentDashboard({ user, onLogout }) {
               {/* Left column - Map and Attendance */}
               <div className="lg:col-span-2 space-y-6">
                 {/* Live Bus Map */}
-                <Card className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                <Card className="p-6 dashboard-card parent-accent-border hover:shadow-lg transition-shadow">
                   <div className="flex items-center gap-3 mb-5">
                     <div className="w-10 h-10 bg-parent-light rounded-lg flex items-center justify-center">
                       <MapPin className="w-5 h-5 text-parent-primary" />
@@ -240,7 +240,7 @@ export default function ParentDashboard({ user, onLogout }) {
                 </Card>
 
                 {/* Attendance Grid */}
-                <Card className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                <Card className="p-6 dashboard-card parent-accent-border hover:shadow-lg transition-shadow">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-5">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 bg-parent-light rounded-lg flex items-center justify-center">
