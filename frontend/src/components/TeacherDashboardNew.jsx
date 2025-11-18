@@ -328,9 +328,8 @@ export default function TeacherDashboardNew({ user, onLogout }) {
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="space-y-6">
-            {/* Teacher Profile Card */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+        {/* Teacher Profile Card */}
             <Card className="p-6 dashboard-card teacher-accent-border hover:shadow-lg transition-shadow">
               <h2 className="text-xl font-semibold mb-5 text-teacher-primary">
                 Teacher Profile
