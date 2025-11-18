@@ -176,22 +176,6 @@ agent_communication:
     message: "Implemented three new features: A) Demo credential autofill - added onClick handlers to demo boxes that populate email/password fields on login page. B) Notification actions - added DELETE endpoint and three-dot menu with Mark as Read/Delete actions in NotificationBell component. C) New user email - added send_new_user_email() function that sends welcome email with credentials when admin creates user, with NEW_USER_EMAIL_ENABLED toggle. All features implemented and ready for backend testing."
 
   - task: "Authentication APIs (login, logout, me)"
-    implemented: true
-    working: true
-    file: "/app/backend/server.py"
-    stuck_count: 0
-    priority: "high"
-    needs_retesting: false
-    status_history:
-      - working: "NA"
-        agent: "main"
-        comment: "Authentication endpoints exist at lines 205-255. Need to verify login flow for all 3 roles."
-      - working: true
-        agent: "testing"
-        comment: "✅ PASSED - All authentication flows working correctly. Tested login/logout for parent@school.com, teacher@school.com, admin@school.com with password 'password'. Session management working with cookies. Invalid credentials properly rejected with 401."
-      - working: true
-        agent: "testing"
-        comment: "✅ ENHANCED ADMIN DASHBOARD VERIFICATION - Admin authentication (admin@school.com/password) working perfectly. Session management via cookies functional. GET /api/auth/me returns complete admin profile data."
 
   - task: "Scan event API (/api/scan_event)"
     implemented: true
