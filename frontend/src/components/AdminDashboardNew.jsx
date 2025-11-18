@@ -750,13 +750,13 @@ export default function AdminDashboardNew({ user, onLogout }) {
                   <thead className="dashboard-content border-b-2 dashboard-separator">
                     <tr>
                       <th className="px-4 py-3 text-left text-xs font-bold text-admin-primary uppercase tracking-wider">Roll No</th>
-                      <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Name</th>
-                      <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Phone</th>
-                      <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Parent</th>
-                      <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Class</th>
-                      <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Section</th>
-                      <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Bus</th>
-                      <th className="px-4 py-3 text-center text-xs font-bold text-navy uppercase tracking-wider">Actions</th>
+                      <th className="px-4 py-3 text-left text-xs font-bold text-admin-primary uppercase tracking-wider">Name</th>
+                      <th className="px-4 py-3 text-left text-xs font-bold text-admin-primary uppercase tracking-wider">Phone</th>
+                      <th className="px-4 py-3 text-left text-xs font-bold text-admin-primary uppercase tracking-wider">Parent</th>
+                      <th className="px-4 py-3 text-left text-xs font-bold text-admin-primary uppercase tracking-wider">Class</th>
+                      <th className="px-4 py-3 text-left text-xs font-bold text-admin-primary uppercase tracking-wider">Section</th>
+                      <th className="px-4 py-3 text-left text-xs font-bold text-admin-primary uppercase tracking-wider">Bus</th>
+                      <th className="px-4 py-3 text-center text-xs font-bold text-admin-primary uppercase tracking-wider">Actions</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
@@ -861,11 +861,11 @@ export default function AdminDashboardNew({ user, onLogout }) {
                       <table className="w-full">
                         <thead className="bg-muted/50 border-b-2 border-border">
                           <tr>
-                            <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Name</th>
-                            <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Role</th>
-                            <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Email</th>
-                            <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Phone</th>
-                            <th className="px-4 py-3 text-center text-xs font-bold text-navy uppercase tracking-wider">Actions</th>
+                            <th className="px-4 py-3 text-left text-xs font-bold text-admin-primary uppercase tracking-wider">Name</th>
+                            <th className="px-4 py-3 text-left text-xs font-bold text-admin-primary uppercase tracking-wider">Role</th>
+                            <th className="px-4 py-3 text-left text-xs font-bold text-admin-primary uppercase tracking-wider">Email</th>
+                            <th className="px-4 py-3 text-left text-xs font-bold text-admin-primary uppercase tracking-wider">Phone</th>
+                            <th className="px-4 py-3 text-center text-xs font-bold text-admin-primary uppercase tracking-wider">Actions</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200">
@@ -1003,12 +1003,12 @@ export default function AdminDashboardNew({ user, onLogout }) {
                     <table className="w-full">
                       <thead className="bg-muted/50 border-b-2 border-border">
                         <tr>
-                          <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Bus No</th>
-                          <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Driver</th>
-                          <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Phone</th>
-                          <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Route</th>
-                          <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Capacity</th>
-                          <th className="px-4 py-3 text-center text-xs font-bold text-navy uppercase tracking-wider">Actions</th>
+                          <th className="px-4 py-3 text-left text-xs font-bold text-admin-primary uppercase tracking-wider">Bus No</th>
+                          <th className="px-4 py-3 text-left text-xs font-bold text-admin-primary uppercase tracking-wider">Driver</th>
+                          <th className="px-4 py-3 text-left text-xs font-bold text-admin-primary uppercase tracking-wider">Phone</th>
+                          <th className="px-4 py-3 text-left text-xs font-bold text-admin-primary uppercase tracking-wider">Route</th>
+                          <th className="px-4 py-3 text-left text-xs font-bold text-admin-primary uppercase tracking-wider">Capacity</th>
+                          <th className="px-4 py-3 text-center text-xs font-bold text-admin-primary uppercase tracking-wider">Actions</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-200">
