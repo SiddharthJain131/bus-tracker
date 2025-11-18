@@ -542,7 +542,7 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                       </tr>
                     ) : (
                       filteredStudents.map(student => (
-                        <tr key={student.student_id} className="hover:bg-gray-50 transition-colors">
+                        <tr key={student.student_id} className="hover:bg-dashboard-content transition-colors">
                           <td className="px-4 py-4 text-sm text-teacher-primary font-medium">
                             {student.roll_number || 'N/A'}
                           </td>
