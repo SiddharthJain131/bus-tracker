@@ -142,17 +142,26 @@ Complete guide for using the Bus Tracker System across all three user roles.
 
 **Access:** Login with teacher account → Auto-redirects to `/teacher`
 
+### Visual Design
+- **Teal/Green Theme:** Professional teal and green accent colors
+- **Personalized Header:** Randomized greeting with your name highlighted in teal
+- **Enhanced Visual Depth:** Micro-shadows, layered surfaces, and refined typography
+- **Consistent Polish:** Matching design language with subtle animations and hover effects
+
 ### Features Overview
 
 #### 1. Teacher Profile Card
-- Your photo, name, contact information
-- Assigned class and section
-- Quick overview statistics
+- Your photo with teal gradient border
+- Name, email, phone contact information
+- Assigned class and section badge with teal accent
+- Enhanced card design with bottom border separator
+- Hover effect for interactive feedback
 
 #### 2. Summary Statistics
-- **Total Students** - Number of students in your class
-- **Avg Monthly Attendance** - Percentage for current month
-- **Today's Absences** - Students marked red (missed bus)
+- **Total Students** - Number of students in your class (teal gradient icon)
+- **Avg Monthly Attendance** - Percentage for current month (teal gradient icon)
+- **Today's Absences** - Students marked red (red gradient icon)
+- All cards feature gradient icon backgrounds and smooth hover elevation
 
 #### 3. Student List Table
 **Columns:**
