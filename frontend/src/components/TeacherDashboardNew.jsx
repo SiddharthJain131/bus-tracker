@@ -325,12 +325,12 @@ export default function TeacherDashboardNew({ user, onLogout }) {
 
   return (
     <div className="min-h-screen dashboard-bg" data-testid="teacher-dashboard">
-      {/* Header */}
-      <header className="dashboard-panel teacher-accent-border border-b dashboard-separator shadow-md sticky top-0 z-10">
+      {/* Header with Dynamic Gradient */}
+      <header className="bg-gradient-to-r from-teal-50 via-emerald-50 to-green-50 animate-gradient dashboard-panel teacher-accent-border border-b dashboard-separator shadow-md sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-4 slide-in-left">
-              <div className="w-16 h-16 bg-gradient-to-br from-teacher-primary via-teal-500 to-teacher-secondary rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="w-16 h-16 bg-gradient-to-br from-teacher-primary via-teal-500 to-teacher-secondary rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:animate-glow">
                 <GraduationCap className="w-8 h-8 text-white" />
               </div>
               <div>
@@ -342,10 +342,13 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                 </p>
               </div>
             </div>
-            <Button onClick={onLogout} variant="outline" className="logout-button logout-button-teacher">
-              <LogOut className="w-4 h-4" />
-              Logout
-            </Button>
+            <div className="flex items-center gap-3">
+              <NotificationBell role="teacher" />
+              <Button onClick={onLogout} variant="outline" className="logout-button logout-button-teacher">
+                <LogOut className="w-4 h-4" />
+                Logout
+              </Button>
+            </div>
           </div>
         </div>
       </header>
