@@ -693,11 +693,6 @@ export default function TeacherDashboardNew({ user, onLogout }) {
         </DialogContent>
       </Dialog>
 
-      <NotificationDetailModal
-        notification={selectedNotification}
-        isOpen={showNotificationDetail}
-        onClose={() => setShowNotificationDetail(false)}
-      />
     </div>
   );
 }
