@@ -16,6 +16,8 @@ export default function Login({ onLogin }) {
   const [shake, setShake] = useState(false);
   const [busIconTransitioning, setBusIconTransitioning] = useState(false);
   const [transitionRole, setTransitionRole] = useState(null);
+  const [requiresVerification, setRequiresVerification] = useState(false);
+  const [verificationCode, setVerificationCode] = useState('');
 
   const getRoleThemeColor = (role) => {
     switch (role) {
