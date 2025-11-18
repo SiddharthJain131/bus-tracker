@@ -130,8 +130,12 @@ export default function Login({ onLogin }) {
         <div className="w-full">
           <Card className={`w-full max-w-md mx-auto p-8 bg-gradient-to-br from-white/70 via-white/80 to-white/90 backdrop-blur-lg shadow-modern-xl border border-white/50 fade-in hover:shadow-2xl transition-all duration-300 rounded-2xl ${shake ? 'animate-shake' : ''}`}>
             <div className="text-center mb-8 slide-in-left">
-              <div className={`inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-indigo-50 via-blue-50 to-indigo-100 animate-gradient rounded-2xl mb-4 shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 border-2 border-indigo-200 ${transitioning ? `bg-gradient-to-br ${getRoleThemeColor(transitionRole)}` : ''}`}>
-                <Bus className={`w-10 h-10 transition-colors duration-500 ${transitioning ? 'text-white' : 'text-indigo-600'}`} />
+              <div className={`inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br rounded-2xl mb-4 shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 border-2 ${
+                busIconTransitioning 
+                  ? `${getRoleThemeColor(transitionRole)} border-transparent scale-105` 
+                  : 'from-indigo-50 via-blue-50 to-indigo-100 animate-gradient border-indigo-200'
+              }`}>
+                <Bus className={`w-10 h-10 transition-all duration-300 ${busIconTransitioning ? 'text-white scale-110' : 'text-indigo-600'}`} />
               </div>
               <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-700 via-indigo-600 to-blue-600 bg-clip-text text-transparent mb-2">
                 Welcome Back
