@@ -296,7 +296,6 @@ export default function ParentDashboard({ user, onLogout }) {
               </div>
             </Card>
           </div>
-          </div>
         )}
       </div>
 
