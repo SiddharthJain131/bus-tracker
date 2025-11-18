@@ -352,8 +352,8 @@ export default function TeacherDashboardNew({ user, onLogout }) {
           {/* Main Content - 3 columns */}
           <div className="lg:col-span-3 space-y-6">
             {/* Teacher Profile Card */}
-            <Card className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-              <h2 className="text-xl font-semibold mb-5 text-gray-900">
+            <Card className="p-6 dashboard-card teacher-accent-border hover:shadow-lg transition-shadow">
+              <h2 className="text-xl font-semibold mb-5 text-teacher-primary">
                 Teacher Profile
               </h2>
               <div className="flex items-center gap-6">
