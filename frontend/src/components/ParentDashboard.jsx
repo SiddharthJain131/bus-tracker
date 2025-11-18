@@ -197,19 +197,19 @@ export default function ParentDashboard({ user, onLogout }) {
               {/* Left column - Map and Attendance */}
               <div className="lg:col-span-2 space-y-6">
                 {/* Live Bus Map */}
-                <Card className="p-6 hover:shadow-modern-lg transition-shadow">
+                <Card className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex items-center gap-3 mb-5">
-                    <div className="p-2 bg-accent-blue/10 rounded-lg">
-                      <MapPin className="w-5 h-5 text-accent-blue" />
+                    <div className="w-10 h-10 bg-parent-light rounded-lg flex items-center justify-center">
+                      <MapPin className="w-5 h-5 text-parent-primary" />
                     </div>
-                    <h2 className="text-2xl font-semibold text-navy">Live Bus Location</h2>
+                    <h2 className="text-xl font-semibold text-gray-900">Live Bus Location</h2>
                     {busLocation && (
                       <span className="ml-auto text-xs text-gray-500">
                         Updated: {new Date(busLocation.timestamp).toLocaleTimeString()}
                       </span>
                     )}
                   </div>
-                  <div className="h-96 rounded-xl overflow-hidden relative border border-border" data-testid="bus-map-container">
+                  <div className="h-96 rounded-xl overflow-hidden relative border border-gray-200" data-testid="bus-map-container">
                     <BusMap location={busLocation} route={route} showRoute={showRoute} />
                     
                     {/* Toggle Route Button */}
@@ -217,10 +217,10 @@ export default function ParentDashboard({ user, onLogout }) {
                       <button
                         onClick={toggleRoute}
                         data-testid="toggle-route-button"
-                        className={`absolute top-4 right-4 z-[1000] flex items-center gap-2 px-4 py-2 rounded-xl shadow-modern-lg transition-all font-medium ${
+                        className={`absolute top-4 right-4 z-[1000] flex items-center gap-2 px-4 py-2 rounded-xl shadow-md transition-all font-medium ${
                           showRoute
-                            ? 'bg-accent-blue text-white hover:bg-accent-blue/90'
-                            : 'bg-white text-navy hover:bg-muted border-2 border-border'
+                            ? 'bg-parent-primary text-white hover:bg-parent-hover'
+                            : 'bg-white text-gray-900 hover:bg-gray-50 border-2 border-gray-300'
                         }`}
                       >
                         {showRoute ? (
