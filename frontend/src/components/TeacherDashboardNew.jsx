@@ -431,7 +431,7 @@ export default function TeacherDashboardNew({ user, onLogout }) {
             </div>
 
             {/* Students List */}
-            <Card className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+            <Card className="p-6 dashboard-card teacher-accent-border">
               <div className="mb-6">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5">
                   <h2 className="text-xl font-semibold text-gray-900">
@@ -598,7 +598,7 @@ export default function TeacherDashboardNew({ user, onLogout }) {
 
           {/* Notifications Sidebar - 1 column */}
           <div className="lg:col-span-1">
-            <Card className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm sticky top-24">
+            <Card className="p-6 dashboard-card teacher-accent-border sticky top-24">
               <div className="flex items-center gap-3 mb-5">
                 <div className="w-10 h-10 bg-teacher-light rounded-lg flex items-center justify-center">
                   <Bell className="w-5 h-5 text-teacher-primary" />
