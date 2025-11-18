@@ -14,7 +14,7 @@ export default function Login({ onLogin }) {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [shake, setShake] = useState(false);
-  const [transitioning, setTransitioning] = useState(false);
+  const [busIconTransitioning, setBusIconTransitioning] = useState(false);
   const [transitionRole, setTransitionRole] = useState(null);
 
   const getRoleThemeColor = (role) => {
@@ -42,14 +42,14 @@ export default function Login({ onLogin }) {
 
       toast.success('Login successful!');
       
-      // Start theme transition animation
+      // Start bus icon theme transition animation only
       setTransitionRole(response.data.role);
-      setTransitioning(true);
+      setBusIconTransitioning(true);
       
-      // Wait for transition to complete before navigating
+      // Quick smooth transition before navigating (300ms for snappy feel)
       setTimeout(() => {
         onLogin(response.data);
-      }, 600);
+      }, 300);
     } catch (error) {
       toast.error(error.response?.data?.detail || 'Login failed');
       // Trigger shake animation on failed login
