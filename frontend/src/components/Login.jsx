@@ -66,16 +66,6 @@ export default function Login({ onLogin }) {
       <div className="absolute top-20 left-10 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl floating-shape" style={{ animationDelay: '0s' }}></div>
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-indigo-400/10 rounded-full blur-3xl floating-shape" style={{ animationDelay: '5s' }}></div>
       <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-cyan-400/10 rounded-full blur-3xl floating-shape" style={{ animationDelay: '10s' }}></div>
-      
-      {/* Theme Transition Overlay */}
-      {transitioning && (
-        <div 
-          className={`fixed inset-0 z-50 bg-gradient-to-br ${getRoleThemeColor(transitionRole)} transition-opacity duration-500`}
-          style={{
-            animation: 'fadeToWhite 600ms ease-in-out forwards'
-          }}
-        />
-      )}
 
       {/* Two-column layout on larger screens, single column on mobile */}
       <div className="w-full max-w-6xl mx-auto grid lg:grid-cols-2 gap-8 items-center">
