@@ -185,56 +185,110 @@ export default function Login({ onLogin }) {
               <p className="text-gray-600 text-base font-medium">Sign in to continue</p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-5" data-testid="login-form">
-              <div className="space-y-2">
-                <label className="text-sm font-semibold text-navy">Email</label>
-                <div className="relative">
-                  <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
-                  <Input
-                    data-testid="email-input"
-                    type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    className="pl-12 h-12 bg-white/90 border-gray-200 focus:border-indigo-400 focus:ring-indigo-400"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-sm font-semibold text-navy">Password</label>
-                <div className="relative">
-                  <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
-                  <Input
-                    data-testid="password-input"
-                    type="password"
-                    placeholder="Enter your password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    className="pl-12 h-12 bg-white/90 border-gray-200 focus:border-indigo-400 focus:ring-indigo-400"
-                  />
-                </div>
-              </div>
-
-              <Button
-                data-testid="login-button"
-                type="submit"
-                disabled={loading}
-                variant="accent"
-                className="w-full h-12 text-base font-semibold bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                {loading ? (
-                  <div className="flex items-center justify-center gap-2">
-                    <div className="spinner" />
-                    Logging in...
+            {!requiresVerification ? (
+              <form onSubmit={handleSubmit} className="space-y-5" data-testid="login-form">
+                <div className="space-y-2">
+                  <label className="text-sm font-semibold text-navy">Email</label>
+                  <div className="relative">
+                    <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
+                    <Input
+                      data-testid="email-input"
+                      type="email"
+                      placeholder="Enter your email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      className="pl-12 h-12 bg-white/90 border-gray-200 focus:border-indigo-400 focus:ring-indigo-400"
+                    />
                   </div>
-                ) : (
-                  'Login'
-                )}
-              </Button>
-            </form>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-semibold text-navy">Password</label>
+                  <div className="relative">
+                    <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
+                    <Input
+                      data-testid="password-input"
+                      type="password"
+                      placeholder="Enter your password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      className="pl-12 h-12 bg-white/90 border-gray-200 focus:border-indigo-400 focus:ring-indigo-400"
+                    />
+                  </div>
+                </div>
+
+                <Button
+                  data-testid="login-button"
+                  type="submit"
+                  disabled={loading}
+                  variant="accent"
+                  className="w-full h-12 text-base font-semibold bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 shadow-lg hover:shadow-xl transition-all duration-300"
+                >
+                  {loading ? (
+                    <div className="flex items-center justify-center gap-2">
+                      <div className="spinner" />
+                      Logging in...
+                    </div>
+                  ) : (
+                    'Login'
+                  )}
+                </Button>
+              </form>
+            ) : (
+              <form onSubmit={handleVerifyCode} className="space-y-5">
+                <div className="text-center mb-4">
+                  <p className="text-sm text-gray-600">
+                    We've sent a 6-digit verification code to <strong>{email}</strong>
+                  </p>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-semibold text-navy">Verification Code</label>
+                  <div className="relative">
+                    <Shield className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
+                    <Input
+                      type="text"
+                      placeholder="Enter 6-digit code"
+                      value={verificationCode}
+                      onChange={(e) => setVerificationCode(e.target.value)}
+                      required
+                      maxLength={6}
+                      pattern="[0-9]{6}"
+                      className="pl-12 h-12 bg-white/90 border-gray-200 focus:border-indigo-400 focus:ring-indigo-400 text-center text-2xl tracking-widest font-bold"
+                    />
+                  </div>
+                </div>
+
+                <Button
+                  type="submit"
+                  disabled={loading || verificationCode.length !== 6}
+                  variant="accent"
+                  className="w-full h-12 text-base font-semibold bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 shadow-lg hover:shadow-xl transition-all duration-300"
+                >
+                  {loading ? (
+                    <div className="flex items-center justify-center gap-2">
+                      <div className="spinner" />
+                      Verifying...
+                    </div>
+                  ) : (
+                    'Verify & Login'
+                  )}
+                </Button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setRequiresVerification(false);
+                    setVerificationCode('');
+                  }}
+                  className="w-full text-sm text-gray-600 hover:text-indigo-600 transition-colors"
+                >
+                  ← Back to login
+                </button>
+              </form>
+            )}
 
             <div className="mt-8 p-5 bg-gradient-to-br from-blue-50/80 to-indigo-50/80 backdrop-blur-sm rounded-xl border border-blue-200/50 shadow-sm">
               <p className="text-sm font-semibold text-blue-900 mb-3 flex items-center gap-2">
