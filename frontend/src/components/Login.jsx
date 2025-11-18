@@ -13,6 +13,7 @@ export default function Login({ onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [shake, setShake] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,6 +29,9 @@ export default function Login({ onLogin }) {
       onLogin(response.data);
     } catch (error) {
       toast.error(error.response?.data?.detail || 'Login failed');
+      // Trigger shake animation on failed login
+      setShake(true);
+      setTimeout(() => setShake(false), 200);
     } finally {
       setLoading(false);
     }
