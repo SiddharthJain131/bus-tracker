@@ -296,9 +296,33 @@ export default function Login({ onLogin }) {
                 Demo Credentials:
               </p>
               <div className="text-sm text-gray-700 space-y-2">
-                <p className="hover:text-blue-700 transition-colors cursor-pointer"><strong className="text-orange-600">Parent:</strong> parent@school.com / password</p>
-                <p className="hover:text-green-700 transition-colors cursor-pointer"><strong className="text-teal-600">Teacher:</strong> teacher@school.com / password</p>
-                <p className="hover:text-blue-700 transition-colors cursor-pointer"><strong className="text-indigo-600">Admin:</strong> admin@school.com / password</p>
+                <p 
+                  onClick={() => {
+                    setEmail('parent@school.com');
+                    setPassword('password');
+                  }}
+                  className="hover:text-blue-700 transition-colors cursor-pointer hover:bg-orange-50 p-2 rounded-lg"
+                >
+                  <strong className="text-orange-600">Parent:</strong> parent@school.com / password
+                </p>
+                <p 
+                  onClick={() => {
+                    setEmail('teacher@school.com');
+                    setPassword('password');
+                  }}
+                  className="hover:text-green-700 transition-colors cursor-pointer hover:bg-teal-50 p-2 rounded-lg"
+                >
+                  <strong className="text-teal-600">Teacher:</strong> teacher@school.com / password
+                </p>
+                <p 
+                  onClick={() => {
+                    setEmail('admin@school.com');
+                    setPassword('password');
+                  }}
+                  className="hover:text-blue-700 transition-colors cursor-pointer hover:bg-indigo-50 p-2 rounded-lg"
+                >
+                  <strong className="text-indigo-600">Admin:</strong> admin@school.com / password
+                </p>
               </div>
             </div>
 
