@@ -56,10 +56,6 @@ export default function TeacherDashboardNew({ user, onLogout }) {
   
   // Photo viewer state
   const [showPhotoViewer, setShowPhotoViewer] = useState(false);
-  
-  // Notification modal state
-  const [showNotificationDetail, setShowNotificationDetail] = useState(false);
-  const [selectedNotification, setSelectedNotification] = useState(null);
   const [currentUser, setCurrentUser] = useState(user);
   
   // Scan photo modal state
