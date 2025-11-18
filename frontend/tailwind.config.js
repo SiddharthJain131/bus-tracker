@@ -61,6 +61,26 @@ module.exports = {
                 'medium-gray': 'hsl(var(--medium-gray))',
                 'light-gray': 'hsl(var(--light-gray))',
                 
+                // Role-Specific Theme Colors
+                admin: {
+                    primary: 'hsl(var(--admin-primary))',
+                    secondary: 'hsl(var(--admin-secondary))',
+                    light: 'hsl(var(--admin-light))',
+                    hover: 'hsl(var(--admin-hover))'
+                },
+                teacher: {
+                    primary: 'hsl(var(--teacher-primary))',
+                    secondary: 'hsl(var(--teacher-secondary))',
+                    light: 'hsl(var(--teacher-light))',
+                    hover: 'hsl(var(--teacher-hover))'
+                },
+                parent: {
+                    primary: 'hsl(var(--parent-primary))',
+                    secondary: 'hsl(var(--parent-secondary))',
+                    light: 'hsl(var(--parent-light))',
+                    hover: 'hsl(var(--parent-hover))'
+                },
+                
                 // Status colors
                 status: {
                     green: 'hsl(var(--status-green))',
