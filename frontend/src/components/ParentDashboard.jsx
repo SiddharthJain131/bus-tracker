@@ -140,12 +140,12 @@ export default function ParentDashboard({ user, onLogout }) {
 
   return (
     <div className="min-h-screen dashboard-bg" data-testid="parent-dashboard">
-      {/* Header */}
-      <header className="dashboard-panel parent-accent-border border-b dashboard-separator shadow-md sticky top-0 z-10">
+      {/* Header with Dynamic Gradient */}
+      <header className="bg-gradient-to-r from-amber-50 via-orange-50 to-yellow-50 animate-gradient dashboard-panel parent-accent-border border-b dashboard-separator shadow-md sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-4 slide-in-left">
-              <div className="w-16 h-16 bg-gradient-to-br from-parent-primary via-parent-secondary to-orange-400 rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="w-16 h-16 bg-gradient-to-br from-parent-primary via-parent-secondary to-orange-400 rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:animate-glow">
                 <Bus className="w-8 h-8 text-white" />
               </div>
               <div>
@@ -157,15 +157,18 @@ export default function ParentDashboard({ user, onLogout }) {
                 </p>
               </div>
             </div>
-            <Button
-              data-testid="logout-button"
-              onClick={onLogout}
-              variant="outline"
-              className="logout-button logout-button-parent"
-            >
-              <LogOut className="w-4 h-4" />
-              Logout
-            </Button>
+            <div className="flex items-center gap-3">
+              <NotificationBell role="parent" />
+              <Button
+                data-testid="logout-button"
+                onClick={onLogout}
+                variant="outline"
+                className="logout-button logout-button-parent"
+              >
+                <LogOut className="w-4 h-4" />
+                Logout
+              </Button>
+            </div>
           </div>
         </div>
       </header>
