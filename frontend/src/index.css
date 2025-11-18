@@ -61,6 +61,25 @@ code {
         --medium-gray: 222 15% 20%;
         --light-gray: 220 14% 96%;
         
+        /* Role-Specific Theme Colors */
+        /* Admin Theme - Indigo/Blue */
+        --admin-primary: 213 94% 61%;
+        --admin-secondary: 222 47% 35%;
+        --admin-light: 213 94% 95%;
+        --admin-hover: 213 94% 55%;
+        
+        /* Teacher Theme - Green/Teal */
+        --teacher-primary: 162 73% 46%;
+        --teacher-secondary: 187 71% 62%;
+        --teacher-light: 162 73% 95%;
+        --teacher-hover: 162 73% 40%;
+        
+        /* Parent Theme - Warm Orange/Gold */
+        --parent-primary: 35 91% 55%;
+        --parent-secondary: 45 93% 66%;
+        --parent-light: 35 91% 95%;
+        --parent-hover: 35 91% 48%;
+        
         /* Status Colors */
         --status-green: 142 76% 36%;
         --status-yellow: 45 93% 47%;
