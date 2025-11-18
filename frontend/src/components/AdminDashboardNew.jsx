@@ -400,12 +400,13 @@ export default function AdminDashboardNew({ user, onLogout }) {
   return (
     <div className="min-h-screen dashboard-bg" data-testid="admin-dashboard">
       {/* Header with Dynamic Gradient */}
-      <header className="bg-gradient-to-r from-indigo-50 via-blue-50 to-indigo-50 animate-gradient dashboard-panel admin-accent-border border-b dashboard-separator shadow-md sticky top-0 z-10">
+      <header className="bg-gradient-to-r from-indigo-50 via-blue-50 to-indigo-50 animate-gradient dashboard-panel admin-accent-border border-b dashboard-separator shadow-md sticky top-0 z-10 transition-shadow duration-300 hover:shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-4 slide-in-left">
-              <div className="w-16 h-16 bg-gradient-to-br from-admin-secondary via-blue-600 to-admin-primary rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300">
-                <Users className="w-8 h-8 text-white" />
+              <div className="w-16 h-16 bg-gradient-to-br from-admin-secondary via-blue-600 to-admin-primary rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:animate-glow group relative">
+                <Users className="w-8 h-8 text-white transition-transform duration-300 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
               <div>
                 <h1 className="text-3xl font-bold bg-gradient-to-r from-admin-primary to-blue-700 bg-clip-text text-transparent">
