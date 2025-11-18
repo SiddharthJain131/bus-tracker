@@ -84,6 +84,50 @@ const BackupManagement = () => {
     }
   };
 
+  const restoreBackup = async (backupId) => {
+    if (!restoreConfirm || restoreConfirm !== backupId) {
+      setRestoreConfirm(backupId);
+      toast({
+        title: 'Confirm Restore',
+        description: 'Click restore again to confirm. This will overwrite current data!',
+        variant: 'default'
+      });
+      
+      // Reset confirmation after 5 seconds
+      setTimeout(() => setRestoreConfirm(null), 5000);
+      return;
+    }
+
+    setIsRestoring(true);
+    try {
+      const response = await axios.post(
+        `${BACKEND_URL}/api/admin/backups/restore/${backupId}`,
+        {},
+        { withCredentials: true }
+      );
+
+      toast({
+        title: 'Restore Successful',
+        description: `Restored ${response.data.restored_collections.length} collection(s) from ${response.data.backup_type} backup`,
+        variant: 'default'
+      });
+
+      setRestoreConfirm(null);
+      
+      // Refresh data
+      await fetchBackupData();
+    } catch (error) {
+      console.error('Restore failed:', error);
+      toast({
+        title: 'Restore Failed',
+        description: error.response?.data?.detail || 'Failed to restore backup',
+        variant: 'destructive'
+      });
+    } finally {
+      setIsRestoring(false);
+    }
+  };
+
   const getHealthBadge = (healthStatus) => {
     const statusConfig = {
       healthy: { label: 'Healthy', variant: 'default', icon: CheckCircle2, color: 'text-green-600' },
