@@ -35,7 +35,6 @@ export default function TeacherDashboardNew({ user, onLogout }) {
 
   // Data states
   const [students, setStudents] = useState([]);
-  const [notifications, setNotifications] = useState([]);
   const [stats, setStats] = useState({
     totalStudents: 0,
     avgAttendance: 0,
