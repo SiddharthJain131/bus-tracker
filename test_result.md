@@ -1035,14 +1035,18 @@ metadata:
   run_ui: true
 
 test_plan:
-  current_focus: []
+  current_focus:
+    - "Demo credential autofill on login page"
+    - "Notification actions - Mark as Read & Delete"
+    - "Delete notification endpoint"
+    - "New user welcome email on user creation"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
 
 agent_communication:
   - agent: "main"
-    message: "Application structure analyzed. All components exist in the codebase. Backend has 22 API endpoints including all requested endpoints except /api/get_embeddings (not found in codebase). Frontend has all 3 dashboards (Parent, Teacher, Admin) implemented with role-based routing. Database has been seeded with test data (5 users, 3 students, 2 buses, 2 routes, 4 stops, 2 holidays). Services are running. Ready to begin comprehensive backend and frontend testing to verify functionality."
+    message: "Implemented three new features for School Bus Tracker: A) Demo Credential Autofill - Added onClick handlers to demo credential boxes on login page that populate email/password fields (parent@school.com, teacher@school.com, admin@school.com) with hover effects and no auto-submit. B) Notification Actions - Added DELETE /api/notifications/{id} endpoint and enhanced NotificationBell.jsx with three-dot menu containing Mark as Read (for unread) and Delete actions with toast feedback. C) New User Email - Added send_new_user_email() function that sends HTML welcome email with role-specific theming and login credentials when admin creates user via POST /api/users, with NEW_USER_EMAIL_ENABLED toggle (.env). All features implemented with non-breaking error handling. Ready for backend testing to verify: notification delete endpoint, user creation email sending, and frontend autofill/notification UI interactions."
   - agent: "testing"
     message: "✅ ADMIN DASHBOARD TESTING COMPLETED - Fixed critical JavaScript errors and verified core functionality. Applied fixes for VITE_API_URL errors, missing imports, and missing modal rendering. Successfully tested: login flow, dashboard navigation, all 4 tabs, Overview tab content (profile, stats, holidays), and Holiday CRUD modal functionality. Session timeout issues prevented complete CRUD testing of Students/Users/Buses tabs. Core Admin Dashboard confirmed working and ready for production. USER REQUEST NOTED: Move status legend in parent account below (similar to teacher account) - this is a UI improvement task for Main Agent, not testing."
   - agent: "main"
