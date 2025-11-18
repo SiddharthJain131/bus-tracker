@@ -323,9 +323,9 @@ export default function TeacherDashboardNew({ user, onLogout }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAFAFC]" data-testid="teacher-dashboard">
+    <div className="min-h-screen dashboard-bg" data-testid="teacher-dashboard">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-10">
+      <header className="dashboard-panel teacher-accent-border border-b dashboard-separator shadow-sm sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-4">
