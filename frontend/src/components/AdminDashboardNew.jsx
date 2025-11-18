@@ -399,8 +399,8 @@ export default function AdminDashboardNew({ user, onLogout }) {
 
   return (
     <div className="min-h-screen dashboard-bg" data-testid="admin-dashboard">
-      {/* Header */}
-      <header className="dashboard-panel admin-accent-border border-b dashboard-separator shadow-md sticky top-0 z-10">
+      {/* Header with Dynamic Gradient */}
+      <header className="bg-gradient-to-r from-indigo-50 via-blue-50 to-indigo-50 animate-gradient dashboard-panel admin-accent-border border-b dashboard-separator shadow-md sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-4 slide-in-left">
