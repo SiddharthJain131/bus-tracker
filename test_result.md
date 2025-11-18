@@ -358,6 +358,30 @@ frontend:
         agent: "testing"
         comment: "✅ PASSED - Notification system working correctly. Identity mismatch notifications created when verified=false in scan events. Notifications properly delivered to parents. Mark as read functionality working."
 
+  - task: "Delete notification endpoint - DELETE /api/notifications/{notification_id}"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Added DELETE endpoint for notifications after mark_notification_read endpoint. Users can only delete their own notifications (filtered by user_id). Returns 404 if notification not found or user doesn't have permission. Returns {status: 'deleted', notification_id: id} on success."
+
+  - task: "New user welcome email on user creation"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py, /app/backend/.env"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Added send_new_user_email() function that sends HTML welcome email with login credentials when admin creates a new user via POST /api/users. Added NEW_USER_EMAIL_ENABLED toggle to .env (default: true). Email includes: role-specific color theming (admin: indigo, teacher: teal, parent: orange), welcome message, login URL, email address, temporary password in code block, instructions to change password. Non-breaking: if email fails, user creation still completes successfully and response includes email_sent flag and email_warning message for admin notification. Uses existing SMTP configuration (SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS)."
+
   - task: "Enhanced Admin Dashboard Backend APIs"
     implemented: true
     working: true
