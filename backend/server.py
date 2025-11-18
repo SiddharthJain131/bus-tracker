@@ -106,6 +106,80 @@ async def create_welcome_notification(user_id: str, user_name: str, role: str):
     except Exception as e:
         logging.error(f"Failed to create welcome notification: {e}")
 
+async def send_new_user_email(user_email: str, user_name: str, user_role: str, temp_password: str):
+    """Send welcome email to newly created user with login credentials"""
+    if not NEW_USER_EMAIL_ENABLED:
+        logging.info(f"New user email disabled. Would send to {user_email}")
+        return {"sent": False, "reason": "disabled"}
+    
+    login_url = os.environ.get('BACKEND_BASE_URL', 'http://localhost:8001').replace(':8001', ':3000')
+    
+    role_colors = {
+        'admin': '#4F46E5',
+        'teacher': '#14B8A6',
+        'parent': '#F59E0B'
+    }
+    role_color = role_colors.get(user_role, '#4F46E5')
+    
+    email_body = f"""
+    <html>
+    <body style="font-family: Arial, sans-serif; padding: 20px; background-color: #f4f5f7;">
+        <div style="max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <div style="display: inline-block; padding: 15px 25px; background: linear-gradient(135deg, {role_color}, {role_color}dd); border-radius: 10px;">
+                    <h2 style="color: white; margin: 0;">🚌 School Bus Tracker</h2>
+                </div>
+            </div>
+            
+            <h3 style="color: {role_color}; margin-bottom: 20px;">Welcome to School Bus Tracker!</h3>
+            
+            <p style="color: #333; font-size: 16px; line-height: 1.6;">
+                Hello <strong>{user_name}</strong>,
+            </p>
+            
+            <p style="color: #333; font-size: 16px; line-height: 1.6;">
+                Your account has been created as a <strong style="color: {role_color};">{user_role.capitalize()}</strong>. 
+                You can now access the School Bus Tracker system using the credentials below.
+            </p>
+            
+            <div style="background: #f9fafb; border-left: 4px solid {role_color}; padding: 20px; margin: 25px 0; border-radius: 5px;">
+                <h4 style="margin-top: 0; color: {role_color};">Your Login Credentials:</h4>
+                <p style="margin: 10px 0; color: #555;">
+                    <strong>Email:</strong> {user_email}<br/>
+                    <strong>Temporary Password:</strong> <code style="background: #e5e7eb; padding: 4px 8px; border-radius: 4px; font-family: monospace;">{temp_password}</code>
+                </p>
+            </div>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="{login_url}" 
+                   style="display: inline-block; padding: 14px 35px; background: {role_color}; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
+                    Login Now
+                </a>
+            </div>
+            
+            <p style="color: #666; font-size: 14px; line-height: 1.6; margin-top: 30px;">
+                <strong>Important:</strong> Please change your password after your first login for security purposes.
+            </p>
+            
+            <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;" />
+            
+            <p style="color: #999; font-size: 12px; text-align: center; margin: 0;">
+                If you have any questions, please contact the school administration.<br/>
+                This is an automated message, please do not reply to this email.
+            </p>
+        </div>
+    </body>
+    </html>
+    """
+    
+    try:
+        await send_email(user_email, "Welcome to School Bus Tracker - Your Account Details", email_body)
+        logging.info(f"New user welcome email sent to {user_email}")
+        return {"sent": True}
+    except Exception as e:
+        logging.error(f"Failed to send new user email to {user_email}: {e}")
+        return {"sent": False, "reason": str(e)}
+
 # Create the main app
 app = FastAPI()
 api_router = APIRouter(prefix="/api")
