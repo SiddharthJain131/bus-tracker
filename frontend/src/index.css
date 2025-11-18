@@ -1,19 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-    margin: 0;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
-}
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
 @layer base {
     :root {
@@ -27,36 +16,35 @@ code {
         --popover: 0 0% 100%;
         --popover-foreground: 222 47% 11%;
         
-        /* Primary - Deep Indigo/Navy */
-        --primary: 222 47% 19%;
-        --primary-foreground: 0 0% 98%;
+        /* Primary */
+        --primary: 213 94% 61%;
+        --primary-foreground: 0 0% 100%;
         
-        /* Secondary - Medium Gray */
-        --secondary: 222 15% 20%;
-        --secondary-foreground: 0 0% 98%;
+        /* Secondary */
+        --secondary: 222 15% 95%;
+        --secondary-foreground: 222 47% 11%;
         
-        /* Accent - Blue */
-        --accent: 213 94% 61%;
-        --accent-foreground: 0 0% 98%;
+        /* Accent */
+        --accent: 187 71% 62%;
+        --accent-foreground: 222 47% 11%;
         
-        /* Muted - Light Gray */
-        --muted: 240 20% 99%;
+        /* Muted */
+        --muted: 220 14% 96%;
         --muted-foreground: 215 16% 47%;
         
         /* Destructive */
         --destructive: 0 84% 60%;
-        --destructive-foreground: 0 0% 98%;
+        --destructive-foreground: 0 0% 100%;
         
         /* Border & Input */
-        --border: 214 32% 91%;
-        --input: 214 32% 91%;
+        --border: 220 13% 91%;
+        --input: 220 13% 91%;
         --ring: 213 94% 61%;
         
-        /* Custom Theme Colors */
-        --navy: 222 47% 19%;
+        /* Brand Colors */
+        --navy: 222 47% 11%;
         --accent-blue: 213 94% 61%;
         --soft-cyan: 187 71% 62%;
-        --lime: 75 100% 50%;
         --charcoal: 222 47% 7%;
         --medium-gray: 222 15% 20%;
         --light-gray: 220 14% 96%;
@@ -186,6 +174,10 @@ code {
         box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -2px rgb(0 0 0 / 0.05);
     }
     
+    .shadow-modern-xl {
+        box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.08), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+    }
+    
     .glass-effect {
         @apply bg-white/80 backdrop-blur-xl border border-white/20;
     }
@@ -215,6 +207,12 @@ code {
         @apply border-gray-200;
     }
     
+    /* Enhanced card styling with micro-shadows */
+    .dashboard-card-enhanced {
+        @apply bg-white rounded-lg shadow-sm border border-gray-100;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+    }
+    
     /* Role-based accent borders */
     .admin-accent-border {
         @apply border-t-4 border-t-admin-primary;
@@ -226,6 +224,113 @@ code {
     
     .parent-accent-border {
         @apply border-t-4 border-t-parent-primary;
+    }
+    
+    /* Subtle dividers with role colors */
+    .divider-subtle {
+        @apply border-b border-gray-100;
+    }
+    
+    /* Animated gradient background for login */
+    .animated-gradient-bg {
+        background: linear-gradient(-45deg, #1e3a8a, #2563eb, #3b82f6, #1e40af);
+        background-size: 400% 400%;
+        animation: gradient-shift 15s ease infinite;
+    }
+    
+    @keyframes gradient-shift {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+    
+    /* Floating shapes animation */
+    .floating-shape {
+        animation: float 20s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+        0%, 100% {
+            transform: translate(0, 0);
+        }
+        25% {
+            transform: translate(10px, -15px);
+        }
+        50% {
+            transform: translate(-15px, 10px);
+        }
+        75% {
+            transform: translate(15px, 15px);
+        }
+    }
+    
+    /* Fade in animation */
+    .fade-in {
+        animation: fadeIn 0.6s ease-out;
+    }
+    
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    /* Slide in from left */
+    .slide-in-left {
+        animation: slideInLeft 0.5s ease-out;
+    }
+    
+    @keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    /* Card hover lift effect */
+    .hover-lift {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .hover-lift:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.12);
+    }
+    
+    /* Unified logout button styles */
+    .logout-button {
+        @apply flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-gray-200 bg-white text-gray-700 font-medium transition-all duration-200;
+    }
+    
+    .logout-button:hover {
+        @apply shadow-md;
+    }
+    
+    .logout-button-admin:hover {
+        @apply border-admin-primary text-admin-primary bg-admin-light;
+    }
+    
+    .logout-button-teacher:hover {
+        @apply border-teacher-primary text-teacher-primary bg-teacher-light;
+    }
+    
+    .logout-button-parent:hover {
+        @apply border-parent-primary text-parent-primary bg-parent-light;
     }
 }
 
@@ -250,13 +355,5 @@ code {
         border-right-width: inherit;
         border-top-width: inherit;
         border-bottom-width: inherit;
-        border-left-style: inherit;
-        border-right-style: inherit;
-        border-top-style: inherit;
-        border-bottom-style: inherit;
-        border-left-color: inherit;
-        border-right-color: inherit;
-        border-top-color: inherit;
-        border-bottom-color: inherit;
     }
 }
