@@ -203,12 +203,18 @@ export default function ParentDashboard({ user, onLogout }) {
 
         {selectedStudent && selectedStudentDetails && (
           <div className="space-y-6">
-            {/* Student Details */}
-            <StudentCard student={selectedStudentDetails} />
+            {/* Unified Student Information Container */}
+            <Card className="dashboard-card-enhanced parent-accent-border overflow-hidden">
+              {/* Student Details Section */}
+              <div className="p-6 bg-gradient-to-r from-amber-50/30 via-orange-50/30 to-amber-50/30">
+                <StudentCard student={selectedStudentDetails} />
+              </div>
 
-            <div className="space-y-6">
-                {/* Live Bus Map */}
-                <Card className="p-6 dashboard-card-enhanced parent-accent-border hover-lift">
+              {/* Section Divider */}
+              <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+
+              {/* Live Bus Map Section */}
+              <div className="p-6">
                   <div className="flex items-center gap-3 mb-5 pb-4 border-b border-gray-100">
                     <div className="w-12 h-12 bg-gradient-to-br from-parent-primary to-parent-secondary rounded-xl flex items-center justify-center shadow-sm">
                       <MapPin className="w-6 h-6 text-white" />
