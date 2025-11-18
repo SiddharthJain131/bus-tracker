@@ -119,7 +119,7 @@ export default function AttendanceGrid({ studentId }) {
           <div
             key={day.date}
             data-testid={`attendance-day-${day.day}`}
-            className="border border-gray-200 rounded-lg p-2 bg-white hover:shadow-md transition-shadow"
+            className="dashboard-card hover:shadow-lg transition-shadow p-2"
           >
             <div className="text-center font-semibold text-sm text-gray-700 mb-2">{day.day}</div>
             <div className="space-y-1">
