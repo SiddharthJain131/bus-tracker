@@ -156,28 +156,7 @@ export default function TeacherDashboardNew({ user, onLogout }) {
     }
   };
 
-  const fetchNotifications = async () => {
-    try {
-      const response = await axios.get(`${API}/get_notifications`);
-      setNotifications(response.data);
-    } catch (error) {
-      console.error('Failed to load notifications:', error);
-    }
-  };
-
-  const handleNotificationClick = async (notification) => {
-    setSelectedNotification(notification);
-    setShowNotificationDetail(true);
-    
-    if (!notification.read) {
-      try {
-        await axios.post(`${API}/mark_notification_read?notification_id=${notification.notification_id}`);
-        await fetchNotifications();
-      } catch (error) {
-        console.error('Error marking notification as read:', error);
-      }
-    }
-  };
+  const handleStudentClick = (student) => {
 
   const formatTimestamp = (timestamp) => {
     if (!timestamp) return '';
