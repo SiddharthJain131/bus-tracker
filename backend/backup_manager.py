@@ -102,7 +102,7 @@ class BackupManager:
     @staticmethod
     def get_metadata_path(backup_path: Path) -> Path:
         """Get metadata file path for a backup"""
-        return backup_path.with_suffix('.meta.json')
+        return backup_path.with_suffix('.json.meta')
     
     def create_metadata(self, backup_path: Path, backup_type: str, collections: Dict[str, int]) -> Dict[str, Any]:
         """Create metadata file with checksum and backup info"""
