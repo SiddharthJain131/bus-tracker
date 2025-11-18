@@ -995,7 +995,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
               </div>
 
               <Tabs value={busSubTab} onValueChange={setBusSubTab}>
-                <TabsList className="grid w-full grid-cols-2 mb-6">
+                <TabsList className="admin-tabs grid w-full grid-cols-2 mb-6 dashboard-panel shadow-sm">
                   <TabsTrigger value="buses">Buses ({buses.length})</TabsTrigger>
                   <TabsTrigger value="routes">Routes</TabsTrigger>
                 </TabsList>
