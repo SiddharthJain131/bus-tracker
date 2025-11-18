@@ -848,6 +848,30 @@ frontend:
         agent: "main"
         comment: "Login component exists. Need to verify authentication flow for all 3 roles."
 
+  - task: "Demo credential autofill on login page"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Login.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Added onClick handlers to demo credential boxes in Login.jsx (lines 299-322). Clicking Parent/Teacher/Admin credential text now autofills email and password state fields using setEmail() and setPassword(). No auto-submit - user must still press Login button. Added enhanced hover effects: hover:bg-orange-50 for parent, hover:bg-teal-50 for teacher, hover:bg-indigo-50 for admin, all with p-2 padding and rounded-lg for better visual feedback. Maintains existing transition-colors animation."
+
+  - task: "Notification actions - Mark as Read & Delete with three-dot menu"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/NotificationBell.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Enhanced NotificationBell.jsx with three-dot action menu for each notification. CHANGES: 1) Added imports: MoreVertical, Trash2, CheckCircle from lucide-react, toast from sonner. 2) Added openMenuId state to track which notification menu is open. 3) Updated markAsRead function with event parameter (e.stopPropagation()) and toast notifications. 4) Added deleteNotification function that calls DELETE /api/notifications/{id}, removes from state, shows toast. 5) Restructured notification list: notification content (title, message, timestamp) in clickable div for detail modal, three-dot button (MoreVertical icon) positioned on right, dropdown menu with: Mark as Read action (CheckCircle icon, green text, only shown for unread), Delete action (Trash2 icon, red text with hover:bg-red-50). 6) Menu closes on action or when clicking outside. 7) Unread indicator dot repositioned next to three-dot button. NotificationDetailModal integration maintained with isOpen prop."
+
   - task: "Parent Dashboard"
     implemented: true
     working: true
