@@ -158,15 +158,23 @@ export default function ParentDashboard({ user, onLogout }) {
                 </p>
               </div>
             </div>
-            <Button
-              data-testid="logout-button"
-              onClick={onLogout}
-              variant="outline"
-              className="logout-button logout-button-parent"
-            >
-              <LogOut className="w-4 h-4" />
-              Logout
-            </Button>
+            <div className="flex items-center gap-3">
+              <NotificationDropdown
+                notifications={notifications}
+                onNotificationClick={handleNotificationClick}
+                onRefresh={fetchNotifications}
+                themeColor="parent"
+              />
+              <Button
+                data-testid="logout-button"
+                onClick={onLogout}
+                variant="outline"
+                className="logout-button logout-button-parent"
+              >
+                <LogOut className="w-4 h-4" />
+                Logout
+              </Button>
+            </div>
           </div>
         </div>
       </header>
