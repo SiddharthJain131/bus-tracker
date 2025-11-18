@@ -173,6 +173,23 @@
         animation: gradient-shimmer 12s ease infinite;
     }
     
+    /* Animation for notification bell shake */
+    @keyframes shake {
+        0%, 100% {
+            transform: rotate(0deg);
+        }
+        10%, 30%, 50%, 70%, 90% {
+            transform: rotate(-10deg);
+        }
+        20%, 40%, 60%, 80% {
+            transform: rotate(10deg);
+        }
+    }
+    
+    .animate-shake {
+        animation: shake 0.8s ease-in-out;
+    }
+    
     /* Dashboard background layers */
     .dashboard-bg {
         background-color: hsl(var(--dashboard-bg));
