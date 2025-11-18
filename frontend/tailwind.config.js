@@ -90,6 +90,14 @@ module.exports = {
                     gray: 'hsl(var(--status-gray))',
                 },
                 
+                // Dashboard theme colors
+                dashboard: {
+                    bg: 'hsl(var(--dashboard-bg))',
+                    content: 'hsl(var(--dashboard-content))',
+                    panel: 'hsl(var(--dashboard-panel))',
+                    separator: 'hsl(var(--dashboard-separator))',
+                },
+                
                 chart: {
                     '1': 'hsl(var(--accent-blue))',
                     '2': 'hsl(var(--soft-cyan))',
