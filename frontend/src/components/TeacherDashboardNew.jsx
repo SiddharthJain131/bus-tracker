@@ -157,6 +157,8 @@ export default function TeacherDashboardNew({ user, onLogout }) {
   };
 
   const handleStudentClick = (student) => {
+    // Handle student click logic here
+  };
 
   const formatTimestamp = (timestamp) => {
     if (!timestamp) return '';
