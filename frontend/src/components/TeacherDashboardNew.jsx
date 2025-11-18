@@ -342,10 +342,18 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                 </p>
               </div>
             </div>
-            <Button onClick={onLogout} variant="outline" className="logout-button logout-button-teacher">
-              <LogOut className="w-4 h-4" />
-              Logout
-            </Button>
+            <div className="flex items-center gap-3">
+              <NotificationDropdown
+                notifications={notifications}
+                onNotificationClick={handleNotificationClick}
+                onRefresh={fetchNotifications}
+                themeColor="teacher"
+              />
+              <Button onClick={onLogout} variant="outline" className="logout-button logout-button-teacher">
+                <LogOut className="w-4 h-4" />
+                Logout
+              </Button>
+            </div>
           </div>
         </div>
       </header>
