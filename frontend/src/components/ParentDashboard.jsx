@@ -8,7 +8,7 @@ import BusMap from './BusMap';
 import AttendanceGrid from './AttendanceGrid';
 import UserProfileHeader from './UserProfileHeader';
 import StudentCard from './StudentCard';
-import NotificationDetailModal from './NotificationDetailModal';
+import NotificationBell from './NotificationBell';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
