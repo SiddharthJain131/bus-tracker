@@ -42,6 +42,14 @@ export default function Login({ onLogin }) {
         password,
       });
 
+      // Check if email verification is required
+      if (response.data.requires_verification) {
+        toast.success('Verification code sent to your email!');
+        setRequiresVerification(true);
+        setLoading(false);
+        return;
+      }
+
       toast.success('Login successful!');
       
       // Start bus icon theme transition animation only
@@ -55,6 +63,38 @@ export default function Login({ onLogin }) {
     } catch (error) {
       toast.error(error.response?.data?.detail || 'Login failed');
       // Trigger shake animation on failed login
+      setShake(true);
+      setTimeout(() => setShake(false), 200);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleVerifyCode = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const response = await axios.post(`${API}/auth/verify-code`, null, {
+        params: {
+          email,
+          code: verificationCode,
+        },
+      });
+
+      toast.success('Verification successful!');
+      
+      // Start bus icon theme transition animation only
+      setTransitionRole(response.data.role);
+      setBusIconTransitioning(true);
+      
+      // Quick smooth transition before navigating (300ms for snappy feel)
+      setTimeout(() => {
+        onLogin(response.data);
+      }, 300);
+    } catch (error) {
+      toast.error(error.response?.data?.detail || 'Verification failed');
+      // Trigger shake animation on failed verification
       setShake(true);
       setTimeout(() => setShake(false), 200);
     } finally {
