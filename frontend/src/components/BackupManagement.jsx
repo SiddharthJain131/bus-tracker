@@ -1,9 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { RefreshCw, Database, AlertCircle, CheckCircle2, Clock, HardDrive, Download, Play, Shield, XCircle } from 'lucide-react';
+import { RefreshCw, Database, AlertCircle, CheckCircle2, Clock, HardDrive, Download, Play, Shield, XCircle, RotateCcw, ChevronRight, Loader2, AlertTriangle } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
+import { Progress } from './ui/progress';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from './ui/dialog';
 import { useToast } from '../hooks/use-toast';
 import axios from 'axios';
 
