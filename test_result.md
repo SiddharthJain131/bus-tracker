@@ -175,7 +175,6 @@ agent_communication:
   - agent: "main"
     message: "Implemented three new features: A) Demo credential autofill - added onClick handlers to demo boxes that populate email/password fields on login page. B) Notification actions - added DELETE endpoint and three-dot menu with Mark as Read/Delete actions in NotificationBell component. C) New user email - added send_new_user_email() function that sends welcome email with credentials when admin creates user, with NEW_USER_EMAIL_ENABLED toggle. All features implemented and ready for backend testing."
 
-backend:
   - task: "Authentication APIs (login, logout, me)"
     implemented: true
     working: true
