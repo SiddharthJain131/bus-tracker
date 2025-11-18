@@ -215,17 +215,17 @@ export default function ParentDashboard({ user, onLogout }) {
 
               {/* Live Bus Map Section */}
               <div className="p-6">
-                  <div className="flex items-center gap-3 mb-5 pb-4 border-b border-gray-100">
-                    <div className="w-12 h-12 bg-gradient-to-br from-parent-primary to-parent-secondary rounded-xl flex items-center justify-center shadow-sm">
-                      <MapPin className="w-6 h-6 text-white" />
-                    </div>
-                    <h2 className="text-xl font-semibold text-parent-primary">Live Bus Location</h2>
-                    {busLocation && (
-                      <span className="ml-auto text-xs text-gray-500">
-                        Updated: {new Date(busLocation.timestamp).toLocaleTimeString()}
-                      </span>
-                    )}
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-12 h-12 bg-gradient-to-br from-parent-primary to-parent-secondary rounded-xl flex items-center justify-center shadow-sm">
+                    <MapPin className="w-6 h-6 text-white" />
                   </div>
+                  <h2 className="text-xl font-semibold text-parent-primary">Live Bus Location</h2>
+                  {busLocation && (
+                    <span className="ml-auto text-xs text-gray-500">
+                      Updated: {new Date(busLocation.timestamp).toLocaleTimeString()}
+                    </span>
+                  )}
+                </div>
                   <div className="h-96 rounded-xl overflow-hidden relative border border-gray-200" data-testid="bus-map-container">
                     <BusMap location={busLocation} route={route} showRoute={showRoute} />
                     
