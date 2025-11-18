@@ -424,7 +424,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-5 mb-6">
+          <TabsList className="grid w-full grid-cols-5 mb-6 dashboard-panel shadow-md">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="students">Students</TabsTrigger>
             <TabsTrigger value="users">Users</TabsTrigger>
@@ -435,7 +435,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
           {/* Overview Tab */}
           <TabsContent value="overview" className="space-y-6">
             {/* Admin Profile */}
-            <Card className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <Card className="p-6 dashboard-card admin-accent-border hover:shadow-lg transition-shadow">
               <h2 className="text-xl font-semibold mb-5 text-gray-900">
                 Admin Profile
               </h2>
