@@ -182,8 +182,7 @@ const NotificationBell = ({ role = 'parent' }) => {
                 {notifications.map((notification) => (
                   <div
                     key={notification.notification_id}
-                    onClick={() => handleNotificationClick(notification)}
-                    className={`px-4 py-3 cursor-pointer transition-colors hover:bg-gray-50 ${
+                    className={`px-4 py-3 transition-colors hover:bg-gray-50 relative ${
                       !notification.read ? 'bg-blue-50/50' : ''
                     }`}
                   >
@@ -195,7 +194,10 @@ const NotificationBell = ({ role = 'parent' }) => {
                           notification.type === 'alert' ? 'text-red-600' : 'text-yellow-600'
                         }`} />
                       </div>
-                      <div className="flex-1 min-w-0">
+                      <div 
+                        className="flex-1 min-w-0 cursor-pointer"
+                        onClick={() => handleNotificationClick(notification)}
+                      >
                         <p className={`text-sm font-medium text-gray-900 ${
                           !notification.read ? 'font-semibold' : ''
                         }`}>
@@ -208,9 +210,42 @@ const NotificationBell = ({ role = 'parent' }) => {
                           {new Date(notification.timestamp).toLocaleString()}
                         </p>
                       </div>
-                      {!notification.read && (
-                        <div className={`w-2 h-2 ${getRoleBgColor()} rounded-full mt-2`}></div>
-                      )}
+                      <div className="flex items-center gap-2">
+                        {!notification.read && (
+                          <div className={`w-2 h-2 ${getRoleBgColor()} rounded-full`}></div>
+                        )}
+                        <div className="relative">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setOpenMenuId(openMenuId === notification.notification_id ? null : notification.notification_id);
+                            }}
+                            className="p-1 hover:bg-gray-200 rounded transition-colors"
+                          >
+                            <MoreVertical className="w-4 h-4 text-gray-500" />
+                          </button>
+                          {openMenuId === notification.notification_id && (
+                            <div className="absolute right-0 mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50 overflow-hidden">
+                              {!notification.read && (
+                                <button
+                                  onClick={(e) => markAsRead(notification.notification_id, e)}
+                                  className="w-full px-4 py-2 text-left text-sm hover:bg-gray-50 flex items-center gap-2 transition-colors"
+                                >
+                                  <CheckCircle className="w-4 h-4 text-green-600" />
+                                  <span>Mark as Read</span>
+                                </button>
+                              )}
+                              <button
+                                onClick={(e) => deleteNotification(notification.notification_id, e)}
+                                className="w-full px-4 py-2 text-left text-sm hover:bg-red-50 flex items-center gap-2 text-red-600 transition-colors"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                                <span>Delete</span>
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 ))}
