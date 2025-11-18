@@ -74,9 +74,9 @@ function RoutesTable({ searchTerm, onViewRoute, onEditRoute, onDeleteRoute, onAd
 
   return (
     <>
-      <div className="overflow-x-auto rounded-lg border border-gray-200">
-        <table className="w-full bg-white">
-          <thead className="bg-gray-50 border-b border-gray-200">
+      <div className="overflow-x-auto rounded-lg dashboard-card">
+        <table className="w-full dashboard-panel">
+          <thead className="dashboard-content border-b dashboard-separator">
             <tr>
               <th className="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Route Name</th>
               <th className="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Stops</th>
