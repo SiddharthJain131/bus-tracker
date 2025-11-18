@@ -139,25 +139,25 @@ export default function ParentDashboard({ user, onLogout }) {
   };
 
   return (
-    <div className="min-h-screen bg-muted" data-testid="parent-dashboard">
+    <div className="min-h-screen bg-[#FAFAFC]" data-testid="parent-dashboard">
       {/* Header */}
-      <header className="bg-card border-b border-border shadow-modern">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+      <header className="bg-white border-b border-gray-200 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 bg-gradient-to-br from-accent-blue to-soft-cyan rounded-xl flex items-center justify-center shadow-modern">
+              <div className="w-14 h-14 bg-gradient-to-br from-parent-primary to-parent-secondary rounded-xl flex items-center justify-center shadow-md">
                 <Bus className="w-7 h-7 text-white" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-navy">Parent Dashboard</h1>
-                <p className="text-sm text-muted-foreground mt-0.5">Welcome, {user.name}</p>
+                <h1 className="text-3xl font-bold text-gray-900">Parent Dashboard</h1>
+                <p className="text-sm text-gray-600 mt-1">Welcome, {user.name}</p>
               </div>
             </div>
             <Button
               data-testid="logout-button"
               onClick={onLogout}
               variant="outline"
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 border-gray-300 hover:border-parent-primary hover:text-parent-primary transition-colors"
             >
               <LogOut className="w-4 h-4" />
               Logout
