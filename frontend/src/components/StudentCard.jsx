@@ -9,9 +9,9 @@ export default function StudentCard({ student, compact = false }) {
 
   if (compact) {
     return (
-      <Card className="p-4 hover:shadow-md transition-shadow" data-testid={`student-card-${student.student_id}`}>
+      <Card className="p-4 dashboard-card-enhanced hover-lift" data-testid={`student-card-${student.student_id}`}>
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white font-bold overflow-hidden">
+          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-parent-primary to-parent-secondary flex items-center justify-center text-white font-bold overflow-hidden shadow-sm">
             {student.photo_url ? (
               <img 
                 src={`${BACKEND_URL}${student.photo_url}`} 
