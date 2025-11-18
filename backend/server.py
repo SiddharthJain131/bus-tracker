@@ -40,9 +40,70 @@ TIMEZONE = os.environ.get('TIMEZONE', 'Asia/Kolkata')
 # Session storage (in-memory for simplicity)
 sessions = {}
 
+# Email verification codes (in-memory, expires in 10 minutes)
+email_verification_codes = {}
+
+# Email Authentication Configuration
+EMAIL_AUTH_ENABLED = os.environ.get('EMAIL_AUTH_ENABLED', 'false').lower() == 'true'
+SMTP_HOST = os.environ.get('SMTP_HOST', 'smtp.gmail.com')
+SMTP_PORT = int(os.environ.get('SMTP_PORT', '587'))
+SMTP_USER = os.environ.get('SMTP_USER', '')
+SMTP_PASS = os.environ.get('SMTP_PASS', '')
+SMTP_FROM = os.environ.get('SMTP_FROM', 'School Bus Tracker <noreply@schoolbustracker.com>')
+
 # Photo storage directory
 PHOTO_DIR = ROOT_DIR / 'photos'
 PHOTO_DIR.mkdir(exist_ok=True)
+
+# Email sending utility
+async def send_email(to_email: str, subject: str, body: str):
+    """Send email using SMTP"""
+    if not EMAIL_AUTH_ENABLED or not SMTP_USER or not SMTP_PASS:
+        logging.info(f"Email sending skipped (not configured). Would send to {to_email}: {subject}")
+        return
+    
+    try:
+        message = MIMEMultipart()
+        message['From'] = SMTP_FROM
+        message['To'] = to_email
+        message['Subject'] = subject
+        message.attach(MIMEText(body, 'html'))
+        
+        await aiosmtplib.send(
+            message,
+            hostname=SMTP_HOST,
+            port=SMTP_PORT,
+            username=SMTP_USER,
+            password=SMTP_PASS,
+            start_tls=True
+        )
+        logging.info(f"Email sent successfully to {to_email}")
+    except Exception as e:
+        logging.error(f"Failed to send email to {to_email}: {e}")
+
+async def create_welcome_notification(user_id: str, user_name: str, role: str):
+    """Create a welcome notification for the user after login"""
+    welcome_messages = {
+        'admin': f"Welcome back, {user_name}! You have full system access.",
+        'teacher': f"Good to see you, {user_name}! Ready to track your students?",
+        'parent': f"Welcome, {user_name}! Hope you have a great day."
+    }
+    
+    notification = {
+        "notification_id": str(uuid.uuid4()),
+        "user_id": user_id,
+        "type": "welcome",
+        "title": "Welcome!",
+        "message": welcome_messages.get(role, f"Welcome back, {user_name}!"),
+        "timestamp": datetime.now(pytz.timezone(TIMEZONE)).isoformat(),
+        "read": False
+    }
+    
+    try:
+        await db.notifications.insert_one(notification)
+        logging.info(f"Welcome notification created for user {user_id}")
+    except Exception as e:
+        logging.error(f"Failed to create welcome notification: {e}")
 
 # Create the main app
 app = FastAPI()
