@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Continue Dashboard Theme Upgrade — Complete Coverage, Reduced Whiteness, Proper Context for All Accounts. Extend the dashboard theme upgrades to ensure full coverage across the entire dashboard system with layered light-neutral surfaces (#F4F5F7, #F9FAFB), role-based accent colors (Admin: Indigo/Blue, Teacher: Teal/Green, Parent: Gold/Orange), and consistent styling across all dashboard views and modules."
+user_problem_statement: "A. Demo Credential Autofill on Login Page - Add clickable demo user boxes that autofill email + password fields (no auto-submit). B. Notification Actions - Mark as Read & Delete - Extend notification dropdown with mark as read and delete actions via three-dot menu, with smooth animations. C. Email on New User Registration by Admin - When admin creates a new user, send automatic welcome email with login credentials using existing SMTP configuration."
 
 backend:
   - task: "Authentication APIs (login, logout, me)"
