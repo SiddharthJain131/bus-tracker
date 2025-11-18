@@ -33,7 +33,7 @@ echo "📥 Pulling latest changes from GitHub..."
 if ! git pull origin main --allow-unrelated-histories --no-rebase; then
   echo "⚠️ Pull failed — performing HARD RESET to remote main..."
   git fetch origin main
-  git reset --hard origin/main || echo "⚠️ Remote main branch not available yet."
+  # git reset --hard origin/main || echo "⚠️ Remote main branch not available yet."
 else
   echo "✅ Pull successful."
 fi
