@@ -325,21 +325,23 @@ export default function TeacherDashboardNew({ user, onLogout }) {
   return (
     <div className="min-h-screen dashboard-bg" data-testid="teacher-dashboard">
       {/* Header */}
-      <header className="dashboard-panel teacher-accent-border border-b dashboard-separator shadow-sm sticky top-0 z-10">
+      <header className="dashboard-panel teacher-accent-border border-b dashboard-separator shadow-md sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
-            <div className="flex items-center gap-4">
-              <div className="w-14 h-14 bg-gradient-to-br from-teacher-primary to-teacher-secondary rounded-xl flex items-center justify-center shadow-md">
-                <GraduationCap className="w-7 h-7 text-white" />
+            <div className="flex items-center gap-4 slide-in-left">
+              <div className="w-16 h-16 bg-gradient-to-br from-teacher-primary via-teal-500 to-teacher-secondary rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300">
+                <GraduationCap className="w-8 h-8 text-white" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-teacher-primary to-teal-600 bg-clip-text text-transparent">
                   Teacher Dashboard
                 </h1>
-                <p className="text-sm text-gray-600 mt-1">Welcome, {user.name}</p>
+                <p className="text-sm text-gray-600 mt-1 font-medium">
+                  Welcome back, <span className="text-teacher-primary">{user.name}</span>
+                </p>
               </div>
             </div>
-            <Button onClick={onLogout} variant="outline" className="flex items-center gap-2 border-gray-300 hover:border-teacher-primary hover:text-teacher-primary transition-colors">
+            <Button onClick={onLogout} variant="outline" className="logout-button logout-button-teacher">
               <LogOut className="w-4 h-4" />
               Logout
             </Button>
