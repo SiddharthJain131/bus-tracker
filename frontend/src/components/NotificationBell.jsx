@@ -13,6 +13,7 @@ const NotificationBell = ({ role = 'parent' }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showDetail, setShowDetail] = useState(false);
   const [selectedNotification, setSelectedNotification] = useState(null);
+  const [openMenuId, setOpenMenuId] = useState(null);
   const dropdownRef = useRef(null);
 
   const unreadCount = notifications.filter(n => !n.read).length;
