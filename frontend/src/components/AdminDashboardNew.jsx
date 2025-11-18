@@ -515,11 +515,13 @@ export default function AdminDashboardNew({ user, onLogout }) {
 
             {/* Recent Activity / Holidays & Notifications */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <Calendar className="w-5 h-5 text-violet-600" />
-                  <h3 className="text-lg font-semibold" style={{ fontFamily: 'Space Grotesk' }}>
+            <Card className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+              <div className="flex items-center justify-between mb-5">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-admin-light rounded-lg flex items-center justify-center">
+                    <Calendar className="w-5 h-5 text-admin-primary" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900">
                     Upcoming Holidays
                   </h3>
                 </div>
@@ -527,7 +529,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
                   onClick={() => setShowHolidaysManagement(true)}
                   variant="outline"
                   size="sm"
-                  className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 border-blue-200"
+                  className="text-admin-primary hover:text-admin-hover hover:bg-admin-light border-admin-primary/30 transition-colors"
                 >
                   <Edit className="w-4 h-4 mr-1" />
                   Edit Holidays
