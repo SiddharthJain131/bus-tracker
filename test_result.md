@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Use photo-maker.py to Populate Photos & Remove Redundant Documentation — Bus Tracker Backend. Integrate photo-maker.py utility to automatically populate all required photo directories for each user role and simplify documentation. Tasks: Run photo-maker.py to populate photos for students/parents/teachers/admins, update database backup with photo paths, cleanup redundant docs, comprehensive logging and validation."
+user_problem_statement: "Continue Dashboard Theme Upgrade — Complete Coverage, Reduced Whiteness, Proper Context for All Accounts. Extend the dashboard theme upgrades to ensure full coverage across the entire dashboard system with layered light-neutral surfaces (#F4F5F7, #F9FAFB), role-based accent colors (Admin: Indigo/Blue, Teacher: Teal/Green, Parent: Gold/Orange), and consistent styling across all dashboard views and modules."
 
 backend:
   - task: "Authentication APIs (login, logout, me)"
