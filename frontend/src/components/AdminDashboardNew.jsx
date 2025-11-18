@@ -851,7 +851,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
               </div>
 
               <Tabs value={userSubTab} onValueChange={setUserSubTab}>
-                <TabsList className="grid w-full grid-cols-3 mb-6">
+                <TabsList className="admin-tabs grid w-full grid-cols-3 mb-6 dashboard-panel shadow-sm">
                   <TabsTrigger value="parents">Parents ({parentUsers.length})</TabsTrigger>
                   <TabsTrigger value="teachers">Teachers ({teacherUsers.length})</TabsTrigger>
                   <TabsTrigger value="admins">Admins ({adminUsers.length})</TabsTrigger>
