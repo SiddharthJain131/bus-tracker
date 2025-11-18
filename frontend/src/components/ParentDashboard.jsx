@@ -17,12 +17,9 @@ export default function ParentDashboard({ user, onLogout }) {
   const [students, setStudents] = useState([]);
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [selectedStudentDetails, setSelectedStudentDetails] = useState(null);
-  const [notifications, setNotifications] = useState([]);
   const [busLocation, setBusLocation] = useState(null);
   const [showRoute, setShowRoute] = useState(false);
   const [route, setRoute] = useState(null);
-  const [showNotificationDetail, setShowNotificationDetail] = useState(false);
-  const [selectedNotification, setSelectedNotification] = useState(null);
 
   useEffect(() => {
     fetchStudents();
