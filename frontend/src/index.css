@@ -308,6 +308,20 @@
         }
     }
     
+    /* Fade to white transition for login success */
+    @keyframes fadeToWhite {
+        0% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+            background: white;
+        }
+    }
+    
     /* Card hover lift effect */
     .hover-lift {
         transition: transform 0.3s ease, box-shadow 0.3s ease;
