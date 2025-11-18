@@ -34,14 +34,21 @@ export default function Login({ onLogin }) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-navy via-primary to-charcoal">
-      <Card className="w-full max-w-md p-8 bg-white/95 backdrop-blur-xl shadow-modern-xl border-0">
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-accent-blue to-soft-cyan rounded-2xl mb-4 shadow-modern-lg">
+    <div className="min-h-screen flex items-center justify-center px-4 animated-gradient-bg relative overflow-hidden">
+      {/* Floating decorative shapes */}
+      <div className="absolute top-20 left-10 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl floating-shape" style={{ animationDelay: '0s' }}></div>
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-indigo-400/10 rounded-full blur-3xl floating-shape" style={{ animationDelay: '5s' }}></div>
+      <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-cyan-400/10 rounded-full blur-3xl floating-shape" style={{ animationDelay: '10s' }}></div>
+      
+      <Card className="w-full max-w-md p-8 bg-white/95 backdrop-blur-xl shadow-modern-xl border-0 fade-in hover:scale-[1.01] transition-transform duration-300 rounded-2xl">
+        <div className="text-center mb-8 slide-in-left">
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-500 rounded-2xl mb-4 shadow-lg hover:shadow-xl transition-shadow duration-300">
             <Bus className="w-10 h-10 text-white" />
           </div>
-          <h1 className="text-4xl font-bold text-navy mb-2">School Bus Tracker</h1>
-          <p className="text-muted-foreground text-base">RFID + Face Recognition System</p>
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-900 via-indigo-800 to-blue-900 bg-clip-text text-transparent mb-2">
+            School Bus Tracker
+          </h1>
+          <p className="text-gray-600 text-base font-medium">RFID + Face Recognition System</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5" data-testid="login-form">
