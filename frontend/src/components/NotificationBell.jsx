@@ -56,7 +56,8 @@ const NotificationBell = ({ role = 'parent' }) => {
     };
   }, [isOpen]);
 
-  const markAsRead = async (notificationId) => {
+  const markAsRead = async (notificationId, e) => {
+    if (e) e.stopPropagation();
     try {
       const res = await fetch(`${API}/mark_notification_read/${notificationId}`, {
         method: 'POST',
@@ -66,9 +67,30 @@ const NotificationBell = ({ role = 'parent' }) => {
         setNotifications(prev =>
           prev.map(n => n.notification_id === notificationId ? { ...n, read: true } : n)
         );
+        toast.success('Notification marked as read');
+        setOpenMenuId(null);
       }
     } catch (error) {
       console.error('Failed to mark notification as read:', error);
+      toast.error('Failed to mark as read');
+    }
+  };
+
+  const deleteNotification = async (notificationId, e) => {
+    if (e) e.stopPropagation();
+    try {
+      const res = await fetch(`${API}/notifications/${notificationId}`, {
+        method: 'DELETE',
+        credentials: 'include'
+      });
+      if (res.ok) {
+        setNotifications(prev => prev.filter(n => n.notification_id !== notificationId));
+        toast.success('Notification deleted');
+        setOpenMenuId(null);
+      }
+    } catch (error) {
+      console.error('Failed to delete notification:', error);
+      toast.error('Failed to delete notification');
     }
   };
 
