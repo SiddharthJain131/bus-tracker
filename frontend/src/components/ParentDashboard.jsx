@@ -237,7 +237,7 @@ export default function ParentDashboard({ user, onLogout }) {
                         className={`absolute top-4 right-4 z-[1000] flex items-center gap-2 px-4 py-2 rounded-xl shadow-md transition-all font-medium ${
                           showRoute
                             ? 'bg-parent-primary text-white hover:bg-parent-hover'
-                            : 'bg-white text-gray-900 hover:bg-gray-50 border-2 border-gray-300'
+                            : 'dashboard-panel text-gray-900 hover:bg-dashboard-content border-2 dashboard-separator'
                         }`}
                       >
                         {showRoute ? (
