@@ -104,6 +104,77 @@
 
 user_problem_statement: "A. Demo Credential Autofill on Login Page - Add clickable demo user boxes that autofill email + password fields (no auto-submit). B. Notification Actions - Mark as Read & Delete - Extend notification dropdown with mark as read and delete actions via three-dot menu, with smooth animations. C. Email on New User Registration by Admin - When admin creates a new user, send automatic welcome email with login credentials using existing SMTP configuration."
 
+
+backend:
+  - task: "Delete notification endpoint - DELETE /api/notifications/{notification_id}"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Added DELETE endpoint for notifications. Users can only delete their own notifications. Returns 404 if notification not found or user doesn't have permission. Endpoint located after mark_notification_read endpoint."
+
+  - task: "New user welcome email functionality"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py, /app/backend/.env"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Added send_new_user_email() function that sends welcome email with login credentials when admin creates a new user. Added NEW_USER_EMAIL_ENABLED toggle to .env (default: true). Email includes: welcome message, role-specific color theming, login URL, email address, temporary password, instructions to change password. Non-breaking: if email fails, user creation completes successfully and response includes email_warning field for admin notification. Uses existing SMTP configuration (EMAIL_AUTH_ENABLED, SMTP_HOST, etc.). POST /api/users endpoint updated to call send_new_user_email after successful user creation."
+
+frontend:
+  - task: "Demo credential autofill on login page"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Login.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Added onClick handlers to demo credential boxes. Clicking Parent/Teacher/Admin boxes now autofills email and password fields. No auto-submit - user must click Login button. Added hover background effects (orange-50 for parent, teal-50 for teacher, indigo-50 for admin) with padding and rounded corners for better UX."
+
+  - task: "Notification actions - Mark as Read & Delete with three-dot menu"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/NotificationBell.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Added three-dot menu (MoreVertical icon) to each notification with dropdown actions. Menu includes: 1) Mark as Read action (only shown for unread notifications) with CheckCircle icon in green. 2) Delete action with Trash2 icon in red with hover effect. Updated markAsRead and added deleteNotification functions with API calls. Added toast notifications for success/error feedback. Menu closes after action. Click on notification content opens detail modal. Menu closes when clicking outside. Imported toast from sonner for notifications."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 0
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "Demo credential autofill on login page"
+    - "Notification actions - Mark as Read & Delete"
+    - "Delete notification endpoint"
+    - "New user welcome email functionality"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "main"
+    message: "Implemented three new features: A) Demo credential autofill - added onClick handlers to demo boxes that populate email/password fields on login page. B) Notification actions - added DELETE endpoint and three-dot menu with Mark as Read/Delete actions in NotificationBell component. C) New user email - added send_new_user_email() function that sends welcome email with credentials when admin creates user, with NEW_USER_EMAIL_ENABLED toggle. All features implemented and ready for backend testing."
+
 backend:
   - task: "Authentication APIs (login, logout, me)"
     implemented: true
