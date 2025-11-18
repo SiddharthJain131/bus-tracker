@@ -594,18 +594,18 @@ export default function AdminDashboardNew({ user, onLogout }) {
                               className={`flex items-start gap-4 p-4 rounded-lg border transition-all ${
                                 holiday.isPast
                                   ? 'bg-gray-50 border-gray-200 opacity-60'
-                                  : 'bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200 shadow-sm'
+                                  : 'bg-admin-light/50 border-admin-primary/20 hover:border-admin-primary/40'
                               }`}
                             >
                               <div className={`flex flex-col items-center justify-center w-16 h-16 rounded-lg flex-shrink-0 ${
-                                holiday.isPast ? 'bg-gray-200 text-gray-600' : 'bg-white text-blue-600 shadow-sm'
+                                holiday.isPast ? 'bg-gray-200 text-gray-600' : 'bg-white text-admin-primary shadow-sm border border-admin-primary/20'
                               }`}>
                                 <span className="text-xs font-semibold uppercase">{month}</span>
                                 <span className="text-2xl font-bold">{day}</span>
                               </div>
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2">
-                                  <h3 className={`font-semibold ${holiday.isPast ? 'text-gray-600' : 'text-gray-800'}`}>
+                                  <h3 className={`font-semibold ${holiday.isPast ? 'text-gray-600' : 'text-gray-900'}`}>
                                     {holiday.name}
                                   </h3>
                                   {holiday.isPast && (
