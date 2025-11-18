@@ -233,7 +233,7 @@ const BackupManagement = () => {
       {/* Header with Manual Trigger */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold text-gray-900">Backup Management</h2>
+          <h2 className="text-3xl font-bold text-admin-primary">Backup Management</h2>
           <p className="text-gray-600 mt-1">Monitor and manage system backups</p>
         </div>
         <div className="flex gap-2">
