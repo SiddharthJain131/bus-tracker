@@ -1730,6 +1730,9 @@ async def create_user(user_data: UserCreate, current_user: dict = Depends(get_cu
     if existing_user:
         raise HTTPException(status_code=400, detail="Email already exists")
     
+    # Store the plain password temporarily for email (before hashing)
+    temp_password = user_data.password
+    
     # Hash the password using bcrypt (consistent with login)
     password_hash = bcrypt.hashpw(user_data.password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
     
@@ -1750,9 +1753,30 @@ async def create_user(user_data: UserCreate, current_user: dict = Depends(get_cu
     
     await db.users.insert_one(user.model_dump())
     
+    # Send welcome email with credentials (non-breaking)
+    email_result = None
+    try:
+        email_result = await send_new_user_email(
+            user_email=user.email,
+            user_name=user.name,
+            user_role=user.role,
+            temp_password=temp_password
+        )
+        logging.info(f"Email send attempt for new user {user.email}: {email_result}")
+    except Exception as e:
+        logging.error(f"Non-critical error sending new user email: {e}")
+        email_result = {"sent": False, "reason": str(e)}
+    
     # Return user without password_hash
     user_dict = user.model_dump()
     user_dict.pop('password_hash')
+    
+    # Add email status to response (for admin notification)
+    if email_result:
+        user_dict['email_sent'] = email_result.get('sent', False)
+        if not email_result.get('sent', False):
+            user_dict['email_warning'] = f"User created successfully, but email could not be sent: {email_result.get('reason', 'Unknown error')}"
+    
     return user_dict
 
 @api_router.put("/users/{user_id}")
