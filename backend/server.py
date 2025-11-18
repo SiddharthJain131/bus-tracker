@@ -1285,6 +1285,18 @@ async def mark_notification_read(notification_id: str, current_user: dict = Depe
     )
     return {"status": "success"}
 
+@api_router.delete("/notifications/{notification_id}")
+async def delete_notification(notification_id: str, current_user: dict = Depends(get_current_user)):
+    """Delete a notification. Users can only delete their own notifications."""
+    result = await db.notifications.delete_one(
+        {"notification_id": notification_id, "user_id": current_user['user_id']}
+    )
+    
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Notification not found or access denied")
+    
+    return {"status": "deleted", "notification_id": notification_id}
+
 # Student APIs
 @api_router.get("/students")
 async def get_students(current_user: dict = Depends(get_current_user)):
