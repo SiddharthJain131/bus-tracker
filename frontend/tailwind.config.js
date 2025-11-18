@@ -146,13 +146,55 @@ module.exports = {
                     to: {
                         transform: 'translateX(0)'
                     }
+                },
+                'gradient': {
+                    '0%, 100%': {
+                        backgroundPosition: '0% 50%'
+                    },
+                    '50%': {
+                        backgroundPosition: '100% 50%'
+                    }
+                },
+                'shake-pulse': {
+                    '0%, 100%': {
+                        transform: 'translateX(0)'
+                    },
+                    '10%, 30%, 50%, 70%, 90%': {
+                        transform: 'translateX(-2px)'
+                    },
+                    '20%, 40%, 60%, 80%': {
+                        transform: 'translateX(2px)'
+                    }
+                },
+                'shake': {
+                    '0%, 100%': {
+                        transform: 'translateX(0)'
+                    },
+                    '25%': {
+                        transform: 'translateX(-4px)'
+                    },
+                    '75%': {
+                        transform: 'translateX(4px)'
+                    }
+                },
+                'glow': {
+                    '0%, 100%': {
+                        filter: 'brightness(1) drop-shadow(0 0 0px rgba(255, 255, 255, 0))'
+                    },
+                    '50%': {
+                        filter: 'brightness(1.2) drop-shadow(0 0 8px rgba(255, 255, 255, 0.4))'
+                    }
                 }
             },
             animation: {
                 'accordion-down': 'accordion-down 0.2s ease-out',
                 'accordion-up': 'accordion-up 0.2s ease-out',
                 'fade-in': 'fade-in 0.3s ease-out',
-                'slide-in': 'slide-in 0.3s ease-out'
+                'slide-in': 'slide-in 0.3s ease-out',
+                'gradient': 'gradient 8s ease infinite',
+                'shake-pulse': 'shake-pulse 2s ease-in-out infinite',
+                'shake': 'shake 0.2s ease-in-out',
+                'glow': 'glow 3s ease-in-out infinite'
             }
         }
   },
