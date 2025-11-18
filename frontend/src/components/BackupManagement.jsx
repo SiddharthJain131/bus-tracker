@@ -583,6 +583,168 @@ const BackupManagement = () => {
           )}
         </TabsContent>
       </Tabs>
+
+      {/* Restore Confirmation Dialog with Progress */}
+      <Dialog open={restoreDialog.open} onOpenChange={(open) => !isRestoring && cancelRestore()}>
+        <DialogContent className="sm:max-w-[500px]" onPointerDownOutside={(e) => isRestoring && e.preventDefault()}>
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-xl">
+              {restoreState.stage === 'success' ? (
+                <>
+                  <CheckCircle2 className="h-6 w-6 text-green-600" />
+                  Restore Complete
+                </>
+              ) : restoreState.stage === 'error' ? (
+                <>
+                  <XCircle className="h-6 w-6 text-red-600" />
+                  Restore Failed
+                </>
+              ) : (
+                <>
+                  <AlertTriangle className="h-6 w-6 text-yellow-600" />
+                  Confirm Restore
+                </>
+              )}
+            </DialogTitle>
+            <DialogDescription>
+              {restoreState.stage === 'success' ? (
+                "Backup has been successfully restored. The page will refresh to reflect changes."
+              ) : restoreState.stage === 'error' ? (
+                "The restore operation failed. Your current data remains unchanged."
+              ) : (
+                "This action will overwrite your current database with the selected backup."
+              )}
+            </DialogDescription>
+          </DialogHeader>
+
+          {restoreDialog.backup && (
+            <div className="space-y-4 py-4">
+              {/* Backup Details */}
+              {!restoreState.stage && (
+                <Card className="bg-gray-50 border-gray-200">
+                  <CardContent className="p-4 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-medium text-gray-700">Backup File:</span>
+                      <code className="text-xs bg-white px-2 py-1 rounded border">{restoreDialog.backup.filename}</code>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-medium text-gray-700">Created:</span>
+                      <span className="text-sm text-gray-600">{formatDate(restoreDialog.backup.timestamp)}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-medium text-gray-700">Size:</span>
+                      <span className="text-sm text-gray-600">{restoreDialog.backup.size_mb} MB</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-medium text-gray-700">Collections:</span>
+                      <span className="text-sm text-gray-600">
+                        {Object.keys(restoreDialog.backup.collections || {}).length} collection(s)
+                      </span>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Progress Indicator */}
+              {(restoreState.stage === 'validating' || restoreState.stage === 'restoring') && (
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <Loader2 className="h-5 w-5 animate-spin text-blue-600" />
+                    <div className="flex-1">
+                      <p className="text-sm font-medium text-gray-900">
+                        {restoreState.stage === 'validating' ? 'Validating backup...' : 'Restoring data...'}
+                      </p>
+                      <p className="text-xs text-gray-500 mt-0.5">
+                        {restoreState.stage === 'validating' 
+                          ? 'Verifying backup integrity and compatibility'
+                          : 'Writing data to database collections'}
+                      </p>
+                    </div>
+                  </div>
+                  <Progress value={restoreState.progress} className="h-2" />
+                  <p className="text-xs text-gray-500 text-center">
+                    {restoreState.progress}% complete
+                  </p>
+                </div>
+              )}
+
+              {/* Success Message */}
+              {restoreState.stage === 'success' && (
+                <div className="flex items-start gap-3 p-4 bg-green-50 border border-green-200 rounded-lg">
+                  <CheckCircle2 className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-green-900">
+                      Database restored successfully
+                    </p>
+                    <p className="text-xs text-green-700 mt-1">
+                      All data has been restored from the backup. The system will refresh momentarily.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Error Message */}
+              {restoreState.stage === 'error' && (
+                <div className="flex items-start gap-3 p-4 bg-red-50 border border-red-200 rounded-lg">
+                  <XCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-red-900">
+                      Restore operation failed
+                    </p>
+                    <p className="text-xs text-red-700 mt-1">
+                      The backup could not be restored. Your current data remains unchanged and safe.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Warning Message */}
+              {!restoreState.stage && (
+                <div className="flex items-start gap-3 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                  <AlertTriangle className="h-5 w-5 text-yellow-600 flex-shrink-0 mt-0.5" />
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-yellow-900">
+                      Warning: This action cannot be undone
+                    </p>
+                    <p className="text-xs text-yellow-700 mt-1">
+                      Current data will be replaced with backup data. Consider creating a backup of your current state first.
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          <DialogFooter>
+            {!restoreState.stage ? (
+              <>
+                <Button
+                  variant="outline"
+                  onClick={cancelRestore}
+                  disabled={isRestoring}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  onClick={confirmRestore}
+                  disabled={isRestoring}
+                  className="bg-red-600 hover:bg-red-700"
+                >
+                  <RotateCcw className="h-4 w-4 mr-2" />
+                  Confirm Restore
+                </Button>
+              </>
+            ) : restoreState.stage === 'success' || restoreState.stage === 'error' ? (
+              <Button
+                variant="outline"
+                onClick={cancelRestore}
+              >
+                Close
+              </Button>
+            ) : null}
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
