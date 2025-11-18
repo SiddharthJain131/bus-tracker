@@ -393,7 +393,7 @@ export default function TeacherDashboardNew({ user, onLogout }) {
 
             {/* Summary Stats Cards */}
             <div className="grid md:grid-cols-3 gap-6">
-              <Card className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+              <Card className="p-6 dashboard-card teacher-accent-border hover:shadow-lg transition-shadow">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600 mb-2">Total Students</p>
@@ -405,7 +405,7 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                 </div>
               </Card>
 
-              <Card className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+              <Card className="p-6 dashboard-card teacher-accent-border hover:shadow-lg transition-shadow">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600 mb-2">Avg Monthly Attendance</p>
@@ -417,7 +417,7 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                 </div>
               </Card>
 
-              <Card className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+              <Card className="p-6 dashboard-card teacher-accent-border hover:shadow-lg transition-shadow">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600 mb-2">Today's Absences</p>
