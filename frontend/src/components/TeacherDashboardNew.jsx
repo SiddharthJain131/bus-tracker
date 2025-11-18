@@ -571,9 +571,6 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                 </table>
               </div>
             </Card>
-
-          </div>
-        </div>
       </div>
 
       {/* Student Detail Modal */}
