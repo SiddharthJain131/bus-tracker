@@ -25,7 +25,8 @@ const BackupManagement = () => {
   const [attendanceBackups, setAttendanceBackups] = useState([]);
   const [isTriggering, setIsTriggering] = useState(false);
   const [isRestoring, setIsRestoring] = useState(false);
-  const [restoreConfirm, setRestoreConfirm] = useState(null);
+  const [restoreState, setRestoreState] = useState({ stage: null, progress: 0 }); // 'validating', 'restoring', 'success', 'error'
+  const [restoreDialog, setRestoreDialog] = useState({ open: false, backup: null });
   const { toast } = useToast();
 
   // Fetch backup health and list on mount
