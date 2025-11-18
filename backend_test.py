@@ -13,8 +13,8 @@ import sys
 import os
 from datetime import datetime
 
-# Get backend URL from frontend .env
-BACKEND_URL = "https://onboard-flow-enhance.preview.emergentagent.com"
+# Get backend URL - use local backend for testing
+BACKEND_URL = "http://localhost:8001"
 API_BASE = f"{BACKEND_URL}/api"
 
 class TestSession:
