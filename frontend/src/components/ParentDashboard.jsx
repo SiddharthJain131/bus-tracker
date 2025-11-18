@@ -292,9 +292,10 @@ export default function ParentDashboard({ user, onLogout }) {
                       </div>
                     </div>
                   </div>
-                  <AttendanceGrid studentId={selectedStudent.student_id} />
-                </Card>
-            </div>
+                <AttendanceGrid studentId={selectedStudent.student_id} />
+              </div>
+            </Card>
+          </div>
           </div>
         )}
       </div>
