@@ -859,7 +859,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
                   <TabsContent key={role} value={role}>
                     <div className="overflow-x-auto">
                       <table className="w-full">
-                        <thead className="bg-muted/50 border-b-2 border-border">
+                        <thead className="dashboard-content border-b-2 dashboard-separator">
                           <tr>
                             <th className="px-4 py-3 text-left text-xs font-bold text-admin-primary uppercase tracking-wider">Name</th>
                             <th className="px-4 py-3 text-left text-xs font-bold text-admin-primary uppercase tracking-wider">Role</th>
@@ -1001,7 +1001,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
                 <TabsContent value="buses">
                   <div className="overflow-x-auto">
                     <table className="w-full">
-                      <thead className="bg-muted/50 border-b-2 border-border">
+                      <thead className="dashboard-content border-b-2 dashboard-separator">
                         <tr>
                           <th className="px-4 py-3 text-left text-xs font-bold text-admin-primary uppercase tracking-wider">Bus No</th>
                           <th className="px-4 py-3 text-left text-xs font-bold text-admin-primary uppercase tracking-wider">Driver</th>
