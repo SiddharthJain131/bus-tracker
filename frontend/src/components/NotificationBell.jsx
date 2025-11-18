@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Bell, X, Check, AlertCircle } from 'lucide-react';
+import { Bell, X, Check, AlertCircle, MoreVertical, Trash2, CheckCircle } from 'lucide-react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import NotificationDetailModal from './NotificationDetailModal';
+import { toast } from 'sonner';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
