@@ -236,6 +236,13 @@ Opens when clicking 📅 View Attendance button:
 
 **Access:** Login with admin account → Auto-redirects to `/admin`
 
+### Visual Design
+- **Indigo/Blue Theme:** Professional indigo and blue accent colors
+- **Personalized Header:** Gradient title with blue tones and personalized greeting
+- **Enhanced Admin Experience:** Premium visual polish with micro-shadows and refined layouts
+- **Unified Design:** Consistent with Teacher and Parent dashboards for familiar navigation
+- **Professional Polish:** Blue gradient icon containers and smooth hover transitions
+
 ### Features Overview
 
 #### Dashboard Tabs:
@@ -243,11 +250,12 @@ Opens when clicking 📅 View Attendance button:
 2. **Students** - Complete student management
 3. **Users** - Manage parents, teachers, admins
 4. **Buses & Routes** - Transportation management
+5. **Backups** - System backup management
 
 ### 1. Overview Tab
 
 **System Statistics Cards:**
-- Total Students count
+- Total Students count (blue gradient icon)
 - Total Teachers count
 - Total Buses count
 
