@@ -208,6 +208,7 @@ def test_new_user_welcome_email():
         
         print(f"\n📧 Email Status:")
         print(f"   Email Sent: {email_sent}")
+        print(f"   Email Warning: {email_warning}")
         
         if email_sent is False:
             print("✅ Email sending attempted but failed (expected - SMTP not configured)")
@@ -216,7 +217,8 @@ def test_new_user_welcome_email():
             else:
                 print("⚠️ Expected email_warning field when email_sent is false")
         elif email_sent is True:
-            print("✅ Email sent successfully (SMTP configured)")
+            print("✅ Email functionality working (may be mocked if SMTP not configured)")
+            print("ℹ️ Check backend logs to verify actual email sending behavior")
         else:
             print(f"⚠️ Unexpected email_sent value: {email_sent}")
         
