@@ -248,7 +248,7 @@ const BackupManagement = () => {
           <Button
             onClick={() => triggerBackup('both')}
             disabled={isTriggering}
-            className="bg-blue-600 hover:bg-blue-700"
+            className="bg-admin-primary hover:bg-admin-hover text-white"
           >
             <Play className={`h-4 w-4 mr-2 ${isTriggering ? 'animate-pulse' : ''}`} />
             {isTriggering ? 'Running...' : 'Run Backup Now'}
