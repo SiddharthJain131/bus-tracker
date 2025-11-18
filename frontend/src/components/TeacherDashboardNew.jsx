@@ -604,61 +604,6 @@ export default function TeacherDashboardNew({ user, onLogout }) {
             </Card>
 
           </div>
-
-          {/* Notifications Sidebar - 1 column */}
-          <div className="lg:col-span-1">
-            <Card className="p-6 dashboard-card teacher-accent-border sticky top-24">
-              <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 bg-teacher-light rounded-lg flex items-center justify-center">
-                  <Bell className="w-5 h-5 text-teacher-primary" />
-                </div>
-                <h2 className="text-lg font-semibold text-gray-900">
-                  Notifications
-                </h2>
-              </div>
-              <div className="space-y-3 max-h-[calc(100vh-200px)] overflow-y-auto">
-                {notifications.length === 0 ? (
-                  <p className="text-sm text-gray-500 text-center py-8">No notifications</p>
-                ) : (
-                  notifications.slice(0, 5).map((notification) => (
-                    <div
-                      key={notification.notification_id}
-                      onClick={() => handleNotificationClick(notification)}
-                      className="flex items-start gap-4 p-4 rounded-lg border border-gray-200 bg-white hover:border-teacher-primary/40 hover:shadow-md transition-all cursor-pointer"
-                    >
-                      <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-teacher-light text-teacher-primary flex-shrink-0">
-                        <Bell className="w-5 h-5" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between gap-2">
-                          <h3 className="font-semibold text-gray-900 truncate">
-                            {notification.title}
-                          </h3>
-                          {notification.timestamp && (
-                            <span className="text-xs text-gray-500 whitespace-nowrap">
-                              {formatTimestamp(notification.timestamp)}
-                            </span>
-                          )}
-                        </div>
-                        {notification.message && (
-                          <p className="text-sm text-gray-600 mt-1 line-clamp-2">
-                            {notification.message}
-                          </p>
-                        )}
-                        {!notification.read && (
-                          <div className="mt-2">
-                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-teacher-primary text-white">
-                              New
-                            </span>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  ))
-                )}
-              </div>
-            </Card>
-          </div>
         </div>
       </div>
 
