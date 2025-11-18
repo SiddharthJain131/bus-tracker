@@ -164,6 +164,14 @@ const BackupManagement = () => {
     return `${Math.round(hours / 24)} days ago`;
   };
 
+  const formatFileSize = (bytes) => {
+    if (!bytes) return 'N/A';
+    const kb = bytes / 1024;
+    const mb = kb / 1024;
+    if (mb >= 1) return `${mb.toFixed(2)} MB`;
+    return `${kb.toFixed(2)} KB`;
+  };
+
   if (loading && !health) {
     return (
       <div className="flex items-center justify-center p-8">
