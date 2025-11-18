@@ -200,9 +200,7 @@ export default function ParentDashboard({ user, onLogout }) {
             {/* Student Details */}
             <StudentCard student={selectedStudentDetails} />
 
-            <div className="grid lg:grid-cols-3 gap-6">
-              {/* Left column - Map and Attendance */}
-              <div className="lg:col-span-2 space-y-6">
+            <div className="space-y-6">
                 {/* Live Bus Map */}
                 <Card className="p-6 dashboard-card-enhanced parent-accent-border hover-lift">
                   <div className="flex items-center gap-3 mb-5 pb-4 border-b border-gray-100">
