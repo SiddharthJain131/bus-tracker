@@ -24,7 +24,6 @@ import StudentDetailModal from './StudentDetailModal';
 import AttendanceGrid from './AttendanceGrid';
 import PhotoViewerModal from './PhotoViewerModal';
 import PhotoAvatar from './PhotoAvatar';
-import NotificationDetailModal from './NotificationDetailModal';
 import NotificationBell from './NotificationBell';
 import { formatClassName } from '../utils/helpers';
 
