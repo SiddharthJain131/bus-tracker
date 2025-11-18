@@ -398,23 +398,23 @@ export default function AdminDashboardNew({ user, onLogout }) {
   );
 
   return (
-    <div className="min-h-screen bg-muted" data-testid="admin-dashboard">
+    <div className="min-h-screen bg-[#FAFAFC]" data-testid="admin-dashboard">
       {/* Header */}
-      <header className="bg-card border-b border-border shadow-modern sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+      <header className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 bg-gradient-to-br from-navy to-accent-blue rounded-xl flex items-center justify-center shadow-modern">
+              <div className="w-14 h-14 bg-gradient-to-br from-admin-secondary to-admin-primary rounded-xl flex items-center justify-center shadow-md">
                 <Users className="w-7 h-7 text-white" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-navy">
+                <h1 className="text-3xl font-bold text-gray-900">
                   Admin Dashboard
                 </h1>
-                <p className="text-sm text-muted-foreground mt-0.5">Welcome, {user.name}</p>
+                <p className="text-sm text-gray-600 mt-1">Welcome, {user.name}</p>
               </div>
             </div>
-            <Button onClick={onLogout} variant="outline" className="flex items-center gap-2">
+            <Button onClick={onLogout} variant="outline" className="flex items-center gap-2 border-gray-300 hover:border-admin-primary hover:text-admin-primary transition-colors">
               <LogOut className="w-4 h-4" />
               Logout
             </Button>
