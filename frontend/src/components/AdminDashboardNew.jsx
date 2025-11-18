@@ -476,37 +476,37 @@ export default function AdminDashboardNew({ user, onLogout }) {
 
             {/* Quick Stats */}
             <div className="grid md:grid-cols-3 gap-6">
-              <Card className="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200">
+              <Card className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600">Total Students</p>
-                    <h3 className="text-4xl font-bold text-blue-600 mt-2">{stats.totalStudents}</h3>
+                    <p className="text-sm font-medium text-gray-600 mb-2">Total Students</p>
+                    <h3 className="text-4xl font-bold text-admin-primary">{stats.totalStudents}</h3>
                   </div>
-                  <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-admin-secondary to-admin-primary rounded-xl flex items-center justify-center shadow-md">
                     <GraduationCap className="w-8 h-8 text-white" />
                   </div>
                 </div>
               </Card>
 
-              <Card className="p-6 bg-gradient-to-br from-emerald-50 to-teal-50 border-emerald-200">
+              <Card className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600">Total Teachers</p>
-                    <h3 className="text-4xl font-bold text-emerald-600 mt-2">{stats.totalTeachers}</h3>
+                    <p className="text-sm font-medium text-gray-600 mb-2">Total Teachers</p>
+                    <h3 className="text-4xl font-bold text-admin-primary">{stats.totalTeachers}</h3>
                   </div>
-                  <div className="w-16 h-16 bg-emerald-500 rounded-full flex items-center justify-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-admin-secondary to-admin-primary rounded-xl flex items-center justify-center shadow-md">
                     <Users className="w-8 h-8 text-white" />
                   </div>
                 </div>
               </Card>
 
-              <Card className="p-6 bg-gradient-to-br from-orange-50 to-amber-50 border-orange-200">
+              <Card className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600">Total Buses</p>
-                    <h3 className="text-4xl font-bold text-orange-600 mt-2">{stats.totalBuses}</h3>
+                    <p className="text-sm font-medium text-gray-600 mb-2">Total Buses</p>
+                    <h3 className="text-4xl font-bold text-admin-primary">{stats.totalBuses}</h3>
                   </div>
-                  <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-admin-secondary to-admin-primary rounded-xl flex items-center justify-center shadow-md">
                     <Bus className="w-8 h-8 text-white" />
                   </div>
                 </div>
