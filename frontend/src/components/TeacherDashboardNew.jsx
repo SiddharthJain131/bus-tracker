@@ -467,7 +467,7 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                   <select
                     value={searchBy}
                     onChange={(e) => setSearchBy(e.target.value)}
-                    className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white text-sm"
+                    className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teacher-primary bg-white text-sm"
                   >
                     <option value="all">All Fields</option>
                     <option value="name">Name</option>
@@ -482,14 +482,14 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                       placeholder="Search for..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10"
+                      className="pl-10 focus:ring-teacher-primary focus:border-teacher-primary"
                     />
                   </div>
 
                   <select
                     value={filterAMStatus}
                     onChange={(e) => setFilterAMStatus(e.target.value)}
-                    className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-teacher-primary"
                   >
                     <option value="">All AM Status</option>
                     {statusOptions.map(status => (
@@ -500,7 +500,7 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                   <select
                     value={filterPMStatus}
                     onChange={(e) => setFilterPMStatus(e.target.value)}
-                    className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-teacher-primary"
                   >
                     <option value="">All PM Status</option>
                     {statusOptions.map(status => (
