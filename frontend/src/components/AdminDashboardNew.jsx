@@ -74,17 +74,17 @@ function RoutesTable({ searchTerm, onViewRoute, onEditRoute, onDeleteRoute, onAd
 
   return (
     <>
-      <div className="overflow-x-auto">
-        <table className="w-full">
-          <thead className="bg-muted/50 border-b-2 border-border">
+      <div className="overflow-x-auto rounded-lg border border-gray-200">
+        <table className="w-full bg-white">
+          <thead className="bg-gray-50 border-b border-gray-200">
             <tr>
-              <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Route Name</th>
-              <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Stops</th>
-              <th className="px-4 py-3 text-left text-xs font-bold text-navy uppercase tracking-wider">Remarks</th>
-              <th className="px-4 py-3 text-center text-xs font-bold text-navy uppercase tracking-wider">Actions</th>
+              <th className="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Route Name</th>
+              <th className="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Stops</th>
+              <th className="px-4 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Remarks</th>
+              <th className="px-4 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200">
+          <tbody className="divide-y divide-gray-100">
             {loading ? (
               <tr>
                 <td colSpan="4" className="px-4 py-8 text-center text-gray-500">
@@ -99,7 +99,7 @@ function RoutesTable({ searchTerm, onViewRoute, onEditRoute, onDeleteRoute, onAd
               </tr>
             ) : (
               filteredRoutes.map(route => (
-                <tr key={route.route_id} className="hover:bg-muted/30">
+                <tr key={route.route_id} className="hover:bg-gray-50 transition-colors">
                   <td className="px-4 py-4">
                     <div className="font-medium text-gray-900">{route.route_name}</div>
                   </td>
@@ -115,7 +115,7 @@ function RoutesTable({ searchTerm, onViewRoute, onEditRoute, onDeleteRoute, onAd
                         variant="ghost"
                         size="sm"
                         onClick={() => onViewRoute(route)}
-                        className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+                        className="text-admin-primary hover:text-admin-hover hover:bg-admin-light"
                         title="View Details"
                       >
                         <Eye className="w-4 h-4" />
@@ -124,7 +124,7 @@ function RoutesTable({ searchTerm, onViewRoute, onEditRoute, onDeleteRoute, onAd
                         variant="ghost"
                         size="sm"
                         onClick={() => onEditRoute(route)}
-                        className="text-yellow-600 hover:text-yellow-700 hover:bg-yellow-50"
+                        className="text-amber-600 hover:text-amber-700 hover:bg-amber-50"
                         title="Edit Route"
                       >
                         <Edit className="w-4 h-4" />
