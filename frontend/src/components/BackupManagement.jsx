@@ -94,45 +94,83 @@ const BackupManagement = () => {
     }
   };
 
-  const restoreBackup = async (backupId) => {
-    if (!restoreConfirm || restoreConfirm !== backupId) {
-      setRestoreConfirm(backupId);
-      toast({
-        title: 'Confirm Restore',
-        description: 'Click restore again to confirm. This will overwrite current data!',
-        variant: 'default'
-      });
-      
-      // Reset confirmation after 5 seconds
-      setTimeout(() => setRestoreConfirm(null), 5000);
-      return;
-    }
+  const initiateRestore = (backup) => {
+    setRestoreDialog({ open: true, backup });
+  };
 
+  const cancelRestore = () => {
+    if (!isRestoring) {
+      setRestoreDialog({ open: false, backup: null });
+      setRestoreState({ stage: null, progress: 0 });
+    }
+  };
+
+  const confirmRestore = async () => {
+    if (!restoreDialog.backup) return;
+    
     setIsRestoring(true);
+    
     try {
+      // Stage 1: Validating backup
+      setRestoreState({ stage: 'validating', progress: 20 });
+      await new Promise(resolve => setTimeout(resolve, 800)); // Simulate validation
+      
+      // Stage 2: Restoring data
+      setRestoreState({ stage: 'restoring', progress: 40 });
+      
       const response = await axios.post(
-        `${BACKEND_URL}/api/admin/backups/restore/${backupId}`,
+        `${BACKEND_URL}/api/admin/backups/restore/${restoreDialog.backup.backup_id}`,
         {},
         { withCredentials: true }
       );
 
+      // Stage 3: Finalizing
+      setRestoreState({ stage: 'restoring', progress: 80 });
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // Success
+      setRestoreState({ stage: 'success', progress: 100 });
+      
       toast({
-        title: 'Restore Successful',
-        description: `Restored ${response.data.restored_collections.length} collection(s) from ${response.data.backup_type} backup`,
-        variant: 'default'
+        title: '✅ Restore Successful',
+        description: `Restored ${response.data.restored_collections?.length || 0} collection(s) from ${response.data.backup_type} backup`,
+        variant: 'default',
+        duration: 5000
       });
 
-      setRestoreConfirm(null);
+      // Close dialog after showing success briefly
+      setTimeout(() => {
+        setRestoreDialog({ open: false, backup: null });
+        setRestoreState({ stage: null, progress: 0 });
+        
+        // Refresh data
+        fetchBackupData();
+        
+        // Optionally refresh entire page after restore
+        toast({
+          title: 'Page Refreshing',
+          description: 'Reloading to reflect restored data...',
+          duration: 2000
+        });
+        setTimeout(() => window.location.reload(), 2500);
+      }, 1500);
       
-      // Refresh data
-      await fetchBackupData();
     } catch (error) {
       console.error('Restore failed:', error);
+      setRestoreState({ stage: 'error', progress: 0 });
+      
       toast({
-        title: 'Restore Failed',
-        description: error.response?.data?.detail || 'Failed to restore backup',
-        variant: 'destructive'
+        title: '❌ Restore Failed',
+        description: error.response?.data?.detail || 'Failed to restore backup. Data remains unchanged.',
+        variant: 'destructive',
+        duration: 7000
       });
+      
+      // Keep dialog open to show error
+      setTimeout(() => {
+        setRestoreDialog({ open: false, backup: null });
+        setRestoreState({ stage: null, progress: 0 });
+      }, 3000);
     } finally {
       setIsRestoring(false);
     }
