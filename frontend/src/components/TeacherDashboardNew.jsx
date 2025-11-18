@@ -393,37 +393,37 @@ export default function TeacherDashboardNew({ user, onLogout }) {
 
             {/* Summary Stats Cards */}
             <div className="grid md:grid-cols-3 gap-6">
-              <Card className="p-6 bg-gradient-to-br from-accent-blue/10 to-accent-blue/5 border-accent-blue/20 hover:shadow-modern-lg transition-shadow">
+              <Card className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-semibold text-muted-foreground">Total Students</p>
-                    <h3 className="text-4xl font-bold text-accent-blue mt-2">{stats.totalStudents}</h3>
+                    <p className="text-sm font-medium text-gray-600 mb-2">Total Students</p>
+                    <h3 className="text-4xl font-bold text-teacher-primary">{stats.totalStudents}</h3>
                   </div>
-                  <div className="w-16 h-16 bg-accent-blue rounded-2xl flex items-center justify-center shadow-modern">
+                  <div className="w-16 h-16 bg-gradient-to-br from-teacher-primary to-teacher-secondary rounded-xl flex items-center justify-center shadow-md">
                     <Users className="w-8 h-8 text-white" />
                   </div>
                 </div>
               </Card>
 
-              <Card className="p-6 bg-gradient-to-br from-status-green/10 to-status-green/5 border-status-green/20 hover:shadow-modern-lg transition-shadow">
+              <Card className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-semibold text-muted-foreground">Avg Monthly Attendance</p>
-                    <h3 className="text-4xl font-bold text-status-green mt-2">{stats.avgAttendance}%</h3>
+                    <p className="text-sm font-medium text-gray-600 mb-2">Avg Monthly Attendance</p>
+                    <h3 className="text-4xl font-bold text-teacher-primary">{stats.avgAttendance}%</h3>
                   </div>
-                  <div className="w-16 h-16 bg-status-green rounded-2xl flex items-center justify-center shadow-modern">
+                  <div className="w-16 h-16 bg-gradient-to-br from-teacher-primary to-teacher-secondary rounded-xl flex items-center justify-center shadow-md">
                     <TrendingUp className="w-8 h-8 text-white" />
                   </div>
                 </div>
               </Card>
 
-              <Card className="p-6 bg-gradient-to-br from-status-red/10 to-status-red/5 border-status-red/20 hover:shadow-modern-lg transition-shadow">
+              <Card className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-semibold text-muted-foreground">Today's Absences</p>
-                    <h3 className="text-4xl font-bold text-status-red mt-2">{stats.todayAbsences}</h3>
+                    <p className="text-sm font-medium text-gray-600 mb-2">Today's Absences</p>
+                    <h3 className="text-4xl font-bold text-status-red">{stats.todayAbsences}</h3>
                   </div>
-                  <div className="w-16 h-16 bg-status-red rounded-2xl flex items-center justify-center shadow-modern">
+                  <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center shadow-md">
                     <UserX className="w-8 h-8 text-white" />
                   </div>
                 </div>
