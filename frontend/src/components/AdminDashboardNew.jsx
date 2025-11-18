@@ -99,7 +99,7 @@ function RoutesTable({ searchTerm, onViewRoute, onEditRoute, onDeleteRoute, onAd
               </tr>
             ) : (
               filteredRoutes.map(route => (
-                <tr key={route.route_id} className="hover:bg-gray-50 transition-colors">
+                <tr key={route.route_id} className="hover:bg-dashboard-content transition-colors">
                   <td className="px-4 py-4">
                     <div className="font-medium text-gray-900">{route.route_name}</div>
                   </td>
