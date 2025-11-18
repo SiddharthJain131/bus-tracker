@@ -487,12 +487,13 @@ const BackupManagement = () => {
           ) : (
             <div className="grid gap-4">
               {attendanceBackups.map((backup) => (
-                <Card key={backup.backup_id} className={backup.is_valid ? 'border' : 'border-2 border-red-200'}>
+                <Card key={backup.backup_id} className={backup.is_valid ? 'border hover:shadow-md transition-shadow' : 'border-2 border-red-200 hover:shadow-md transition-shadow'}>
                   <CardContent className="p-4">
-                    <div className="flex items-center justify-between">
-                      <div className="space-y-1 flex-1">
-                        <div className="flex items-center gap-2">
-                          <h4 className="font-medium text-gray-900">{backup.filename}</h4>
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="space-y-2 flex-1 min-w-0">
+                        {/* Header Row */}
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <h4 className="font-semibold text-gray-900 text-sm">{backup.filename}</h4>
                           {backup.is_valid ? (
                             <Badge variant="default" className="bg-green-100 text-green-800">
                               <CheckCircle2 className="h-3 w-3 mr-1" />
@@ -505,29 +506,74 @@ const BackupManagement = () => {
                             </Badge>
                           )}
                           {backup.age_days === 0 && (
-                            <Badge variant="secondary">Latest</Badge>
+                            <Badge variant="secondary" className="bg-blue-100 text-blue-800">Latest</Badge>
                           )}
                         </div>
-                        <div className="flex items-center gap-4 text-xs text-gray-600">
-                          <span className="flex items-center gap-1">
+                        
+                        {/* Directory with horizontal scroll */}
+                        <div className="relative group">
+                          <div className="flex items-center gap-2 text-xs text-gray-500">
+                            <HardDrive className="h-3 w-3 flex-shrink-0" />
+                            <div 
+                              className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 hover:scrollbar-thumb-gray-400 pb-1"
+                              role="region"
+                              aria-label="Backup directory path"
+                              tabIndex={0}
+                            >
+                              <code className="bg-gray-50 px-2 py-1 rounded text-xs whitespace-nowrap">
+                                {backup.directory || '/app/backend/backups/attendance'}
+                              </code>
+                            </div>
+                          </div>
+                          {/* Scroll indicator */}
+                          <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </div>
+                        
+                        {/* Metadata Row */}
+                        <div className="flex items-center gap-4 text-xs text-gray-600 flex-wrap">
+                          <span className="flex items-center gap-1" title={`Created: ${formatDate(backup.timestamp)}`}>
                             <Clock className="h-3 w-3" />
                             {formatDate(backup.timestamp)}
                           </span>
-                          <span>Size: {backup.size_mb} MB</span>
-                          <span>Age: {backup.age_days} days</span>
+                          <span className="flex items-center gap-1" title="File size">
+                            <HardDrive className="h-3 w-3" />
+                            {backup.size_mb} MB
+                          </span>
+                          <span title="Backup age">Age: {backup.age_days}d</span>
                         </div>
+                        
+                        {/* Checksum */}
                         <div className="flex items-center gap-2 text-xs text-gray-500">
-                          <Shield className="h-3 w-3" />
-                          Checksum: <code className="bg-gray-100 px-1 rounded">{backup.checksum}</code>
+                          <Shield className="h-3 w-3 flex-shrink-0" />
+                          <span className="font-medium">Integrity:</span>
+                          <code className="bg-gray-50 px-2 py-0.5 rounded text-xs truncate" title={backup.checksum}>
+                            {backup.checksum?.substring(0, 16)}...
+                          </code>
                         </div>
-                        {/* Collections count */}
-                        <div className="flex flex-wrap gap-2 mt-2">
+                        
+                        {/* Collections badges */}
+                        <div className="flex flex-wrap gap-2 pt-1">
                           {Object.entries(backup.collections || {}).map(([name, count]) => (
-                            <Badge key={name} variant="outline" className="text-xs">
+                            <Badge key={name} variant="outline" className="text-xs font-normal">
                               {name}: {count}
                             </Badge>
                           ))}
                         </div>
+                      </div>
+                      
+                      {/* Action Button */}
+                      <div className="flex-shrink-0">
+                        <Button
+                          onClick={() => initiateRestore(backup)}
+                          disabled={!backup.is_valid || isRestoring}
+                          variant={backup.is_valid ? "default" : "secondary"}
+                          size="sm"
+                          className={backup.is_valid ? "bg-blue-600 hover:bg-blue-700" : ""}
+                          title={backup.is_valid ? "Restore this backup" : "Cannot restore invalid backup"}
+                        >
+                          <RotateCcw className="h-4 w-4 mr-2" />
+                          Restore
+                        </Button>
                       </div>
                     </div>
                   </CardContent>
