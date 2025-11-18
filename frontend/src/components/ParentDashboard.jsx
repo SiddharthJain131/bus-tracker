@@ -254,11 +254,14 @@ export default function ParentDashboard({ user, onLogout }) {
                       </button>
                     )}
                   </div>
-                </Card>
+                </div>
 
-                {/* Attendance Grid */}
-                <Card className="p-6 dashboard-card-enhanced parent-accent-border hover-lift">
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-5 pb-4 border-b border-gray-100">
+              {/* Section Divider */}
+              <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+
+              {/* Attendance Calendar Section */}
+              <div className="p-6 bg-gray-50/30">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-5">
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 bg-gradient-to-br from-parent-primary to-parent-secondary rounded-xl flex items-center justify-center shadow-sm">
                         <Calendar className="w-6 h-6 text-white" />
