@@ -47,10 +47,17 @@ Complete guide for using the Bus Tracker System across all three user roles.
 
 **Access:** Login with any parent account → Auto-redirects to `/parent`
 
+### Visual Design
+- **Warm Theme:** Gold and orange accent colors throughout
+- **Personalized Header:** Randomized greeting message ("Welcome back", "Good to see you", etc.)
+- **Enhanced Cards:** Micro-shadows, gradient icon backgrounds, and smooth hover effects
+- **Profile Card:** Role-aware gradient background with enhanced avatar and contact details
+
 ### Features Overview
 
 #### 1. Student Information Card
-- Student photo and name
+- Student photo with gradient border (warm tones)
+- Student name prominently displayed
 - **Information displayed (in order):**
   1. Class & Section
   2. Teacher Name
@@ -58,6 +65,7 @@ Complete guide for using the Bus Tracker System across all three user roles.
   4. Emergency Contact (highlighted)
   5. Bus Number
   6. Stop Name
+- **Visual Polish:** Cards feature subtle shadows and lift on hover for tactile feedback
 
 #### 2. Live Bus Tracking
 - Real-time GPS location of your child's bus
