@@ -201,12 +201,12 @@ export default function ParentDashboard({ user, onLogout }) {
               {/* Left column - Map and Attendance */}
               <div className="lg:col-span-2 space-y-6">
                 {/* Live Bus Map */}
-                <Card className="p-6 dashboard-card parent-accent-border hover:shadow-lg transition-shadow">
-                  <div className="flex items-center gap-3 mb-5">
-                    <div className="w-10 h-10 bg-parent-light rounded-lg flex items-center justify-center">
-                      <MapPin className="w-5 h-5 text-parent-primary" />
+                <Card className="p-6 dashboard-card-enhanced parent-accent-border hover-lift">
+                  <div className="flex items-center gap-3 mb-5 pb-4 border-b border-gray-100">
+                    <div className="w-12 h-12 bg-gradient-to-br from-parent-primary to-parent-secondary rounded-xl flex items-center justify-center shadow-sm">
+                      <MapPin className="w-6 h-6 text-white" />
                     </div>
-                    <h2 className="text-xl font-semibold text-gray-900">Live Bus Location</h2>
+                    <h2 className="text-xl font-semibold text-parent-primary">Live Bus Location</h2>
                     {busLocation && (
                       <span className="ml-auto text-xs text-gray-500">
                         Updated: {new Date(busLocation.timestamp).toLocaleTimeString()}
