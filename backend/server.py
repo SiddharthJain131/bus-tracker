@@ -2058,6 +2058,88 @@ async def verify_backup(backup_id: str, current_user: dict = Depends(get_current
         raise HTTPException(status_code=500, detail=f"Verification failed: {str(e)}")
 
 
+@api_router.post("/admin/backups/restore/{backup_id}")
+async def restore_backup(backup_id: str, current_user: dict = Depends(get_current_user)):
+    """Restore database from a specific backup"""
+    if current_user['role'] != 'admin':
+        raise HTTPException(status_code=403, detail="Access denied")
+    
+    try:
+        from backup_manager import BackupManager, BACKUP_DIR, ATTENDANCE_BACKUP_DIR
+        from pathlib import Path
+        import json
+        
+        manager = BackupManager()
+        await manager.connect()
+        
+        try:
+            # Check main backups first
+            backup_path = BACKUP_DIR / f"{backup_id}.json"
+            backup_type = "main"
+            
+            if not backup_path.exists():
+                # Check attendance backups
+                backup_path = ATTENDANCE_BACKUP_DIR / f"{backup_id}.json"
+                backup_type = "attendance"
+            
+            if not backup_path.exists():
+                raise HTTPException(status_code=404, detail="Backup not found")
+            
+            # Verify backup before restoring
+            is_valid, verify_message = manager.verify_backup(backup_path)
+            if not is_valid:
+                raise HTTPException(status_code=400, detail=f"Backup verification failed: {verify_message}")
+            
+            # Load backup data
+            with open(backup_path, 'r') as f:
+                backup_data = json.load(f)
+            
+            metadata = backup_data.get('metadata', {})
+            collections_data = backup_data.get('data', {})
+            
+            # Restore collections based on backup type
+            restored_collections = []
+            if backup_type == "main":
+                # Restore main collections
+                for collection_name in ['users', 'students', 'buses', 'routes', 'stops', 'holidays']:
+                    if collection_name in collections_data:
+                        collection = manager.db[collection_name]
+                        # Clear existing data
+                        await collection.delete_many({})
+                        # Insert backup data
+                        if collections_data[collection_name]:
+                            await collection.insert_many(collections_data[collection_name])
+                        restored_collections.append(collection_name)
+            else:  # attendance backup
+                # Restore attendance collections
+                for collection_name in ['attendance', 'events']:
+                    if collection_name in collections_data:
+                        collection = manager.db[collection_name]
+                        # Clear existing data
+                        await collection.delete_many({})
+                        # Insert backup data
+                        if collections_data[collection_name]:
+                            await collection.insert_many(collections_data[collection_name])
+                        restored_collections.append(collection_name)
+            
+            return {
+                'backup_id': backup_id,
+                'backup_type': backup_type,
+                'restored_collections': restored_collections,
+                'backup_date': metadata.get('timestamp', 'Unknown'),
+                'message': f"Successfully restored {len(restored_collections)} collection(s)"
+            }
+        
+        finally:
+            manager.close()
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        logging.error(f"Restore failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Restore failed: {str(e)}")
+
+
 # ================================================================================
 # PHOTO RESTORATION ENDPOINT
 # Teacher endpoints
