@@ -352,8 +352,8 @@ export default function TeacherDashboardNew({ user, onLogout }) {
           {/* Main Content - 3 columns */}
           <div className="lg:col-span-3 space-y-6">
             {/* Teacher Profile Card */}
-            <Card className="p-6 hover:shadow-modern-lg transition-shadow">
-              <h2 className="text-2xl font-semibold mb-5 text-navy">
+            <Card className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+              <h2 className="text-xl font-semibold mb-5 text-gray-900">
                 Teacher Profile
               </h2>
               <div className="flex items-center gap-6">
@@ -362,27 +362,27 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                   userName={currentUser.name}
                   size="lg"
                   onClick={handleProfilePhotoClick}
-                  gradientFrom="accent-blue"
-                  gradientTo="soft-cyan"
+                  gradientFrom="teacher-primary"
+                  gradientTo="teacher-secondary"
                 />
                 <div className="flex-1 space-y-2">
-                  <h3 className="text-2xl font-bold text-navy">{user.name}</h3>
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                  <h3 className="text-2xl font-bold text-gray-900">{user.name}</h3>
+                  <div className="flex items-center gap-4 text-sm text-gray-600">
                     {user.email && (
-                      <div className="flex items-center gap-1.5">
-                        <Mail className="w-4 h-4" />
+                      <div className="flex items-center gap-2">
+                        <Mail className="w-4 h-4 text-teacher-primary" />
                         {user.email}
                       </div>
                     )}
                     {user.phone && (
-                      <div className="flex items-center gap-1.5">
-                        <Phone className="w-4 h-4" />
+                      <div className="flex items-center gap-2">
+                        <Phone className="w-4 h-4 text-teacher-primary" />
                         {user.phone}
                       </div>
                     )}
                   </div>
                   {(user.assigned_class || user.assigned_section) && (
-                    <div className="flex items-center gap-1.5 text-sm font-medium text-accent-blue bg-accent-blue/10 px-3 py-1.5 rounded-lg inline-flex">
+                    <div className="flex items-center gap-1.5 text-sm font-medium text-teacher-primary bg-teacher-light px-3 py-1.5 rounded-lg inline-flex">
                       <GraduationCap className="w-4 h-4" />
                       Class: {formatClassName(user.assigned_class)} {user.assigned_section ? `- Section ${user.assigned_section}` : ''}
                     </div>
