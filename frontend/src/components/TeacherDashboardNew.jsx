@@ -431,10 +431,10 @@ export default function TeacherDashboardNew({ user, onLogout }) {
             </div>
 
             {/* Students List */}
-            <Card className="p-6 hover:shadow-modern-lg transition-shadow">
+            <Card className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
               <div className="mb-6">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5">
-                  <h2 className="text-2xl font-semibold text-navy">
+                  <h2 className="text-xl font-semibold text-gray-900">
                     My Students
                   </h2>
                   {/* Inline Status Legend */}
