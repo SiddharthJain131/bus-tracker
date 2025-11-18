@@ -258,11 +258,11 @@ const BackupManagement = () => {
 
       {/* Overall Health Card */}
       {health && (
-        <Card className="border-2">
+        <Card className="dashboard-card admin-accent-border border-2">
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
               <CardTitle className="flex items-center gap-2">
-                <Shield className="h-5 w-5 text-blue-600" />
+                <Shield className="h-5 w-5 text-admin-primary" />
                 Overall Backup Health
               </CardTitle>
               {getHealthBadge(health.overall_health)}
