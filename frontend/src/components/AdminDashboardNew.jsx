@@ -630,7 +630,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
               </div>
             </Card>
 
-            <Card className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+            <Card className="p-6 dashboard-card admin-accent-border hover:shadow-lg transition-shadow">
               <div className="flex items-center justify-between mb-5">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-admin-light rounded-lg flex items-center justify-center">
