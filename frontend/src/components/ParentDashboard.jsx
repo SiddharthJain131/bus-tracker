@@ -69,15 +69,6 @@ export default function ParentDashboard({ user, onLogout }) {
     }
   };
 
-  const fetchNotifications = async () => {
-    try {
-      const response = await axios.get(`${API}/get_notifications`);
-      setNotifications(response.data);
-    } catch (error) {
-      console.error('Failed to load notifications:', error);
-    }
-  };
-
   const fetchBusLocation = async (busNumber) => {
     try {
       const response = await axios.get(`${API}/get_bus_location?bus_number=${busNumber}`);
