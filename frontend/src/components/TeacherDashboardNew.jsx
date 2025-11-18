@@ -630,7 +630,7 @@ export default function TeacherDashboardNew({ user, onLogout }) {
           
           <div className="mt-4">
             {/* Status Legend */}
-            <div className="flex flex-wrap items-center justify-center gap-4 mb-6 p-4 bg-gray-50 rounded-lg">
+            <div className="flex flex-wrap items-center justify-center gap-4 mb-6 p-4 dashboard-content rounded-lg border dashboard-separator">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full status-gray"></div>
                 <span className="text-xs font-medium text-gray-600">Not Scanned</span>
