@@ -259,6 +259,7 @@ const NotificationBell = ({ role = 'parent' }) => {
       {showDetail && selectedNotification && (
         <NotificationDetailModal
           notification={selectedNotification}
+          isOpen={showDetail}
           onClose={() => {
             setShowDetail(false);
             setSelectedNotification(null);
