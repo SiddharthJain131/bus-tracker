@@ -173,13 +173,13 @@ export default function ParentDashboard({ user, onLogout }) {
         {/* Student Cards - Multiple Children */}
         {students.length > 1 ? (
           <div>
-            <h2 className="text-2xl font-semibold mb-5 text-navy">My Children</h2>
+            <h2 className="text-xl font-semibold mb-5 text-gray-900">My Children</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-6">
               {students.map((student) => (
                 <div
                   key={student.student_id}
                   onClick={() => setSelectedStudent(student)}
-                  className={`cursor-pointer transition-all ${selectedStudent?.student_id === student.student_id ? 'ring-2 ring-accent-blue rounded-xl' : ''}`}
+                  className={`cursor-pointer transition-all ${selectedStudent?.student_id === student.student_id ? 'ring-2 ring-parent-primary rounded-xl' : ''}`}
                 >
                   <StudentCard student={student} compact={true} />
                 </div>
