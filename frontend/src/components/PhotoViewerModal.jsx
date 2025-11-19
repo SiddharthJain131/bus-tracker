@@ -58,7 +58,7 @@ export default function PhotoViewerModal({
         withCredentials: true,
       });
 
-      toast.success('Photo updated successfully!');
+      // REMOVED: Success toast - instant photo refresh is sufficient feedback
       
       // Update local state with new photo URL + cache-busting timestamp
       const newPhotoUrl = response.data.photo_url;

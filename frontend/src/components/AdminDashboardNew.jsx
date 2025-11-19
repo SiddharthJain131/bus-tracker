@@ -452,7 +452,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
                   gradientTo="admin-primary"
                 />
                 <div className="flex-1 space-y-2">
-                  <h3 className="text-2xl font-bold text-gray-900">{user.name}</h3>
+                  <h3 className="text-xl font-bold text-gray-900">{user.name}</h3>
                   <div className="flex items-center gap-4 text-sm text-gray-600">
                     {user.email && (
                       <div className="flex items-center gap-2">
@@ -524,7 +524,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
                   <div className="w-10 h-10 bg-admin-light rounded-lg flex items-center justify-center">
                     <Calendar className="w-5 h-5 text-admin-primary" />
                   </div>
-                  <h2 className="text-2xl font-semibold text-gray-900">
+                  <h2 className="text-lg font-semibold text-gray-900">
                     Upcoming Holidays
                   </h2>
                 </div>
@@ -608,7 +608,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
                               </div>
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2">
-                                  <h3 className={`text-2xl font-semibold ${holiday.isPast ? 'text-gray-600' : 'text-gray-900'}`}>
+                                  <h3 className={`text-base font-semibold ${holiday.isPast ? 'text-gray-600' : 'text-gray-900'}`}>
                                     {holiday.name}
                                   </h3>
                                   {holiday.isPast && (

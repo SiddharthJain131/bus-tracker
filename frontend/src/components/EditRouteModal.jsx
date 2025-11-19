@@ -216,7 +216,7 @@ export default function EditRouteModal({ route, open, onClose, onSuccess }) {
         remarks: formData.remarks || null
       });
 
-      toast.success(`Route "${formData.route_name}" updated successfully!`);
+      // REMOVED: Success toast - modal close is sufficient feedback
       onSuccess();
       handleClose();
     } catch (error) {

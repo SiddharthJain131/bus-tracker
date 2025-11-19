@@ -62,7 +62,7 @@ export default function AddUserModal({ open, onClose, onSuccess }) {
 
       await axios.post(`${API}/users`, payload);
 
-      toast.success(`${selectedRole.charAt(0).toUpperCase() + selectedRole.slice(1)} created successfully!`);
+      // REMOVED: Success toast - modal close is sufficient feedback
       onSuccess();
       onClose();
       resetForm();

@@ -230,7 +230,7 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
         toast.warning(studentResponse.data.capacity_warning, { duration: 6000 });
       }
 
-      toast.success(parentMode === 'create' ? 'Student and Parent created successfully!' : 'Student created successfully!');
+      // REMOVED: Success toast - modal close is sufficient feedback
       onSuccess();
       onClose();
       resetForm();

@@ -40,7 +40,7 @@ export default function EditHolidayModal({ holiday, open, onClose, onSuccess }) 
     setIsSubmitting(true);
     try {
       await axios.put(`${API}/admin/holidays/${holiday.holiday_id}`, formData);
-      toast.success('Holiday updated successfully!');
+      // REMOVED: Success toast - modal close is sufficient feedback
       onSuccess();
       onClose();
     } catch (error) {

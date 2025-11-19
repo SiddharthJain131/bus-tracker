@@ -50,7 +50,7 @@ export default function EditUserModalEnhanced({ user, currentUser, open, onClose
     setSaving(true);
     try {
       await axios.put(`${API}/users/${user.user_id}`, formData);
-      toast.success('User updated successfully!');
+      // REMOVED: Success toast - modal close is sufficient feedback
       onSuccess();
       onClose();
     } catch (error) {

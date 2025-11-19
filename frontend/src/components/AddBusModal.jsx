@@ -59,7 +59,7 @@ export default function AddBusModal({ open, onClose, onSuccess }) {
       };
 
       await axios.post(`${API}/buses`, payload);
-      toast.success(`Bus ${formData.bus_number} created successfully!`);
+      // REMOVED: Success toast - modal close is sufficient feedback
       onSuccess();
       handleClose();
     } catch (error) {

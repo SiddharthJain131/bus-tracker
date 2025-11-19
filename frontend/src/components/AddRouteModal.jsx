@@ -102,7 +102,7 @@ export default function AddRouteModal({ open, onClose, onSuccess }) {
         remarks: formData.remarks || null
       });
 
-      toast.success(`Route "${formData.route_name}" created successfully with ${stops.length} stops!`);
+      // REMOVED: Success toast - modal close is sufficient feedback
       onSuccess();
       handleClose();
     } catch (error) {

@@ -64,16 +64,18 @@ const NotificationBell = ({ role = 'parent' }) => {
         credentials: 'include'
       });
       if (res.ok) {
+        // REMOVED: Success toast - silent icon state change is sufficient
         setNotifications(prev =>
           prev.map(n => n.notification_id === notificationId ? { ...n, read: true } : n)
         );
-        toast.success('Notification marked as read');
         setOpenMenuId(null);
       } else {
+        // KEEP: Error toast for failed operations
         toast.error('Failed to mark as read');
       }
     } catch (error) {
       console.error('Failed to mark notification as read:', error);
+      // KEEP: Error toast for network failures
       toast.error('Failed to mark as read');
     }
   };
@@ -86,12 +88,13 @@ const NotificationBell = ({ role = 'parent' }) => {
         credentials: 'include'
       });
       if (res.ok) {
+        // REMOVED: Success toast - silent removal is sufficient
         setNotifications(prev => prev.filter(n => n.notification_id !== notificationId));
-        toast.success('Notification deleted');
         setOpenMenuId(null);
       }
     } catch (error) {
       console.error('Failed to delete notification:', error);
+      // KEEP: Error toast for network failures
       toast.error('Failed to delete notification');
     }
   };

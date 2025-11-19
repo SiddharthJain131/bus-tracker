@@ -345,7 +345,7 @@ export default function TeacherDashboardNew({ user, onLogout }) {
                   gradientTo="teacher-secondary"
                 />
                 <div className="flex-1 space-y-2">
-                  <h3 className="text-2xl font-bold text-gray-900">{user.name}</h3>
+                  <h3 className="text-xl font-bold text-gray-900">{user.name}</h3>
                   <div className="flex items-center gap-4 text-sm text-gray-600">
                     {user.email && (
                       <div className="flex items-center gap-2">

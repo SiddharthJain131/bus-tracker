@@ -44,13 +44,12 @@ export default function Login({ onLogin }) {
 
       // Check if email verification is required
       if (response.data.requires_verification) {
-        toast.success('Verification code sent to your email!');
         setRequiresVerification(true);
         setLoading(false);
         return;
       }
 
-      toast.success('Login successful!');
+      // REMOVED: Login success toast - transition is enough feedback
       
       // Start bus icon theme transition animation only
       setTransitionRole(response.data.role);
@@ -61,6 +60,7 @@ export default function Login({ onLogin }) {
         onLogin(response.data);
       }, 300);
     } catch (error) {
+      // KEEP: Login failure toast (critical error)
       toast.error(error.response?.data?.detail || 'Login failed');
       // Trigger shake animation on failed login
       setShake(true);
@@ -82,7 +82,7 @@ export default function Login({ onLogin }) {
         },
       });
 
-      toast.success('Verification successful!');
+      // REMOVED: Verification success toast - transition is enough feedback
       
       // Start bus icon theme transition animation only
       setTransitionRole(response.data.role);
@@ -93,6 +93,7 @@ export default function Login({ onLogin }) {
         onLogin(response.data);
       }, 300);
     } catch (error) {
+      // KEEP: Verification failure toast (critical error)
       toast.error(error.response?.data?.detail || 'Verification failed');
       // Trigger shake animation on failed verification
       setShake(true);
@@ -128,13 +129,13 @@ export default function Login({ onLogin }) {
                   </div>
                   <div>
                     <h2 className="text-2xl font-bold text-white drop-shadow-lg">School Bus Tracker</h2>
-                    <p className="text-white/80 text-sm font-medium">Next-Gen Student Safety System</p>
+                    <p className="text-white/80 text-xs font-medium">Next-Gen Student Safety System</p>
                   </div>
                 </div>
 
                 {/* Project Summary */}
                 <div className="space-y-4 text-white/90">
-                  <p className="text-base leading-relaxed">
+                  <p className="text-sm leading-relaxed">
                     A comprehensive real-time tracking and attendance management system combining RFID technology with AI-powered face recognition for enhanced student safety and parent peace of mind.
                   </p>
                   
@@ -142,25 +143,25 @@ export default function Login({ onLogin }) {
                   <div className="grid grid-cols-1 gap-3 mt-4">
                     <div className="flex items-center gap-3 p-3 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20">
                       <Shield className="w-5 h-5 text-white" />
-                      <span className="text-sm font-medium">Dual Authentication System</span>
+                      <span className="text-xs font-medium">Dual Authentication System</span>
                     </div>
                     <div className="flex items-center gap-3 p-3 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20">
                       <Zap className="w-5 h-5 text-white" />
-                      <span className="text-sm font-medium">Real-time GPS Tracking</span>
+                      <span className="text-xs font-medium">Real-time GPS Tracking</span>
                     </div>
                     <div className="flex items-center gap-3 p-3 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20">
                       <Sparkles className="w-5 h-5 text-white" />
-                      <span className="text-sm font-medium">Instant Parent Notifications</span>
+                      <span className="text-xs font-medium">Instant Parent Notifications</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Creator Credit */}
                 <div className="mt-6 pt-6 border-t border-white/30">
-                  <div className="text-center space-y-2">
-                    <p className="text-sm text-white/70 font-medium">Website ideated and developed by</p>
-                    <p className="text-lg font-bold text-white drop-shadow">Siddharth Jain</p>
-                    <p className="text-sm text-white/60 font-mono">(2022AAPS0253P)</p>
+                  <div className="text-center space-y-1">
+                    <p className="text-xs text-white/70 font-medium">Website ideated and developed by</p>
+                    <p className="text-base font-bold text-white drop-shadow">Siddharth Jain</p>
+                    <p className="text-xs text-white/60 font-mono">(2022AAPS0253P)</p>
                   </div>
                 </div>
               </div>
@@ -179,10 +180,10 @@ export default function Login({ onLogin }) {
               }`}>
                 <Bus className={`w-10 h-10 transition-all duration-300 ${busIconTransitioning ? 'text-white scale-110' : 'text-indigo-600'}`} />
               </div>
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-700 via-indigo-600 to-blue-600 bg-clip-text text-transparent mb-2">
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-gray-700 via-indigo-600 to-blue-600 bg-clip-text text-transparent mb-1">
                 Welcome Back
               </h1>
-              <p className="text-gray-600 text-base font-medium">Sign in to continue</p>
+              <p className="text-gray-600 text-sm font-medium">Sign in to continue</p>
             </div>
 
             {!requiresVerification ? (
@@ -239,7 +240,7 @@ export default function Login({ onLogin }) {
             ) : (
               <form onSubmit={handleVerifyCode} className="space-y-5">
                 <div className="text-center mb-4">
-                  <p className="text-sm text-gray-600">
+                  <p className="text-xs text-gray-600">
                     We've sent a 6-digit verification code to <strong>{email}</strong>
                   </p>
                 </div>
@@ -283,7 +284,7 @@ export default function Login({ onLogin }) {
                     setRequiresVerification(false);
                     setVerificationCode('');
                   }}
-                  className="w-full text-sm text-gray-600 hover:text-indigo-600 transition-colors"
+                  className="w-full text-xs text-gray-600 hover:text-indigo-600 transition-colors"
                 >
                   ← Back to login
                 </button>
@@ -291,11 +292,11 @@ export default function Login({ onLogin }) {
             )}
 
             <div className="mt-8 p-5 bg-gradient-to-br from-blue-50/80 to-indigo-50/80 backdrop-blur-sm rounded-xl border border-blue-200/50 shadow-sm">
-              <p className="text-sm font-semibold text-blue-900 mb-3 flex items-center gap-2">
+              <p className="text-xs font-semibold text-blue-900 mb-3 flex items-center gap-2">
                 <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
                 Demo Credentials:
               </p>
-              <div className="text-sm text-gray-700 space-y-2">
+              <div className="text-xs text-gray-700 space-y-2">
                 <p 
                   onClick={() => {
                     setEmail('parent@school.com');

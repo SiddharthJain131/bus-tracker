@@ -68,7 +68,7 @@ export default function EditBusModal({ bus, open, onClose, onSuccess }) {
       };
 
       await axios.put(`${API}/buses/${bus.bus_number}`, payload);
-      toast.success(`Bus ${formData.bus_number} updated successfully!`);
+      // REMOVED: Success toast - modal close is sufficient feedback
       onSuccess();
       onClose();
     } catch (error) {

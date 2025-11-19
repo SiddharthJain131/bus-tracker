@@ -196,7 +196,7 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
         toast.warning(response.data.capacity_warning, { duration: 6000 });
       }
       
-      toast.success('Student updated successfully! Email notification sent to parent.');
+      // REMOVED: Success toast - modal close is sufficient feedback
       onSuccess();
       onClose();
     } catch (error) {
