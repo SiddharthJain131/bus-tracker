@@ -60,7 +60,7 @@ const NotificationBell = ({ role = 'parent' }) => {
     if (e) e.stopPropagation();
     try {
       const res = await fetch(`${API}/mark_notification_read/${notificationId}`, {
-        method: 'POST',
+        method: 'PUT',
         credentials: 'include'
       });
       if (res.ok) {
@@ -69,6 +69,8 @@ const NotificationBell = ({ role = 'parent' }) => {
         );
         toast.success('Notification marked as read');
         setOpenMenuId(null);
+      } else {
+        toast.error('Failed to mark as read');
       }
     } catch (error) {
       console.error('Failed to mark notification as read:', error);
