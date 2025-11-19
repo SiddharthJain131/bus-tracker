@@ -1,52 +1,61 @@
 #!/bin/bash
-# === School Bus Tracker Git Setup Script (Updated with Hard Reset Fallback) ===
+# === Append ALL Emergent changes as ONE commit ON TOP OF MAIN ===
 
 USERNAME="Siddharth Jain"
 USEREMAIL="your_email@example.com"
 GITHUB_REPO="https://github.com/SiddharthJain131/bus-tracker.git"
+BRANCH="main"
 
-echo "🚀 Starting Git setup for Bus Tracker..."
+echo "🚀 Applying Emergent changes onto main as ONE clean commit..."
 cd /app || exit 1
 
-# Ensure HOME exists
-[ -z "$HOME" ] && export HOME=~
+# Ensure HOME exists (Emergent containers usually need this)
+if [ -z "$HOME" ]; then
+  export HOME="/home/app"
+  mkdir -p "$HOME"
+  echo "🏠 HOME was missing — set to $HOME"
+fi
 
-# Configure Git identity
+# Configure identity
 git config --global user.name "$USERNAME"
 git config --global user.email "$USEREMAIL"
-git config --global init.defaultBranch main
+git config --global init.defaultBranch "$BRANCH"
 
 # Initialize repo if missing
 if [ ! -d ".git" ]; then
+  echo "📁 No .git directory found — initializing fresh repo..."
   git init
-  echo "✅ Initialized new git repository."
 else
-  echo "ℹ️ Git repository already exists."
+  echo "ℹ️ Existing .git detected."
 fi
 
-# Set remote
+# Set remote to GitHub
 git remote remove origin 2>/dev/null
 git remote add origin "$GITHUB_REPO"
+echo "🔗 Remote set to $GITHUB_REPO"
 
-# Pull & fallback to hard reset if needed
-echo "📥 Pulling latest changes from GitHub..."
-if ! git pull origin main --allow-unrelated-histories --no-rebase; then
-  echo "⚠️ Pull failed — performing HARD RESET to remote main..."
-  git fetch origin main
-  # git reset --hard origin/main || echo "⚠️ Remote main branch not available yet."
-else
-  echo "✅ Pull successful."
-fi
+# Fetch real main from GitHub
+echo "📥 Fetching origin/main..."
+git fetch origin main
 
-# Stage & commit
-echo "📦 Adding all files..."
-git add .
-git commit -m "Sync local project with remote - $(date +'%Y-%m-%d %H:%M')" || echo "ℹ️ No new changes to commit."
+# Reset working branch to remote main
+echo "🌿 Switching to main..."
+git checkout -B "$BRANCH" origin/main
 
-# Push
-echo "🚀 Pushing to GitHub..."
-git push origin main
+# Stage all Emergent modifications
+echo "📦 Staging Emergent changes..."
+git add -A
+
+# Create ONE appended commit
+echo "📝 Creating single consolidated commit..."
+git commit -m "Emergent changes (single consolidated commit) - $(date +'%Y-%m-%d %H:%M')" \
+  || echo "ℹ️ No changes to commit."
+
+# Push normally (DO NOT FORCE)
+echo "🚀 Pushing commit to GitHub main (no force push)..."
+git push origin "$BRANCH"
 
 echo ""
-echo "✅ All done!"
-echo "Repo synced at: $GITHUB_REPO"
+echo "✅ DONE!"
+echo "Main history preserved — Emergent changes added as ONE new commit."
+echo "➡  $GITHUB_REPO"
