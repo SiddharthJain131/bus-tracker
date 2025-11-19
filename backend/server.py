@@ -1521,11 +1521,55 @@ async def get_student(student_id: str, current_user: dict = Depends(get_current_
     
     return student
 
+@api_router.put("/students/{student_id}/register-rfid")
+async def register_student_rfid(student_id: str, tag_id: str, current_user: dict = Depends(get_current_user)):
+    """
+    Assign or update an RFID tag for a student.
+    Ensures RFID uniqueness and updates MongoDB.
+    Admin + Teacher allowed.
+    """
+    if current_user['role'] not in ['admin']:
+        raise HTTPException(status_code=403, detail="Access denied")
+
+    # Check if student exists
+    student = await db.students.find_one({"student_id": student_id}, {"_id": 0})
+    if not student:
+        raise HTTPException(status_code=404, detail="Student not found")
+
+    # Ensure tag_id uniqueness
+    existing = await db.students.find_one({"tag_id": tag_id, "student_id": {"$ne": student_id}})
+    if existing:
+        raise HTTPException(status_code=400, detail="RFID already assigned to another student")
+
+    # Update tag
+    await db.students.update_one(
+        {"student_id": student_id},
+        {"$set": {"tag_id": tag_id}}
+    )
+
+    return {
+        "status": "success",
+        "student_id": student_id,
+        "tag_id": tag_id,
+        "message": "RFID registered successfully"
+    }
+
 @api_router.post("/students")
 async def create_student(student: Student, current_user: dict = Depends(get_current_user)):
     if current_user['role'] != 'admin':
         raise HTTPException(status_code=403, detail="Access denied")
-    
+
+    # ---------------------------
+    #  NEW: Validate RFID unique
+    # ---------------------------
+    if student.tag_id:
+        existing_tag = await db.students.find_one({"tag_id": student.tag_id}, {"_id": 0})
+        if existing_tag:
+            raise HTTPException(
+                status_code=400, 
+                detail=f"RFID tag {student.tag_id} is already assigned to another student"
+            )
+
     # Validate roll_number uniqueness per class+section
     if student.roll_number and student.class_name and student.section:
         existing = await db.students.find_one({
@@ -1534,8 +1578,11 @@ async def create_student(student: Student, current_user: dict = Depends(get_curr
             "section": student.section
         })
         if existing:
-            raise HTTPException(status_code=400, detail=f"Roll number {student.roll_number} already exists in {student.class_name} - {student.section}")
-    
+            raise HTTPException(
+                status_code=400, 
+                detail=f"Roll number {student.roll_number} already exists in {student.class_name} - {student.section}"
+            )
+
     # Check bus capacity before creating student
     capacity_warning = None
     if student.bus_number:
@@ -1546,30 +1593,32 @@ async def create_student(student: Student, current_user: dict = Depends(get_curr
             new_count = current_count + 1
             
             if new_count > bus_capacity:
-                capacity_warning = f"Warning: Bus {bus['bus_number']} capacity ({bus_capacity}) will be exceeded. Current: {current_count}, After: {new_count}"
-                print(f"⚠️ CAPACITY WARNING: {capacity_warning}")
-    
+                capacity_warning = (
+                    f"Warning: Bus {bus['bus_number']} capacity ({bus_capacity}) "
+                    f"will be exceeded. Current: {current_count}, After: {new_count}"
+                )
+
+    # Insert student with tag_id
     await db.students.insert_one(student.model_dump())
-    
-    # Update parent's student_ids array (supports multiple students per parent)
+
+    # Update parent linkage
     if student.parent_id:
         await db.users.update_one(
             {"user_id": student.parent_id},
             {"$addToSet": {"student_ids": student.student_id}}
         )
-    
-    # Update teacher's student_ids array if teacher is assigned
+
+    # Update teacher linkage
     if student.teacher_id:
         await db.users.update_one(
             {"user_id": student.teacher_id},
             {"$addToSet": {"student_ids": student.student_id}}
         )
-    
-    # Return student with capacity warning if applicable
+
     response = student.model_dump()
     if capacity_warning:
-        response['capacity_warning'] = capacity_warning
-    
+        response["capacity_warning"] = capacity_warning
+
     return response
 
 @api_router.put("/students/{student_id}")
