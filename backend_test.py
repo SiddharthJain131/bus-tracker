@@ -45,22 +45,22 @@ class TestSession:
         print(f"🚪 Logged out")
         return response.status_code == 200
 
-def test_delete_notification_endpoint():
-    """Test FEATURE A: Delete Notification Endpoint"""
+def test_mark_notification_read_endpoint():
+    """Test Fix A: Notification Mark as Read - 404 Error Fix"""
     print("\n" + "="*60)
-    print("🧪 TESTING FEATURE A: Delete Notification Endpoint")
+    print("🧪 TESTING FIX A: Notification Mark as Read - 404 Error Fix")
     print("="*60)
     
-    # Test with parent user
+    # Test with parent user first
     parent_session = TestSession()
     parent_user = parent_session.login("parent@school.com", "password")
     
     if not parent_user:
-        print("❌ Failed to login as parent - cannot test delete notification")
+        print("❌ Failed to login as parent - cannot test mark notification as read")
         return False
     
-    # Step 1: Get existing notifications
-    print("\n📋 Step 1: Getting existing notifications...")
+    # Step 1: Get list of notifications
+    print("\n📋 Step 1: Getting list of notifications...")
     response = parent_session.session.get(f"{API_BASE}/get_notifications")
     
     if response.status_code != 200:
@@ -70,90 +70,94 @@ def test_delete_notification_endpoint():
     notifications = response.json()
     print(f"✅ Found {len(notifications)} notifications")
     
-    # Step 2: Create a notification if none exist (via scan event with verified=false)
-    notification_id = None
-    if len(notifications) == 0:
-        print("\n🔄 Step 2: Creating notification via identity mismatch...")
-        
-        # First get a student ID from parent's children
-        students_response = parent_session.session.get(f"{API_BASE}/students")
-        if students_response.status_code == 200:
-            students = students_response.json()
-            if students:
-                student_id = students[0]['student_id']
-                
-                # Create scan event with verified=false to generate notification
-                scan_data = {
-                    "student_id": student_id,
-                    "tag_id": "TEST_TAG_123",
-                    "verified": False,
-                    "confidence": 0.3,
-                    "lat": 12.9716,
-                    "lon": 77.5946,
-                    "present": True
-                }
-                
-                # Note: This requires device API key, so we'll skip creating and use existing
-                print("⚠️ Cannot create scan event without device API key - checking for existing notifications")
-        
-        # Get notifications again
-        response = parent_session.session.get(f"{API_BASE}/get_notifications")
-        if response.status_code == 200:
-            notifications = response.json()
+    # Find an unread notification
+    unread_notification = None
+    for notif in notifications:
+        if not notif.get('read', True):  # Find unread notification
+            unread_notification = notif
+            break
     
-    if notifications:
-        notification_id = notifications[0]['notification_id']
-        print(f"✅ Using notification ID: {notification_id}")
+    if unread_notification:
+        notification_id = unread_notification['notification_id']
+        print(f"✅ Found unread notification ID: {notification_id}")
+        print(f"   Title: {unread_notification.get('title', 'N/A')}")
+        print(f"   Read status: {unread_notification.get('read', 'N/A')}")
     else:
-        print("⚠️ No notifications available for testing - creating mock scenario")
-        # We'll test with a fake ID to verify 404 behavior
-        notification_id = "fake-notification-id-12345"
+        print("⚠️ No unread notifications found - will test with first available notification")
+        if notifications:
+            notification_id = notifications[0]['notification_id']
+            print(f"✅ Using notification ID: {notification_id}")
+        else:
+            print("⚠️ No notifications available - will test with fake ID for 404 behavior")
+            notification_id = "fake-notification-id-12345"
     
-    # Step 3: Test DELETE with valid notification_id
-    print(f"\n🗑️ Step 3: Testing DELETE /api/notifications/{notification_id}")
-    delete_response = parent_session.session.delete(f"{API_BASE}/notifications/{notification_id}")
+    # Step 2: Test PUT /api/mark_notification_read/{notification_id}
+    print(f"\n✅ Step 2: Testing PUT /api/mark_notification_read/{notification_id}")
+    mark_read_response = parent_session.session.put(f"{API_BASE}/mark_notification_read/{notification_id}")
     
-    if delete_response.status_code == 200:
-        result = delete_response.json()
-        print(f"✅ Notification deleted successfully: {result}")
-    elif delete_response.status_code == 404:
-        print(f"✅ Expected 404 for non-existent notification: {delete_response.json()}")
+    if mark_read_response.status_code == 200:
+        result = mark_read_response.json()
+        print(f"✅ Notification marked as read successfully: {result}")
+        
+        if result.get('status') == 'success':
+            print("✅ Response contains expected 'status': 'success'")
+        else:
+            print(f"⚠️ Unexpected response format: {result}")
+            
+    elif mark_read_response.status_code == 404:
+        print(f"✅ Expected 404 for non-existent notification: {mark_read_response.json()}")
     else:
-        print(f"❌ Unexpected response: {delete_response.status_code} - {delete_response.text}")
+        print(f"❌ Unexpected response: {mark_read_response.status_code} - {mark_read_response.text}")
     
-    # Step 4: Test DELETE with invalid notification_id
-    print(f"\n🗑️ Step 4: Testing DELETE with invalid notification ID...")
-    invalid_response = parent_session.session.delete(f"{API_BASE}/notifications/invalid-notification-12345")
+    # Step 3: Verify notification is now marked as read (if we had a real notification)
+    if notifications and notification_id != "fake-notification-id-12345":
+        print(f"\n🔍 Step 3: Verifying notification is marked as read...")
+        verify_response = parent_session.session.get(f"{API_BASE}/get_notifications")
+        
+        if verify_response.status_code == 200:
+            updated_notifications = verify_response.json()
+            updated_notif = next((n for n in updated_notifications if n['notification_id'] == notification_id), None)
+            
+            if updated_notif:
+                if updated_notif.get('read', False):
+                    print("✅ Notification successfully marked as read")
+                else:
+                    print("❌ Notification was not marked as read")
+            else:
+                print("⚠️ Notification not found in updated list")
+        else:
+            print(f"❌ Failed to verify notification status: {verify_response.status_code}")
+    
+    # Step 4: Test with invalid notification ID (should return 404)
+    print(f"\n🚫 Step 4: Testing with invalid notification ID...")
+    invalid_response = parent_session.session.put(f"{API_BASE}/mark_notification_read/invalid-notification-12345")
     
     if invalid_response.status_code == 404:
         print(f"✅ Correctly returned 404 for invalid notification: {invalid_response.json()}")
     else:
         print(f"❌ Expected 404 but got: {invalid_response.status_code} - {invalid_response.text}")
     
-    # Step 5: Test cross-user deletion (login as different user)
-    print(f"\n🔒 Step 5: Testing cross-user deletion protection...")
+    # Step 5: Test cross-user access (admin trying to mark parent's notification)
+    print(f"\n🔒 Step 5: Testing cross-user access protection...")
     
-    # Login as admin
     admin_session = TestSession()
     admin_user = admin_session.login("admin@school.com", "password")
     
-    if admin_user:
-        # Try to delete parent's notification (if we had a real one)
-        if notifications and len(notifications) > 0:
-            cross_delete_response = admin_session.session.delete(f"{API_BASE}/notifications/{notifications[0]['notification_id']}")
-            
-            if cross_delete_response.status_code == 404:
-                print(f"✅ Cross-user deletion correctly blocked: {cross_delete_response.json()}")
-            else:
-                print(f"⚠️ Cross-user deletion response: {cross_delete_response.status_code} - {cross_delete_response.text}")
+    if admin_user and notifications:
+        # Try to mark parent's notification as read using admin account
+        parent_notification_id = notifications[0]['notification_id']
+        cross_access_response = admin_session.session.put(f"{API_BASE}/mark_notification_read/{parent_notification_id}")
+        
+        if cross_access_response.status_code == 404:
+            print(f"✅ Cross-user access correctly blocked (404): {cross_access_response.json()}")
         else:
-            print("⚠️ No notifications to test cross-user deletion")
+            print(f"⚠️ Cross-user access response: {cross_access_response.status_code} - {cross_access_response.text}")
         
         admin_session.logout()
     
     parent_session.logout()
     
-    print("\n✅ Delete Notification Endpoint testing completed")
+    print("\n✅ Mark Notification Read endpoint testing completed")
     return True
 
 def test_new_user_welcome_email():
