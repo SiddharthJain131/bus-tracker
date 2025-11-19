@@ -30,6 +30,7 @@ from email.mime.multipart import MIMEMultipart
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
+load_dotenv(ROOT_DIR / '.env.local', override=True)
 
 # MongoDB connection
 mongo_url = os.environ['MONGO_URL']

@@ -66,7 +66,7 @@ agenthub/agents/youtube/db
 # Archive files and large assets
 **/*.zip
 **/*.tar.gz
-**/*.tar
+**/*.tar 
 **/*.tgz
 *.pack
 *.deb
@@ -77,5 +77,6 @@ agenthub/agents/youtube/db
 
 # Mobile development
 android-sdk/ 
-
+# exclude local env files inside any folder
+*.env.local
 sup.sh
