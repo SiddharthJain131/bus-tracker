@@ -1352,12 +1352,17 @@ async def get_notifications(current_user: dict = Depends(get_current_user)):
     
     return notifications
 
-@api_router.post("/mark_notification_read")
+@api_router.put("/mark_notification_read/{notification_id}")
 async def mark_notification_read(notification_id: str, current_user: dict = Depends(get_current_user)):
-    await db.notifications.update_one(
+    """Mark a notification as read. Users can only mark their own notifications."""
+    result = await db.notifications.update_one(
         {"notification_id": notification_id, "user_id": current_user['user_id']},
         {"$set": {"read": True}}
     )
+    
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Notification not found or access denied")
+    
     return {"status": "success"}
 
 @api_router.delete("/notifications/{notification_id}")
