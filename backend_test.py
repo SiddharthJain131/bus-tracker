@@ -160,6 +160,115 @@ def test_mark_notification_read_endpoint():
     print("\n✅ Mark Notification Read endpoint testing completed")
     return True
 
+def test_teacher_mark_notification_read():
+    """Test Fix A with teacher user - PRIORITY FIX"""
+    print("\n" + "="*60)
+    print("🧪 TESTING FIX A: Teacher User - Mark Notification Read")
+    print("="*60)
+    
+    # Test with teacher user
+    teacher_session = TestSession()
+    teacher_user = teacher_session.login("teacher@school.com", "password")
+    
+    if not teacher_user:
+        print("❌ Failed to login as teacher - cannot test mark notification as read")
+        return False
+    
+    # Step 1: Get teacher's notifications
+    print("\n📋 Step 1: Getting teacher notifications...")
+    response = teacher_session.session.get(f"{API_BASE}/get_notifications")
+    
+    if response.status_code != 200:
+        print(f"❌ Failed to get teacher notifications: {response.status_code}")
+        return False
+    
+    notifications = response.json()
+    print(f"✅ Found {len(notifications)} teacher notifications")
+    
+    # Find an unread notification or use first available
+    notification_id = None
+    if notifications:
+        unread_notification = next((n for n in notifications if not n.get('read', True)), None)
+        if unread_notification:
+            notification_id = unread_notification['notification_id']
+            print(f"✅ Found unread teacher notification ID: {notification_id}")
+            print(f"   Title: {unread_notification.get('title', 'N/A')}")
+            print(f"   Read status: {unread_notification.get('read', 'N/A')}")
+        else:
+            notification_id = notifications[0]['notification_id']
+            print(f"✅ Using first teacher notification ID: {notification_id}")
+    else:
+        print("⚠️ No teacher notifications found - testing with fake ID")
+        notification_id = "fake-teacher-notification-12345"
+    
+    # Step 2: Test PUT /api/mark_notification_read/{notification_id} with teacher
+    print(f"\n✅ Step 2: Testing teacher mark notification read...")
+    mark_read_response = teacher_session.session.put(f"{API_BASE}/mark_notification_read/{notification_id}")
+    
+    if mark_read_response.status_code == 200:
+        result = mark_read_response.json()
+        print(f"✅ Teacher notification marked as read successfully: {result}")
+        
+        if result.get('status') == 'success':
+            print("✅ Response contains expected 'status': 'success'")
+        else:
+            print(f"⚠️ Unexpected response format: {result}")
+            
+    elif mark_read_response.status_code == 404:
+        print(f"✅ Expected 404 for non-existent teacher notification: {mark_read_response.json()}")
+    else:
+        print(f"❌ Unexpected response: {mark_read_response.status_code} - {mark_read_response.text}")
+    
+    # Step 3: Verify teacher notification is marked as read
+    if notifications and notification_id != "fake-teacher-notification-12345":
+        print(f"\n🔍 Step 3: Verifying teacher notification is marked as read...")
+        verify_response = teacher_session.session.get(f"{API_BASE}/get_notifications")
+        
+        if verify_response.status_code == 200:
+            updated_notifications = verify_response.json()
+            updated_notif = next((n for n in updated_notifications if n['notification_id'] == notification_id), None)
+            
+            if updated_notif:
+                if updated_notif.get('read', False):
+                    print("✅ Teacher notification successfully marked as read")
+                else:
+                    print("❌ Teacher notification was not marked as read")
+            else:
+                print("⚠️ Teacher notification not found in updated list")
+        else:
+            print(f"❌ Failed to verify teacher notification status: {verify_response.status_code}")
+    
+    # Step 4: Test cross-user access (teacher trying to mark parent's notification)
+    print(f"\n🔒 Step 4: Testing teacher cross-user access protection...")
+    
+    # Login as parent to get a parent notification
+    parent_session = TestSession()
+    parent_user = parent_session.login("parent@school.com", "password")
+    
+    if parent_user:
+        parent_notifications_response = parent_session.session.get(f"{API_BASE}/get_notifications")
+        if parent_notifications_response.status_code == 200:
+            parent_notifications = parent_notifications_response.json()
+            if parent_notifications:
+                parent_notification_id = parent_notifications[0]['notification_id']
+                
+                # Try to mark parent's notification as read using teacher account
+                cross_access_response = teacher_session.session.put(f"{API_BASE}/mark_notification_read/{parent_notification_id}")
+                
+                if cross_access_response.status_code == 404:
+                    print(f"✅ Teacher cross-user access correctly blocked (404): {cross_access_response.json()}")
+                else:
+                    print(f"⚠️ Teacher cross-user access response: {cross_access_response.status_code} - {cross_access_response.text}")
+            else:
+                print("⚠️ No parent notifications to test cross-user access")
+        
+        parent_session.logout()
+    
+    teacher_session.logout()
+    
+    print("\n✅ Teacher Mark Notification Read testing completed")
+    return True
+
 def test_admin_mark_notification_read():
     """Test Fix A with admin user as well"""
     print("\n" + "="*60)
