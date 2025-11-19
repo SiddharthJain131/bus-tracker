@@ -148,31 +148,45 @@ export default function ParentDashboard({ user, onLogout }) {
         {/* User Profile */}
         <UserProfileHeader user={user} role="parent" />
 
-        {/* Student Cards - Multiple Children */}
-        {students.length > 1 ? (
-          <div>
-            <h2 className="text-xl font-semibold mb-5 text-gray-900">My Children</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-6">
-              {students.map((student) => (
-                <div
-                  key={student.student_id}
-                  onClick={() => setSelectedStudent(student)}
-                  className={`cursor-pointer transition-all ${selectedStudent?.student_id === student.student_id ? 'ring-2 ring-parent-primary rounded-xl' : ''}`}
-                >
-                  <StudentCard student={student} compact={true} />
-                </div>
-              ))}
-            </div>
-          </div>
-        ) : null}
-
+        {/* Unified Student Information Container */}
         {selectedStudent && selectedStudentDetails && (
-          <div className="space-y-6">
-            {/* Student Details */}
-            <StudentCard student={selectedStudentDetails} />
+          <Card className="p-6 dashboard-card-enhanced parent-accent-border">
+            {/* Section 1: Student List (for multiple children) */}
+            {students.length > 1 && (
+              <div className="mb-6 pb-6 border-b-2 border-gray-100">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-1 h-6 bg-gradient-to-b from-parent-primary to-parent-secondary rounded-full"></div>
+                  <h2 className="text-xl font-semibold text-gray-900">My Children</h2>
+                  <span className="ml-2 text-sm text-gray-500">({students.length} students)</span>
+                </div>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {students.map((student) => (
+                    <div
+                      key={student.student_id}
+                      onClick={() => setSelectedStudent(student)}
+                      className={`cursor-pointer transition-all ${selectedStudent?.student_id === student.student_id ? 'ring-2 ring-parent-primary rounded-xl' : ''}`}
+                    >
+                      <StudentCard student={student} compact={true} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
+            {/* Section 2: Selected Student Details */}
             <div className="space-y-6">
-                {/* Live Bus Map */}
+              <div>
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-1 h-6 bg-gradient-to-b from-parent-primary to-parent-secondary rounded-full"></div>
+                  <h2 className="text-xl font-semibold text-gray-900">
+                    {students.length > 1 ? 'Selected Student Details' : 'Student Details'}
+                  </h2>
+                </div>
+                <StudentCard student={selectedStudentDetails} />
+              </div>
+
+              {/* Live Bus Map */}
+              <div>
                 <Card className="p-6 dashboard-card-enhanced parent-accent-border hover-lift">
                   <div className="flex items-center gap-3 mb-5 pb-4 border-b border-gray-100">
                     <div className="w-12 h-12 bg-gradient-to-br from-parent-primary to-parent-secondary rounded-xl flex items-center justify-center shadow-sm">
@@ -214,8 +228,10 @@ export default function ParentDashboard({ user, onLogout }) {
                     )}
                   </div>
                 </Card>
+              </div>
 
-                {/* Attendance Grid */}
+              {/* Attendance Grid */}
+              <div>
                 <Card className="p-6 dashboard-card-enhanced parent-accent-border hover-lift">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-5 pb-4 border-b border-gray-100">
                     <div className="flex items-center gap-3">
@@ -250,8 +266,9 @@ export default function ParentDashboard({ user, onLogout }) {
                   </div>
                   <AttendanceGrid studentId={selectedStudent.student_id} />
                 </Card>
+              </div>
             </div>
-          </div>
+          </Card>
         )}
       </div>
     </div>
