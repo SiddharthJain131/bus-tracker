@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 """
 Backend Testing Script for School Bus Tracker System
-Testing newly implemented features:
-1. Delete Notification Endpoint
-2. New User Welcome Email
-3. Demo Credential Autofill (Frontend - noted only)
+Testing Fix A: Notification Mark as Read - 404 Error Fix
+Focus: PUT /api/mark_notification_read/{notification_id} endpoint
 """
 
 import requests
@@ -13,8 +11,8 @@ import sys
 import os
 from datetime import datetime
 
-# Get backend URL - use local backend for testing
-BACKEND_URL = "http://localhost:8001"
+# Get backend URL from environment
+BACKEND_URL = "http://172.17.73.220:8001"
 API_BASE = f"{BACKEND_URL}/api"
 
 class TestSession:
