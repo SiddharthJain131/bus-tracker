@@ -352,6 +352,37 @@
     .logout-button-parent:hover {
         @apply border-parent-primary text-parent-primary bg-parent-light;
     }
+    
+    /* Enhanced Admin Tabs Styling */
+    .admin-tabs {
+        @apply bg-gradient-to-r from-indigo-50/80 via-blue-50/80 to-indigo-50/80;
+        @apply border border-indigo-100;
+        @apply rounded-lg;
+        padding: 4px;
+    }
+    
+    .admin-tabs [role="tab"] {
+        @apply bg-white/60;
+        @apply text-gray-600;
+        @apply border border-gray-200/50;
+        @apply rounded-md;
+        @apply font-medium;
+        @apply transition-all duration-200;
+        @apply hover:bg-white/80 hover:text-gray-900;
+    }
+    
+    .admin-tabs [role="tab"][data-state="active"] {
+        @apply bg-gradient-to-r from-admin-primary to-indigo-600;
+        @apply text-white;
+        @apply border-transparent;
+        @apply shadow-md;
+        @apply font-semibold;
+        transform: translateY(-1px);
+    }
+    
+    .admin-tabs [role="tab"][data-state="active"]:hover {
+        @apply from-admin-hover to-indigo-700;
+    }
 }
 
 @layer base {
