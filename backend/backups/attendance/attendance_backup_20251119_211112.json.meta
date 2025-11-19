@@ -1,0 +1,18 @@
+{
+  "backup_id": "attendance_backup_20251119_211112",
+  "backup_type": "attendance",
+  "filename": "attendance_backup_20251119_211112.json",
+  "timestamp": "2025-11-19T21:11:12.985140",
+  "checksum": "76668d24ad74b0035f15f7c4357bb5d90d2ca95bb29f9fc8d39ceba48aa1ac42",
+  "checksum_algorithm": "SHA256",
+  "file_size_bytes": 199533,
+  "file_size_mb": 0.19,
+  "collections": {
+    "attendance": 279,
+    "events": 0,
+    "photo_references": 201
+  },
+  "mongo_url": "mongodb://172.17.73.220:27017",
+  "db_name": "bus_tracker",
+  "version": "2.0"
+}
