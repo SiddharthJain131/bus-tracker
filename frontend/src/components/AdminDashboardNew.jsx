@@ -524,9 +524,9 @@ export default function AdminDashboardNew({ user, onLogout }) {
                   <div className="w-10 h-10 bg-admin-light rounded-lg flex items-center justify-center">
                     <Calendar className="w-5 h-5 text-admin-primary" />
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900">
+                  <h2 className="text-2xl font-semibold text-gray-900">
                     Upcoming Holidays
-                  </h3>
+                  </h2>
                 </div>
                 <Button
                   onClick={() => setShowHolidaysManagement(true)}
@@ -608,7 +608,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
                               </div>
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2">
-                                  <h3 className={`font-semibold ${holiday.isPast ? 'text-gray-600' : 'text-gray-900'}`}>
+                                  <h3 className={`text-2xl font-semibold ${holiday.isPast ? 'text-gray-600' : 'text-gray-900'}`}>
                                     {holiday.name}
                                   </h3>
                                   {holiday.isPast && (
@@ -639,9 +639,9 @@ export default function AdminDashboardNew({ user, onLogout }) {
                   <div className="w-10 h-10 bg-admin-light rounded-lg flex items-center justify-center">
                     <Bell className="w-5 h-5 text-admin-primary" />
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900">
+                  <h2 className="text-2xl font-semibold text-gray-900">
                     Notifications
-                  </h3>
+                  </h2>
                 </div>
               </div>
               <div className="space-y-3">
@@ -676,9 +676,9 @@ export default function AdminDashboardNew({ user, onLogout }) {
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center justify-between gap-2">
-                            <h3 className="font-semibold text-gray-900 truncate">
+                            <h5 className="font-semibold text-gray-900 truncate">
                               {notification.title}
-                            </h3>
+                            </h5>
                             {notification.timestamp && (
                               <span className="text-xs text-gray-500 whitespace-nowrap">
                                 {formatTimestamp(notification.timestamp)}
