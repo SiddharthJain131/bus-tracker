@@ -17,77 +17,65 @@ export default function BusMap({ location, route, showRoute }) {
   const routeLayersRef = useRef([]);
 
   const createBusIcon = (busState = 'active') => {
-    // Determine icon colors and badge based on bus state
-    const stateConfig = {
-      active: {
-        gradient: '#10b981 0%, #059669 100%',  // Green gradient for active
-        badge: null
-      },
-      stale: {
-        gradient: '#f59e0b 0%, #d97706 100%',  // Orange gradient for stale
-        badge: '!',
-        badgeColor: '#ef4444'
-      },
-      offline: {
-        gradient: '#6b7280 0%, #4b5563 100%',  // Gray gradient for offline
-        badge: '✕',
-        badgeColor: '#ef4444'
-      },
-      unknown: {
-        gradient: '#8b5cf6 0%, #7c3aed 100%',  // Purple gradient for unknown
-        badge: '?',
-        badgeColor: '#eab308'
-      }
-    };
+    // Use clean bus icon for active state, question mark icon for stale/missing/offline/unknown
+    const isActive = busState === 'active';
     
-    const config = stateConfig[busState] || stateConfig.active;
-    
-    return L.divIcon({
-      className: 'custom-bus-marker',
-      html: `
-        <div style="
-          width: 40px;
-          height: 40px;
-          background: linear-gradient(135deg, ${config.gradient});
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-center: center;
-          box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-          border: 3px solid white;
-          position: relative;
-        ">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M8 6v6"/>
-            <path d="M15 6v6"/>
-            <path d="M2 12h19.6"/>
-            <path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3"/>
-            <circle cx="7" cy="18" r="2"/>
-            <circle cx="16" cy="18" r="2"/>
-          </svg>
-          ${config.badge ? `
-            <div style="
-              position: absolute;
-              top: -8px;
-              right: -8px;
-              width: 20px;
-              height: 20px;
-              background: ${config.badgeColor};
-              border-radius: 50%;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              border: 2px solid white;
-              box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            ">
-              <span style="color: white; font-size: 12px; font-weight: bold;">${config.badge}</span>
-            </div>
-          ` : ''}
-        </div>
-      `,
-      iconSize: [40, 40],
-      iconAnchor: [20, 20],
-    });
+    if (isActive) {
+      // Clean bus icon for active state
+      return L.divIcon({
+        className: 'custom-bus-marker',
+        html: `
+          <div style="
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            border: 3px solid white;
+          ">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 6v6"/>
+              <path d="M15 6v6"/>
+              <path d="M2 12h19.6"/>
+              <path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3"/>
+              <circle cx="7" cy="18" r="2"/>
+              <circle cx="16" cy="18" r="2"/>
+            </svg>
+          </div>
+        `,
+        iconSize: [40, 40],
+        iconAnchor: [20, 20],
+      });
+    } else {
+      // Question mark icon for stale/offline/unknown (anything not active)
+      return L.divIcon({
+        className: 'custom-bus-marker',
+        html: `
+          <div style="
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            border: 3px solid white;
+          ">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </div>
+        `,
+        iconSize: [40, 40],
+        iconAnchor: [20, 20],
+      });
+    }
   };
 
   useEffect(() => {
@@ -119,6 +107,27 @@ export default function BusMap({ location, route, showRoute }) {
       const busIcon = createBusIcon(busState);
       markerRef.current.setIcon(busIcon);
       
+      // Helper function to format time ago
+      const formatTimeAgo = (seconds) => {
+        if (seconds === null || seconds === undefined) return '';
+        
+        if (seconds < 60) {
+          return `${Math.round(seconds)}s ago`;
+        } else if (seconds < 3600) {
+          const minutes = Math.floor(seconds / 60);
+          const secs = Math.round(seconds % 60);
+          return `${minutes}m ${secs}s ago`;
+        } else if (seconds < 86400) {
+          const hours = Math.floor(seconds / 3600);
+          const minutes = Math.floor((seconds % 3600) / 60);
+          return `${hours}h ${minutes}m ago`;
+        } else {
+          const days = Math.floor(seconds / 86400);
+          const hours = Math.floor((seconds % 86400) / 3600);
+          return `${days}d ${hours}h ago`;
+        }
+      };
+      
       // Update popup text based on state
       let popupText = '<b>School Bus</b><br>';
       const ageSeconds = location.age_seconds;
@@ -127,15 +136,13 @@ export default function BusMap({ location, route, showRoute }) {
         case 'active':
           popupText += '✅ Active<br><span style="color: #10b981; font-size: 11px;">Updated recently</span>';
           if (ageSeconds !== null && ageSeconds !== undefined) {
-            popupText += `<br><span style="font-size: 10px; color: #6b7280;">${Math.round(ageSeconds)}s ago</span>`;
+            popupText += `<br><span style="font-size: 10px; color: #6b7280;">${formatTimeAgo(ageSeconds)}</span>`;
           }
           break;
         case 'stale':
           popupText += '⚠️ Stale Data<br><span style="color: #f59e0b; font-size: 11px;">Last updated: >60s ago</span>';
           if (ageSeconds !== null && ageSeconds !== undefined) {
-            const minutes = Math.floor(ageSeconds / 60);
-            const seconds = Math.round(ageSeconds % 60);
-            popupText += `<br><span style="font-size: 10px; color: #6b7280;">${minutes}m ${seconds}s ago</span>`;
+            popupText += `<br><span style="font-size: 10px; color: #6b7280;">${formatTimeAgo(ageSeconds)}</span>`;
           }
           break;
         case 'offline':
