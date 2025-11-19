@@ -1122,3 +1122,76 @@ agent_communication:
     message: "🔧 STUDENT-PARENT & STUDENT-BUS RELATIONSHIP FIX IMPLEMENTED - Completed all changes to support Many:1 parent-student relationship and enforce 1:Many bus-student relationship with capacity warnings. BACKEND CHANGES: 1) Created new GET /api/parents/all endpoint that returns ALL parent accounts (sorted by name, password_hash excluded) - supports multiple students per parent. 2) Updated POST /api/students with bus capacity check: counts current students on bus vs bus.capacity, logs warning if exceeded, returns capacity_warning in response but allows creation. 3) Updated PUT /api/students/{student_id} with: bus capacity check when bus is changed (excludes current student from count), parent reassignment logic (removes from old parent's student_ids, adds to new parent's student_ids using $addToSet to support multiple children), returns capacity_warning in response if capacity exceeded. 4) All capacity warnings logged at info level with format: 'Warning: Bus {bus_number} capacity ({capacity}) will be exceeded. Current: {current_count}, After: {new_count}'. FRONTEND CHANGES: 1) AddStudentModal.jsx: Changed to fetch from /api/parents/all instead of /api/parents/unlinked, updated state variable from unlinkedParents to allParents, updated parent dropdown to show all parents with format 'Name (email)', updated radio button label from 'Select Existing Parent (unlinked only)' to 'Select Existing Parent', added capacity warning toast display with 6s duration. 2) EditStudentModalEnhanced.jsx: Already fetches all parents via /api/users (filtered by role=parent), added capacity warning toast display with 6s duration, improved error handling to show backend error messages. VALIDATION & SAFETY: Bus field remains mandatory in both modals, parent dashboard supports multiple children via student_ids array (already implemented), bus deletion blocked if students assigned (already implemented), parent change properly manages student_ids on both old and new parents. Services restarted successfully. Ready for backend testing to verify: 1) Multiple students can link to same parent, 2) Parent dropdown shows ALL parents, 3) Bus capacity warnings trigger correctly, 4) Parent reassignment updates both parent records.
   - agent: "testing"
     message: "✅ COMPREHENSIVE PROFILE PHOTO DISPLAY TESTING COMPLETED - 100% SUCCESS RATE (22/22 tests passed). Executed comprehensive testing of profile photo functionality for all user roles as requested in review. TEST RESULTS: SCENARIO 1 - STATIC FILE SERVING: ✅ Direct photo access via backend (localhost:8001) working correctly with proper image/jpeg content-type for all role folders (admins/, teachers/, parents/). ✅ Non-existent photos correctly return 404 status. SCENARIO 2 - PHOTO URL CONVERSION: ✅ Database path conversion working perfectly (17/17 users tested). ✅ Paths like 'backend/photos/admins/xyz.jpg' correctly converted to '/photos/admins/xyz.jpg' format. SCENARIO 3-7 - USER ROLE TESTING: ✅ ADMIN ROLES: Both admin@school.com (James Anderson) and admin2@school.com (Patricia Williams) - login and /auth/me endpoints return correct photo URLs in /photos/admins/ format, photo files accessible with proper content-type. ✅ TEACHER ROLES: Both teacher@school.com (Mary Johnson) and teacher2@school.com (Robert Smith) - login and /auth/me endpoints return correct photo URLs in /photos/teachers/ format, photo files accessible with proper content-type. ✅ PARENT ROLE: parent@school.com (John Parent) - login and /auth/me endpoints return correct photo URL in /photos/parents/ format, photo file accessible with proper content-type. ✅ URL CONSISTENCY: All users show consistent photo URLs between login and /auth/me endpoints. INFRASTRUCTURE NOTE: External URL routing (via Kubernetes ingress) has configuration issue where /photos/* requests are routed to frontend instead of backend, but backend photo serving functionality is working correctly when accessed directly. This is a deployment configuration issue, not a backend code issue. All backend photo functionality is working as designed and ready for production use."
+# NEW FIXES - November 19, 2025
+user_problem_statement_update: "A. Fix Notification Mark as Read - Backend 404 Error. B. Unify Student List + Student Details into Single Container (Parent Dashboard). C. Improve Admin Tabs Background Contrast."
+
+backend:
+  - task: "Fix notification mark as read endpoint - PUT /api/mark_notification_read/{notification_id}"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "FIXED - Changed endpoint from POST /mark_notification_read (with query param) to PUT /mark_notification_read/{notification_id} (with path param). Added proper 404 error handling when notification not found or user doesn't have access. More RESTful implementation."
+
+frontend:
+  - task: "Fix notification mark as read - Frontend calls"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/NotificationBell.jsx, /app/frontend/src/components/AdminDashboardNew.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "FIXED - Updated NotificationBell.jsx to use PUT method instead of POST. Updated AdminDashboardNew.jsx to use path parameter instead of query parameter. Both now correctly call PUT /api/mark_notification_read/{notification_id}."
+
+  - task: "Unify Student List + Student Details in Parent Dashboard"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/ParentDashboard.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Merged student list and student details into a single unified Card container. Added section headers with visual separators (gradient bar + heading). Student list section (for multiple children) has border separator. Selected student details section clearly labeled. Maintains all existing functionality (map, attendance, student cards). Preserved responsiveness and proper spacing."
+
+  - task: "Improve Admin Tabs Background Contrast"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/index.css"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Added enhanced styling for .admin-tabs class. Tab strip now has gradient background (indigo-50/blue-50 tones) with border and padding. Inactive tabs: white/60 background with gray borders and hover effects. Active tabs: gradient background (admin-primary to indigo-600), white text, shadow, and slight lift effect. Smooth transitions on all state changes. Consistent with admin header gradient theme."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.1"
+  test_sequence: 1
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "Fix notification mark as read endpoint"
+    - "Fix notification mark as read - Frontend calls"
+    - "Unify Student List + Student Details in Parent Dashboard"
+    - "Improve Admin Tabs Background Contrast"
+  stuck_tasks: []
+  test_all: true
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "main"
+    message: "Implemented three fixes: 1) Fixed notification mark as read 404 error by updating backend route to PUT /mark_notification_read/{notification_id} and updating frontend calls in NotificationBell.jsx and AdminDashboardNew.jsx. 2) Unified student list and details in Parent Dashboard into single container with section headers. 3) Enhanced Admin tabs styling with better contrast, gradient backgrounds, and active/inactive state styling. All services running. Ready for testing."
+
