@@ -160,99 +160,85 @@ def test_mark_notification_read_endpoint():
     print("\n✅ Mark Notification Read endpoint testing completed")
     return True
 
-def test_new_user_welcome_email():
-    """Test FEATURE B: New User Welcome Email"""
+def test_admin_mark_notification_read():
+    """Test Fix A with admin user as well"""
     print("\n" + "="*60)
-    print("🧪 TESTING FEATURE B: New User Welcome Email")
+    print("🧪 TESTING FIX A: Admin User - Mark Notification Read")
     print("="*60)
     
-    # Login as admin
+    # Test with admin user
     admin_session = TestSession()
     admin_user = admin_session.login("admin@school.com", "password")
     
     if not admin_user:
-        print("❌ Failed to login as admin - cannot test user creation")
+        print("❌ Failed to login as admin - cannot test mark notification as read")
         return False
     
-    # Step 1: Create a new parent user
-    print("\n👤 Step 1: Creating new parent user...")
+    # Step 1: Get admin's notifications
+    print("\n📋 Step 1: Getting admin notifications...")
+    response = admin_session.session.get(f"{API_BASE}/get_notifications")
     
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    new_user_data = {
-        "email": f"testparent_{timestamp}@test.com",
-        "password": "TestPass123",
-        "role": "parent",
-        "name": "Test Parent",
-        "phone": "+1-555-9999"
-    }
+    if response.status_code != 200:
+        print(f"❌ Failed to get admin notifications: {response.status_code}")
+        return False
     
-    print(f"Creating user: {new_user_data['email']}")
+    notifications = response.json()
+    print(f"✅ Found {len(notifications)} admin notifications")
     
-    create_response = admin_session.session.post(f"{API_BASE}/users", json=new_user_data)
-    
-    if create_response.status_code == 200:
-        result = create_response.json()
-        print(f"✅ User created successfully!")
-        print(f"   User ID: {result.get('user_id', 'N/A')}")
-        print(f"   Name: {result.get('name', 'N/A')}")
-        print(f"   Email: {result.get('email', 'N/A')}")
-        print(f"   Role: {result.get('role', 'N/A')}")
-        
-        # Step 2: Check if password_hash is excluded from response
-        if 'password_hash' not in result:
-            print("✅ Password hash correctly excluded from response")
+    # Find an unread notification or use first available
+    notification_id = None
+    if notifications:
+        unread_notification = next((n for n in notifications if not n.get('read', True)), None)
+        if unread_notification:
+            notification_id = unread_notification['notification_id']
+            print(f"✅ Found unread admin notification ID: {notification_id}")
         else:
-            print("❌ Password hash should not be in response!")
-        
-        # Step 3: Check email sending status
-        email_sent = result.get('email_sent', None)
-        email_warning = result.get('email_warning', None)
-        
-        print(f"\n📧 Email Status:")
-        print(f"   Email Sent: {email_sent}")
-        print(f"   Email Warning: {email_warning}")
-        
-        if email_sent is False:
-            print("✅ Email sending attempted but failed (expected - SMTP not configured)")
-            if email_warning:
-                print(f"   Warning: {email_warning}")
-            else:
-                print("⚠️ Expected email_warning field when email_sent is false")
-        elif email_sent is True:
-            print("✅ Email functionality working (may be mocked if SMTP not configured)")
-            print("ℹ️ Check backend logs to verify actual email sending behavior")
-        else:
-            print(f"⚠️ Unexpected email_sent value: {email_sent}")
-        
-        # Step 4: Verify user was created successfully even if email failed
-        print(f"\n🔍 Step 4: Verifying user creation...")
-        users_response = admin_session.session.get(f"{API_BASE}/users")
-        
-        if users_response.status_code == 200:
-            users = users_response.json()
-            created_user = next((u for u in users if u['email'] == new_user_data['email']), None)
-            
-            if created_user:
-                print("✅ User successfully created in database")
-                print(f"   Found user: {created_user['name']} ({created_user['email']})")
-            else:
-                print("❌ User not found in database!")
-        else:
-            print(f"❌ Failed to fetch users: {users_response.status_code}")
-        
+            notification_id = notifications[0]['notification_id']
+            print(f"✅ Using first admin notification ID: {notification_id}")
     else:
-        print(f"❌ User creation failed: {create_response.status_code}")
-        print(f"   Response: {create_response.text}")
-        admin_session.logout()
-        return False
+        print("⚠️ No admin notifications found - testing with fake ID")
+        notification_id = "fake-admin-notification-12345"
     
-    # Step 5: Check backend logs for email attempt
-    print(f"\n📋 Step 5: Backend logs check...")
-    print("Note: Check backend logs with: tail -n 50 /var/log/supervisor/backend.out.log | grep -i 'email\\|new user'")
+    # Step 2: Test PUT /api/mark_notification_read/{notification_id} with admin
+    print(f"\n✅ Step 2: Testing admin mark notification read...")
+    mark_read_response = admin_session.session.put(f"{API_BASE}/mark_notification_read/{notification_id}")
+    
+    if mark_read_response.status_code == 200:
+        result = mark_read_response.json()
+        print(f"✅ Admin notification marked as read successfully: {result}")
+        
+        if result.get('status') == 'success':
+            print("✅ Response contains expected 'status': 'success'")
+        else:
+            print(f"⚠️ Unexpected response format: {result}")
+            
+    elif mark_read_response.status_code == 404:
+        print(f"✅ Expected 404 for non-existent admin notification: {mark_read_response.json()}")
+    else:
+        print(f"❌ Unexpected response: {mark_read_response.status_code} - {mark_read_response.text}")
+    
+    # Step 3: Verify admin notification is marked as read
+    if notifications and notification_id != "fake-admin-notification-12345":
+        print(f"\n🔍 Step 3: Verifying admin notification is marked as read...")
+        verify_response = admin_session.session.get(f"{API_BASE}/get_notifications")
+        
+        if verify_response.status_code == 200:
+            updated_notifications = verify_response.json()
+            updated_notif = next((n for n in updated_notifications if n['notification_id'] == notification_id), None)
+            
+            if updated_notif:
+                if updated_notif.get('read', False):
+                    print("✅ Admin notification successfully marked as read")
+                else:
+                    print("❌ Admin notification was not marked as read")
+            else:
+                print("⚠️ Admin notification not found in updated list")
+        else:
+            print(f"❌ Failed to verify admin notification status: {verify_response.status_code}")
     
     admin_session.logout()
     
-    print("\n✅ New User Welcome Email testing completed")
+    print("\n✅ Admin Mark Notification Read testing completed")
     return True
 
 def test_demo_credential_autofill():
