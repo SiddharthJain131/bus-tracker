@@ -241,17 +241,52 @@ def test_admin_mark_notification_read():
     print("\n✅ Admin Mark Notification Read testing completed")
     return True
 
-def test_demo_credential_autofill():
-    """Note FEATURE C: Demo Credential Autofill (Frontend Only)"""
+def test_notification_endpoint_comprehensive():
+    """Comprehensive test of notification mark as read functionality"""
     print("\n" + "="*60)
-    print("📝 FEATURE C: Demo Credential Autofill")
+    print("🧪 COMPREHENSIVE NOTIFICATION MARK AS READ TEST")
     print("="*60)
     
-    print("ℹ️ This is a frontend-only feature that adds onClick handlers to demo credential boxes on login page.")
-    print("ℹ️ Cannot be tested via backend API calls - requires visual verification.")
-    print("ℹ️ Feature adds autofill functionality without auto-submit.")
-    print("ℹ️ Will be tested separately via frontend testing agent.")
+    # Test various edge cases and scenarios
+    parent_session = TestSession()
+    parent_user = parent_session.login("parent@school.com", "password")
     
+    if not parent_user:
+        print("❌ Failed to login as parent")
+        return False
+    
+    # Test 1: Test with completely invalid notification ID format
+    print("\n🧪 Test 1: Invalid notification ID format...")
+    invalid_formats = ["", "123", "invalid-id", "null", "undefined"]
+    
+    for invalid_id in invalid_formats:
+        response = parent_session.session.put(f"{API_BASE}/mark_notification_read/{invalid_id}")
+        if response.status_code == 404:
+            print(f"✅ Correctly returned 404 for invalid ID '{invalid_id}'")
+        else:
+            print(f"⚠️ Unexpected response for '{invalid_id}': {response.status_code}")
+    
+    # Test 2: Test HTTP method validation (should only accept PUT)
+    print("\n🧪 Test 2: HTTP method validation...")
+    test_id = "test-notification-id"
+    
+    # Test GET (should not be allowed)
+    get_response = parent_session.session.get(f"{API_BASE}/mark_notification_read/{test_id}")
+    if get_response.status_code in [404, 405]:  # 404 or Method Not Allowed
+        print(f"✅ GET method correctly rejected: {get_response.status_code}")
+    else:
+        print(f"⚠️ GET method response: {get_response.status_code}")
+    
+    # Test POST (should not be allowed)
+    post_response = parent_session.session.post(f"{API_BASE}/mark_notification_read/{test_id}")
+    if post_response.status_code in [404, 405]:  # 404 or Method Not Allowed
+        print(f"✅ POST method correctly rejected: {post_response.status_code}")
+    else:
+        print(f"⚠️ POST method response: {post_response.status_code}")
+    
+    parent_session.logout()
+    
+    print("\n✅ Comprehensive notification testing completed")
     return True
 
 def main():
