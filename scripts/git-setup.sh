@@ -1,11 +1,11 @@
 #!/bin/bash
-# === School Bus Tracker Git Setup Script (Squash Everything Into One Commit) ===
+# === School Bus Tracker Git Setup Script (Updated with Hard Reset Fallback) ===
 
 USERNAME="Siddharth Jain"
 USEREMAIL="your_email@example.com"
 GITHUB_REPO="https://github.com/SiddharthJain131/bus-tracker.git"
 
-echo "🚀 Starting Git setup for Bus Tracker (Single Commit Mode)..."
+echo "🚀 Starting Git setup for Bus Tracker..."
 cd /app || exit 1
 
 # Ensure HOME exists
@@ -28,21 +28,25 @@ fi
 git remote remove origin 2>/dev/null
 git remote add origin "$GITHUB_REPO"
 
-# Fetch remote branch if exists
-git fetch origin main 2>/dev/null
+# Pull & fallback to hard reset if needed
+echo "📥 Pulling latest changes from GitHub..."
+if ! git pull origin main --allow-unrelated-histories --no-rebase; then
+  echo "⚠️ Pull failed — performing HARD RESET to remote main..."
+  git fetch origin main
+  # git reset --hard origin/main || echo "⚠️ Remote main branch not available yet."
+else
+  echo "✅ Pull successful."
+fi
 
-echo "🧹 Clearing commit history to consolidate changes..."
-# Reset to an empty state but keep files
-git reset --soft $(git commit-tree HEAD^{tree} -m "TEMP_EMPTY_COMMIT")
-
-echo "📦 Staging all project files..."
+# Stage & commit
+echo "📦 Adding all files..."
 git add .
+git commit -m "Sync local project with remote - $(date +'%Y-%m-%d %H:%M')" || echo "ℹ️ No new changes to commit."
 
-echo "📝 Creating SINGLE consolidated commit..."
-git commit -m "Consolidated commit - $(date +'%Y-%m-%d %H:%M')"
-
-echo "🚀 Pushing consolidated commit to GitHub (force push)..."
-git push origin main --force
+# Push
+echo "🚀 Pushing to GitHub..."
+git push origin main
 
 echo ""
-echo "✅ Done! Remote 'main' now contains ONE clean consolidated commit."
+echo "✅ All done!"
+echo "Repo synced at: $GITHUB_REPO"
