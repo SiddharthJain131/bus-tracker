@@ -291,26 +291,27 @@ def test_notification_endpoint_comprehensive():
 
 def main():
     """Main test execution"""
-    print("🚌 School Bus Tracker - Backend Feature Testing")
+    print("🚌 School Bus Tracker - Fix A Testing")
     print("=" * 60)
+    print("🎯 Focus: Notification Mark as Read - 404 Error Fix")
     print(f"Backend URL: {BACKEND_URL}")
     print(f"Testing Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     
     results = {
-        "delete_notification": False,
-        "new_user_email": False,
-        "demo_autofill": True  # Frontend only - noted
+        "parent_mark_notification_read": False,
+        "admin_mark_notification_read": False,
+        "comprehensive_notification_tests": False
     }
     
     try:
-        # Test Feature A: Delete Notification Endpoint
-        results["delete_notification"] = test_delete_notification_endpoint()
+        # Test Fix A: Notification Mark as Read with parent user
+        results["parent_mark_notification_read"] = test_mark_notification_read_endpoint()
         
-        # Test Feature B: New User Welcome Email
-        results["new_user_email"] = test_new_user_welcome_email()
+        # Test Fix A: Notification Mark as Read with admin user
+        results["admin_mark_notification_read"] = test_admin_mark_notification_read()
         
-        # Note Feature C: Demo Credential Autofill
-        test_demo_credential_autofill()
+        # Comprehensive edge case testing
+        results["comprehensive_notification_tests"] = test_notification_endpoint_comprehensive()
         
     except Exception as e:
         print(f"\n❌ Testing failed with exception: {str(e)}")
@@ -319,7 +320,7 @@ def main():
     
     # Summary
     print("\n" + "="*60)
-    print("📊 TESTING SUMMARY")
+    print("📊 FIX A TESTING SUMMARY")
     print("="*60)
     
     total_tests = len(results)
@@ -332,7 +333,10 @@ def main():
     print(f"\nOverall: {passed_tests}/{total_tests} tests passed")
     
     if passed_tests == total_tests:
-        print("🎉 All tests completed successfully!")
+        print("🎉 Fix A: Notification Mark as Read testing completed successfully!")
+        print("✅ PUT /api/mark_notification_read/{notification_id} endpoint working correctly")
+        print("✅ 404 errors returned appropriately for invalid/non-existent notifications")
+        print("✅ User access control working (users can only mark their own notifications)")
         return 0
     else:
         print("⚠️ Some tests failed - check details above")
