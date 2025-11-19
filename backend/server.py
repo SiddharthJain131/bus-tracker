@@ -766,26 +766,28 @@ async def update_student_photo(student_id: str, file: UploadFile = File(...), cu
         # Save as profile.jpg
         file_name = f"profile.{file_ext}"
         file_path = student_dir / file_name
-
-        # Generate embedding
-        result = await generate_face_embedding(str(file_path))
-        if not result['success']:
-            raise HTTPException(status_code=400, detail=f"Error generating embedding: {result['message']}")
-        # Update student record with embedding
-        await db.students.update_one(
-            {"student_id": student_id},
-            {"$set": {"embedding": result['embedding']}}
-        )
         
-        # Save file
+        # Save file FIRST before generating embedding
         with open(file_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
         
-        # Update database
+        # NOW generate embedding from saved file
+        result = await generate_face_embedding(str(file_path))
+        
+        # Update database with photo URL and embedding
         photo = f"/api/photos/students/{student_id}/profile.{file_ext}"
+        update_data = {"photo": photo}
+        
+        if result['success']:
+            update_data["embedding"] = result['embedding']
+            logging.info(f"✅ Generated embedding for student {student_id}")
+        else:
+            # Photo upload still succeeds even if embedding fails
+            logging.warning(f"⚠️ Embedding generation failed for student {student_id}: {result['message']}")
+        
         await db.students.update_one(
             {"student_id": student_id},
-            {"$set": {"photo": photo}}
+            {"$set": update_data}
         )
         
         return {"success": True, "photo_url": photo, "message": "Student photo updated successfully"}
@@ -1317,38 +1319,64 @@ async def get_attendance(student_id: str, month: str, current_user: dict = Depen
 async def get_bus_location(bus_number: str, device: dict = Depends(get_current_user)):
     """
     Endpoint for retrieving bus GPS location.
-    Returns location with stale flag if not updated in last 60 seconds.
+    Returns granular bus state: active, stale, offline, or unknown.
+    
+    States:
+    - active: Location updated within last 60 seconds
+    - stale: Location exists but >60 seconds old
+    - offline: No location record exists in database
+    - unknown: Location record exists but coordinates are null
     """
     location = await db.bus_locations.find_one({"bus_number": bus_number}, {"_id": 0})
+    
     if not location:
-        # Return default structure with stale flag
+        # No location record - bus is offline
         return {
             "bus_number": bus_number,
             "lat": None,
             "lon": None,
             "timestamp": None,
+            "bus_state": "offline",
             "is_stale": True,
-            "is_missing": True
+            "is_missing": True,
+            "age_seconds": None
         }
     
-    # Check if location is stale (not updated in last 60 seconds)
+    # Check if coordinates are null
+    has_null_coords = location.get("lat") is None or location.get("lon") is None
+    
+    # Calculate age of location data
+    age_seconds = None
     is_stale = False
-    is_missing = location.get("lat") is None or location.get("lon") is None
     
     if location.get("timestamp"):
         try:
             last_update = datetime.fromisoformat(location["timestamp"].replace('Z', '+00:00'))
             now = datetime.now(timezone.utc)
             age_seconds = (now - last_update).total_seconds()
-            is_stale = age_seconds > 60
-        except Exception:
+            is_stale = age_seconds > 60  # Stale if >1 minute old
+        except Exception as e:
+            logging.error(f"Error parsing timestamp for bus {bus_number}: {e}")
             is_stale = True
     else:
+        # No timestamp means data is stale
         is_stale = True
     
-    # Add flags to response
+    # Determine bus state
+    if has_null_coords:
+        bus_state = "unknown"  # Location record exists but no coordinates
+    elif is_stale:
+        bus_state = "stale"  # Coordinates exist but data is old
+    else:
+        bus_state = "active"  # Fresh data with valid coordinates
+    
+    # Add state information to response
+    location["bus_state"] = bus_state
     location["is_stale"] = is_stale
-    location["is_missing"] = is_missing
+    location["is_missing"] = has_null_coords
+    location["age_seconds"] = age_seconds
+    
+    logging.info(f"🚌 Bus {bus_number} state: {bus_state} (age: {age_seconds}s, coords: {'null' if has_null_coords else 'valid'})")
     
     return location
 
@@ -1714,6 +1742,27 @@ async def update_student(student_id: str, updates: StudentUpdate, current_user: 
                 {"$addToSet": {"student_ids": student_id}}
             )
     
+    # Handle teacher change - update both old and new teacher's student_ids
+    if 'teacher_id' in update_data and update_data['teacher_id'] != old_student.get('teacher_id'):
+        old_teacher_id = old_student.get('teacher_id')
+        new_teacher_id = update_data['teacher_id']
+        
+        # Remove from old teacher's student_ids
+        if old_teacher_id:
+            await db.users.update_one(
+                {"user_id": old_teacher_id},
+                {"$pull": {"student_ids": student_id}}
+            )
+            logging.info(f"🔗 Removed student {student_id} from old teacher {old_teacher_id}")
+        
+        # Add to new teacher's student_ids (supports multiple students per teacher)
+        if new_teacher_id:
+            await db.users.update_one(
+                {"user_id": new_teacher_id},
+                {"$addToSet": {"student_ids": student_id}}
+            )
+            logging.info(f"🔗 Added student {student_id} to new teacher {new_teacher_id}")
+    
     await db.students.update_one(
         {"student_id": student_id},
         {"$set": update_data}
@@ -1874,6 +1923,56 @@ async def update_user(user_id: str, updates: UserUpdate, current_user: dict = De
         raise HTTPException(status_code=403, detail="Only elevated admins can edit other admins")
     
     update_data = {k: v for k, v in updates.model_dump().items() if v is not None}
+    
+    # Handle teacher assignment changes - update student linkages
+    if target_user['role'] == 'teacher':
+        # Check if assigned_class or assigned_section changed
+        class_changed = 'assigned_class' in update_data and update_data['assigned_class'] != target_user.get('assigned_class')
+        section_changed = 'assigned_section' in update_data and update_data['assigned_section'] != target_user.get('assigned_section')
+        
+        if class_changed or section_changed:
+            # Get final values for class and section
+            final_class = update_data.get('assigned_class', target_user.get('assigned_class'))
+            final_section = update_data.get('assigned_section', target_user.get('assigned_section'))
+            
+            logging.info(f"🔗 Teacher {user_id} assignment changed to class {final_class}{final_section}")
+            
+            # Remove this teacher from ALL current students
+            old_student_ids = target_user.get('student_ids', [])
+            if old_student_ids:
+                await db.students.update_many(
+                    {"student_id": {"$in": old_student_ids}},
+                    {"$set": {"teacher_id": None}}
+                )
+                logging.info(f"🔗 Unlinked {len(old_student_ids)} students from teacher {user_id}")
+            
+            # Find all students in the new class/section and link them
+            if final_class and final_section:
+                matching_students = await db.students.find(
+                    {"class_name": final_class, "section": final_section},
+                    {"_id": 0, "student_id": 1}
+                ).to_list(1000)
+                
+                new_student_ids = [s['student_id'] for s in matching_students]
+                
+                if new_student_ids:
+                    # Update all matching students to point to this teacher
+                    await db.students.update_many(
+                        {"student_id": {"$in": new_student_ids}},
+                        {"$set": {"teacher_id": user_id}}
+                    )
+                    logging.info(f"🔗 Linked {len(new_student_ids)} students to teacher {user_id}")
+                    
+                    # Update teacher's student_ids array
+                    update_data['student_ids'] = new_student_ids
+                else:
+                    # No students in this class/section
+                    update_data['student_ids'] = []
+                    logging.info(f"🔗 No students found for class {final_class}{final_section}")
+            else:
+                # Class or section cleared
+                update_data['student_ids'] = []
+    
     await db.users.update_one(
         {"user_id": user_id},
         {"$set": update_data}

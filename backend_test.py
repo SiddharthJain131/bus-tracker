@@ -12,7 +12,7 @@ import os
 from datetime import datetime
 
 # Get backend URL from environment
-BACKEND_URL = "https://rfid-shutdown.preview.emergentagent.com"
+BACKEND_URL = "https://school-fix-squad.preview.emergentagent.com"
 API_BASE = f"{BACKEND_URL}/api"
 
 class TestSession:
