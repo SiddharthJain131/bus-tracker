@@ -408,6 +408,7 @@ def main():
     
     results = {
         "parent_mark_notification_read": False,
+        "teacher_mark_notification_read": False,
         "admin_mark_notification_read": False,
         "comprehensive_notification_tests": False
     }
@@ -415,6 +416,9 @@ def main():
     try:
         # Test Fix A: Notification Mark as Read with parent user
         results["parent_mark_notification_read"] = test_mark_notification_read_endpoint()
+        
+        # PRIORITY: Test Fix A: Notification Mark as Read with teacher user
+        results["teacher_mark_notification_read"] = test_teacher_mark_notification_read()
         
         # Test Fix A: Notification Mark as Read with admin user
         results["admin_mark_notification_read"] = test_admin_mark_notification_read()
