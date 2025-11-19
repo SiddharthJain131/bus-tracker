@@ -12,7 +12,7 @@ import os
 from datetime import datetime
 
 # Get backend URL from environment
-BACKEND_URL = "http://172.17.73.220:8001"
+BACKEND_URL = "https://admin-tab-contrast.preview.emergentagent.com"
 API_BASE = f"{BACKEND_URL}/api"
 
 class TestSession:
