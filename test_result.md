@@ -804,6 +804,18 @@ backend:
         agent: "main"
         comment: "COMPLETED - Integrated and synchronized Raspberry Pi testing scripts with backend server.py. BACKEND CHANGES: 1) Added /api/bus-locations/update endpoint as alias to /update_location for Pi script compatibility. Both endpoints now accept optional timestamp field from device. 2) Enhanced UpdateLocationRequest model to accept optional timestamp parameter. 3) Verified /api/students/embedding-by-rfid endpoint exists and works correctly for RFID-based student lookup. 4) All device endpoints (/scan_event, /update_location, /students/{id}/embedding, /students/{id}/photo) properly protected with X-API-Key authentication via verify_device_key dependency. PI SCRIPT FIXES: 1) Fixed bug in pi_server.py where bus location update call used incorrect parameter (json=payload changed to data=payload) to match api_request function signature. 2) Verified all API endpoints match Pi script expectations (device registration, embedding retrieval, scan events, bus location updates). FRONTEND CLEANUP: 1) Removed unused components: AdminDashboard.jsx, TeacherDashboard.jsx, EditStudentModal.jsx, EditUserModal.jsx (old versions superseded by *New or *Enhanced variants). 2) Verified all remaining components are properly imported and used. TESTING FILES: All Pi testing scripts preserved in /app/tests/ (pi_server.py, pi_hardware.py, pi_hardware_mod.py, pi_simulated.py, auto-prog.py, cam_test.py, rfid_student_mapping.json). These are essential for Raspberry Pi device integration and testing. VERIFICATION: Backend and frontend dependencies installed, all services restarted successfully, no import errors or missing modules. Integration complete and ready for Pi device testing."
 
+  - task: "Optional RFID (tag_id) Support for Students"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py, /app/frontend/src/components/AddStudentModal.jsx, /app/frontend/src/components/EditStudentModalEnhanced.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "IMPLEMENTED - Added optional RFID (tag_id) field support for student management. BACKEND CHANGES: 1) Changed Student model tag_id from required to optional (Optional[str] = None). 2) Added tag_id uniqueness validation in PUT /api/students endpoint - checks if another student already has the same tag_id when updating. 3) POST endpoint already had tag_id uniqueness validation. 4) StudentUpdate model already had tag_id as optional. FRONTEND CHANGES: 1) AddStudentModal.jsx - Added tag_id to studentData state, added RFID input field after Roll Number (labeled 'RFID Tag (Optional)'), included tag_id in studentPayload when creating student. 2) EditStudentModalEnhanced.jsx - Added tag_id to formData state, loads existing tag_id value in useEffect, added RFID input field after Roll Number. FEATURES: RFID field is optional (not required), empty values allowed, supports creating/editing students with or without tag_id, validates uniqueness when tag_id is provided, pre-fills existing tag_id values in edit form. Ready for testing: Create student with tag_id, create student without tag_id, edit student to add tag_id, edit student to remove tag_id, verify uniqueness validation works."
+
 frontend:
   - task: "Login page"
     implemented: true

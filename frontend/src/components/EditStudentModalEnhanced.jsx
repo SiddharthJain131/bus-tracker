@@ -14,6 +14,7 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
   const [formData, setFormData] = useState({
     name: '',
     roll_number: '',
+    tag_id: '',  // RFID tag (optional)
     phone: '',
     class_section: '',  // Combined field for display
     class_name: '',
@@ -41,6 +42,7 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
       setFormData({
         name: student.name || '',
         roll_number: student.roll_number || '',
+        tag_id: student.tag_id || '',  // Load existing RFID tag
         phone: student.phone || '',
         class_section: combinedClassSection,
         class_name: student.class_name || '',
@@ -239,6 +241,15 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
                 value={formData.roll_number}
                 onChange={(e) => handleChange('roll_number', e.target.value)}
                 placeholder="Roll number"
+              />
+            </div>
+
+            <div>
+              <Label>RFID Tag (Optional)</Label>
+              <Input
+                value={formData.tag_id}
+                onChange={(e) => handleChange('tag_id', e.target.value)}
+                placeholder="RFID tag"
               />
             </div>
 

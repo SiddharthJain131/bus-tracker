@@ -27,6 +27,7 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
   const [studentData, setStudentData] = useState({
     name: '',
     roll_number: '',
+    tag_id: '',  // RFID tag (optional)
     class_section: '',  // Combined field
     class_name: '',
     section: '',
@@ -103,6 +104,7 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
     setStudentData({
       name: '',
       roll_number: '',
+      tag_id: '',
       class_section: '',
       class_name: '',
       section: '',
@@ -212,6 +214,7 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
       const studentPayload = {
         name: studentData.name,
         roll_number: studentData.roll_number,
+        tag_id: studentData.tag_id || null,  // Optional RFID tag
         class_name: studentData.class_name,
         section: studentData.section,
         bus_number: studentData.bus_number,
@@ -297,6 +300,15 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
                   value={studentData.roll_number}
                   onChange={(e) => setStudentData({ ...studentData, roll_number: e.target.value })}
                   placeholder="Enter roll number"
+                />
+              </div>
+              
+              <div>
+                <Label>RFID Tag (Optional)</Label>
+                <Input
+                  value={studentData.tag_id}
+                  onChange={(e) => setStudentData({ ...studentData, tag_id: e.target.value })}
+                  placeholder="Enter RFID tag"
                 />
               </div>
               

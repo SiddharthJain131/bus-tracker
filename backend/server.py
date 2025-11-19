@@ -230,7 +230,7 @@ class Student(BaseModel):
     student_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     name: str
     roll_number: str  # Required for uniqueness constraint
-    tag_id: str  # RFID tag identifier for Pi scanning (unique per student)
+    tag_id: Optional[str] = None  # RFID tag identifier for Pi scanning (optional, unique per student)
     phone: Optional[str] = None
     photo: Optional[str] = None
     embedding: Optional[str] = None  # Face embedding data (base64 encoded)
@@ -1653,6 +1653,19 @@ async def update_student(student_id: str, updates: StudentUpdate, current_user: 
             raise HTTPException(
                 status_code=400, 
                 detail=f"A student with this roll number already exists in class {final_class_name}{final_section}."
+            )
+    
+    # Validate tag_id uniqueness if being updated
+    if 'tag_id' in update_data and update_data['tag_id']:
+        # Check if another student has this tag_id
+        existing_tag = await db.students.find_one({
+            "tag_id": update_data['tag_id'],
+            "student_id": {"$ne": student_id}  # Exclude current student
+        })
+        if existing_tag:
+            raise HTTPException(
+                status_code=400,
+                detail=f"RFID tag {update_data['tag_id']} is already assigned to another student"
             )
     
     # Check bus capacity if bus is being changed
