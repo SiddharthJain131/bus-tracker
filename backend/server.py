@@ -426,6 +426,24 @@ def get_photo_url(photo_path: Optional[str]) -> Optional[str]:
             photo_path = '/api/photos/' + photo_path
     return photo_path
 
+# Helper function to normalize timestamps to UTC
+def _normalize_timestamp_to_utc(ts: Optional[str]) -> str:
+    """
+    Normalize any timestamp to UTC ISO format.
+    Handles timestamps with or without timezone info.
+    Returns current UTC time if timestamp is invalid or None.
+    """
+    if not ts:
+        return datetime.now(timezone.utc).isoformat()
+    try:
+        dt = datetime.fromisoformat(ts)
+        if dt.tzinfo is None:
+            # assume UTC when no tzinfo
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt.astimezone(timezone.utc).isoformat()
+    except Exception:
+        return datetime.now(timezone.utc).isoformat()
+
 # Face embedding generation helper
 async def generate_face_embedding(image_source) -> dict:
     """
@@ -1222,9 +1240,10 @@ async def update_location(request: UpdateLocationRequest, device: dict = Depends
     """
     Device-only endpoint for updating bus GPS location.
     Requires X-API-Key header authentication.
+    Always uses server time for consistency.
     """
-    # Use provided timestamp or generate server timestamp in UTC
-    timestamp = request.timestamp if request.timestamp else datetime.now(timezone.utc).isoformat()
+    # Always use server timestamp in UTC (ignore any incoming timestamp)
+    timestamp = datetime.now(timezone.utc).isoformat()
     
     # Verify that the device is authorized for this bus
     if device['bus_number'] != request.bus_number:
@@ -2917,18 +2936,6 @@ async def ensure_bus_locations_index():
     except Exception:
         # ignore if index exists or creation fails
         pass
-
-def _normalize_timestamp_to_utc(ts: Optional[str]) -> str:
-    if not ts:
-        return datetime.now(timezone.utc).isoformat()
-    try:
-        dt = datetime.fromisoformat(ts)
-        if dt.tzinfo is None:
-            # assume UTC when no tzinfo
-            dt = dt.replace(tzinfo=timezone.utc)
-        return dt.astimezone(timezone.utc).isoformat()
-    except Exception:
-        return datetime.now(timezone.utc).isoformat()
 
 @api_router.post("/bus-locations/update", summary="Update last known location for a bus")
 async def api_update_bus_location(payload: BusLocationUpdate, device: dict = Depends(verify_device_key)):

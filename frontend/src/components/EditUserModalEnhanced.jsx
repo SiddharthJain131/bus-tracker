@@ -194,6 +194,44 @@ export default function EditUserModalEnhanced({ user, currentUser, open, onClose
             />
           </div>
 
+          {/* Photo Section */}
+          <div className="border-t pt-4">
+            <Label>Photo (optional)</Label>
+            <div className="mt-2">
+              {/* Show current photo or new photo preview */}
+              {(formData.photo || currentPhoto) && (
+                <div className="mb-3 flex items-center gap-3">
+                  <img 
+                    src={formData.photo || currentPhoto} 
+                    alt="User" 
+                    className="w-20 h-20 rounded-full object-cover border-2 border-gray-300"
+                  />
+                  <span className="text-sm text-gray-600">
+                    {formData.photo ? 'New photo selected' : 'Current photo'}
+                  </span>
+                </div>
+              )}
+              <Input
+                type="file"
+                accept="image/*"
+                onChange={handlePhotoChange}
+                className="cursor-pointer"
+                disabled={isEditingOtherAdmin}
+              />
+              <p className="text-xs text-gray-500 mt-1">Max size: 5MB. Leave empty to keep current photo.</p>
+              {formData.photo && (
+                <button
+                  type="button"
+                  onClick={() => setFormData({ ...formData, photo: '' })}
+                  className="text-sm text-red-600 hover:text-red-700 mt-2"
+                  disabled={isEditingOtherAdmin}
+                >
+                  Remove New Photo
+                </button>
+              )}
+            </div>
+          </div>
+
           <div className="flex gap-3 justify-end">
             <Button variant="outline" onClick={onClose} disabled={saving}>
               Cancel
