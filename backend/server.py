@@ -60,9 +60,9 @@ PHOTO_DIR.mkdir(exist_ok=True)
 # Email sending utility
 async def send_email(to_email: str, subject: str, body: str):
     """Send email using SMTP"""
-    if not EMAIL_AUTH_ENABLED or not SMTP_USER or not SMTP_PASS:
-        logging.info(f"Email sending skipped (not configured). Would send to {to_email}: {subject}")
-        return
+    if not SMTP_USER or not SMTP_PASS:
+        logging.warning(f"Email sending skipped (SMTP not configured). Would send to {to_email}: {subject}")
+        raise Exception("SMTP credentials not configured in .env.local")
     
     try:
         message = MIMEMultipart()
@@ -70,6 +70,8 @@ async def send_email(to_email: str, subject: str, body: str):
         message['To'] = to_email
         message['Subject'] = subject
         message.attach(MIMEText(body, 'html'))
+        
+        logging.info(f"Attempting to send email to {to_email} via {SMTP_HOST}:{SMTP_PORT}")
         
         await aiosmtplib.send(
             message,
@@ -79,9 +81,10 @@ async def send_email(to_email: str, subject: str, body: str):
             password=SMTP_PASS,
             start_tls=True
         )
-        logging.info(f"Email sent successfully to {to_email}")
+        logging.info(f"✅ Email sent successfully to {to_email}")
     except Exception as e:
-        logging.error(f"Failed to send email to {to_email}: {e}")
+        logging.error(f"❌ Failed to send email to {to_email}: {e}")
+        raise
 
 async def create_welcome_notification(user_id: str, user_name: str, role: str):
     """Create a welcome notification for the user after login"""
@@ -111,7 +114,12 @@ async def send_new_user_email(user_email: str, user_name: str, user_role: str, t
     """Send welcome email to newly created user with login credentials"""
     if not NEW_USER_EMAIL_ENABLED:
         logging.info(f"New user email disabled. Would send to {user_email}")
-        return {"sent": False, "reason": "disabled"}
+        return {"sent": False, "reason": "Email sending is disabled"}
+    
+    # Check if SMTP is configured
+    if not SMTP_USER or not SMTP_PASS:
+        logging.warning(f"SMTP not configured. Cannot send email to {user_email}")
+        return {"sent": False, "reason": "SMTP credentials not configured"}
     
     login_url = os.environ.get('BACKEND_BASE_URL', 'http://localhost:8001').replace(':8001', ':3000')
     

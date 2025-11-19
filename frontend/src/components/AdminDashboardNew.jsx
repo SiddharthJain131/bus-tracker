@@ -21,7 +21,10 @@ import {
   Trash2,
   Plus,
   Camera,
-  Eye
+  Eye,
+  MoreVertical,
+  CheckCircle,
+  AlertCircle
 } from 'lucide-react';
 import StudentDetailModal from './StudentDetailModal';
 import UserDetailModal from './UserDetailModal';
@@ -200,6 +203,7 @@ export default function AdminDashboardNew({ user, onLogout }) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [showNotificationDetail, setShowNotificationDetail] = useState(false);
   const [selectedNotification, setSelectedNotification] = useState(null);
+  const [openNotificationMenuId, setOpenNotificationMenuId] = useState(null);
   
   // Photo viewer state
   const [showPhotoViewer, setShowPhotoViewer] = useState(false);
@@ -300,14 +304,49 @@ export default function AdminDashboardNew({ user, onLogout }) {
     
     // Mark as read if unread
     if (!notification.read) {
-      try {
-        await axios.put(`${API}/mark_notification_read/${notification.notification_id}`);
-        // Refresh notifications
-        const notificationsRes = await axios.get(`${API}/get_notifications`);
-        setNotifications(notificationsRes.data);
-      } catch (error) {
-        console.error('Error marking notification as read:', error);
-      }
+      await markNotificationAsRead(notification.notification_id);
+    }
+  };
+
+  const markNotificationAsRead = async (notificationId, e) => {
+    if (e) e.stopPropagation();
+    try {
+      await axios.put(`${API}/mark_notification_read/${notificationId}`);
+      // Update local state
+      setNotifications(prev =>
+        prev.map(n => n.notification_id === notificationId ? { ...n, read: true } : n)
+      );
+      setOpenNotificationMenuId(null);
+    } catch (error) {
+      console.error('Error marking notification as read:', error);
+      toast.error('Failed to mark notification as read');
+    }
+  };
+
+  const markNotificationAsUnread = async (notificationId, e) => {
+    if (e) e.stopPropagation();
+    try {
+      // Update local state
+      setNotifications(prev =>
+        prev.map(n => n.notification_id === notificationId ? { ...n, read: false } : n)
+      );
+      setOpenNotificationMenuId(null);
+    } catch (error) {
+      console.error('Error marking notification as unread:', error);
+      toast.error('Failed to mark notification as unread');
+    }
+  };
+
+  const deleteNotification = async (notificationId, e) => {
+    if (e) e.stopPropagation();
+    try {
+      await axios.delete(`${API}/notifications/${notificationId}`);
+      // Remove from local state
+      setNotifications(prev => prev.filter(n => n.notification_id !== notificationId));
+      setOpenNotificationMenuId(null);
+    } catch (error) {
+      console.error('Error deleting notification:', error);
+      toast.error('Failed to delete notification');
     }
   };
 
@@ -642,13 +681,22 @@ export default function AdminDashboardNew({ user, onLogout }) {
                   <h2 className="text-2xl font-semibold text-gray-900">
                     Notifications
                   </h2>
+                  {notifications.filter(n => !n.read).length > 0 && (
+                    <span className="bg-admin-primary text-white text-xs font-bold rounded-full px-2.5 py-1">
+                      {notifications.filter(n => !n.read).length} new
+                    </span>
+                  )}
                 </div>
               </div>
-              <div className="space-y-3">
+              <div className="space-y-3 max-h-[500px] overflow-y-auto">
                 {notifications.length === 0 ? (
-                  <p className="text-sm text-gray-500 text-center py-4">No notifications</p>
+                  <div className="text-center py-8">
+                    <Bell className="w-12 h-12 mx-auto mb-3 text-gray-300" />
+                    <p className="font-medium text-gray-500">No notifications</p>
+                    <p className="text-sm text-gray-400 mt-1">You're all caught up!</p>
+                  </div>
                 ) : (
-                  notifications.slice(0, 5).map(notification => {
+                  notifications.map(notification => {
                     const formatTimestamp = (timestamp) => {
                       if (!timestamp) return '';
                       const date = new Date(timestamp);
@@ -668,16 +716,31 @@ export default function AdminDashboardNew({ user, onLogout }) {
                     return (
                       <div
                         key={notification.notification_id}
-                        onClick={() => handleNotificationClick(notification)}
-                        className="flex items-start gap-4 p-4 rounded-lg border border-gray-200 bg-white hover:border-admin-primary/40 hover:shadow-md transition-all cursor-pointer"
+                        className={`flex items-start gap-3 p-4 rounded-lg border transition-all relative ${
+                          !notification.read 
+                            ? 'bg-blue-50/50 border-admin-primary/20 hover:border-admin-primary/40' 
+                            : 'bg-white border-gray-200 hover:border-admin-primary/40'
+                        } hover:shadow-md`}
                       >
-                        <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-admin-light text-admin-primary flex-shrink-0">
-                          <Bell className="w-5 h-5" />
+                        <div 
+                          className="flex items-center justify-center w-10 h-10 rounded-lg bg-admin-light text-admin-primary flex-shrink-0 cursor-pointer"
+                          onClick={() => handleNotificationClick(notification)}
+                        >
+                          {notification.type === 'alert' ? (
+                            <AlertCircle className="w-5 h-5 text-red-600" />
+                          ) : (
+                            <Bell className="w-5 h-5" />
+                          )}
                         </div>
-                        <div className="flex-1 min-w-0">
+                        <div 
+                          className="flex-1 min-w-0 cursor-pointer"
+                          onClick={() => handleNotificationClick(notification)}
+                        >
                           <div className="flex items-center justify-between gap-2">
-                            <h5 className="font-semibold text-gray-900 truncate">
-                              {notification.title}
+                            <h5 className={`text-sm font-medium text-gray-900 truncate ${
+                              !notification.read ? 'font-semibold' : ''
+                            }`}>
+                              {notification.title || 'Notification'}
                             </h5>
                             {notification.timestamp && (
                               <span className="text-xs text-gray-500 whitespace-nowrap">
@@ -690,13 +753,54 @@ export default function AdminDashboardNew({ user, onLogout }) {
                               {notification.message}
                             </p>
                           )}
+                        </div>
+                        <div className="flex items-center gap-2">
                           {!notification.read && (
-                            <div className="mt-2">
-                              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-admin-primary text-white">
-                                New
-                              </span>
-                            </div>
+                            <div className="w-2 h-2 bg-admin-primary rounded-full"></div>
                           )}
+                          <div className="relative">
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setOpenNotificationMenuId(
+                                  openNotificationMenuId === notification.notification_id 
+                                    ? null 
+                                    : notification.notification_id
+                                );
+                              }}
+                              className="p-1 hover:bg-gray-200 rounded transition-colors"
+                            >
+                              <MoreVertical className="w-4 h-4 text-gray-500" />
+                            </button>
+                            {openNotificationMenuId === notification.notification_id && (
+                              <div className="absolute right-0 mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50 overflow-hidden">
+                                {notification.read ? (
+                                  <button
+                                    onClick={(e) => markNotificationAsUnread(notification.notification_id, e)}
+                                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-50 flex items-center gap-2 transition-colors"
+                                  >
+                                    <Bell className="w-4 h-4 text-blue-600" />
+                                    <span>Mark as Unread</span>
+                                  </button>
+                                ) : (
+                                  <button
+                                    onClick={(e) => markNotificationAsRead(notification.notification_id, e)}
+                                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-50 flex items-center gap-2 transition-colors"
+                                  >
+                                    <CheckCircle className="w-4 h-4 text-green-600" />
+                                    <span>Mark as Read</span>
+                                  </button>
+                                )}
+                                <button
+                                  onClick={(e) => deleteNotification(notification.notification_id, e)}
+                                  className="w-full px-4 py-2 text-left text-sm hover:bg-red-50 flex items-center gap-2 text-red-600 transition-colors"
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                  <span>Delete</span>
+                                </button>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
                     );

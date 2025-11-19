@@ -60,9 +60,17 @@ export default function AddUserModal({ open, onClose, onSuccess }) {
         role: selectedRole
       };
 
-      await axios.post(`${API}/users`, payload);
+      const response = await axios.post(`${API}/users`, payload);
 
-      // REMOVED: Success toast - modal close is sufficient feedback
+      // Check email status and show appropriate message
+      if (response.data.email_sent === false && response.data.email_warning) {
+        toast.warning(response.data.email_warning);
+      } else if (response.data.email_sent === true) {
+        toast.success(`User created successfully! Welcome email sent to ${userData.email}`);
+      } else {
+        toast.success('User created successfully!');
+      }
+
       onSuccess();
       onClose();
       resetForm();
