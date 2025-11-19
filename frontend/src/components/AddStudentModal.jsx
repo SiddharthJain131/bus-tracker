@@ -120,10 +120,44 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
       name: '',
       phone: '',
       email: '',
-      photo: '',
+      photo: '',  // Base64 encoded photo
       address: ''
     });
     setStops([]);
+  };
+
+  // Handle photo file selection and convert to Base64
+  const handleParentPhotoChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      toast.error('Please select an image file');
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error('Image size should be less than 5MB');
+      return;
+    }
+
+    try {
+      // Convert to Base64
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result; // Includes data:image/xxx;base64,
+        setParentData({ ...parentData, photo: base64String });
+      };
+      reader.onerror = () => {
+        toast.error('Failed to read image file');
+      };
+      reader.readAsDataURL(file);
+    } catch (error) {
+      console.error('Error converting image to Base64:', error);
+      toast.error('Failed to process image');
+    }
   };
 
   // Parse class-section input (e.g., "5A", "5-A", "Class 5 A", "Grade 5 A")
@@ -500,12 +534,30 @@ export default function AddStudentModal({ open, onClose, onSuccess }) {
                 </div>
                 
                 <div className="col-span-2">
-                  <Label>Photo URL (optional)</Label>
+                  <Label>Photo (optional)</Label>
                   <Input
-                    value={parentData.photo}
-                    onChange={(e) => setParentData({ ...parentData, photo: e.target.value })}
-                    placeholder="https://example.com/photo.jpg"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleParentPhotoChange}
+                    className="cursor-pointer"
                   />
+                  <p className="text-xs text-gray-500 mt-1">Max size: 5MB. Supported: JPG, PNG, WebP</p>
+                  {parentData.photo && (
+                    <div className="mt-3 flex items-center gap-3">
+                      <img 
+                        src={parentData.photo} 
+                        alt="Preview" 
+                        className="w-16 h-16 rounded-full object-cover border-2 border-gray-300"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setParentData({ ...parentData, photo: '' })}
+                        className="text-sm text-red-600 hover:text-red-700"
+                      >
+                        Remove Photo
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             )}

@@ -24,7 +24,8 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
     bus_number: '',
     stop_id: '',
     emergency_contact: '',
-    remarks: ''
+    remarks: '',
+    photo: ''  // Base64 encoded photo
   });
   const [saving, setSaving] = useState(false);
   const [parents, setParents] = useState([]);
@@ -32,6 +33,7 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
   const [stops, setStops] = useState([]);
   const [loadingStops, setLoadingStops] = useState(false);
   const [classSectionSuggestions, setClassSectionSuggestions] = useState([]);
+  const [currentPhoto, setCurrentPhoto] = useState(null); // Store original photo for display
 
   useEffect(() => {
     if (open && student) {
@@ -52,8 +54,11 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
         bus_number: student.bus_number || '',
         stop_id: student.stop_id || '',
         emergency_contact: student.emergency_contact || '',
-        remarks: student.remarks || ''
+        remarks: student.remarks || '',
+        photo: ''  // Empty by default, will be filled if user uploads new photo
       });
+      // Store current photo for display
+      setCurrentPhoto(student.photo || null);
       fetchDropdownData();
       // Fetch stops if bus is already selected
       if (student.bus_number) {
@@ -173,6 +178,40 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
     });
   };
 
+  // Handle photo file selection and convert to Base64
+  const handlePhotoChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      toast.error('Please select an image file');
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error('Image size should be less than 5MB');
+      return;
+    }
+
+    try {
+      // Convert to Base64
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result; // Includes data:image/xxx;base64,
+        setFormData({ ...formData, photo: base64String });
+      };
+      reader.onerror = () => {
+        toast.error('Failed to read image file');
+      };
+      reader.readAsDataURL(file);
+    } catch (error) {
+      console.error('Error converting image to Base64:', error);
+      toast.error('Failed to process image');
+    }
+  };
+
   const handleSave = async () => {
     // Validation
     if (!formData.name || !formData.roll_number || !formData.class_name || 
@@ -183,15 +222,13 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
 
     setSaving(true);
     try {
-      // Track changed fields
-      const changedFields = [];
-      Object.keys(formData).forEach(key => {
-        if (formData[key] !== (student[key] || '')) {
-          changedFields.push(`${key}: ${student[key] || 'N/A'} → ${formData[key] || 'N/A'}`);
-        }
-      });
+      // Prepare update data - only send photo if a new one was uploaded
+      const updateData = { ...formData };
+      if (!formData.photo) {
+        delete updateData.photo; // Don't send empty photo field
+      }
 
-      const response = await axios.put(`${API}/students/${student.student_id}`, formData);
+      const response = await axios.put(`${API}/students/${student.student_id}`, updateData);
       
       // Check for capacity warning
       if (response.data?.capacity_warning) {
@@ -366,6 +403,42 @@ export default function EditStudentModalEnhanced({ student, open, onClose, onSuc
               rows={3}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+          </div>
+
+          {/* Photo Section */}
+          <div className="border-t pt-4">
+            <Label>Photo (optional)</Label>
+            <div className="mt-2">
+              {/* Show current photo or new photo preview */}
+              {(formData.photo || currentPhoto) && (
+                <div className="mb-3 flex items-center gap-3">
+                  <img 
+                    src={formData.photo || currentPhoto} 
+                    alt="Student" 
+                    className="w-20 h-20 rounded-full object-cover border-2 border-gray-300"
+                  />
+                  <span className="text-sm text-gray-600">
+                    {formData.photo ? 'New photo selected' : 'Current photo'}
+                  </span>
+                </div>
+              )}
+              <Input
+                type="file"
+                accept="image/*"
+                onChange={handlePhotoChange}
+                className="cursor-pointer"
+              />
+              <p className="text-xs text-gray-500 mt-1">Max size: 5MB. Leave empty to keep current photo.</p>
+              {formData.photo && (
+                <button
+                  type="button"
+                  onClick={() => setFormData({ ...formData, photo: '' })}
+                  className="text-sm text-red-600 hover:text-red-700 mt-2"
+                >
+                  Remove New Photo
+                </button>
+              )}
+            </div>
           </div>
 
           <div className="flex gap-3 justify-end">

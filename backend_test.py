@@ -12,7 +12,7 @@ import os
 from datetime import datetime
 
 # Get backend URL from environment
-BACKEND_URL = "https://transit-ui-update.preview.emergentagent.com"
+BACKEND_URL = "https://edit-ui-revamp.preview.emergentagent.com"
 API_BASE = f"{BACKEND_URL}/api"
 
 class TestSession:

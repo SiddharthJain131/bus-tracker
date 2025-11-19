@@ -21,7 +21,7 @@ export default function AddUserModal({ open, onClose, onSuccess }) {
     email: '',
     password: '',
     phone: '',
-    photo: '',
+    photo: '',  // Base64 encoded photo
     address: '',
     assigned_class: '',
     assigned_section: ''
@@ -33,12 +33,46 @@ export default function AddUserModal({ open, onClose, onSuccess }) {
       email: '',
       password: '',
       phone: '',
-      photo: '',
+      photo: '',  // Base64 encoded photo
       address: '',
       assigned_class: '',
       assigned_section: ''
     });
     setSelectedRole('parent');
+  };
+
+  // Handle photo file selection and convert to Base64
+  const handlePhotoChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      toast.error('Please select an image file');
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error('Image size should be less than 5MB');
+      return;
+    }
+
+    try {
+      // Convert to Base64
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result; // Includes data:image/xxx;base64,
+        setUserData({ ...userData, photo: base64String });
+      };
+      reader.onerror = () => {
+        toast.error('Failed to read image file');
+      };
+      reader.readAsDataURL(file);
+    } catch (error) {
+      console.error('Error converting image to Base64:', error);
+      toast.error('Failed to process image');
+    }
   };
 
   const handleSubmit = async () => {
@@ -175,12 +209,30 @@ export default function AddUserModal({ open, onClose, onSuccess }) {
               </div>
               
               <div>
-                <Label>Photo URL (optional)</Label>
+                <Label>Photo (optional)</Label>
                 <Input
-                  value={userData.photo}
-                  onChange={(e) => setUserData({ ...userData, photo: e.target.value })}
-                  placeholder="https://example.com/photo.jpg"
+                  type="file"
+                  accept="image/*"
+                  onChange={handlePhotoChange}
+                  className="cursor-pointer"
                 />
+                <p className="text-xs text-gray-500 mt-1">Max size: 5MB. Supported: JPG, PNG, WebP</p>
+                {userData.photo && (
+                  <div className="mt-3 flex items-center gap-3">
+                    <img 
+                      src={userData.photo} 
+                      alt="Preview" 
+                      className="w-16 h-16 rounded-full object-cover border-2 border-gray-300"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setUserData({ ...userData, photo: '' })}
+                      className="text-sm text-red-600 hover:text-red-700"
+                    >
+                      Remove Photo
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           )}
@@ -230,12 +282,30 @@ export default function AddUserModal({ open, onClose, onSuccess }) {
               </div>
               
               <div>
-                <Label>Photo URL (optional)</Label>
+                <Label>Photo (optional)</Label>
                 <Input
-                  value={userData.photo}
-                  onChange={(e) => setUserData({ ...userData, photo: e.target.value })}
-                  placeholder="https://example.com/photo.jpg"
+                  type="file"
+                  accept="image/*"
+                  onChange={handlePhotoChange}
+                  className="cursor-pointer"
                 />
+                <p className="text-xs text-gray-500 mt-1">Max size: 5MB. Supported: JPG, PNG, WebP</p>
+                {userData.photo && (
+                  <div className="mt-3 flex items-center gap-3">
+                    <img 
+                      src={userData.photo} 
+                      alt="Preview" 
+                      className="w-16 h-16 rounded-full object-cover border-2 border-gray-300"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setUserData({ ...userData, photo: '' })}
+                      className="text-sm text-red-600 hover:text-red-700"
+                    >
+                      Remove Photo
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           )}
@@ -245,12 +315,30 @@ export default function AddUserModal({ open, onClose, onSuccess }) {
               <h4 className="font-semibold text-gray-900">Admin Information</h4>
               
               <div>
-                <Label>Photo URL (optional)</Label>
+                <Label>Photo (optional)</Label>
                 <Input
-                  value={userData.photo}
-                  onChange={(e) => setUserData({ ...userData, photo: e.target.value })}
-                  placeholder="https://example.com/photo.jpg"
+                  type="file"
+                  accept="image/*"
+                  onChange={handlePhotoChange}
+                  className="cursor-pointer"
                 />
+                <p className="text-xs text-gray-500 mt-1">Max size: 5MB. Supported: JPG, PNG, WebP</p>
+                {userData.photo && (
+                  <div className="mt-3 flex items-center gap-3">
+                    <img 
+                      src={userData.photo} 
+                      alt="Preview" 
+                      className="w-16 h-16 rounded-full object-cover border-2 border-gray-300"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setUserData({ ...userData, photo: '' })}
+                      className="text-sm text-red-600 hover:text-red-700"
+                    >
+                      Remove Photo
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           )}

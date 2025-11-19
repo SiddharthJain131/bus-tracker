@@ -17,9 +17,11 @@ export default function EditUserModalEnhanced({ user, currentUser, open, onClose
     email: '',
     assigned_class: '',
     assigned_section: '',
-    address: ''
+    address: '',
+    photo: ''  // Base64 encoded photo
   });
   const [saving, setSaving] = useState(false);
+  const [currentPhoto, setCurrentPhoto] = useState(null); // Store original photo for display
 
   // Check if editing another admin
   const isEditingOtherAdmin = user && user.role === 'admin' && user.user_id !== currentUser.user_id;
@@ -32,13 +34,50 @@ export default function EditUserModalEnhanced({ user, currentUser, open, onClose
         email: user.email || '',
         assigned_class: user.assigned_class || '',
         assigned_section: user.assigned_section || '',
-        address: user.address || ''
+        address: user.address || '',
+        photo: ''  // Empty by default, will be filled if user uploads new photo
       });
+      // Store current photo for display
+      setCurrentPhoto(user.photo || null);
     }
   }, [open, user]);
 
   const handleChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  // Handle photo file selection and convert to Base64
+  const handlePhotoChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      toast.error('Please select an image file');
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error('Image size should be less than 5MB');
+      return;
+    }
+
+    try {
+      // Convert to Base64
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result; // Includes data:image/xxx;base64,
+        setFormData({ ...formData, photo: base64String });
+      };
+      reader.onerror = () => {
+        toast.error('Failed to read image file');
+      };
+      reader.readAsDataURL(file);
+    } catch (error) {
+      console.error('Error converting image to Base64:', error);
+      toast.error('Failed to process image');
+    }
   };
 
   const handleSave = async () => {
@@ -49,7 +88,13 @@ export default function EditUserModalEnhanced({ user, currentUser, open, onClose
 
     setSaving(true);
     try {
-      await axios.put(`${API}/users/${user.user_id}`, formData);
+      // Prepare update data - only send photo if a new one was uploaded
+      const updateData = { ...formData };
+      if (!formData.photo) {
+        delete updateData.photo; // Don't send empty photo field
+      }
+
+      await axios.put(`${API}/users/${user.user_id}`, updateData);
       // REMOVED: Success toast - modal close is sufficient feedback
       onSuccess();
       onClose();
