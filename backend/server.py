@@ -1320,9 +1320,9 @@ async def get_attendance(student_id: str, month: str, current_user: dict = Depen
             "pm_status": pm_status,
             "am_confidence": am_record['confidence'] if am_record else None,
             "pm_confidence": pm_record['confidence'] if pm_record else None,
-            "am_scan_photo": am_record.get('scan_photo') if am_record else None,
+            "am_scan_photo": get_photo_url(am_record.get('scan_photo')) if am_record else None,
             "am_scan_timestamp": am_record.get('scan_timestamp') if am_record else None,
-            "pm_scan_photo": pm_record.get('scan_photo') if pm_record else None,
+            "pm_scan_photo": get_photo_url(pm_record.get('scan_photo')) if pm_record else None,
             "pm_scan_timestamp": pm_record.get('scan_timestamp') if pm_record else None
         })
     
@@ -2632,9 +2632,9 @@ async def get_teacher_students(current_user: dict = Depends(get_current_user)):
         student['pm_status'] = pm_attendance['status'] if pm_attendance else 'gray'
         
         # Add scan photos and timestamps for clickable status badges
-        student['am_scan_photo'] = am_attendance.get('scan_photo') if am_attendance else None
+        student['am_scan_photo'] = get_photo_url(am_attendance.get('scan_photo')) if am_attendance else None
         student['am_scan_timestamp'] = am_attendance.get('scan_timestamp') if am_attendance else None
-        student['pm_scan_photo'] = pm_attendance.get('scan_photo') if pm_attendance else None
+        student['pm_scan_photo'] = get_photo_url(pm_attendance.get('scan_photo')) if pm_attendance else None
         student['pm_scan_timestamp'] = pm_attendance.get('scan_timestamp') if pm_attendance else None
         
         # Add bus info

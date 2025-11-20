@@ -756,6 +756,18 @@ backend:
         agent: "main"
         comment: "IMPLEMENTED - Updated Stop model to include expected arrival times for both morning and evening operations. MODEL CHANGES: Added morning_expected_time field (Optional[str], HH:MM format) for morning trip expected arrival, Added evening_expected_time field (Optional[str], HH:MM format) for evening trip expected arrival. These fields are optional to support gradual adoption. CRUD ENDPOINTS: Existing stop CRUD endpoints (GET/POST/PUT /api/stops) automatically support new fields via Pydantic model. No endpoint changes needed. CONFIGURATION: Added RED_STATUS_THRESHOLD=10 to .env file (default 10 minutes for missed scan detection). Ready for testing: Create/update stops with morning/evening times, verify times stored in database, verify stop CRUD operations preserve time fields."
 
+  - task: "Attendance Photo URL Conversion Fix"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "FIXED - Resolved issue where attendance scan photos were not displaying in UI after RFID/face scan. ROOT CAUSE: Scan photos were being saved correctly in database as 'photos/attendance/{student_id}_{date}_{trip}.jpg' but API endpoints were returning raw database paths instead of converting them to accessible URLs like '/api/photos/attendance/...'. SOLUTION: Applied get_photo_url() helper function to convert scan photo paths in both GET /api/get_attendance (lines 1323, 1325) and GET /api/teacher/students (lines 2635, 2637) endpoints. The helper automatically prepends '/api/photos/' prefix to make photos accessible via static file serving. AFFECTED ENDPOINTS: 1) GET /api/get_attendance - Now returns am_scan_photo and pm_scan_photo as proper URLs in attendance grid for Parent Dashboard calendar view. 2) GET /api/teacher/students - Now returns am_scan_photo and pm_scan_photo as proper URLs for Teacher Dashboard status badges. Backend restarted successfully with no errors. Ready for testing: Scan student with RFID/face, verify photo appears in attendance calendar (Parent Dashboard), verify photo appears in status badges (Teacher Dashboard), verify photo URLs are properly formatted as /api/photos/attendance/..."
+
   - task: "Automated Scan Status Logic"
     implemented: true
     working: "NA"
@@ -1197,6 +1209,7 @@ metadata:
 
 test_plan:
   current_focus:
+    - "Attendance Photo URL Conversion Fix"
     - "Fix notification mark as read endpoint"
     - "Fix notification mark as read - Frontend calls"
     - "Unify Student List + Student Details in Parent Dashboard"
@@ -1208,4 +1221,6 @@ test_plan:
 agent_communication:
   - agent: "main"
     message: "Implemented three fixes: 1) Fixed notification mark as read 404 error by updating backend route to PUT /mark_notification_read/{notification_id} and updating frontend calls in NotificationBell.jsx and AdminDashboardNew.jsx. 2) Unified student list and details in Parent Dashboard into single container with section headers. 3) Enhanced Admin tabs styling with better contrast, gradient backgrounds, and active/inactive state styling. All services running. Ready for testing."
+  - agent: "main"
+    message: "🔧 ATTENDANCE PHOTO URL CONVERSION FIX COMPLETED - Fixed critical bug where scan photos were not displaying after RFID/face recognition. PROBLEM: Photos were being saved correctly during scan_event but API endpoints were returning raw database paths ('photos/attendance/...') instead of accessible URLs ('/api/photos/attendance/...'). SOLUTION: Applied get_photo_url() helper function to convert scan photo paths in GET /api/get_attendance (for Parent Dashboard calendar) and GET /api/teacher/students (for Teacher Dashboard status badges). IMPLEMENTATION: Modified lines 1323, 1325 in get_attendance endpoint and lines 2635, 2637 in get_teacher_students endpoint to wrap scan_photo fields with get_photo_url(). Backend restarted successfully with no errors. TESTING NEEDED: 1) Verify scan photos appear in Parent Dashboard attendance calendar after RFID/face scan. 2) Verify scan photos appear in Teacher Dashboard when clicking yellow/green status badges. 3) Verify photo URLs are properly formatted as /api/photos/attendance/{student_id}_{date}_{trip}.jpg. 4) Test with existing attendance records that have scan photos (found 7 attendance photos in /app/backend/photos/attendance/)."
 
