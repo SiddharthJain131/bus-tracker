@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-11-19T17:57:50.770840",
+  "timestamp": "2025-11-20T00:06:22.004227",
   "backup_type": "attendance",
   "collections": {
     "attendance": [
@@ -3338,9 +3338,179 @@
         "last_update": "2025-11-19T16:35:54.837552+05:30",
         "scan_photo": null,
         "scan_timestamp": null
+      },
+      {
+        "_id": "691dda6570e9ae8deb50b958",
+        "attendance_id": "efe040d6-ebca-4c13-80b0-2b3afc137e02",
+        "student_id": "6a4dbb59-1199-4996-a7b9-ce9d187b9a84",
+        "date": "2025-11-19",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.8615995645523071,
+        "last_update": "2025-11-19T17:31:28.766338+00:00",
+        "scan_photo": "photos/attendance/6a4dbb59-1199-4996-a7b9-ce9d187b9a84_2025-11-19_PM.jpg",
+        "scan_timestamp": "2025-11-19T17:31:28.766338+00:00"
+      },
+      {
+        "_id": "691de7962ea74d097272d913",
+        "attendance_id": "d3e9ccf0-bc87-45b8-8335-d5132fa2d9f8",
+        "student_id": "466dc78c-0c1f-4f20-bed1-ceae1d5ab9b4",
+        "date": "2025-11-19",
+        "trip": "PM",
+        "status": "green",
+        "confidence": 0.72119140625,
+        "last_update": "2025-11-19T17:38:12.762855+00:00",
+        "scan_photo": "photos/attendance/466dc78c-0c1f-4f20-bed1-ceae1d5ab9b4_2025-11-19_PM.jpg",
+        "scan_timestamp": "2025-11-19T17:38:12.762855+00:00"
+      },
+      {
+        "_id": "691deaa42ea74d097272d91a",
+        "attendance_id": "62a395bb-33e3-4a49-b3ef-0726286ee914",
+        "student_id": "4c6f8888-4baa-4b54-93f2-3901c054a043",
+        "date": "2025-11-19",
+        "trip": "PM",
+        "status": "red",
+        "confidence": 0.0,
+        "last_update": "2025-11-19T21:34:52.134151+05:30",
+        "scan_photo": null,
+        "scan_timestamp": null
+      },
+      {
+        "_id": "691e009af9f5a8854e74e732",
+        "attendance_id": "b9bacc17-3b05-4e7e-b622-190fb964cd0a",
+        "student_id": "466dc78c-0c1f-4f20-bed1-ceae1d5ab9b4",
+        "date": "2025-11-19",
+        "trip": "PM",
+        "status": "yellow",
+        "confidence": 1.0,
+        "last_update": "2025-11-19T17:38:34.374205+00:00",
+        "scan_photo": null,
+        "scan_timestamp": null
       }
     ],
-    "events": []
+    "events": [
+      {
+        "_id": "691de5f32ea74d097272d90f",
+        "event_id": "2d15aa58-2887-452e-977e-7306c45e7993",
+        "student_id": "6a4dbb59-1199-4996-a7b9-ce9d187b9a84",
+        "tag_id": "RFID-866581947494",
+        "verified": false,
+        "confidence": 0.0,
+        "lat": 28.364281,
+        "lon": 75.588919,
+        "timestamp": "2025-11-19T15:44:51.302633+00:00"
+      },
+      {
+        "_id": "691de87c2ea74d097272d916",
+        "event_id": "465233a6-fcb1-4da3-b2b3-b9b9eef1ce2f",
+        "student_id": "6a4dbb59-1199-4996-a7b9-ce9d187b9a84",
+        "tag_id": "RFID-866581947494",
+        "verified": false,
+        "confidence": 0.0,
+        "lat": 28.364281,
+        "lon": 75.588919,
+        "timestamp": "2025-11-19T15:55:40.991595+00:00"
+      },
+      {
+        "_id": "691df0b687947bccb288fbdc",
+        "event_id": "63979f93-e20b-4183-85cd-5f72e92dd8b0",
+        "student_id": "6a4dbb59-1199-4996-a7b9-ce9d187b9a84",
+        "tag_id": "RFID-866581947494",
+        "verified": false,
+        "confidence": 0.0,
+        "lat": 28.364281,
+        "lon": 75.588919,
+        "timestamp": "2025-11-19T16:30:46.108436+00:00"
+      },
+      {
+        "_id": "691dfe2bf9f5a8854e74e724",
+        "event_id": "39feece1-316b-4b0b-89f7-e2f42a292860",
+        "student_id": "466dc78c-0c1f-4f20-bed1-ceae1d5ab9b4",
+        "tag_id": "RFID-1023434852694",
+        "verified": false,
+        "confidence": 0.5141777396202087,
+        "lat": 28.364281,
+        "lon": 75.588919,
+        "timestamp": "2025-11-19T17:28:11.146868+00:00"
+      },
+      {
+        "_id": "691dfef0f9f5a8854e74e726",
+        "event_id": "7353d8c3-b747-4bdd-9f34-377083d7c8f5",
+        "student_id": "6a4dbb59-1199-4996-a7b9-ce9d187b9a84",
+        "tag_id": "RFID-866581947494",
+        "verified": true,
+        "confidence": 0.8615995645523071,
+        "lat": 28.364281,
+        "lon": 75.588919,
+        "timestamp": "2025-11-19T17:31:28.766338+00:00"
+      },
+      {
+        "_id": "691dff88f9f5a8854e74e727",
+        "event_id": "2f5ef6f9-2c77-4a01-8cd1-e9cd57288e22",
+        "student_id": "466dc78c-0c1f-4f20-bed1-ceae1d5ab9b4",
+        "tag_id": "RFID-1023434852694",
+        "verified": false,
+        "confidence": 0.6474714279174805,
+        "lat": 28.364281,
+        "lon": 75.588919,
+        "timestamp": "2025-11-19T17:34:00.995083+00:00"
+      },
+      {
+        "_id": "691dffbef9f5a8854e74e729",
+        "event_id": "82a91fc8-f545-421e-a7f4-62dd5fb77e43",
+        "student_id": "4c6f8888-4baa-4b54-93f2-3901c054a043",
+        "tag_id": "RFID-523306329142",
+        "verified": false,
+        "confidence": 0.26529428362846375,
+        "lat": 28.364281,
+        "lon": 75.588919,
+        "timestamp": "2025-11-19T17:34:54.116278+00:00"
+      },
+      {
+        "_id": "691dfff0f9f5a8854e74e72b",
+        "event_id": "c0ad8f5a-a236-4f55-b21f-fd5d571cdc1d",
+        "student_id": "4c6f8888-4baa-4b54-93f2-3901c054a043",
+        "tag_id": "RFID-523306329142",
+        "verified": false,
+        "confidence": 0.1755283772945404,
+        "lat": 28.364281,
+        "lon": 75.588919,
+        "timestamp": "2025-11-19T17:35:44.335628+00:00"
+      },
+      {
+        "_id": "691e0028f9f5a8854e74e72d",
+        "event_id": "89c4144a-4d60-4cac-805c-997ffa82fa57",
+        "student_id": "4c6f8888-4baa-4b54-93f2-3901c054a043",
+        "tag_id": "RFID-523306329142",
+        "verified": false,
+        "confidence": -0.009181872941553593,
+        "lat": 28.360306,
+        "lon": 75.588666,
+        "timestamp": "2025-11-19T17:36:40.330049+00:00"
+      },
+      {
+        "_id": "691e0084f9f5a8854e74e730",
+        "event_id": "34449e65-38a4-401e-8502-d67debc35f6d",
+        "student_id": "466dc78c-0c1f-4f20-bed1-ceae1d5ab9b4",
+        "tag_id": "RFID-1023434852694",
+        "verified": true,
+        "confidence": 0.72119140625,
+        "lat": 28.360349,
+        "lon": 75.588631,
+        "timestamp": "2025-11-19T17:38:12.762855+00:00"
+      },
+      {
+        "_id": "691e009af9f5a8854e74e731",
+        "event_id": "2de5cb22-a7d6-49bd-9df0-26623c6842e8",
+        "student_id": "466dc78c-0c1f-4f20-bed1-ceae1d5ab9b4",
+        "tag_id": "RFID-1023434852694",
+        "verified": true,
+        "confidence": 1.0,
+        "lat": 28.360336,
+        "lon": 75.58862,
+        "timestamp": "2025-11-19T17:38:34.374205+00:00"
+      }
+    ]
   },
   "photo_references": {
     "scan_photos": [
@@ -4549,6 +4719,18 @@
         "student_id": "dc1e7ad7-3b88-486d-ba96-cb7dfb6e408e",
         "date": "2025-11-08",
         "photo_url": "/api/photos/students/dc1e7ad7-3b88-486d-ba96-cb7dfb6e408e/attendance/2025-11-08_AM.jpg"
+      },
+      {
+        "attendance_id": "efe040d6-ebca-4c13-80b0-2b3afc137e02",
+        "student_id": "6a4dbb59-1199-4996-a7b9-ce9d187b9a84",
+        "date": "2025-11-19",
+        "photo_url": "photos/attendance/6a4dbb59-1199-4996-a7b9-ce9d187b9a84_2025-11-19_PM.jpg"
+      },
+      {
+        "attendance_id": "d3e9ccf0-bc87-45b8-8335-d5132fa2d9f8",
+        "student_id": "466dc78c-0c1f-4f20-bed1-ceae1d5ab9b4",
+        "date": "2025-11-19",
+        "photo_url": "photos/attendance/466dc78c-0c1f-4f20-bed1-ceae1d5ab9b4_2025-11-19_PM.jpg"
       }
     ],
     "student_attendance_folders": []
