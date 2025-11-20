@@ -90,21 +90,21 @@ sudo supervisorctl restart all
 
 ### For Developers
 - **[API Documentation](./docs/API_DOCUMENTATION.md)** - Complete API reference
+- **[API Test Device](./docs/API_TEST_DEVICE.md)** - Device API key testing guide
 - **[Database Schema](./docs/DATABASE.md)** - Data models and relationships
 - **[Photo Organization](./docs/PHOTO_ORGANIZATION.md)** - Photo structure and management
-- **[Development Guide](./docs/DEVELOPMENT.md)** - Development workflow and testing
 
 ### For IoT Integration
 - **[Raspberry Pi Integration](./docs/RASPBERRY_PI_INTEGRATION.md)** - Attendance upload via RFID + Camera + SIM800
   - Complete GPS fallback documentation included
   - Null coordinate handling across full stack
   - Frontend/backend integration details
-- **[Pi Hardware Setup](./tests/README_PI_HARDWARE.md)** - Hardware wiring and GPIO configuration
-- **[Auto-Start Configuration](./tests/README_AUTOSTART.md)** - Systemd service setup for auto-run on boot
+- **[Pi Testing Guide](./docs/PI_TESTING.md)** - Pi boarding scanner testing and workflow
+- **[Pi Hardware Setup](./docs/PI_HARDWARE.md)** - Hardware wiring and GPIO configuration
+- **[Auto-Start Configuration](./docs/PI_AUTOSTART.md)** - Systemd service setup for auto-run on boot
 
 ### Operations
 - **[Backup System](./docs/BACKUP_SYSTEM.md)** - ⭐ Production-ready backup with integrity verification
-- **[Dependency Management](./docs/DEPENDENCY_MANAGEMENT.md)** - Safe deletion rules and constraints
 - **[Troubleshooting](./docs/TROUBLESHOOTING.md)** - Common issues and solutions
 
 ---
@@ -295,7 +295,7 @@ NOTIFICATIONS ──> Sent to Users (user_id)
 - Students cannot be deleted if attendance exists
 - Parents/Teachers cannot be deleted if students linked
 - Buses cannot be deleted if students assigned
-- See [DEPENDENCY_MANAGEMENT.md](./docs/DEPENDENCY_MANAGEMENT.md)
+- Routes cannot be deleted if buses are using them
 
 ---
 
@@ -374,8 +374,6 @@ sudo supervisorctl restart backend
 ```bash
 sudo supervisorctl status
 ```
-
-📖 **Full Dev Guide:** [DEVELOPMENT.md](./docs/DEVELOPMENT.md)
 
 ---
 
@@ -481,9 +479,11 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file for
 | [USER_GUIDE.md](./docs/USER_GUIDE.md) | User manual for all roles |
 | [API_DOCUMENTATION.md](./docs/API_DOCUMENTATION.md) | REST API reference |
 | [API_TEST_DEVICE.md](./docs/API_TEST_DEVICE.md) | Device API key testing guide |
-| [PHOTO_ORGANIZATION.md](./docs/PHOTO_ORGANIZATION.md) | **NEW**: Photo structure by role & attendance folders |
-| [RASPBERRY_PI_INTEGRATION.md](./docs/RASPBERRY_PI_INTEGRATION.md) | IoT device integration |
 | [DATABASE.md](./docs/DATABASE.md) | Database schema and models |
-| [DEVELOPMENT.md](./docs/DEVELOPMENT.md) | Development workflow |
-| [DEPENDENCY_MANAGEMENT.md](./docs/DEPENDENCY_MANAGEMENT.md) | Entity dependencies |
+| [PHOTO_ORGANIZATION.md](./docs/PHOTO_ORGANIZATION.md) | Photo structure by role & attendance folders |
+| [RASPBERRY_PI_INTEGRATION.md](./docs/RASPBERRY_PI_INTEGRATION.md) | IoT device integration guide |
+| [PI_TESTING.md](./docs/PI_TESTING.md) | Raspberry Pi testing and workflow |
+| [PI_HARDWARE.md](./docs/PI_HARDWARE.md) | Pi hardware wiring and GPIO setup |
+| [PI_AUTOSTART.md](./docs/PI_AUTOSTART.md) | Systemd auto-start configuration |
+| [BACKUP_SYSTEM.md](./docs/BACKUP_SYSTEM.md) | Production backup with integrity checks |
 | [TROUBLESHOOTING.md](./docs/TROUBLESHOOTING.md) | Common issues and fixes |
