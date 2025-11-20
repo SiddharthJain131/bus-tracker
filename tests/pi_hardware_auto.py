@@ -27,6 +27,7 @@ from typing import Optional, Dict, Tuple
 from datetime import datetime
 
 import numpy as np
+import serial
 
 # Color codes for terminal output (matching project style)
 class Colors:
@@ -46,7 +47,7 @@ class Colors:
 # ADB Configuration (from auto-prog.py)
 DEVICE_IP = os.getenv("DEVICE_IP", "172.17.72.186")
 DEVICE_ID = f"{DEVICE_IP}:5555"
-
+ready_seen = False
 # Photo Configuration (from auto-prog.py)
 PHOTO_AGE_LIMIT = int(os.getenv("PHOTO_AGE_LIMIT", "20"))  # seconds
 MAX_RETRIES = int(os.getenv("MAX_PHOTO_RETRIES", "5"))
@@ -61,7 +62,9 @@ BIN2 = int(os.getenv("GPIO_BIN2", "25"))
 BINARY_PINS = [BIN0, BIN1, BIN2]
 
 # RFID Configuration
-RFID_READ_TIMEOUT = float(os.getenv("RFID_READ_TIMEOUT", "60.0"))  # seconds
+RFID_READ_TIMEOUT = float(os.getenv("RFID_READ_TIMEOUT", "1200.0"))  # seconds
+RFID_SERIAL_PORT = os.getenv("RFID_SERIAL_PORT", "/dev/ttyACM0")  # Arduino serial port
+RFID_BAUD_RATE = int(os.getenv("RFID_BAUD_RATE", "115200"))  # Serial baud rate
 
 # ============================================================
 # GLOBAL STATE
@@ -208,19 +211,32 @@ def display_binary(value: int) -> None:
         set_gpio_output(BINARY_PINS[i], bool((value >> i) & 1))
 
 def init_rfid_reader() -> bool:
-    """Initialize RFID reader hardware (from auto-prog.py)"""
+    """Initialize RFID reader hardware - reads from Arduino via serial ACM0"""
     global rfid_reader
     
     try:
-        from mfrc522 import SimpleMFRC522
+        print(f"{Colors.CYAN}-> Opening serial port {RFID_SERIAL_PORT} at {RFID_BAUD_RATE} baud...{Colors.RESET}")
         
-        rfid_reader = SimpleMFRC522()
-        print(f"{Colors.GREEN}[OK] RFID reader initialized (SimpleMFRC522){Colors.RESET}")
+        rfid_reader = serial.Serial(
+            port=RFID_SERIAL_PORT,
+            baudrate=RFID_BAUD_RATE,
+            timeout=1,
+            bytesize=serial.EIGHTBITS,
+            parity=serial.PARITY_NONE,
+            stopbits=serial.STOPBITS_ONE
+        )
+        
+        # Flush any existing data
+        rfid_reader.reset_input_buffer()
+        rfid_reader.reset_output_buffer()
+        
+        print(f"{Colors.GREEN}[OK] RFID reader initialized on {RFID_SERIAL_PORT}{Colors.RESET}")
         return True
         
-    except ImportError:
-        print(f"{Colors.RED}[ERROR] RFID library not found{Colors.RESET}")
-        print(f"{Colors.YELLOW}  Install: pip install mfrc522 RPi.GPIO{Colors.RESET}")
+    except serial.SerialException as e:
+        print(f"{Colors.RED}[ERROR] Serial port error: {e}{Colors.RESET}")
+        print(f"{Colors.YELLOW}  Check: Is Arduino connected to {RFID_SERIAL_PORT}?{Colors.RESET}")
+        print(f"{Colors.YELLOW}  Check: Do you have permission? (sudo usermod -a -G dialout $USER){Colors.RESET}")
         return False
         
     except Exception as e:
@@ -315,6 +331,9 @@ def adb_command(cmd: list, timeout: float = 10.0) -> Tuple[bool, str]:
 
 def take_photo_adb() -> bool:
     """Trigger Android camera shutter (from auto-prog.py)"""
+    for i in range(5, 0, -1):
+        print(f"    Triggering in {i}...", end="\r")
+        time.sleep(1)
     print(f"{Colors.BLUE}-> Triggering Android camera...{Colors.RESET}")
     success, _ = adb_command(["shell", "input", "keyevent", "27"], timeout=5.0)
     
@@ -444,7 +463,7 @@ def get_gps_location_adb() -> Tuple[Optional[float], Optional[float]]:
 
 def read_rfid() -> Optional[str]:
     """
-    Read RFID tag from hardware reader with timeout (from auto-prog.py).
+    Read RFID tag from Arduino via serial ACM0 with timeout.
     
     Returns: RFID tag string in format "RFID-{id}" or None
     """
@@ -453,25 +472,78 @@ def read_rfid() -> Optional[str]:
         return None
     
     try:
-        print(f"\n{Colors.CYAN}-> [AUTO] Waiting for RFID scan...{Colors.RESET}")
+        print(f"\n{Colors.CYAN}-> [AUTO] Waiting for RFID scan from {RFID_SERIAL_PORT}...{Colors.RESET}")
         
         # Turn on scan LED (visual feedback)
         set_gpio_output(LED_SCAN, True)
         
-        # Read from RFID reader (blocking call)
+        # Read from serial port in thread
         rfid_result = [None]
         read_error = [None]
         
         def read_thread():
             try:
-                id_val, text = rfid_reader.read()
-                rfid_result[0] = id_val
+                global ready_seen
+                rfid_reader.reset_input_buffer()
+
+                start_time = time.time()
+
+                # ---------------------------------------
+                # STEP 1: Only wait for READY ONCE
+                # ---------------------------------------
+                if not ready_seen:
+                    print("Waiting for Arduino READY...")
+
+                    while (time.time() - start_time) < RFID_READ_TIMEOUT:
+                        if rfid_reader.in_waiting > 0:
+                            line = rfid_reader.readline().decode('utf-8', errors='ignore').strip()
+
+                            if not line:
+                                continue
+
+                            print(f"[SERIAL] {line}")
+
+                            if line.upper() == "READY":
+                                print("Arduino READY received.")
+                                ready_seen = True
+                                break
+
+                        time.sleep(0.05)
+
+                    if not ready_seen:
+                        print("READY not received in time.")
+                        return
+
+                # ---------------------------------------
+                # STEP 2: Read RFID NUMBER every time
+                # ---------------------------------------
+                print("Waiting for RFID number...")
+
+                while (time.time() - start_time) < RFID_READ_TIMEOUT:
+                    if rfid_reader.in_waiting > 0:
+                        line = rfid_reader.readline().decode('utf-8', errors='ignore').strip()
+
+                        if not line:
+                            continue
+
+                        print(f"[SERIAL] {line}")
+
+                        # Numeric only
+                        rfid_id = ''.join(filter(str.isdigit, line))
+
+                        if rfid_id != "":
+                            rfid_result[0] = rfid_id
+                            return
+
+                    time.sleep(0.05)
+
             except Exception as e:
+                print(f"Error: {e}")
                 read_error[0] = e
-        
-        thread = threading.Thread(target=read_thread, daemon=True)
+
+        thread = threading.Thread(target=read_thread, daemon=True, name="RFID-Reader")
         thread.start()
-        thread.join()  # Wait for RFID read
+        thread.join(timeout=RFID_READ_TIMEOUT + 5)
         
         # Turn off scan LED
         set_gpio_output(LED_SCAN, False)
@@ -709,8 +781,19 @@ def cleanup() -> None:
     Performs cleanup of:
     - GPIO pins
     - LED states
+    - Serial port connection
     """
     print(f"{Colors.CYAN}-> [AUTO] Cleaning up hardware resources...{Colors.RESET}")
+    
+    # Close serial port
+    global rfid_reader
+    if rfid_reader is not None:
+        try:
+            if rfid_reader.is_open:
+                rfid_reader.close()
+                print(f"{Colors.GREEN}[OK] Serial port closed{Colors.RESET}")
+        except Exception as e:
+            print(f"{Colors.YELLOW}[WARN] Serial port cleanup warning: {e}{Colors.RESET}")
     
     # Reset GPIO to default state
     if gpio_available:

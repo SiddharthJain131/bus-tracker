@@ -633,7 +633,7 @@ def process_boarding(config: Dict, rfid_tag: str, student_info: Dict, rfid_mappi
 
     if sent:
         status_color = Colors.RED if not verified else (Colors.YELLOW if new_present == 1 else Colors.GREEN)
-        status_text = 'FAILED' if not verified else ('OUT' if new_present == 1 else 'IN')
+        status_text = 'FAILED' if not verified else ('IN' if new_present == 1 else 'OUT')
 
         print(f"{Colors.GREEN}[OK] Scan event sent successfully{Colors.RESET}")
         print(f"{status_color}[STATUS] {status_text}{Colors.RESET}")

@@ -1156,7 +1156,7 @@ async def scan_event(
         # =====================================
         # present == 0  →  Boarding IN (YELLOW)
         # =====================================
-        if request.present == 0:
+        if request.present == 1:
             status = "yellow"
 
             attendance = Attendance(
